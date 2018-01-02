@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LoadingView">
+        <attr name="loading_view_size" format="dimension" />
+        <attr name="android:color" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="AlphaTabView">
+        <attr name="tabIconNormal" format="reference" />
+        <attr name="tabIconSelected" format="reference" />
+        <attr name="tabText" format="string" />
+        <attr name="tabTextSize" format="dimension" />
+        <attr name="textColorNormal" format="color" />
+        <attr name="textColorSelected" format="color" />
+        <attr name="badgeBackgroundColor" format="color" />
+        <attr name="paddingTextIcon" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TitleView">
+        <attr name="showBackButton" format="boolean" />
+        <attr name="showConfirmButton" format="boolean" />
+        <attr name="titleText" format="string" />
+        <attr name="confirmButtonText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="SpinnerView">
+        <attr name="showFirstOption" format="boolean" />
+        <attr name="showSecondOption" format="boolean" />
+        <attr name="showSearchView" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="GifView">
+        <attr name="gif" format="reference" />
+        <attr name="paused" format="boolean" />
+    </declare-styleable>
+
+</resources>

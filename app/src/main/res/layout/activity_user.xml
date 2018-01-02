@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.wisdomstation.view.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showConfirmButton="false"
+        app:titleText="用户" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/div_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray8"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/d15">
+
+        <com.winsion.wisdomstation.view.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/d60"
+            android:layout_height="@dimen/d60"
+            android:src="@drawable/ic_head_single"
+            app:civ_border_color="@color/black6"
+            app:civ_border_width="@dimen/d0_5" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d15"
+            android:textColor="@color/blue1"
+            android:textSize="@dimen/s21"
+            tools:text="汪文斌" />
+
+        <TextView
+            android:id="@+id/tv_role_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white1"
+            android:textSize="@dimen/s21"
+            tools:text="(站长)" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/div_horizontal" />
+
+    <RelativeLayout
+        android:id="@+id/ll_change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray8"
+        android:padding="@dimen/d15">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/change_password"
+            android:textColor="@color/white1"
+            android:textSize="@dimen/s21" />
+
+        <ImageView
+            android:layout_width="@dimen/d20"
+            android:layout_height="@dimen/d20"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_right" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/div_horizontal" />
+
+    <TextView
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray8"
+        android:gravity="center"
+        android:padding="@dimen/d15"
+        android:text="@string/logout"
+        android:textColor="@color/yellow2"
+        android:textSize="@dimen/s21" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/div_horizontal" />
+</LinearLayout>

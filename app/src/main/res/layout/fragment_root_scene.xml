@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.wisdomstation.view.TitleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showBackButton="false"
+        app:showConfirmButton="false"
+        app:titleText="@string/scene" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/d10">
+
+            <LinearLayout
+                android:id="@+id/ll1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/ib_main_passenger"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="36"
+                    android:src="@drawable/bg_main_passenger" />
+
+                <View
+                    android:layout_width="@dimen/d5"
+                    android:layout_height="match_parent" />
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_lost"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="31"
+                    android:src="@drawable/bg_lost" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll1"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/d5"
+                android:orientation="horizontal">
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_area_broadcast"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="31"
+                    android:src="@drawable/bg_area_broadcast" />
+
+                <View
+                    android:layout_width="@dimen/d5"
+                    android:layout_height="match_parent" />
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_broadcast"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="36"
+                    android:src="@drawable/bg_passenger_broadcast" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll2"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/d5"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="36">
+
+                    <com.winsion.wisdomstation.view.AdjustImageView
+                        android:id="@+id/iv_transfer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/bg_transfer" />
+
+                    <ImageView
+                        android:id="@+id/iv_red_dot"
+                        android:layout_width="@dimen/d8"
+                        android:layout_height="@dimen/d8"
+                        android:layout_alignEnd="@id/iv_transfer"
+                        android:background="@drawable/bg_circle_red"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="@dimen/d5"
+                    android:layout_height="match_parent" />
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="31"
+                    android:src="@drawable/bg_light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll3"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/d5"
+                android:orientation="horizontal">
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_elevator"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="31"
+                    android:src="@drawable/bg_elevator" />
+
+                <View
+                    android:layout_width="@dimen/d5"
+                    android:layout_height="match_parent" />
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_water"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="36"
+                    android:src="@drawable/bg_water" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll4"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/d5"
+                android:orientation="horizontal">
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_video"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="36"
+                    android:src="@drawable/bg_video" />
+
+                <View
+                    android:layout_width="@dimen/d5"
+                    android:layout_height="match_parent" />
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_door"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="31"
+                    android:src="@drawable/bg_door" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll5"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/d5"
+                android:orientation="horizontal">
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_air_conditioner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="31"
+                    android:src="@drawable/bg_conditioner" />
+
+                <View
+                    android:layout_width="@dimen/d5"
+                    android:layout_height="match_parent" />
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_air_handing"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="36"
+                    android:src="@drawable/bg_air_handing" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll6"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/d5"
+                android:orientation="horizontal">
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_pump"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="36"
+                    android:src="@drawable/bg_pump" />
+
+                <View
+                    android:layout_width="@dimen/d5"
+                    android:layout_height="match_parent" />
+
+                <com.winsion.wisdomstation.view.AdjustImageView
+                    android:id="@+id/iv_cooling_tower"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="31"
+                    android:src="@drawable/bg_cooling_tower" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

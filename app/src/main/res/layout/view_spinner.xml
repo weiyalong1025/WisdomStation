@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_spinner"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/d40"
+    android:background="@color/gray8"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/container_first"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/text_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/selector_spinner_text"
+            android:textSize="@dimen/s16" />
+
+        <ImageView
+            android:id="@+id/arrow_first"
+            android:layout_width="@dimen/d14"
+            android:layout_height="@dimen/d14"
+            android:layout_marginStart="@dimen/d6"
+            android:src="@drawable/ic_arrow_down_little" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/d1"
+        android:layout_height="@dimen/d15"
+        android:background="@color/black1" />
+
+    <LinearLayout
+        android:id="@+id/container_second"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/text_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/selector_spinner_text"
+            android:textSize="@dimen/s16" />
+
+        <ImageView
+            android:id="@+id/arrow_second"
+            android:layout_width="@dimen/d14"
+            android:layout_height="@dimen/d14"
+            android:layout_marginStart="@dimen/d6"
+            android:src="@drawable/ic_arrow_down_little" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/d1"
+        android:layout_height="@dimen/d15"
+        android:background="@color/black1" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/d5"
+            android:adjustViewBounds="true"
+            android:background="@drawable/bg_search"
+            android:gravity="center"
+            android:hint="@string/search"
+            android:paddingEnd="@dimen/d15"
+            android:paddingStart="@dimen/d32"
+            android:singleLine="true"
+            android:textColor="@color/white1"
+            android:textColorHint="@color/gray4"
+            android:textSize="@dimen/s16" />
+
+        <ImageView
+            android:layout_width="@dimen/d24"
+            android:layout_height="@dimen/d24"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/d15"
+            android:src="@drawable/ic_search" />
+    </RelativeLayout>
+</LinearLayout>

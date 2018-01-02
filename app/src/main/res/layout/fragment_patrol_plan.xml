@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d40"
+        android:background="@color/gray8"
+        android:padding="@dimen/d8">
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/default_patrol_date"
+            android:textColor="@color/white1"
+            android:textSize="@dimen/s16" />
+
+        <ImageView
+            android:id="@+id/iv_bluetooth"
+            android:layout_width="@dimen/d24"
+            android:layout_height="@dimen/d24"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_bluetooth" />
+    </RelativeLayout>
+
+    <include layout="@layout/layout_status" />
+</LinearLayout>

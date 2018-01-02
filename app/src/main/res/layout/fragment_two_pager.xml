@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.wisdomstation.view.MyIndicator
+        android:id="@+id/mi_container"
+        style="@style/IndicatorStyle">
+
+        <RadioButton
+            style="@style/RadioButtonStyle"
+            android:background="@drawable/selector_indicator_bg_left" />
+
+        <RadioButton
+            style="@style/RadioButtonStyle"
+            android:background="@drawable/selector_indicator_bg_right" />
+    </com.winsion.wisdomstation.view.MyIndicator>
+
+    <com.winsion.wisdomstation.view.NoScrollViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

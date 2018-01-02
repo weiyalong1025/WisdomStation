@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray7"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/d6"
+    android:paddingLeft="@dimen/d10"
+    android:paddingRight="@dimen/d10"
+    android:paddingTop="@dimen/d6">
+
+    <com.winsion.wisdomstation.view.CircleImageView
+        android:id="@+id/civ_head"
+        android:layout_width="@dimen/d36"
+        android:layout_height="@dimen/d36"
+        android:src="@drawable/ic_head_single"
+        app:civ_border_color="@color/black6"
+        app:civ_border_width="@dimen/d0_5" />
+
+    <TextView
+        android:id="@+id/item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/d12"
+        android:textColor="@color/blue1"
+        android:textSize="@dimen/s18"
+        tools:text="1010" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="@dimen/d25"
+        android:layout_height="@dimen/d25"
+        android:gravity="center_vertical"
+        android:src="@drawable/ic_delete" />
+</LinearLayout>

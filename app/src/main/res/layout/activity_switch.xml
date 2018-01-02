@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_switch_system" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/ib_switch_oper"
+            android:layout_width="@dimen/d295"
+            android:layout_height="@dimen/d138"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_switch_dispatch" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/d80" />
+
+        <ImageButton
+            android:id="@+id/ib_switch_grid"
+            android:layout_width="@dimen/d295"
+            android:layout_height="@dimen/d138"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_switch_grid" />
+    </LinearLayout>
+</FrameLayout>

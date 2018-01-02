@@ -1,0 +1,98 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:6816946576704191815",
+      "lastPropertyId": "11:4272512360311781531",
+      "name": "UserEntity",
+      "properties": [
+        {
+          "id": "1:2774126661908705055",
+          "name": "id"
+        },
+        {
+          "id": "2:702261180733006719",
+          "name": "userId"
+        },
+        {
+          "id": "3:3435696003695894597",
+          "name": "username"
+        },
+        {
+          "id": "4:6579552345146720795",
+          "name": "password"
+        },
+        {
+          "id": "5:5200576494237569786",
+          "name": "headerUrl"
+        },
+        {
+          "id": "6:3573608997162313875",
+          "name": "pocUsername"
+        },
+        {
+          "id": "7:8565947589478443593",
+          "name": "pocPassword"
+        },
+        {
+          "id": "8:2780249250699141777",
+          "name": "lastLoginTime"
+        },
+        {
+          "id": "9:2180609201208878429",
+          "name": "loginIp"
+        },
+        {
+          "id": "10:1056810070833812802",
+          "name": "loginPort"
+        },
+        {
+          "id": "11:4272512360311781531",
+          "name": "isAutoLogin"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:4754352641601375825",
+      "lastPropertyId": "5:2986648504960717619",
+      "name": "TodoEntity",
+      "properties": [
+        {
+          "id": "1:2608925508639012241",
+          "name": "id"
+        },
+        {
+          "id": "2:6711298776505687971",
+          "name": "content"
+        },
+        {
+          "id": "3:3832262826047500684",
+          "name": "planDate"
+        },
+        {
+          "id": "4:8698036786025597802",
+          "name": "finished"
+        },
+        {
+          "id": "5:2986648504960717619",
+          "name": "belongUserId"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:4754352641601375825",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

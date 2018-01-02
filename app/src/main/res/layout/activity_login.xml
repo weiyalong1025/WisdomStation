@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.wisdomstation.view.TitleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showBackButton="false"
+        app:showConfirmButton="false"
+        app:titleText="@string/login" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3" />
+
+        <com.winsion.wisdomstation.view.CircleImageView
+            android:id="@+id/civ_head"
+            android:layout_width="@dimen/d60"
+            android:layout_height="@dimen/d60"
+            android:src="@drawable/ic_head_single"
+            app:civ_border_color="@color/black6"
+            app:civ_border_width="@dimen/d0_5" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/ll_username"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d48"
+            android:layout_marginLeft="@dimen/d20"
+            android:layout_marginRight="@dimen/d20"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/d50"
+                android:layout_height="wrap_content"
+                android:text="@string/account"
+                android:textColor="@color/gray5"
+                android:textSize="@dimen/s20" />
+
+            <RelativeLayout
+                android:id="@+id/rl_username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/et_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/please_input_account"
+                    android:paddingStart="@dimen/d10"
+                    android:singleLine="true"
+                    android:textColor="@color/white1"
+                    android:textColorHint="@color/gray7"
+                    android:textSize="@dimen/s20"
+                    tools:ignore="RtlSymmetry" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow"
+                    android:layout_width="@dimen/d48"
+                    android:layout_height="@dimen/d48"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_arrow_down" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/refer_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d1"
+            android:layout_marginStart="@dimen/d10"
+            android:background="@color/gray5" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d48"
+            android:layout_marginLeft="@dimen/d20"
+            android:layout_marginRight="@dimen/d20"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/d50"
+                android:layout_height="wrap_content"
+                android:text="@string/password"
+                android:textColor="@color/gray5"
+                android:textSize="@dimen/s20" />
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/please_input_password"
+                android:inputType="textPassword"
+                android:paddingStart="@dimen/d10"
+                android:singleLine="true"
+                android:textColor="@color/white1"
+                android:textColorHint="@color/gray7"
+                android:textSize="@dimen/s20"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d1"
+            android:layout_marginStart="@dimen/d10"
+            android:background="@color/gray5" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d48"
+            android:layout_marginLeft="@dimen/d10"
+            android:layout_marginRight="@dimen/d10"
+            android:background="@drawable/btn_blue"
+            android:text="@string/login"
+            android:textSize="@dimen/s18" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7.5" />
+
+        <TextView
+            android:id="@+id/tv_login_config"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/d5"
+            android:text="@string/login_config"
+            android:textColor="@color/gray1"
+            android:textSize="@dimen/s18" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

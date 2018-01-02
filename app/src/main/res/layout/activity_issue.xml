@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.wisdomstation.view.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:confirmButtonText="@string/issue"
+        app:showBackButton="true" />
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black1"
+        android:orientation="horizontal"
+        android:padding="@dimen/d10">
+
+        <Button
+            android:id="@+id/btn_take_photo"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/d48"
+            android:layout_marginEnd="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@drawable/btn_yellow"
+            android:text="@string/take_photo"
+            android:textSize="@dimen/s18" />
+
+        <Button
+            android:id="@+id/btn_video"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/d48"
+            android:layout_marginLeft="@dimen/d5"
+            android:layout_marginRight="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@drawable/btn_yellow"
+            android:text="@string/video"
+            android:textSize="@dimen/s18" />
+
+        <Button
+            android:id="@+id/btn_record"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/d48"
+            android:layout_marginStart="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@drawable/btn_yellow"
+            android:text="@string/record"
+            android:textSize="@dimen/s18" />
+    </LinearLayout>
+</LinearLayout>

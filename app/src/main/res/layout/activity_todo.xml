@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.wisdomstation.view.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showConfirmButton="false"
+        app:titleText="@string/add_todo" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray8"
+        android:orientation="horizontal"
+        android:padding="@dimen/d15">
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white1"
+            android:textSize="@dimen/s21"
+            tools:text="2017-12-12" />
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="@dimen/d20"
+            android:layout_height="@dimen/d20"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_right" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/d10"
+            android:layout_toStartOf="@id/iv_arrow"
+            android:textColor="@color/white1"
+            android:textSize="@dimen/s21"
+            tools:text="22:00" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:background="@color/gray2" />
+
+    <EditText
+        android:id="@+id/et_desc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d200"
+        android:background="@color/gray8"
+        android:gravity="top|start"
+        android:hint="@string/reminder_content"
+        android:maxLength="80"
+        android:maxLines="5"
+        android:padding="@dimen/d15"
+        android:textColor="@color/white1"
+        android:textColorHint="@color/gray5"
+        android:textSize="@dimen/s20" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d48"
+        android:layout_margin="@dimen/d15"
+        android:background="@drawable/btn_yellow"
+        android:text="@string/add"
+        android:textSize="@dimen/s21" />
+</LinearLayout>

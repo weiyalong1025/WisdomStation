@@ -3,6 +3,7 @@ package com.winsion.wisdomstation.grid.adapter;
 import android.content.Context;
 
 import com.winsion.wisdomstation.R;
+import com.winsion.wisdomstation.common.listener.ClickListener;
 import com.winsion.wisdomstation.operation.constants.TaskState;
 import com.winsion.wisdomstation.operation.entity.TaskEntity;
 import com.zhy.adapter.abslistview.CommonAdapter;
@@ -15,12 +16,8 @@ import java.util.List;
  */
 
 public class ProblemAdapter extends CommonAdapter<TaskEntity> {
-    private OnButtonClickListener passButtonListener;
-    private OnButtonClickListener notPassButtonListener;
-
-    public interface OnButtonClickListener {
-        void onButtonClick(TaskEntity taskEntity);
-    }
+    private ClickListener<TaskEntity> passButtonListener;
+    private ClickListener<TaskEntity> notPassButtonListener;
 
     public ProblemAdapter(Context context, List<TaskEntity> data) {
         super(context, R.layout.item_problem, data);
@@ -70,11 +67,11 @@ public class ProblemAdapter extends CommonAdapter<TaskEntity> {
 
         viewHolder.setOnClickListener(R.id.btn_pass, (view) -> {
             if (process == TaskState.DONE && passButtonListener != null)
-                passButtonListener.onButtonClick(taskEntity);
+                passButtonListener.onClick(taskEntity);
         });
         viewHolder.setOnClickListener(R.id.btn_not_pass, (view) -> {
             if (process == TaskState.DONE && notPassButtonListener != null)
-                notPassButtonListener.onButtonClick(taskEntity);
+                notPassButtonListener.onClick(taskEntity);
         });
 
         // 设置底色
@@ -111,11 +108,11 @@ public class ProblemAdapter extends CommonAdapter<TaskEntity> {
         }
     }
 
-    public void setOnPassClickListener(OnButtonClickListener listener) {
+    public void setOnPassClickListener(ClickListener<TaskEntity> listener) {
         this.passButtonListener = listener;
     }
 
-    public void setOnNotPassClickListener(OnButtonClickListener listener) {
+    public void setOnNotPassClickListener(ClickListener<TaskEntity> listener) {
         this.notPassButtonListener = listener;
     }
 }

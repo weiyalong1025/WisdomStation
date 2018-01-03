@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseActivity;
-import com.winsion.wisdomstation.common.CommonBiz;
+import com.winsion.wisdomstation.common.biz.CommonBiz;
 import com.winsion.wisdomstation.data.CacheDataSource;
 import com.winsion.wisdomstation.utils.ImageLoader;
 import com.winsion.wisdomstation.view.CircleImageView;

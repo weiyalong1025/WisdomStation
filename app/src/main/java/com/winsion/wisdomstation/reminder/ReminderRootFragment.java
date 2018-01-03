@@ -11,8 +11,8 @@ import com.winsion.wisdomstation.base.BaseFragment;
 import com.winsion.wisdomstation.common.constants.SystemType;
 import com.winsion.wisdomstation.data.SPDataSource;
 import com.winsion.wisdomstation.data.constants.SPKey;
-import com.winsion.wisdomstation.reminder.fragment.systemremind.SystemRemindFragment;
-import com.winsion.wisdomstation.reminder.fragment.todo.TodoFragment;
+import com.winsion.wisdomstation.reminder.modules.systemremind.fragment.SystemRemindFragment;
+import com.winsion.wisdomstation.reminder.modules.todo.fragment.TodoFragment;
 import com.winsion.wisdomstation.view.MyIndicator;
 import com.winsion.wisdomstation.view.NoScrollViewPager;
 

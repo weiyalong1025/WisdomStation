@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.model.HttpParams;
 import com.winsion.wisdomstation.application.AppApplication;
+import com.winsion.wisdomstation.common.biz.CommonBiz;
 import com.winsion.wisdomstation.data.DBDataSource;
 import com.winsion.wisdomstation.data.NetDataSource;
 import com.winsion.wisdomstation.data.SPDataSource;
@@ -17,7 +18,6 @@ import com.winsion.wisdomstation.login.entity.AuthDto;
 import com.winsion.wisdomstation.login.entity.UserEntity;
 import com.winsion.wisdomstation.login.listener.LoginListener;
 import com.winsion.wisdomstation.mqtt.MQTTClient;
-import com.winsion.wisdomstation.utils.CommonUtils;
 import com.winsion.wisdomstation.utils.LogUtils;
 
 import java.util.List;
@@ -78,7 +78,7 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
         loginListener.onLogin();
 
         // 获取当前用户连接的WIFI信息用来定位
-        String bssid = CommonUtils.getBSSID(mContext);
+        String bssid = CommonBiz.getBSSID(mContext);
 
         HttpParams httpParams = new HttpParams();
         httpParams.put("account", username);

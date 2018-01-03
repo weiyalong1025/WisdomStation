@@ -7,8 +7,8 @@ import android.view.View;
 
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseFragment;
-import com.winsion.wisdomstation.grid.fragment.patrolplan.PatrolPlanFragment;
-import com.winsion.wisdomstation.grid.fragment.problemmanage.ProblemManageFragment;
+import com.winsion.wisdomstation.grid.modules.patrolplan.fragment.PatrolPlanFragment;
+import com.winsion.wisdomstation.grid.modules.problemmanage.fragment.ProblemManageFragment;
 import com.winsion.wisdomstation.view.MyIndicator;
 import com.winsion.wisdomstation.view.NoScrollViewPager;
 

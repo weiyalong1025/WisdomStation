@@ -10,9 +10,9 @@ import com.winsion.wisdomstation.base.BaseFragment;
 import com.winsion.wisdomstation.common.constants.SystemType;
 import com.winsion.wisdomstation.data.SPDataSource;
 import com.winsion.wisdomstation.data.constants.SPKey;
-import com.winsion.wisdomstation.operation.fragment.issue.IssueFragment;
-import com.winsion.wisdomstation.operation.fragment.mytask.MyTaskFragment;
-import com.winsion.wisdomstation.operation.fragment.taskmonitor.TaskMonitorFragment;
+import com.winsion.wisdomstation.operation.modules.issue.fragment.IssueFragment;
+import com.winsion.wisdomstation.operation.modules.mytask.fragment.MyTaskFragment;
+import com.winsion.wisdomstation.operation.modules.taskmonitor.fragment.TaskMonitorFragment;
 import com.winsion.wisdomstation.view.MyIndicator;
 import com.winsion.wisdomstation.view.NoScrollViewPager;
 

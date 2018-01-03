@@ -114,6 +114,9 @@
     <string name="plan_remind">预案提醒</string>
     <string name="only_read_remind_can_be_selected">只有已读提醒才能被选中</string>
     <string name="only_read_remind_can_be_deleted">只有已读提醒才可以删除</string>
+    <string name="delete_success">删除成功</string>
+    <string name="set_read_status_failed">置为已读失败</string>
+    <string name="delete_failed">删除失败</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

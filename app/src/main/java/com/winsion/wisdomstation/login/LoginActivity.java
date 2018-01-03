@@ -24,12 +24,13 @@ import android.widget.RelativeLayout;
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.SwitchSysActivity;
 import com.winsion.wisdomstation.base.BaseActivity;
+import com.winsion.wisdomstation.common.biz.CommonBiz;
 import com.winsion.wisdomstation.config.LoginConfigActivity;
 import com.winsion.wisdomstation.login.constants.LoginErrorCode;
 import com.winsion.wisdomstation.login.entity.UserEntity;
 import com.winsion.wisdomstation.login.listener.LoginListener;
-import com.winsion.wisdomstation.utils.CommonUtils;
 import com.winsion.wisdomstation.utils.ImageLoader;
+import com.winsion.wisdomstation.utils.constants.ListType;
 import com.winsion.wisdomstation.view.CircleImageView;
 import com.winsion.wisdomstation.view.TipDialog;
 import com.winsion.wisdomstation.view.WrapContentListView;
@@ -165,7 +166,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
                 if (isSoftShow) {
                     // 如果软键盘是弹出状态先隐藏软键盘
                     delayMillis = 100;
-                    CommonUtils.hideKeyboard(view);
+                    CommonBiz.hideKeyboard(view);
                 }
                 mHandler.postDelayed(() -> {
                     arrowUp();
@@ -209,7 +210,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View itemView = layoutInflater.inflate(R.layout.item_user_option, null);
         itemView.measure(0, 0);
-        int suggestMaxHeight = CommonUtils.getSuggestMaxHeight(mContext, itemView.getMeasuredHeight());
+        int suggestMaxHeight = CommonBiz.getSuggestMaxHeight(mContext, itemView.getMeasuredHeight(), ListType.TYPE_POPUP);
         ListView listView = new WrapContentListView(mContext, suggestMaxHeight);
         listView.setAdapter(commonAdapter);
         listView.setOnItemClickListener(this);
@@ -283,7 +284,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
     @Override
     public void onLogin() {
         // 隐藏软键盘
-        CommonUtils.hideKeyboard(etUsername);
+        CommonBiz.hideKeyboard(etUsername);
         // 登陆中，显示dialog
         if (mLoadingDialog == null) {
             mLoadingDialog = new TipDialog.Builder(mContext)

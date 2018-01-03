@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_multiple_delete_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d48"
+        android:background="@color/black3"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="@dimen/d56"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/blue1"
+            android:textSize="@dimen/s16" />
+
+        <Button
+            android:id="@+id/btn_select_count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:textColor="@color/blue1"
+            android:textSize="@dimen/s18"
+            tools:text="已选10项" />
+
+        <Button
+            android:id="@+id/btn_all_select"
+            android:layout_width="@dimen/d56"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="center"
+            android:text="@string/check_all"
+            android:textColor="@color/blue1"
+            android:textSize="@dimen/s16" />
+    </LinearLayout>
+
+    <com.winsion.wisdomstation.view.DrawableCenterButton
+        android:id="@+id/btn_multiple_delete_footer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d54"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_bg_back"
+        android:drawablePadding="@dimen/d5"
+        android:drawableStart="@drawable/ic_delete1"
+        android:gravity="center"
+        android:text="@string/delete"
+        android:textColor="@color/red2"
+        android:textSize="@dimen/s18" />
+</RelativeLayout>

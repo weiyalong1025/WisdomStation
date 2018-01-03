@@ -144,4 +144,8 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
     public int getColor(@ColorRes int colorResId) {
         return getResources().getColor(colorResId);
     }
+
+    public boolean onKeyDown(int keyCode) {
+        return false;
+    }
 }

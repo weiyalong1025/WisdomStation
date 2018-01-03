@@ -117,6 +117,9 @@
     <string name="delete_success">删除成功</string>
     <string name="set_read_status_failed">置为已读失败</string>
     <string name="delete_failed">删除失败</string>
+    <string name="check_all">全选</string>
+    <string name="delete">删除</string>
+    <string name="selected_item_zero">已选0项</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import com.winsion.wisdomstation.utils.HandlerUtils;
 import com.winsion.wisdomstation.utils.LogUtils;
 import com.winsion.wisdomstation.utils.ToastUtils;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -165,8 +168,27 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // 实现fragment拦截该事件，fragment不做处理再交给activity
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment fragment : fragments) {
+            List<Fragment> childFragments = fragment.getChildFragmentManager().getFragments();
+            for (Fragment childFragment : childFragments) {
+                if (childFragment.isVisible() &&
+                        childFragment.getUserVisibleHint() &&
+                        childFragment instanceof BaseFragment &&
+                        ((BaseFragment) childFragment).onKeyDown(keyCode)) {
+                    return true;
+                }
+            }
+            if (fragment.isVisible() &&
+                    fragment.getUserVisibleHint() &&
+                    fragment instanceof BaseFragment &&
+                    ((BaseFragment) fragment).onKeyDown(keyCode)) {
+                return true;
+            }
+        }
+        // 按返回键不退出程序,当且仅当当前activity为根activity才会生效
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            // 按返回键不退出程序,当且仅当当前activity为根activity才会生效
             moveTaskToBack(false);
         }
         return super.onKeyDown(keyCode, event);

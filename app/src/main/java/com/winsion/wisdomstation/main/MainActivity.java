@@ -41,6 +41,8 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     AlphaTabView atvDispatch;
     @BindView(R.id.atv_contacts)
     AlphaTabView atvContacts;
+    @BindView(R.id.atv_grid)
+    AlphaTabView atvGrid;
     @BindView(R.id.atv_scene)
     AlphaTabView atvScene;
     @BindView(R.id.atv_reminder)
@@ -158,17 +160,17 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     private void switchSystem(int systemType) {
         switch (systemType) {
             case SystemType.OPERATION:
-                atiIndicator.getTabView(1).setVisibility(View.VISIBLE);
-                atiIndicator.getTabView(2).setVisibility(View.VISIBLE);
-                atiIndicator.getTabView(3).setVisibility(View.GONE);
-                atiIndicator.getTabView(4).setVisibility(View.VISIBLE);
+                atvDispatch.setVisibility(View.VISIBLE);
+                atvContacts.setVisibility(View.VISIBLE);
+                atvGrid.setVisibility(View.GONE);
+                atvScene.setVisibility(View.VISIBLE);
                 atiIndicator.setTabCurrentItem(0);
                 break;
             case SystemType.GRID:
-                atiIndicator.getTabView(1).setVisibility(View.GONE);
-                atiIndicator.getTabView(2).setVisibility(View.GONE);
-                atiIndicator.getTabView(3).setVisibility(View.VISIBLE);
-                atiIndicator.getTabView(4).setVisibility(View.GONE);
+                atvDispatch.setVisibility(View.GONE);
+                atvContacts.setVisibility(View.GONE);
+                atvGrid.setVisibility(View.VISIBLE);
+                atvScene.setVisibility(View.GONE);
                 atiIndicator.setTabCurrentItem(0);
                 break;
         }
@@ -184,6 +186,14 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
             case R.id.iv_head:
                 startActivity(UserActivity.class, false);
                 break;
+        }
+    }
+
+    public void updateUnreadCount(int count) {
+        if (count == 0) {
+            atvReminder.removeShow();
+        } else {
+            atvReminder.showNumber(count);
         }
     }
 }

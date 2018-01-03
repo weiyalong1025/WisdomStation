@@ -174,8 +174,8 @@ public class AlphaTabView extends View {
      * badge
      */
     private void drawBadge(Canvas canvas) {
-        int i = getMeasuredWidth() / 14;
-        int j = getMeasuredHeight() / 9;
+        int i = getMeasuredWidth() / 5;
+        int j = getMeasuredHeight() / 3;
         i = i >= j ? j : i;
         if (mBadgeNumber > 0) {
             Paint backgroundPaint = new Paint();
@@ -184,34 +184,33 @@ public class AlphaTabView extends View {
             String number = mBadgeNumber > 99 ? "99+" : String.valueOf(mBadgeNumber);
             float textSize = i / 1.5f == 0 ? 5 : i / 1.5f;
             int width;
-            int hight = (int) dp2px(mContext, i);
+            int height = i;
             Bitmap bitmap;
             if (number.length() == 1) {
-                width = (int) dp2px(mContext, i);
-                bitmap = Bitmap.createBitmap(width, hight, Bitmap.Config.ARGB_8888);
+                width = i;
+                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             } else if (number.length() == 2) {
-                width = (int) dp2px(mContext, i + 5);
-                bitmap = Bitmap.createBitmap(width, hight, Bitmap.Config.ARGB_8888);
+                width = i + 5;
+                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             } else {
-                width = (int) dp2px(mContext, i + 8);
+                width = i + 8;
                 bitmap = Bitmap.createBitmap(width, width, Bitmap.Config.ARGB_8888);
             }
             Canvas canvasMessages = new Canvas(bitmap);
-            RectF messageRectF = new RectF(0, 0, width, hight);
+            RectF messageRectF = new RectF(0, 0, width, height);
             canvasMessages.drawRoundRect(messageRectF, 50, 50, backgroundPaint); //画椭圆
             Paint numberPaint = new Paint();
             numberPaint.setColor(Color.WHITE);
-            numberPaint.setTextSize(dp2px(mContext, textSize));
+            numberPaint.setTextSize(textSize);
             numberPaint.setAntiAlias(true);
             numberPaint.setTextAlign(Paint.Align.CENTER);
             numberPaint.setTypeface(Typeface.DEFAULT_BOLD);
             Paint.FontMetrics fontMetrics = numberPaint.getFontMetrics();
             float x = width / 2f;
-            float y = hight / 2f - fontMetrics.descent + (fontMetrics.descent - fontMetrics.ascent) / 2;
+            float y = height / 2f - fontMetrics.descent + (fontMetrics.descent - fontMetrics.ascent) / 2;
             canvasMessages.drawText(number, x, y, numberPaint);
             float left = getMeasuredWidth() / 10 * 6f;
-            float top = dp2px(mContext, 5);
-            canvas.drawBitmap(bitmap, left, top, null);
+            canvas.drawBitmap(bitmap, left, getResources().getDimensionPixelSize(R.dimen.d5), null);
             bitmap.recycle();
         } else if (mBadgeNumber == 0) {
 
@@ -221,10 +220,9 @@ public class AlphaTabView extends View {
                 paint.setColor(mBadgeBackgroundColor);
                 paint.setAntiAlias(true);
                 float left = getMeasuredWidth() / 10 * 6f;
-                float top = dp2px(getContext(), 5);
+                float top = getResources().getDimensionPixelSize(R.dimen.d5);
                 i = i > 10 ? 10 : i;
-                float width = dp2px(getContext(), i);
-                RectF messageRectF = new RectF(left, top, left + width, top + width);
+                RectF messageRectF = new RectF(left, top, left + i, top + i);
                 canvas.drawOval(messageRectF, paint);
             }
         }
@@ -301,10 +299,5 @@ public class AlphaTabView extends View {
         } else {
             postInvalidate();
         }
-    }
-
-    private float dp2px(Context context, float dipValue) {
-        float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dipValue * scale);
     }
 }

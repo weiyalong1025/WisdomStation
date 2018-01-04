@@ -313,6 +313,10 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
                     } else {
                         mLvAdapter.notifyDataSetChanged();
                     }
+                    if (listData.size() == 0) {
+                        tvHint.setText(R.string.no_data_click_to_retry);
+                        showView(flContainer, tvHint);
+                    }
                 }
                 break;
         }

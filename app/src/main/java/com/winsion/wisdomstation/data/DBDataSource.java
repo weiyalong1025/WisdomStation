@@ -5,8 +5,8 @@ import android.text.TextUtils;
 import com.winsion.wisdomstation.application.AppApplication;
 import com.winsion.wisdomstation.login.entity.UserEntity;
 import com.winsion.wisdomstation.login.entity.UserEntity_;
-import com.winsion.wisdomstation.reminder.entity.TodoEntity;
-import com.winsion.wisdomstation.reminder.entity.TodoEntity_;
+import com.winsion.wisdomstation.modules.reminder.entity.TodoEntity;
+import com.winsion.wisdomstation.modules.reminder.entity.TodoEntity_;
 
 import java.util.List;
 

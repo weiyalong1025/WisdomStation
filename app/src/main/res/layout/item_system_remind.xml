@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -46,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/iv_red_dot"
-                    android:text="@string/remind_classify"
+                    tools:text="[提醒分类]"
                     android:textColor="@color/blue1"
                     android:textSize="@dimen/s21" />
 
@@ -57,7 +58,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:gravity="center"
-                    android:text="@string/data_time"
+                    tools:text="[日期时间]"
                     android:textColor="@color/gray2"
                     android:textSize="@dimen/s16" />
             </RelativeLayout>
@@ -78,29 +79,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/d32"
                     android:padding="@dimen/d15"
-                    android:text="@string/remind_content"
                     android:textColor="@color/white1"
-                    android:textSize="@dimen/s21" />
+                    android:textSize="@dimen/s21"
+                    tools:text="[提醒内容]" />
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/iv_select"
+                    android:layout_width="@dimen/d54"
+                    android:layout_height="@dimen/d54"
                     android:layout_alignParentEnd="true"
-                    android:padding="@dimen/d15">
+                    android:padding="@dimen/d15"
+                    android:src="@drawable/ic_check_box_outline"
+                    android:visibility="gone" />
 
-                    <ImageView
-                        android:id="@+id/iv_select"
-                        android:layout_width="@dimen/d24"
-                        android:layout_height="@dimen/d24"
-                        android:src="@drawable/ic_check_box_outline"
-                        android:visibility="gone" />
-
-                    <ImageView
-                        android:id="@+id/iv_delete"
-                        android:layout_width="@dimen/d24"
-                        android:layout_height="@dimen/d24"
-                        android:src="@drawable/ic_delete1" />
-                </FrameLayout>
+                <ImageView
+                    android:id="@+id/iv_delete"
+                    android:layout_width="@dimen/d54"
+                    android:layout_height="@dimen/d54"
+                    android:layout_alignParentEnd="true"
+                    android:padding="@dimen/d15"
+                    android:src="@drawable/ic_delete1" />
             </RelativeLayout>
 
         </LinearLayout>

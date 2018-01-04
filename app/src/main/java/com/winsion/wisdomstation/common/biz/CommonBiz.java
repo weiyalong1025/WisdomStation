@@ -19,7 +19,7 @@ import com.winsion.wisdomstation.data.CacheDataSource;
 import com.winsion.wisdomstation.data.DBDataSource;
 import com.winsion.wisdomstation.data.NetDataSource;
 import com.winsion.wisdomstation.data.constants.Urls;
-import com.winsion.wisdomstation.login.LoginActivity;
+import com.winsion.wisdomstation.login.activity.LoginActivity;
 import com.winsion.wisdomstation.mqtt.MQTTClient;
 import com.winsion.wisdomstation.utils.ConvertUtils;
 import com.winsion.wisdomstation.utils.constants.ListType;

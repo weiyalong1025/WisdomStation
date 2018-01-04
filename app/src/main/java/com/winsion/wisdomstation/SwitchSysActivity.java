@@ -7,7 +7,7 @@ import com.winsion.wisdomstation.base.BaseActivity;
 import com.winsion.wisdomstation.common.constants.SystemType;
 import com.winsion.wisdomstation.data.SPDataSource;
 import com.winsion.wisdomstation.data.constants.SPKey;
-import com.winsion.wisdomstation.main.MainActivity;
+import com.winsion.wisdomstation.main.activity.MainActivity;
 
 import butterknife.OnClick;
 

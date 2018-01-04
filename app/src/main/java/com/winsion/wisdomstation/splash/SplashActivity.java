@@ -3,7 +3,7 @@ package com.winsion.wisdomstation.splash;
 import android.os.Message;
 
 import com.winsion.wisdomstation.base.BaseActivity;
-import com.winsion.wisdomstation.login.LoginActivity;
+import com.winsion.wisdomstation.login.activity.LoginActivity;
 import com.winsion.wisdomstation.utils.LogUtils;
 
 public class SplashActivity extends BaseActivity {

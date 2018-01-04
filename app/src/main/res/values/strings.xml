@@ -99,14 +99,12 @@
     <string name="add">添加</string>
     <string name="year">年</string>
     <string name="month">月</string>
-    <string name="sure_you_want_to_delete_it">确定要删除吗？</string>
+    <string name="sure_to_delete_it">确定要删除吗？</string>
+    <string name="sure_to_delete">确定要删除</string>
     <string name="reminder_content">提醒内容:</string>
     <string name="add_todo">添加待办事项</string>
     <string name="update">更新</string>
     <string name="please_complete">请将信息填写完整</string>
-    <string name="remind_classify">[提醒分类]</string>
-    <string name="data_time">[日期时间]</string>
-    <string name="remind_content">[提醒内容]</string>
     <string name="homework_remind">作业提醒</string>
     <string name="command_remind">命令提醒</string>
     <string name="cooperation_remind">协作提醒</string>
@@ -114,12 +112,16 @@
     <string name="plan_remind">预案提醒</string>
     <string name="only_read_remind_can_be_selected">只有已读提醒才能被选中</string>
     <string name="only_read_remind_can_be_deleted">只有已读提醒才可以删除</string>
-    <string name="delete_success">删除成功</string>
-    <string name="set_read_status_failed">置为已读失败</string>
-    <string name="delete_failed">删除失败</string>
-    <string name="check_all">全选</string>
     <string name="delete">删除</string>
-    <string name="selected_item_zero">已选0项</string>
+    <string name="delete_success">删除成功</string>
+    <string name="delete_failed">删除失败</string>
+    <string name="set_read_status_failed">置为已读失败</string>
+    <string name="select_all">全选</string>
+    <string name="select_none">全不选</string>
+    <string name="currently_no_selected_item">当前没有已选项</string>
+    <string name="selected">已选</string>
+    <string name="item">项</string>
+    <string name="items">项吗？</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

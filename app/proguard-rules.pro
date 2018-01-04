@@ -25,9 +25,9 @@
 -keep class com.winsion.wisdomstation.data.entity.** { *; }
 -keep class com.winsion.wisdomstation.login.entity.** { *; }
 -keep class com.winsion.wisdomstation.mqtt.entity.** { *; }
--keep class com.winsion.wisdomstation.operation.entity.** { *; }
--keep class com.winsion.wisdomstation.grid.entity.** { *; }
--keep class com.winsion.wisdomstation.reminder.entity.** { *; }
+-keep class com.winsion.wisdomstation.modules.operation.entity.** { *; }
+-keep class com.winsion.wisdomstation.modules.grid.entity.** { *; }
+-keep class com.winsion.wisdomstation.modules.reminder.entity.** { *; }
 #-------------------------------------------------------------------------
 
 #---------------------------------2.第三方包-------------------------------

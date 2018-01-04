@@ -32,11 +32,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".login.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".config.LoginConfigActivity"
+            android:name=".config.activity.LoginConfigActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
@@ -44,7 +44,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".main.MainActivity"
+            android:name=".main.activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -54,11 +54,11 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".operation.modules.issue.activity.IssueActivity"
+            android:name=".modules.operation.modules.issue.activity.IssueActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".reminder.modules.todo.activity.TodoActivity"
+            android:name=".modules.reminder.modules.todo.activity.TodoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
 
@@ -66,7 +66,7 @@
         <service android:name="org.eclipse.paho.android.service.MqttService" />
 
         <!-- receiver -->
-        <receiver android:name=".reminder.modules.todo.receiver.TodoReceiver" />
+        <receiver android:name=".modules.reminder.modules.todo.receiver.TodoReceiver" />
     </application>
 
 </manifest>

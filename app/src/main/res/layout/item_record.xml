@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_media"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/d20">
+
+        <ImageView
+            android:id="@+id/iv_file_type"
+            android:layout_width="@dimen/d28"
+            android:layout_height="@dimen/d22"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_picture" />
+
+        <TextView
+            android:id="@+id/tv_file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d20"
+            android:textColor="@color/white1"
+            android:textSize="@dimen/s18"
+            tools:text="IMG_20170615" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/iv_status"
+            android:layout_width="@dimen/d20"
+            android:layout_height="@dimen/d20"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_failed" />
+
+        <com.winsion.wisdomstation.view.CircleProgressBar
+            android:id="@+id/cpb_status"
+            android:layout_width="@dimen/d20"
+            android:layout_height="@dimen/d20"
+            android:visibility="gone"
+            app:draw_progress_text="false"
+            app:line_width="@dimen/d3"
+            app:progress_background_color="@color/gray7"
+            app:progress_end_color="@color/white1"
+            app:progress_start_color="@color/white1"
+            app:progress_stroke_width="@dimen/d2"
+            app:style="line" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/d20"
+        android:textColor="@color/white1"
+        android:textSize="@dimen/s21"
+        android:visibility="gone"
+        tools:text="备注内容" />
+</FrameLayout>

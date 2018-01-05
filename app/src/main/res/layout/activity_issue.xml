@@ -10,13 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:confirmButtonText="@string/issue"
-        app:showBackButton="true" />
+        app:showBackButton="true"
+        app:titleText="@string/issue_command" />
 
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/gray8"
         android:divider="@null" />
 
     <LinearLayout
@@ -28,6 +30,7 @@
 
         <Button
             android:id="@+id/btn_take_photo"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="@dimen/d48"
             android:layout_marginEnd="@dimen/d5"
@@ -38,6 +41,7 @@
 
         <Button
             android:id="@+id/btn_video"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="@dimen/d48"
             android:layout_marginLeft="@dimen/d5"
@@ -49,6 +53,7 @@
 
         <Button
             android:id="@+id/btn_record"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="@dimen/d48"
             android:layout_marginStart="@dimen/d5"

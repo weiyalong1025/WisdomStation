@@ -122,6 +122,14 @@
     <string name="selected">已选</string>
     <string name="item">项</string>
     <string name="items">项吗？</string>
+    <string name="please_select_station">请选择车站</string>
+    <string name="start_time">开始时间:</string>
+    <string name="end_time">结束时间:</string>
+    <string name="note">备注</string>
+    <string name="command_content">命令内容:</string>
+    <string name="command_group">受令班组:</string>
+    <string name="cooperation_group">协作班组:</string>
+    <string name="cooperation_content">协作内容:</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

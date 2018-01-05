@@ -1,12 +1,11 @@
 package com.winsion.wisdomstation.modules.operation.modules.issue.fragment;
 
-import android.content.Intent;
 import android.view.View;
 
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseFragment;
-import com.winsion.wisdomstation.modules.operation.modules.issue.activity.IssueActivity;
 import com.winsion.wisdomstation.modules.operation.constants.TaskType;
+import com.winsion.wisdomstation.modules.operation.modules.issue.activity.IssueActivity;
 
 import butterknife.OnClick;
 
@@ -29,14 +28,10 @@ public class IssueFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_issue_order:
-                Intent intent = new Intent(mContext, IssueActivity.class);
-                intent.putExtra(IssueActivity.ISSUE_TYPE, TaskType.COMMAND);
-                startActivity(intent);
+                IssueActivity.startIssueActivity(mContext, TaskType.COMMAND);
                 break;
             case R.id.ll_issue_cooperation:
-                Intent intent1 = new Intent(mContext, IssueActivity.class);
-                intent1.putExtra(IssueActivity.ISSUE_TYPE, TaskType.COOPERATE);
-                startActivity(intent1);
+                IssueActivity.startIssueActivity(mContext, TaskType.COOPERATE);
                 break;
         }
     }

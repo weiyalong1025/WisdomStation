@@ -1,5 +1,6 @@
 package com.winsion.wisdomstation.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.BitmapDrawable;
@@ -28,6 +29,7 @@ import java.util.List;
 
 /**
  * Created by 10295 on 2017/12/15 0015.
+ * 下拉选项框
  */
 
 public class SpinnerView extends LinearLayout implements TextWatcher {
@@ -82,15 +84,15 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
         typedArray.recycle();
 
         LayoutInflater.from(context).inflate(R.layout.view_spinner, this);
-        LinearLayout containerFirst = findViewById(R.id.container_first);
-        textFirst = findViewById(R.id.text_first);
-        arrowFirst = findViewById(R.id.arrow_first);
+        LinearLayout containerFirst = findViewById(R.id.ll_container_first);
+        textFirst = findViewById(R.id.iv_text_first);
+        arrowFirst = findViewById(R.id.iv_arrow_first);
 
-        LinearLayout containerSecond = findViewById(R.id.container_second);
-        textSecond = findViewById(R.id.text_second);
-        arrowSecond = findViewById(R.id.arrow_second);
+        LinearLayout containerSecond = findViewById(R.id.ll_container_second);
+        textSecond = findViewById(R.id.iv_text_second);
+        arrowSecond = findViewById(R.id.iv_arrow_second);
 
-        search = findViewById(R.id.search);
+        search = findViewById(R.id.et_search);
 
         if (showFirstOption) {
             containerFirst.setVisibility(VISIBLE);
@@ -215,6 +217,7 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
         };
 
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+        @SuppressLint("InflateParams")
         View itemView = layoutInflater.inflate(R.layout.item_spinner, null);
         itemView.measure(0, 0);
         int suggestMaxHeight = CommonBiz.getSuggestMaxHeight(getContext(), itemView.getMeasuredHeight(), ListType.TYPE_POPUP);

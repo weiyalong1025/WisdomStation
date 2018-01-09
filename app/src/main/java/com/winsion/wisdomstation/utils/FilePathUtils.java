@@ -2,12 +2,17 @@ package com.winsion.wisdomstation.utils;
 
 import android.os.Environment;
 
+import com.winsion.wisdomstation.media.constants.FileType;
 import com.winsion.wisdomstation.utils.constants.Path;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by 10295 on 2017/12/17 0017.
+ * 文件工具类
  */
 
 public class FilePathUtils {
@@ -27,7 +32,7 @@ public class FilePathUtils {
     private static final String TTS_LOG = "/TTSLog";
     private static StringBuilder stringBuilder = new StringBuilder();
 
-    public static String getRootPath() throws Exception {
+    private static String getRootPath() throws Exception {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + Path.ROOT;
         }
@@ -81,5 +86,38 @@ public class FilePathUtils {
         stringBuilder.setLength(0);
         stringBuilder.append(ROOT_PATH).append(TTS_LOG);
         return stringBuilder.toString();
+    }
+
+    public static String getMediaFilePath(String path, int type) {
+        File mediaStorageDir = null;
+        try {
+            mediaStorageDir = new File(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (mediaStorageDir != null && !mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                LogUtils.e("SAVE", "内存卡不存在");
+                return null;
+            }
+        }
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA).format(new Date());
+        File mediaFile;
+        if (type == FileType.PICTURE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + ".jpg");
+        } else if (type == FileType.VIDEO) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "VID_" + timeStamp + ".mp4");
+        } else if (type == FileType.AUDIO) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "VOI_" + timeStamp + ".aac");
+        } else if (type == FileType.TEXT) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "TEXT_NOTE.txt");
+        } else {
+            return null;
+        }
+        return mediaFile.getAbsolutePath();
     }
 }

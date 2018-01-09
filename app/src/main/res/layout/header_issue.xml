@@ -152,7 +152,7 @@
                 android:scrollbars="none">
 
                 <TextView
-                    android:id="@+id/tv_performer_list"
+                    android:id="@+id/tv_team_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -280,12 +280,12 @@
         android:background="@color/gray5" />
 
     <EditText
-        android:id="@+id/et_word_content"
+        android:id="@+id/et_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
         android:gravity="top|start"
-        android:labelFor="@id/et_word_content"
+        android:labelFor="@id/et_content"
         android:paddingBottom="@dimen/d12"
         android:paddingEnd="@dimen/d6"
         android:paddingStart="@dimen/d6"
@@ -293,5 +293,6 @@
         android:textColor="@color/white1"
         android:textColorHint="@color/gray5"
         android:textSize="@dimen/s20"
-        tools:hint="@string/command_content" />
+        tools:hint="@string/command_content"
+        tools:ignore="TextFields" />
 </LinearLayout>

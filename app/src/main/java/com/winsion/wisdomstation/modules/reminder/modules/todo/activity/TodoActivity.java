@@ -135,10 +135,7 @@ public class TodoActivity extends BaseActivity implements TodoContract.View {
                 .setDate(calendar)
                 .build();
 
-        RelativeLayout tvTopBar = (RelativeLayout) datePickerView.findViewById(R.id.rv_topbar);
-        ViewGroup.LayoutParams layoutParams = tvTopBar.getLayoutParams();
-        layoutParams.height = getResources().getDimensionPixelSize(R.dimen.d45);
-        tvTopBar.setLayoutParams(layoutParams);
+        CommonBiz.selfAdaptionTopBar(datePickerView);
         datePickerView.show();
     }
 
@@ -164,10 +161,7 @@ public class TodoActivity extends BaseActivity implements TodoContract.View {
                 .setDate(calendar)
                 .build();
 
-        RelativeLayout tvTopBar = (RelativeLayout) timePickerView.findViewById(R.id.rv_topbar);
-        ViewGroup.LayoutParams layoutParams = tvTopBar.getLayoutParams();
-        layoutParams.height = getResources().getDimensionPixelSize(R.dimen.d45);
-        tvTopBar.setLayoutParams(layoutParams);
+        CommonBiz.selfAdaptionTopBar(timePickerView);
         timePickerView.show();
     }
 

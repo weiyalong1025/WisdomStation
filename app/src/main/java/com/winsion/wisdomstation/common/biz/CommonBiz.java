@@ -7,11 +7,14 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
+import com.bigkoo.pickerview.view.BasePickerView;
 import com.lzy.okgo.model.HttpParams;
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.common.listener.SuccessListener;
@@ -26,6 +29,7 @@ import com.winsion.wisdomstation.utils.constants.ListType;
 
 /**
  * Created by 10295 on 2017/12/21 0021.
+ * 通用业务层
  */
 
 public class CommonBiz {
@@ -168,5 +172,13 @@ public class CommonBiz {
                 .setTextColorCenter(0xFF46DBE2)
                 // 是否只显示中间选中项的label文字，false则每项item全部都带有label
                 .isCenterLabel(false);
+    }
+
+    public static void selfAdaptionTopBar(BasePickerView pickerView) {
+        RelativeLayout tvTopBar = (RelativeLayout) pickerView.findViewById(R.id.rv_topbar);
+        if (tvTopBar == null) return;
+        ViewGroup.LayoutParams layoutParams = tvTopBar.getLayoutParams();
+        layoutParams.height = tvTopBar.getResources().getDimensionPixelSize(R.dimen.d45);
+        tvTopBar.setLayoutParams(layoutParams);
     }
 }

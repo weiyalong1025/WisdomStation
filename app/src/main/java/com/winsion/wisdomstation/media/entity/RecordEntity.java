@@ -1,18 +1,20 @@
 package com.winsion.wisdomstation.media.entity;
 
+import java.io.File;
+
 /**
  * Created by wyl on 2017/6/16
  */
 public class RecordEntity {
     /**
+     * 文件
+     */
+    private File file;
+
+    /**
      * 文件类型 FileType
      */
     private int fileType;
-
-    /**
-     * 文件名
-     */
-    private String fileName;
 
     /**
      * 状态 FileState
@@ -20,19 +22,22 @@ public class RecordEntity {
     private int fileStatus;
 
     /**
-     * 文件本地路径
-     */
-    private String localPath;
-
-    /**
      * 文件服务器路径
      */
-    private String serverPath;
+    private String serverUri;
 
     /**
      * 进度 0-100
      */
     private int progress;
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
 
     public int getFileType() {
         return fileType;
@@ -40,14 +45,6 @@ public class RecordEntity {
 
     public void setFileType(int fileType) {
         this.fileType = fileType;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 
     public int getFileStatus() {
@@ -58,20 +55,12 @@ public class RecordEntity {
         this.fileStatus = fileStatus;
     }
 
-    public String getLocalPath() {
-        return localPath;
+    public String getServerUri() {
+        return serverUri;
     }
 
-    public void setLocalPath(String localPath) {
-        this.localPath = localPath;
-    }
-
-    public String getServerPath() {
-        return serverPath;
-    }
-
-    public void setServerPath(String serverPath) {
-        this.serverPath = serverPath;
+    public void setServerUri(String serverUri) {
+        this.serverUri = serverUri;
     }
 
     public int getProgress() {

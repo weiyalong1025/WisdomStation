@@ -1,5 +1,6 @@
 package com.winsion.wisdomstation.modules.reminder.modules.todo.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,6 +44,7 @@ public class TodoFragment extends BaseFragment implements TodoContract.View, Ada
     private TodoAdapter mAdapter;
     private TodoContract.Presenter mPresenter;
 
+    @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
         return getLayoutInflater().inflate(R.layout.fragment_todo, null);
@@ -108,9 +110,9 @@ public class TodoFragment extends BaseFragment implements TodoContract.View, Ada
     }
 
     /**
-     * 该事件由{@link com.winsion.wisdomstation.modules.reminder.modules.todo.receiver.TodoReceiver}发出
+     * 该事件由TodoReceiver发出
      *
-     * @param event
+     * @param event 提醒置为已读状态，刷新界面
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(UpdateTodoEvent event) {

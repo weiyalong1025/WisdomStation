@@ -8,5 +8,6 @@ public interface ParamKey {
     String TIME = "time";
     String DATA = "data";
     String HASH = "hash";
+    String FILE = "file";
     String OPE_CODE = "opeCode";
 }

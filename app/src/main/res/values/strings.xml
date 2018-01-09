@@ -41,7 +41,7 @@
     <string name="patrol_plan">巡视计划</string>
     <string name="problem_manager">问题管理</string>
     <string name="search">搜索</string>
-    <string name="failure_load_click_retry">加载失败，点击重试</string>
+    <string name="failure_load_click_retry">获取数据失败，点击重试</string>
     <string name="all">全部</string>
     <string name="not_started">未开始</string>
     <string name="doing">进行中</string>
@@ -75,9 +75,9 @@
     <string name="a_plan">个步骤</string>
     <string name="command">命令</string>
     <string name="cooperation">协作</string>
-    <string name="take_photo"><![CDATA[拍照>>]]></string>
-    <string name="video"><![CDATA[录像>>]]></string>
-    <string name="record"><![CDATA[录音>>]]></string>
+    <string name="take_photo_btn_str"><![CDATA[拍照>>]]></string>
+    <string name="video_btn_str"><![CDATA[录像>>]]></string>
+    <string name="record_btn_str"><![CDATA[录音>>]]></string>
     <string name="issue">发布</string>
     <string name="issue_command">发布命令</string>
     <string name="issue_cooperate">发布协作</string>
@@ -130,6 +130,17 @@
     <string name="command_group">受令班组:</string>
     <string name="cooperation_group">协作班组:</string>
     <string name="cooperation_content">协作内容:</string>
+    <string name="start_time_not_later_than_the_end_of_time">开始时间不能晚于结束时间</string>
+    <string name="end_time_cannot_be_earlier_than_the_start_time">结束时间不能早于开始时间</string>
+    <string name="select_team">选择班组</string>
+    <string name="select_train">选择车次</string>
+    <string name="please_complete_the_information">请将信息填写完整</string>
+    <string name="rephotograph">重拍</string>
+    <string name="upload_success">上传成功</string>
+    <string name="upload_failed">上传失败</string>
+    <string name="take_photo">拍照</string>
+    <string name="record_video">录像</string>
+    <string name="will_you_clear_out_the_data_after_you_exit">退出之后将清空所填数据，确定退出吗?</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

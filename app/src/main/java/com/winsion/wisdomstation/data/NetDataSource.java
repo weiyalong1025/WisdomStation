@@ -6,20 +6,27 @@ import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.MemoryCookieStore;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Progress;
+import com.lzy.okgo.model.Response;
 import com.lzy.okrx2.adapter.ObservableBody;
 import com.winsion.wisdomstation.BuildConfig;
 import com.winsion.wisdomstation.data.constants.ParamKey;
+import com.winsion.wisdomstation.data.constants.Urls;
 import com.winsion.wisdomstation.data.converter.ObjectConverter;
 import com.winsion.wisdomstation.data.entity.OrderBy;
 import com.winsion.wisdomstation.data.entity.QueryParameter;
 import com.winsion.wisdomstation.data.entity.WhereClause;
 import com.winsion.wisdomstation.data.listener.ResponseListener;
+import com.winsion.wisdomstation.data.listener.UploadListener;
 import com.winsion.wisdomstation.utils.HashUtils;
+import com.winsion.wisdomstation.utils.LogUtils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -80,10 +87,10 @@ public class NetDataSource {
 
         // 配置Https
         // 信任所有证书
-        /*HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
-        builder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
-        //配置https的域名匹配规则，详细看demo的初始化介绍，不需要就不要加入，使用不当会导致https握手失败
-        builder.hostnameVerifier(new SafeHostnameVerifier());*/
+        // HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
+        // builder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
+        // 配置https的域名匹配规则，详细看demo的初始化介绍，不需要就不要加入，使用不当会导致https握手失败
+        // builder.hostnameVerifier(new SafeHostnameVerifier());
 
         //必须调用初始化
         OkGo.getInstance()
@@ -117,14 +124,14 @@ public class NetDataSource {
 
         long time = System.currentTimeMillis();
         String dataStr = JSON.toJSONString(dataParameter);
-        String httpKey = CacheDataSource.getHttpKey();
         String token = CacheDataSource.getToken();
+        String httpKey = CacheDataSource.getHttpKey();
         String sha1Str = HashUtils.getSha1Str(dataStr + time + httpKey);
 
         HttpParams httpParams = new HttpParams();
-        httpParams.put(ParamKey.TOKEN, token);
         httpParams.put(ParamKey.TIME, time);
         httpParams.put(ParamKey.DATA, dataStr);
+        httpParams.put(ParamKey.TOKEN, token);
         httpParams.put(ParamKey.HASH, sha1Str);
         httpParams.put(ParamKey.OPE_CODE, opeCode);
         post(tag, url, httpParams, listener);
@@ -136,16 +143,16 @@ public class NetDataSource {
      * @param opeCode {@link com.winsion.wisdomstation.data.constants.OpeCode}
      */
     public static <T> void post(Object tag, String url, Object data, int opeCode, ResponseListener<T> listener) {
-        String dataStr = JSON.toJSONString(data);
-        String httpKey = CacheDataSource.getHttpKey();
-        String token = CacheDataSource.getToken();
         long time = System.currentTimeMillis();
+        String dataStr = JSON.toJSONString(data);
+        String token = CacheDataSource.getToken();
+        String httpKey = CacheDataSource.getHttpKey();
         String sha1Str = HashUtils.getSha1Str(dataStr + time + httpKey);
 
         HttpParams httpParams = new HttpParams();
-        httpParams.put(ParamKey.TOKEN, token);
         httpParams.put(ParamKey.TIME, time);
         httpParams.put(ParamKey.DATA, dataStr);
+        httpParams.put(ParamKey.TOKEN, token);
         httpParams.put(ParamKey.HASH, sha1Str);
         if (opeCode != 0) {
             httpParams.put(ParamKey.OPE_CODE, opeCode);
@@ -173,14 +180,40 @@ public class NetDataSource {
                 .subscribe(getObserver(tag, listener));
     }
 
-    public static <T> void postJson(Object tag, String url, Object jsonObject, ResponseListener<T> listener) {
-        OkGo.<T>post(CacheDataSource.getBaseUrl() + url)
-                .upJson(JSON.toJSONString(jsonObject))
-                .converter(new ObjectConverter<>(listener))
-                .adapt(new ObservableBody<>())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(getObserver(tag, listener));
+    public static void uploadFileNoData(Object tag, File file, UploadListener uploadListener) {
+        long time = System.currentTimeMillis();
+        String dataStr = file.getName();
+        String token = CacheDataSource.getToken();
+        String httpKey = CacheDataSource.getHttpKey();
+        String sha1Str = HashUtils.getSha1Str(dataStr + time + httpKey);
+
+        HttpParams httpParams = new HttpParams();
+        httpParams.put(ParamKey.TIME, time);
+        httpParams.put(ParamKey.FILE, file);
+        httpParams.put(ParamKey.TOKEN, token);
+        httpParams.put(ParamKey.HASH, sha1Str);
+        OkGo.<String>post(CacheDataSource.getBaseUrl() + Urls.UPLOAD_SINGLE)
+                .tag(tag)
+                .params(httpParams)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        LogUtils.i("上传文件", file.getName() + "上传成功");
+                        uploadListener.uploadSuccess(file);
+                    }
+
+                    @Override
+                    public void uploadProgress(Progress progress) {
+                        LogUtils.i("上传文件", file.getName() + "上传进度：" + progress.fraction + "%");
+                        uploadListener.uploadProgress(file, progress.fraction);
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        LogUtils.i("上传文件", file.getName() + "上传失败");
+                        uploadListener.uploadFailed(file);
+                    }
+                });
     }
 
     private static <T> Observer<T> getObserver(Object tag, ResponseListener<T> listener) {

@@ -10,13 +10,14 @@
         android:id="@+id/ll_media"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/d20">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/iv_file_type"
             android:layout_width="@dimen/d28"
             android:layout_height="@dimen/d22"
+            android:layout_margin="@dimen/d20"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_picture" />
 
@@ -24,7 +25,6 @@
             android:id="@+id/tv_file_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d20"
             android:textColor="@color/white1"
             android:textSize="@dimen/s18"
             tools:text="IMG_20170615" />
@@ -36,8 +36,9 @@
 
         <ImageView
             android:id="@+id/iv_status"
-            android:layout_width="@dimen/d20"
-            android:layout_height="@dimen/d20"
+            android:layout_width="@dimen/d60"
+            android:layout_height="@dimen/d60"
+            android:padding="@dimen/d20"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_failed" />
 
@@ -45,6 +46,7 @@
             android:id="@+id/cpb_status"
             android:layout_width="@dimen/d20"
             android:layout_height="@dimen/d20"
+            android:layout_margin="@dimen/d20"
             android:visibility="gone"
             app:draw_progress_text="false"
             app:line_width="@dimen/d3"

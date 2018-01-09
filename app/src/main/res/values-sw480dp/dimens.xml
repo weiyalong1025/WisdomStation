@@ -31,6 +31,7 @@
     <dimen name="d38">50.67dp</dimen>
     <dimen name="d40">53.33dp</dimen>
     <dimen name="d43">57.33dp</dimen>
+    <dimen name="d44">58.67dp</dimen>
     <dimen name="d45">60dp</dimen>
     <dimen name="d48">64dp</dimen>
     <dimen name="d50">66.67dp</dimen>
@@ -38,6 +39,7 @@
     <dimen name="d54">72dp</dimen>
     <dimen name="d56">74.67dp</dimen>
     <dimen name="d60">80dp</dimen>
+    <dimen name="d64">85.33dp</dimen>
     <dimen name="d70">93.33dp</dimen>
     <dimen name="d80">106.67dp</dimen>
     <dimen name="d85">113.33dp</dimen>
@@ -60,5 +62,6 @@
     <dimen name="s18">24sp</dimen>
     <dimen name="s20">26.67sp</dimen>
     <dimen name="s21">28sp</dimen>
+    <dimen name="s30">40sp</dimen>
     <dimen name="s32">42.67sp</dimen>
 </resources>

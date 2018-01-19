@@ -57,7 +57,6 @@ public class MyIndicator extends RadioGroup implements RadioGroup.OnCheckedChang
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         int childCount = radioGroup.getChildCount();
         for (int j = 0; j < childCount; j++) {
-
             if (radioGroup.getChildAt(j).getId() == i) {
                 if (mViewPager != null) {
                     mViewPager.setCurrentItem(j, false);

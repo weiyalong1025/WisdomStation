@@ -135,8 +135,7 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
                     @Override
                     public void onSuccess(ResponseForQueryData<List<RunEntity>> result) {
                         List<RunEntity> dataList = result.getDataList();
-                        // TODO: 2018/1/9 测试数据
-                        /*if (dataList.size() == 0) {
+                        if (dataList.size() == 0) {
                             tvHint.setText(R.string.no_data_click_to_retry);
                             showView(flContainer, tvHint);
                         } else {
@@ -147,19 +146,7 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
                             etSearch.setText("");
                             showView(flContainer, llContent);
                             mLvAdapter.notifyDataSetChanged();
-                        }*/
-                        RunEntity e = new RunEntity();
-                        e.setTrainnumber("G506");
-                        e.setRunsid("110");
-                        dataList.add(e);
-
-                        allData.clear();
-                        allData.addAll(dataList);
-                        listData.clear();
-                        listData.addAll(dataList);
-                        etSearch.setText("");
-                        showView(flContainer, llContent);
-                        mLvAdapter.notifyDataSetChanged();
+                        }
                     }
 
                     @Override

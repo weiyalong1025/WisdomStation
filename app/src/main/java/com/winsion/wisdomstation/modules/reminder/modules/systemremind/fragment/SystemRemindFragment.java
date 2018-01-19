@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseFragment;
 import com.winsion.wisdomstation.main.activity.MainActivity;
+import com.winsion.wisdomstation.modules.reminder.ReminderRootFragment;
 import com.winsion.wisdomstation.modules.reminder.adapter.SystemRemindAdapter;
 import com.winsion.wisdomstation.modules.reminder.constants.HandleType;
 import com.winsion.wisdomstation.modules.reminder.constants.ReadStatus;
@@ -332,8 +333,10 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
                 unreadCount++;
             }
         }
+        ReminderRootFragment parentFragment = (ReminderRootFragment) getParentFragment();
+        parentFragment.getBrbView(2).showNumber(unreadCount);
         MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.updateUnreadCount(unreadCount);
+        mainActivity.notifyUnreadSysRemindCountChanged(unreadCount);
     }
 
     @Override

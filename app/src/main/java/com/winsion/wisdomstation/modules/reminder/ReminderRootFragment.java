@@ -13,6 +13,7 @@ import com.winsion.wisdomstation.data.SPDataSource;
 import com.winsion.wisdomstation.data.constants.SPKey;
 import com.winsion.wisdomstation.modules.reminder.modules.systemremind.fragment.SystemRemindFragment;
 import com.winsion.wisdomstation.modules.reminder.modules.todo.fragment.TodoFragment;
+import com.winsion.wisdomstation.view.BadgeRadioButton;
 import com.winsion.wisdomstation.view.MyIndicator;
 import com.winsion.wisdomstation.view.NoScrollViewPager;
 
@@ -27,6 +28,12 @@ public class ReminderRootFragment extends BaseFragment {
     NoScrollViewPager vpContent;
     @BindView(R.id.mi_container)
     MyIndicator mIndicator;
+    @BindView(R.id.brb0)
+    BadgeRadioButton brb0;
+    @BindView(R.id.brb1)
+    BadgeRadioButton brb1;
+    @BindView(R.id.brb2)
+    BadgeRadioButton brb2;
 
     private Fragment[] mFragments = {new PlaceHolderFragment(), new TodoFragment(), new SystemRemindFragment()};
     private int[] mTitles = {R.string.user_message, R.string.to_do_list, R.string.system_remind};
@@ -64,6 +71,10 @@ public class ReminderRootFragment extends BaseFragment {
                     break;
             }
         }
+    }
+
+    public BadgeRadioButton getBrbView(int index) {
+        return index == 0 ? brb0 : index == 1 ? brb1 : index == 2 ? brb2 : null;
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

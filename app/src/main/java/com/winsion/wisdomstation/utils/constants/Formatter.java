@@ -18,4 +18,5 @@ public interface Formatter {
     SimpleDateFormat DATE_FORMAT8 = new SimpleDateFormat("yyyyMMdd", Locale.CHINA);
     SimpleDateFormat DATE_FORMAT9 = new SimpleDateFormat("mm:ss", Locale.CHINA);
     SimpleDateFormat DATE_FORMAT10 = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
+    SimpleDateFormat DATE_FORMAT11 = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA);
 }

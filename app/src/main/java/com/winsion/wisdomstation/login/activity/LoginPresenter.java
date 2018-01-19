@@ -98,7 +98,7 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
                 // 开启MQ
                 new MQTTClient.Connector(AppApplication.getContext())
                         .listener(LoginPresenter.this)
-                        .connect(ip);
+                        .host(ip).connect();
                 LogUtils.header(TAG, "用户登录信息");
                 LogUtils.i(TAG, "用户名:" + mUsername + ",密码:" + mPassword);
                 LogUtils.i(TAG, "IP地址:" + ip + ",端口号:" + port);

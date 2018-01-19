@@ -21,6 +21,7 @@
     <string name="mq_connect_failed">MQ连接失败</string>
     <string name="on_login">登录中</string>
     <string name="on_logout">注销中</string>
+    <string name="on_issue">发布中</string>
     <string name="dispatch">到发</string>
     <string name="operation">作业</string>
     <string name="contacts">联系人</string>
@@ -141,6 +142,11 @@
     <string name="take_photo">拍照</string>
     <string name="record_video">录像</string>
     <string name="will_you_clear_out_the_data_after_you_exit">退出之后将清空所填数据，确定退出吗?</string>
+    <string name="recording">录音中...</string>
+    <string name="record_audio">录音</string>
+    <string name="please_wait_for_the_files_upload_complete">请等待附件上传完成</string>
+    <string name="issue_success">发布成功</string>
+    <string name="issue_failed">发布失败</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

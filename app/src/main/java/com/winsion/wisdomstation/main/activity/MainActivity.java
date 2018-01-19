@@ -189,11 +189,40 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
         }
     }
 
-    public void updateUnreadCount(int count) {
-        if (count == 0) {
+    /**
+     * 未读用户消息数
+     */
+    private int unreadUserMessageCount;
+    /**
+     * 未读系统提醒数
+     */
+    private int unreadSysRemindCount;
+
+    /**
+     * 未读用户消息数发生改变，更新小红点
+     *
+     * @param afterChangedCount 改变后的未读用户消息数
+     */
+    public void notifyUnreadUserMessageCountChanged(int afterChangedCount) {
+        unreadUserMessageCount = afterChangedCount;
+        if (unreadUserMessageCount + unreadSysRemindCount == 0) {
             atvReminder.removeShow();
         } else {
-            atvReminder.showNumber(count);
+            atvReminder.showPoint();
+        }
+    }
+
+    /**
+     * 未读系统提醒数发生改变，更新小红点
+     *
+     * @param afterChangedCount 改变后的未读提醒数
+     */
+    public void notifyUnreadSysRemindCountChanged(int afterChangedCount) {
+        unreadSysRemindCount = afterChangedCount;
+        if (unreadUserMessageCount + unreadSysRemindCount == 0) {
+            atvReminder.removeShow();
+        } else {
+            atvReminder.showPoint();
         }
     }
 }

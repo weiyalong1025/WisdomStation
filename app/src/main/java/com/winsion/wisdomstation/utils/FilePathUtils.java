@@ -1,14 +1,16 @@
 package com.winsion.wisdomstation.utils;
 
 import android.os.Environment;
+import android.support.annotation.IntDef;
 
 import com.winsion.wisdomstation.media.constants.FileType;
+import com.winsion.wisdomstation.utils.constants.Formatter;
 import com.winsion.wisdomstation.utils.constants.Path;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by 10295 on 2017/12/17 0017.
@@ -88,36 +90,33 @@ public class FilePathUtils {
         return stringBuilder.toString();
     }
 
-    public static String getMediaFilePath(String path, int type) {
-        File mediaStorageDir = null;
-        try {
-            mediaStorageDir = new File(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (mediaStorageDir != null && !mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                LogUtils.e("SAVE", "内存卡不存在");
+    public static String getMediaFilePath(String path, @FileTypeLimit int type) {
+        File mediaStorageDir = new File(path);
+        if (mediaStorageDir.exists() || mediaStorageDir.mkdirs()) {
+            String timeStamp = Formatter.DATE_FORMAT11.format(new Date());
+            File mediaFile;
+            if (type == FileType.PICTURE) {
+                mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                        + "IMG_" + timeStamp + ".jpg");
+            } else if (type == FileType.VIDEO) {
+                mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                        + "VID_" + timeStamp + ".mp4");
+            } else if (type == FileType.AUDIO) {
+                mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                        + "VOI_" + timeStamp + ".aac");
+            } else if (type == FileType.TEXT) {
+                mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                        + "TEXT_NOTE.txt");
+            } else {
                 return null;
             }
+            return mediaFile.getAbsolutePath();
         }
-        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA).format(new Date());
-        File mediaFile;
-        if (type == FileType.PICTURE) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".jpg");
-        } else if (type == FileType.VIDEO) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "VID_" + timeStamp + ".mp4");
-        } else if (type == FileType.AUDIO) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "VOI_" + timeStamp + ".aac");
-        } else if (type == FileType.TEXT) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "TEXT_NOTE.txt");
-        } else {
-            return null;
-        }
-        return mediaFile.getAbsolutePath();
+        return null;
+    }
+
+    @IntDef({FileType.PICTURE, FileType.VIDEO, FileType.AUDIO, FileType.TEXT})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface FileTypeLimit {
     }
 }

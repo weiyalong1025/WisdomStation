@@ -8,15 +8,18 @@
         android:id="@+id/mi_container"
         style="@style/IndicatorStyle">
 
-        <RadioButton
+        <com.winsion.wisdomstation.view.BadgeRadioButton
+            android:id="@+id/brb0"
             style="@style/RadioButtonStyle"
             android:background="@drawable/selector_indicator_bg_left" />
 
-        <RadioButton
+        <com.winsion.wisdomstation.view.BadgeRadioButton
+            android:id="@+id/brb1"
             style="@style/RadioButtonStyle"
             android:background="@drawable/selector_indicator_bg_middle" />
 
-        <RadioButton
+        <com.winsion.wisdomstation.view.BadgeRadioButton
+            android:id="@+id/brb2"
             style="@style/RadioButtonStyle"
             android:background="@drawable/selector_indicator_bg_right" />
     </com.winsion.wisdomstation.view.MyIndicator>

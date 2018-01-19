@@ -5,6 +5,10 @@ package com.winsion.wisdomstation.data.constants;
  */
 public interface OpeCode {
     /**
+     * 发布命令/协作
+     */
+    int ISSUE = 201;
+    /**
      * 任务状态
      */
     int TASK = 202;

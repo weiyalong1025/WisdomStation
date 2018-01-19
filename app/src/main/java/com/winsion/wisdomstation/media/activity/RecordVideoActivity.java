@@ -26,6 +26,8 @@ import butterknife.OnClick;
 /**
  * Created by wyl on 2016/8/27.
  * 录制视频
+ * TODO 动态权限-相机
+ * TODO 动态权限-录音
  */
 public class RecordVideoActivity extends BaseActivity {
     @BindView(R.id.camera_preview)

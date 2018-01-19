@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -17,7 +18,8 @@
             android:layout_centerVertical="true"
             android:text="@string/default_patrol_date"
             android:textColor="@color/white1"
-            android:textSize="@dimen/s16" />
+            android:textSize="@dimen/s16"
+            tools:ignore="RelativeOverlap" />
 
         <ImageView
             android:id="@+id/iv_bluetooth"
@@ -26,7 +28,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_bluetooth" />
+            android:src="@drawable/ic_bluetooth"
+            tools:ignore="ContentDescription" />
     </RelativeLayout>
 
     <include layout="@layout/layout_status" />

@@ -19,8 +19,13 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseActivity;
 import com.winsion.wisdomstation.common.biz.CommonBiz;
+import com.winsion.wisdomstation.data.CacheDataSource;
 import com.winsion.wisdomstation.data.NetDataSource;
+import com.winsion.wisdomstation.data.constants.OpeCode;
+import com.winsion.wisdomstation.data.constants.Urls;
+import com.winsion.wisdomstation.data.listener.ResponseListener;
 import com.winsion.wisdomstation.data.listener.UploadListener;
+import com.winsion.wisdomstation.media.activity.RecordAudioActivity;
 import com.winsion.wisdomstation.media.activity.RecordVideoActivity;
 import com.winsion.wisdomstation.media.activity.TakePhotoActivity;
 import com.winsion.wisdomstation.media.adapter.RecordAdapter;
@@ -28,11 +33,14 @@ import com.winsion.wisdomstation.media.constants.FileStatus;
 import com.winsion.wisdomstation.media.constants.FileType;
 import com.winsion.wisdomstation.media.entity.RecordEntity;
 import com.winsion.wisdomstation.modules.operation.constants.TaskType;
+import com.winsion.wisdomstation.modules.operation.entity.FileDto;
+import com.winsion.wisdomstation.modules.operation.entity.PublishParameter;
 import com.winsion.wisdomstation.modules.operation.entity.RunEntity;
 import com.winsion.wisdomstation.modules.operation.entity.TeamEntity;
 import com.winsion.wisdomstation.utils.ConvertUtils;
 import com.winsion.wisdomstation.utils.FilePathUtils;
 import com.winsion.wisdomstation.utils.constants.Formatter;
+import com.winsion.wisdomstation.view.TipDialog;
 import com.winsion.wisdomstation.view.TitleView;
 
 import java.io.File;
@@ -96,6 +104,9 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     private ArrayList<RecordEntity> recordEntities = new ArrayList<>();
     private File photoFile;
     private File videoFile;
+    private File audioFile;
+    // 发布中显示dialog
+    private TipDialog mLoadingDialog;
 
     /**
      * @param context   上下文
@@ -178,9 +189,79 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             if (isEmpty(getText(tvStation)) || isEmpty(teamIds) || isEmpty(title) || isEmpty(runsId) || isEmpty(content)) {
                 showToast(getString(R.string.please_complete_the_information));
             } else {
-
+                for (RecordEntity recordEntity : recordEntities) {
+                    if (recordEntity.getFileStatus() != FileStatus.SYNCHRONIZED) {
+                        showToast(getString(R.string.please_wait_for_the_files_upload_complete));
+                        return;
+                    }
+                }
+                // 隐藏软键盘
+                CommonBiz.hideKeyboard(tvTitle);
+                // 发布中，显示dialog
+                showDialog();
+                // 发布
+                issue();
             }
         });
+    }
+
+    private void issue() {
+        ArrayList<FileDto> fileList = new ArrayList<>();
+        for (RecordEntity recordEntity : recordEntities) {
+            FileDto fileDto = new FileDto();
+            fileDto.setFileName(recordEntity.getFile().getName());
+            fileDto.setFileType(recordEntity.getFileType());
+            fileList.add(fileDto);
+        }
+
+        PublishParameter publishParameter = new PublishParameter();
+        publishParameter.setRunsId(runsId);
+        publishParameter.setSsId(CommonBiz.getBSSID(this));
+        publishParameter.setUsersId(CacheDataSource.getUserId());
+        publishParameter.setTaskName(getText(etTitle));
+        publishParameter.setPlanEndTime(getText(tvEndTime));
+        publishParameter.setTaskType(issueType);
+        publishParameter.setNote("");
+        publishParameter.setPlanStartTime(getText(tvStartTime));
+        publishParameter.setWorkContent(getText(etContent));
+        publishParameter.setMonitorTeamId(CacheDataSource.getTeamId());
+        publishParameter.setAreaId("");
+        publishParameter.setOperatorTeamId(teamIds);
+        publishParameter.setFileList(fileList);
+
+        NetDataSource.post(getClass(), Urls.JOb, publishParameter, OpeCode.ISSUE,
+                new ResponseListener<String>() {
+                    @Override
+                    public String convert(String jsonStr) {
+                        return jsonStr;
+                    }
+
+                    @Override
+                    public void onSuccess(String result) {
+                        mLoadingDialog.dismiss();
+                        showToast(R.string.issue_success);
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailed(int errorCode, String errorInfo) {
+                        mLoadingDialog.dismiss();
+                        showToast(R.string.issue_failed);
+                    }
+                });
+    }
+
+    private void showDialog() {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new TipDialog.Builder(mContext)
+                    .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
+                    .setTipWord(getString(R.string.on_issue))
+                    .create();
+        }
+        if (mLoadingDialog.isShowing()) {
+            mLoadingDialog.dismiss();
+        }
+        mLoadingDialog.show();
     }
 
     @SuppressLint("InflateParams")
@@ -263,7 +344,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         // 隐藏软键盘
         CommonBiz.hideKeyboard(textView);
 
-        // 获取回显事件
+        // 获取回显时间
         Date currentDate;
         String str = getText(textView);
         if (isEmpty(str)) {
@@ -361,7 +442,15 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     NetDataSource.uploadFileNoData(getClass(), videoFile, this);
                     break;
                 case CODE_RECORD_AUDIO:
-
+                    // 录音成功
+                    recordEntity = new RecordEntity();
+                    recordEntity.setFileType(FileType.AUDIO);
+                    recordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                    recordEntity.setFile(audioFile);
+                    recordEntities.add(recordEntity);
+                    recordAdapter.notifyDataSetChanged();
+                    // 上传
+                    NetDataSource.uploadFileNoData(getClass(), audioFile, this);
                     break;
             }
         }
@@ -389,7 +478,13 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                 }
                 break;
             case R.id.btn_record:
-//                startActivityForResult(RecordAudioActivity.class, CODE_RECORD_AUDIO);
+                String audioFilePath = FilePathUtils.getMediaFilePath(FilePathUtils.getIssuePath(), FileType.AUDIO);
+                if (audioFilePath != null) {
+                    audioFile = new File(audioFilePath);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(RecordAudioActivity.FILE, audioFile);
+                    startActivityForResult(RecordAudioActivity.class, CODE_RECORD_AUDIO, bundle);
+                }
                 break;
         }
     }

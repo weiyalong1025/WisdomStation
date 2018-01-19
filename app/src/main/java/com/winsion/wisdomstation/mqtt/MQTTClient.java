@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.winsion.wisdomstation.mqtt.entity.MQMessage;
@@ -46,6 +47,7 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
     private WeakReference<Context> mContext;
     private boolean needReconnect;
     private ConnectListener mConnectListener;
+    private Connector mConnector;
     private String mServerUrl;
 
     @Override
@@ -53,7 +55,7 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
         LogUtils.i(TAG, intent.getAction());
         if (isNetworkConnected()) {
             mContext.get().unregisterReceiver(this);
-            connect();
+            reconnect();
         }
     }
 
@@ -85,24 +87,23 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
 
     private MQTTClient(Connector connector) {
         this.mConnectListener = connector.connectListener;
+        this.mConnector = connector;
         this.mContext = new WeakReference<>(connector.context);
-        mServerUrl = "tcp://" + connector.host + ":" + MQ_PORT;
+        mServerUrl = connector.host;
         String CLIENT_ID = "yalong" + System.currentTimeMillis();
-        mClient = new MqttAndroidClient(mContext.get(), mServerUrl, CLIENT_ID, new MemoryPersistence());
+        mClient = new MqttAndroidClient(mContext.get(), "tcp://" + mServerUrl + ":" + MQ_PORT, CLIENT_ID, new MemoryPersistence());
         mClient.setCallback(new MqttCallback() {
             @Override
             public void connectionLost(Throwable cause) {
                 LogUtils.i(TAG, "connectionLost：连接丢失");
-                connect();
+                reconnect();
             }
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 // 接到消息
                 String msg = new String(message.getPayload());
-                LogUtils.header(TAG, topic);
                 LogUtils.i(TAG, "messageArrived:" + msg);
-                LogUtils.footer(TAG, topic);
                 notifyObservers(JSON.parseObject(msg, MQMessage.class));
             }
 
@@ -138,10 +139,26 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
             return this;
         }
 
-        public void connect(String host) {
+        public Connector host(String host) {
             this.host = host;
-            MQTTClient.getInstance(this).connect();
+            return this;
         }
+
+        public void connect() {
+            if (mInstance == null) {
+                MQTTClient.getInstance(this).connect();
+            } else {
+                String currentHost = mInstance.getCurrentHost();
+                if (!currentHost.equals(host)) {
+                    destroy();
+                    MQTTClient.getInstance(this).connect();
+                }
+            }
+        }
+    }
+
+    private String getCurrentHost() {
+        return mServerUrl;
     }
 
     void connect() {
@@ -163,6 +180,13 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
         }
     }
 
+    void reconnect() {
+        destroy();
+        MQTTClient instance = getInstance(mConnector);
+        instance.needReconnect = true;
+        instance.connect();
+    }
+
     @Override
     public void onSuccess(IMqttToken asyncActionToken) {
         LogUtils.i(TAG, "connect success !");
@@ -173,6 +197,7 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
             }
             if (mConnectListener != null) {
                 mConnectListener.connectSuccess();
+                mConnector.connectListener = null;
                 mConnectListener = null;
             }
         } catch (MqttException e) {
@@ -184,7 +209,7 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
     public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
         LogUtils.i(TAG, "connect failed , server url is ：" + mServerUrl + " , exception: " + exception.toString());
         if (needReconnect) {
-            connect();
+            reconnect();
         } else {
             if (mConnectListener != null) {
                 mConnectListener.connectFailed();
@@ -203,8 +228,10 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
     private void close() {
         try {
             mClient.setCallback(null);
-            mClient.close();
-            mClient.disconnect();
+            if (mClient.isConnected()) {
+                mClient.close();
+                mClient.disconnect();
+            }
             mInstance = null;
         } catch (MqttException e) {
             e.printStackTrace();

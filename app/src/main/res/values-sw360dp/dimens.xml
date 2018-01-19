@@ -55,6 +55,9 @@
     <dimen name="d208">208dp</dimen>
     <dimen name="d295">295dp</dimen>
 
+    <dimen name="s8">8sp</dimen>
+    <dimen name="s9">9sp</dimen>
+    <dimen name="s10">10sp</dimen>
     <dimen name="s12">12sp</dimen>
     <dimen name="s14">14sp</dimen>
     <dimen name="s15">15sp</dimen>

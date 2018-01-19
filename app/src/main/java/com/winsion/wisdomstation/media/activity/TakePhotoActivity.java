@@ -33,7 +33,7 @@ import butterknife.OnClick;
 
 /**
  * Created by wyl on 2016/8/27.
- * TODO 相机需要动态权限
+ * TODO 动态权限-相机
  */
 public class TakePhotoActivity extends BaseActivity {
     @BindView(R.id.sv_preview)

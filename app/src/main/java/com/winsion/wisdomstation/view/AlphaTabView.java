@@ -39,7 +39,7 @@ public class AlphaTabView extends View {
     private boolean isShowRemove;                //是否移除当前角标
     private boolean isShowPoint;                //是否显示圆点
     private int mBadgeNumber;                       //角标数
-    private int mBadgeBackgroundColor = 0xFFFF0000;       //默认红颜色
+    private int mBadgeBackgroundColor = Color.RED;       //默认红颜色
 
     public AlphaTabView(Context context) {
         this(context, null);
@@ -194,7 +194,7 @@ public class AlphaTabView extends View {
                 bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             } else {
                 width = i + 8;
-                bitmap = Bitmap.createBitmap(width, width, Bitmap.Config.ARGB_8888);
+                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             }
             Canvas canvasMessages = new Canvas(bitmap);
             RectF messageRectF = new RectF(0, 0, width, height);
@@ -221,8 +221,8 @@ public class AlphaTabView extends View {
                 paint.setAntiAlias(true);
                 float left = getMeasuredWidth() / 10 * 6f;
                 float top = getResources().getDimensionPixelSize(R.dimen.d5);
-                i = i > 10 ? 10 : i;
-                RectF messageRectF = new RectF(left, top, left + i, top + i);
+                int pointSize = getResources().getDimensionPixelSize(R.dimen.d8);
+                RectF messageRectF = new RectF(left, top, left + pointSize, top + pointSize);
                 canvas.drawOval(messageRectF, paint);
             }
         }

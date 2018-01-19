@@ -103,6 +103,8 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
             }
         });
         atiIndicator.setViewPager(vpContent);
+        // 预加载所有界面
+        vpContent.setOffscreenPageLimit(5);
     }
 
     private void initListener() {

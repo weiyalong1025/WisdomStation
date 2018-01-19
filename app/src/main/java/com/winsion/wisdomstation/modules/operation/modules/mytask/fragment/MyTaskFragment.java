@@ -1,5 +1,6 @@
 package com.winsion.wisdomstation.modules.operation.modules.mytask.fragment;
 
+import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -17,11 +18,12 @@ import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseFragment;
 import com.winsion.wisdomstation.common.listener.StateListener;
 import com.winsion.wisdomstation.data.constants.OpeType;
-import com.winsion.wisdomstation.modules.operation.biz.TaskCommBiz;
 import com.winsion.wisdomstation.modules.operation.adapter.MyTaskAdapter;
+import com.winsion.wisdomstation.modules.operation.biz.TaskCommBiz;
 import com.winsion.wisdomstation.modules.operation.constants.TaskSpinnerState;
 import com.winsion.wisdomstation.modules.operation.constants.TaskState;
 import com.winsion.wisdomstation.modules.operation.entity.JobEntity;
+import com.winsion.wisdomstation.modules.operation.modules.mytask.activity.MyTaskActivity;
 import com.winsion.wisdomstation.utils.ConvertUtils;
 import com.winsion.wisdomstation.utils.constants.Formatter;
 import com.winsion.wisdomstation.view.SpinnerView;
@@ -38,6 +40,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by 10295 on 2017/12/15 0015.
+ * 我的任务Fragment
  */
 
 public class MyTaskFragment extends BaseFragment implements MyTaskContract.View, AdapterView.OnItemClickListener,
@@ -75,6 +78,7 @@ public class MyTaskFragment extends BaseFragment implements MyTaskContract.View,
     // 记录选了哪个状态进行筛选
     private int statusPosition = TaskSpinnerState.STATE_ALL;
 
+    @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
         return getLayoutInflater().inflate(R.layout.fragment_task, null);
@@ -186,7 +190,8 @@ public class MyTaskFragment extends BaseFragment implements MyTaskContract.View,
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        showToast(position + "");
+        JobEntity jobEntity = listData.get(position);
+        MyTaskActivity.startMyTaskActivity(mContext, jobEntity);
     }
 
     @Override

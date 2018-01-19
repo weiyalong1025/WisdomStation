@@ -48,6 +48,8 @@ public class ReminderRootFragment extends BaseFragment {
     protected void init() {
         vpContent.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         mIndicator.setViewPager(vpContent);
+        // 预加载所有界面
+        vpContent.setOffscreenPageLimit(2);
     }
 
     @Override

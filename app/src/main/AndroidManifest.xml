@@ -89,6 +89,10 @@
             android:name=".media.activity.RecordAudioActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".modules.operation.modules.mytask.activity.MyTaskActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
 
         <!-- service -->
         <service android:name="org.eclipse.paho.android.service.MqttService" />

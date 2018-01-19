@@ -87,7 +87,7 @@
     <string name="plan_end">计划结束</string>
     <string name="separator">/</string>
     <string name="Your_device_does_not_support_bluetooth">该设备不支持蓝牙功能</string>
-    <string name="Failed_to_open_the_bluetooth">打开蓝牙失败，请手动打开蓝牙后使用该功能</string>
+    <string name="Failed_to_open_the_bluetooth">打开蓝牙失败，巡视功能暂不可用</string>
     <string name="bluetooth_address">蓝牙地址：</string>
     <string name="last_time_receive_msg">最近收到信号时间：</string>
     <string name="no_data_click_to_retry">没有数据，点击重新获取</string>

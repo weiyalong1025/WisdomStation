@@ -54,7 +54,7 @@ public class BadgeRadioButton extends AppCompatRadioButton {
 
             Paint numberPaint = new Paint();
             numberPaint.setColor(Color.WHITE);
-            numberPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.s10));
+            numberPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.s9));
             numberPaint.setAntiAlias(true);
             numberPaint.setTextAlign(Paint.Align.CENTER);
             numberPaint.setTypeface(Typeface.DEFAULT_BOLD);

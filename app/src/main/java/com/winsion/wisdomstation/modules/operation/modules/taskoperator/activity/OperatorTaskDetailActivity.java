@@ -332,10 +332,8 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 设置按钮背景和文字
                 btnStatus.setBackgroundResource(R.drawable.btn_bg_start);
                 btnStatus.setText(getString(R.string.click_to_start));
-
                 // 设置持续时间
                 tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.minute)));
-
                 // 判断是否超时
                 isTimeOut = planStartTime < currentTime;
                 if (isTimeOut) {
@@ -422,14 +420,26 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         }
     }
 
-    @OnClick({R.id.btn_take_photo, R.id.btn_video, R.id.btn_record})
+    @OnClick({R.id.btn_status, R.id.btn_note, R.id.btn_broadcast, R.id.btn_take_photo, R.id.btn_video, R.id.btn_record})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.btn_status:
+                showToast("更改状态");
+                break;
+            case R.id.btn_note:
+                showToast("添加备注");
+                break;
+            case R.id.btn_broadcast:
+                showToast("发送广播");
+                break;
             case R.id.btn_take_photo:
+                showToast("拍摄照片");
                 break;
             case R.id.btn_video:
+                showToast("录制视频");
                 break;
             case R.id.btn_record:
+                showToast("录制音频");
                 break;
         }
     }

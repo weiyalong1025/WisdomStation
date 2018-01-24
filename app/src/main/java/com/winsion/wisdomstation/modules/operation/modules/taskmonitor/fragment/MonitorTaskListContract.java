@@ -7,10 +7,10 @@ import com.winsion.wisdomstation.modules.operation.entity.TaskEntity;
 import java.util.List;
 
 /**
- * Created by 10295 on 2017/12/25.
+ * Created by 10295 on 2017/12/25
  */
 
-class TaskMonitorContract {
+class MonitorTaskListContract {
     interface View extends BaseView {
         void getMonitorTaskDataSuccess(List<TaskEntity> data);
 

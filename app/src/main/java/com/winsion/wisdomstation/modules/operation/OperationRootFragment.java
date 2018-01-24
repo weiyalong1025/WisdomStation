@@ -1,5 +1,6 @@
 package com.winsion.wisdomstation.modules.operation;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,15 +12,15 @@ import com.winsion.wisdomstation.common.constants.SystemType;
 import com.winsion.wisdomstation.data.SPDataSource;
 import com.winsion.wisdomstation.data.constants.SPKey;
 import com.winsion.wisdomstation.modules.operation.modules.issue.fragment.IssueFragment;
-import com.winsion.wisdomstation.modules.operation.modules.mytask.fragment.MyTaskFragment;
-import com.winsion.wisdomstation.modules.operation.modules.taskmonitor.fragment.TaskMonitorFragment;
+import com.winsion.wisdomstation.modules.operation.modules.taskmonitor.fragment.MonitorTaskListFragment;
+import com.winsion.wisdomstation.modules.operation.modules.taskoperator.fragment.OperatorTaskListFragment;
 import com.winsion.wisdomstation.view.MyIndicator;
 import com.winsion.wisdomstation.view.NoScrollViewPager;
 
 import butterknife.BindView;
 
 /**
- * Created by 10295 on 2017/12/10 0010.
+ * Created by 10295 on 2017/12/10 0010
  */
 
 public class OperationRootFragment extends BaseFragment {
@@ -28,10 +29,11 @@ public class OperationRootFragment extends BaseFragment {
     @BindView(R.id.mi_container)
     MyIndicator mIndicator;
 
-    private Fragment[] mFragments = {new MyTaskFragment(), new TaskMonitorFragment(), new IssueFragment()};
+    private Fragment[] mFragments = {new OperatorTaskListFragment(), new MonitorTaskListFragment(), new IssueFragment()};
     private int[] mTitles = {R.string.my_task, R.string.task_monitor, R.string.command_and_collaboration};
     private int mCurrentSysType = -1;
 
+    @SuppressLint("InflateParams")
     @Override
     public View setContentView() {
         return getLayoutInflater().inflate(R.layout.fragment_three_pager, null);

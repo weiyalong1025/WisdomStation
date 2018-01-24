@@ -9,11 +9,13 @@ import android.widget.RadioButton;
 
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseFragment;
+import com.winsion.wisdomstation.main.activity.MainActivity;
+import com.winsion.wisdomstation.modules.reminder.ReminderRootFragment;
 import com.winsion.wisdomstation.modules.reminder.adapter.TodoAdapter;
 import com.winsion.wisdomstation.modules.reminder.constants.ExtraName;
 import com.winsion.wisdomstation.modules.reminder.entity.TodoEntity;
 import com.winsion.wisdomstation.modules.reminder.event.UpdateTodoEvent;
-import com.winsion.wisdomstation.modules.reminder.modules.todo.activity.TodoActivity;
+import com.winsion.wisdomstation.modules.reminder.modules.todo.activity.TodoDetailActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -30,7 +32,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * Created by wyl on 2017/6/2
  */
-public class TodoFragment extends BaseFragment implements TodoContract.View, AdapterView.OnItemClickListener {
+public class TodoListFragment extends BaseFragment implements TodoListContract.View, AdapterView.OnItemClickListener {
     @BindView(R.id.lv_reminders_list)
     ListView lvRemindersList;
     @BindView(R.id.btn_unfinished)
@@ -42,7 +44,7 @@ public class TodoFragment extends BaseFragment implements TodoContract.View, Ada
     private boolean mIsFinish;
     private List<TodoEntity> listData = new ArrayList<>();
     private TodoAdapter mAdapter;
-    private TodoContract.Presenter mPresenter;
+    private TodoListContract.Presenter mPresenter;
 
     @SuppressLint("InflateParams")
     @Override
@@ -55,18 +57,19 @@ public class TodoFragment extends BaseFragment implements TodoContract.View, Ada
         initPresenter();
         initAdapter();
         initListener();
-        initData();
-        rbUnFinished.setChecked(true);
+        recoverAlarm();
+        initData(true);
     }
 
     private void initPresenter() {
-        mPresenter = new TodoPresenter(this);
+        mPresenter = new TodoListPresenter(this);
         mPresenter.start();
     }
 
     private void initAdapter() {
         mAdapter = new TodoAdapter(mContext, listData);
         lvRemindersList.setAdapter(mAdapter);
+        rbUnFinished.setChecked(true);
     }
 
     private void initListener() {
@@ -75,11 +78,32 @@ public class TodoFragment extends BaseFragment implements TodoContract.View, Ada
         lvRemindersList.setOnItemClickListener(this);
     }
 
-    private void initData() {
+    private void initData(boolean isUpdateBadge) {
         List<TodoEntity> toDoBeen = mPresenter.queryToDo(mIsFinish);
         listData.clear();
         listData.addAll(toDoBeen);
         mAdapter.notifyDataSetChanged();
+
+        if (isUpdateBadge) {
+            // 更新角标
+            int unreadCount = 0;
+            for (TodoEntity todoEntity : mPresenter.queryToDo(false)) {
+                if (todoEntity.getPlanDate() < System.currentTimeMillis()) {
+                    unreadCount++;
+                }
+            }
+            ReminderRootFragment parentFragment = (ReminderRootFragment) getParentFragment();
+            parentFragment.getBrbView(1).showNumber(unreadCount);
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.notifyUnreadTodoCountChanged(unreadCount);
+        }
+    }
+
+    /**
+     * 避免退出程序后之前设置的闹钟不会提醒，需要将之前的提醒进行重新设置
+     */
+    private void recoverAlarm() {
+        mPresenter.recoverAlarm();
     }
 
     @OnClick({R.id.btn_unfinished, R.id.btn_finished, R.id.btn_add})
@@ -87,14 +111,14 @@ public class TodoFragment extends BaseFragment implements TodoContract.View, Ada
         switch (view.getId()) {
             case R.id.btn_unfinished:
                 mIsFinish = false;
-                initData();
+                initData(false);
                 break;
             case R.id.btn_finished:
                 mIsFinish = true;
-                initData();
+                initData(false);
                 break;
             case R.id.btn_add:
-                Intent intent = new Intent(mContext, TodoActivity.class);
+                Intent intent = new Intent(mContext, TodoDetailActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
                 break;
         }
@@ -103,7 +127,7 @@ public class TodoFragment extends BaseFragment implements TodoContract.View, Ada
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (!mIsFinish) {
-            Intent intent = new Intent(mContext, TodoActivity.class);
+            Intent intent = new Intent(mContext, TodoDetailActivity.class);
             intent.putExtra(ExtraName.NAME_TODO_ID, listData.get(position).getId());
             startActivityForResult(intent, REQUEST_CODE);
         }
@@ -116,20 +140,20 @@ public class TodoFragment extends BaseFragment implements TodoContract.View, Ada
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(UpdateTodoEvent event) {
-        initData();
+        initData(true);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            initData();
+            initData(true);
         }
     }
 
     @Override
     public void notifyLocalDataChange() {
-        initData();
+        initData(true);
     }
 
     @Override

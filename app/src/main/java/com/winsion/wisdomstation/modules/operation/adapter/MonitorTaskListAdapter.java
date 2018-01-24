@@ -19,17 +19,17 @@ import com.zhy.adapter.abslistview.ViewHolder;
 import java.util.List;
 
 /**
- * Created by 10295 on 2017/12/18 0018.
+ * Created by 10295 on 2017/12/18 0018
  */
 
-public class MonitorTaskAdapter extends CommonAdapter<TaskEntity> {
+public class MonitorTaskListAdapter extends CommonAdapter<TaskEntity> {
     private OnButtonClickListener mListener;
 
     public interface OnButtonClickListener {
         void onButtonClick(TaskEntity taskEntity, View button);
     }
 
-    public MonitorTaskAdapter(Context context, List<TaskEntity> data) {
+    public MonitorTaskListAdapter(Context context, List<TaskEntity> data) {
         super(context, R.layout.item_operation, data);
     }
 
@@ -106,8 +106,8 @@ public class MonitorTaskAdapter extends CommonAdapter<TaskEntity> {
         }
 
         // 把需要用到的时间转换好
-        long currentTime = System.currentTimeMillis();
         int lastTime;
+        long currentTime = System.currentTimeMillis();
 
         String planStartTimeStr = taskEntity.getPlanstarttime();
         String realStartTimeStr = taskEntity.getRealstarttime();
@@ -131,7 +131,7 @@ public class MonitorTaskAdapter extends CommonAdapter<TaskEntity> {
             case TaskState.NOT_STARTED:
                 // 持续时间
                 lastTime = 0;
-                viewHolder.setText(R.id.tv_last_time, lastTime + "分");
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
                 // 判断是否超时
                 isTimeOut = planStartTime < currentTime;
                 if (isTimeOut) {
@@ -143,7 +143,7 @@ public class MonitorTaskAdapter extends CommonAdapter<TaskEntity> {
             case TaskState.RUN:
                 // 持续时间
                 lastTime = (int) ((currentTime - realStartTime) / 60000);
-                viewHolder.setText(R.id.tv_last_time, lastTime + "分");
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
                 // 判断是否超时
                 isTimeOut = planEndTime < currentTime;
                 GifView gifView = viewHolder.getView(R.id.doing_gif);
@@ -156,7 +156,7 @@ public class MonitorTaskAdapter extends CommonAdapter<TaskEntity> {
             case TaskState.DONE:
                 // 持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / 60000);
-                viewHolder.setText(R.id.tv_last_time, lastTime + "分");
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
                 // 判断是否超时
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
@@ -174,11 +174,11 @@ public class MonitorTaskAdapter extends CommonAdapter<TaskEntity> {
             case TaskState.GRID_NOT_PASS:
                 // 持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / 60000);
-                viewHolder.setText(R.id.tv_last_time, lastTime + "分");
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
                 // 判断是否超时
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
-                    // 超时已完成
+                    // 超时已完成，因没有超时未通过图标，这里使用一样的
                     viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_not_pass);
                 } else {
                     viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_not_pass);

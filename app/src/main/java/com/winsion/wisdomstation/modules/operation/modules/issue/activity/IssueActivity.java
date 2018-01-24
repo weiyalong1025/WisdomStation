@@ -113,7 +113,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
      * @param issueType 发布类型(命令<COMMAND>/协作<COOPERATE>)
      *                  {@link TaskType}
      */
-    public static void startIssueActivity(Context context, int issueType) {
+    public static void startIssueActivity(Context context, @TaskType int issueType) {
         startIssueActivity(context, issueType, null);
     }
 
@@ -123,7 +123,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
      *                   {@link TaskType}
      * @param teamEntity 发布给班组的班组对象，可以为空
      */
-    public static void startIssueActivity(Context context, int issueType, @Nullable TeamEntity teamEntity) {
+    public static void startIssueActivity(Context context, @TaskType int issueType, @Nullable TeamEntity teamEntity) {
         Intent intent = new Intent(context, IssueActivity.class);
         intent.putExtra(ISSUE_TYPE, issueType);
         if (teamEntity != null) {
@@ -181,7 +181,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     }
 
     private void initTitleView() {
-        tvTitle.setOnBackClickListener(v -> finish());
+        tvTitle.setOnBackClickListener(v -> showHintDialog());
         tvTitle.setOnConfirmClickListener(v -> {
             // 检查数据是否填写完整
             String title = getText(etTitle);
@@ -198,7 +198,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                 // 隐藏软键盘
                 CommonBiz.hideKeyboard(tvTitle);
                 // 发布中，显示dialog
-                showDialog();
+                showOnIssueDialog();
                 // 发布
                 issue();
             }
@@ -251,7 +251,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                 });
     }
 
-    private void showDialog() {
+    private void showOnIssueDialog() {
         if (mLoadingDialog == null) {
             mLoadingDialog = new TipDialog.Builder(mContext)
                     .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
@@ -535,14 +535,13 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     }
 
     private void showHintDialog() {
-        new AlertDialog.Builder(this).setMessage(R.string.will_you_clear_out_the_data_after_you_exit)
+        new AlertDialog.Builder(this)
+                .setMessage(R.string.will_you_clear_out_the_data_after_you_exit)
                 .setPositiveButton(R.string.confirm, (dialog, which) -> {
                     dialog.dismiss();
                     finish();
                 })
                 .setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss())
-                .setCancelable(true)
-                .create()
                 .show();
     }
 

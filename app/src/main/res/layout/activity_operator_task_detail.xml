@@ -7,10 +7,17 @@
     android:orientation="vertical">
 
     <com.winsion.wisdomstation.view.TitleView
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showConfirmButton="false"
         tools:titleText="作业详情" />
 
-    <include layout="@layout/layout_status" />
+    <ListView
+        android:id="@+id/lv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        tools:listheader="@layout/header_operation_detail"
+        tools:listitem="@layout/item_record" />
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.winsion.wisdomstation.modules.reminder;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,7 +13,7 @@ import com.winsion.wisdomstation.common.constants.SystemType;
 import com.winsion.wisdomstation.data.SPDataSource;
 import com.winsion.wisdomstation.data.constants.SPKey;
 import com.winsion.wisdomstation.modules.reminder.modules.systemremind.fragment.SystemRemindFragment;
-import com.winsion.wisdomstation.modules.reminder.modules.todo.fragment.TodoFragment;
+import com.winsion.wisdomstation.modules.reminder.modules.todo.fragment.TodoListFragment;
 import com.winsion.wisdomstation.view.BadgeRadioButton;
 import com.winsion.wisdomstation.view.MyIndicator;
 import com.winsion.wisdomstation.view.NoScrollViewPager;
@@ -20,7 +21,7 @@ import com.winsion.wisdomstation.view.NoScrollViewPager;
 import butterknife.BindView;
 
 /**
- * Created by 10295 on 2017/12/10 0010.
+ * Created by 10295 on 2017/12/10 0010
  */
 
 public class ReminderRootFragment extends BaseFragment {
@@ -35,10 +36,11 @@ public class ReminderRootFragment extends BaseFragment {
     @BindView(R.id.brb2)
     BadgeRadioButton brb2;
 
-    private Fragment[] mFragments = {new PlaceHolderFragment(), new TodoFragment(), new SystemRemindFragment()};
+    private Fragment[] mFragments = {new PlaceHolderFragment(), new TodoListFragment(), new SystemRemindFragment()};
     private int[] mTitles = {R.string.user_message, R.string.to_do_list, R.string.system_remind};
     private int mCurrentSysType = -1;
 
+    @SuppressLint("InflateParams")
     @Override
     public View setContentView() {
         return getLayoutInflater().inflate(R.layout.fragment_three_pager, null);

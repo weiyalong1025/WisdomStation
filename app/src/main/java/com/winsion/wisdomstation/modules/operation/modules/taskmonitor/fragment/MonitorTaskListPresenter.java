@@ -26,14 +26,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 10295 on 2017/12/25.
+ * Created by 10295 on 2017/12/25
  */
 
-public class TaskMonitorPresenter implements TaskMonitorContract.Presenter {
-    private TaskMonitorContract.View mView;
+public class MonitorTaskListPresenter implements MonitorTaskListContract.Presenter {
+    private MonitorTaskListContract.View mView;
     private Context mContext;
 
-    TaskMonitorPresenter(TaskMonitorContract.View view) {
+    MonitorTaskListPresenter(MonitorTaskListContract.View view) {
         this.mView = view;
         this.mContext = view.getContext();
     }

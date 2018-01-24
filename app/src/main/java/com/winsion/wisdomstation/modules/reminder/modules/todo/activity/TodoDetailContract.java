@@ -10,7 +10,7 @@ import com.winsion.wisdomstation.modules.reminder.entity.TodoEntity;
  * 创建时间：2017/12/27 2:49
  */
 
-class TodoContract {
+class TodoDetailContract {
     interface View extends BaseView {
         void updateOrAddSuccess();
     }

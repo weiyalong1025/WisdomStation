@@ -1,7 +1,8 @@
 package com.winsion.wisdomstation.modules.reminder.modules.systemremind.fragment;
 
-import android.app.AlertDialog;
+import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     private FrameLayout flMultipleDeleteHeader;
     private Button btnSelectAll;
 
+    @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
         return getLayoutInflater().inflate(R.layout.layout_status, null);
@@ -116,11 +118,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         RemindEntity remindEntity = listData.get(position);
         if (isMultipleDeleteLayoutDisplaying) {
-            if (remindEntity.getReaded() == ReadStatus.UNREAD) {
-                showToast(R.string.only_read_remind_can_be_selected);
-            } else {
-                mLvAdapter.selectOneItem((ViewHolder) view.getTag(), position);
-            }
+            mLvAdapter.selectOneItem((ViewHolder) view.getTag(), position);
         } else if (remindEntity.getReaded() == ReadStatus.UNREAD) {
             ArrayList<RemindEntity> list = new ArrayList<>();
             list.add(remindEntity);
@@ -191,6 +189,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     /**
      * 初始化多选删除布局
      */
+    @SuppressLint("InflateParams")
     private void initMultipleDeleteLayout() {
         multipleDeleteLayout = getLayoutInflater().inflate(R.layout.layout_multiple_delete, null);
         btnMultipleDeleteFooter = multipleDeleteLayout.findViewById(R.id.btn_multiple_delete_footer);
@@ -222,12 +221,11 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         } else {
             new AlertDialog.Builder(getActivity())
                     .setMessage(getConfirmDeleteHint(selectData.size()))
-                    .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.cancel())
                     .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
                         mPresenter.handleReminds(selectData, HandleType.HANDLE_DELETE);
                         dialog.cancel();
                     })
-                    .create()
+                    .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.cancel())
                     .show();
         }
     }

@@ -1,4 +1,4 @@
-package com.winsion.wisdomstation.modules.operation.modules.mytask.activity;
+package com.winsion.wisdomstation.modules.operation.modules.taskoperator.activity;
 
 import com.winsion.wisdomstation.base.BasePresenter;
 import com.winsion.wisdomstation.base.BaseView;
@@ -8,7 +8,7 @@ import com.winsion.wisdomstation.base.BaseView;
  * 我的任务Contract
  */
 
-public class MyTaskContract {
+class OperatorTaskDetailContract {
     interface View extends BaseView {
 
     }

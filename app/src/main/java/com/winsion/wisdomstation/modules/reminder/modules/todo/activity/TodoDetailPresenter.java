@@ -20,13 +20,13 @@ import com.winsion.wisdomstation.utils.constants.Formatter;
  * 创建时间：2017/12/27 2:51
  */
 
-public class TodoPresenter implements TodoContract.Presenter {
-    private TodoContract.View mView;
+public class TodoDetailPresenter implements TodoDetailContract.Presenter {
+    private TodoDetailContract.View mView;
     private Context mContext;
 
     private AlarmManager alarmManager;
 
-    TodoPresenter(TodoContract.View view) {
+    TodoDetailPresenter(TodoDetailContract.View view) {
         this.mView = view;
         this.mContext = mView.getContext();
     }

@@ -1,6 +1,8 @@
-package com.winsion.wisdomstation.modules.operation.modules.taskmonitor.fragment;
+package com.winsion.wisdomstation.modules.operation.modules.taskoperator.fragment;
 
+import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,10 +16,16 @@ import android.widget.TextView;
 
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseFragment;
-import com.winsion.wisdomstation.modules.operation.adapter.MonitorTaskAdapter;
+import com.winsion.wisdomstation.common.listener.StateListener;
+import com.winsion.wisdomstation.data.constants.OpeType;
+import com.winsion.wisdomstation.modules.operation.adapter.OperatorTaskListAdapter;
+import com.winsion.wisdomstation.modules.operation.biz.TaskCommBiz;
 import com.winsion.wisdomstation.modules.operation.constants.TaskSpinnerState;
 import com.winsion.wisdomstation.modules.operation.constants.TaskState;
-import com.winsion.wisdomstation.modules.operation.entity.TaskEntity;
+import com.winsion.wisdomstation.modules.operation.entity.JobEntity;
+import com.winsion.wisdomstation.modules.operation.modules.taskoperator.activity.OperatorTaskDetailActivity;
+import com.winsion.wisdomstation.utils.ConvertUtils;
+import com.winsion.wisdomstation.utils.constants.Formatter;
 import com.winsion.wisdomstation.view.SpinnerView;
 
 import java.util.ArrayList;
@@ -31,11 +39,12 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
- * Created by 10295 on 2017/12/25.
+ * Created by 10295 on 2017/12/15 0015.
+ * 我的任务Fragment
  */
 
-public class TaskMonitorFragment extends BaseFragment implements TaskMonitorContract.View, AdapterView.OnItemClickListener,
-        AbsListView.OnScrollListener, SpinnerView.AfterTextChangeListener {
+public class OperatorTaskListFragment extends BaseFragment implements OperatorTaskListContract.View, AdapterView.OnItemClickListener,
+        AbsListView.OnScrollListener, SpinnerView.AfterTextChangeListener, OperatorTaskListAdapter.OnButtonClickListener {
     @BindView(R.id.sv_spinner)
     SpinnerView svSpinner;
     @BindView(R.id.swipe_refresh)
@@ -43,7 +52,7 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.tv_hint)
-    TextView tvHint;
+    TextView tvRetry;
     @BindView(R.id.fl_container)
     FrameLayout flContainer;
     @BindView(R.id.lv_list)
@@ -53,25 +62,26 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
     @BindView(R.id.iv_shade)
     ImageView ivShade;
 
-    private TaskMonitorContract.Presenter mPresenter;
-    private MonitorTaskAdapter mLvAdapter;
+    private OperatorTaskListContract.Presenter mPresenter;
+    private OperatorTaskListAdapter mLvAdapter;
     private int mCurrentSysType = -1;
     // 当前显示数据
-    private List<TaskEntity> listData = new ArrayList<>();
+    private List<JobEntity> listData = new ArrayList<>();
     // 全部的
-    private List<TaskEntity> allData = new ArrayList<>();
+    private List<JobEntity> allData = new ArrayList<>();
     // 未开始
-    private List<TaskEntity> unStartedData = new ArrayList<>();
+    private List<JobEntity> unStartedData = new ArrayList<>();
     // 进行中
-    private List<TaskEntity> underwayData = new ArrayList<>();
+    private List<JobEntity> underwayData = new ArrayList<>();
     // 已完成
-    private List<TaskEntity> doneData = new ArrayList<>();
+    private List<JobEntity> doneData = new ArrayList<>();
     // 记录选了哪个状态进行筛选
     private int statusPosition = TaskSpinnerState.STATE_ALL;
 
+    @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return getLayoutInflater().inflate(R.layout.fragment_task, null);
+        return getLayoutInflater().inflate(R.layout.fragment_task_list, null);
     }
 
     @Override
@@ -83,7 +93,7 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
     }
 
     private void initPresenter() {
-        mPresenter = new TaskMonitorPresenter(this);
+        mPresenter = new OperatorTaskListPresenter(this);
     }
 
     private void initView() {
@@ -95,7 +105,7 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
         svSpinner.setFirstOptionData(stationList);
         svSpinner.setFirstOptionItemClickListener((position) -> {
             showView(flContainer, progressBar);
-            mPresenter.getMonitorTaskData(mCurrentSysType);
+            mPresenter.getMyTaskData(mCurrentSysType);
         });
 
         // 初始化状态选项
@@ -119,20 +129,68 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
             }
         });
 
-        mLvAdapter = new MonitorTaskAdapter(mContext, listData);
+        mLvAdapter = new OperatorTaskListAdapter(mContext, listData);
         lvList.setAdapter(mLvAdapter);
     }
 
     private void initListener() {
-        swipeRefresh.setOnRefreshListener(() -> mPresenter.getMonitorTaskData(mCurrentSysType));
+        swipeRefresh.setOnRefreshListener(() -> mPresenter.getMyTaskData(mCurrentSysType));
         lvList.setOnItemClickListener(this);
         lvList.setOnScrollListener(this);
         svSpinner.setAfterTextChangeListener(this);
+        mLvAdapter.setOnButtonClickListener(this);
+    }
+
+    /**
+     * 更改任务状态按钮点击事件
+     *
+     * @param jobEntity 该条目对应的job
+     * @param button    该条目上的button按钮
+     */
+    @Override
+    public void onButtonClick(JobEntity jobEntity, View button) {
+        // 更改任务状态按钮点击事件
+        boolean isFinish = jobEntity.getWorkstatus() == TaskState.RUN;
+        new AlertDialog.Builder(mContext)
+                .setMessage(getString(isFinish ? R.string.sure_you_want_to_finish : R.string.sure_you_want_to_start))
+                .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
+                    button.setEnabled(false);
+                    int opeType = isFinish ? OpeType.COMPLETE : OpeType.BEGIN;
+                    TaskCommBiz.changeJobStatus(mContext, jobEntity, opeType, new StateListener() {
+                        @Override
+                        public void onSuccess() {
+                            button.setEnabled(true);
+                            String currentTime = ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1);
+                            if (isFinish) {
+                                jobEntity.setWorkstatus(TaskState.DONE);
+                                jobEntity.setRealendtime(currentTime);
+                                underwayData.remove(jobEntity);
+                                doneData.add(jobEntity);
+                            } else {
+                                jobEntity.setWorkstatus(TaskState.RUN);
+                                jobEntity.setRealstarttime(currentTime);
+                                unStartedData.remove(jobEntity);
+                                underwayData.add(jobEntity);
+                            }
+                            filterData();
+                            scrollToItem(jobEntity.getTasksid());
+                        }
+
+                        @Override
+                        public void onFailed() {
+                            button.setEnabled(true);
+                            showToast(R.string.change_the_state_of_failure);
+                        }
+                    });
+                })
+                .setNegativeButton(getString(R.string.cancel), null)
+                .show();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        showToast(position + "");
+        JobEntity jobEntity = listData.get(position);
+        OperatorTaskDetailActivity.startOperatorTaskDetailActivity(mContext, jobEntity);
     }
 
     @Override
@@ -161,14 +219,6 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (trainNumberIndex.getVisibility() == View.VISIBLE) {
-            trainNumberIndex.setVisibility(View.GONE);
-        }
-    }
-
     private String lastText;
 
     @Override
@@ -184,7 +234,7 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
             filterData();
         } else {
             listData.clear();
-            for (TaskEntity task : getSameStatusList(statusPosition)) {
+            for (JobEntity task : getSameStatusList(statusPosition)) {
                 String number = task.getTrainnumber();
                 number = TextUtils.isEmpty(number) ? getString(R.string.nothing) : number;
                 String trainNumber = number.toLowerCase();
@@ -196,8 +246,8 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
         }
     }
 
-    private List<TaskEntity> getSameStatusList(int status) {
-        List<TaskEntity> tempList = new ArrayList<>();
+    private List<JobEntity> getSameStatusList(int status) {
+        List<JobEntity> tempList = new ArrayList<>();
         switch (status) {
             case TaskSpinnerState.STATE_ALL:
                 tempList.addAll(doneData);
@@ -234,12 +284,12 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
         if (mCurrentSysType != sysType) {
             mCurrentSysType = sysType;
             showView(flContainer, progressBar);
-            mPresenter.getMonitorTaskData(mCurrentSysType);
+            mPresenter.getMyTaskData(mCurrentSysType);
         }
     }
 
     @Override
-    public void getMonitorTaskDataSuccess(List<TaskEntity> data) {
+    public void getMyTaskDataSuccess(List<JobEntity> data) {
         swipeRefresh.setRefreshing(false);
         svSpinner.clearSearchContent();
         allData.clear();
@@ -248,8 +298,8 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
         underwayData.clear();
         doneData.clear();
         // 根据任务状态分类
-        for (TaskEntity task : allData) {
-            int workStatus = task.getTaskstatus();
+        for (JobEntity task : allData) {
+            int workStatus = task.getWorkstatus();
             switch (workStatus) {
                 case TaskState.GRID_NOT_PASS:
                 case TaskState.NOT_STARTED:
@@ -264,8 +314,8 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
             }
         }
         if (unStartedData.size() + underwayData.size() + doneData.size() == 0) {
-            tvHint.setText(R.string.no_data_click_to_retry);
-            showView(flContainer, tvHint);
+            tvRetry.setText(R.string.no_data_click_to_retry);
+            showView(flContainer, tvRetry);
         } else {
             filterData();
             showView(flContainer, swipeRefresh);
@@ -273,10 +323,10 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
     }
 
     @Override
-    public void getMonitorTaskDataFailed() {
+    public void getMyTaskDataFailed() {
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(getString(R.string.failure_load_click_retry));
-        showView(flContainer, tvHint);
+        tvRetry.setText(getString(R.string.failure_load_click_retry));
+        showView(flContainer, tvRetry);
     }
 
     /**
@@ -291,7 +341,7 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
     @OnClick(R.id.tv_hint)
     public void onViewClicked() {
         showView(flContainer, progressBar);
-        mPresenter.getMonitorTaskData(mCurrentSysType);
+        mPresenter.getMyTaskData(mCurrentSysType);
     }
 
     /**
@@ -299,11 +349,19 @@ public class TaskMonitorFragment extends BaseFragment implements TaskMonitorCont
      */
     public void scrollToItem(String taskId) {
         for (int i = 0; i < listData.size(); i++) {
-            TaskEntity jobEntity = listData.get(i);
+            JobEntity jobEntity = listData.get(i);
             if (equals(jobEntity.getTasksid(), taskId)) {
                 lvList.smoothScrollToPosition(i);
                 break;
             }
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (trainNumberIndex.getVisibility() == View.VISIBLE) {
+            trainNumberIndex.setVisibility(View.GONE);
         }
     }
 

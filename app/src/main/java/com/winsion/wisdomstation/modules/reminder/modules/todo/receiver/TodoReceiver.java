@@ -1,5 +1,6 @@
 package com.winsion.wisdomstation.modules.reminder.modules.todo.receiver;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +19,7 @@ import com.winsion.wisdomstation.data.DBDataSource;
 import com.winsion.wisdomstation.modules.reminder.constants.ExtraName;
 import com.winsion.wisdomstation.modules.reminder.entity.TodoEntity;
 import com.winsion.wisdomstation.modules.reminder.event.UpdateTodoEvent;
-import com.winsion.wisdomstation.modules.reminder.modules.todo.fragment.TodoFragment;
+import com.winsion.wisdomstation.modules.reminder.modules.todo.fragment.TodoListFragment;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -35,6 +36,7 @@ public class TodoReceiver extends BroadcastReceiver {
     private TodoEntity todoEntity;
     private MediaPlayer mediaPlayer;
     private Vibrator vibrator;
+    private AlertDialog alertDialog;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -69,34 +71,47 @@ public class TodoReceiver extends BroadcastReceiver {
         vibrator.vibrate(new long[]{400, 1000}, 0);
     }
 
+    private boolean isFinish = false;
+
     /**
-     * 该方法会发出一个事件，接收者在{@link TodoFragment}
+     * 该方法会发出一个事件，接收者在{@link TodoListFragment}
      */
+    @SuppressLint("InflateParams")
     private void showDialog(Context context) {
         View inflate = LayoutInflater.from(context).inflate(R.layout.dialog_todo_remind, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
-        AlertDialog alertDialog = builder.setView(inflate).create();
+        alertDialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert)
+                .setView(inflate)
+                .create();
 
         TextView tvDesc = inflate.findViewById(R.id.tv_desc);
         tvDesc.setText(todoEntity.getContent());
         TextView tvConfirm = inflate.findViewById(R.id.tv_confirm);
         tvConfirm.setOnClickListener(v -> {
-            todoEntity.setFinished(true);
-            DBDataSource.getInstance().updateOrAddTodo(todoEntity);
-            EventBus.getDefault().post(new UpdateTodoEvent());
-            if (mediaPlayer.isPlaying()) {
-                mediaPlayer.stop();
-                mediaPlayer.release();
-            }
-            if (vibrator != null) vibrator.cancel();
-            alertDialog.dismiss();
+            isFinish = true;
+            operateState();
         });
 
         Window window = alertDialog.getWindow();
         assert window != null;
         window.setType(WindowManager.LayoutParams.TYPE_TOAST);
         window.setBackgroundDrawableResource(android.R.color.transparent);
-        alertDialog.setCancelable(false);
+        alertDialog.setOnDismissListener(dialog -> {
+            if (!isFinish) {
+                operateState();
+            }
+        });
         alertDialog.show();
+    }
+
+    private void operateState() {
+        todoEntity.setFinished(isFinish);
+        DBDataSource.getInstance().updateOrAddTodo(todoEntity);
+        EventBus.getDefault().post(new UpdateTodoEvent());
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        if (vibrator != null) vibrator.cancel();
+        alertDialog.dismiss();
     }
 }

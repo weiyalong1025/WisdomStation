@@ -22,6 +22,8 @@ import java.util.List;
  * Created by wyl on 2017/6/22
  */
 public class RecordAdapter extends CommonAdapter<RecordEntity> {
+    private UploadPerformer uploadPerformer;
+    private DownloadPerformer downloadPerformer;
 
     public RecordAdapter(Context context, List<RecordEntity> data) {
         super(context, R.layout.item_record, data);
@@ -126,21 +128,34 @@ public class RecordAdapter extends CommonAdapter<RecordEntity> {
         tvNote.setText(builder);
     }
 
+    /**
+     * 上传具体操作，上传中/上传失败/上传成功需要及时更新Adapter
+     */
     public interface UploadPerformer {
         void upload(RecordEntity recordEntity);
     }
 
+    /**
+     * 下载具体操作，下载中/下载失败/下载成功需要及时更新Adapter
+     */
     public interface DownloadPerformer {
         void download(RecordEntity recordEntity);
     }
 
-    private UploadPerformer uploadPerformer;
-    private DownloadPerformer downloadPerformer;
-
+    /**
+     * 设置上传具体操作
+     *
+     * @param performer 上传执行器
+     */
     public void setUploadPerformer(UploadPerformer performer) {
         this.uploadPerformer = performer;
     }
 
+    /**
+     * 设置下载具体操作
+     *
+     * @param performer 下载执行器
+     */
     public void setDownloadPerformer(DownloadPerformer performer) {
         this.downloadPerformer = performer;
     }

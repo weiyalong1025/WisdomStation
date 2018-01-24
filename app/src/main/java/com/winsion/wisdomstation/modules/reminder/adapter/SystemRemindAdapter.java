@@ -9,6 +9,7 @@ import com.winsion.wisdomstation.common.listener.ClickListener;
 import com.winsion.wisdomstation.modules.operation.constants.TaskType;
 import com.winsion.wisdomstation.modules.reminder.constants.ReadStatus;
 import com.winsion.wisdomstation.modules.reminder.entity.RemindEntity;
+import com.winsion.wisdomstation.utils.ToastUtils;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 
@@ -93,13 +94,13 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
         viewHolder.setOnClickListener(R.id.iv_delete, v ->
                 new AlertDialog.Builder(mContext)
                         .setMessage(getString(R.string.sure_to_delete_it))
-                        .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.cancel())
                         .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
                             if (mListener != null) {
                                 mListener.onClick(remindEntity);
                                 dialog.dismiss();
                             }
                         })
+                        .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.cancel())
                         .create()
                         .show());
 
@@ -108,15 +109,19 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
 
     public void selectOneItem(ViewHolder viewHolder, int position) {
         RemindEntity remindEntity = mDatas.get(position);
-        if (selectData.contains(remindEntity)) {
-            selectData.remove(remindEntity);
-            viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box_outline);
+        if (remindEntity.getReaded() == ReadStatus.UNREAD) {
+            ToastUtils.showToast(mContext, R.string.only_read_remind_can_be_selected);
         } else {
-            selectData.add(remindEntity);
-            viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box);
-        }
-        if (onSelectChangeListener != null) {
-            onSelectChangeListener.onSelectChange(selectData.size());
+            if (selectData.contains(remindEntity)) {
+                selectData.remove(remindEntity);
+                viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box_outline);
+            } else {
+                selectData.add(remindEntity);
+                viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box);
+            }
+            if (onSelectChangeListener != null) {
+                onSelectChangeListener.onSelectChange(selectData.size());
+            }
         }
     }
 

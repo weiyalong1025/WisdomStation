@@ -1,9 +1,16 @@
 package com.winsion.wisdomstation.modules.operation.constants;
 
+import android.support.annotation.IntDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Created by wyl on 2017/6/13
  */
-public interface TaskType {
+@IntDef({TaskType.COOPERATE, TaskType.COMMAND, TaskType.TASK, TaskType.GRID, TaskType.PLAN})
+@Retention(RetentionPolicy.SOURCE)
+public @interface TaskType {
     /**
      * 协作
      */

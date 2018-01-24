@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by 10295 on 2017/12/6 0006.
+ * Created by 10295 on 2017/12/6 0006
  */
 
 public class MainActivity extends BaseActivity implements MainContract.View, ViewPager.OnPageChangeListener {
@@ -196,6 +196,10 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
      */
     private int unreadUserMessageCount;
     /**
+     * 未读代办事项
+     */
+    private int unreadTodoCount;
+    /**
      * 未读系统提醒数
      */
     private int unreadSysRemindCount;
@@ -207,7 +211,21 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
      */
     public void notifyUnreadUserMessageCountChanged(int afterChangedCount) {
         unreadUserMessageCount = afterChangedCount;
-        if (unreadUserMessageCount + unreadSysRemindCount == 0) {
+        if (unreadUserMessageCount + unreadTodoCount + unreadSysRemindCount == 0) {
+            atvReminder.removeShow();
+        } else {
+            atvReminder.showPoint();
+        }
+    }
+
+    /**
+     * 未读待办事项数发生改变，更新小红点
+     *
+     * @param afterChangedCount 改变后的未读待办事项
+     */
+    public void notifyUnreadTodoCountChanged(int afterChangedCount) {
+        unreadTodoCount = afterChangedCount;
+        if (unreadUserMessageCount + unreadTodoCount + unreadSysRemindCount == 0) {
             atvReminder.removeShow();
         } else {
             atvReminder.showPoint();
@@ -221,7 +239,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
      */
     public void notifyUnreadSysRemindCountChanged(int afterChangedCount) {
         unreadSysRemindCount = afterChangedCount;
-        if (unreadUserMessageCount + unreadSysRemindCount == 0) {
+        if (unreadUserMessageCount + unreadTodoCount + unreadSysRemindCount == 0) {
             atvReminder.removeShow();
         } else {
             atvReminder.showPoint();

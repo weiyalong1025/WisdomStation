@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">智慧枢纽</string>
+    <string name="app_name">智慧车站</string>
     <string name="complete">完成</string>
     <string name="account">账号</string>
     <string name="please_input_account">请输入账号</string>
@@ -47,7 +47,7 @@
     <string name="not_started">未开始</string>
     <string name="doing">进行中</string>
     <string name="done">已完成</string>
-    <string name="station_name">智慧枢纽</string>
+    <string name="station_name">智慧车站</string>
     <string name="click_to_start">点击开始</string>
     <string name="plan_time">计划时间</string>
     <string name="train_number">车次</string>
@@ -142,11 +142,33 @@
     <string name="take_photo">拍照</string>
     <string name="record_video">录像</string>
     <string name="will_you_clear_out_the_data_after_you_exit">退出之后将清空所填数据，确定退出吗?</string>
-    <string name="recording">录音中...</string>
+    <string name="recording">录音中…</string>
     <string name="record_audio">录音</string>
     <string name="please_wait_for_the_files_upload_complete">请等待附件上传完成</string>
     <string name="issue_success">发布成功</string>
     <string name="issue_failed">发布失败</string>
+    <string name="track">道</string>
+    <string name="platform">站台</string>
+    <string name="plan">计划</string>
+    <string name="waiting_room">候</string>
+    <string name="real">实际</string>
+    <string name="check_port">口</string>
+    <string name="location">位置</string>
+    <string name="broadcast">广播</string>
+    <string name="operation_detail">作业详情</string>
+    <string name="command_detail">命令详情</string>
+    <string name="task_detail">任务详情</string>
+    <string name="tickets_check_in_progress">正在检票</string>
+    <string name="tickets_check_finished">完成检票</string>
+    <string name="stop_tickets_check">停止检票</string>
+    <string name="tickets_check_default_state">默认状态</string>
+    <string name="late">(晚点)</string>
+    <string name="late_unsure">(晚点未定)</string>
+    <string name="stop_run">(停运)</string>
+    <string name="minute">分</string>
+    <string name="alarm_detail">预警详情</string>
+    <string name="grid_detail">网格详情</string>
+    <string name="cooperation_detail">协作详情</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

@@ -19,10 +19,10 @@ import com.zhy.adapter.abslistview.ViewHolder;
 import java.util.List;
 
 /**
- * Created by 10295 on 2017/12/18 0018.
+ * Created by 10295 on 2017/12/18 0018
  */
 
-public class MyTaskAdapter extends CommonAdapter<JobEntity> {
+public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
     private Context mContext;
     private List<JobEntity> listData;
     private OnButtonClickListener mListener;
@@ -31,7 +31,7 @@ public class MyTaskAdapter extends CommonAdapter<JobEntity> {
         void onButtonClick(JobEntity jobEntity, View button);
     }
 
-    public MyTaskAdapter(Context context, List<JobEntity> data) {
+    public OperatorTaskListAdapter(Context context, List<JobEntity> data) {
         super(context, R.layout.item_operation, data);
         this.mContext = context;
         this.listData = data;
@@ -101,8 +101,8 @@ public class MyTaskAdapter extends CommonAdapter<JobEntity> {
         }
 
         // 把需要用到的时间转换好
-        long currentTime = System.currentTimeMillis();
         int lastTime;
+        long currentTime = System.currentTimeMillis();
 
         String planStartTimeStr = jobEntity.getPlanstarttime();
         String realStartTimeStr = jobEntity.getRealstarttime();
@@ -129,7 +129,7 @@ public class MyTaskAdapter extends CommonAdapter<JobEntity> {
                 viewHolder.setText(R.id.btn_status, getString(R.string.click_to_start));
                 // 持续时间
                 lastTime = 0;
-                viewHolder.setText(R.id.tv_last_time, lastTime + "分");
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
                 // 判断是否超时
                 isTimeOut = planStartTime < currentTime;
                 if (isTimeOut) {
@@ -144,7 +144,7 @@ public class MyTaskAdapter extends CommonAdapter<JobEntity> {
                 viewHolder.setText(R.id.btn_status, getString(R.string.click_to_finish));
                 // 持续时间
                 lastTime = (int) ((currentTime - realStartTime) / 60000);
-                viewHolder.setText(R.id.tv_last_time, lastTime + "分");
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
                 // 判断是否超时
                 isTimeOut = planEndTime < currentTime;
                 GifView gifView = viewHolder.getView(R.id.doing_gif);
@@ -160,7 +160,7 @@ public class MyTaskAdapter extends CommonAdapter<JobEntity> {
                 viewHolder.setText(R.id.btn_status, getString(R.string.done));
                 // 持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / 60000);
-                viewHolder.setText(R.id.tv_last_time, lastTime + "分");
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
                 // 判断是否超时
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
@@ -181,11 +181,11 @@ public class MyTaskAdapter extends CommonAdapter<JobEntity> {
                 viewHolder.setText(R.id.btn_status, getString(R.string.restart));
                 // 持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / 60000);
-                viewHolder.setText(R.id.tv_last_time, lastTime + "分");
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
                 // 判断是否超时
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
-                    // 超时已完成
+                    // 超时已完成，因没有超时未通过图标，这里使用一样的
                     viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_not_pass);
                 } else {
                     viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_not_pass);

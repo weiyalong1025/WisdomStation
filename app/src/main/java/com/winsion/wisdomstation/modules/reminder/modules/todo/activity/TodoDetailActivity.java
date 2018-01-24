@@ -2,10 +2,8 @@ package com.winsion.wisdomstation.modules.reminder.modules.todo.activity;
 
 import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
@@ -30,7 +28,7 @@ import butterknife.OnClick;
  * 创建时间：2017/12/27 1:53
  */
 
-public class TodoActivity extends BaseActivity implements TodoContract.View {
+public class TodoDetailActivity extends BaseActivity implements TodoDetailContract.View {
     @BindView(R.id.tv_date)
     TextView tvDate;
     @BindView(R.id.tv_time)
@@ -42,7 +40,7 @@ public class TodoActivity extends BaseActivity implements TodoContract.View {
     @BindView(R.id.btn_save)
     Button btnSave;
 
-    private TodoContract.Presenter mPresenter;
+    private TodoDetailContract.Presenter mPresenter;
     // 是否是更新
     private boolean isUpdate;
     private long todoId;
@@ -60,7 +58,7 @@ public class TodoActivity extends BaseActivity implements TodoContract.View {
     }
 
     private void initPresenter() {
-        mPresenter = new TodoPresenter(this);
+        mPresenter = new TodoDetailPresenter(this);
         mPresenter.start();
     }
 

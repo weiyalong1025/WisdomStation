@@ -12,10 +12,10 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.winsion.wisdomstation.utils.constants.Formatter;
+import com.winsion.wisdomstation.utils.constants.TrainAreaType;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,10 +26,10 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by yalong on 2016/6/15.
+ * Created by yalong on 2016/6/15
  */
 public class ConvertUtils {
-    static final char[] hexDigits = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    private static final char[] hexDigits = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
     private ConvertUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
@@ -61,9 +61,8 @@ public class ConvertUtils {
 
     /**
      * 标准日期格式(2016-09-29 09:00:00)切割为月日时分(07-24 09:00)
-     * 为空的话会返回----- --:--
      *
-     * @return
+     * @return 切割后的日期   为空的话会返回----- --:--
      */
     public static String splitToMDHM(String date) {
         String mdhm = "----- --:--";
@@ -104,16 +103,61 @@ public class ConvertUtils {
         return url;
     }
 
+    /**
+     * 格式化车次数据
+     *
+     * @return {股道，站台，检票口，候车室}
+     */
+    public static String[] formatTrainData(String[] areaType, String[] name) {
+        String track = "--";
+        String platform = "--";
+        String waitRoom = "--";
+        String checkPort = "--";
+        for (int i = 0; i < name.length; i++) {
+            switch (areaType[i]) {
+                case TrainAreaType.TRACK:
+                    if (TextUtils.equals(track, "--")) {
+                        track = name[i];
+                    } else {
+                        track += "," + name[i];
+                    }
+                    break;
+                case TrainAreaType.PLATFORM:
+                    if (TextUtils.equals(platform, "--")) {
+                        platform = name[i];
+                    } else {
+                        platform += "," + name[i];
+                    }
+                    break;
+                case TrainAreaType.WAITING_ROOM:
+                    if (TextUtils.equals(waitRoom, "--")) {
+                        waitRoom = name[i];
+                    } else {
+                        waitRoom += "," + name[i];
+                    }
+                    break;
+                case TrainAreaType.TICKET_ENTRANCE:
+                    if (TextUtils.equals(checkPort, "--")) {
+                        checkPort = name[i];
+                    } else {
+                        checkPort += "," + name[i];
+                    }
+                    break;
+            }
+        }
+        return new String[]{track, platform, waitRoom, checkPort};
+    }
+
     public static String getDigitFromStr(String str) {
-        String str2 = "";
+        StringBuilder str2 = new StringBuilder();
         if (str != null && !"".equals(str)) {
             for (int i = 0; i < str.length(); i++) {
                 if (str.charAt(i) >= 48 && str.charAt(i) <= 57) {
-                    str2 += str.charAt(i);
+                    str2.append(str.charAt(i));
                 }
             }
         }
-        return str2;
+        return str2.toString();
     }
 
     public static String bytes2HexString(byte[] bytes) {
@@ -215,14 +259,13 @@ public class ConvertUtils {
 
     public static String bytes2Bits(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
-        byte[] var2 = bytes;
         int var3 = bytes.length;
 
         for (int var4 = 0; var4 < var3; ++var4) {
-            byte aByte = var2[var4];
+            byte aByte = bytes[var4];
 
             for (int j = 7; j >= 0; --j) {
-                sb.append((char) ((aByte >> j & 1) == 0 ? '0' : '1'));
+                sb.append(((aByte >> j & 1) == 0 ? '0' : '1'));
             }
         }
 
@@ -233,9 +276,11 @@ public class ConvertUtils {
         int lenMod = bits.length() % 8;
         int byteLen = bits.length() / 8;
         if (lenMod != 0) {
+            StringBuilder bitsBuilder = new StringBuilder(bits);
             for (int i = lenMod; i < 8; ++i) {
-                bits = "0" + bits;
+                bitsBuilder.insert(0, "0");
             }
+            bits = bitsBuilder.toString();
 
             ++byteLen;
         }
@@ -256,7 +301,6 @@ public class ConvertUtils {
         if (is == null) {
             return null;
         } else {
-            Object var2;
             try {
                 ByteArrayOutputStream os = new ByteArrayOutputStream();
                 byte[] b = new byte[1024];
@@ -265,17 +309,14 @@ public class ConvertUtils {
                 while ((len = is.read(b, 0, 1024)) != -1) {
                     os.write(b, 0, len);
                 }
-
-                ByteArrayOutputStream var4 = os;
-                return var4;
+                return os;
             } catch (IOException var8) {
                 var8.printStackTrace();
-                var2 = null;
             } finally {
-                CloseUtils.closeIO(new Closeable[]{is});
+                CloseUtils.closeIO(is);
             }
 
-            return (ByteArrayOutputStream) var2;
+            return null;
         }
     }
 
@@ -298,24 +339,17 @@ public class ConvertUtils {
     public static OutputStream bytes2OutputStream(byte[] bytes) {
         if (bytes != null && bytes.length > 0) {
             ByteArrayOutputStream os = null;
-
-            Object var3;
             try {
                 os = new ByteArrayOutputStream();
                 os.write(bytes);
-                ByteArrayOutputStream var2 = os;
-                return var2;
+                return os;
             } catch (IOException var7) {
                 var7.printStackTrace();
-                var3 = null;
             } finally {
-                CloseUtils.closeIO(new Closeable[]{os});
+                CloseUtils.closeIO(os);
             }
-
-            return (OutputStream) var3;
-        } else {
-            return null;
         }
+        return null;
     }
 
     public static String inputStream2String(InputStream is, String charsetName) {

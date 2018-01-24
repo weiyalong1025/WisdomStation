@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by wyl on 2017/6/2
  */
-class TodoContract {
+class TodoListContract {
     interface View extends BaseView {
         void notifyLocalDataChange();
     }
@@ -18,6 +18,8 @@ class TodoContract {
         void deleteToDo(TodoEntity todoEntity);
 
         List<TodoEntity> queryToDo(boolean isFinish);
+
+        void recoverAlarm();
 
         void exit();
     }

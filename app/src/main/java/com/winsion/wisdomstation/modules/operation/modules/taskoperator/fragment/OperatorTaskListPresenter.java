@@ -1,4 +1,4 @@
-package com.winsion.wisdomstation.modules.operation.modules.mytask.fragment;
+package com.winsion.wisdomstation.modules.operation.modules.taskoperator.fragment;
 
 import android.content.Context;
 
@@ -26,14 +26,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 10295 on 2017/12/15 0015.
+ * Created by 10295 on 2017/12/15 0015
  */
 
-public class MyTaskPresenter implements MyTaskContract.Presenter {
-    private MyTaskContract.View mView;
+public class OperatorTaskListPresenter implements OperatorTaskListContract.Presenter {
+    private OperatorTaskListContract.View mView;
     private Context mContext;
 
-    MyTaskPresenter(MyTaskContract.View view) {
+    OperatorTaskListPresenter(OperatorTaskListContract.View view) {
         this.mView = view;
         this.mContext = view.getContext();
     }

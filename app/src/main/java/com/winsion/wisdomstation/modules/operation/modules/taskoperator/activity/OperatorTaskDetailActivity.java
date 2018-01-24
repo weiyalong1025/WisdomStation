@@ -180,11 +180,11 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         if (taskType == TaskType.GRID || taskType == TaskType.PLAN) {
             llTrainModule.setVisibility(View.GONE);
             divHeader.setVisibility(View.GONE);
-        } else {
-            llTrainModule.setVisibility(View.VISIBLE);
-            divHeader.setVisibility(View.VISIBLE);
+            return;
         }
 
+        llTrainModule.setVisibility(View.VISIBLE);
+        divHeader.setVisibility(View.VISIBLE);
 
         String trainNumber = mJobEntity.getTrainnumber();
         int color = 0xFFFFFFFF;
@@ -412,6 +412,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 break;
         }
 
+        // 根据是否超时设置任务模块背景色
         if (isTimeOut) {
             llBgColor.setBackgroundResource(R.color.yellow1);
             tvLastTime.setTextColor(getResources().getColor(R.color.red2));

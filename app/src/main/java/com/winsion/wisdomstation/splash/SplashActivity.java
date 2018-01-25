@@ -16,13 +16,13 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void start() {
-        mHandler.sendEmptyMessageDelayed(0, 2000);
+        logScreenInfo();
+        mHandler.sendEmptyMessageDelayed(0, 1000);
     }
 
     @Override
     public void handlerMessage(Message msg) {
         super.handlerMessage(msg);
-        logScreenInfo();
         startActivity(LoginActivity.class, true);
     }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -61,7 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
      */
     protected abstract void start();
 
-    public void showToast(int resId) {
+    public void showToast(@StringRes int resId) {
         ToastUtils.showToast(mContext, resId);
     }
 

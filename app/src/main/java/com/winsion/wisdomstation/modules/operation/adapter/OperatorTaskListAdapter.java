@@ -205,6 +205,42 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
                 break;
 
         }
+
+        /*
+        渐变效果
+        if (isTimeOut) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                View view = viewHolder.getView(R.id.ll_bg_color);
+                ValueAnimator valueAnimator = (ValueAnimator) view.getTag();
+                if (valueAnimator == null) {
+                    valueAnimator = ValueAnimator.ofArgb(0xFF333339, 0xFF74592C);
+                    valueAnimator.setDuration(2000);
+                    valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
+                    valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
+                    valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+                    valueAnimator.addUpdateListener(animation -> {
+                        int colorValue = (int) animation.getAnimatedValue();
+                        viewHolder.setBackgroundColor(R.id.ll_bg_color, colorValue);
+                    });
+                }
+                viewHolder.setTag(R.id.ll_bg_color, valueAnimator);
+                valueAnimator.start();
+            } else {
+                viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.yellow1);
+            }
+            viewHolder.setTextColorRes(R.id.tv_last_time, R.color.red2);
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                View view = viewHolder.getView(R.id.ll_bg_color);
+                ValueAnimator valueAnimator = (ValueAnimator) view.getTag();
+                if (valueAnimator != null) {
+                    valueAnimator.cancel();
+                }
+            }
+            viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.gray8);
+            viewHolder.setTextColorRes(R.id.tv_last_time, R.color.blue1);
+        }*/
+
         if (isTimeOut) {
             viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.yellow1);
             viewHolder.setTextColorRes(R.id.tv_last_time, R.color.red2);

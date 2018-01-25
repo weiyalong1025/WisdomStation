@@ -15,11 +15,12 @@ import com.winsion.wisdomstation.modules.operation.constants.TaskType;
 import com.winsion.wisdomstation.modules.operation.entity.JobEntity;
 import com.winsion.wisdomstation.modules.operation.entity.JobParameter;
 import com.winsion.wisdomstation.modules.operation.entity.WarnTaskStep;
-import com.winsion.wisdomstation.utils.FilePathUtils;
+import com.winsion.wisdomstation.utils.DirAndFileUtils;
 import com.winsion.wisdomstation.utils.IOUtils;
 import com.winsion.wisdomstation.utils.ToastUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by 10295 on 2017/12/17 0017.
@@ -94,16 +95,14 @@ public class TaskCommBiz {
     private static String getNote(Context context, String id) {
         String note = "";
         try {
-            File file = new File(FilePathUtils.getPerformerPath(CacheDataSource.getUserId(), id));
-            if (file.exists()) {
-                File[] files = file.listFiles();
-                for (File f : files) {
-                    if (f.getName().endsWith(".txt")) {
-                        note = IOUtils.read(f);
-                    }
+            File performerFolder = DirAndFileUtils.getPerformerFolder(CacheDataSource.getUserId(), id);
+            File[] files = performerFolder.listFiles();
+            for (File f : files) {
+                if (f.getName().endsWith(".txt")) {
+                    note = IOUtils.read(f);
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             ToastUtils.showToast(context, R.string.please_check_sdcard_state);
         }
         return note;

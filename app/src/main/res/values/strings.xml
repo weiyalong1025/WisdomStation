@@ -86,7 +86,8 @@
     <string name="plan_start">计划开始</string>
     <string name="plan_end">计划结束</string>
     <string name="separator">/</string>
-    <string name="Your_device_does_not_support_bluetooth">该设备不支持蓝牙功能</string>
+    <string name="your_device_does_not_support_bluetooth">该设备不支持蓝牙功能</string>
+    <string name="your_device_does_not_support_video">该设备不支持录像功能</string>
     <string name="Failed_to_open_the_bluetooth">打开蓝牙失败，巡视功能暂不可用</string>
     <string name="bluetooth_address">蓝牙地址：</string>
     <string name="last_time_receive_msg">最近收到信号时间：</string>
@@ -169,6 +170,8 @@
     <string name="alarm_detail">预警详情</string>
     <string name="grid_detail">网格详情</string>
     <string name="cooperation_detail">协作详情</string>
+    <string name="local_file_clear_failed">本地文件清空失败</string>
+    <string name="local_file_clear_success">本地文件清空成功</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

@@ -108,9 +108,13 @@ public class RecordVideoActivity extends BaseActivity {
 
         svs = parameters.getSupportedVideoSizes();
         List<Camera.Size> sps = parameters.getSupportedPreviewSizes();
-        if (sps != null && sps.size() != 0) {
+        if (svs != null && sps != null && sps.size() != 0) {
             Camera.Size size = svs.get(sps.size() / 2);
             parameters.setPreviewSize(size.width, size.height);
+        } else {
+            showToast(R.string.your_device_does_not_support_video);
+            finish();
+            return;
         }
 
         parameters.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);

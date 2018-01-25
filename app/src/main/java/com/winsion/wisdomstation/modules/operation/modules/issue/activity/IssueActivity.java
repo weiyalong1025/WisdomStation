@@ -38,12 +38,13 @@ import com.winsion.wisdomstation.modules.operation.entity.PublishParameter;
 import com.winsion.wisdomstation.modules.operation.entity.RunEntity;
 import com.winsion.wisdomstation.modules.operation.entity.TeamEntity;
 import com.winsion.wisdomstation.utils.ConvertUtils;
-import com.winsion.wisdomstation.utils.FilePathUtils;
+import com.winsion.wisdomstation.utils.DirAndFileUtils;
 import com.winsion.wisdomstation.utils.constants.Formatter;
 import com.winsion.wisdomstation.view.TipDialog;
 import com.winsion.wisdomstation.view.TitleView;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -458,32 +459,33 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     @OnClick({R.id.btn_take_photo, R.id.btn_video, R.id.btn_record})
     public void onViewClicked(View view) {
+        Bundle bundle = new Bundle();
         switch (view.getId()) {
             case R.id.btn_take_photo:
-                String photoFilePath = FilePathUtils.getMediaFilePath(FilePathUtils.getIssuePath(), FileType.PICTURE);
-                if (photoFilePath != null) {
-                    photoFile = new File(photoFilePath);
-                    Bundle bundle = new Bundle();
+                try {
+                    photoFile = DirAndFileUtils.getMediaFilePath(DirAndFileUtils.getIssueFolder(), FileType.PICTURE);
                     bundle.putSerializable(TakePhotoActivity.FILE, photoFile);
                     startActivityForResult(TakePhotoActivity.class, CODE_TAKE_PHOTO, bundle);
+                } catch (IOException e) {
+                    showToast(R.string.please_check_sdcard_state);
                 }
                 break;
             case R.id.btn_video:
-                String videoFilePath = FilePathUtils.getMediaFilePath(FilePathUtils.getIssuePath(), FileType.VIDEO);
-                if (videoFilePath != null) {
-                    videoFile = new File(videoFilePath);
-                    Bundle bundle = new Bundle();
+                try {
+                    videoFile = DirAndFileUtils.getMediaFilePath(DirAndFileUtils.getIssueFolder(), FileType.VIDEO);
                     bundle.putSerializable(RecordVideoActivity.FILE, videoFile);
                     startActivityForResult(RecordVideoActivity.class, CODE_RECORD_VIDEO, bundle);
+                } catch (IOException e) {
+                    showToast(R.string.please_check_sdcard_state);
                 }
                 break;
             case R.id.btn_record:
-                String audioFilePath = FilePathUtils.getMediaFilePath(FilePathUtils.getIssuePath(), FileType.AUDIO);
-                if (audioFilePath != null) {
-                    audioFile = new File(audioFilePath);
-                    Bundle bundle = new Bundle();
+                try {
+                    audioFile = DirAndFileUtils.getMediaFilePath(DirAndFileUtils.getIssueFolder(), FileType.AUDIO);
                     bundle.putSerializable(RecordAudioActivity.FILE, audioFile);
                     startActivityForResult(RecordAudioActivity.class, CODE_RECORD_AUDIO, bundle);
+                } catch (IOException e) {
+                    showToast(R.string.please_check_sdcard_state);
                 }
                 break;
         }
@@ -538,11 +540,31 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         new AlertDialog.Builder(this)
                 .setMessage(R.string.will_you_clear_out_the_data_after_you_exit)
                 .setPositiveButton(R.string.confirm, (dialog, which) -> {
+                    // 删除附件
+                    deleteRecordFiles();
                     dialog.dismiss();
                     finish();
                 })
                 .setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss())
                 .show();
+    }
+
+    /**
+     * 没有发布而退出需要删除本地已经保存的附件
+     */
+    private void deleteRecordFiles() {
+        if (recordEntities.size() != 0) {
+            int deleteFileSize = 0;
+            for (RecordEntity recordEntity : recordEntities) {
+                File file = recordEntity.getFile();
+                if (file.delete()) deleteFileSize++;
+            }
+            if (deleteFileSize != recordEntities.size()) {
+                showToast(R.string.local_file_clear_failed);
+            } else {
+                showToast(R.string.local_file_clear_success);
+            }
+        }
     }
 
     @Override

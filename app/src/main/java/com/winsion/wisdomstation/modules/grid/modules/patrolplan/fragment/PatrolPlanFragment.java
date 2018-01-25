@@ -204,7 +204,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
 
     private boolean verifyBluetooth() {
         if (mBtAdapter == null) {
-            showToast(R.string.Your_device_does_not_support_bluetooth);
+            showToast(R.string.your_device_does_not_support_bluetooth);
             return false;
         }
         if (!mBtAdapter.isEnabled()) {

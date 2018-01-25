@@ -30,6 +30,7 @@ import com.winsion.wisdomstation.view.TitleView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
 
 import javax.annotation.Nonnull;
 
@@ -412,6 +413,21 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
 
         // 根据是否超时设置任务模块背景色
         if (isTimeOut) {
+            /*// 渐变效果
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                ValueAnimator valueAnimator = ValueAnimator.ofArgb(0xFF333339, 0xFF74592C);
+                valueAnimator.setDuration(2000);
+                valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
+                valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
+                valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+                valueAnimator.addUpdateListener(animation -> {
+                    int colorValue = (int) animation.getAnimatedValue();
+                    llBgColor.setBackgroundColor(colorValue);
+                });
+                valueAnimator.start();
+            } else {
+                llBgColor.setBackgroundResource(R.color.yellow1);
+            }*/
             llBgColor.setBackgroundResource(R.color.yellow1);
             tvLastTime.setTextColor(getResources().getColor(R.color.red2));
         } else {
@@ -451,7 +467,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     }
 
     /**
-     * 获取已经上传的附件记录
+     * 获取本地和已经上传的附件记录
      */
     private void initData() {
 

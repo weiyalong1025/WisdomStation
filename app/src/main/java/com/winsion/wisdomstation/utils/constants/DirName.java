@@ -2,6 +2,7 @@ package com.winsion.wisdomstation.utils.constants;
 
 /**
  * Created by 10295 on 2017/12/17 0017.
+ * 文件夹名称
  */
 
 public interface DirName {
@@ -9,6 +10,10 @@ public interface DirName {
      * 根目录
      */
     String ROOT = "Dispatch";
+    /**
+     * Log目录
+     */
+    String LOG = "Log";
     /**
      * 附件存储目录
      */

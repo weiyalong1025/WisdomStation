@@ -16,14 +16,15 @@ import com.winsion.wisdomstation.modules.operation.entity.JobEntity;
 import com.winsion.wisdomstation.modules.operation.entity.JobParameter;
 import com.winsion.wisdomstation.modules.operation.entity.WarnTaskStep;
 import com.winsion.wisdomstation.utils.DirAndFileUtils;
-import com.winsion.wisdomstation.utils.IOUtils;
+import com.winsion.wisdomstation.utils.FileUtils;
 import com.winsion.wisdomstation.utils.ToastUtils;
 
 import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by 10295 on 2017/12/17 0017.
+ * Created by 10295 on 2017/12/17 0017
+ * 操作任务通用业务
  */
 
 public class TaskCommBiz {
@@ -95,11 +96,11 @@ public class TaskCommBiz {
     private static String getNote(Context context, String id) {
         String note = "";
         try {
-            File performerFolder = DirAndFileUtils.getPerformerFolder(CacheDataSource.getUserId(), id);
-            File[] files = performerFolder.listFiles();
+            File performerDir = DirAndFileUtils.getPerformerDir(CacheDataSource.getUserId(), id);
+            File[] files = performerDir.listFiles();
             for (File f : files) {
                 if (f.getName().endsWith(".txt")) {
-                    note = IOUtils.read(f);
+                    note = FileUtils.readFile2String(f, "UTF-8");
                 }
             }
         } catch (IOException e) {

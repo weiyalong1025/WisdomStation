@@ -23,7 +23,7 @@ import com.winsion.wisdomstation.utils.LogUtils;
 import java.util.List;
 
 /**
- * Created by wyl on 2017/3/23.
+ * Created by wyl on 2017/3/23
  */
 
 class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListener {
@@ -99,11 +99,9 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
                 new MQTTClient.Connector(AppApplication.getContext())
                         .listener(LoginPresenter.this)
                         .host(ip).connect();
-                LogUtils.header(TAG, "用户登录信息");
                 LogUtils.i(TAG, "用户名:" + mUsername + ",密码:" + mPassword);
                 LogUtils.i(TAG, "IP地址:" + ip + ",端口号:" + port);
                 LogUtils.i(TAG, "BSSID地址:" + bssid);
-                LogUtils.footer(TAG, "用户登录信息");
             }
 
             @Override

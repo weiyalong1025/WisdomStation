@@ -21,11 +21,32 @@ import java.util.Date;
 public class DirAndFileUtils {
     private static StringBuilder stringBuilder = new StringBuilder();
 
-    private static String getRootPath() throws IOException {
+    private static String getRootDir() throws IOException {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + DirName.ROOT;
         }
         throw new IOException("Please check SDCard state!");
+    }
+
+    /**
+     * 获取发布命令/协作附件存储目录
+     *
+     * @return 对应的目录
+     * @throws IOException 没有挂载SD卡或创建文件失败抛出异常
+     */
+    public static File getLogDir() throws IOException {
+        stringBuilder.setLength(0);
+        String filePath = stringBuilder
+                .append(getRootDir())
+                .append(File.separator)
+                .append(DirName.LOG)
+                .toString();
+        File file = new File(filePath);
+        boolean orExistsDir = FileUtils.createOrExistsDir(file);
+        if (!orExistsDir) {
+            throw new NullPointerException("Create folder failed!");
+        }
+        return file;
     }
 
     /**
@@ -34,10 +55,10 @@ public class DirAndFileUtils {
      * @return 对应的目录
      * @throws IOException 没有挂载SD卡或创建文件失败抛出异常
      */
-    public static File getPerformerFolder(String userId, String jobOperatorId) throws IOException {
+    public static File getPerformerDir(String userId, String jobOperatorId) throws IOException {
         stringBuilder.setLength(0);
         String filePath = stringBuilder
-                .append(getRootPath())
+                .append(getRootDir())
                 .append(File.separator)
                 .append(DirName.RECORD)
                 .append(File.separator)
@@ -61,10 +82,10 @@ public class DirAndFileUtils {
      * @return 对应的目录
      * @throws IOException 没有挂载SD卡或创建文件失败抛出异常
      */
-    public static File getMonitorFolder(String userId, String jobOperatorId) throws IOException {
+    public static File getMonitorDir(String userId, String jobOperatorId) throws IOException {
         stringBuilder.setLength(0);
         String filePath = stringBuilder
-                .append(getRootPath())
+                .append(getRootDir())
                 .append(File.separator)
                 .append(DirName.RECORD)
                 .append(File.separator)
@@ -88,10 +109,10 @@ public class DirAndFileUtils {
      * @return 对应的目录
      * @throws IOException 没有挂载SD卡或创建文件失败抛出异常
      */
-    public static File getIssueFolder() throws IOException {
+    public static File getIssueDir() throws IOException {
         stringBuilder.setLength(0);
         String filePath = stringBuilder
-                .append(getRootPath())
+                .append(getRootDir())
                 .append(File.separator)
                 .append(DirName.ISSUE)
                 .toString();
@@ -109,10 +130,10 @@ public class DirAndFileUtils {
      * @return 对应的目录
      * @throws IOException 没有挂载SD卡或创建文件失败抛出异常
      */
-    public static File getLostFolder() throws IOException {
+    public static File getLostDir() throws IOException {
         stringBuilder.setLength(0);
         String filePath = stringBuilder
-                .append(getRootPath())
+                .append(getRootDir())
                 .append(File.separator)
                 .append(DirName.LOST)
                 .toString();
@@ -124,7 +145,7 @@ public class DirAndFileUtils {
         return file;
     }
 
-    public static File getMediaFilePath(File file, @FileTypeLimit int type) {
+    public static File getMediaFile(File file, @FileTypeLimit int type) {
         if (file.exists() || file.mkdirs()) {
             String timeStamp = Formatter.DATE_FORMAT11.format(new Date());
             File mediaFile;

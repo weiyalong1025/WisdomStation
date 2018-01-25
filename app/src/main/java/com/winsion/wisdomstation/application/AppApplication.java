@@ -8,12 +8,15 @@ import com.winsion.wisdomstation.MyObjectBox;
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.data.NetDataSource;
 import com.winsion.wisdomstation.utils.CrashUtils;
+import com.winsion.wisdomstation.utils.DirAndFileUtils;
 import com.winsion.wisdomstation.utils.LogUtils;
+
+import java.io.IOException;
 
 import io.objectbox.BoxStore;
 
 /**
- * Created by 10295 on 2017/12/5 0005.
+ * Created by 10295 on 2017/12/5 0005
  */
 
 public class AppApplication extends Application {
@@ -31,7 +34,13 @@ public class AppApplication extends Application {
         // 初始化网络库
         NetDataSource.init(this);
         // 初始化LOG
-        LogUtils.init(this, BuildConfig.DEBUG, true, LogUtils.FILTER_V, getString(R.string.log_tag));
+        String logDir;
+        try {
+            logDir = DirAndFileUtils.getLogDir().toString();
+        } catch (IOException e) {
+            logDir = getCacheDir().toString();
+        }
+        LogUtils.init(BuildConfig.DEBUG, true, logDir, LogUtils.FILTER_V, getString(R.string.app_name));
     }
 
     public static Context getContext() {

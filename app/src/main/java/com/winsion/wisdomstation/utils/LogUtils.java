@@ -1,6 +1,5 @@
 package com.winsion.wisdomstation.utils;
 
-import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
@@ -30,7 +29,7 @@ public class LogUtils {
     private static boolean log2FileSwitch = false;
     private static char logFilter = 'v';
     private static String tag = "TAG";
-    private static String dir = null;
+    private static String savePath = Environment.getExternalStorageDirectory().toString();
 
     public static final char FILTER_V = 'v';
     public static final char FILTER_D = 'd';
@@ -40,39 +39,28 @@ public class LogUtils {
 
     /**
      * 初始化函数
-     * <p>与{@link #getBuilder(Context)}两者选其一</p>
+     * <p>与{@link #getBuilder()}两者选其一</p>
      *
-     * @param context        上下文
      * @param logSwitch      日志输出开关
      * @param log2FileSwitch 日志写入文件开关
      * @param logFilter      输入日志类型有{@code v, d, i, w, e}<br>v代表输出所有信息，w则只输出警告...
      * @param tag            标签
      */
-    public static void init(Context context, boolean logSwitch, boolean log2FileSwitch, char logFilter, String tag) {
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            dir = context.getExternalCacheDir().getPath() + File.separator + "log" + File.separator;
-        } else {
-            dir = context.getCacheDir().getPath() + File.separator + "log" + File.separator;
-        }
+    public static void init(boolean logSwitch, boolean log2FileSwitch, String savePath, char logFilter, String tag) {
         LogUtils.logSwitch = logSwitch;
         LogUtils.log2FileSwitch = log2FileSwitch;
         LogUtils.logFilter = logFilter;
+        LogUtils.savePath = savePath;
         LogUtils.tag = tag;
     }
 
     /**
      * 获取LogUtils建造者
-     * <p>与{@link #init(Context, boolean, boolean, char, String)}两者选其一</p>
+     * <p>与{@link #init(boolean, boolean, String, char, String)}两者选其一</p>
      *
-     * @param context 上下文
      * @return Builder对象
      */
-    public static Builder getBuilder(Context context) {
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            dir = context.getExternalCacheDir().getPath() + File.separator + "log" + File.separator;
-        } else {
-            dir = context.getCacheDir().getPath() + File.separator + "log" + File.separator;
-        }
+    public static Builder getBuilder() {
         return new Builder();
     }
 
@@ -82,6 +70,7 @@ public class LogUtils {
         private boolean log2FileSwitch = false;
         private char logFilter = 'v';
         private String tag = "TAG";
+        private String savePath = Environment.getExternalStorageDirectory().toString();
 
         public Builder setLogSwitch(boolean logSwitch) {
             this.logSwitch = logSwitch;
@@ -103,11 +92,17 @@ public class LogUtils {
             return this;
         }
 
+        public Builder setSavePath(String savePath) {
+            this.savePath = savePath;
+            return this;
+        }
+
         public void create() {
             LogUtils.logSwitch = logSwitch;
             LogUtils.log2FileSwitch = log2FileSwitch;
             LogUtils.logFilter = logFilter;
             LogUtils.tag = tag;
+            LogUtils.savePath = savePath;
         }
     }
 
@@ -201,14 +196,6 @@ public class LogUtils {
         log(tag, msg.toString(), tr, 'i');
     }
 
-    public static void header(String tag, String headerName) {
-        i(tag, headerName + "===================================>>>>>");
-    }
-
-    public static void footer(String tag, String footerName) {
-        i(tag, "<<<<<===================================" + footerName);
-    }
-
     /**
      * Warn日志
      *
@@ -294,6 +281,9 @@ public class LogUtils {
         }
     }
 
+    private static final String HEADER = "===================================>>>>>";
+    private static final String FOOTER = "<<<<<===================================";
+
     /**
      * 打开日志文件并写入日志
      *
@@ -305,10 +295,10 @@ public class LogUtils {
         if (content == null) return;
         Date now = new Date();
         String date = new SimpleDateFormat("MM-dd", Locale.getDefault()).format(now);
-        final String fullPath = dir + date + ".txt";
+        final String fullPath = savePath + File.separator + date + ".txt";
         if (!FileUtils.createOrExistsFile(fullPath)) return;
         String time = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault()).format(now);
-        final String dateLogContent = time + ":" + type + ":" + tag + ":" + content + '\n';
+        final String dateLogContent = HEADER + '\n' + time + ":" + type + ":" + tag + ":" + content + '\n' + FOOTER + '\n';
         new Thread(() -> {
             BufferedWriter bw = null;
             try {
@@ -320,6 +310,5 @@ public class LogUtils {
                 CloseUtils.closeIO(bw);
             }
         }).start();
-
     }
 }

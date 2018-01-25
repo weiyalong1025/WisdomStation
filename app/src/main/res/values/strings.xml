@@ -38,7 +38,6 @@
     <string name="user_message">用户消息</string>
     <string name="to_do_list">待办事项</string>
     <string name="system_remind">系统提醒</string>
-    <string name="log_tag">WisdomStationLog</string>
     <string name="patrol_plan">巡视计划</string>
     <string name="problem_manager">问题管理</string>
     <string name="search">搜索</string>

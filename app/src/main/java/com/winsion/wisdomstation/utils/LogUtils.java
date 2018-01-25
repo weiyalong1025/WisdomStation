@@ -277,7 +277,11 @@ public class LogUtils {
             }
         }
         if (log2FileSwitch) {
-            log2File(type, tag, msg + '\n' + Log.getStackTraceString(tr));
+            if (tr == null) {
+                log2File(type, tag, msg);
+            } else {
+                log2File(type, tag, msg + '\n' + Log.getStackTraceString(tr));
+            }
         }
     }
 
@@ -294,11 +298,11 @@ public class LogUtils {
     private synchronized static void log2File(final char type, final String tag, final String content) {
         if (content == null) return;
         Date now = new Date();
-        String date = new SimpleDateFormat("MM-dd", Locale.getDefault()).format(now);
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(now);
         final String fullPath = savePath + File.separator + date + ".txt";
         if (!FileUtils.createOrExistsFile(fullPath)) return;
-        String time = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault()).format(now);
-        final String dateLogContent = HEADER + '\n' + time + ":" + type + ":" + tag + ":" + content + '\n' + FOOTER + '\n';
+        String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault()).format(now);
+        final String dateLogContent = HEADER + '\n' + time + ":" + type + ":" + tag + ":" + content + '\n' + FOOTER + '\n' + '\n';
         new Thread(() -> {
             BufferedWriter bw = null;
             try {

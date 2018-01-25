@@ -1,5 +1,6 @@
 package com.winsion.wisdomstation.data;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.alibaba.fastjson.JSON;
@@ -161,23 +162,25 @@ public class NetDataSource {
     }
 
     public static <T> void post(Object tag, String url, HttpParams httpParams, ResponseListener<T> listener) {
-        OkGo.<T>post(CacheDataSource.getBaseUrl() + url)
+        url = CacheDataSource.getBaseUrl() + url;
+        OkGo.<T>post(url)
                 .params(httpParams)
                 .converter(new ObjectConverter<>(listener))
                 .adapt(new ObservableBody<>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(getObserver(tag, listener));
+                .subscribe(getObserver(tag, url, listener));
     }
 
     public static <T> void get(Object tag, String url, HttpParams httpParams, ResponseListener<T> listener) {
-        OkGo.<T>get(CacheDataSource.getBaseUrl() + url)
+        url = CacheDataSource.getBaseUrl() + url;
+        OkGo.<T>get(url)
                 .params(httpParams)
                 .converter(new ObjectConverter<>(listener))
                 .adapt(new ObservableBody<>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(getObserver(tag, listener));
+                .subscribe(getObserver(tag, url, listener));
     }
 
     public static void uploadFileNoData(Object tag, File file, UploadListener uploadListener) {
@@ -216,7 +219,7 @@ public class NetDataSource {
                 });
     }
 
-    private static <T> Observer<T> getObserver(Object tag, ResponseListener<T> listener) {
+    private static <T> Observer<T> getObserver(Object tag, String url, ResponseListener<T> listener) {
         return new Observer<T>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -232,6 +235,7 @@ public class NetDataSource {
 
             @Override
             public void onError(Throwable e) {
+                LogUtils.e("WebService", "onError:::" + url + ":::" + e.toString());
                 if (listener != null) {
                     listener.onFailed(0, e.getMessage());
                 }
@@ -262,6 +266,7 @@ public class NetDataSource {
         }
     }
 
+    @SuppressLint("BadHostnameVerifier")
     private static class SafeHostnameVerifier implements HostnameVerifier {
         @Override
         public boolean verify(String hostname, SSLSession session) {

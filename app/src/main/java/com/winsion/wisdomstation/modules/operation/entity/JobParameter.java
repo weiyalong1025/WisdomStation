@@ -14,7 +14,7 @@ public class JobParameter {
     private String note;
     private String opormotId;
     private int opType;
-    private List<FileDto> fileList;
+    private List<FileEntity> fileList;
 
     public String getUsersId() {
         return usersId;
@@ -72,11 +72,11 @@ public class JobParameter {
         this.opType = opType;
     }
 
-    public List<FileDto> getFileList() {
+    public List<FileEntity> getFileList() {
         return fileList;
     }
 
-    public void setFileList(List<FileDto> fileList) {
+    public void setFileList(List<FileEntity> fileList) {
         this.fileList = fileList;
     }
 }

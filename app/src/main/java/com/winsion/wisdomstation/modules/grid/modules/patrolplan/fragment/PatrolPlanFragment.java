@@ -1,5 +1,6 @@
 package com.winsion.wisdomstation.modules.grid.modules.patrolplan.fragment;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -19,12 +20,12 @@ import android.widget.TextView;
 
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseFragment;
-import com.winsion.wisdomstation.common.biz.CommonBiz;
 import com.winsion.wisdomstation.modules.grid.adapter.BluetoothPointAdapter;
 import com.winsion.wisdomstation.modules.grid.adapter.PatrolPlanAdapter;
 import com.winsion.wisdomstation.modules.grid.entity.BluetoothPoint;
 import com.winsion.wisdomstation.modules.grid.entity.PatrolTaskEntity;
 import com.winsion.wisdomstation.utils.IbeaconUtils;
+import com.winsion.wisdomstation.utils.ViewUtils;
 import com.winsion.wisdomstation.utils.constants.ListType;
 import com.winsion.wisdomstation.view.WrapContentListView;
 
@@ -129,6 +130,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
         mLvAdapter.notifyDataSetChanged();
     }
 
+    @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
         return getLayoutInflater().inflate(R.layout.fragment_patrol_plan, null);
@@ -245,6 +247,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
         mPresenter.getPatrolPlanData();
     }
 
+    @SuppressLint("InflateParams")
     @OnClick({R.id.iv_bluetooth, R.id.tv_hint})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -252,7 +255,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 View inflate = LayoutInflater.from(getContext()).inflate(R.layout.item_bluetooth_info, null);
                 inflate.measure(0, 0);
-                int suggestMaxHeight = CommonBiz.getSuggestMaxHeight(mContext, inflate.getMeasuredHeight(), ListType.TYPE_DIALOG);
+                int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, inflate.getMeasuredHeight(), ListType.TYPE_DIALOG);
                 ListView listView = new WrapContentListView(getContext(), suggestMaxHeight);
                 bluetoothAdapter = new BluetoothPointAdapter(mContext, bluetoothPoints);
                 listView.setAdapter(bluetoothAdapter);

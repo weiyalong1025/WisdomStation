@@ -139,6 +139,8 @@
     <string name="rephotograph">重拍</string>
     <string name="upload_success">上传成功</string>
     <string name="upload_failed">上传失败</string>
+    <string name="download_success">下载成功</string>
+    <string name="download_failed">下载失败</string>
     <string name="take_photo">拍照</string>
     <string name="record_video">录像</string>
     <string name="will_you_clear_out_the_data_after_you_exit">退出之后将清空所填数据，确定退出吗?</string>
@@ -171,6 +173,7 @@
     <string name="cooperation_detail">协作详情</string>
     <string name="local_file_clear_failed">本地文件清空失败</string>
     <string name="local_file_clear_success">本地文件清空成功</string>
+    <string name="note_content">备注内容：</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

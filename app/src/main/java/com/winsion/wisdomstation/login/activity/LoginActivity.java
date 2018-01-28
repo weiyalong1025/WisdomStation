@@ -1,5 +1,6 @@
 package com.winsion.wisdomstation.login.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -30,6 +31,7 @@ import com.winsion.wisdomstation.login.constants.LoginErrorCode;
 import com.winsion.wisdomstation.login.entity.UserEntity;
 import com.winsion.wisdomstation.login.listener.LoginListener;
 import com.winsion.wisdomstation.utils.ImageLoader;
+import com.winsion.wisdomstation.utils.ViewUtils;
 import com.winsion.wisdomstation.utils.constants.ListType;
 import com.winsion.wisdomstation.view.CircleImageView;
 import com.winsion.wisdomstation.view.TipDialog;
@@ -173,6 +175,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         }
     }
 
+    @SuppressLint("InflateParams")
     private void initUserListPopup() {
         CommonAdapter<UserEntity> commonAdapter = new CommonAdapter<UserEntity>(mContext, R.layout.item_user_option, mAllSavedUser) {
             @Override
@@ -206,7 +209,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View itemView = layoutInflater.inflate(R.layout.item_user_option, null);
         itemView.measure(0, 0);
-        int suggestMaxHeight = CommonBiz.getSuggestMaxHeight(mContext, itemView.getMeasuredHeight(), ListType.TYPE_POPUP);
+        int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, itemView.getMeasuredHeight(), ListType.TYPE_POPUP);
         ListView listView = new WrapContentListView(mContext, suggestMaxHeight);
         listView.setAdapter(commonAdapter);
         listView.setOnItemClickListener(this);

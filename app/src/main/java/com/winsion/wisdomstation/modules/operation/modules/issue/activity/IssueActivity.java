@@ -31,9 +31,9 @@ import com.winsion.wisdomstation.media.activity.TakePhotoActivity;
 import com.winsion.wisdomstation.media.adapter.RecordAdapter;
 import com.winsion.wisdomstation.media.constants.FileStatus;
 import com.winsion.wisdomstation.media.constants.FileType;
-import com.winsion.wisdomstation.media.entity.RecordEntity;
+import com.winsion.wisdomstation.media.entity.LocalRecordEntity;
 import com.winsion.wisdomstation.modules.operation.constants.TaskType;
-import com.winsion.wisdomstation.modules.operation.entity.FileDto;
+import com.winsion.wisdomstation.modules.operation.entity.FileEntity;
 import com.winsion.wisdomstation.modules.operation.entity.PublishParameter;
 import com.winsion.wisdomstation.modules.operation.entity.RunEntity;
 import com.winsion.wisdomstation.modules.operation.entity.TeamEntity;
@@ -102,7 +102,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     // 记录 拍照/录像/录音
     private RecordAdapter recordAdapter;
-    private ArrayList<RecordEntity> recordEntities = new ArrayList<>();
+    private ArrayList<LocalRecordEntity> localRecordEntities = new ArrayList<>();
     private File photoFile;
     private File videoFile;
     private File audioFile;
@@ -190,8 +190,8 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             if (isEmpty(getText(tvStation)) || isEmpty(teamIds) || isEmpty(title) || isEmpty(runsId) || isEmpty(content)) {
                 showToast(getString(R.string.please_complete_the_information));
             } else {
-                for (RecordEntity recordEntity : recordEntities) {
-                    if (recordEntity.getFileStatus() != FileStatus.SYNCHRONIZED) {
+                for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+                    if (localRecordEntity.getFileStatus() != FileStatus.SYNCHRONIZED) {
                         showToast(getString(R.string.please_wait_for_the_files_upload_complete));
                         return;
                     }
@@ -207,12 +207,12 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     }
 
     private void issue() {
-        ArrayList<FileDto> fileList = new ArrayList<>();
-        for (RecordEntity recordEntity : recordEntities) {
-            FileDto fileDto = new FileDto();
-            fileDto.setFileName(recordEntity.getFile().getName());
-            fileDto.setFileType(recordEntity.getFileType());
-            fileList.add(fileDto);
+        ArrayList<FileEntity> fileList = new ArrayList<>();
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            FileEntity fileEntity = new FileEntity();
+            fileEntity.setFileName(localRecordEntity.getFile().getName());
+            fileEntity.setFileType(localRecordEntity.getFileType());
+            fileList.add(fileEntity);
         }
 
         PublishParameter publishParameter = new PublishParameter();
@@ -384,8 +384,8 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     }
 
     private void initAdapter() {
-        recordAdapter = new RecordAdapter(mContext, recordEntities);
-        recordAdapter.setUploadPerformer(recordEntity -> NetDataSource.uploadFileNoData(getClass(), recordEntity.getFile(), this));
+        recordAdapter = new RecordAdapter(mContext, localRecordEntities);
+        recordAdapter.setUploadPerformer(localRecordEntity -> NetDataSource.uploadFileNoData(getClass(), localRecordEntity.getFile(), this));
         listView.setAdapter(recordAdapter);
     }
 
@@ -393,7 +393,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            RecordEntity recordEntity;
+            LocalRecordEntity localRecordEntity;
             switch (requestCode) {
                 case CODE_SELECT_TEAM:
                     Serializable serializable = data.getSerializableExtra("selectData");
@@ -422,33 +422,33 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     break;
                 case CODE_TAKE_PHOTO:
                     // 拍照成功
-                    recordEntity = new RecordEntity();
-                    recordEntity.setFileType(FileType.PICTURE);
-                    recordEntity.setFileStatus(FileStatus.NO_UPLOAD);
-                    recordEntity.setFile(photoFile);
-                    recordEntities.add(recordEntity);
+                    localRecordEntity = new LocalRecordEntity();
+                    localRecordEntity.setFileType(FileType.PICTURE);
+                    localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                    localRecordEntity.setFile(photoFile);
+                    localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
                     // 上传
                     NetDataSource.uploadFileNoData(getClass(), photoFile, this);
                     break;
                 case CODE_RECORD_VIDEO:
                     // 录像成功
-                    recordEntity = new RecordEntity();
-                    recordEntity.setFileType(FileType.VIDEO);
-                    recordEntity.setFileStatus(FileStatus.NO_UPLOAD);
-                    recordEntity.setFile(videoFile);
-                    recordEntities.add(recordEntity);
+                    localRecordEntity = new LocalRecordEntity();
+                    localRecordEntity.setFileType(FileType.VIDEO);
+                    localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                    localRecordEntity.setFile(videoFile);
+                    localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
                     // 上传
                     NetDataSource.uploadFileNoData(getClass(), videoFile, this);
                     break;
                 case CODE_RECORD_AUDIO:
                     // 录音成功
-                    recordEntity = new RecordEntity();
-                    recordEntity.setFileType(FileType.AUDIO);
-                    recordEntity.setFileStatus(FileStatus.NO_UPLOAD);
-                    recordEntity.setFile(audioFile);
-                    recordEntities.add(recordEntity);
+                    localRecordEntity = new LocalRecordEntity();
+                    localRecordEntity.setFileType(FileType.AUDIO);
+                    localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                    localRecordEntity.setFile(audioFile);
+                    localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
                     // 上传
                     NetDataSource.uploadFileNoData(getClass(), audioFile, this);
@@ -493,10 +493,10 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     @Override
     public void uploadProgress(File uploadFile, float progress) {
-        for (RecordEntity recordEntity : recordEntities) {
-            if (recordEntity.getFile() == uploadFile) {
-                recordEntity.setFileStatus(FileStatus.UPLOADING);
-                recordEntity.setProgress((int) progress);
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            if (localRecordEntity.getFile() == uploadFile) {
+                localRecordEntity.setFileStatus(FileStatus.UPLOADING);
+                localRecordEntity.setProgress((int) progress);
                 recordAdapter.notifyDataSetChanged();
                 break;
             }
@@ -505,9 +505,9 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     @Override
     public void uploadSuccess(File uploadFile) {
-        for (RecordEntity recordEntity : recordEntities) {
-            if (recordEntity.getFile() == uploadFile) {
-                recordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            if (localRecordEntity.getFile() == uploadFile) {
+                localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
                 recordAdapter.notifyDataSetChanged();
                 showToast(R.string.upload_success);
                 break;
@@ -517,9 +517,9 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     @Override
     public void uploadFailed(File uploadFile) {
-        for (RecordEntity recordEntity : recordEntities) {
-            if (recordEntity.getFile() == uploadFile) {
-                recordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            if (localRecordEntity.getFile() == uploadFile) {
+                localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
                 recordAdapter.notifyDataSetChanged();
                 showToast(R.string.upload_failed);
                 break;
@@ -553,13 +553,13 @@ public class IssueActivity extends BaseActivity implements UploadListener {
      * 没有发布而退出需要删除本地已经保存的附件
      */
     private void deleteRecordFiles() {
-        if (recordEntities.size() != 0) {
+        if (localRecordEntities.size() != 0) {
             int deleteFileSize = 0;
-            for (RecordEntity recordEntity : recordEntities) {
-                File file = recordEntity.getFile();
+            for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+                File file = localRecordEntity.getFile();
                 if (file.delete()) deleteFileSize++;
             }
-            if (deleteFileSize != recordEntities.size()) {
+            if (deleteFileSize != localRecordEntities.size()) {
                 showToast(R.string.local_file_clear_failed);
             } else {
                 showToast(R.string.local_file_clear_success);

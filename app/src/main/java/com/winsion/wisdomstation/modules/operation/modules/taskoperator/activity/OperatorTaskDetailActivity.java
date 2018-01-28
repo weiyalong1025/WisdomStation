@@ -3,9 +3,12 @@ package com.winsion.wisdomstation.modules.operation.modules.taskoperator.activit
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,28 +18,47 @@ import android.widget.TextView;
 
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseActivity;
+import com.winsion.wisdomstation.common.listener.StateListener;
+import com.winsion.wisdomstation.data.CacheDataSource;
+import com.winsion.wisdomstation.data.NetDataSource;
+import com.winsion.wisdomstation.data.constants.OpeType;
+import com.winsion.wisdomstation.data.listener.DownloadListener;
+import com.winsion.wisdomstation.data.listener.UploadListener;
+import com.winsion.wisdomstation.media.activity.AddNoteActivity;
+import com.winsion.wisdomstation.media.activity.RecordAudioActivity;
+import com.winsion.wisdomstation.media.activity.RecordVideoActivity;
+import com.winsion.wisdomstation.media.activity.TakePhotoActivity;
 import com.winsion.wisdomstation.media.adapter.RecordAdapter;
-import com.winsion.wisdomstation.media.entity.RecordEntity;
+import com.winsion.wisdomstation.media.constants.FileStatus;
+import com.winsion.wisdomstation.media.constants.FileType;
+import com.winsion.wisdomstation.media.entity.LocalRecordEntity;
+import com.winsion.wisdomstation.media.entity.ServerRecordEntity;
+import com.winsion.wisdomstation.modules.operation.biz.TaskCommBiz;
 import com.winsion.wisdomstation.modules.operation.constants.RunState;
 import com.winsion.wisdomstation.modules.operation.constants.TaskState;
 import com.winsion.wisdomstation.modules.operation.constants.TaskType;
 import com.winsion.wisdomstation.modules.operation.constants.TrainState;
 import com.winsion.wisdomstation.modules.operation.entity.JobEntity;
 import com.winsion.wisdomstation.utils.ConvertUtils;
+import com.winsion.wisdomstation.utils.DirAndFileUtils;
 import com.winsion.wisdomstation.utils.constants.Formatter;
 import com.winsion.wisdomstation.view.DrawableCenterTextView;
 import com.winsion.wisdomstation.view.GifView;
 import com.winsion.wisdomstation.view.TitleView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.GZIPInputStream;
-
-import javax.annotation.Nonnull;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 10295 on 2018/1/19.
@@ -44,7 +66,7 @@ import butterknife.OnClick;
  * 协作/命令/任务/网格/预案
  */
 
-public class OperatorTaskDetailActivity extends BaseActivity implements OperatorTaskDetailContract.View {
+public class OperatorTaskDetailActivity extends BaseActivity implements OperatorTaskDetailContract.View, UploadListener, DownloadListener {
     @BindView(R.id.tv_title)
     TitleView tvTitle;
     @BindView(R.id.tv_number)
@@ -119,16 +141,23 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     LinearLayout llBgColor;
     private ListView lvList;
 
-    private static final String TASK_ENTITY = "taskEntity";
-    private List<RecordEntity> recordEntities = new ArrayList<>();
+    // 备注
+    public static final int CODE_NOTE = 0;
+    // 拍照
+    public static final int CODE_TAKE_PHOTO = 1;
+    // 录像
+    public static final int CODE_RECORD_VIDEO = 2;
+    // 录音
+    public static final int CODE_RECORD_AUDIO = 3;
+
+    public static final String TASK_ENTITY = "taskEntity";
+    private OperatorTaskDetailContract.Presenter mPresenter;
+    private List<LocalRecordEntity> localRecordEntities = new ArrayList<>();
     private JobEntity mJobEntity;
     private RecordAdapter recordAdapter;
-
-    public static void startOperatorTaskDetailActivity(Context context, @Nonnull JobEntity jobEntity) {
-        Intent intent = new Intent(context, OperatorTaskDetailActivity.class);
-        intent.putExtra(TASK_ENTITY, jobEntity);
-        context.startActivity(intent);
-    }
+    private Disposable timer;
+    // 是否更改了任务状态，用来刷新Fragment中的数据
+    private boolean isChangeState = false;
 
     @Override
     protected int setContentView() {
@@ -139,10 +168,12 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     @Override
     protected void start() {
         bindView();
+        initPresenter();
         getIntentData();
         initView();
         initAdapter();
         initData();
+        updateLastTime();
     }
 
     @SuppressLint("InflateParams")
@@ -152,6 +183,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         lvList = findViewById(R.id.lv_list);
         lvList.addHeaderView(headerView);
         ButterKnife.bind(this);
+    }
+
+    private void initPresenter() {
+        mPresenter = new OperatorTaskDetailPresenter(this);
     }
 
     private void getIntentData() {
@@ -164,7 +199,24 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     }
 
     private void initTitleView() {
-        tvTitle.setOnBackClickListener(v -> finish());
+        tvTitle.setOnBackClickListener(v -> {
+            if (isChangeState) {
+                Intent data = new Intent();
+                data.putExtra("afterChangeEntity", mJobEntity);
+                setResult(RESULT_OK, data);
+            }
+            finish();
+        });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && isChangeState) {
+            Intent data = new Intent();
+            data.putExtra("afterChangeEntity", mJobEntity);
+            setResult(RESULT_OK, data);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void initHeader() {
@@ -436,41 +488,304 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         }
     }
 
+    private void initAdapter() {
+        // 上传附件列表adapter
+        recordAdapter = new RecordAdapter(mContext, localRecordEntities);
+        // 设置上传文件具体操作
+        recordAdapter.setUploadPerformer(localRecordEntity -> NetDataSource.uploadFile(getClass(),
+                mJobEntity, localRecordEntity.getFile(), this));
+        // 设置下载文件具体操作
+        recordAdapter.setDownloadPerformer(localRecordEntity -> {
+            try {
+                String userId = CacheDataSource.getUserId();
+                String jobOperatorsId = mJobEntity.getJoboperatorsid();
+                File performerDir = DirAndFileUtils.getPerformerDir(userId, jobOperatorsId);
+                NetDataSource.downloadFile(getClass(), localRecordEntity.getServerUri(),
+                        performerDir.getAbsolutePath(), this);
+            } catch (IOException e) {
+                showToast(R.string.please_check_sdcard_state);
+            }
+        });
+        lvList.setAdapter(recordAdapter);
+    }
+
+    @Override
+    public void uploadProgress(File uploadFile, float progress) {
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            if (localRecordEntity.getFile() == uploadFile) {
+                localRecordEntity.setFileStatus(FileStatus.UPLOADING);
+                localRecordEntity.setProgress((int) progress);
+                recordAdapter.notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void uploadSuccess(File uploadFile) {
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            if (localRecordEntity.getFile() == uploadFile) {
+                localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
+                recordAdapter.notifyDataSetChanged();
+                showToast(R.string.upload_success);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void uploadFailed(File uploadFile) {
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            if (localRecordEntity.getFile() == uploadFile) {
+                localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                recordAdapter.notifyDataSetChanged();
+                showToast(R.string.upload_failed);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void downloadProgress(String serverUri, float progress) {
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            if (equals(localRecordEntity.getServerUri(), serverUri)) {
+                localRecordEntity.setFileStatus(FileStatus.DOWNLOADING);
+                localRecordEntity.setProgress((int) progress);
+                recordAdapter.notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void downloadSuccess(String serverUri) {
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            if (equals(localRecordEntity.getServerUri(), serverUri)) {
+                localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
+                recordAdapter.notifyDataSetChanged();
+                showToast(R.string.download_success);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void downloadFailed(String serverUri) {
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            if (equals(localRecordEntity.getServerUri(), serverUri)) {
+                localRecordEntity.setFileStatus(FileStatus.NO_DOWNLOAD);
+                recordAdapter.notifyDataSetChanged();
+                showToast(R.string.download_failed);
+                break;
+            }
+        }
+    }
+
+    /**
+     * 获取本地保存的/已经上传到服务器的附件记录
+     */
+    private void initData() {
+        String jobOperatorsId = mJobEntity.getJoboperatorsid();
+        ArrayList<LocalRecordEntity> localFile = mPresenter.getLocalFile(jobOperatorsId);
+        localRecordEntities.addAll(localFile);
+        recordAdapter.notifyDataSetChanged();
+        mPresenter.getServerFile(jobOperatorsId);
+    }
+
+    /**
+     * 获取上传到服务器的附件记录成功
+     *
+     * @param serverRecordFileList 上传到服务器的附件列表
+     */
+    @Override
+    public void onServerFileGetSuccess(List<ServerRecordEntity> serverRecordFileList) {
+        for (ServerRecordEntity entity : serverRecordFileList) {
+            String[] split = entity.getFilepath().split("/");
+            String fileName = split[split.length - 1];
+            int position = checkFileExist(fileName);
+            if (position == -1) {
+                // 本地没有
+                LocalRecordEntity localRecordEntity = new LocalRecordEntity();
+                localRecordEntity.setFileType(Integer.valueOf(entity.getType()));
+                localRecordEntity.setFileStatus(FileStatus.NO_DOWNLOAD);
+                localRecordEntity.setServerUri(entity.getFilepath());
+                localRecordEntities.add(localRecordEntity);
+            } else {
+                // 本地存在
+                LocalRecordEntity localRecordEntity = localRecordEntities.get(position);
+                localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
+            }
+        }
+        recordAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 检查文件是否存在
+     *
+     * @param fileName 文件名
+     * @return 不存在返回-1，存在返回该文件在集合中的position
+     */
+    private int checkFileExist(String fileName) {
+        for (LocalRecordEntity entity : localRecordEntities) {
+            if (entity.getFile().getName().equals(fileName)) {
+                return localRecordEntities.indexOf(entity);
+            }
+        }
+        return -1;
+    }
+
+    private File noteFile;
+    private File photoFile;
+    private File videoFile;
+    private File audioFile;
+
     @OnClick({R.id.btn_status, R.id.btn_note, R.id.btn_broadcast, R.id.btn_take_photo, R.id.btn_video, R.id.btn_record})
     public void onViewClicked(View view) {
+        Bundle bundle = new Bundle();
+        String userId = CacheDataSource.getUserId();
+        String jobOperatorsId = mJobEntity.getJoboperatorsid();
         switch (view.getId()) {
             case R.id.btn_status:
-                showToast("更改状态");
-                break;
-            case R.id.btn_note:
-                showToast("添加备注");
+                // 更改任务状态按钮点击事件
+                showDialog(mJobEntity.getWorkstatus() == TaskState.RUN, view);
                 break;
             case R.id.btn_broadcast:
                 showToast("发送广播");
                 break;
+            case R.id.btn_note:
+                try {
+                    noteFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.TEXT);
+                    bundle.putSerializable(AddNoteActivity.FILE, noteFile);
+                    startActivityForResult(AddNoteActivity.class, CODE_NOTE, bundle);
+                } catch (IOException e) {
+                    showToast(R.string.please_check_sdcard_state);
+                }
+                break;
             case R.id.btn_take_photo:
-                showToast("拍摄照片");
+                try {
+                    photoFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.PICTURE);
+                    bundle.putSerializable(TakePhotoActivity.FILE, photoFile);
+                    startActivityForResult(TakePhotoActivity.class, CODE_TAKE_PHOTO, bundle);
+                } catch (IOException e) {
+                    showToast(R.string.please_check_sdcard_state);
+                }
                 break;
             case R.id.btn_video:
-                showToast("录制视频");
+                try {
+                    videoFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.VIDEO);
+                    bundle.putSerializable(RecordVideoActivity.FILE, videoFile);
+                    startActivityForResult(RecordVideoActivity.class, CODE_RECORD_VIDEO, bundle);
+                } catch (IOException e) {
+                    showToast(R.string.please_check_sdcard_state);
+                }
                 break;
             case R.id.btn_record:
-                showToast("录制音频");
+                try {
+                    audioFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.AUDIO);
+                    bundle.putSerializable(RecordAudioActivity.FILE, audioFile);
+                    startActivityForResult(RecordAudioActivity.class, CODE_RECORD_AUDIO, bundle);
+                } catch (IOException e) {
+                    showToast(R.string.please_check_sdcard_state);
+                }
                 break;
         }
     }
 
-    private void initAdapter() {
-        // 上传附件列表adapter
-        recordAdapter = new RecordAdapter(mContext, recordEntities);
-        lvList.setAdapter(recordAdapter);
+    private void showDialog(boolean isFinish, View btn) {
+        new AlertDialog.Builder(mContext)
+                .setMessage(getString(isFinish ? R.string.sure_you_want_to_finish : R.string.sure_you_want_to_start))
+                .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
+                    btn.setEnabled(false);
+                    int opeType = isFinish ? OpeType.COMPLETE : OpeType.BEGIN;
+                    TaskCommBiz.changeJobStatus(mContext, mJobEntity, opeType, new StateListener() {
+                        @Override
+                        public void onSuccess() {
+                            isChangeState = true;
+                            btn.setEnabled(true);
+                            String currentTime = ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1);
+                            if (isFinish) {
+                                mJobEntity.setWorkstatus(TaskState.DONE);
+                                mJobEntity.setRealendtime(currentTime);
+                            } else {
+                                mJobEntity.setWorkstatus(TaskState.RUN);
+                                mJobEntity.setRealstarttime(currentTime);
+                            }
+                            initTaskModuleView();
+                        }
+
+                        @Override
+                        public void onFailed() {
+                            btn.setEnabled(true);
+                            showToast(R.string.change_the_state_of_failure);
+                        }
+                    });
+                })
+                .setNegativeButton(getString(R.string.cancel), null)
+                .show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            LocalRecordEntity localRecordEntity;
+            switch (requestCode) {
+                case CODE_TAKE_PHOTO:
+                    // 拍照成功
+                    localRecordEntity = new LocalRecordEntity();
+                    localRecordEntity.setFileType(FileType.PICTURE);
+                    localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                    localRecordEntity.setFile(photoFile);
+                    localRecordEntities.add(localRecordEntity);
+                    recordAdapter.notifyDataSetChanged();
+                    // 上传
+                    NetDataSource.uploadFile(getClass(), mJobEntity, photoFile, this);
+                    break;
+                case CODE_RECORD_VIDEO:
+                    // 录像成功
+                    localRecordEntity = new LocalRecordEntity();
+                    localRecordEntity.setFileType(FileType.VIDEO);
+                    localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                    localRecordEntity.setFile(videoFile);
+                    localRecordEntities.add(localRecordEntity);
+                    recordAdapter.notifyDataSetChanged();
+                    // 上传
+                    NetDataSource.uploadFile(getClass(), mJobEntity, videoFile, this);
+                    break;
+                case CODE_RECORD_AUDIO:
+                    // 录音成功
+                    localRecordEntity = new LocalRecordEntity();
+                    localRecordEntity.setFileType(FileType.AUDIO);
+                    localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                    localRecordEntity.setFile(audioFile);
+                    localRecordEntities.add(localRecordEntity);
+                    recordAdapter.notifyDataSetChanged();
+                    // 上传
+                    NetDataSource.uploadFile(getClass(), mJobEntity, audioFile, this);
+                    break;
+                case CODE_NOTE:
+                    // 添加备注成功
+                    if (localRecordEntities.size() == 0 || localRecordEntities.get(0).getFileType() != FileType.TEXT) {
+                        localRecordEntity = new LocalRecordEntity();
+                        localRecordEntity.setFileType(FileType.TEXT);
+                        localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                        localRecordEntity.setFile(noteFile);
+                        localRecordEntities.add(0, localRecordEntity);
+                    }
+                    recordAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
     }
 
     /**
-     * 获取本地和已经上传的附件记录
+     * 定时更新任务持续时间
      */
-    private void initData() {
-
+    private void updateLastTime() {
+        timer = Observable.interval(30, 30, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((Long aLong) -> initTaskModuleView());
     }
 
     @Override
@@ -478,4 +793,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         return mContext;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.exit();
+        timer.dispose();
+    }
 }

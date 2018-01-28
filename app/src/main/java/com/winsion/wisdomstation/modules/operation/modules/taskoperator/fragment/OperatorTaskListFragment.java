@@ -1,6 +1,8 @@
 package com.winsion.wisdomstation.modules.operation.modules.taskoperator.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -173,7 +175,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
                                 underwayData.add(jobEntity);
                             }
                             filterData();
-                            scrollToItem(jobEntity.getTasksid());
+                            scrollToItem(jobEntity);
                         }
 
                         @Override
@@ -187,10 +189,14 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
                 .show();
     }
 
+    private static final int REQUEST_CODE = 666;
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         JobEntity jobEntity = listData.get(position);
-        OperatorTaskDetailActivity.startOperatorTaskDetailActivity(mContext, jobEntity);
+        Intent intent = new Intent(mContext, OperatorTaskDetailActivity.class);
+        intent.putExtra(OperatorTaskDetailActivity.TASK_ENTITY, jobEntity);
+        startActivityForResult(intent, REQUEST_CODE);
     }
 
     @Override
@@ -271,7 +277,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
      * 间隔60s刷新一次页面，实现计时效果
      */
     private void startCountTimeByRxAndroid() {
-        Observable.interval(0, 60, TimeUnit.SECONDS)
+        Observable.interval(30, 30, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((Long aLong) -> mLvAdapter.notifyDataSetChanged());
     }
@@ -347,14 +353,9 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     /**
      * 滚动到对应taskId条目的位置
      */
-    public void scrollToItem(String taskId) {
-        for (int i = 0; i < listData.size(); i++) {
-            JobEntity jobEntity = listData.get(i);
-            if (equals(jobEntity.getTasksid(), taskId)) {
-                lvList.smoothScrollToPosition(i);
-                break;
-            }
-        }
+    public void scrollToItem(JobEntity jobEntity) {
+        int positionInList = listData.indexOf(jobEntity);
+        if (positionInList != -1) lvList.setSelection(positionInList);
     }
 
     @Override
@@ -363,6 +364,57 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         if (trainNumberIndex.getVisibility() == View.VISIBLE) {
             trainNumberIndex.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+            JobEntity afterChangeEntity = (JobEntity) data.getSerializableExtra("afterChangeEntity");
+            int positionInList = getPositionInList(afterChangeEntity, allData);
+            if (positionInList != -1) {
+                JobEntity jobEntity = allData.get(positionInList);
+                boolean isFinish = jobEntity.getWorkstatus() == TaskState.RUN;
+                if (isFinish) {
+                    jobEntity.setWorkstatus(TaskState.DONE);
+                    jobEntity.setRealendtime(afterChangeEntity.getRealendtime());
+                    underwayData.remove(jobEntity);
+                    doneData.add(jobEntity);
+                } else {
+                    jobEntity.setWorkstatus(TaskState.RUN);
+                    jobEntity.setRealstarttime(afterChangeEntity.getRealstarttime());
+                    unStartedData.remove(jobEntity);
+                    underwayData.add(jobEntity);
+                }
+                filterData();
+                scrollToItem(jobEntity);
+            }
+        }
+    }
+
+    /**
+     * 根据状态改变后的对象的jobOperatorsId查找在集合中的位置
+     *
+     * @param afterChangeEntity 状态改变后的对象
+     * @return 该对象在集合中的位置，找不到返回-1
+     */
+    private int getPositionInList(JobEntity afterChangeEntity, List<JobEntity> list) {
+        int min = 0;
+        int max = list.size() - 1;
+        while (min <= max) {
+            int middle = (min + max) >>> 1;
+            JobEntity jobEntity = list.get(middle);
+            long time1 = ConvertUtils.parseDate(jobEntity.getPlanstarttime(), Formatter.DATE_FORMAT1);
+            long time2 = ConvertUtils.parseDate(afterChangeEntity.getPlanstarttime(), Formatter.DATE_FORMAT1);
+            if (equals(jobEntity.getJoboperatorsid(), afterChangeEntity.getJoboperatorsid())) {
+                return middle;
+            } else if (time1 < time2) {
+                min = middle + 1;
+            } else {
+                max = middle - 1;
+            }
+        }
+        return -1;
     }
 
     @Override

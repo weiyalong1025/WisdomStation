@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Created by wyl on 2017/6/16
  */
-public class RecordEntity {
+public class LocalRecordEntity {
     /**
      * 文件
      */

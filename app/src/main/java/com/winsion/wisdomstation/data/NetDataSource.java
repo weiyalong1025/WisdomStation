@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.MemoryCookieStore;
@@ -16,18 +17,27 @@ import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.lzy.okrx2.adapter.ObservableBody;
 import com.winsion.wisdomstation.BuildConfig;
+import com.winsion.wisdomstation.application.AppApplication;
+import com.winsion.wisdomstation.common.biz.CommonBiz;
+import com.winsion.wisdomstation.data.constants.OpeType;
 import com.winsion.wisdomstation.data.constants.ParamKey;
 import com.winsion.wisdomstation.data.constants.Urls;
 import com.winsion.wisdomstation.data.converter.ObjectConverter;
 import com.winsion.wisdomstation.data.entity.OrderBy;
 import com.winsion.wisdomstation.data.entity.QueryParameter;
 import com.winsion.wisdomstation.data.entity.WhereClause;
+import com.winsion.wisdomstation.data.listener.DownloadListener;
 import com.winsion.wisdomstation.data.listener.ResponseListener;
 import com.winsion.wisdomstation.data.listener.UploadListener;
+import com.winsion.wisdomstation.media.constants.FileType;
+import com.winsion.wisdomstation.modules.operation.entity.FileEntity;
+import com.winsion.wisdomstation.modules.operation.entity.JobEntity;
+import com.winsion.wisdomstation.modules.operation.entity.JobParameter;
 import com.winsion.wisdomstation.utils.HashUtils;
 import com.winsion.wisdomstation.utils.LogUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -217,6 +227,114 @@ public class NetDataSource {
                         uploadListener.uploadFailed(file);
                     }
                 });
+    }
+
+    /**
+     * 上传文件
+     */
+    public static void uploadFile(Object tag, JobEntity jobEntity, File file, UploadListener uploadListener) {
+        JobParameter jobParameter = new JobParameter();
+        jobParameter.setSsId(CommonBiz.getBSSID(AppApplication.getContext()));
+        jobParameter.setTaskId(jobEntity.getTasksid());
+        jobParameter.setOpormotId(jobEntity.getJoboperatorsid());
+        jobParameter.setOpType(OpeType.RUNNING);
+        jobParameter.setJobsId(jobEntity.getJobsid());
+        jobParameter.setUsersId(CacheDataSource.getUserId());
+
+        List<FileEntity> fileList = new ArrayList<>();
+        FileEntity fileEntity = new FileEntity();
+        fileEntity.setFileName(file.getName());
+        fileEntity.setFileType(getFileType(file.getName()));
+        fileList.add(fileEntity);
+        jobParameter.setFileList(fileList);
+
+        String token = CacheDataSource.getToken();
+        long time = System.currentTimeMillis();
+        String dataStr = JSON.toJSONString(jobParameter);
+        String httpKey = CacheDataSource.getHttpKey();
+        String sha1Str = HashUtils.getSha1Str(dataStr + time + httpKey);
+
+        HttpParams httpParams = new HttpParams();
+        httpParams.put(ParamKey.FILE, file);
+        httpParams.put(ParamKey.TOKEN, token);
+        httpParams.put(ParamKey.TIME, time);
+        httpParams.put(ParamKey.DATA, dataStr);
+        httpParams.put(ParamKey.HASH, sha1Str);
+
+        OkGo.<String>post(CacheDataSource.getBaseUrl() + Urls.UPLOAD)
+                .tag(tag)
+                .params(httpParams)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        LogUtils.i("上传文件", file.getName() + "上传成功");
+                        uploadListener.uploadSuccess(file);
+                    }
+
+                    @Override
+                    public void uploadProgress(Progress progress) {
+                        LogUtils.i("上传文件", file.getName() + "上传进度：" + progress.fraction + "%");
+                        uploadListener.uploadProgress(file, progress.fraction);
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        LogUtils.i("上传文件", file.getName() + "上传失败");
+                        uploadListener.uploadFailed(file);
+                    }
+                });
+    }
+
+    /**
+     * 根据文件名返回文件类型
+     *
+     * @param fileName 文件名
+     * @return 没有符合的返回-1
+     */
+    private static int getFileType(String fileName) {
+        if (fileName.endsWith(".jpg")) {
+            return FileType.PICTURE;
+        } else if (fileName.endsWith(".mp4")) {
+            return FileType.VIDEO;
+        } else if (fileName.endsWith(".aac")) {
+            return FileType.AUDIO;
+        }
+        return -1;
+    }
+
+    /**
+     * 下载文件
+     *
+     * @param serverUri        文件服务器地址
+     * @param targetDir        文件目标存储目录
+     * @param downloadListener 下载状态监听
+     */
+    public static void downloadFile(Class tag, String serverUri, String targetDir, DownloadListener downloadListener) {
+        String[] split = serverUri.split("/");
+        if (split.length != 0) {
+            String fileName = split[split.length - 1];
+            OkGo.<File>get(serverUri)
+                    .tag(tag)
+                    .execute(new FileCallback(targetDir, fileName) {
+                        @Override
+                        public void onSuccess(Response<File> response) {
+                            LogUtils.i("下载文件", fileName + "下载成功");
+                            downloadListener.downloadSuccess(serverUri);
+                        }
+
+                        @Override
+                        public void downloadProgress(Progress progress) {
+                            LogUtils.i("下载文件", fileName + "下载进度：" + progress.fraction + "%");
+                            downloadListener.downloadProgress(serverUri, progress.fraction);
+                        }
+
+                        @Override
+                        public void onError(Response<File> response) {
+                            LogUtils.i("下载文件", fileName + "下载失败");
+                            downloadListener.downloadFailed(serverUri);
+                        }
+                    });
+        }
     }
 
     private static <T> Observer<T> getObserver(Object tag, String url, ResponseListener<T> listener) {

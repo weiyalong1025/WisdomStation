@@ -20,11 +20,8 @@ import java.util.Locale;
  * </pre>
  */
 public class LogUtils {
-
-    private LogUtils() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
-    }
-
+    private static final String HEADER = "===============================================================================================>>>>>";
+    private static final String FOOTER = "<<<<<===============================================================================================";
     private static boolean logSwitch = true;
     private static boolean log2FileSwitch = false;
     private static char logFilter = 'v';
@@ -36,6 +33,10 @@ public class LogUtils {
     public static final char FILTER_I = 'i';
     public static final char FILTER_W = 'w';
     public static final char FILTER_E = 'e';
+
+    private LogUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
 
     /**
      * 初始化函数
@@ -285,9 +286,6 @@ public class LogUtils {
         }
     }
 
-    private static final String HEADER = "===================================>>>>>";
-    private static final String FOOTER = "<<<<<===================================";
-
     /**
      * 打开日志文件并写入日志
      *
@@ -295,14 +293,24 @@ public class LogUtils {
      * @param tag     标签
      * @param content 内容
      **/
-    private synchronized static void log2File(final char type, final String tag, final String content) {
+    private synchronized static void log2File(char type, String tag, String content) {
         if (content == null) return;
         Date now = new Date();
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(now);
         final String fullPath = savePath + File.separator + date + ".txt";
         if (!FileUtils.createOrExistsFile(fullPath)) return;
         String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault()).format(now);
-        final String dateLogContent = HEADER + '\n' + time + ":" + type + ":" + tag + ":" + content + '\n' + FOOTER + '\n' + '\n';
+        content = time + ":" + type + ":" + tag + ":" + content;
+        int size = content.length() / HEADER.length();
+        StringBuilder newContent = new StringBuilder();
+        for (int i = 0; i <= size; i++) {
+            if (i == size) {
+                newContent.append(content.substring(i * HEADER.length(), content.length() - 1));
+            } else {
+                newContent.append(content.substring(i * HEADER.length(), (i + 1) * HEADER.length())).append('\n');
+            }
+        }
+        String dateLogContent = HEADER + '\n' + newContent.toString() + '\n' + FOOTER + '\n' + '\n';
         new Thread(() -> {
             BufferedWriter bw = null;
             try {

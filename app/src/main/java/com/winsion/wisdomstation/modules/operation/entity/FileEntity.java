@@ -3,7 +3,7 @@ package com.winsion.wisdomstation.modules.operation.entity;
 /**
  * Created by wyl on 2017/6/21
  */
-public class FileDto {
+public class FileEntity {
     private String fileName;
     private int fileType;
 

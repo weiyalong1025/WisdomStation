@@ -58,6 +58,7 @@
     <dimen name="d200">200dp</dimen>
     <dimen name="d208">208dp</dimen>
     <dimen name="d295">295dp</dimen>
+    <dimen name="d300">300dp</dimen>
 
     <dimen name="s8">8sp</dimen>
     <dimen name="s9">9sp</dimen>

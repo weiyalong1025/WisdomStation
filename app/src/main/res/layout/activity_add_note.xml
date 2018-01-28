@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.wisdomstation.view.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleText="@string/note" />
+
+    <EditText
+        android:id="@+id/et_note_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d300"
+        android:background="@color/gray8"
+        android:gravity="start|top"
+        android:hint="@string/note_content"
+        android:padding="@dimen/d10"
+        android:textColor="@color/white1"
+        android:textColorHint="@color/gray2"
+        android:textSize="@dimen/s20" />
+</LinearLayout>

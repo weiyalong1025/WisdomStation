@@ -6,17 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_media"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_file_type"
             android:layout_width="@dimen/d28"
             android:layout_height="@dimen/d22"
+            android:layout_centerVertical="true"
             android:layout_margin="@dimen/d20"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_picture" />
@@ -25,19 +24,20 @@
             android:id="@+id/tv_file_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/d60"
+            android:layout_toEndOf="@+id/iv_file_type"
             android:textColor="@color/white1"
             android:textSize="@dimen/s18"
-            tools:text="IMG_20170615" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            tools:ignore="RelativeOverlap"
+            tools:text="IMG_201706151231.jpg" />
 
         <ImageView
             android:id="@+id/iv_status"
             android:layout_width="@dimen/d60"
             android:layout_height="@dimen/d60"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:padding="@dimen/d20"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_failed" />
@@ -46,6 +46,8 @@
             android:id="@+id/cpb_status"
             android:layout_width="@dimen/d20"
             android:layout_height="@dimen/d20"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_margin="@dimen/d20"
             android:visibility="gone"
             app:draw_progress_text="false"
@@ -55,7 +57,7 @@
             app:progress_start_color="@color/white1"
             app:progress_stroke_width="@dimen/d2"
             app:style="line" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_note"

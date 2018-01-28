@@ -223,7 +223,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
      * 间隔60s刷新一次页面，实现计时效果
      */
     private void startCountTimeByRxAndroid() {
-        Observable.interval(0, 60, TimeUnit.SECONDS)
+        Observable.interval(30, 30, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((Long aLong) -> mLvAdapter.notifyDataSetChanged());
     }

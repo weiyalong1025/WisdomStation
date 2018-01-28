@@ -28,7 +28,7 @@ public class PublishParameter {
     private String workContent;
     private String ssId;
     private String note;
-    private ArrayList<FileDto> fileList;
+    private ArrayList<FileEntity> fileList;
 
     public String getAreaId() {
         return areaId;
@@ -126,11 +126,11 @@ public class PublishParameter {
         this.note = note;
     }
 
-    public ArrayList<FileDto> getFileList() {
+    public ArrayList<FileEntity> getFileList() {
         return fileList;
     }
 
-    public void setFileList(ArrayList<FileDto> fileList) {
+    public void setFileList(ArrayList<FileEntity> fileList) {
         this.fileList = fileList;
     }
 }

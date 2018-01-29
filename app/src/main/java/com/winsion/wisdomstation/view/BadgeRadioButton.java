@@ -72,7 +72,7 @@ public class BadgeRadioButton extends AppCompatRadioButton {
             roundRect.top = redDotY - numberHeight / 2;
             roundRect.right = redDotX + numberWidth / 2 + b;
             roundRect.bottom = redDotY + numberHeight / 2;
-            canvas.drawRoundRect(roundRect, getResources().getDimension(R.dimen.d5), getResources().getDimension(R.dimen.d5), paint);
+            canvas.drawRoundRect(roundRect, getResources().getDimension(R.dimen.d8), getResources().getDimension(R.dimen.d8), paint);
 
             float numberY = redDotY + (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
             canvas.drawText(number, redDotX, numberY, numberPaint);
@@ -89,11 +89,6 @@ public class BadgeRadioButton extends AppCompatRadioButton {
             number = String.valueOf(badgeNum);
             showBadge = true;
         }
-        postInvalidate();
-    }
-
-    public void hideNumber() {
-        showBadge = false;
         postInvalidate();
     }
 }

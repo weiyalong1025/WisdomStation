@@ -1,5 +1,7 @@
 package com.winsion.wisdomstation.modules.operation.modules.taskoperator.activity;
 
+import android.text.TextUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.winsion.wisdomstation.data.CacheDataSource;
@@ -16,6 +18,7 @@ import com.winsion.wisdomstation.media.constants.FileType;
 import com.winsion.wisdomstation.media.entity.LocalRecordEntity;
 import com.winsion.wisdomstation.media.entity.ServerRecordEntity;
 import com.winsion.wisdomstation.utils.DirAndFileUtils;
+import com.winsion.wisdomstation.utils.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,8 +66,11 @@ public class OperatorTaskDetailPresenter implements OperatorTaskDetailContract.P
                         localRecordEntity.setFileType(FileType.AUDIO);
                         recordEntities.add(localRecordEntity);
                     } else if (name.endsWith(".txt")) {
-                        localRecordEntity.setFileType(FileType.TEXT);
-                        recordEntities.add(0, localRecordEntity);
+                        String noteContent = FileUtils.readFile2String(file, "UTF-8");
+                        if (!TextUtils.isEmpty(noteContent)) {
+                            localRecordEntity.setFileType(FileType.TEXT);
+                            recordEntities.add(0, localRecordEntity);
+                        }
                     }
                 }
                 return recordEntities;

@@ -1,7 +1,6 @@
 package com.winsion.wisdomstation.media.activity;
 
 import android.app.Activity;
-import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.winsion.wisdomstation.R;
@@ -36,10 +35,8 @@ public class AddNoteActivity extends BaseActivity {
         tvTitle.setOnBackClickListener(v -> finish());
         tvTitle.setOnConfirmClickListener(v -> {
             String content = etNoteContent.getText().toString();
-            if (!TextUtils.isEmpty(content)) {
-                FileUtils.writeFileFromString(file, content, false);
-                setResult(Activity.RESULT_OK);
-            }
+            FileUtils.writeFileFromString(file, content, false);
+            setResult(Activity.RESULT_OK);
             finish();
         });
         file = (File) getIntent().getSerializableExtra(FILE);

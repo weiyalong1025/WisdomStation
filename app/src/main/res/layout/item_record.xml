@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray8"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -63,6 +64,7 @@
         android:id="@+id/tv_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/gray8"
         android:padding="@dimen/d20"
         android:textColor="@color/white1"
         android:textSize="@dimen/s21"

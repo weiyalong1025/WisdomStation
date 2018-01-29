@@ -902,7 +902,11 @@ public class FileUtils {
                 sb.append(line).append("\r\n");// windows系统换行为\r\n，Linux为\n
             }
             // 要去除最后的换行符
-            return sb.delete(sb.length() - 2, sb.length()).toString();
+            if (sb.length() != 0) {
+                return sb.delete(sb.length() - 2, sb.length()).toString();
+            } else {
+                return sb.toString();
+            }
         } catch (IOException e) {
             e.printStackTrace();
             return null;

@@ -1,12 +1,12 @@
 package com.winsion.wisdomstation.modules.operation.modules.taskoperator.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
@@ -41,6 +41,8 @@ import com.winsion.wisdomstation.modules.operation.constants.TrainState;
 import com.winsion.wisdomstation.modules.operation.entity.JobEntity;
 import com.winsion.wisdomstation.utils.ConvertUtils;
 import com.winsion.wisdomstation.utils.DirAndFileUtils;
+import com.winsion.wisdomstation.utils.FileUtils;
+import com.winsion.wisdomstation.utils.ViewUtils;
 import com.winsion.wisdomstation.utils.constants.Formatter;
 import com.winsion.wisdomstation.view.DrawableCenterTextView;
 import com.winsion.wisdomstation.view.GifView;
@@ -53,7 +55,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -139,7 +140,18 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     Button btnRecord;
     @BindView(R.id.ll_bg_color)
     LinearLayout llBgColor;
-    private ListView lvList;
+    @BindView(R.id.tv_publisher_title)
+    TextView tvPublisherTitle;
+    @BindView(R.id.lv_record_publisher)
+    ListView lvRecordPublisher;
+    @BindView(R.id.tv_performer_title)
+    TextView tvPerformerTitle;
+    @BindView(R.id.lv_record_performer)
+    ListView lvRecordPerformer;
+    @BindView(R.id.iv_record_div1)
+    ImageView ivRecordDiv1;
+    @BindView(R.id.iv_record_div2)
+    ImageView ivRecordDiv2;
 
     // 备注
     public static final int CODE_NOTE = 0;
@@ -151,6 +163,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     public static final int CODE_RECORD_AUDIO = 3;
 
     public static final String TASK_ENTITY = "taskEntity";
+
     private OperatorTaskDetailContract.Presenter mPresenter;
     private List<LocalRecordEntity> localRecordEntities = new ArrayList<>();
     private JobEntity mJobEntity;
@@ -161,28 +174,17 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
 
     @Override
     protected int setContentView() {
-        // 由于需要绑定header到该页面，所以这里先不设置布局
-        return 0;
+        return R.layout.activity_operator_task_detail;
     }
 
     @Override
     protected void start() {
-        bindView();
         initPresenter();
         getIntentData();
         initView();
         initAdapter();
         initData();
         updateLastTime();
-    }
-
-    @SuppressLint("InflateParams")
-    private void bindView() {
-        setContentView(R.layout.activity_operator_task_detail);
-        View headerView = getLayoutInflater().inflate(R.layout.header_operation_detail, null);
-        lvList = findViewById(R.id.lv_list);
-        lvList.addHeaderView(headerView);
-        ButterKnife.bind(this);
     }
 
     private void initPresenter() {
@@ -220,7 +222,25 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     }
 
     private void initHeader() {
-        initTrainModuleView();
+        int taskType = mJobEntity.getTaktype();
+        if (taskType == TaskType.GRID || taskType == TaskType.PLAN) {
+            llTrainModule.setVisibility(View.GONE);
+            divHeader.setVisibility(View.GONE);
+            lvRecordPublisher.setVisibility(View.VISIBLE);
+            tvPerformerTitle.setVisibility(View.VISIBLE);
+            tvPublisherTitle.setVisibility(View.VISIBLE);
+            ivRecordDiv1.setVisibility(View.VISIBLE);
+            ivRecordDiv2.setVisibility(View.VISIBLE);
+        } else {
+            llTrainModule.setVisibility(View.VISIBLE);
+            divHeader.setVisibility(View.VISIBLE);
+            lvRecordPublisher.setVisibility(View.GONE);
+            tvPerformerTitle.setVisibility(View.GONE);
+            tvPublisherTitle.setVisibility(View.GONE);
+            ivRecordDiv1.setVisibility(View.GONE);
+            ivRecordDiv2.setVisibility(View.GONE);
+            initTrainModuleView();
+        }
         initTaskModuleView();
     }
 
@@ -228,17 +248,6 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
      * 初始化车次模块数据
      */
     private void initTrainModuleView() {
-        // 网格和预案任务不显示车次模块
-        int taskType = mJobEntity.getTaktype();
-        if (taskType == TaskType.GRID || taskType == TaskType.PLAN) {
-            llTrainModule.setVisibility(View.GONE);
-            divHeader.setVisibility(View.GONE);
-            return;
-        }
-
-        llTrainModule.setVisibility(View.VISIBLE);
-        divHeader.setVisibility(View.VISIBLE);
-
         String trainNumber = mJobEntity.getTrainnumber();
         int color = 0xFFFFFFFF;
         switch (mJobEntity.getTrainlate()) {
@@ -506,7 +515,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 showToast(R.string.please_check_sdcard_state);
             }
         });
-        lvList.setAdapter(recordAdapter);
+        lvRecordPerformer.setAdapter(recordAdapter);
     }
 
     @Override
@@ -589,6 +598,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         ArrayList<LocalRecordEntity> localFile = mPresenter.getLocalFile(jobOperatorsId);
         localRecordEntities.addAll(localFile);
         recordAdapter.notifyDataSetChanged();
+        if (localFile.size() != 0) ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
         mPresenter.getServerFile(jobOperatorsId);
     }
 
@@ -599,6 +609,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
      */
     @Override
     public void onServerFileGetSuccess(List<ServerRecordEntity> serverRecordFileList) {
+        boolean needRecalculateHeight = false;
         for (ServerRecordEntity entity : serverRecordFileList) {
             String[] split = entity.getFilepath().split("/");
             String fileName = split[split.length - 1];
@@ -610,6 +621,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 localRecordEntity.setFileStatus(FileStatus.NO_DOWNLOAD);
                 localRecordEntity.setServerUri(entity.getFilepath());
                 localRecordEntities.add(localRecordEntity);
+                needRecalculateHeight = true;
             } else {
                 // 本地存在
                 LocalRecordEntity localRecordEntity = localRecordEntities.get(position);
@@ -617,6 +629,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             }
         }
         recordAdapter.notifyDataSetChanged();
+        if (needRecalculateHeight) ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
     }
 
     /**
@@ -738,6 +751,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     localRecordEntity.setFile(photoFile);
                     localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
+                    ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
                     // 上传
                     NetDataSource.uploadFile(getClass(), mJobEntity, photoFile, this);
                     break;
@@ -749,6 +763,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     localRecordEntity.setFile(videoFile);
                     localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
+                    ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
                     // 上传
                     NetDataSource.uploadFile(getClass(), mJobEntity, videoFile, this);
                     break;
@@ -760,6 +775,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     localRecordEntity.setFile(audioFile);
                     localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
+                    ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
                     // 上传
                     NetDataSource.uploadFile(getClass(), mJobEntity, audioFile, this);
                     break;
@@ -772,7 +788,12 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                         localRecordEntity.setFile(noteFile);
                         localRecordEntities.add(0, localRecordEntity);
                     }
+                    // 如果备注内容为空不显示
+                    if (TextUtils.isEmpty(FileUtils.readFile2String(noteFile, "UTF-8"))) {
+                        localRecordEntities.remove(0);
+                    }
                     recordAdapter.notifyDataSetChanged();
+                    ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
                     break;
             }
         }

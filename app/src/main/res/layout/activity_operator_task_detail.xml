@@ -13,11 +13,77 @@
         app:showConfirmButton="false"
         tools:titleText="作业详情" />
 
-    <ListView
-        android:id="@+id/lv_list"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null"
-        tools:listheader="@layout/header_operation_detail"
-        tools:listitem="@layout/item_record" />
+        tools:ignore="ScrollViewCount">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <include layout="@layout/header_operation_detail" />
+
+            <TextView
+                android:id="@+id/tv_publisher_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d40"
+                android:background="@color/black1"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/d15"
+                android:text="@string/publisher_uploaded_record"
+                android:textColor="@color/white1"
+                android:textSize="@dimen/s16"
+                android:visibility="gone"
+                tools:ignore="RtlSymmetry" />
+
+            <ListView
+                android:id="@+id/lv_record_publisher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:visibility="gone"
+                tools:ignore="NestedScrolling"
+                tools:listitem="@layout/item_record" />
+
+            <ImageView
+                android:id="@+id/iv_record_div1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/div_horizontal"
+                android:visibility="gone"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_performer_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d40"
+                android:background="@color/black1"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/d15"
+                android:text="@string/performer_uploaded_record"
+                android:textColor="@color/white1"
+                android:textSize="@dimen/s16"
+                android:visibility="gone"
+                tools:ignore="RtlSymmetry" />
+
+            <ListView
+                android:id="@+id/lv_record_performer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                tools:ignore="NestedScrolling"
+                tools:listitem="@layout/item_record" />
+
+            <ImageView
+                android:id="@+id/iv_record_div2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/div_horizontal"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

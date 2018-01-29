@@ -104,7 +104,7 @@ public class TaskCommBiz {
                 }
             }
         } catch (IOException e) {
-            ToastUtils.showToast(context, R.string.please_check_sdcard_state);
+            e.printStackTrace();
         }
         return note;
     }

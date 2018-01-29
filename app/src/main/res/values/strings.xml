@@ -174,6 +174,8 @@
     <string name="local_file_clear_failed">本地文件清空失败</string>
     <string name="local_file_clear_success">本地文件清空成功</string>
     <string name="note_content">备注内容：</string>
+    <string name="publisher_uploaded_record">任务发布人上传附件：</string>
+    <string name="performer_uploaded_record">任务执行人上传附件：</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

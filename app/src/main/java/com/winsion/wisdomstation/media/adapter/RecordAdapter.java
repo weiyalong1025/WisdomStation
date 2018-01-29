@@ -136,9 +136,11 @@ public class RecordAdapter extends CommonAdapter<LocalRecordEntity> {
         }
         ForegroundColorSpan gray = new ForegroundColorSpan(0xFF69696D);
 
-        SpannableStringBuilder builder = new SpannableStringBuilder(mContext.getString(R.string.note_content) + note);
-
-        builder.setSpan(gray, 0, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        String prefix = mContext.getString(R.string.note_content);
+        SpannableStringBuilder builder = new SpannableStringBuilder()
+                .append(prefix)
+                .append(note);
+        builder.setSpan(gray, 0, prefix.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         TextView tvNote = viewHolder.getView(R.id.tv_note);
         tvNote.setText(builder);
     }

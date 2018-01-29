@@ -64,6 +64,8 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @BindView(R.id.iv_shade)
     ImageView ivShade;
 
+    private static final int CODE_TASK_DETAIL = 666;
+
     private OperatorTaskListContract.Presenter mPresenter;
     private OperatorTaskListAdapter mLvAdapter;
     private int mCurrentSysType = -1;
@@ -189,14 +191,12 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
                 .show();
     }
 
-    private static final int REQUEST_CODE = 666;
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         JobEntity jobEntity = listData.get(position);
         Intent intent = new Intent(mContext, OperatorTaskDetailActivity.class);
         intent.putExtra(OperatorTaskDetailActivity.TASK_ENTITY, jobEntity);
-        startActivityForResult(intent, REQUEST_CODE);
+        startActivityForResult(intent, CODE_TASK_DETAIL);
     }
 
     @Override
@@ -369,7 +369,8 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+        // 在详情页改变了任务状态需要刷新列表的任务状态
+        if (resultCode == Activity.RESULT_OK && requestCode == CODE_TASK_DETAIL) {
             JobEntity afterChangeEntity = (JobEntity) data.getSerializableExtra("afterChangeEntity");
             int positionInList = getPositionInList(afterChangeEntity, allData);
             if (positionInList != -1) {

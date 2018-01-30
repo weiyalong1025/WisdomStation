@@ -252,16 +252,16 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_bluetooth:
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 View inflate = LayoutInflater.from(getContext()).inflate(R.layout.item_bluetooth_info, null);
                 inflate.measure(0, 0);
                 int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, inflate.getMeasuredHeight(), ListType.TYPE_DIALOG);
                 ListView listView = new WrapContentListView(getContext(), suggestMaxHeight);
                 bluetoothAdapter = new BluetoothPointAdapter(mContext, bluetoothPoints);
                 listView.setAdapter(bluetoothAdapter);
-                builder.setView(listView);
-                builder.setCancelable(true);
-                builder.create().show();
+                new AlertDialog.Builder(getActivity())
+                        .setView(listView)
+                        .setCancelable(true)
+                        .create().show();
                 break;
             case R.id.tv_hint:
                 initData();

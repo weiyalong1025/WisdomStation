@@ -11,6 +11,10 @@ public interface DirName {
      */
     String ROOT = "Dispatch";
     /**
+     * 版本更新包存储目录
+     */
+    String UPDATE = "Update";
+    /**
      * Log目录
      */
     String LOG = "Log";

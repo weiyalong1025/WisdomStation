@@ -29,6 +29,27 @@ public class DirAndFileUtils {
     }
 
     /**
+     * 获取版本更新包存储目录
+     *
+     * @return 对应的目录
+     * @throws IOException 没有挂载SD卡或创建文件失败抛出异常
+     */
+    public static File getUpdateDir() throws IOException {
+        stringBuilder.setLength(0);
+        String filePath = stringBuilder
+                .append(getRootDir())
+                .append(File.separator)
+                .append(DirName.UPDATE)
+                .toString();
+        File file = new File(filePath);
+        boolean orExistsDir = FileUtils.createOrExistsDir(file);
+        if (!orExistsDir) {
+            throw new NullPointerException("Create folder failed!");
+        }
+        return file;
+    }
+
+    /**
      * 获取发布命令/协作附件存储目录
      *
      * @return 对应的目录

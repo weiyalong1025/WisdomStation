@@ -11,7 +11,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- * Created by 10295 on 2017/12/18 0018.
+ * Created by 10295 on 2017/12/18 0018
  */
 
 public class ObjectConverter<T> implements Converter<T> {
@@ -27,7 +27,7 @@ public class ObjectConverter<T> implements Converter<T> {
         if (body == null || mListener == null) return null;
         KingkongResponse kingkongResponse = JSON.parseObject(body.string(), KingkongResponse.class);
         int code = kingkongResponse.getCode();
-        if (code != 0) {
+        if (code != 0 || !kingkongResponse.isSuccess()) {
             Observable.empty()
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnComplete(() -> mListener.onFailed(code, kingkongResponse.getMessage()))

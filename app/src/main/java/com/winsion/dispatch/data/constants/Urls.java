@@ -32,4 +32,6 @@ public interface Urls {
     String CHANGE_DEVICE = "kingkong/0.01/airCondition/changeDeviceValue";
     // 改变消息状态
     String MESSAGE_HANDLING = "kingkong/0.01/job/messageHandling";
+    // 检查更新
+    String CHECK_UPDATE = "/kingkong/0.01/file/versionCheck";
 }

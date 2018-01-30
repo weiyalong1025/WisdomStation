@@ -311,7 +311,7 @@ public class NetDataSource {
      * @param targetDir        文件目标存储目录
      * @param downloadListener 下载状态监听
      */
-    public static void downloadFile(Class tag, String serverUri, String targetDir, DownloadListener downloadListener) {
+    public static void downloadFile(Object tag, String serverUri, String targetDir, DownloadListener downloadListener) {
         String[] split = serverUri.split("/");
         if (split.length != 0) {
             String fileName = split[split.length - 1];
@@ -355,7 +355,7 @@ public class NetDataSource {
 
             @Override
             public void onError(Throwable e) {
-                LogUtils.e("WebService", "onError:::" + url + ":::" + e.toString());
+                LogUtils.e("接口调用失败", "onError:::" + url + ":::" + e.toString());
                 if (listener != null) {
                     listener.onFailed(0, e.getMessage());
                 }

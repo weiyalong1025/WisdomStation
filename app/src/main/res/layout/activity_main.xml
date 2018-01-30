@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.winsion.wisdomstation.view.AlphaTabsIndicator
+    <com.winsion.dispatch.view.AlphaTabsIndicator
         android:id="@+id/ati_indicator"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d54"
@@ -13,50 +13,50 @@
         android:background="@color/gray7"
         android:orientation="horizontal">
 
-        <com.winsion.wisdomstation.view.AlphaTabView
+        <com.winsion.dispatch.view.AlphaTabView
             android:id="@+id/atv_operation"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_operation"
             app:tabIconSelected="@drawable/ic_operation_selected"
             app:tabText="@string/operation" />
 
-        <com.winsion.wisdomstation.view.AlphaTabView
+        <com.winsion.dispatch.view.AlphaTabView
             android:id="@+id/atv_dispatch"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_dispatch"
             app:tabIconSelected="@drawable/ic_dispatch_selected"
             app:tabText="@string/dispatch" />
 
-        <com.winsion.wisdomstation.view.AlphaTabView
+        <com.winsion.dispatch.view.AlphaTabView
             android:id="@+id/atv_contacts"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_contacts"
             app:tabIconSelected="@drawable/ic_contacts_selected"
             app:tabText="@string/contacts" />
 
-        <com.winsion.wisdomstation.view.AlphaTabView
+        <com.winsion.dispatch.view.AlphaTabView
             android:id="@+id/atv_grid"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_grid"
             app:tabIconSelected="@drawable/ic_grid_selected"
             app:tabText="@string/grid" />
 
-        <com.winsion.wisdomstation.view.AlphaTabView
+        <com.winsion.dispatch.view.AlphaTabView
             android:id="@+id/atv_scene"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_scene"
             app:tabIconSelected="@drawable/ic_scene_selected"
             app:tabText="@string/scene" />
 
-        <com.winsion.wisdomstation.view.AlphaTabView
+        <com.winsion.dispatch.view.AlphaTabView
             android:id="@+id/atv_reminder"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_reminder"
             app:tabIconSelected="@drawable/ic_reminder_selected"
             app:tabText="@string/reminder" />
-    </com.winsion.wisdomstation.view.AlphaTabsIndicator>
+    </com.winsion.dispatch.view.AlphaTabsIndicator>
 
-    <com.winsion.wisdomstation.view.NoScrollViewPager
+    <com.winsion.dispatch.view.NoScrollViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -70,7 +70,7 @@
         android:padding="@dimen/d11"
         android:src="@drawable/ic_switch" />
 
-    <com.winsion.wisdomstation.view.CircleImageView
+    <com.winsion.dispatch.view.CircleImageView
         android:id="@+id/iv_head"
         android:layout_width="@dimen/d48"
         android:layout_height="@dimen/d48"

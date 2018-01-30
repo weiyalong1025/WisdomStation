@@ -4,7 +4,7 @@ apply plugin: 'io.objectbox'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.winsion.wisdomstation"
+        applicationId "com.winsion.dispatch"
         minSdkVersion 18
         targetSdkVersion 22
         versionCode 1
@@ -17,9 +17,9 @@ android {
     }
     signingConfigs {
         release {
-            keyAlias 'wisdomstationkey'
+            keyAlias 'dispatchkey'
             keyPassword 'winsion123'
-            storeFile file('C:/Users/10295/Desktop/wisdomstationkey.jks')
+            storeFile file('C:/Users/10295/Desktop/dispatchkey.jks')
             storePassword 'winsion123'
         }
     }

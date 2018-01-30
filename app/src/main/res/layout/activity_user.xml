@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.winsion.wisdomstation.view.TitleView
+    <com.winsion.dispatch.view.TitleView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
         android:orientation="horizontal"
         android:padding="@dimen/d15">
 
-        <com.winsion.wisdomstation.view.CircleImageView
+        <com.winsion.dispatch.view.CircleImageView
             android:id="@+id/iv_head"
             android:layout_width="@dimen/d60"
             android:layout_height="@dimen/d60"
@@ -55,7 +56,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 
     <RelativeLayout
         android:id="@+id/ll_change_password"
@@ -70,20 +72,23 @@
             android:layout_centerVertical="true"
             android:text="@string/change_password"
             android:textColor="@color/white1"
-            android:textSize="@dimen/s21" />
+            android:textSize="@dimen/s21"
+            tools:ignore="RelativeOverlap" />
 
         <ImageView
             android:layout_width="@dimen/d20"
             android:layout_height="@dimen/d20"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right" />
+            android:src="@drawable/ic_arrow_right"
+            tools:ignore="ContentDescription" />
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/btn_logout"
@@ -99,5 +104,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 </LinearLayout>

@@ -51,7 +51,7 @@
                         android:src="@drawable/ic_not_start"
                         tools:ignore="ContentDescription" />
 
-                    <com.winsion.wisdomstation.view.GifView
+                    <com.winsion.dispatch.view.GifView
                         android:id="@+id/doing_gif"
                         android:layout_width="@dimen/d45"
                         android:layout_height="@dimen/d45"

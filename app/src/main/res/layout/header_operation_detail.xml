@@ -327,7 +327,7 @@
                     android:src="@drawable/ic_not_start"
                     tools:ignore="ContentDescription" />
 
-                <com.winsion.wisdomstation.view.GifView
+                <com.winsion.dispatch.view.GifView
                     android:id="@+id/doing_gif"
                     android:layout_width="@dimen/d45"
                     android:layout_height="@dimen/d45"
@@ -449,7 +449,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <com.winsion.wisdomstation.view.DrawableCenterTextView
+                <com.winsion.dispatch.view.DrawableCenterTextView
                     android:id="@+id/btn_note"
                     android:layout_width="@dimen/d100"
                     android:layout_height="@dimen/d40"
@@ -493,7 +493,7 @@
                     android:background="@color/black1"
                     tools:ignore="NestedWeights" />
 
-                <com.winsion.wisdomstation.view.DrawableCenterTextView
+                <com.winsion.dispatch.view.DrawableCenterTextView
                     android:id="@+id/btn_broadcast"
                     android:layout_width="@dimen/d100"
                     android:layout_height="@dimen/d40"

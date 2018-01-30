@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.winsion.wisdomstation.view.TitleView
+    <com.winsion.dispatch.view.TitleView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showBackButton="false"
@@ -29,7 +29,7 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/ib_main_passenger"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                     android:layout_width="@dimen/d5"
                     android:layout_height="match_parent" />
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_lost"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_area_broadcast"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                     android:layout_width="@dimen/d5"
                     android:layout_height="match_parent" />
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_broadcast"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="36">
 
-                    <com.winsion.wisdomstation.view.AdjustImageView
+                    <com.winsion.dispatch.view.AdjustImageView
                         android:id="@+id/iv_transfer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                     android:layout_width="@dimen/d5"
                     android:layout_height="match_parent" />
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_light"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_elevator"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
                     android:layout_width="@dimen/d5"
                     android:layout_height="match_parent" />
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_water"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_video"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                     android:layout_width="@dimen/d5"
                     android:layout_height="match_parent" />
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_door"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_air_conditioner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -194,7 +194,7 @@
                     android:layout_width="@dimen/d5"
                     android:layout_height="match_parent" />
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_air_handing"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_pump"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -222,7 +222,7 @@
                     android:layout_width="@dimen/d5"
                     android:layout_height="match_parent" />
 
-                <com.winsion.wisdomstation.view.AdjustImageView
+                <com.winsion.dispatch.view.AdjustImageView
                     android:id="@+id/iv_cooling_tower"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

@@ -43,7 +43,7 @@
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_failed" />
 
-        <com.winsion.wisdomstation.view.CircleProgressBar
+        <com.winsion.dispatch.view.CircleProgressBar
             android:id="@+id/cpb_status"
             android:layout_width="@dimen/d20"
             android:layout_height="@dimen/d20"

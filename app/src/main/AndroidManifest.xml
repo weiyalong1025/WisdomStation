@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.winsion.wisdomstation">
+    package="com.winsion.dispatch">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -19,7 +19,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
-        android:name=".application.AppApplication"
+        android:name="com.winsion.dispatch.application.AppApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -30,7 +30,7 @@
 
         <!-- activity -->
         <activity
-            android:name=".splash.SplashActivity"
+            android:name="com.winsion.dispatch.splash.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
@@ -41,62 +41,62 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.activity.LoginActivity"
+            android:name="com.winsion.dispatch.login.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".config.activity.LoginConfigActivity"
+            android:name="com.winsion.dispatch.config.activity.LoginConfigActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SwitchSysActivity"
+            android:name="com.winsion.dispatch.SwitchSysActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".main.activity.MainActivity"
+            android:name="com.winsion.dispatch.main.activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".user.UserActivity"
+            android:name="com.winsion.dispatch.user.UserActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".modules.operation.modules.issue.activity.IssueActivity"
+            android:name="com.winsion.dispatch.modules.operation.modules.issue.activity.IssueActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".modules.reminder.modules.todo.activity.TodoDetailActivity"
+            android:name="com.winsion.dispatch.modules.reminder.modules.todo.activity.TodoDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".modules.operation.modules.issue.activity.SelectTeamActivity"
+            android:name="com.winsion.dispatch.modules.operation.modules.issue.activity.SelectTeamActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".modules.operation.modules.issue.activity.SelectTrainActivity"
+            android:name="com.winsion.dispatch.modules.operation.modules.issue.activity.SelectTrainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".media.activity.AddNoteActivity"
+            android:name="com.winsion.dispatch.media.activity.AddNoteActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".media.activity.TakePhotoActivity"
+            android:name="com.winsion.dispatch.media.activity.TakePhotoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".media.activity.RecordVideoActivity"
+            android:name="com.winsion.dispatch.media.activity.RecordVideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".media.activity.RecordAudioActivity"
+            android:name="com.winsion.dispatch.media.activity.RecordAudioActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".modules.operation.modules.taskoperator.activity.OperatorTaskDetailActivity"
+            android:name="com.winsion.dispatch.modules.operation.modules.taskoperator.activity.OperatorTaskDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
 
@@ -104,7 +104,7 @@
         <service android:name="org.eclipse.paho.android.service.MqttService" />
 
         <!-- receiver -->
-        <receiver android:name=".modules.reminder.modules.todo.receiver.TodoReceiver" />
+        <receiver android:name="com.winsion.dispatch.modules.reminder.modules.todo.receiver.TodoReceiver" />
     </application>
 
 </manifest>

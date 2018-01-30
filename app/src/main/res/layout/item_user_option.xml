@@ -12,7 +12,7 @@
     android:paddingRight="@dimen/d10"
     android:paddingTop="@dimen/d6">
 
-    <com.winsion.wisdomstation.view.CircleImageView
+    <com.winsion.dispatch.view.CircleImageView
         android:id="@+id/civ_head"
         android:layout_width="@dimen/d36"
         android:layout_height="@dimen/d36"

@@ -154,41 +154,44 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @Override
     public void onButtonClick(JobEntity jobEntity, View button) {
         // 更改任务状态按钮点击事件
-        boolean isFinish = jobEntity.getWorkstatus() == TaskState.RUN;
-        new AlertDialog.Builder(mContext)
-                .setMessage(getString(isFinish ? R.string.sure_you_want_to_finish : R.string.sure_you_want_to_start))
-                .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
-                    button.setEnabled(false);
-                    int opeType = isFinish ? OpeType.COMPLETE : OpeType.BEGIN;
-                    TaskCommBiz.changeJobStatus(mContext, jobEntity, opeType, new StateListener() {
-                        @Override
-                        public void onSuccess() {
-                            button.setEnabled(true);
-                            String currentTime = ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1);
-                            if (isFinish) {
-                                jobEntity.setWorkstatus(TaskState.DONE);
-                                jobEntity.setRealendtime(currentTime);
-                                underwayData.remove(jobEntity);
-                                doneData.add(jobEntity);
-                            } else {
-                                jobEntity.setWorkstatus(TaskState.RUN);
-                                jobEntity.setRealstarttime(currentTime);
-                                unStartedData.remove(jobEntity);
-                                underwayData.add(jobEntity);
+        int workStatus = jobEntity.getWorkstatus();
+        if (workStatus == TaskState.RUN || workStatus == TaskState.NOT_STARTED || workStatus == TaskState.GRID_NOT_PASS) {
+            boolean isFinish = workStatus == TaskState.RUN;
+            new AlertDialog.Builder(mContext)
+                    .setMessage(getString(isFinish ? R.string.sure_you_want_to_finish : R.string.sure_you_want_to_start))
+                    .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
+                        button.setEnabled(false);
+                        int opeType = isFinish ? OpeType.COMPLETE : OpeType.BEGIN;
+                        TaskCommBiz.changeJobStatus(mContext, jobEntity, opeType, new StateListener() {
+                            @Override
+                            public void onSuccess() {
+                                button.setEnabled(true);
+                                String currentTime = ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1);
+                                if (isFinish) {
+                                    jobEntity.setWorkstatus(TaskState.DONE);
+                                    jobEntity.setRealendtime(currentTime);
+                                    underwayData.remove(jobEntity);
+                                    doneData.add(jobEntity);
+                                } else {
+                                    jobEntity.setWorkstatus(TaskState.RUN);
+                                    jobEntity.setRealstarttime(currentTime);
+                                    unStartedData.remove(jobEntity);
+                                    underwayData.add(jobEntity);
+                                }
+                                filterData();
+                                scrollToItem(jobEntity);
                             }
-                            filterData();
-                            scrollToItem(jobEntity);
-                        }
 
-                        @Override
-                        public void onFailed() {
-                            button.setEnabled(true);
-                            showToast(R.string.change_the_state_of_failure);
-                        }
-                    });
-                })
-                .setNegativeButton(getString(R.string.cancel), null)
-                .show();
+                            @Override
+                            public void onFailed() {
+                                button.setEnabled(true);
+                                showToast(R.string.change_the_state_of_failure);
+                            }
+                        });
+                    })
+                    .setNegativeButton(getString(R.string.cancel), null)
+                    .show();
+        }
     }
 
     @Override

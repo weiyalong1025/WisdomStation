@@ -660,7 +660,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         switch (view.getId()) {
             case R.id.btn_status:
                 // 更改任务状态按钮点击事件
-                showDialog(mJobEntity.getWorkstatus() == TaskState.RUN, view);
+                int workStatus = mJobEntity.getWorkstatus();
+                if (workStatus == TaskState.RUN || workStatus == TaskState.NOT_STARTED || workStatus == TaskState.GRID_NOT_PASS) {
+                    showDialog(workStatus == TaskState.RUN, view);
+                }
                 break;
             case R.id.btn_broadcast:
                 showToast("发送广播");
@@ -704,19 +707,25 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         }
     }
 
-    private void showDialog(boolean isFinish, View btn) {
+    /**
+     * 更改任务状态前弹出对话框
+     *
+     * @param isRunning 当前任务是否正在进行中
+     * @param btn       按钮Button
+     */
+    private void showDialog(boolean isRunning, View btn) {
         new AlertDialog.Builder(mContext)
-                .setMessage(getString(isFinish ? R.string.sure_you_want_to_finish : R.string.sure_you_want_to_start))
+                .setMessage(getString(isRunning ? R.string.sure_you_want_to_finish : R.string.sure_you_want_to_start))
                 .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
                     btn.setEnabled(false);
-                    int opeType = isFinish ? OpeType.COMPLETE : OpeType.BEGIN;
+                    int opeType = isRunning ? OpeType.COMPLETE : OpeType.BEGIN;
                     TaskCommBiz.changeJobStatus(mContext, mJobEntity, opeType, new StateListener() {
                         @Override
                         public void onSuccess() {
                             isChangeState = true;
                             btn.setEnabled(true);
                             String currentTime = ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1);
-                            if (isFinish) {
+                            if (isRunning) {
                                 mJobEntity.setWorkstatus(TaskState.DONE);
                                 mJobEntity.setRealendtime(currentTime);
                             } else {

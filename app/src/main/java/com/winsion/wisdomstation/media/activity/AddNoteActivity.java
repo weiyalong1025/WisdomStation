@@ -1,7 +1,10 @@
 package com.winsion.wisdomstation.media.activity;
 
 import android.app.Activity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.winsion.wisdomstation.R;
 import com.winsion.wisdomstation.base.BaseActivity;
@@ -16,11 +19,13 @@ import butterknife.BindView;
  * Created by admin on 2016/8/13.
  * 添加备注
  */
-public class AddNoteActivity extends BaseActivity {
+public class AddNoteActivity extends BaseActivity implements TextWatcher {
     @BindView(R.id.et_note_content)
     EditText etNoteContent;
     @BindView(R.id.tv_title)
     TitleView tvTitle;
+    @BindView(R.id.tv_counter)
+    TextView tvCounter;
 
     public static final String FILE = "file";
     private File file;
@@ -39,6 +44,9 @@ public class AddNoteActivity extends BaseActivity {
             setResult(Activity.RESULT_OK);
             finish();
         });
+
+        etNoteContent.addTextChangedListener(this);
+
         file = (File) getIntent().getSerializableExtra(FILE);
         if (file.exists()) {
             String content = FileUtils.readFile2String(file, "UTF-8");
@@ -46,5 +54,21 @@ public class AddNoteActivity extends BaseActivity {
             // 设置光标位置在最后
             etNoteContent.setSelection(content.length());
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        String note = s.toString();
+        tvCounter.setText(String.format("%s/150", String.valueOf(note.length())));
     }
 }

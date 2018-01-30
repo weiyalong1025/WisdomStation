@@ -18,8 +18,6 @@ import com.winsion.wisdomstation.R;
 
 
 public class AlphaTabView extends View {
-
-    private Context mContext;                     //上下文
     private Bitmap mIconNormal;                   //默认图标
     private Bitmap mIconSelected;                 //选中的图标
     private String mText;                         //描述文本
@@ -43,17 +41,14 @@ public class AlphaTabView extends View {
 
     public AlphaTabView(Context context) {
         this(context, null);
-        mContext = context;
     }
 
     public AlphaTabView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
-        mContext = context;
     }
 
     public AlphaTabView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
         mTextSize = getResources().getDimensionPixelSize(R.dimen.s12);
         mPadding = getResources().getDimensionPixelSize(R.dimen.d5);
         //获取所有的自定义属性
@@ -212,9 +207,7 @@ public class AlphaTabView extends View {
             float left = getMeasuredWidth() / 10 * 6f;
             canvas.drawBitmap(bitmap, left, getResources().getDimensionPixelSize(R.dimen.d5), null);
             bitmap.recycle();
-        } else if (mBadgeNumber == 0) {
-
-        } else {
+        } else if (mBadgeNumber != 0) {
             if (isShowPoint) {
                 Paint paint = new Paint();
                 paint.setColor(mBadgeBackgroundColor);

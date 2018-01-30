@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -8,7 +9,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +20,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/div_vertical" />
+            android:background="@drawable/div_vertical"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:id="@+id/ll_bg_color"
@@ -45,7 +48,8 @@
                         android:id="@+id/iv_status"
                         android:layout_width="@dimen/d45"
                         android:layout_height="@dimen/d45"
-                        android:src="@drawable/ic_not_start" />
+                        android:src="@drawable/ic_not_start"
+                        tools:ignore="ContentDescription" />
 
                     <com.winsion.wisdomstation.view.GifView
                         android:id="@+id/doing_gif"
@@ -61,14 +65,16 @@
                     android:layout_marginBottom="@dimen/d4"
                     android:layout_marginTop="@dimen/d15"
                     app:layout_columnWeight="1"
-                    app:layout_gravity="center">
+                    app:layout_gravity="center"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:id="@+id/iv_type_icon"
                         android:layout_width="@dimen/d23"
                         android:layout_height="@dimen/d23"
                         android:layout_marginEnd="@dimen/d3"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/task_type_name"
@@ -107,21 +113,23 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layout_columnWeight="1"
-                    app:layout_gravity="center">
+                    app:layout_gravity="center"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:id="@+id/iv_job_icon"
                         android:layout_width="@dimen/d20"
                         android:layout_height="@dimen/d20"
                         android:layout_marginEnd="@dimen/d3"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/tv_task_name"
                         style="@style/MarqueeTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxWidth="@dimen/d95"
+                        android:maxWidth="@dimen/d120"
                         android:textColor="@color/blue1"
                         android:textSize="@dimen/s21"
                         android:textStyle="bold" />
@@ -139,8 +147,10 @@
 
                 <TextView
                     android:id="@+id/tv_last_time"
+                    style="@style/MarqueeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxWidth="@dimen/d60"
                     android:textColor="@color/blue1"
                     android:textSize="@dimen/s21"
                     app:layout_columnWeight="1"
@@ -213,12 +223,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/div_vertical" />
+            android:background="@drawable/div_vertical"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_bottom_split"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 </LinearLayout>

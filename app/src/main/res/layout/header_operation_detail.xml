@@ -408,7 +408,7 @@
                     style="@style/MarqueeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="@dimen/d100"
+                    android:maxWidth="@dimen/d120"
                     android:textColor="@color/blue1"
                     android:textSize="@dimen/s21"
                     android:textStyle="bold" />
@@ -416,12 +416,12 @@
 
             <TextView
                 android:id="@+id/tv_last_time"
+                style="@style/MarqueeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:maxWidth="@dimen/d60"
                 android:textColor="@color/blue1"
                 android:textSize="@dimen/s21"
-                android:textStyle="bold"
                 app:layout_columnWeight="1"
                 app:layout_gravity="center" />
 

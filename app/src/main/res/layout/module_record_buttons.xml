@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/d10"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btn_take_photo"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d48"
+        android:layout_marginEnd="@dimen/d5"
+        android:layout_weight="1"
+        android:background="@drawable/btn_yellow"
+        android:text="@string/take_photo_btn_str"
+        android:textSize="@dimen/s18" />
+
+    <Button
+        android:id="@+id/btn_video"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d48"
+        android:layout_marginLeft="@dimen/d5"
+        android:layout_marginRight="@dimen/d5"
+        android:layout_weight="1"
+        android:background="@drawable/btn_yellow"
+        android:text="@string/video_btn_str"
+        android:textSize="@dimen/s18" />
+
+    <Button
+        android:id="@+id/btn_record"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/d48"
+        android:layout_marginStart="@dimen/d5"
+        android:layout_weight="1"
+        android:background="@drawable/btn_yellow"
+        android:text="@string/record_btn_str"
+        android:textSize="@dimen/s18" />
+</LinearLayout>

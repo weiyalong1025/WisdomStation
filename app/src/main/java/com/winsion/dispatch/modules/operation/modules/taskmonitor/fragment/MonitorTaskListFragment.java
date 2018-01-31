@@ -19,6 +19,8 @@ import com.winsion.dispatch.modules.operation.adapter.MonitorTaskListAdapter;
 import com.winsion.dispatch.modules.operation.constants.TaskSpinnerState;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.TaskEntity;
+import com.winsion.dispatch.utils.ConvertUtils;
+import com.winsion.dispatch.utils.constants.Formatter;
 import com.winsion.dispatch.view.SpinnerView;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by 10295 on 2017/12/25
+ * 任务监控Fragment
  */
 
 public class MonitorTaskListFragment extends BaseFragment implements MonitorTaskListContract.View, AdapterView.OnItemClickListener,
@@ -134,7 +137,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        showToast(position + "");
+
     }
 
     @Override
@@ -160,14 +163,6 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
                 trainNumber = getString(R.string.nothing);
             }
             trainNumberIndex.setText(trainNumber);
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (trainNumberIndex.getVisibility() == View.VISIBLE) {
-            trainNumberIndex.setVisibility(View.GONE);
         }
     }
 
@@ -226,6 +221,14 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         Observable.interval(30, 30, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((Long aLong) -> mLvAdapter.notifyDataSetChanged());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (trainNumberIndex.getVisibility() == View.VISIBLE) {
+            trainNumberIndex.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -299,14 +302,34 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     /**
      * 滚动到对应taskId条目的位置
      */
-    public void scrollToItem(String taskId) {
-        for (int i = 0; i < listData.size(); i++) {
-            TaskEntity jobEntity = listData.get(i);
-            if (equals(jobEntity.getTasksid(), taskId)) {
-                lvList.smoothScrollToPosition(i);
-                break;
+    public void scrollToItem(TaskEntity taskEntity) {
+        int positionInList = listData.indexOf(taskEntity);
+        if (positionInList != -1) lvList.setSelection(positionInList);
+    }
+
+    /**
+     * 根据状态改变后的对象的taskId查找在集合中的位置
+     *
+     * @param afterChangeEntity 状态改变后的对象
+     * @return 该对象在集合中的位置，找不到返回-1
+     */
+    private int getPositionInList(TaskEntity afterChangeEntity, List<TaskEntity> list) {
+        int min = 0;
+        int max = list.size() - 1;
+        while (min <= max) {
+            int middle = (min + max) >>> 1;
+            TaskEntity taskEntity = list.get(middle);
+            long time1 = ConvertUtils.parseDate(taskEntity.getPlanstarttime(), Formatter.DATE_FORMAT1);
+            long time2 = ConvertUtils.parseDate(afterChangeEntity.getPlanstarttime(), Formatter.DATE_FORMAT1);
+            if (equals(taskEntity.getTasksid(), taskEntity.getTasksid())) {
+                return middle;
+            } else if (time1 < time2) {
+                min = middle + 1;
+            } else {
+                max = middle - 1;
             }
         }
+        return -1;
     }
 
     @Override

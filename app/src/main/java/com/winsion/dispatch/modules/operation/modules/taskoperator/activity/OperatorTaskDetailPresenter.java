@@ -32,6 +32,11 @@ import java.util.List;
  */
 
 public class OperatorTaskDetailPresenter implements OperatorTaskDetailContract.Presenter {
+    // 查询监控人上传附件用的字段
+    private static final String FIELD_MONITOR = "jobsid";
+    // 查询执行人上传附件用的字段
+    private static final String FIELD_PERFORMER = "joboperatorsid";
+
     private OperatorTaskDetailContract.View mView;
 
     OperatorTaskDetailPresenter(OperatorTaskDetailContract.View view) {
@@ -44,54 +49,87 @@ public class OperatorTaskDetailPresenter implements OperatorTaskDetailContract.P
     }
 
     @Override
-    public ArrayList<LocalRecordEntity> getLocalFile(String jobsId) {
-        ArrayList<LocalRecordEntity> recordEntities = new ArrayList<>();
+    public ArrayList<LocalRecordEntity> getPerformerLocalFile(String jobOperatorsId) {
+        String userId = CacheDataSource.getUserId();
+        ArrayList<LocalRecordEntity> performerLocalFile = new ArrayList<>();
         try {
-            String userId = CacheDataSource.getUserId();
-            File performerDir = DirAndFileUtils.getPerformerDir(userId, jobsId);
-            File[] files = performerDir.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    String name = file.getName();
-                    LocalRecordEntity localRecordEntity = new LocalRecordEntity();
-                    localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
-                    localRecordEntity.setFile(file);
-                    if (name.endsWith(".jpg")) {
-                        localRecordEntity.setFileType(FileType.PICTURE);
-                        recordEntities.add(localRecordEntity);
-                    } else if (name.endsWith(".mp4")) {
-                        localRecordEntity.setFileType(FileType.VIDEO);
-                        recordEntities.add(localRecordEntity);
-                    } else if (name.endsWith(".aac")) {
-                        localRecordEntity.setFileType(FileType.AUDIO);
-                        recordEntities.add(localRecordEntity);
-                    } else if (name.endsWith(".txt")) {
-                        String noteContent = FileUtils.readFile2String(file, "UTF-8");
-                        if (!TextUtils.isEmpty(noteContent)) {
-                            localRecordEntity.setFileType(FileType.TEXT);
-                            recordEntities.add(0, localRecordEntity);
-                        }
-                    }
-                }
-                return recordEntities;
-            }
+            File performerDir = DirAndFileUtils.getPerformerDir(userId, jobOperatorsId);
+            performerLocalFile.addAll(getLocalFile(performerDir));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        return performerLocalFile;
+    }
+
+    @Override
+    public ArrayList<LocalRecordEntity> getPublisherLocalFile(String jobsId) {
+        String userId = CacheDataSource.getUserId();
+        ArrayList<LocalRecordEntity> publisherLocalFile = new ArrayList<>();
+        try {
+            File monitorDir = DirAndFileUtils.getMonitorDir(userId, jobsId);
+            publisherLocalFile.addAll(getLocalFile(monitorDir));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return publisherLocalFile;
+    }
+
+    private ArrayList<LocalRecordEntity> getLocalFile(File parentFile) {
+        ArrayList<LocalRecordEntity> recordEntities = new ArrayList<>();
+        File[] files = parentFile.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                String name = file.getName();
+                LocalRecordEntity localRecordEntity = new LocalRecordEntity();
+                localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                localRecordEntity.setFile(file);
+                if (name.endsWith(".jpg")) {
+                    localRecordEntity.setFileType(FileType.PICTURE);
+                    recordEntities.add(localRecordEntity);
+                } else if (name.endsWith(".mp4")) {
+                    localRecordEntity.setFileType(FileType.VIDEO);
+                    recordEntities.add(localRecordEntity);
+                } else if (name.endsWith(".aac")) {
+                    localRecordEntity.setFileType(FileType.AUDIO);
+                    recordEntities.add(localRecordEntity);
+                } else if (name.endsWith(".txt")) {
+                    String noteContent = FileUtils.readFile2String(file, "UTF-8");
+                    if (!TextUtils.isEmpty(noteContent)) {
+                        localRecordEntity.setFileType(FileType.TEXT);
+                        recordEntities.add(0, localRecordEntity);
+                    }
+                }
+            }
         }
         return recordEntities;
     }
 
+    /**
+     * 查询命令/协作发布人上传的附件
+     */
     @Override
-    public void getServerFile(String jobOperatorsId) {
+    public void getPublisherUploadedFile(String jobsId) {
+        getUploadedFile(FIELD_MONITOR, jobsId, ViewName.MONITOR_FILE);
+    }
+
+    /**
+     * 查询执行人上传的附件
+     */
+    @Override
+    public void getPerformerUploadedFile(String jobOperatorsId) {
+        getUploadedFile(FIELD_PERFORMER, jobOperatorsId, ViewName.FILE_INFO);
+    }
+
+    private void getUploadedFile(String field, String valueKey, String viewName) {
         List<WhereClause> whereClauses = new ArrayList<>();
         WhereClause where = new WhereClause();
         where.setFieldKey(FieldKey.EQUALS);
         where.setJoinKey(JoinKey.OTHER);
-        where.setFields("joboperatorsid");
-        where.setValueKey(jobOperatorsId);
+        where.setFields(field);
+        where.setValueKey(valueKey);
         whereClauses.add(where);
 
-        NetDataSource.post(getClass(), Urls.BASE_QUERY, whereClauses, null, ViewName.FILE_INFO,
+        NetDataSource.post(getClass(), Urls.BASE_QUERY, whereClauses, null, viewName,
                 1, new ResponseListener<ResponseForQueryData<List<ServerRecordEntity>>>() {
                     @Override
                     public ResponseForQueryData<List<ServerRecordEntity>> convert(String jsonStr) {
@@ -102,7 +140,11 @@ public class OperatorTaskDetailPresenter implements OperatorTaskDetailContract.P
 
                     @Override
                     public void onSuccess(ResponseForQueryData<List<ServerRecordEntity>> result) {
-                        mView.onServerFileGetSuccess(result.getDataList());
+                        if (field.equals(FIELD_MONITOR)) {
+                            mView.onPublisherUploadedFileGetSuccess(result.getDataList());
+                        } else {
+                            mView.onPerformerUploadedFileGetSuccess(result.getDataList());
+                        }
                     }
 
                     @Override

@@ -2,6 +2,7 @@ package com.winsion.dispatch.main.activity;
 
 import android.content.Context;
 
+import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.common.constants.SystemType;
 import com.winsion.dispatch.data.SPDataSource;
 import com.winsion.dispatch.data.constants.SPKey;
@@ -20,7 +21,8 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void start() {
-
+        // 检查更新
+        CommonBiz.checkVersionUpdate(mContext, false);
     }
 
     @Override

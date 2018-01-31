@@ -103,7 +103,7 @@ public class DirAndFileUtils {
      * @return 对应的目录
      * @throws IOException 没有挂载SD卡或创建文件失败抛出异常
      */
-    public static File getMonitorDir(String userId, String jobOperatorId) throws IOException {
+    public static File getMonitorDir(String userId, String jobsId) throws IOException {
         stringBuilder.setLength(0);
         String filePath = stringBuilder
                 .append(getRootDir())
@@ -112,7 +112,7 @@ public class DirAndFileUtils {
                 .append(File.separator)
                 .append(userId)
                 .append(File.separator)
-                .append(jobOperatorId)
+                .append(jobsId)
                 .append(File.separator)
                 .append(DirName.MONITOR)
                 .toString();

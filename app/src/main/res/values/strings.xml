@@ -68,6 +68,7 @@
     <string name="confirm_success">确认成功</string>
     <string name="confirm_failed">确认失败</string>
     <string name="change_password">修改密码</string>
+    <string name="check_update">检查更新</string>
     <string name="logout">注销</string>
     <string name="a_job">个作业</string>
     <string name="a_command">个命令</string>
@@ -128,9 +129,11 @@
     <string name="end_time">结束时间:</string>
     <string name="note">备注</string>
     <string name="command_content">命令内容:</string>
-    <string name="command_group">受令班组:</string>
-    <string name="cooperation_group">协作班组:</string>
     <string name="cooperation_content">协作内容:</string>
+    <string name="issue_order_group">发令班组:</string>
+    <string name="order_group">受令班组:</string>
+    <string name="issue_cooperation_group">发起班组:</string>
+    <string name="cooperation_group">协作班组:</string>
     <string name="start_time_not_later_than_the_end_of_time">开始时间不能晚于结束时间</string>
     <string name="end_time_cannot_be_earlier_than_the_start_time">结束时间不能早于开始时间</string>
     <string name="select_team">选择班组</string>
@@ -176,6 +179,14 @@
     <string name="note_content">备注内容：</string>
     <string name="publisher_uploaded_record">任务发布人上传附件：</string>
     <string name="performer_uploaded_record">任务执行人上传附件：</string>
+    <string name="current_version_is_the_latest">当前已是最新版本</string>
+    <string name="check_update_failed">检查更新失败</string>
+    <string name="update_now">立即更新</string>
+    <string name="update_later">暂不更新</string>
+    <string name="version_update">版本更新</string>
+    <string name="downloading_installation_package">正在下载安装包…</string>
+    <string name="discover_new_version">发现新版本</string>
+    <string name="no_corresponding_program">没有对应的查看程序</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

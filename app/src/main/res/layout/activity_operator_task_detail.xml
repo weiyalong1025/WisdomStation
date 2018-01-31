@@ -25,7 +25,37 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-            <include layout="@layout/header_operation_detail" />
+            <include layout="@layout/module_train_info" />
+
+            <include
+                layout="@layout/module_order"
+                android:visibility="gone" />
+
+            <ListView
+                android:id="@+id/lv_record_publisher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null"
+                android:visibility="gone"
+                tools:ignore="NestedScrolling"
+                tools:listitem="@layout/item_record" />
+
+            <ImageView
+                android:id="@+id/div_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/div_horizontal"
+                tools:ignore="ContentDescription" />
+
+            <include layout="@layout/module_operation" />
+
+            <include layout="@layout/module_record_buttons" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/div_horizontal"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tv_publisher_title"
@@ -41,7 +71,7 @@
                 tools:ignore="RtlSymmetry" />
 
             <ListView
-                android:id="@+id/lv_record_publisher"
+                android:id="@+id/lv_record_publisher_grid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"

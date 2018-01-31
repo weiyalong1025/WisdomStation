@@ -274,7 +274,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         etContent = issueHeader.findViewById(R.id.et_content);
         switch (issueType) {
             case TaskType.COMMAND:
-                tvPerformerGroupHint.setText(R.string.command_group);
+                tvPerformerGroupHint.setText(R.string.order_group);
                 etContent.setHint(R.string.command_content);
                 break;
             case TaskType.COOPERATE:
@@ -313,7 +313,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         etTitle = issueHeader.findViewById(R.id.et_title);
 
         // 选择车次
-        tvTrainNumber = issueHeader.findViewById(R.id.et_train_number);
+        tvTrainNumber = issueHeader.findViewById(R.id.tv_train_number);
         tvTrainNumber.setOnClickListener((View v) -> startActivityForResult(SelectTrainActivity.class, CODE_SELECT_TRAIN));
 
         listView.addHeaderView(issueHeader);

@@ -5,31 +5,31 @@ package com.winsion.dispatch.common.entity;
  */
 
 public class UpdateEntity {
-    private String versionCode;
-    private String downloadUrl;
-    private String updateInfo;
+    private int versionNumber;
+    private String filePath;
+    private String versionContent;
 
-    public String getVersionCode() {
-        return versionCode;
+    public int getVersionNumber() {
+        return versionNumber;
     }
 
-    public void setVersionCode(String versionCode) {
-        this.versionCode = versionCode;
+    public void setVersionNumber(int versionNumber) {
+        this.versionNumber = versionNumber;
     }
 
-    public String getDownloadUrl() {
-        return downloadUrl;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setDownloadUrl(String downloadUrl) {
-        this.downloadUrl = downloadUrl;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
-    public String getUpdateInfo() {
-        return updateInfo;
+    public String getVersionContent() {
+        return versionContent;
     }
 
-    public void setUpdateInfo(String updateInfo) {
-        this.updateInfo = updateInfo;
+    public void setVersionContent(String versionContent) {
+        this.versionContent = versionContent;
     }
 }

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray8"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d85"
+        android:layout_marginBottom="@dimen/d5"
+        app:columnCount="4"
+        app:orientation="horizontal"
+        app:rowCount="2">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d15"
+            app:layout_rowSpan="2">
+
+            <ImageView
+                android:id="@+id/iv_status"
+                android:layout_width="@dimen/d45"
+                android:layout_height="@dimen/d45"
+                android:src="@drawable/ic_not_start"
+                tools:ignore="ContentDescription" />
+
+            <com.winsion.dispatch.view.GifView
+                android:id="@+id/doing_gif"
+                android:layout_width="@dimen/d45"
+                android:layout_height="@dimen/d45"
+                android:visibility="gone"
+                app:gif="@drawable/gif_doing" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/d23"
+            android:layout_marginBottom="@dimen/d4"
+            android:layout_marginTop="@dimen/d15"
+            android:gravity="center"
+            app:layout_columnWeight="1"
+            app:layout_gravity="center"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/iv_icon_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/d3"
+                android:visibility="gone"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/task_type_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/task_name"
+                android:textColor="@color/gray2"
+                android:textSize="@dimen/s15" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/d23"
+            android:layout_marginBottom="@dimen/d4"
+            android:layout_marginTop="@dimen/d15"
+            android:gravity="center"
+            android:text="@string/execution_time"
+            android:textColor="@color/gray2"
+            android:textSize="@dimen/s15"
+            app:layout_columnWeight="1"
+            app:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/d23"
+            android:layout_marginBottom="@dimen/d4"
+            android:layout_marginTop="@dimen/d15"
+            android:gravity="center"
+            android:text="@string/location"
+            android:textColor="@color/gray2"
+            android:textSize="@dimen/s15"
+            app:layout_columnWeight="1"
+            app:layout_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_columnWeight="1"
+            app:layout_gravity="center"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/iv_job_icon"
+                android:layout_width="@dimen/d20"
+                android:layout_height="@dimen/d20"
+                android:layout_marginEnd="@dimen/d3"
+                android:visibility="gone"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_task_name"
+                style="@style/MarqueeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="@dimen/d120"
+                android:textColor="@color/blue1"
+                android:textSize="@dimen/s21"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_last_time"
+            style="@style/MarqueeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="@dimen/d60"
+            android:textColor="@color/blue1"
+            android:textSize="@dimen/s21"
+            app:layout_columnWeight="1"
+            app:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxWidth="@dimen/d100"
+            android:singleLine="true"
+            android:textColor="@color/blue1"
+            android:textSize="@dimen/s21"
+            app:layout_columnWeight="1"
+            app:layout_gravity="center" />
+    </android.support.v7.widget.GridLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.winsion.dispatch.view.DrawableCenterTextView
+                android:id="@+id/btn_note"
+                android:layout_width="@dimen/d100"
+                android:layout_height="@dimen/d40"
+                android:background="@drawable/btn_yellow_left"
+                android:drawablePadding="@dimen/d3"
+                android:drawableStart="@drawable/ic_notes"
+                android:focusable="false"
+                android:gravity="center_vertical"
+                android:text="@string/note"
+                android:textColor="@color/black6"
+                android:textSize="@dimen/s18" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d1"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@color/black1"
+                tools:ignore="NestedWeights" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_status"
+            android:layout_width="@dimen/d110"
+            android:layout_height="@dimen/d40"
+            android:background="@drawable/btn_bg_start"
+            android:focusable="false"
+            android:text="@string/click_to_start"
+            android:textSize="@dimen/s18" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d1"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@color/black1"
+                tools:ignore="NestedWeights" />
+
+            <com.winsion.dispatch.view.DrawableCenterTextView
+                android:id="@+id/btn_broadcast"
+                android:layout_width="@dimen/d100"
+                android:layout_height="@dimen/d40"
+                android:background="@drawable/btn_yellow_right"
+                android:drawablePadding="@dimen/d3"
+                android:drawableStart="@drawable/ic_broadcast"
+                android:focusable="false"
+                android:gravity="center_vertical"
+                android:text="@string/broadcast"
+                android:textColor="@color/black6"
+                android:textSize="@dimen/s18" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/d15">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/plan"
+                android:textColor="@color/gray2"
+                android:textSize="@dimen/s18" />
+
+            <TextView
+                android:id="@+id/tv_plan_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d5"
+                android:textColor="@color/white1"
+                android:textSize="@dimen/s18" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/d1"
+            android:layout_height="match_parent"
+            android:background="@color/black1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d5"
+                android:text="@string/real"
+                android:textColor="@color/gray2"
+                android:textSize="@dimen/s18" />
+
+            <TextView
+                android:id="@+id/tv_real_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d5"
+                android:textColor="@color/white1"
+                android:textSize="@dimen/s18" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

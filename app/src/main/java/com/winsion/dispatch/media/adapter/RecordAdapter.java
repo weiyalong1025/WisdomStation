@@ -1,5 +1,6 @@
 package com.winsion.dispatch.media.adapter;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import com.winsion.dispatch.media.constants.FileStatus;
 import com.winsion.dispatch.media.constants.FileType;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
 import com.winsion.dispatch.utils.FileUtils;
+import com.winsion.dispatch.utils.ToastUtils;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 
@@ -105,10 +107,15 @@ public class RecordAdapter extends CommonAdapter<LocalRecordEntity> {
                             : fileType == FileType.VIDEO ? "video/*" : "";
                     if (type.equals("")) return;
 
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    Uri uri = Uri.fromFile(localRecordEntity.getFile());
-                    intent.setDataAndType(uri, type);
-                    mContext.startActivity(intent);
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        Uri uri = Uri.fromFile(localRecordEntity.getFile());
+                        intent.setDataAndType(uri, type);
+                        mContext.startActivity(intent);
+                    } catch (ActivityNotFoundException e) {
+                        ToastUtils.showToast(mContext, R.string.no_corresponding_program);
+                    }
+
                     break;
                 case FileStatus.NO_DOWNLOAD:
                     // 下载
@@ -134,8 +141,8 @@ public class RecordAdapter extends CommonAdapter<LocalRecordEntity> {
         } else {
             note = "点击查看";
         }
-        ForegroundColorSpan gray = new ForegroundColorSpan(0xFF69696D);
 
+        ForegroundColorSpan gray = new ForegroundColorSpan(0xFF69696D);
         String prefix = mContext.getString(R.string.note_content);
         SpannableStringBuilder builder = new SpannableStringBuilder()
                 .append(prefix)

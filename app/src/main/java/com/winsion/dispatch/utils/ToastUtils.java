@@ -1,6 +1,7 @@
 package com.winsion.dispatch.utils;
 
 import android.content.Context;
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
 /**
@@ -13,7 +14,7 @@ public class ToastUtils {
     private static long oneTime = 0;
     private static long twoTime = 0;
 
-    public static void showToast(Context context, int resId) {
+    public static void showToast(Context context, @StringRes int resId) {
         showToast(context, context.getString(resId));
     }
 

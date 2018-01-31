@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_order_module"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/gray8"
@@ -14,103 +15,21 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_monitor_group_hint"
             android:layout_width="@dimen/d88"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="车"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:ignore="HardcodedText" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="站:"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:ignore="HardcodedText" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_station"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/d10"
-            android:layout_marginRight="@dimen/d10"
-            android:drawableEnd="@drawable/ic_arrow_right"
-            android:hint="@string/please_select_station"
-            android:textColor="@color/white1"
-            android:textColorHint="@color/gray5"
-            android:textSize="@dimen/s20" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d1"
-        android:background="@color/gray5" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d45"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/d88"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d5"
-            android:text="@string/start_time"
             android:textColor="@color/gray5"
-            android:textSize="@dimen/s20" />
+            android:textSize="@dimen/s20"
+            tools:text="@string/issue_order_group" />
 
         <TextView
-            android:id="@+id/tv_start_time"
+            android:id="@+id/tv_monitor_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/d10"
             android:layout_marginRight="@dimen/d10"
-            android:drawableEnd="@drawable/ic_arrow_right"
-            android:textColor="@color/white1"
-            android:textSize="@dimen/s20" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d1"
-        android:background="@color/gray5" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d45"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/d88"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d5"
-            android:text="@string/end_time"
-            android:textColor="@color/gray5"
-            android:textSize="@dimen/s20" />
-
-        <TextView
-            android:id="@+id/tv_end_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/d10"
-            android:layout_marginRight="@dimen/d10"
-            android:drawableEnd="@drawable/ic_arrow_right"
             android:textColor="@color/white1"
             android:textSize="@dimen/s20" />
     </LinearLayout>
@@ -135,37 +54,20 @@
             android:textSize="@dimen/s20"
             tools:text="@string/order_group" />
 
-        <LinearLayout
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:scrollbars="none">
 
-            <HorizontalScrollView
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/tv_performer_team"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/d10"
                 android:layout_marginRight="@dimen/d10"
-                android:layout_weight="1"
-                android:scrollbars="none">
-
-                <TextView
-                    android:id="@+id/tv_team_list"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/blue1"
-                    android:textSize="@dimen/s20" />
-            </HorizontalScrollView>
-
-            <ImageView
-                android:id="@+id/iv_add_performer"
-                android:layout_width="@dimen/d30"
-                android:layout_height="@dimen/d30"
-                android:layout_marginEnd="@dimen/d10"
-                android:src="@drawable/ic_add"
-                tools:ignore="ContentDescription" />
-        </LinearLayout>
+                android:textColor="@color/white1"
+                android:textSize="@dimen/s20" />
+        </HorizontalScrollView>
     </LinearLayout>
 
     <View
@@ -207,15 +109,12 @@
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/et_title"
+        <TextView
+            android:id="@+id/tv_title1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/d10"
             android:layout_marginRight="@dimen/d10"
-            android:background="@null"
-            android:inputType="text"
-            android:labelFor="@+id/et_title"
             android:textColor="@color/white1"
             android:textSize="@dimen/s20" />
     </LinearLayout>
@@ -265,7 +164,64 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/d10"
             android:layout_marginRight="@dimen/d10"
-            android:drawableEnd="@drawable/ic_arrow_right"
+            android:textColor="@color/white1"
+            android:textSize="@dimen/s20" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:background="@color/gray5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d45"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/d88"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d5"
+            android:text="@string/start_time"
+            android:textColor="@color/gray5"
+            android:textSize="@dimen/s20" />
+
+        <TextView
+            android:id="@+id/tv_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/d10"
+            android:layout_marginRight="@dimen/d10"
+            android:textColor="@color/white1"
+            android:textSize="@dimen/s20" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:background="@color/gray5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d45"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/d88"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d5"
+            android:text="@string/end_time"
+            android:textColor="@color/gray5"
+            android:textSize="@dimen/s20" />
+
+        <TextView
+            android:id="@+id/tv_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/d10"
+            android:layout_marginRight="@dimen/d10"
             android:textColor="@color/white1"
             android:textSize="@dimen/s20" />
     </LinearLayout>
@@ -280,9 +236,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:gravity="top|start"
         android:labelFor="@id/et_content"
-        android:maxLength="150"
         android:paddingBottom="@dimen/d12"
         android:paddingEnd="@dimen/d5"
         android:paddingStart="@dimen/d5"

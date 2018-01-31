@@ -41,7 +41,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
- * Created by 10295 on 2017/12/15 0015.
+ * Created by 10295 on 2017/12/15 0015
  * 我的任务Fragment
  */
 
@@ -54,7 +54,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.tv_hint)
-    TextView tvRetry;
+    TextView tvHint;
     @BindView(R.id.fl_container)
     FrameLayout flContainer;
     @BindView(R.id.lv_list)
@@ -198,7 +198,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         JobEntity jobEntity = listData.get(position);
         Intent intent = new Intent(mContext, OperatorTaskDetailActivity.class);
-        intent.putExtra(OperatorTaskDetailActivity.TASK_ENTITY, jobEntity);
+        intent.putExtra(OperatorTaskDetailActivity.JOB_ENTITY, jobEntity);
         startActivityForResult(intent, CODE_TASK_DETAIL);
     }
 
@@ -286,6 +286,14 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        if (trainNumberIndex.getVisibility() == View.VISIBLE) {
+            trainNumberIndex.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         // 根据系统类型获取数据 生产/网格
@@ -323,8 +331,8 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
             }
         }
         if (unStartedData.size() + underwayData.size() + doneData.size() == 0) {
-            tvRetry.setText(R.string.no_data_click_to_retry);
-            showView(flContainer, tvRetry);
+            tvHint.setText(R.string.no_data_click_to_retry);
+            showView(flContainer, tvHint);
         } else {
             filterData();
             showView(flContainer, swipeRefresh);
@@ -334,8 +342,8 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @Override
     public void getMyTaskDataFailed() {
         swipeRefresh.setRefreshing(false);
-        tvRetry.setText(getString(R.string.failure_load_click_retry));
-        showView(flContainer, tvRetry);
+        tvHint.setText(getString(R.string.failure_load_click_retry));
+        showView(flContainer, tvHint);
     }
 
     /**
@@ -359,14 +367,6 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     public void scrollToItem(JobEntity jobEntity) {
         int positionInList = listData.indexOf(jobEntity);
         if (positionInList != -1) lvList.setSelection(positionInList);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (trainNumberIndex.getVisibility() == View.VISIBLE) {
-            trainNumberIndex.setVisibility(View.GONE);
-        }
     }
 
     @Override

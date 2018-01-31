@@ -15,12 +15,18 @@ import java.util.List;
 
 class OperatorTaskDetailContract {
     interface View extends BaseView {
-        void onServerFileGetSuccess(List<ServerRecordEntity> serverRecordFileList);
+        void onPublisherUploadedFileGetSuccess(List<ServerRecordEntity> serverRecordFileList);
+
+        void onPerformerUploadedFileGetSuccess(List<ServerRecordEntity> serverRecordFileList);
     }
 
     interface Presenter extends BasePresenter {
-        ArrayList<LocalRecordEntity> getLocalFile(String jobOperatorsId);
+        ArrayList<LocalRecordEntity> getPerformerLocalFile(String jobOperatorsId);
 
-        void getServerFile(String jobOperatorsId);
+        ArrayList<LocalRecordEntity> getPublisherLocalFile(String jobsId);
+
+        void getPublisherUploadedFile(String jobsId);
+
+        void getPerformerUploadedFile(String jobOperatorsId);
     }
 }

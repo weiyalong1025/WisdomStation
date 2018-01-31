@@ -63,19 +63,18 @@ public class CommonBiz {
 
             @Override
             public void onSuccess(UpdateEntity updateEntity) {
-                int versionCode = Integer.valueOf(updateEntity.getVersionCode());
-                if (AppUtils.getPackageInfo(context).versionCode < versionCode) {
+                if (AppUtils.getPackageInfo(context).versionCode < updateEntity.getVersionNumber()) {
                     // 需要更新
                     showUpdateDialog(context, updateEntity);
                 } else if (showHint) {
                     // 不需要更新
-                    ToastUtils.showToast(context, "当前已是最新版本");
+                    ToastUtils.showToast(context, R.string.current_version_is_the_latest);
                 }
             }
 
             @Override
             public void onFailed(int errorCode, String errorInfo) {
-                if (showHint) ToastUtils.showToast(context, "检查更新失败");
+                if (showHint) ToastUtils.showToast(context, R.string.check_update_failed);
             }
         });
     }
@@ -89,11 +88,11 @@ public class CommonBiz {
     private static void showUpdateDialog(Context context, UpdateEntity updateEntity) {
         // 需要更新,弹出对话框
         new AlertDialog.Builder(context)
-                .setTitle("发现新版本")
-                .setMessage(updateEntity.getUpdateInfo())
+                .setTitle(R.string.discover_new_version)
+                .setMessage(updateEntity.getVersionContent())
                 .setCancelable(false)
-                .setPositiveButton("立即更新", (dialog, which) -> downloadNewVersion(context, updateEntity.getDownloadUrl()))
-                .setNegativeButton("暂不更新", (dialog, which) -> dialog.dismiss())
+                .setPositiveButton(R.string.update_now, (dialog, which) -> downloadNewVersion(context, updateEntity.getFilePath()))
+                .setNegativeButton(R.string.update_later, (dialog, which) -> dialog.dismiss())
                 .show();
     }
 
@@ -114,11 +113,11 @@ public class CommonBiz {
 
             // 显示下载进度对话框
             ProgressDialog progressDialog = new ProgressDialog(context);
-            progressDialog.setTitle("版本更新");
-            progressDialog.setMessage("正在下载安装包...");
+            progressDialog.setTitle(R.string.version_update);
+            progressDialog.setMessage(context.getString(R.string.downloading_installation_package));
             progressDialog.setCancelable(false);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "取消", (dialog, which) -> {
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.cancel), (dialog, which) -> {
                 NetDataSource.unSubscribe(downloadUrl);
                 dialog.dismiss();
             });
@@ -165,7 +164,7 @@ public class CommonBiz {
         NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         assert nm != null;
         nm.cancelAll();
-        // 请求用户退出接口
+        // 用户请求退出接口
         HttpParams httpParams = new HttpParams();
         httpParams.put("userId", CacheDataSource.getUserId());
         NetDataSource.post(null, Urls.USER_LOGOUT, httpParams, null);

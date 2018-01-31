@@ -16,7 +16,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by 10295 on 2017/12/19 0019.
+ * Created by 10295 on 2017/12/19 0019
+ * 用户信息界面
  */
 
 public class UserActivity extends BaseActivity {
@@ -43,10 +44,11 @@ public class UserActivity extends BaseActivity {
         tvTitle.setOnBackClickListener(v -> finish());
     }
 
-    @OnClick({R.id.ll_change_password, R.id.btn_logout})
+    @OnClick({R.id.rl_check_update, R.id.btn_logout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ll_change_password:
+            case R.id.rl_check_update:
+                CommonBiz.checkVersionUpdate(mContext, true);
                 break;
             case R.id.btn_logout:
                 showDialog();

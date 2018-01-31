@@ -8,7 +8,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 22
         versionCode 1
-        versionName "1.0.0"
+        versionName "0.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
@@ -33,7 +33,7 @@ android {
 
             applicationVariants.all { variant ->
                 variant.outputs.all { output ->
-                    outputFileName = "智慧车站_${defaultConfig.versionName}_${releaseTime()}.apk"
+                    outputFileName = "dispatch_${defaultConfig.versionName}_${releaseTime()}.apk"
                 }
             }
         }

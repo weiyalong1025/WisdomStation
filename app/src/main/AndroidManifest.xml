@@ -61,7 +61,8 @@
         <activity
             android:name="com.winsion.dispatch.user.UserActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.winsion.dispatch.modules.operation.modules.issue.activity.IssueActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

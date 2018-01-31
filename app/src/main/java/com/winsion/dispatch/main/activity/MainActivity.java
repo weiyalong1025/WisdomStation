@@ -79,6 +79,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
 
     private void initPresenter() {
         mPresenter = new MainPresenter(this);
+        mPresenter.start();
     }
 
     private void initData() {

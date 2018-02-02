@@ -82,30 +82,6 @@
         }
       ],
       "relations": []
-    },
-    {
-      "id": "3:5087777874517788127",
-      "lastPropertyId": "4:5821654555970516166",
-      "name": "PatrolTimeDto",
-      "properties": [
-        {
-          "id": "1:299805185943514067",
-          "name": "id"
-        },
-        {
-          "id": "2:1123130969747258350",
-          "name": "patrolId"
-        },
-        {
-          "id": "3:1798780462962147265",
-          "name": "arriveTime"
-        },
-        {
-          "id": "4:5821654555970516166",
-          "name": "finishTime"
-        }
-      ],
-      "relations": []
     }
   ],
   "lastEntityId": "3:5087777874517788127",
@@ -114,9 +90,16 @@
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    5087777874517788127
+  ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    299805185943514067,
+    1123130969747258350,
+    1798780462962147265,
+    5821654555970516166
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

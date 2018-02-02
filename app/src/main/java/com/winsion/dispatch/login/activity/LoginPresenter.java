@@ -14,10 +14,11 @@ import com.winsion.dispatch.data.constants.SPKey;
 import com.winsion.dispatch.data.constants.Urls;
 import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.login.constants.LoginErrorCode;
-import com.winsion.dispatch.login.entity.AuthDto;
+import com.winsion.dispatch.login.entity.AuthEntity;
 import com.winsion.dispatch.login.entity.UserEntity;
 import com.winsion.dispatch.login.listener.LoginListener;
 import com.winsion.dispatch.mqtt.MQTTClient;
+import com.winsion.dispatch.utils.JsonUtils;
 import com.winsion.dispatch.utils.LogUtils;
 
 import java.util.List;
@@ -33,7 +34,7 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
     private Context mContext;
     private DBDataSource mDbDataSource;
     private LoginListener mLoginListener;
-    private AuthDto mAuthDto;
+    private AuthEntity mAuthEntity;
     private String mUsername;
     private String mPassword;
 
@@ -77,6 +78,19 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
 
         loginListener.onLogin();
 
+        // 测试模式
+        if (mUsername.equals("10295010") && mPassword.equals("15910772637")) {
+            mUsername = "1010";
+            mPassword = "123456";
+            AppApplication.TEST_MODE = true;
+        }
+
+        if (AppApplication.TEST_MODE) {
+            mAuthEntity = JsonUtils.getTestEntity(mContext, AuthEntity.class);
+            connectSuccess();
+            return;
+        }
+
         // 获取当前用户连接的WIFI信息用来定位
         String bssid = CommonBiz.getBSSID(mContext);
 
@@ -86,15 +100,15 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
         httpParams.put("ssId", bssid);
         httpParams.put("device", 1);
 
-        NetDataSource.post(getClass(), Urls.LOGIN, httpParams, new ResponseListener<AuthDto>() {
+        NetDataSource.post(this, Urls.LOGIN, httpParams, new ResponseListener<AuthEntity>() {
             @Override
-            public AuthDto convert(String jsonStr) {
-                return JSON.parseObject(jsonStr, AuthDto.class);
+            public AuthEntity convert(String jsonStr) {
+                return JSON.parseObject(jsonStr, AuthEntity.class);
             }
 
             @Override
-            public void onSuccess(AuthDto authDto) {
-                mAuthDto = authDto;
+            public void onSuccess(AuthEntity authEntity) {
+                mAuthEntity = authEntity;
                 // 开启MQ
                 new MQTTClient.Connector(AppApplication.getContext())
                         .listener(LoginPresenter.this)
@@ -137,12 +151,12 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
      * 存储数据到本地
      */
     private void saveDataToLocal() {
-        AuthDto.UserDto user = mAuthDto.getUser();
-        SPDataSource.put(mContext, SPKey.KEY_USER_ID, mAuthDto.getUserId());
-        SPDataSource.put(mContext, SPKey.KEY_HTTP_KEY, mAuthDto.getHttpKey());
-        SPDataSource.put(mContext, SPKey.KEY_TOKEN, mAuthDto.getToken());
-        SPDataSource.put(mContext, SPKey.KEY_MQ_KEY, mAuthDto.getMqKey());
-        SPDataSource.put(mContext, SPKey.KEY_TEAM_ID, mAuthDto.getTeamId());
+        AuthEntity.UserDto user = mAuthEntity.getUser();
+        SPDataSource.put(mContext, SPKey.KEY_USER_ID, mAuthEntity.getUserId());
+        SPDataSource.put(mContext, SPKey.KEY_HTTP_KEY, mAuthEntity.getHttpKey());
+        SPDataSource.put(mContext, SPKey.KEY_TOKEN, mAuthEntity.getToken());
+        SPDataSource.put(mContext, SPKey.KEY_MQ_KEY, mAuthEntity.getMqKey());
+        SPDataSource.put(mContext, SPKey.KEY_TEAM_ID, mAuthEntity.getTeamId());
         SPDataSource.put(mContext, SPKey.KEY_USERNAME, mUsername);
         SPDataSource.put(mContext, SPKey.KEY_PASSWORD, mPassword);
         SPDataSource.put(mContext, SPKey.KEY_SIP_USERNAME, user.getSiptelladdress());
@@ -151,7 +165,7 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
         SPDataSource.put(mContext, SPKey.KEY_USER_HEAD_ADDRESS, user.getPhoto());
 
         UserEntity userBean = new UserEntity();
-        userBean.setUserId(mAuthDto.getUserId());
+        userBean.setUserId(mAuthEntity.getUserId());
         userBean.setUsername(mUsername);
         userBean.setPassword(mPassword);
         userBean.setHeaderUrl(user.getPhoto());
@@ -166,6 +180,6 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
 
     @Override
     public void exit() {
-        NetDataSource.unSubscribe(getClass());
+        NetDataSource.unSubscribe(this);
     }
 }

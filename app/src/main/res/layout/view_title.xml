@@ -19,16 +19,20 @@
         android:layout_width="@dimen/d48"
         android:layout_height="@dimen/d48"
         android:background="@drawable/selector_bg_back"
-        android:src="@drawable/ic_arrow_left" />
+        android:src="@drawable/ic_arrow_left"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/title_view_confirm"
-        android:layout_width="@dimen/d56"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/d48"
         android:layout_alignParentEnd="true"
         android:background="@drawable/selector_bg_back"
         android:gravity="center"
+        android:paddingEnd="@dimen/d10"
+        android:paddingStart="@dimen/d10"
         android:text="@string/complete"
         android:textColor="@color/blue1"
-        android:textSize="@dimen/s18" />
+        android:textSize="@dimen/s18"
+        tools:ignore="RelativeOverlap" />
 </RelativeLayout>

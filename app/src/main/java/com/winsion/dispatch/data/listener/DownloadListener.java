@@ -6,7 +6,7 @@ package com.winsion.dispatch.data.listener;
  */
 
 public interface DownloadListener {
-    void downloadProgress(String serverUri, float progress);
+    void downloadProgress(String serverUri, int progress);
 
     void downloadSuccess(String serverUri);
 

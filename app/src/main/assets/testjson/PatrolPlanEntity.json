@@ -1,0 +1,22 @@
+[
+  {
+    "postname": "客运值班主任",
+    "commituser": "--",
+    "planendtime": "2018-02-02 20:00:00.0",
+    "patrolsstate": "异常",
+    "realstarttime": "2018-02-02 10:03:28",
+    "createdate": "2018-02-02",
+    "realendtime": "-- --",
+    "postid": "cf8b020a-62f4-11e7-802b-00237d613264",
+    "itemscount": "8",
+    "problemscount": "5",
+    "committeamname": "客运主任乙",
+    "finishcount": "4",
+    "pointsid": "8a78d511-e162-11e7-b8b7-782bcb466fe6",
+    "pointname": "036候车区",
+    "teamid": "83096a5c-62f5-11e7-802b-00237d613264",
+    "planstarttime": "2018-02-02 08:00:00.0",
+    "id": "d829afe8-07bc-11e8-8666-782bcb466fe6",
+    "bluetoothid": "12:3B:6A:1A:C3:95,12:3B:6A:1A:C3:95,12:3B:6A:1A:C3:95,12:3B:6A:1A:C3:95,12:3B:6A:1A:C3:95"
+  }
+]

@@ -22,6 +22,7 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.bigkoo.pickerview.view.BasePickerView;
 import com.lzy.okgo.model.HttpParams;
 import com.winsion.dispatch.R;
+import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.common.entity.UpdateEntity;
 import com.winsion.dispatch.common.listener.SuccessListener;
 import com.winsion.dispatch.data.CacheDataSource;
@@ -126,8 +127,8 @@ public class CommonBiz {
             // 下载更新包
             NetDataSource.downloadFile(downloadUrl, downloadUrl, targetDir, new DownloadListener() {
                 @Override
-                public void downloadProgress(String serverUri, float progress) {
-                    progressDialog.setProgress((int) progress);
+                public void downloadProgress(String serverUri, int progress) {
+                    progressDialog.setProgress(progress);
                 }
 
                 @Override
@@ -171,6 +172,7 @@ public class CommonBiz {
         // 清除缓存信息
         CacheDataSource.clearCache();
         listener.onSuccess();
+        AppApplication.TEST_MODE = false;
         // 跳转登录界面
         Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

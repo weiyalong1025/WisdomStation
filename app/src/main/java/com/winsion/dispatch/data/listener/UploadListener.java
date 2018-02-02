@@ -8,7 +8,7 @@ import java.io.File;
  */
 
 public interface UploadListener {
-    void uploadProgress(File uploadFile, float progress);
+    void uploadProgress(File uploadFile, int progress);
 
     void uploadSuccess(File uploadFile);
 

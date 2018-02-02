@@ -220,7 +220,7 @@ public class NetDataSource {
                     @Override
                     public void uploadProgress(Progress progress) {
                         LogUtils.i("上传文件", file.getName() + "上传进度：" + progress.fraction + "%");
-                        uploadListener.uploadProgress(file, progress.fraction);
+                        uploadListener.uploadProgress(file, (int) (progress.fraction * 100));
                     }
 
                     @Override
@@ -276,7 +276,7 @@ public class NetDataSource {
                     @Override
                     public void uploadProgress(Progress progress) {
                         LogUtils.i("上传文件", file.getName() + "上传进度：" + progress.fraction + "%");
-                        uploadListener.uploadProgress(file, progress.fraction);
+                        uploadListener.uploadProgress(file, (int) (progress.fraction * 100));
                     }
 
                     @Override
@@ -327,7 +327,7 @@ public class NetDataSource {
                         @Override
                         public void downloadProgress(Progress progress) {
                             LogUtils.i("下载文件", fileName + "下载进度：" + progress.fraction + "%");
-                            downloadListener.downloadProgress(serverUri, progress.fraction);
+                            downloadListener.downloadProgress(serverUri, (int) (progress.fraction * 100));
                         }
 
                         @Override

@@ -1,0 +1,260 @@
+{
+  "mqKey": "5b523b9f-0a2f-49a6-b89f-5f5516d92976",
+  "roleId": "1260AF45-9B10-44CF-8262-51B388ED38C0",
+  "teamId": "390bdafe-a70d-46e1-97fd-bd4baf1fc978",
+  "userId": "667495FB-164A-4D15-8BE4-281E860B4B8C",
+  "token": "ae6f196b-2842-42b0-91b4-a7615f7e3555",
+  "httpKey": "128ef580-a866-4138-b3ce-3343b31b64fc",
+  "teamName": "吸污组",
+  "powerLine": "0110100010001110101001110001011010110001100",
+  "configDtoList": [
+    {
+      "description": "工作计划删除",
+      "configValue": "1",
+      "valueString": "WORKPLANRUN_DELETE",
+      "configKey": 24
+    },
+    {
+      "description": "指定的SSID对应的wifi密码",
+      "configValue": "0",
+      "valueString": "WIFI_PWD",
+      "configKey": 32
+    },
+    {
+      "description": "排班时长",
+      "configValue": "1",
+      "valueString": "TEAMPLAN_SHOW_HOURS",
+      "configKey": 14
+    },
+    {
+      "description": "任务显示时长",
+      "configValue": "2",
+      "valueString": "TASK_SHOW_HOURS",
+      "configKey": 15
+    },
+    {
+      "description": "预测时间范围",
+      "configValue": "0",
+      "valueString": "PREDICT_TOTAL_TIME",
+      "configKey": 29
+    },
+    {
+      "description": "客运命令提醒间隔",
+      "configValue": "1",
+      "valueString": "NOTICEREMIND",
+      "configKey": 6
+    },
+    {
+      "description": "任务图片数量",
+      "configValue": "2",
+      "valueString": "TASK_PICTURE_NUM",
+      "configKey": 11
+    },
+    {
+      "description": "服务端客运命令保留天数",
+      "configValue": "1",
+      "valueString": "SERVERNOTICEREMAIN",
+      "configKey": 3
+    },
+    {
+      "description": "终端客运命令保留天数",
+      "configValue": "1",
+      "valueString": "CLIENTNOTICEREMAIN",
+      "configKey": 5
+    },
+    {
+      "description": "旅服通信服务器地址",
+      "configValue": "172.16.0.21",
+      "valueString": "LFCOMMUNICATIONDADRESS",
+      "configKey": 9
+    },
+    {
+      "description": "失物图片数量",
+      "configValue": "1",
+      "valueString": "LOST_PICTURE_NUM",
+      "configKey": 13
+    },
+    {
+      "description": "设备白名单",
+      "configValue": "0",
+      "valueString": "DEVICE_WHITELIST_ENABLE",
+      "configKey": 33
+    },
+    {
+      "description": "生成基础车次到运行车次间隔",
+      "configValue": "2",
+      "valueString": "SCHEDULE_TO_RUN_INTERVAL",
+      "configKey": 21
+    },
+    {
+      "description": "服务器实时消息保留天数",
+      "configValue": "1",
+      "valueString": "SERVERMESSAGEREMAIN",
+      "configKey": 2
+    },
+    {
+      "description": "下行",
+      "configValue": "下行",
+      "valueString": "DOWN",
+      "configKey": 8
+    },
+    {
+      "description": "车次删除时间",
+      "configValue": "1",
+      "valueString": "RUN_DELETE_TIME",
+      "configKey": 22
+    },
+    {
+      "description": "终端实时消息保留天数",
+      "configValue": "1",
+      "valueString": "CLIENTMESSAGEREMAIN",
+      "configKey": 4
+    },
+    {
+      "description": "工作计划生成时间间隔",
+      "configValue": "3",
+      "valueString": "WORKPLANRUN_PRODUCE_TIME_INTERVAL",
+      "configKey": 20
+    },
+    {
+      "description": "任务视频数量",
+      "configValue": "1",
+      "valueString": "TASK_VIDEO_NUM",
+      "configKey": 12
+    },
+    {
+      "description": "任务生成时间",
+      "configValue": "48",
+      "valueString": "TASK_PRODUCE_TIME",
+      "configKey": 17
+    },
+    {
+      "description": "任务生成间隔",
+      "configValue": "4",
+      "valueString": "TASK_PRODUCE_INTERVAL",
+      "configKey": 18
+    },
+    {
+      "description": "工作计划删除间隔",
+      "configValue": "1",
+      "valueString": "WORKPLANRUN_DELETE_INTERVAL",
+      "configKey": 25
+    },
+    {
+      "description": "消息推送服务器地址",
+      "configValue": "172.16.200.20:1883",
+      "valueString": "COMMUNICATIONDADRESS",
+      "configKey": 0
+    },
+    {
+      "description": "短信通知启动配置",
+      "configValue": "1",
+      "valueString": "MESSAGES_END_TRUE",
+      "configKey": 36
+    },
+    {
+      "description": "流转发服务器地址",
+      "configValue": "0",
+      "valueString": "STREAMFORWARDSERVERADDRESS",
+      "configKey": 27
+    },
+    {
+      "description": "工作计划生成多少天",
+      "configValue": "3",
+      "valueString": "WORKPLANRUN_PRODUCE_DAY",
+      "configKey": 19
+    },
+    {
+      "description": "指定的SSID名",
+      "configValue": "0",
+      "valueString": "WIFI_SSID",
+      "configKey": 31
+    },
+    {
+      "description": "基准时间",
+      "configValue": "2016-12-2 00:00:00",
+      "valueString": "START_DATE_TIME",
+      "configKey": 26
+    },
+    {
+      "description": "生成基础车次到运行车次多少小时",
+      "configValue": "48",
+      "valueString": "SCHEDULE_TO_RUN_TIME",
+      "configKey": 16
+    },
+    {
+      "description": "SIP服务器地址",
+      "configValue": "172.16.100.98",
+      "valueString": "SWITCHBOARDADRESS",
+      "configKey": 1
+    },
+    {
+      "description": "车次删除时间间隔",
+      "configValue": "2",
+      "valueString": "RUN_DELETE_TIME_INTERVAL",
+      "configKey": 23
+    },
+    {
+      "description": "任务音频频数量",
+      "configValue": "1",
+      "valueString": "TASK_AUDIO_NUM",
+      "configKey": 10
+    },
+    {
+      "description": "码流",
+      "configValue": "1",
+      "valueString": "DATA_RATE",
+      "configKey": 30
+    },
+    {
+      "description": "上行",
+      "configValue": "上行",
+      "valueString": "UP",
+      "configKey": 7
+    },
+    {
+      "description": "预测统计时间间隔",
+      "configValue": "1",
+      "valueString": "PREDICT_TIME_INTERVAL",
+      "configKey": 28
+    },
+    {
+      "description": "文件服务器URL",
+      "configValue": "http://172.16.200.20/",
+      "valueString": "FILEURL",
+      "configKey": 34
+    },
+    {
+      "description": "上传文件路径",
+      "configValue": "D:\\img",
+      "valueString": "FILEPATH",
+      "configKey": 35
+    }
+  ],
+  "user": {
+    "device": 1,
+    "sippassword": "winsion123",
+    "usertype": 0,
+    "password": "f7b7c53d7e2561071486f3b46092fcae7b59bba7",
+    "lastTimeStamp": 1517565361813,
+    "siptelladdress": "5012",
+    "mmpuser": "m9001",
+    "photo": "http://172.16.200.20/headPhoto.png",
+    "loginname": "1010",
+    "delflag": 0,
+    "mmpwd": "Winsion123",
+    "username": "刘名利",
+    "status": 0,
+    "lastSsid": "48:0F:CF:57:B0:F8",
+    "login": 0,
+    "loginip": "172.16.200.20",
+    "logintime": 1517565361813,
+    "starttime": 1482768000000,
+    "passwordsec": "yPHOafUVSW87DDWV",
+    "organizationid": "990482FA-6B4B-43C2-93D8-F7D2EE92A797",
+    "userlevel": 0,
+    "areaid": "9cd4dc93-9eaf-11e7-af89-782bcb3332bb",
+    "endtime": 1798352051000
+  },
+  "mqKeyId": "c430c444-e24d-4d94-a198-31888e028cee"
+}

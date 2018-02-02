@@ -187,6 +187,12 @@
     <string name="downloading_installation_package">正在下载安装包…</string>
     <string name="discover_new_version">发现新版本</string>
     <string name="no_corresponding_program">没有对应的查看程序</string>
+    <string name="arrive_time">到位时间</string>
+    <string name="finish_time">完成时间</string>
+    <string name="device_repair">设备报修</string>
+    <string name="patrol_item">巡视项目</string>
+    <string name="submit_failed">上报失败</string>
+    <string name="do_you_want_to_add_problem_desc">是否添加问题描述？</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

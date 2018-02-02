@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.login.entity.UserEntity;
 import com.winsion.dispatch.login.entity.UserEntity_;
-import com.winsion.dispatch.modules.grid.entity.PatrolTimeDto;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity_;
 
@@ -22,12 +21,10 @@ public class DBDataSource {
     private static volatile DBDataSource mInstance;
     private final Box<UserEntity> mUserEntityBox;
     private final Box<TodoEntity> mTodoEntityBox;
-    private final Box<PatrolTimeDto> mPatrolTimeEntityBox;
 
     private DBDataSource() {
         mUserEntityBox = AppApplication.getBoxStore().boxFor(UserEntity.class);
         mTodoEntityBox = AppApplication.getBoxStore().boxFor(TodoEntity.class);
-        mPatrolTimeEntityBox = AppApplication.getBoxStore().boxFor(PatrolTimeDto.class);
     }
 
     public static DBDataSource getInstance() {
@@ -47,21 +44,24 @@ public class DBDataSource {
      * @return 用户集合
      */
     public List<UserEntity> getAllSavedUser() {
-        return mUserEntityBox.query()
+        return mUserEntityBox
+                .query()
                 .orderDesc(UserEntity_.lastLoginTime)
                 .build()
                 .find();
     }
 
     public UserEntity getUserByUsername(String username) {
-        return mUserEntityBox.query()
+        return mUserEntityBox
+                .query()
                 .equal(UserEntity_.username, username)
                 .build()
                 .findUnique();
     }
 
     public UserEntity getLastLoginUser() {
-        return mUserEntityBox.query()
+        return mUserEntityBox
+                .query()
                 .orderDesc(UserEntity_.lastLoginTime)
                 .build()
                 .findFirst();
@@ -117,7 +117,8 @@ public class DBDataSource {
      * @return 符合条件的待办事项集合
      */
     public List<TodoEntity> queryTodoByStatus(boolean finishStatus, String userId) {
-        return mTodoEntityBox.query()
+        return mTodoEntityBox
+                .query()
                 .equal(TodoEntity_.finished, finishStatus)
                 .equal(TodoEntity_.belongUserId, userId)
                 .order(TodoEntity_.planDate)
@@ -125,8 +126,9 @@ public class DBDataSource {
                 .find();
     }
 
-    public TodoEntity getTodoById(long todoId) {
-        return mTodoEntityBox.query()
+    public TodoEntity getTodoEntityById(long todoId) {
+        return mTodoEntityBox
+                .query()
                 .equal(TodoEntity_.id, todoId)
                 .build()
                 .findUnique();

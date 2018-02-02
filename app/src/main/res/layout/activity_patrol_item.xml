@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.dispatch.view.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:confirmButtonText="@string/device_repair"
+        app:titleText="@string/patrol_item" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d40"
+        android:background="@color/gray8"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/arrive_time"
+                android:textColor="@color/gray2"
+                android:textSize="@dimen/s16" />
+
+            <TextView
+                android:id="@+id/tv_arrive_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d10"
+                android:textColor="@color/white1"
+                android:textSize="@dimen/s16"
+                tools:text="--:--" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/finish_time"
+                android:textColor="@color/gray2"
+                android:textSize="@dimen/s16" />
+
+            <TextView
+                android:id="@+id/tv_finish_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d10"
+                android:textColor="@color/white1"
+                android:textSize="@dimen/s16"
+                tools:text="--:--" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/layout_status" />
+</LinearLayout>

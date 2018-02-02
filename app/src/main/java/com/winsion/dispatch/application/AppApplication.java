@@ -22,6 +22,8 @@ import io.objectbox.BoxStore;
 public class AppApplication extends Application {
     private static Context mApplicationContext;
     private static BoxStore mBoxStore;
+    // 测试模式开关
+    public static boolean TEST_MODE = false;
 
     @Override
     public void onCreate() {

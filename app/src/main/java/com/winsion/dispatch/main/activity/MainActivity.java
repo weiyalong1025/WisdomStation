@@ -246,4 +246,10 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
             atvReminder.showPoint();
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.exit();
+    }
 }

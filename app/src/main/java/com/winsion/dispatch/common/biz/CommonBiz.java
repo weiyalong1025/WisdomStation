@@ -53,10 +53,10 @@ public class CommonBiz {
      * @param context  上下文
      * @param showHint 没有更新/检查更新失败是否显示提示信息
      */
-    public static void checkVersionUpdate(Context context, boolean showHint) {
+    public static void checkVersionUpdate(Context context, Object tag, boolean showHint) {
         HttpParams httpParams = new HttpParams();
         httpParams.put("key", "gridApp");
-        NetDataSource.post(context, Urls.CHECK_UPDATE, httpParams, new ResponseListener<UpdateEntity>() {
+        NetDataSource.post(tag, Urls.CHECK_UPDATE, httpParams, new ResponseListener<UpdateEntity>() {
             @Override
             public UpdateEntity convert(String jsonStr) {
                 return JSON.parseObject(jsonStr, UpdateEntity.class);

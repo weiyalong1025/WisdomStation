@@ -7,6 +7,7 @@ import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseActivity;
 import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.data.CacheDataSource;
+import com.winsion.dispatch.data.NetDataSource;
 import com.winsion.dispatch.utils.ImageLoader;
 import com.winsion.dispatch.view.CircleImageView;
 import com.winsion.dispatch.view.TipDialog;
@@ -48,7 +49,7 @@ public class UserActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_check_update:
-                CommonBiz.checkVersionUpdate(mContext, true);
+                CommonBiz.checkVersionUpdate(mContext, this, true);
                 break;
             case R.id.btn_logout:
                 showDialog();
@@ -75,5 +76,11 @@ public class UserActivity extends BaseActivity {
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        NetDataSource.unSubscribe(this);
     }
 }

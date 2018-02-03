@@ -67,8 +67,6 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @BindView(R.id.iv_shade)
     ImageView ivShade;
 
-    private static final int CODE_TASK_DETAIL = 666;
-
     private OperatorTaskListContract.Presenter mPresenter;
     private OperatorTaskListAdapter mLvAdapter;
     private int mCurrentSysType = -1;

@@ -35,7 +35,8 @@
             android:layout_height="@dimen/d20"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right" />
+            android:src="@drawable/ic_arrow_right"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_time"
@@ -46,6 +47,7 @@
             android:layout_toStartOf="@id/iv_arrow"
             android:textColor="@color/white1"
             android:textSize="@dimen/s21"
+            tools:ignore="RelativeOverlap"
             tools:text="22:00" />
     </RelativeLayout>
 

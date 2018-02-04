@@ -63,15 +63,13 @@
         <activity
             android:name="com.winsion.dispatch.user.UserActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.winsion.dispatch.modules.operation.activity.issue.IssueActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.winsion.dispatch.modules.reminder.activity.todo.TodoDetailActivity"
+            android:name="com.winsion.dispatch.modules.reminder.activity.todo.AddTodoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity

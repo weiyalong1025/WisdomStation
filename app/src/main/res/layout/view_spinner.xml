@@ -68,11 +68,9 @@
         android:layout_height="@dimen/d15"
         android:background="@color/black1" />
 
-    <RelativeLayout
+    <include
+        layout="@layout/view_search"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <include layout="@layout/view_search" />
-    </RelativeLayout>
+        android:layout_weight="1" />
 </LinearLayout>

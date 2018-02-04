@@ -15,7 +15,7 @@ import com.winsion.dispatch.modules.reminder.adapter.TodoAdapter;
 import com.winsion.dispatch.modules.reminder.constants.ExtraName;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
 import com.winsion.dispatch.modules.reminder.event.UpdateTodoEvent;
-import com.winsion.dispatch.modules.reminder.activity.todo.TodoDetailActivity;
+import com.winsion.dispatch.modules.reminder.activity.todo.AddTodoActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -118,7 +118,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
                 initData(false);
                 break;
             case R.id.btn_add:
-                Intent intent = new Intent(mContext, TodoDetailActivity.class);
+                Intent intent = new Intent(mContext, AddTodoActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
                 break;
         }
@@ -127,7 +127,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (!mIsFinish) {
-            Intent intent = new Intent(mContext, TodoDetailActivity.class);
+            Intent intent = new Intent(mContext, AddTodoActivity.class);
             intent.putExtra(ExtraName.NAME_TODO_ID, listData.get(position).getId());
             startActivityForResult(intent, REQUEST_CODE);
         }

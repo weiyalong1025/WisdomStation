@@ -853,7 +853,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 }
                 break;
             case R.id.btn_broadcast:
-                showToast("发送广播");
+                showToast("暂未开放");
                 break;
             case R.id.btn_note:
                 try {

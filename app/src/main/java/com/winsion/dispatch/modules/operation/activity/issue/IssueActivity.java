@@ -1,16 +1,13 @@
 package com.winsion.dispatch.modules.operation.activity.issue;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,6 +36,7 @@ import com.winsion.dispatch.modules.operation.entity.RunEntity;
 import com.winsion.dispatch.modules.operation.entity.TeamEntity;
 import com.winsion.dispatch.utils.ConvertUtils;
 import com.winsion.dispatch.utils.DirAndFileUtils;
+import com.winsion.dispatch.utils.ViewUtils;
 import com.winsion.dispatch.utils.constants.Formatter;
 import com.winsion.dispatch.view.TipDialog;
 import com.winsion.dispatch.view.TitleView;
@@ -61,16 +59,24 @@ import butterknife.OnClick;
 public class IssueActivity extends BaseActivity implements UploadListener {
     @BindView(R.id.tv_title)
     TitleView tvTitle;
+    @BindView(R.id.tv_performer_group_hint)
+    TextView tvPerformerGroupHint;
+    @BindView(R.id.et_content)
+    EditText etContent;
+    @BindView(R.id.tv_station)
+    TextView tvStation;
+    @BindView(R.id.tv_start_time)
+    TextView tvStartTime;
+    @BindView(R.id.tv_end_time)
+    TextView tvEndTime;
+    @BindView(R.id.tv_team_list)
+    TextView tvTeamList;
+    @BindView(R.id.et_title)
+    EditText etTitle;
+    @BindView(R.id.tv_train_number)
+    TextView tvTrainNumber;
     @BindView(R.id.list_view)
     ListView listView;
-
-    private TextView tvStation;
-    private TextView tvStartTime;
-    private TextView tvEndTime;
-    private TextView tvTeamList;
-    private EditText etTitle;
-    private TextView tvTrainNumber;
-    private EditText etContent;
 
     private static final String ISSUE_TYPE = "issueType";
     private static final String TO_TEAM_ENTITY = "toTeamEntity";
@@ -183,73 +189,74 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     private void initTitleView() {
         tvTitle.setOnBackClickListener(v -> showHintDialog());
-        tvTitle.setOnConfirmClickListener(v -> {
-            // 检查数据是否填写完整
-            String title = getText(etTitle);
-            String content = getText(etContent);
-            if (isEmpty(getText(tvStation)) || isEmpty(teamIds) || isEmpty(title) || isEmpty(runsId) || isEmpty(content)) {
-                showToast(getString(R.string.please_complete_the_information));
-            } else {
-                for (LocalRecordEntity localRecordEntity : localRecordEntities) {
-                    if (localRecordEntity.getFileStatus() != FileStatus.SYNCHRONIZED) {
-                        showToast(getString(R.string.please_wait_for_the_files_upload_complete));
-                        return;
-                    }
-                }
-                // 隐藏软键盘
-                CommonBiz.hideKeyboard(tvTitle);
-                // 发布中，显示dialog
-                showOnIssueDialog();
-                // 发布
-                issue();
-            }
-        });
+        tvTitle.setOnConfirmClickListener(v -> issue());
     }
 
+    /**
+     * 发布命令/协作
+     */
     private void issue() {
-        ArrayList<FileEntity> fileList = new ArrayList<>();
-        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
-            FileEntity fileEntity = new FileEntity();
-            fileEntity.setFileName(localRecordEntity.getFile().getName());
-            fileEntity.setFileType(localRecordEntity.getFileType());
-            fileList.add(fileEntity);
+        // 检查数据是否填写完整
+        String title = getText(etTitle);
+        String content = getText(etContent);
+        if (isEmpty(getText(tvStation)) || isEmpty(teamIds) || isEmpty(title) || isEmpty(runsId) || isEmpty(content)) {
+            showToast(getString(R.string.please_complete_the_information));
+        } else {
+            for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+                if (localRecordEntity.getFileStatus() != FileStatus.SYNCHRONIZED) {
+                    showToast(getString(R.string.please_wait_for_the_files_upload_complete));
+                    return;
+                }
+            }
+            // 隐藏软键盘
+            CommonBiz.hideKeyboard(tvTitle);
+            // 发布中，显示dialog
+            showOnIssueDialog();
+            // 发布
+            ArrayList<FileEntity> fileList = new ArrayList<>();
+            for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+                FileEntity fileEntity = new FileEntity();
+                fileEntity.setFileName(localRecordEntity.getFile().getName());
+                fileEntity.setFileType(localRecordEntity.getFileType());
+                fileList.add(fileEntity);
+            }
+
+            PublishParameter publishParameter = new PublishParameter();
+            publishParameter.setRunsId(runsId);
+            publishParameter.setSsId(CommonBiz.getBSSID(this));
+            publishParameter.setUsersId(CacheDataSource.getUserId());
+            publishParameter.setTaskName(getText(etTitle));
+            publishParameter.setPlanEndTime(getText(tvEndTime));
+            publishParameter.setTaskType(issueType);
+            publishParameter.setNote("");
+            publishParameter.setPlanStartTime(getText(tvStartTime));
+            publishParameter.setWorkContent(getText(etContent));
+            publishParameter.setMonitorTeamId(CacheDataSource.getTeamId());
+            publishParameter.setAreaId("");
+            publishParameter.setOperatorTeamId(teamIds);
+            publishParameter.setFileList(fileList);
+
+            NetDataSource.post(this, Urls.JOb, publishParameter, OpeCode.ISSUE,
+                    new ResponseListener<String>() {
+                        @Override
+                        public String convert(String jsonStr) {
+                            return jsonStr;
+                        }
+
+                        @Override
+                        public void onSuccess(String result) {
+                            mLoadingDialog.dismiss();
+                            showToast(R.string.issue_success);
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailed(int errorCode, String errorInfo) {
+                            mLoadingDialog.dismiss();
+                            showToast(R.string.issue_failed);
+                        }
+                    });
         }
-
-        PublishParameter publishParameter = new PublishParameter();
-        publishParameter.setRunsId(runsId);
-        publishParameter.setSsId(CommonBiz.getBSSID(this));
-        publishParameter.setUsersId(CacheDataSource.getUserId());
-        publishParameter.setTaskName(getText(etTitle));
-        publishParameter.setPlanEndTime(getText(tvEndTime));
-        publishParameter.setTaskType(issueType);
-        publishParameter.setNote("");
-        publishParameter.setPlanStartTime(getText(tvStartTime));
-        publishParameter.setWorkContent(getText(etContent));
-        publishParameter.setMonitorTeamId(CacheDataSource.getTeamId());
-        publishParameter.setAreaId("");
-        publishParameter.setOperatorTeamId(teamIds);
-        publishParameter.setFileList(fileList);
-
-        NetDataSource.post(this, Urls.JOb, publishParameter, OpeCode.ISSUE,
-                new ResponseListener<String>() {
-                    @Override
-                    public String convert(String jsonStr) {
-                        return jsonStr;
-                    }
-
-                    @Override
-                    public void onSuccess(String result) {
-                        mLoadingDialog.dismiss();
-                        showToast(R.string.issue_success);
-                        finish();
-                    }
-
-                    @Override
-                    public void onFailed(int errorCode, String errorInfo) {
-                        mLoadingDialog.dismiss();
-                        showToast(R.string.issue_failed);
-                    }
-                });
     }
 
     private void showOnIssueDialog() {
@@ -265,13 +272,8 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         mLoadingDialog.show();
     }
 
-    @SuppressLint("InflateParams")
     private void initHeader() {
-        View issueHeader = LayoutInflater.from(mContext).inflate(R.layout.header_issue, null);
-
-        TextView tvPerformerGroupHint = issueHeader.findViewById(R.id.tv_performer_group_hint);
         // 命令/协作内容  hint
-        etContent = issueHeader.findViewById(R.id.et_content);
         switch (issueType) {
             case TaskType.COMMAND:
                 tvPerformerGroupHint.setText(R.string.order_group);
@@ -282,41 +284,14 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                 etContent.setHint(R.string.cooperation_content);
                 break;
         }
-
-        tvStation = issueHeader.findViewById(R.id.tv_station);
-        // 选择车站点击事件
-        tvStation.setOnClickListener(this::showStationPickerView);
-
-        tvStartTime = issueHeader.findViewById(R.id.tv_start_time);
-        // 开始时间点击事件
-        tvStartTime.setOnClickListener((View v) -> showTimePickerView((TextView) v, 0));
         // 进入界面默任回写开始时间
         tvStartTime.setText(ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1));
-
-        tvEndTime = issueHeader.findViewById(R.id.tv_end_time);
-        // 结束时间点击事件
-        tvEndTime.setOnClickListener((View v) -> showTimePickerView((TextView) v, 1));
         // 进入界面默任回写后一天的时间
         tvEndTime.setText(ConvertUtils.formatDate(System.currentTimeMillis() + 1000 * 60 * 60 * 24, Formatter.DATE_FORMAT1));
-
-        // 选择班组按钮点击事件
-        ImageView ivAddPerformer = issueHeader.findViewById(R.id.iv_add_performer);
-        ivAddPerformer.setOnClickListener((View v) -> startActivityForResult(SelectTeamActivity.class, CODE_SELECT_TEAM));
-
-        tvTeamList = issueHeader.findViewById(R.id.tv_team_list);
         // 回显跳转过来时传递的班组
         if (isEmpty(teamNames)) {
             tvTeamList.setText(teamNames);
         }
-
-        // 标题
-        etTitle = issueHeader.findViewById(R.id.et_title);
-
-        // 选择车次
-        tvTrainNumber = issueHeader.findViewById(R.id.tv_train_number);
-        tvTrainNumber.setOnClickListener((View v) -> startActivityForResult(SelectTrainActivity.class, CODE_SELECT_TRAIN));
-
-        listView.addHeaderView(issueHeader);
     }
 
     private void showStationPickerView(View v) {
@@ -428,6 +403,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     localRecordEntity.setFile(photoFile);
                     localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
+                    ViewUtils.setListViewHeightBasedOnChildren(listView);
                     // 上传
                     NetDataSource.uploadFileNoData(this, photoFile, this);
                     break;
@@ -439,6 +415,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     localRecordEntity.setFile(videoFile);
                     localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
+                    ViewUtils.setListViewHeightBasedOnChildren(listView);
                     // 上传
                     NetDataSource.uploadFileNoData(this, videoFile, this);
                     break;
@@ -450,6 +427,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     localRecordEntity.setFile(audioFile);
                     localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
+                    ViewUtils.setListViewHeightBasedOnChildren(listView);
                     // 上传
                     NetDataSource.uploadFileNoData(this, audioFile, this);
                     break;
@@ -457,10 +435,31 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         }
     }
 
-    @OnClick({R.id.btn_take_photo, R.id.btn_video, R.id.btn_record})
+    @OnClick({R.id.tv_station, R.id.tv_start_time, R.id.tv_end_time, R.id.iv_add_performer, R.id.tv_train_number,
+            R.id.btn_take_photo, R.id.btn_video, R.id.btn_record})
     public void onViewClicked(View view) {
         Bundle bundle = new Bundle();
         switch (view.getId()) {
+            case R.id.tv_station:
+                // 选择车站点击事件
+                showStationPickerView(view);
+                break;
+            case R.id.tv_start_time:
+                // 开始时间点击事件
+                showTimePickerView((TextView) view, 0);
+                break;
+            case R.id.tv_end_time:
+                // 结束时间点击事件
+                showTimePickerView((TextView) view, 1);
+                break;
+            case R.id.iv_add_performer:
+                // 选择班组按钮点击事件
+                startActivityForResult(SelectTeamActivity.class, CODE_SELECT_TEAM);
+                break;
+            case R.id.tv_train_number:
+                // 选择车次
+                startActivityForResult(SelectTrainActivity.class, CODE_SELECT_TRAIN);
+                break;
             case R.id.btn_take_photo:
                 try {
                     photoFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);

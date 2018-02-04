@@ -28,7 +28,7 @@ import butterknife.OnClick;
  * 创建时间：2017/12/27 1:53
  */
 
-public class TodoDetailActivity extends BaseActivity implements TodoDetailContract.View {
+public class AddTodoActivity extends BaseActivity implements AddTodoContract.View {
     @BindView(R.id.tv_date)
     TextView tvDate;
     @BindView(R.id.tv_time)
@@ -40,14 +40,14 @@ public class TodoDetailActivity extends BaseActivity implements TodoDetailContra
     @BindView(R.id.btn_save)
     Button btnSave;
 
-    private TodoDetailContract.Presenter mPresenter;
+    private AddTodoContract.Presenter mPresenter;
     // 是否是更新
     private boolean isUpdate;
     private long todoId;
 
     @Override
     protected int setContentView() {
-        return R.layout.activity_todo;
+        return R.layout.activity_add_todo;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class TodoDetailActivity extends BaseActivity implements TodoDetailContra
     }
 
     private void initPresenter() {
-        mPresenter = new TodoDetailPresenter(this);
+        mPresenter = new AddTodoPresenter(this);
         mPresenter.start();
     }
 

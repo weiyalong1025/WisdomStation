@@ -79,7 +79,7 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
         loginListener.onLogin();
 
         // 测试模式
-        if (mUsername.equals("10295010") && mPassword.equals("15910772637")) {
+        if (mUsername.equals("admin") && mPassword.equals("admin")) {
             mUsername = "1010";
             mPassword = "123456";
             AppApplication.TEST_MODE = true;

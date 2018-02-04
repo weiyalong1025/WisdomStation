@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
+import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.base.BaseFragment;
 import com.winsion.dispatch.modules.grid.activity.patrolitem.PatrolItemActivity;
 import com.winsion.dispatch.modules.grid.adapter.BluetoothPointAdapter;
@@ -271,7 +272,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         PatrolPlanEntity patrolPlanEntity = listData.get(position);
-        if (patrolPlanEntity.isArrive()) {
+        if (patrolPlanEntity.isArrive() || AppApplication.TEST_MODE) {
             Intent intent = new Intent(mContext, PatrolItemActivity.class);
             intent.putExtra(PatrolItemActivity.PATROL_TASK_ENTITY, patrolPlanEntity);
             startActivity(intent);

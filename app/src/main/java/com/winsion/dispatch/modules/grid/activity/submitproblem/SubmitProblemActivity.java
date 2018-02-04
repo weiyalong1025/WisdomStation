@@ -1,5 +1,6 @@
 package com.winsion.dispatch.modules.grid.activity.submitproblem;
 
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseActivity;
 
 /**
@@ -20,7 +21,7 @@ public class SubmitProblemActivity extends BaseActivity {
 
     @Override
     protected int setContentView() {
-        return 0;
+        return R.layout.activity_submit_problem;
     }
 
     @Override

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,7 +8,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 
     <RelativeLayout
         android:id="@+id/ll_issue_order"
@@ -21,7 +23,8 @@
             android:layout_width="@dimen/d23"
             android:layout_height="@dimen/d23"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_command" />
+            android:src="@drawable/ic_command"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,20 +34,23 @@
             android:layout_toEndOf="@+id/iv_command"
             android:text="@string/command"
             android:textColor="@color/white1"
-            android:textSize="@dimen/s21" />
+            android:textSize="@dimen/s21"
+            tools:ignore="RelativeOverlap" />
 
         <ImageView
             android:layout_width="@dimen/d20"
             android:layout_height="@dimen/d20"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right" />
+            android:src="@drawable/ic_arrow_right"
+            tools:ignore="ContentDescription" />
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 
     <RelativeLayout
         android:id="@+id/ll_issue_cooperation"
@@ -59,7 +65,8 @@
             android:layout_width="@dimen/d23"
             android:layout_height="@dimen/d23"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_cooperation" />
+            android:src="@drawable/ic_cooperation"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,18 +76,21 @@
             android:layout_toEndOf="@+id/iv_cooperation"
             android:text="@string/cooperation"
             android:textColor="@color/white1"
-            android:textSize="@dimen/s21" />
+            android:textSize="@dimen/s21"
+            tools:ignore="RelativeOverlap" />
 
         <ImageView
             android:layout_width="@dimen/d20"
             android:layout_height="@dimen/d20"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right" />
+            android:src="@drawable/ic_arrow_right"
+            tools:ignore="ContentDescription" />
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 </LinearLayout>

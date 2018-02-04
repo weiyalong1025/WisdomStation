@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/tv_monitor_group_hint"
-            android:layout_width="@dimen/d88"
+            android:layout_width="@dimen/d100"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
             android:textColor="@color/gray5"
@@ -47,7 +47,7 @@
 
         <TextView
             android:id="@+id/tv_performer_group_hint"
-            android:layout_width="@dimen/d88"
+            android:layout_width="@dimen/d100"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
             android:textColor="@color/gray5"
@@ -82,7 +82,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="@dimen/d88"
+            android:layout_width="@dimen/d100"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
             android:orientation="horizontal">
@@ -103,7 +103,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="题:"
+                android:text="题："
                 android:textColor="@color/gray5"
                 android:textSize="@dimen/s20"
                 tools:ignore="HardcodedText" />
@@ -131,7 +131,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="@dimen/d88"
+            android:layout_width="@dimen/d100"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
             android:orientation="horizontal">
@@ -152,7 +152,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="次:"
+                android:text="次："
                 android:textColor="@color/gray5"
                 android:textSize="@dimen/s20"
                 tools:ignore="HardcodedText" />
@@ -180,7 +180,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/d88"
+            android:layout_width="@dimen/d100"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
             android:text="@string/start_time"
@@ -209,7 +209,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/d88"
+            android:layout_width="@dimen/d100"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
             android:text="@string/end_time"

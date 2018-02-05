@@ -116,7 +116,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
                 Intent intent = new Intent(mContext, SubmitProblemActivity.class);
                 intent.putExtra(SubmitProblemActivity.PATROL_DETAIL_ID, devicePatrolDetailId);
                 intent.putExtra(SubmitProblemActivity.SITE_NAME, patrolPlanEntity.getPointname());
-                intent.putExtra(SubmitProblemActivity.PROBLEM_TYPE, SubmitProblemActivity.PROBLEM_WITH_DEVICE);
+                intent.putExtra(SubmitProblemActivity.DEVICE_DEPENDENT, true);
                 startActivityForResult(intent, 200);
             }
         });
@@ -150,7 +150,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
                         Intent intent = new Intent(mContext, SubmitProblemActivity.class);
                         intent.putExtra(SubmitProblemActivity.PATROL_DETAIL_ID, patrolItemEntity.getId());
                         intent.putExtra(SubmitProblemActivity.SITE_NAME, patrolPlanEntity.getPointname());
-                        intent.putExtra(SubmitProblemActivity.PROBLEM_TYPE, SubmitProblemActivity.PROBLEM_WITHOUT_DEVICE);
+                        intent.putExtra(SubmitProblemActivity.DEVICE_DEPENDENT, false);
                         startActivityForResult(intent, 200);
                     })
                     .create()

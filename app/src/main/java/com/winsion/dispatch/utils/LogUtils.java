@@ -301,11 +301,11 @@ public class LogUtils {
         if (!FileUtils.createOrExistsFile(fullPath)) return;
         String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault()).format(now);
         content = time + ":" + type + ":" + tag + ":" + content;
-        int size = content.length() / HEADER.length();
+        int size = (int) Math.ceil(content.length() / HEADER.length());
         StringBuilder newContent = new StringBuilder();
         for (int i = 0; i <= size; i++) {
             if (i == size) {
-                newContent.append(content.substring(i * HEADER.length(), content.length() - 1));
+                newContent.append(content.substring(i * HEADER.length(), content.length()));
             } else {
                 newContent.append(content.substring(i * HEADER.length(), (i + 1) * HEADER.length())).append('\n');
             }

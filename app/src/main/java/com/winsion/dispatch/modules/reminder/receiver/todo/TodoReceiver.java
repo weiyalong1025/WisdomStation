@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.Vibrator;
@@ -54,8 +55,8 @@ public class TodoReceiver extends BroadcastReceiver {
     private void playRing(Context context) {
         try {
             mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(context, RingtoneManager.getDefaultUri(
-                    RingtoneManager.TYPE_ALARM));
+            mediaPlayer.setDataSource(context, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
             mediaPlayer.setOnCompletionListener(MediaPlayer::release);
             mediaPlayer.setLooping(true);
             mediaPlayer.prepare();

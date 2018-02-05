@@ -183,13 +183,27 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     }
 
     private void initView() {
-        initTitleView();
-        initHeader();
-    }
-
-    private void initTitleView() {
         tvTitle.setOnBackClickListener(v -> showHintDialog());
         tvTitle.setOnConfirmClickListener(v -> issue());
+        // 命令/协作内容  hint
+        switch (issueType) {
+            case TaskType.COMMAND:
+                tvPerformerGroupHint.setText(R.string.order_group);
+                etContent.setHint(R.string.command_content);
+                break;
+            case TaskType.COOPERATE:
+                tvPerformerGroupHint.setText(R.string.cooperation_group);
+                etContent.setHint(R.string.cooperation_content);
+                break;
+        }
+        // 进入界面默任回写开始时间
+        tvStartTime.setText(ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1));
+        // 进入界面默任回写后一天的时间
+        tvEndTime.setText(ConvertUtils.formatDate(System.currentTimeMillis() + 1000 * 60 * 60 * 24, Formatter.DATE_FORMAT1));
+        // 回显跳转过来时传递的班组
+        if (isEmpty(teamNames)) {
+            tvTeamList.setText(teamNames);
+        }
     }
 
     /**
@@ -270,28 +284,6 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             mLoadingDialog.dismiss();
         }
         mLoadingDialog.show();
-    }
-
-    private void initHeader() {
-        // 命令/协作内容  hint
-        switch (issueType) {
-            case TaskType.COMMAND:
-                tvPerformerGroupHint.setText(R.string.order_group);
-                etContent.setHint(R.string.command_content);
-                break;
-            case TaskType.COOPERATE:
-                tvPerformerGroupHint.setText(R.string.cooperation_group);
-                etContent.setHint(R.string.cooperation_content);
-                break;
-        }
-        // 进入界面默任回写开始时间
-        tvStartTime.setText(ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1));
-        // 进入界面默任回写后一天的时间
-        tvEndTime.setText(ConvertUtils.formatDate(System.currentTimeMillis() + 1000 * 60 * 60 * 24, Formatter.DATE_FORMAT1));
-        // 回显跳转过来时传递的班组
-        if (isEmpty(teamNames)) {
-            tvTeamList.setText(teamNames);
-        }
     }
 
     private void showStationPickerView(View v) {
@@ -536,7 +528,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     }
 
     private void showHintDialog() {
-        new AlertDialog.Builder(this)
+        new AlertDialog.Builder(mContext)
                 .setMessage(R.string.will_you_clear_out_the_data_after_you_exit)
                 .setPositiveButton(R.string.confirm, (dialog, which) -> {
                     // 删除附件

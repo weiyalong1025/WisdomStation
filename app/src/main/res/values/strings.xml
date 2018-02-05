@@ -20,6 +20,7 @@
     <string name="format_error">格式错误</string>
     <string name="mq_connect_failed">MQ连接失败</string>
     <string name="on_login">登录中</string>
+    <string name="on_search">查询中</string>
     <string name="on_logout">注销中</string>
     <string name="on_issue">发布中</string>
     <string name="dispatch">到发</string>
@@ -197,6 +198,8 @@
     <string name="add_problem">添加问题</string>
     <string name="time_limit">解决时限：</string>
     <string name="problem_desc">问题描述：</string>
+    <string name="device_mismatch">设备不匹配</string>
+    <string name="check_device_failed">查询设备失败</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

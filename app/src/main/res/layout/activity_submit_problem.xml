@@ -23,229 +23,235 @@
             android:focusable="true"
             android:focusableInTouchMode="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
-                android:layout_marginStart="@dimen/d15"
-                android:gravity="center_vertical"
-                android:text="地"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/refer1"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
-                android:layout_alignEnd="@id/refer3"
-                android:gravity="center_vertical"
-                android:text="点："
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/tv_site"
+            <RelativeLayout
+                android:id="@+id/rl_device_info"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
-                android:layout_marginLeft="@dimen/d10"
-                android:layout_marginRight="@dimen/d10"
-                android:layout_toEndOf="@id/refer1"
-                android:gravity="center_vertical"
-                android:textColor="@color/white1"
-                android:textColorHint="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:text="第三候车室" />
+                android:layout_height="wrap_content">
 
-            <View
-                android:id="@+id/refer2"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
-                android:layout_below="@id/refer1"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d45"
+                    android:layout_marginStart="@dimen/d15"
+                    android:gravity="center_vertical"
+                    android:text="地"
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/s20"
+                    tools:ignore="HardcodedText" />
 
-            <TextView
-                android:id="@+id/refer3"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
-                android:layout_below="@id/refer2"
-                android:layout_marginStart="@dimen/d15"
-                android:gravity="center_vertical"
-                android:text="@string/device_name"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20" />
+                <TextView
+                    android:id="@+id/refer1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d45"
+                    android:layout_alignEnd="@id/refer3"
+                    android:gravity="center_vertical"
+                    android:text="点："
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/s20"
+                    tools:ignore="HardcodedText" />
 
-            <TextView
-                android:id="@+id/tv_device_name"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
-                android:layout_below="@id/refer2"
-                android:layout_marginStart="@dimen/d10"
-                android:layout_toEndOf="@id/refer3"
-                android:layout_toStartOf="@id/iv_scan"
-                android:gravity="center_vertical"
-                android:singleLine="true"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s20"
-                tools:text="03洗手池" />
+                <TextView
+                    android:id="@+id/tv_site"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d45"
+                    android:layout_marginLeft="@dimen/d10"
+                    android:layout_marginRight="@dimen/d10"
+                    android:layout_toEndOf="@id/refer1"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white1"
+                    android:textColorHint="@color/gray5"
+                    android:textSize="@dimen/s20"
+                    tools:text="第三候车室" />
 
-            <ImageView
-                android:id="@+id/iv_scan"
-                android:layout_width="@dimen/d45"
-                android:layout_height="@dimen/d45"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@id/refer2"
-                android:padding="@dimen/d10"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_scan"
-                tools:ignore="ContentDescription" />
+                <View
+                    android:id="@+id/refer2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d1"
+                    android:layout_below="@id/refer1"
+                    android:layout_marginStart="@dimen/d10"
+                    android:background="@color/gray5" />
 
-            <View
-                android:id="@+id/refer4"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
-                android:layout_below="@id/iv_scan"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                <TextView
+                    android:id="@+id/refer3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d45"
+                    android:layout_below="@id/refer2"
+                    android:layout_marginStart="@dimen/d15"
+                    android:gravity="center_vertical"
+                    android:text="@string/device_name"
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/s20" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
-                android:layout_below="@id/refer4"
-                android:layout_marginStart="@dimen/d15"
-                android:gravity="center_vertical"
-                android:text="子"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:ignore="HardcodedText" />
+                <TextView
+                    android:id="@+id/tv_device_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d45"
+                    android:layout_above="@+id/imageView"
+                    android:layout_toEndOf="@id/refer3"
+                    android:layout_toStartOf="@id/iv_scan"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:textColor="@color/white1"
+                    android:textSize="@dimen/s20"
+                    tools:text="03洗手池" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
-                android:layout_alignEnd="@id/refer3"
-                android:layout_below="@id/refer4"
-                android:gravity="center_vertical"
-                android:text="类："
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:ignore="HardcodedText" />
+                <ImageView
+                    android:id="@+id/iv_scan"
+                    android:layout_width="@dimen/d45"
+                    android:layout_height="@dimen/d45"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/refer2"
+                    android:padding="@dimen/d10"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_scan"
+                    tools:ignore="ContentDescription" />
 
-            <ImageView
-                android:layout_width="@dimen/d45"
-                android:layout_height="@dimen/d45"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@id/refer4"
-                android:padding="@dimen/d12"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_arrow_right"
-                tools:ignore="ContentDescription" />
+                <View
+                    android:id="@+id/refer4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d1"
+                    android:layout_below="@id/iv_scan"
+                    android:layout_marginStart="@dimen/d10"
+                    android:background="@color/gray5" />
 
-            <TextView
-                android:id="@+id/tv_subclass"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
-                android:layout_below="@id/refer4"
-                android:layout_marginStart="@dimen/d10"
-                android:layout_toEndOf="@id/refer3"
-                android:gravity="center_vertical"
-                android:paddingEnd="@dimen/d45"
-                android:singleLine="true"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s20"
-                tools:ignore="RtlSymmetry"
-                tools:text="类别001" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d45"
+                    android:layout_below="@id/refer4"
+                    android:layout_marginStart="@dimen/d15"
+                    android:gravity="center_vertical"
+                    android:text="子"
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/s20"
+                    tools:ignore="HardcodedText" />
 
-            <View
-                android:id="@+id/refer5"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
-                android:layout_below="@id/tv_subclass"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d45"
+                    android:layout_alignEnd="@id/refer3"
+                    android:layout_below="@id/refer4"
+                    android:gravity="center_vertical"
+                    android:text="类："
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/s20"
+                    tools:ignore="HardcodedText" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
-                android:layout_below="@id/refer5"
-                android:layout_marginStart="@dimen/d15"
-                android:gravity="center_vertical"
-                android:text="等"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:ignore="HardcodedText" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="@dimen/d45"
+                    android:layout_height="@dimen/d45"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/refer4"
+                    android:padding="@dimen/d12"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_arrow_right"
+                    tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/refer6"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
-                android:layout_alignEnd="@id/refer3"
-                android:layout_below="@id/refer5"
-                android:gravity="center_vertical"
-                android:text="级："
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:ignore="HardcodedText" />
+                <TextView
+                    android:id="@+id/tv_subclass"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d45"
+                    android:layout_below="@id/refer4"
+                    android:layout_marginStart="@dimen/d10"
+                    android:layout_toEndOf="@id/refer3"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="@dimen/d45"
+                    android:singleLine="true"
+                    android:textColor="@color/white1"
+                    android:textSize="@dimen/s20"
+                    tools:ignore="RtlSymmetry"
+                    tools:text="类别001" />
 
-            <TextView
-                android:id="@+id/tv_grade"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
-                android:layout_below="@id/refer5"
-                android:layout_marginLeft="@dimen/d10"
-                android:layout_marginRight="@dimen/d10"
-                android:layout_toEndOf="@id/refer6"
-                android:gravity="center_vertical"
-                android:textColor="@color/white1"
-                android:textColorHint="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:text="1" />
+                <View
+                    android:id="@+id/refer5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d1"
+                    android:layout_below="@id/tv_subclass"
+                    android:layout_marginStart="@dimen/d10"
+                    android:background="@color/gray5" />
 
-            <View
-                android:id="@+id/refer7"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
-                android:layout_below="@id/tv_grade"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d45"
+                    android:layout_below="@id/refer5"
+                    android:layout_marginStart="@dimen/d15"
+                    android:gravity="center_vertical"
+                    android:text="等"
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/s20"
+                    tools:ignore="HardcodedText" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
-                android:layout_below="@id/refer7"
-                android:layout_marginStart="@dimen/d15"
-                android:gravity="center_vertical"
-                android:text="@string/time_limit"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20" />
+                <TextView
+                    android:id="@+id/refer6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d45"
+                    android:layout_alignEnd="@id/refer3"
+                    android:layout_below="@id/refer5"
+                    android:gravity="center_vertical"
+                    android:text="级："
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/s20"
+                    tools:ignore="HardcodedText" />
 
-            <TextView
-                android:id="@+id/tv_time_limit"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
-                android:layout_below="@id/refer7"
-                android:layout_marginLeft="@dimen/d10"
-                android:layout_marginRight="@dimen/d10"
-                android:layout_toEndOf="@id/refer1"
-                android:gravity="center_vertical"
-                android:textColor="@color/white1"
-                android:textColorHint="@color/gray5"
-                android:textSize="@dimen/s20"
-                tools:text="120分钟" />
+                <TextView
+                    android:id="@+id/tv_grade"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d45"
+                    android:layout_below="@id/refer5"
+                    android:layout_marginLeft="@dimen/d10"
+                    android:layout_marginRight="@dimen/d10"
+                    android:layout_toEndOf="@id/refer6"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white1"
+                    android:textColorHint="@color/gray5"
+                    android:textSize="@dimen/s20"
+                    tools:text="1" />
 
-            <View
-                android:id="@+id/refer8"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
-                android:layout_below="@id/tv_time_limit"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                <View
+                    android:id="@+id/refer7"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d1"
+                    android:layout_below="@id/tv_grade"
+                    android:layout_marginStart="@dimen/d10"
+                    android:background="@color/gray5" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d45"
+                    android:layout_below="@id/refer7"
+                    android:layout_marginStart="@dimen/d15"
+                    android:gravity="center_vertical"
+                    android:text="@string/time_limit"
+                    android:textColor="@color/gray5"
+                    android:textSize="@dimen/s20" />
+
+                <TextView
+                    android:id="@+id/tv_time_limit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d45"
+                    android:layout_below="@id/refer7"
+                    android:layout_marginLeft="@dimen/d10"
+                    android:layout_marginRight="@dimen/d10"
+                    android:layout_toEndOf="@id/refer1"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white1"
+                    android:textColorHint="@color/gray5"
+                    android:textSize="@dimen/s20"
+                    tools:text="120分钟" />
+
+                <View
+                    android:id="@+id/refer8"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d1"
+                    android:layout_below="@id/tv_time_limit"
+                    android:layout_marginStart="@dimen/d10"
+                    android:background="@color/gray5" />
+            </RelativeLayout>
 
             <EditText
                 android:id="@+id/et_word_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/refer8"
+                android:layout_below="@id/rl_device_info"
                 android:layout_marginStart="@dimen/d15"
                 android:background="@null"
                 android:hint="@string/problem_desc"

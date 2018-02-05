@@ -18,14 +18,14 @@ import java.util.List;
  * Created by wyl on 2017/6/2
  */
 public class TodoListPresenter implements TodoListContract.Presenter {
-    private TodoListContract.View mToDoView;
+    private TodoListContract.View mView;
     private Context mContext;
 
     private AlarmManager alarmManager;
 
-    TodoListPresenter(TodoListContract.View toDoView) {
-        this.mToDoView = toDoView;
-        this.mContext = mToDoView.getContext();
+    TodoListPresenter(TodoListContract.View view) {
+        this.mView = view;
+        this.mContext = view.getContext();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class TodoListPresenter implements TodoListContract.Presenter {
             alarmManager.cancel(pendingIntent);
         }
         DBDataSource.getInstance().deleteOneTodo(todoEntity);
-        mToDoView.notifyLocalDataChange();
+        mView.notifyLocalDataChange();
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.data.constants.SPKey;
-import com.winsion.dispatch.utils.ConvertUtils;
 
 /**
  * Created by 10295 on 2017/12/5 0005.
@@ -26,7 +25,11 @@ public class CacheDataSource {
         if (TextUtils.isEmpty(baseUrl)) {
             String ip = (String) SPDataSource.get(AppApplication.getContext(), SPKey.KEY_IP, "");
             String port = (String) SPDataSource.get(AppApplication.getContext(), SPKey.KEY_PORT, "");
-            baseUrl = ConvertUtils.formatURL(ip, port);
+            if (!TextUtils.isEmpty(ip) && !TextUtils.isEmpty(port)) {
+                baseUrl = String.format("http://%s:%s/", ip, port);
+            } else {
+                throw new NullPointerException("Ip value and port value cannot be null!");
+            }
         }
         return baseUrl;
     }

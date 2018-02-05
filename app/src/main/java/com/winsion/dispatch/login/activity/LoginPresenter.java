@@ -38,9 +38,9 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
     private String mUsername;
     private String mPassword;
 
-    LoginPresenter(LoginContract.View loginView) {
-        this.mView = loginView;
-        this.mContext = loginView.getContext();
+    LoginPresenter(LoginContract.View view) {
+        this.mView = view;
+        this.mContext = view.getContext();
         this.mDbDataSource = DBDataSource.getInstance();
     }
 

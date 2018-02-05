@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.winsion.dispatch.utils.constants.Formatter;
-import com.winsion.dispatch.utils.constants.TrainAreaType;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -93,59 +92,6 @@ public class ConvertUtils {
             return hm;
         }
         return date.substring(11, 16);
-    }
-
-    public static String formatURL(String ip, String port) {
-        String url = "";
-        if (!TextUtils.isEmpty(ip) && !TextUtils.isEmpty(port)) {
-            url += "http://" + ip + ":" + port + "/";
-        }
-        return url;
-    }
-
-    /**
-     * 格式化车次数据
-     *
-     * @return {股道，站台，检票口，候车室}
-     */
-    public static String[] formatTrainData(String[] areaType, String[] name) {
-        String track = "--";
-        String platform = "--";
-        String waitRoom = "--";
-        String checkPort = "--";
-        for (int i = 0; i < name.length; i++) {
-            switch (areaType[i]) {
-                case TrainAreaType.TRACK:
-                    if (TextUtils.equals(track, "--")) {
-                        track = name[i];
-                    } else {
-                        track += "," + name[i];
-                    }
-                    break;
-                case TrainAreaType.PLATFORM:
-                    if (TextUtils.equals(platform, "--")) {
-                        platform = name[i];
-                    } else {
-                        platform += "," + name[i];
-                    }
-                    break;
-                case TrainAreaType.WAITING_ROOM:
-                    if (TextUtils.equals(waitRoom, "--")) {
-                        waitRoom = name[i];
-                    } else {
-                        waitRoom += "," + name[i];
-                    }
-                    break;
-                case TrainAreaType.TICKET_ENTRANCE:
-                    if (TextUtils.equals(checkPort, "--")) {
-                        checkPort = name[i];
-                    } else {
-                        checkPort += "," + name[i];
-                    }
-                    break;
-            }
-        }
-        return new String[]{track, platform, waitRoom, checkPort};
     }
 
     public static String getDigitFromStr(String str) {

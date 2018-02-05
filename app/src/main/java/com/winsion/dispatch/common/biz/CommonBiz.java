@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.support.annotation.IntDef;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
@@ -32,14 +33,19 @@ import com.winsion.dispatch.data.constants.Urls;
 import com.winsion.dispatch.data.listener.DownloadListener;
 import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.login.activity.LoginActivity;
+import com.winsion.dispatch.media.constants.FileType;
 import com.winsion.dispatch.mqtt.MQTTClient;
 import com.winsion.dispatch.utils.AppUtils;
 import com.winsion.dispatch.utils.ConvertUtils;
 import com.winsion.dispatch.utils.DirAndFileUtils;
 import com.winsion.dispatch.utils.ToastUtils;
+import com.winsion.dispatch.utils.constants.Formatter;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.util.Date;
 
 /**
  * Created by 10295 on 2017/12/21 0021.
@@ -275,11 +281,47 @@ public class CommonBiz {
                 .isCenterLabel(false);
     }
 
+    /**
+     * 适配选择器标题栏高度
+     */
     public static void selfAdaptionTopBar(BasePickerView pickerView) {
         RelativeLayout tvTopBar = (RelativeLayout) pickerView.findViewById(R.id.rv_topbar);
         if (tvTopBar == null) return;
         ViewGroup.LayoutParams layoutParams = tvTopBar.getLayoutParams();
         layoutParams.height = tvTopBar.getResources().getDimensionPixelSize(R.dimen.d45);
         tvTopBar.setLayoutParams(layoutParams);
+    }
+
+
+    public static File getMediaFile(File file, @FileTypeLimit int type) {
+        if (file.exists() || file.mkdirs()) {
+            String timeStamp = Formatter.DATE_FORMAT11.format(new Date());
+            File mediaFile;
+            if (type == FileType.PICTURE) {
+                mediaFile = new File(file.getPath() + File.separator
+                        + "IMG_" + timeStamp + ".jpg");
+            } else if (type == FileType.VIDEO) {
+                mediaFile = new File(file.getPath() + File.separator
+                        + "VID_" + timeStamp + ".mp4");
+            } else if (type == FileType.AUDIO) {
+                mediaFile = new File(file.getPath() + File.separator
+                        + "VOI_" + timeStamp + ".aac");
+            } else if (type == FileType.TEXT) {
+                mediaFile = new File(file.getPath() + File.separator
+                        + "TEXT_NOTE.txt");
+            } else {
+                return null;
+            }
+            return mediaFile;
+        }
+        return null;
+    }
+
+    /**
+     * 文件类型
+     */
+    @IntDef({FileType.PICTURE, FileType.VIDEO, FileType.AUDIO, FileType.TEXT})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface FileTypeLimit {
     }
 }

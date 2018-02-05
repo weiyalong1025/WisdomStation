@@ -32,7 +32,6 @@ import com.winsion.dispatch.login.entity.UserEntity;
 import com.winsion.dispatch.login.listener.LoginListener;
 import com.winsion.dispatch.utils.ImageLoader;
 import com.winsion.dispatch.utils.ViewUtils;
-import com.winsion.dispatch.utils.constants.ListType;
 import com.winsion.dispatch.view.CircleImageView;
 import com.winsion.dispatch.view.TipDialog;
 import com.winsion.dispatch.view.WrapContentListView;
@@ -209,7 +208,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View itemView = layoutInflater.inflate(R.layout.item_user_option, null);
         itemView.measure(0, 0);
-        int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, itemView.getMeasuredHeight(), ListType.TYPE_POPUP);
+        int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, itemView.getMeasuredHeight(), ViewUtils.ListType.TYPE_POPUP);
         ListView listView = new WrapContentListView(mContext, suggestMaxHeight);
         listView.setAdapter(commonAdapter);
         listView.setOnItemClickListener(this);

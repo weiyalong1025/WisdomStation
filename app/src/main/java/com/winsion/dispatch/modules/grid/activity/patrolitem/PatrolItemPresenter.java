@@ -1,11 +1,12 @@
 package com.winsion.dispatch.modules.grid.activity.patrolitem;
 
+import android.content.Context;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lzy.okgo.model.HttpParams;
 import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.data.CacheDataSource;
-import com.winsion.dispatch.data.DBDataSource;
 import com.winsion.dispatch.data.NetDataSource;
 import com.winsion.dispatch.data.constants.FieldKey;
 import com.winsion.dispatch.data.constants.JoinKey;
@@ -27,11 +28,11 @@ import java.util.List;
 
 public class PatrolItemPresenter implements PatrolItemContract.Presenter {
     private PatrolItemContract.View mView;
-    private final DBDataSource dbDataSource;
+    private Context mContext;
 
     PatrolItemPresenter(PatrolItemContract.View view) {
         this.mView = view;
-        this.dbDataSource = DBDataSource.getInstance();
+        this.mContext = view.getContext();
     }
 
     @Override
@@ -47,7 +48,7 @@ public class PatrolItemPresenter implements PatrolItemContract.Presenter {
     @Override
     public void getPatrolItemData(String patrolId) {
         if (AppApplication.TEST_MODE) {
-            List<PatrolItemEntity> patrolItemEntities = JsonUtils.getTestEntities(mView.getContext(), PatrolItemEntity.class);
+            List<PatrolItemEntity> patrolItemEntities = JsonUtils.getTestEntities(mContext, PatrolItemEntity.class);
             mView.getPatrolItemDataSuccess(patrolItemEntities);
             return;
         }

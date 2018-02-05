@@ -1,4 +1,4 @@
-package com.winsion.dispatch.utils.constants;
+package com.winsion.dispatch.modules.operation.constants;
 
 /**
  * Created by wyl on 2017/6/17

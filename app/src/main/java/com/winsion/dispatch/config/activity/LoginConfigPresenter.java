@@ -12,23 +12,24 @@ import com.winsion.dispatch.data.constants.SPKey;
 
 /**
  * Created by wyl on 2017/3/28.
+ * 登录配置Presenter
  */
 
 class LoginConfigPresenter implements LoginConfigContract.Presenter {
 
-    private LoginConfigContract.View mLoginConfigView;
+    private LoginConfigContract.View mView;
     private Context mContext;
 
-    LoginConfigPresenter(LoginConfigContract.View loginConfigView) {
-        this.mLoginConfigView = loginConfigView;
-        this.mContext = loginConfigView.getContext();
+    LoginConfigPresenter(LoginConfigContract.View view) {
+        this.mView = view;
+        this.mContext = view.getContext();
     }
 
     @Override
     public void start() {
         String ip = (String) SPDataSource.get(mContext, SPKey.KEY_IP, "");
         String port = (String) SPDataSource.get(mContext, SPKey.KEY_PORT, "");
-        mLoginConfigView.redisplayHost(ip, port);
+        mView.redisplayHost(ip, port);
     }
 
     @Override

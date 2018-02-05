@@ -1,17 +1,11 @@
 package com.winsion.dispatch.utils;
 
 import android.os.Environment;
-import android.support.annotation.IntDef;
 
-import com.winsion.dispatch.media.constants.FileType;
 import com.winsion.dispatch.utils.constants.DirName;
-import com.winsion.dispatch.utils.constants.Formatter;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.util.Date;
 
 /**
  * Created by 10295 on 2017/12/17 0017.
@@ -164,37 +158,5 @@ public class DirAndFileUtils {
             throw new NullPointerException("Create folder failed!");
         }
         return file;
-    }
-
-    public static File getMediaFile(File file, @FileTypeLimit int type) {
-        if (file.exists() || file.mkdirs()) {
-            String timeStamp = Formatter.DATE_FORMAT11.format(new Date());
-            File mediaFile;
-            if (type == FileType.PICTURE) {
-                mediaFile = new File(file.getPath() + File.separator
-                        + "IMG_" + timeStamp + ".jpg");
-            } else if (type == FileType.VIDEO) {
-                mediaFile = new File(file.getPath() + File.separator
-                        + "VID_" + timeStamp + ".mp4");
-            } else if (type == FileType.AUDIO) {
-                mediaFile = new File(file.getPath() + File.separator
-                        + "VOI_" + timeStamp + ".aac");
-            } else if (type == FileType.TEXT) {
-                mediaFile = new File(file.getPath() + File.separator
-                        + "TEXT_NOTE.txt");
-            } else {
-                return null;
-            }
-            return mediaFile;
-        }
-        return null;
-    }
-
-    /**
-     * 文件类型
-     */
-    @IntDef({FileType.PICTURE, FileType.VIDEO, FileType.AUDIO, FileType.TEXT})
-    @Retention(RetentionPolicy.SOURCE)
-    @interface FileTypeLimit {
     }
 }

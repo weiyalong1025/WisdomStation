@@ -28,7 +28,7 @@ public class AddTodoPresenter implements AddTodoContract.Presenter {
 
     AddTodoPresenter(AddTodoContract.View view) {
         this.mView = view;
-        this.mContext = mView.getContext();
+        this.mContext = view.getContext();
     }
 
     @Override

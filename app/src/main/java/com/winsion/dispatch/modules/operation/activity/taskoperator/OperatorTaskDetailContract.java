@@ -36,5 +36,7 @@ class OperatorTaskDetailContract {
         void download(String url, String targetPath, DownloadListener downloadListener);
 
         void upload(JobEntity jobEntity, File file, UploadListener uploadListener);
+
+        String[] formatTrainData(String[] areaType, String[] name);
     }
 }

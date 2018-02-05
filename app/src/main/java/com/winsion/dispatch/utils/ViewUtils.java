@@ -1,13 +1,15 @@
 package com.winsion.dispatch.utils;
 
 import android.content.Context;
+import android.support.annotation.IntDef;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.winsion.dispatch.utils.constants.ListType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by 10295 on 2018/1/26
@@ -61,5 +63,12 @@ public class ViewUtils {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
+    }
+
+    @IntDef({ListType.TYPE_DIALOG, ListType.TYPE_POPUP})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ListType {
+        int TYPE_DIALOG = 0;
+        int TYPE_POPUP = 1;
     }
 }

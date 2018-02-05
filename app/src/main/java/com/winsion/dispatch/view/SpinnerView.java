@@ -21,7 +21,6 @@ import android.widget.TextView;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.utils.ConvertUtils;
 import com.winsion.dispatch.utils.ViewUtils;
-import com.winsion.dispatch.utils.constants.ListType;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 
@@ -220,7 +219,7 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
         @SuppressLint("InflateParams")
         View itemView = layoutInflater.inflate(R.layout.item_spinner, null);
         itemView.measure(0, 0);
-        int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(getContext(), itemView.getMeasuredHeight(), ListType.TYPE_POPUP);
+        int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(getContext(), itemView.getMeasuredHeight(), ViewUtils.ListType.TYPE_POPUP);
         ListView listView = new WrapContentListView(getContext(), suggestMaxHeight);
         listView.setBackgroundResource(R.color.gray7);
         listView.setAdapter(adapter);

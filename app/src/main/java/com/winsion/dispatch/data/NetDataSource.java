@@ -18,9 +18,6 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okrx2.adapter.ObservableBody;
 import com.winsion.dispatch.BuildConfig;
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.application.AppApplication;
-import com.winsion.dispatch.common.biz.CommonBiz;
-import com.winsion.dispatch.data.constants.OpeType;
 import com.winsion.dispatch.data.constants.ParamKey;
 import com.winsion.dispatch.data.constants.Urls;
 import com.winsion.dispatch.data.converter.ObjectConverter;
@@ -30,15 +27,10 @@ import com.winsion.dispatch.data.entity.WhereClause;
 import com.winsion.dispatch.data.listener.DownloadListener;
 import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.data.listener.UploadListener;
-import com.winsion.dispatch.media.constants.FileType;
-import com.winsion.dispatch.modules.operation.entity.FileEntity;
-import com.winsion.dispatch.modules.operation.entity.JobEntity;
-import com.winsion.dispatch.modules.operation.entity.JobParameter;
 import com.winsion.dispatch.utils.HashUtils;
 import com.winsion.dispatch.utils.LogUtils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -234,25 +226,10 @@ public class NetDataSource {
     /**
      * 上传文件
      */
-    public static void uploadFile(Object tag, JobEntity jobEntity, File file, UploadListener uploadListener) {
-        JobParameter jobParameter = new JobParameter();
-        jobParameter.setSsId(CommonBiz.getBSSID(AppApplication.getContext()));
-        jobParameter.setTaskId(jobEntity.getTasksid());
-        jobParameter.setOpormotId(jobEntity.getJoboperatorsid());
-        jobParameter.setOpType(OpeType.RUNNING);
-        jobParameter.setJobsId(jobEntity.getJobsid());
-        jobParameter.setUsersId(CacheDataSource.getUserId());
-
-        List<FileEntity> fileList = new ArrayList<>();
-        FileEntity fileEntity = new FileEntity();
-        fileEntity.setFileName(file.getName());
-        fileEntity.setFileType(getFileType(file.getName()));
-        fileList.add(fileEntity);
-        jobParameter.setFileList(fileList);
-
+    public static void uploadFile(Object tag, Object dateObject, File file, UploadListener uploadListener) {
         String token = CacheDataSource.getToken();
         long time = System.currentTimeMillis();
-        String dataStr = JSON.toJSONString(jobParameter);
+        String dataStr = JSON.toJSONString(dateObject);
         String httpKey = CacheDataSource.getHttpKey();
         String sha1Str = HashUtils.getSha1Str(dataStr + time + httpKey);
 
@@ -285,23 +262,6 @@ public class NetDataSource {
                         uploadListener.uploadFailed(file);
                     }
                 });
-    }
-
-    /**
-     * 根据文件名返回文件类型
-     *
-     * @param fileName 文件名
-     * @return 没有符合的返回-1
-     */
-    private static int getFileType(String fileName) {
-        if (fileName.endsWith(".jpg")) {
-            return FileType.PICTURE;
-        } else if (fileName.endsWith(".mp4")) {
-            return FileType.VIDEO;
-        } else if (fileName.endsWith(".aac")) {
-            return FileType.AUDIO;
-        }
-        return -1;
     }
 
     /**

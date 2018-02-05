@@ -4,10 +4,13 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.winsion.dispatch.application.AppApplication;
+import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.NetDataSource;
 import com.winsion.dispatch.data.constants.FieldKey;
 import com.winsion.dispatch.data.constants.JoinKey;
+import com.winsion.dispatch.data.constants.OpeType;
 import com.winsion.dispatch.data.constants.Urls;
 import com.winsion.dispatch.data.constants.ViewName;
 import com.winsion.dispatch.data.entity.ResponseForQueryData;
@@ -19,9 +22,12 @@ import com.winsion.dispatch.media.constants.FileStatus;
 import com.winsion.dispatch.media.constants.FileType;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
 import com.winsion.dispatch.media.entity.ServerRecordEntity;
+import com.winsion.dispatch.modules.operation.entity.FileEntity;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
+import com.winsion.dispatch.modules.operation.entity.JobParameter;
 import com.winsion.dispatch.utils.DirAndFileUtils;
 import com.winsion.dispatch.utils.FileUtils;
+import com.winsion.dispatch.modules.operation.constants.TrainAreaType;
 
 import java.io.File;
 import java.io.IOException;
@@ -130,7 +136,39 @@ public class OperatorTaskDetailPresenter implements OperatorTaskDetailContract.P
 
     @Override
     public void upload(JobEntity jobEntity, File file, UploadListener uploadListener) {
-        NetDataSource.uploadFile(this, jobEntity, file, uploadListener);
+        JobParameter jobParameter = new JobParameter();
+        jobParameter.setSsId(CommonBiz.getBSSID(AppApplication.getContext()));
+        jobParameter.setTaskId(jobEntity.getTasksid());
+        jobParameter.setOpormotId(jobEntity.getJoboperatorsid());
+        jobParameter.setOpType(OpeType.RUNNING);
+        jobParameter.setJobsId(jobEntity.getJobsid());
+        jobParameter.setUsersId(CacheDataSource.getUserId());
+
+        List<FileEntity> fileList = new ArrayList<>();
+        FileEntity fileEntity = new FileEntity();
+        fileEntity.setFileName(file.getName());
+        fileEntity.setFileType(getFileType(file.getName()));
+        fileList.add(fileEntity);
+        jobParameter.setFileList(fileList);
+
+        NetDataSource.uploadFile(this, jobParameter, file, uploadListener);
+    }
+
+    /**
+     * 根据文件名返回文件类型
+     *
+     * @param fileName 文件名
+     * @return 没有符合的返回-1
+     */
+    private static int getFileType(String fileName) {
+        if (fileName.endsWith(".jpg")) {
+            return FileType.PICTURE;
+        } else if (fileName.endsWith(".mp4")) {
+            return FileType.VIDEO;
+        } else if (fileName.endsWith(".aac")) {
+            return FileType.AUDIO;
+        }
+        return -1;
     }
 
     private void getUploadedFile(String field, String valueKey, String viewName) {
@@ -165,6 +203,52 @@ public class OperatorTaskDetailPresenter implements OperatorTaskDetailContract.P
 
                     }
                 });
+    }
+
+    /**
+     * 格式化车次数据
+     *
+     * @return {股道，站台，检票口，候车室}
+     */
+    @Override
+    public String[] formatTrainData(String[] areaType, String[] name) {
+        String track = "--";
+        String platform = "--";
+        String waitRoom = "--";
+        String checkPort = "--";
+        for (int i = 0; i < name.length; i++) {
+            switch (areaType[i]) {
+                case TrainAreaType.TRACK:
+                    if (TextUtils.equals(track, "--")) {
+                        track = name[i];
+                    } else {
+                        track += "," + name[i];
+                    }
+                    break;
+                case TrainAreaType.PLATFORM:
+                    if (TextUtils.equals(platform, "--")) {
+                        platform = name[i];
+                    } else {
+                        platform += "," + name[i];
+                    }
+                    break;
+                case TrainAreaType.WAITING_ROOM:
+                    if (TextUtils.equals(waitRoom, "--")) {
+                        waitRoom = name[i];
+                    } else {
+                        waitRoom += "," + name[i];
+                    }
+                    break;
+                case TrainAreaType.TICKET_ENTRANCE:
+                    if (TextUtils.equals(checkPort, "--")) {
+                        checkPort = name[i];
+                    } else {
+                        checkPort += "," + name[i];
+                    }
+                    break;
+            }
+        }
+        return new String[]{track, platform, waitRoom, checkPort};
     }
 
     @Override

@@ -35,9 +35,9 @@ public class ProblemManagePresenter implements ProblemManageContract.Presenter {
     private ProblemManageContract.View mView;
     private Context mContext;
 
-    ProblemManagePresenter(ProblemManageContract.View problemManageView) {
-        this.mView = problemManageView;
-        this.mContext = mView.getContext();
+    ProblemManagePresenter(ProblemManageContract.View view) {
+        this.mView = view;
+        this.mContext = view.getContext();
     }
 
     @Override

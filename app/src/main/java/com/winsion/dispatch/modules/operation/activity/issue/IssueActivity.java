@@ -454,7 +454,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                 break;
             case R.id.btn_take_photo:
                 try {
-                    photoFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
+                    photoFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
                     bundle.putSerializable(TakePhotoActivity.FILE, photoFile);
                     startActivityForResult(TakePhotoActivity.class, CODE_TAKE_PHOTO, bundle);
                 } catch (IOException e) {
@@ -463,7 +463,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                 break;
             case R.id.btn_video:
                 try {
-                    videoFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.VIDEO);
+                    videoFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.VIDEO);
                     bundle.putSerializable(RecordVideoActivity.FILE, videoFile);
                     startActivityForResult(RecordVideoActivity.class, CODE_RECORD_VIDEO, bundle);
                 } catch (IOException e) {
@@ -472,7 +472,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                 break;
             case R.id.btn_record:
                 try {
-                    audioFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.AUDIO);
+                    audioFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.AUDIO);
                     bundle.putSerializable(RecordAudioActivity.FILE, audioFile);
                     startActivityForResult(RecordAudioActivity.class, CODE_RECORD_AUDIO, bundle);
                 } catch (IOException e) {

@@ -1,5 +1,7 @@
 package com.winsion.dispatch.modules.grid.fragment.patrolplan;
 
+import android.content.Context;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.winsion.dispatch.application.AppApplication;
@@ -30,9 +32,11 @@ import java.util.List;
 
 public class PatrolPlanPresenter implements PatrolPlanContract.Presenter {
     private PatrolPlanContract.View mView;
+    private Context mContext;
 
     PatrolPlanPresenter(PatrolPlanContract.View view) {
         this.mView = view;
+        this.mContext = view.getContext();
     }
 
     @Override
@@ -43,7 +47,7 @@ public class PatrolPlanPresenter implements PatrolPlanContract.Presenter {
     @Override
     public void getPatrolPlanData() {
         if (AppApplication.TEST_MODE) {
-            List<PatrolPlanEntity> testEntity = JsonUtils.getTestEntities(mView.getContext(), PatrolPlanEntity.class);
+            List<PatrolPlanEntity> testEntity = JsonUtils.getTestEntities(mContext, PatrolPlanEntity.class);
             mView.getPatrolPlanDataSuccess(testEntity);
             return;
         }

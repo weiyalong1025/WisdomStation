@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseActivity;
+import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.common.listener.StateListener;
 import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.constants.OpeType;
@@ -375,7 +376,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
 
         String[] areaType = mJobEntity.getAreatypeno().split(",");
         String[] name = mJobEntity.getRunareaname().split(",");
-        String[] strings = ConvertUtils.formatTrainData(areaType, name);
+        String[] strings = mPresenter.formatTrainData(areaType, name);
         tvStartStationName.setText(mJobEntity.getSstname());
         tvEndStationName.setText(mJobEntity.getEstname());
         tvTrack.setText(strings[0]);
@@ -857,7 +858,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 break;
             case R.id.btn_note:
                 try {
-                    noteFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.TEXT);
+                    noteFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.TEXT);
                     bundle.putSerializable(AddNoteActivity.FILE, noteFile);
                     startActivityForResult(AddNoteActivity.class, CODE_NOTE, bundle);
                 } catch (IOException e) {
@@ -866,7 +867,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 break;
             case R.id.btn_take_photo:
                 try {
-                    photoFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.PICTURE);
+                    photoFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.PICTURE);
                     bundle.putSerializable(TakePhotoActivity.FILE, photoFile);
                     startActivityForResult(TakePhotoActivity.class, CODE_TAKE_PHOTO, bundle);
                 } catch (IOException e) {
@@ -875,7 +876,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 break;
             case R.id.btn_video:
                 try {
-                    videoFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.VIDEO);
+                    videoFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.VIDEO);
                     bundle.putSerializable(RecordVideoActivity.FILE, videoFile);
                     startActivityForResult(RecordVideoActivity.class, CODE_RECORD_VIDEO, bundle);
                 } catch (IOException e) {
@@ -884,7 +885,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 break;
             case R.id.btn_record:
                 try {
-                    audioFile = DirAndFileUtils.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.AUDIO);
+                    audioFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.AUDIO);
                     bundle.putSerializable(RecordAudioActivity.FILE, audioFile);
                     startActivityForResult(RecordAudioActivity.class, CODE_RECORD_AUDIO, bundle);
                 } catch (IOException e) {

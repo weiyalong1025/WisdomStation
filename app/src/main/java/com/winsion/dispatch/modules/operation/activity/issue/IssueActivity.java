@@ -214,7 +214,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         String title = getText(etTitle);
         String content = getText(etContent);
         if (isEmpty(getText(tvStation)) || isEmpty(teamIds) || isEmpty(title) || isEmpty(runsId) || isEmpty(content)) {
-            showToast(getString(R.string.please_complete_the_information));
+            showToast(getString(R.string.toast_complete_info));
         } else {
             for (LocalRecordEntity localRecordEntity : localRecordEntities) {
                 if (localRecordEntity.getFileStatus() != FileStatus.SYNCHRONIZED) {

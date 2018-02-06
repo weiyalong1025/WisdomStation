@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.dispatch.view.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showConfirmButton="false"
+        app:titleText="@string/title_qr_code" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SurfaceView
+            android:id="@+id/scanner_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.winsion.dispatch.view.ViewfinderView
+            android:id="@+id/viewfinder_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:corner_color="@color/green2"
+            app:frame_color="@color/white3"
+            app:label_text="@string/hint_capture_qr_code"
+            app:label_text_color="@color/white3"
+            app:laser_color="@color/green2"
+            app:mask_color="@color/black7"
+            app:result_point_color="@color/yellow4" />
+
+        <ToggleButton
+            android:id="@+id/btn_flashLight"
+            android:layout_width="@dimen/d38"
+            android:layout_height="@dimen/d38"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/d50"
+            android:background="@drawable/selector_bg_flashlight"
+            android:textOff=""
+            android:textOn="" />
+    </FrameLayout>
+</LinearLayout>

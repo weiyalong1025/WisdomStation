@@ -15,9 +15,9 @@ class TodoListContract {
     }
 
     interface Presenter extends BasePresenter {
-        void deleteToDo(TodoEntity todoEntity);
+        void deleteTodo(TodoEntity todoEntity);
 
-        List<TodoEntity> queryToDo(boolean isFinish);
+        List<TodoEntity> queryTodo(boolean isFinish);
 
         void recoverAlarm();
 

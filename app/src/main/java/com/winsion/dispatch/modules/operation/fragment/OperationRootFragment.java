@@ -30,7 +30,7 @@ public class OperationRootFragment extends BaseFragment {
     MyIndicator mIndicator;
 
     private Fragment[] mFragments = {new OperatorTaskListFragment(), new MonitorTaskListFragment(), new IssueFragment()};
-    private int[] mTitles = {R.string.my_task, R.string.task_monitor, R.string.command_and_collaboration};
+    private int[] mTitles = {R.string.tab_my_task, R.string.tab_task_monitor, R.string.tab_command_and_cooperation};
     private int mCurrentSysType = -1;
 
     @SuppressLint("InflateParams")

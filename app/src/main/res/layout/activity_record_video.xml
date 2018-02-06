@@ -96,11 +96,11 @@
 
             <Button
                 android:id="@+id/btn_confirm"
-                style="?android:attr/borderlessButtonStyle"
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/confirm"
+                android:text="@string/btn_confirm"
                 android:textSize="@dimen/s18" />
 
             <View
@@ -110,7 +110,7 @@
 
             <Button
                 android:id="@+id/btn_cancel"
-                style="?android:attr/borderlessButtonStyle"
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

@@ -318,7 +318,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
             String createDate = listData.get(0).getCreatedate();
             String[] split = createDate.split("-");
             String data = split[0] + "年" + split[1] + "月" + split[2] + "日";
-            tvDate.setText(String.format("%s%s", data, getString(R.string.patrol_plan)));
+            tvDate.setText(String.format("%s%s", data, getString(R.string.tab_patrol_plan)));
             showView(flContainer, swipeRefresh);
         }
     }
@@ -326,7 +326,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     @Override
     public void getPatrolPlanDataFailed() {
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(R.string.failure_load_click_retry);
+        tvHint.setText(R.string.msg_load_failed_click_retry);
         showView(flContainer, tvHint);
     }
 

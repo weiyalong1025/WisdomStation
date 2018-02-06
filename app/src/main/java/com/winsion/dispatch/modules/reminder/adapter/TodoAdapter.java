@@ -51,7 +51,7 @@ public class TodoAdapter extends CommonAdapter<TodoEntity> {
                 new AlertDialog.Builder(mContext)
                         .setMessage(getString(R.string.sure_to_delete_it))
                         .setNegativeButton(getString(R.string.cancel), (DialogInterface dialog, int which) -> dialog.cancel())
-                        .setPositiveButton(getString(R.string.confirm), (DialogInterface dialog, int which) -> {
+                        .setPositiveButton(getString(R.string.btn_confirm), (DialogInterface dialog, int which) -> {
                             if (onItemClickListener != null) {
                                 onItemClickListener.onClick(mDatas.get(position));
                             }

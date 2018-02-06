@@ -287,7 +287,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         if (mLoadingDialog == null) {
             mLoadingDialog = new TipDialog.Builder(mContext)
                     .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord(getString(R.string.on_login))
+                    .setTipWord(getString(R.string.dialog_on_login))
                     .create();
         }
         if (mLoadingDialog.isShowing()) {
@@ -309,19 +309,19 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         hideDialog();
         switch (loginErrorCode) {
             case LoginErrorCode.CAN_NOT_EMPTY:
-                showToast(R.string.username_and_password_can_not_be_empty);
+                showToast(R.string.toast_complete_login_data);
                 break;
             case LoginErrorCode.NO_IP_AND_PORT:
-                showToast(R.string.please_configure_the_IP_address_and_port_number_first);
+                showToast(R.string.toast_need_config_ip_port);
                 break;
             case LoginErrorCode.LOGIN_FAILED:
-                showToast(R.string.login_failed);
+                showToast(R.string.toast_login_failed);
                 break;
             case LoginErrorCode.WRONG_USER_INFO:
-                showToast(R.string.incorrect_username_or_password);
+                showToast(R.string.toast_incorrect_username_pwd);
                 break;
             case LoginErrorCode.MQ_CONNECT_FAILED:
-                showToast(R.string.mq_connect_failed);
+                showToast(R.string.toast_mq_connect_failed);
                 break;
         }
     }

@@ -74,12 +74,12 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
 
     private void initListener() {
         EventBus.getDefault().register(this);
-        mAdapter.setOnButtonClickListener(todoEntity -> mPresenter.deleteToDo(todoEntity));
+        mAdapter.setOnButtonClickListener(todoEntity -> mPresenter.deleteTodo(todoEntity));
         lvRemindersList.setOnItemClickListener(this);
     }
 
     private void initData(boolean isUpdateBadge) {
-        List<TodoEntity> toDoBeen = mPresenter.queryToDo(mIsFinish);
+        List<TodoEntity> toDoBeen = mPresenter.queryTodo(mIsFinish);
         listData.clear();
         listData.addAll(toDoBeen);
         mAdapter.notifyDataSetChanged();
@@ -87,7 +87,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
         if (isUpdateBadge) {
             // 更新角标
             int unreadCount = 0;
-            for (TodoEntity todoEntity : mPresenter.queryToDo(false)) {
+            for (TodoEntity todoEntity : mPresenter.queryTodo(false)) {
                 if (todoEntity.getPlanDate() < System.currentTimeMillis()) {
                     unreadCount++;
                 }

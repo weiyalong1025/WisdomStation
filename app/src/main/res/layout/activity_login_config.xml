@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:showConfirmButton="false"
-        app:titleText="@string/login_config" />
+        app:titleText="@string/title_btn_login_config" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:layout_width="@dimen/d70"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/ip_address"
+            android:text="@string/label_ip_address"
             android:textColor="@color/gray5"
             android:textSize="@dimen/s20" />
 
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:hint="@string/please_input_ip_address"
+                android:hint="@string/hint_ip_address"
                 android:paddingStart="@dimen/d10"
                 android:singleLine="true"
                 android:textColor="@color/white1"
@@ -66,7 +66,7 @@
             android:layout_gravity="center_vertical"
             android:layout_width="@dimen/d70"
             android:layout_height="wrap_content"
-            android:text="@string/port"
+            android:text="@string/label_port"
             android:textColor="@color/gray5"
             android:textSize="@dimen/s20" />
 
@@ -75,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            android:hint="@string/please_input_port"
+            android:hint="@string/hint_input_port"
             android:inputType="number"
             android:paddingStart="@dimen/d10"
             android:singleLine="true"
@@ -99,6 +99,6 @@
         android:layout_marginRight="@dimen/d10"
         android:layout_marginTop="@dimen/d20"
         android:background="@drawable/btn_yellow"
-        android:text="@string/confirm"
+        android:text="@string/btn_confirm"
         android:textSize="@dimen/s18" />
 </LinearLayout>

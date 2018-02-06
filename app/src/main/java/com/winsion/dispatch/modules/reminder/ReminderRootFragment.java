@@ -37,7 +37,7 @@ public class ReminderRootFragment extends BaseFragment {
     BadgeRadioButton brb2;
 
     private Fragment[] mFragments = {new PlaceHolderFragment(), new TodoListFragment(), new SystemRemindFragment()};
-    private int[] mTitles = {R.string.user_message, R.string.to_do_list, R.string.system_remind};
+    private int[] mTitles = {R.string.tab_user_message, R.string.tab_todo, R.string.tab_system_remind};
     private int mCurrentSysType = -1;
 
     @SuppressLint("InflateParams")

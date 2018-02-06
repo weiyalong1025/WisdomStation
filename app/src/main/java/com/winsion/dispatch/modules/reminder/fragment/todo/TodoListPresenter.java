@@ -35,7 +35,7 @@ public class TodoListPresenter implements TodoListContract.Presenter {
     }
 
     @Override
-    public void deleteToDo(TodoEntity todoEntity) {
+    public void deleteTodo(TodoEntity todoEntity) {
         if (!todoEntity.getFinished()) {
             Intent intent = new Intent(mContext, TodoReceiver.class);
             intent.putExtra(ExtraName.NAME_TODO_ID, todoEntity.getId());
@@ -49,7 +49,7 @@ public class TodoListPresenter implements TodoListContract.Presenter {
     }
 
     @Override
-    public List<TodoEntity> queryToDo(boolean isFinish) {
+    public List<TodoEntity> queryTodo(boolean isFinish) {
         return DBDataSource.getInstance().queryTodoByStatus(isFinish, CacheDataSource.getUserId());
     }
 
@@ -58,7 +58,7 @@ public class TodoListPresenter implements TodoListContract.Presenter {
      */
     @Override
     public void recoverAlarm() {
-        for (TodoEntity todoEntity : queryToDo(false)) {
+        for (TodoEntity todoEntity : queryTodo(false)) {
             setAlarm(todoEntity);
         }
     }

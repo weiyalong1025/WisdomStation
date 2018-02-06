@@ -27,7 +27,7 @@ public class GridRootFragment extends BaseFragment {
     MyIndicator mIndicator;
 
     private Fragment[] mFragments = {new PatrolPlanFragment(), new ProblemManageFragment()};
-    private int[] mTitles = {R.string.patrol_plan, R.string.problem_manager};
+    private int[] mTitles = {R.string.tab_patrol_plan, R.string.tab_problem_manager};
 
     @SuppressLint("InflateParams")
     @Override

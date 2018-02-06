@@ -71,7 +71,7 @@ public class MonitorTaskListAdapter extends CommonAdapter<TaskEntity> {
         switch (taskType) {
             // 任务
             case TaskType.TASK:
-                viewHolder.setText(R.id.task_type_name, getString(R.string.task_name));
+                viewHolder.setText(R.id.task_type_name, getString(R.string.label_task_name));
                 viewHolder.setVisible(R.id.iv_type_icon, false);
                 viewHolder.setText(R.id.btn_status, jobSize + getString(R.string.a_job));
                 break;

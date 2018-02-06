@@ -399,7 +399,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             // 任务
             case TaskType.TASK:
                 tvTitle.setTitleText(getString(R.string.task_detail));
-                taskTypeName.setText(R.string.task_name);
+                taskTypeName.setText(R.string.label_task_name);
                 ivIconOrder.setVisibility(View.GONE);
                 break;
             // 命令
@@ -464,7 +464,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 未开始
                 // 设置按钮背景和文字
                 btnStatus.setBackgroundResource(R.drawable.btn_bg_start);
-                btnStatus.setText(getString(R.string.click_to_start));
+                btnStatus.setText(getString(R.string.btn_click_to_start));
                 // 设置持续时间
                 tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.minute)));
                 // 判断是否超时
@@ -495,7 +495,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 已完成
                 // 设置按钮背景和文字
                 btnStatus.setBackgroundResource(R.drawable.btn_bg_done);
-                btnStatus.setText(getString(R.string.done));
+                btnStatus.setText(getString(R.string.spinner_done));
                 // 设置持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / (60 * 1000));
                 tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.minute)));
@@ -904,7 +904,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private void showDialog(boolean isRunning, View btn) {
         new AlertDialog.Builder(mContext)
                 .setMessage(getString(isRunning ? R.string.sure_you_want_to_finish : R.string.sure_you_want_to_start))
-                .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
+                .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
                     btn.setEnabled(false);
                     int opeType = isRunning ? OpeType.COMPLETE : OpeType.BEGIN;
                     TaskCommBiz.changeJobStatus(mContext, mJobEntity, opeType, new StateListener() {

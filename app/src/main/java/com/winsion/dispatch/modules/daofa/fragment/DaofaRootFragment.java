@@ -26,7 +26,7 @@ public class DaofaRootFragment extends BaseFragment {
     MyIndicator mIndicator;
 
     private Fragment[] mFragments = {new PlaceHolderFragment(), new PlaceHolderFragment()};
-    private int[] mTitles = {R.string.up, R.string.down};
+    private int[] mTitles = {R.string.tab_up, R.string.tab_down};
 
     @SuppressLint("InflateParams")
     @Override

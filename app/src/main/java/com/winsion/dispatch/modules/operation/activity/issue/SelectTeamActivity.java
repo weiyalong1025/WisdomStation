@@ -108,7 +108,7 @@ public class SelectTeamActivity extends BaseActivity {
 
                     @Override
                     public void onFailed(int errorCode, String errorInfo) {
-                        tvHint.setText(R.string.failure_load_click_retry);
+                        tvHint.setText(R.string.msg_load_failed_click_retry);
                         showView(flContainer, tvHint);
                     }
                 });

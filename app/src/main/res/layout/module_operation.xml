@@ -59,7 +59,7 @@
                 android:id="@+id/task_type_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/task_name"
+                android:text="@string/label_task_name"
                 android:textColor="@color/gray2"
                 android:textSize="@dimen/s15" />
         </LinearLayout>
@@ -70,7 +70,7 @@
             android:layout_marginBottom="@dimen/d4"
             android:layout_marginTop="@dimen/d15"
             android:gravity="center"
-            android:text="@string/execution_time"
+            android:text="@string/label_execution_time"
             android:textColor="@color/gray2"
             android:textSize="@dimen/s15"
             app:layout_columnWeight="1"
@@ -179,7 +179,7 @@
             android:layout_height="@dimen/d40"
             android:background="@drawable/btn_bg_start"
             android:focusable="false"
-            android:text="@string/click_to_start"
+            android:text="@string/btn_click_to_start"
             android:textSize="@dimen/s18" />
 
         <LinearLayout

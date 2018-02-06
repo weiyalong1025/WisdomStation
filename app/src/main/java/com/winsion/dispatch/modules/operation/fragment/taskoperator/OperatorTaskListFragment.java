@@ -106,7 +106,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
         // 初始化车站选项
         List<String> stationList = new ArrayList<>();
-        stationList.add(getString(R.string.station_name));
+        stationList.add(getString(R.string.spinner_station_name));
         svSpinner.setFirstOptionData(stationList);
         svSpinner.setFirstOptionItemClickListener((position) -> {
             showView(flContainer, progressBar);
@@ -161,7 +161,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
             boolean isFinish = workStatus == TaskState.RUN;
             new AlertDialog.Builder(mContext)
                     .setMessage(getString(isFinish ? R.string.sure_you_want_to_finish : R.string.sure_you_want_to_start))
-                    .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
+                    .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
                         button.setEnabled(false);
                         int opeType = isFinish ? OpeType.COMPLETE : OpeType.BEGIN;
                         TaskCommBiz.changeJobStatus(mContext, jobEntity, opeType, new StateListener() {
@@ -344,7 +344,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @Override
     public void getMyTaskDataFailed() {
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(getString(R.string.failure_load_click_retry));
+        tvHint.setText(getString(R.string.msg_load_failed_click_retry));
         showView(flContainer, tvHint);
     }
 

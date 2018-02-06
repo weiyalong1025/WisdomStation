@@ -15,6 +15,7 @@ import butterknife.OnClick;
 
 /**
  * Created by 10295 on 2017/12/6 0006.
+ * 登录配置界面
  */
 
 public class LoginConfigActivity extends BaseActivity implements LoginConfigContract.View, SaveListener {
@@ -74,10 +75,10 @@ public class LoginConfigActivity extends BaseActivity implements LoginConfigCont
     public void saveFailed(int saveErrorCode) {
         switch (saveErrorCode) {
             case SaveErrorCode.CAN_NOT_BE_NULL:
-                showToast(R.string.address_and_port_can_not_be_empty);
+                showToast(R.string.toast_complete_ip_port);
                 break;
             case SaveErrorCode.FORMAT_ERROR:
-                showToast(R.string.format_error);
+                showToast(R.string.toast_format_error);
                 break;
         }
     }

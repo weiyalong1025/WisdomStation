@@ -179,7 +179,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     // 选择车站数据
     private void initStationData() {
-        stationList.add(getString(R.string.station_name));
+        stationList.add(getString(R.string.spinner_station_name));
     }
 
     private void initView() {
@@ -277,7 +277,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         if (mLoadingDialog == null) {
             mLoadingDialog = new TipDialog.Builder(mContext)
                     .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord(getString(R.string.on_issue))
+                    .setTipWord(getString(R.string.dialog_on_issue))
                     .create();
         }
         if (mLoadingDialog.isShowing()) {
@@ -530,7 +530,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     private void showHintDialog() {
         new AlertDialog.Builder(mContext)
                 .setMessage(R.string.will_you_clear_out_the_data_after_you_exit)
-                .setPositiveButton(R.string.confirm, (dialog, which) -> {
+                .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
                     // 删除附件
                     deleteRecordFiles();
                     dialog.dismiss();

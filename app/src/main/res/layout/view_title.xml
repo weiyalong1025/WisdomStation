@@ -31,7 +31,7 @@
         android:gravity="center"
         android:paddingEnd="@dimen/d10"
         android:paddingStart="@dimen/d10"
-        android:text="@string/complete"
+        android:text="@string/btn_complete"
         android:textColor="@color/blue1"
         android:textSize="@dimen/s18"
         tools:ignore="RelativeOverlap" />

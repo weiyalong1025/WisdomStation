@@ -94,7 +94,7 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
         viewHolder.setOnClickListener(R.id.iv_delete, v ->
                 new AlertDialog.Builder(mContext)
                         .setMessage(getString(R.string.sure_to_delete_it))
-                        .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
+                        .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
                             if (mListener != null) {
                                 mListener.onClick(remindEntity);
                                 dialog.dismiss();

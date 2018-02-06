@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:showBackButton="false"
         app:showConfirmButton="false"
-        app:titleText="@string/login" />
+        app:titleText="@string/title_btn_login" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
             <TextView
                 android:layout_width="@dimen/d50"
                 android:layout_height="wrap_content"
-                android:text="@string/account"
+                android:text="@string/label_account"
                 android:textColor="@color/gray5"
                 android:textSize="@dimen/s20" />
 
@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="@string/please_input_account"
+                    android:hint="@string/hint_input_account"
                     android:paddingStart="@dimen/d10"
                     android:singleLine="true"
                     android:textColor="@color/white1"
@@ -76,7 +76,8 @@
                     android:layout_width="@dimen/d48"
                     android:layout_height="@dimen/d48"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_arrow_down" />
+                    android:src="@drawable/ic_arrow_down"
+                    tools:ignore="ContentDescription" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -103,7 +104,7 @@
             <TextView
                 android:layout_width="@dimen/d50"
                 android:layout_height="wrap_content"
-                android:text="@string/password"
+                android:text="@string/label_password"
                 android:textColor="@color/gray5"
                 android:textSize="@dimen/s20" />
 
@@ -112,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:hint="@string/please_input_password"
+                android:hint="@string/hint_input_password"
                 android:inputType="textPassword"
                 android:paddingStart="@dimen/d10"
                 android:singleLine="true"
@@ -140,7 +141,7 @@
             android:layout_marginLeft="@dimen/d10"
             android:layout_marginRight="@dimen/d10"
             android:background="@drawable/btn_blue"
-            android:text="@string/login"
+            android:text="@string/title_btn_login"
             android:textSize="@dimen/s18" />
 
         <View
@@ -153,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/d5"
-            android:text="@string/login_config"
+            android:text="@string/title_btn_login_config"
             android:textColor="@color/gray1"
             android:textSize="@dimen/s18" />
 

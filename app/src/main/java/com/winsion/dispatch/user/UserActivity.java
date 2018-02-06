@@ -63,7 +63,7 @@ public class UserActivity extends BaseActivity {
         if (mLoadingDialog == null) {
             mLoadingDialog = new TipDialog.Builder(mContext)
                     .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord(getString(R.string.on_logout))
+                    .setTipWord(getString(R.string.dialog_on_logout))
                     .create();
         }
         if (mLoadingDialog.isShowing()) {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,7 +11,7 @@
         android:layout_height="wrap_content"
         app:showBackButton="false"
         app:showConfirmButton="false"
-        app:titleText="@string/scene" />
+        app:titleText="@string/tab_scene" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -103,7 +104,8 @@
                         android:layout_height="@dimen/d8"
                         android:layout_alignEnd="@id/iv_transfer"
                         android:background="@drawable/bg_circle_red"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        tools:ignore="ContentDescription" />
                 </RelativeLayout>
 
                 <View

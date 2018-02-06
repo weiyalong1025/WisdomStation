@@ -71,7 +71,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
         switch (taskType) {
             // 任务
             case TaskType.TASK:
-                viewHolder.setText(R.id.task_type_name, getString(R.string.task_name));
+                viewHolder.setText(R.id.task_type_name, getString(R.string.label_task_name));
                 viewHolder.setVisible(R.id.iv_type_icon, false);
                 break;
             // 命令
@@ -126,7 +126,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
             case TaskState.NOT_STARTED:
                 // 设置按钮背景和文字
                 viewHolder.setBackgroundRes(R.id.btn_status, R.drawable.btn_bg_start);
-                viewHolder.setText(R.id.btn_status, getString(R.string.click_to_start));
+                viewHolder.setText(R.id.btn_status, getString(R.string.btn_click_to_start));
                 // 持续时间
                 lastTime = 0;
                 viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
@@ -157,7 +157,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
             case TaskState.DONE:
                 // 设置按钮背景和文字
                 viewHolder.setBackgroundRes(R.id.btn_status, R.drawable.btn_bg_done);
-                viewHolder.setText(R.id.btn_status, getString(R.string.done));
+                viewHolder.setText(R.id.btn_status, getString(R.string.spinner_done));
                 // 持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / 60000);
                 viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));

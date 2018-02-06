@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/d24"
-            android:text="@string/reminder"
+            android:text="@string/tab_reminder"
             android:textColor="@color/gray9"
             android:textSize="@dimen/s18" />
 
@@ -42,7 +42,7 @@
             android:background="@drawable/selector_dialog_button_bg"
             android:gravity="center"
             android:padding="@dimen/d15"
-            android:text="@string/confirm"
+            android:text="@string/btn_confirm"
             android:textColor="@color/selector_dialog_button_text"
             android:textSize="@dimen/s18" />
     </LinearLayout>

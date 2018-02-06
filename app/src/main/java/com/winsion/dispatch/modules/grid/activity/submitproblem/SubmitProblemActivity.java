@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseActivity;
+import com.winsion.dispatch.capture.CaptureActivity;
 import com.winsion.dispatch.modules.grid.entity.SubclassEntity;
 import com.winsion.dispatch.view.TipDialog;
 import com.winsion.dispatch.view.TitleView;
@@ -23,6 +24,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.winsion.dispatch.capture.CaptureActivity.INTENT_EXTRA_KEY_QR_SCAN;
 
 /**
  * Created by 10295 on 2018/2/2.
@@ -54,6 +57,10 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     public static final String SITE_NAME = "siteName";
     // 是否与设备相关
     public static final String DEVICE_DEPENDENT = "deviceDependent";
+    // 拍照
+    private static final int CODE_TAKE_PHOTO = 0;
+    // 扫描二维码
+    private static final int CODE_CAPTURE_QR = 1;
 
     private SubmitProblemContact.Presenter mPresenter;
     private String devicePatrolDetailId;
@@ -110,7 +117,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
                 EditText editText = new EditText(this);
                 builder.setView(editText);
                 builder.setMessage("请输入设备ID");
-                builder.setPositiveButton(R.string.confirm, (DialogInterface dialog, int which) -> {
+                builder.setPositiveButton(R.string.btn_confirm, (DialogInterface dialog, int which) -> {
                     String deviceId = getText(editText);
                     if (!isEmpty(deviceId)) {
                         dialog.dismiss();
@@ -126,6 +133,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
                 editText.setLayoutParams(layoutParams);
                 break;
             case R.id.iv_scan:
+                startActivityForResult(CaptureActivity.class, CODE_CAPTURE_QR);
                 break;
             case R.id.tv_subclass:
                 break;
@@ -139,7 +147,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
         if (mLoadingDialog == null) {
             mLoadingDialog = new TipDialog.Builder(mContext)
                     .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord(getString(R.string.on_search))
+                    .setTipWord(getString(R.string.dialog_on_search))
                     .create();
         }
         if (mLoadingDialog.isShowing()) {
@@ -178,6 +186,22 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     @Override
     public void submitFailed() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case CODE_TAKE_PHOTO:
+
+                    break;
+                case CODE_CAPTURE_QR:
+                    String result = data.getStringExtra(INTENT_EXTRA_KEY_QR_SCAN);
+                    showToast(result);
+                    break;
+            }
+        }
     }
 
     @Override

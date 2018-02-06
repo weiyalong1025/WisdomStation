@@ -47,7 +47,7 @@ public class TitleView extends RelativeLayout {
         showBackButton(showBackButton);
         showConfirmButton(showConfirmButton);
         setTitleText(titleText);
-        setConfirmButtonText(TextUtils.isEmpty(confirmButtonText) ? getResources().getString(R.string.confirm) : confirmButtonText);
+        setConfirmButtonText(TextUtils.isEmpty(confirmButtonText) ? getResources().getString(R.string.btn_confirm) : confirmButtonText);
     }
 
     public void showBackButton(boolean isShow) {

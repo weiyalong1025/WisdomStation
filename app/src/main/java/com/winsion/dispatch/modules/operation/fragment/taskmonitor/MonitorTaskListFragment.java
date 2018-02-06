@@ -96,7 +96,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
         // 初始化车站选项
         List<String> stationList = new ArrayList<>();
-        stationList.add(getString(R.string.station_name));
+        stationList.add(getString(R.string.spinner_station_name));
         svSpinner.setFirstOptionData(stationList);
         svSpinner.setFirstOptionItemClickListener((position) -> {
             showView(flContainer, progressBar);
@@ -280,7 +280,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     @Override
     public void getMonitorTaskDataFailed() {
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(getString(R.string.failure_load_click_retry));
+        tvHint.setText(getString(R.string.msg_load_failed_click_retry));
         showView(flContainer, tvHint);
     }
 

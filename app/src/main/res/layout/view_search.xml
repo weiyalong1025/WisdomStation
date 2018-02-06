@@ -14,7 +14,7 @@
         android:layout_margin="@dimen/d5"
         android:adjustViewBounds="true"
         android:background="@drawable/bg_search"
-        android:hint="@string/search"
+        android:hint="@string/hint_search"
         android:paddingEnd="@dimen/d15"
         android:paddingStart="@dimen/d44"
         android:singleLine="true"

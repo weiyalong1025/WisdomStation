@@ -221,7 +221,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         } else {
             new AlertDialog.Builder(getActivity())
                     .setMessage(getConfirmDeleteHint(selectData.size()))
-                    .setPositiveButton(getString(R.string.confirm), (dialog, which) -> {
+                    .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
                         mPresenter.handleReminds(selectData, HandleType.HANDLE_DELETE);
                         dialog.cancel();
                     })
@@ -289,7 +289,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
 
     @Override
     public void getRemindDataFailed() {
-        tvHint.setText(R.string.failure_load_click_retry);
+        tvHint.setText(R.string.msg_load_failed_click_retry);
         showView(flContainer, tvHint);
     }
 

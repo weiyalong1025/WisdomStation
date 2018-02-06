@@ -104,7 +104,7 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
     @Override
     public void getProblemDataFailed(String errorInfo) {
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(R.string.failure_load_click_retry);
+        tvHint.setText(R.string.msg_load_failed_click_retry);
         showView(flContainer, tvHint);
     }
 

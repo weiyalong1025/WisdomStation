@@ -146,7 +146,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
                         // 取消，直接上报问题
                         mPresenter.submitProblemWithoutDevice(patrolItemEntity, DeviceState.FAILURE);
                     })
-                    .setPositiveButton(R.string.confirm, (dialog, which) -> {
+                    .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
                         Intent intent = new Intent(mContext, SubmitProblemActivity.class);
                         intent.putExtra(SubmitProblemActivity.PATROL_DETAIL_ID, patrolItemEntity.getId());
                         intent.putExtra(SubmitProblemActivity.SITE_NAME, patrolPlanEntity.getPointname());
@@ -239,7 +239,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
         listData.clear();
         devicePatrolDetailId = null;
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(R.string.failure_load_click_retry);
+        tvHint.setText(R.string.msg_load_failed_click_retry);
         showView(flContainer, tvHint);
     }
 

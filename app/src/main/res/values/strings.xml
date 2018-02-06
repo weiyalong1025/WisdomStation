@@ -1,59 +1,61 @@
 <resources>
     <string name="app_name">智慧车站</string>
-    <string name="complete">完成</string>
-    <string name="account">账号</string>
-    <string name="please_input_account">请输入账号</string>
-    <string name="password">密码</string>
-    <string name="please_input_password">请输入密码</string>
-    <string name="login">登录</string>
-    <string name="login_config">登录配置</string>
-    <string name="username_and_password_can_not_be_empty">用户名密码不能为空</string>
-    <string name="please_configure_the_IP_address_and_port_number_first">请先配置IP地址和端口号</string>
-    <string name="login_failed">登录失败</string>
-    <string name="incorrect_username_or_password">用户名密码错误</string>
-    <string name="ip_address">IP地址</string>
-    <string name="please_input_ip_address">请输入IP地址</string>
-    <string name="port">端口号</string>
-    <string name="please_input_port">请输入端口号</string>
-    <string name="confirm">确定</string>
-    <string name="address_and_port_can_not_be_empty">地址端口号不能为空</string>
-    <string name="format_error">格式错误</string>
-    <string name="mq_connect_failed">MQ连接失败</string>
-    <string name="on_login">登录中</string>
-    <string name="on_search">查询中</string>
-    <string name="on_logout">注销中</string>
-    <string name="on_issue">发布中</string>
-    <string name="dispatch">到发</string>
-    <string name="operation">作业</string>
-    <string name="contacts">联系人</string>
-    <string name="grid">网格</string>
-    <string name="scene">现场</string>
-    <string name="reminder">提醒</string>
-    <string name="my_task">我的任务</string>
-    <string name="task_monitor">任务监控</string>
-    <string name="command_and_collaboration">命令与协作</string>
-    <string name="up">上行</string>
-    <string name="down">下行</string>
-    <string name="team_group">班组</string>
-    <string name="contact_group">联系人组</string>
-    <string name="user_message">用户消息</string>
-    <string name="to_do_list">待办事项</string>
-    <string name="system_remind">系统提醒</string>
-    <string name="patrol_plan">巡视计划</string>
-    <string name="problem_manager">问题管理</string>
-    <string name="search">搜索</string>
-    <string name="failure_load_click_retry">获取数据失败，点击重试</string>
-    <string name="all">全部</string>
-    <string name="not_started">未开始</string>
-    <string name="doing">进行中</string>
-    <string name="done">已完成</string>
-    <string name="station_name">智慧车站</string>
-    <string name="click_to_start">点击开始</string>
-    <string name="plan_time">计划时间</string>
-    <string name="train_number">车次</string>
-    <string name="task_name">任务名称</string>
-    <string name="execution_time">执行时间</string>
+    <string name="btn_complete">完成</string>
+    <string name="label_account">账号</string>
+    <string name="hint_input_account">请输入账号</string>
+    <string name="label_password">密码</string>
+    <string name="hint_input_password">请输入密码</string>
+    <string name="title_btn_login">登录</string>
+    <string name="title_btn_login_config">登录配置</string>
+    <string name="toast_complete_login_data">用户名密码不能为空</string>
+    <string name="toast_need_config_ip_port">请先配置IP地址和端口号</string>
+    <string name="toast_login_failed">登录失败</string>
+    <string name="toast_incorrect_username_pwd">用户名密码错误</string>
+    <string name="label_ip_address">IP地址</string>
+    <string name="hint_ip_address">请输入IP地址</string>
+    <string name="label_port">端口号</string>
+    <string name="hint_input_port">请输入端口号</string>
+    <string name="btn_confirm">确定</string>
+    <string name="toast_complete_ip_port">地址端口号不能为空</string>
+    <string name="toast_format_error">格式错误</string>
+    <string name="toast_mq_connect_failed">MQ连接失败</string>
+    <string name="dialog_on_login">登录中</string>
+    <string name="dialog_on_search">查询中</string>
+    <string name="dialog_on_logout">注销中</string>
+    <string name="dialog_on_issue">发布中</string>
+    <string name="tab_dispatch">到发</string>
+    <string name="tab_operation">作业</string>
+    <string name="tab_contacts">联系人</string>
+    <string name="tab_grid">网格</string>
+    <string name="tab_scene">现场</string>
+    <string name="tab_reminder">提醒</string>
+    <string name="tab_my_task">我的任务</string>
+    <string name="tab_task_monitor">任务监控</string>
+    <string name="tab_command_and_cooperation">命令与协作</string>
+    <string name="tab_up">上行</string>
+    <string name="tab_down">下行</string>
+    <string name="tab_team_group">班组</string>
+    <string name="tab_contact_group">联系人组</string>
+    <string name="tab_user_message">用户消息</string>
+    <string name="tab_todo">待办事项</string>
+    <string name="tab_system_remind">系统提醒</string>
+    <string name="tab_patrol_plan">巡视计划</string>
+    <string name="tab_problem_manager">问题管理</string>
+    <string name="hint_search">搜索</string>
+    <string name="msg_load_failed_click_retry">获取数据失败，点击重试</string>
+    <string name="spinner_all">全部</string>
+    <string name="spinner_not_started">未开始</string>
+    <string name="spinner_doing">进行中</string>
+    <string name="spinner_done">已完成</string>
+    <string name="spinner_station_name">智慧车站</string>
+    <string name="btn_click_to_start">点击开始</string>
+    <string name="label_plan_time">计划时间</string>
+    <string name="label_train_number">车次</string>
+    <string name="label_task_name">任务名称</string>
+    <string name="label_execution_time">执行时间</string>
+
     <string name="nothing">无</string>
+
     <string name="command_name">命令名称</string>
     <string name="cooperation_name">协作名称</string>
     <string name="grid_task">网格任务</string>
@@ -200,12 +202,15 @@
     <string name="problem_desc">问题描述：</string>
     <string name="device_mismatch">设备不匹配</string>
     <string name="check_device_failed">查询设备失败</string>
+    <string name="title_qr_code">二维码/条码</string>
+    <string name="hint_capture_qr_code">将二维码/条码放入框内，即可自动扫描</string>
+    <string name="hint_capture_failed">扫描失败!</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">
-        <item>@string/all</item>
-        <item>@string/not_started</item>
-        <item>@string/doing</item>
-        <item>@string/done</item>
+        <item>@string/spinner_all</item>
+        <item>@string/spinner_not_started</item>
+        <item>@string/spinner_doing</item>
+        <item>@string/spinner_done</item>
     </string-array>
 </resources>

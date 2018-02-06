@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showConfirmButton="false"
-        app:titleText="@string/record_video" />
+        app:titleText="@string/title_record_video" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/rephotograph"
+                android:text="@string/btn_rephotograph"
                 android:textSize="@dimen/s18" />
         </LinearLayout>
     </RelativeLayout>

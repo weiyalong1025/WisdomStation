@@ -58,7 +58,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
             viewHolder.setVisible(R.id.tv_train_number, true);
             viewHolder.setVisible(R.id.tv_train_number_title, true);
             String trainNumber = jobEntity.getTrainnumber();
-            trainNumber = TextUtils.isEmpty(trainNumber) ? getString(R.string.nothing) : trainNumber;
+            trainNumber = TextUtils.isEmpty(trainNumber) ? getString(R.string.value_nothing) : trainNumber;
             viewHolder.setText(R.id.tv_train_number, trainNumber);
         }
 
@@ -71,30 +71,30 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
         switch (taskType) {
             // 任务
             case TaskType.TASK:
-                viewHolder.setText(R.id.task_type_name, getString(R.string.label_task_name));
+                viewHolder.setText(R.id.task_type_name, getString(R.string.name_task_name));
                 viewHolder.setVisible(R.id.iv_type_icon, false);
                 break;
             // 命令
             case TaskType.COMMAND:
-                viewHolder.setText(R.id.task_type_name, getString(R.string.command_name));
+                viewHolder.setText(R.id.task_type_name, getString(R.string.name_command_name));
                 viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_command);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 break;
             // 协作
             case TaskType.COOPERATE:
-                viewHolder.setText(R.id.task_type_name, getString(R.string.cooperation_name));
+                viewHolder.setText(R.id.task_type_name, getString(R.string.name_cooperation_name));
                 viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_cooperation);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 break;
             // 网格
             case TaskType.GRID:
-                viewHolder.setText(R.id.task_type_name, getString(R.string.grid_task));
+                viewHolder.setText(R.id.task_type_name, getString(R.string.value_grid_task));
                 viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_grid1);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 break;
             // 预案
             case TaskType.PLAN:
-                viewHolder.setText(R.id.task_type_name, getString(R.string.alarm_task));
+                viewHolder.setText(R.id.task_type_name, getString(R.string.value_alarm_task));
                 viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_alarm);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 break;
@@ -129,7 +129,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
                 viewHolder.setText(R.id.btn_status, getString(R.string.btn_click_to_start));
                 // 持续时间
                 lastTime = 0;
-                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.suffix_minute));
                 // 判断是否超时
                 isTimeOut = planStartTime < currentTime;
                 if (isTimeOut) {
@@ -141,10 +141,10 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
             case TaskState.RUN:
                 // 设置按钮背景和文字
                 viewHolder.setBackgroundRes(R.id.btn_status, R.drawable.btn_bg_finish);
-                viewHolder.setText(R.id.btn_status, getString(R.string.click_to_finish));
+                viewHolder.setText(R.id.btn_status, getString(R.string.btn_click_to_finish));
                 // 持续时间
                 lastTime = (int) ((currentTime - realStartTime) / 60000);
-                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.suffix_minute));
                 // 判断是否超时
                 isTimeOut = planEndTime < currentTime;
                 GifView gifView = viewHolder.getView(R.id.doing_gif);
@@ -160,7 +160,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
                 viewHolder.setText(R.id.btn_status, getString(R.string.spinner_done));
                 // 持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / 60000);
-                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.suffix_minute));
                 // 判断是否超时
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
@@ -172,16 +172,16 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
                 // 如果是网格任务已完成状态则显示为待验收
                 if (taskType == TaskType.GRID) {
                     viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_wait_pass);
-                    viewHolder.setText(R.id.btn_status, getString(R.string.wait_acceptance));
+                    viewHolder.setText(R.id.btn_status, getString(R.string.btn_wait_acceptance));
                 }
                 break;
             case TaskState.GRID_NOT_PASS:
                 // 设置按钮背景和文字
                 viewHolder.setBackgroundRes(R.id.btn_status, R.drawable.btn_bg_restart);
-                viewHolder.setText(R.id.btn_status, getString(R.string.restart));
+                viewHolder.setText(R.id.btn_status, getString(R.string.btn_restart));
                 // 持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / 60000);
-                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.minute));
+                viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.suffix_minute));
                 // 判断是否超时
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {

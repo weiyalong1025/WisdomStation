@@ -80,12 +80,12 @@ public class TaskCommBiz {
 
             @Override
             public void onSuccess(String result) {
-                ToastUtils.showToast(context, R.string.confirm_success);
+                ToastUtils.showToast(context, R.string.toast_confirm_success);
             }
 
             @Override
             public void onFailed(int errorCode, String errorInfo) {
-                ToastUtils.showToast(context, R.string.confirm_failed);
+                ToastUtils.showToast(context, R.string.toast_confirm_failed);
             }
         });
     }

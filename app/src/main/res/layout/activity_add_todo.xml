@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showConfirmButton="false"
-        app:titleText="@string/add_todo" />
+        app:titleText="@string/title_add_todo" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
         android:layout_height="@dimen/d200"
         android:background="@color/gray8"
         android:gravity="top|start"
-        android:hint="@string/reminder_content"
+        android:hint="@string/name_reminder_content"
         android:maxLength="80"
         android:maxLines="5"
         android:padding="@dimen/d15"
@@ -76,6 +76,6 @@
         android:layout_height="@dimen/d48"
         android:layout_margin="@dimen/d15"
         android:background="@drawable/btn_yellow"
-        android:text="@string/add"
+        android:text="@string/btn_add"
         android:textSize="@dimen/s21" />
 </LinearLayout>

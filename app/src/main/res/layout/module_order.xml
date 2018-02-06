@@ -22,7 +22,7 @@
             android:layout_marginStart="@dimen/d5"
             android:textColor="@color/gray5"
             android:textSize="@dimen/s20"
-            tools:text="@string/issue_order_group" />
+            tools:text="@string/name_issue_order_group" />
 
         <TextView
             android:id="@+id/tv_monitor_team"
@@ -52,7 +52,7 @@
             android:layout_marginStart="@dimen/d5"
             android:textColor="@color/gray5"
             android:textSize="@dimen/s20"
-            tools:text="@string/order_group" />
+            tools:text="@string/name_order_group" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -183,7 +183,7 @@
             android:layout_width="@dimen/d100"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
-            android:text="@string/start_time"
+            android:text="@string/name_start_time"
             android:textColor="@color/gray5"
             android:textSize="@dimen/s20" />
 
@@ -212,7 +212,7 @@
             android:layout_width="@dimen/d100"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
-            android:text="@string/end_time"
+            android:text="@string/name_end_time"
             android:textColor="@color/gray5"
             android:textSize="@dimen/s20" />
 
@@ -247,6 +247,6 @@
         android:textColor="@color/white1"
         android:textColorHint="@color/gray5"
         android:textSize="@dimen/s20"
-        tools:hint="@string/command_content"
+        tools:hint="@string/name_command_content"
         tools:ignore="TextFields" />
 </LinearLayout>

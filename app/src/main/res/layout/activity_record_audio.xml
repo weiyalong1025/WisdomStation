@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showConfirmButton="false"
-        app:titleText="@string/record_audio" />
+        app:titleText="@string/title_record" />
 
     <RelativeLayout
         android:layout_width="match_parent"

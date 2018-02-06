@@ -113,7 +113,7 @@ public class RecordAdapter extends CommonAdapter<LocalRecordEntity> {
                         intent.setDataAndType(uri, type);
                         mContext.startActivity(intent);
                     } catch (ActivityNotFoundException e) {
-                        ToastUtils.showToast(mContext, R.string.no_corresponding_program);
+                        ToastUtils.showToast(mContext, R.string.toast_no_corresponding_program);
                     }
 
                     break;
@@ -143,7 +143,7 @@ public class RecordAdapter extends CommonAdapter<LocalRecordEntity> {
         }
 
         ForegroundColorSpan gray = new ForegroundColorSpan(0xFF69696D);
-        String prefix = mContext.getString(R.string.note_content);
+        String prefix = mContext.getString(R.string.name_note_content);
         SpannableStringBuilder builder = new SpannableStringBuilder()
                 .append(prefix)
                 .append(note);

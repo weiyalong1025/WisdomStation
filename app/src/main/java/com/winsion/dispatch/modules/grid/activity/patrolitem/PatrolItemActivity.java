@@ -141,8 +141,8 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     public void onAbnormalClick(PatrolItemEntity patrolItemEntity) {
         if (equals(patrolItemEntity.getDevicestate(), PatrolItemState.UNDONE)) {
             new AlertDialog.Builder(mContext)
-                    .setMessage(R.string.do_you_want_to_add_problem_desc)
-                    .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                    .setMessage(R.string.dialog_do_you_want_to_add_problem_desc)
+                    .setNegativeButton(R.string.btn_cancel, (dialog, which) -> {
                         // 取消，直接上报问题
                         mPresenter.submitProblemWithoutDevice(patrolItemEntity, DeviceState.FAILURE);
                     })
@@ -206,7 +206,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
 
     @Override
     public void problemStateChangeFailed() {
-        showToast(R.string.submit_failed);
+        showToast(R.string.toast_submit_failed);
     }
 
     private void initPatrolItemData() {
@@ -219,7 +219,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
         swipeRefresh.setRefreshing(false);
         if (patrolItemEntities.size() == 0) {
             devicePatrolDetailId = null;
-            tvHint.setText(R.string.no_data_click_to_retry);
+            tvHint.setText(R.string.hint_no_data_click_retry);
             showView(flContainer, tvHint);
         } else {
             for (PatrolItemEntity patrolItemDto : patrolItemEntities) {
@@ -239,7 +239,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
         listData.clear();
         devicePatrolDetailId = null;
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(R.string.msg_load_failed_click_retry);
+        tvHint.setText(R.string.hint_load_failed_click_retry);
         showView(flContainer, tvHint);
     }
 

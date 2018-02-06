@@ -10,8 +10,8 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:confirmButtonText="@string/device_repair"
-        app:titleText="@string/patrol_item" />
+        app:confirmButtonText="@string/btn_device_repair"
+        app:titleText="@string/title_patrol_item" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/arrive_time"
+                android:text="@string/name_arrive_time"
                 android:textColor="@color/gray2"
                 android:textSize="@dimen/s16" />
 
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/finish_time"
+                android:text="@string/name_finish_time"
                 android:textColor="@color/gray2"
                 android:textSize="@dimen/s16" />
 

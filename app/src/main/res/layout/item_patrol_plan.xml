@@ -8,7 +8,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +20,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/div_vertical" />
+            android:background="@drawable/div_vertical"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_location"
@@ -52,7 +54,7 @@
                 android:id="@+id/tv_plan_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/plan_start"
+                android:text="@string/name_plan_start"
                 android:textColor="@color/gray2"
                 android:textSize="@dimen/s15" />
 
@@ -71,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/d10"
-                android:text="@string/plan_end"
+                android:text="@string/name_plan_finish"
                 android:textColor="@color/gray2"
                 android:textSize="@dimen/s15" />
 
@@ -111,7 +113,7 @@
                 android:id="@+id/tv_split_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/separator"
+                android:text="@string/symbol_separator"
                 android:textColor="@color/gray2"
                 android:textSize="@dimen/s20" />
 
@@ -127,12 +129,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/div_vertical" />
+            android:background="@drawable/div_vertical"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_bottom_split"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 </LinearLayout>

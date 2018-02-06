@@ -10,9 +10,9 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:confirmButtonText="@string/issue"
+        app:confirmButtonText="@string/btn_issue"
         app:showBackButton="true"
-        app:titleText="@string/issue_command" />
+        app:titleText="@string/title_issue_command" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:layout_marginStart="@dimen/d10"
                 android:layout_toEndOf="@id/refer1"
                 android:gravity="center_vertical"
-                android:hint="@string/please_select_station"
+                android:hint="@string/hint_select_station"
                 android:paddingEnd="@dimen/d45"
                 android:textColor="@color/white1"
                 android:textColorHint="@color/gray5"
@@ -85,7 +85,7 @@
                 android:layout_below="@id/refer2"
                 android:layout_marginStart="@dimen/d15"
                 android:gravity="center_vertical"
-                android:text="@string/start_time"
+                android:text="@string/name_start_time"
                 android:textColor="@color/gray5"
                 android:textSize="@dimen/s20" />
 
@@ -128,7 +128,7 @@
                 android:layout_below="@id/refer4"
                 android:layout_marginStart="@dimen/d15"
                 android:gravity="center_vertical"
-                android:text="@string/end_time"
+                android:text="@string/name_end_time"
                 android:textColor="@color/gray5"
                 android:textSize="@dimen/s20" />
 
@@ -173,7 +173,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/gray5"
                 android:textSize="@dimen/s20"
-                tools:text="@string/order_group" />
+                tools:text="@string/name_order_group" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -321,7 +321,7 @@
                 android:layout_below="@id/refer10"
                 android:layout_marginStart="@dimen/d15"
                 android:background="@null"
-                android:hint="@string/command_content"
+                android:hint="@string/name_command_content"
                 android:maxLength="150"
                 android:paddingBottom="@dimen/d10"
                 android:paddingEnd="@dimen/d10"

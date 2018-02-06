@@ -18,7 +18,7 @@
             android:background="@drawable/selector_radio_button"
             android:button="@null"
             android:gravity="center"
-            android:text="@string/unDone"
+            android:text="@string/tab_unfinished"
             android:textColor="@color/selector_button_text"
             android:textSize="@dimen/s16" />
 
@@ -49,7 +49,7 @@
         android:layout_height="@dimen/d48"
         android:layout_margin="@dimen/d15"
         android:background="@drawable/btn_yellow"
-        android:text="@string/add"
+        android:text="@string/btn_add"
         android:textColor="@color/black6"
         android:textSize="@dimen/s21" />
 </LinearLayout>

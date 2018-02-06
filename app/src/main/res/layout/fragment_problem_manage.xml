@@ -10,7 +10,7 @@
         android:background="@color/gray8"
         android:gravity="center_vertical"
         android:padding="@dimen/d9"
-        android:text="@string/problem_list"
+        android:text="@string/title_problem_list"
         android:textColor="@color/white1"
         android:textSize="@dimen/s16" />
 

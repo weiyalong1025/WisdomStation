@@ -9,7 +9,7 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleText="@string/select_train" />
+        app:titleText="@string/title_select_train" />
 
     <FrameLayout
         android:id="@+id/fl_container"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="@dimen/d10"
-            android:text="@string/msg_load_failed_click_retry"
+            android:text="@string/hint_load_failed_click_retry"
             android:textColor="@color/blue1"
             android:textSize="@dimen/s18"
             android:visibility="gone" />

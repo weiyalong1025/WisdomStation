@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="@string/check_update"
+            android:text="@string/btn_check_update"
             android:textColor="@color/white1"
             android:textSize="@dimen/s21"
             tools:ignore="RelativeOverlap" />
@@ -97,7 +97,7 @@
         android:background="@color/gray8"
         android:gravity="center"
         android:padding="@dimen/d15"
-        android:text="@string/logout"
+        android:text="@string/btn_logout"
         android:textColor="@color/yellow2"
         android:textSize="@dimen/s21" />
 

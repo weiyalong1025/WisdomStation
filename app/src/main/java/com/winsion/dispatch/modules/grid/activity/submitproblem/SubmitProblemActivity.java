@@ -53,14 +53,10 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     ListView lvPhotoList;
 
     public static final String PATROL_DETAIL_ID = "patrolDetailId";
-    // 地点
-    public static final String SITE_NAME = "siteName";
-    // 是否与设备相关
-    public static final String DEVICE_DEPENDENT = "deviceDependent";
-    // 拍照
-    private static final int CODE_TAKE_PHOTO = 0;
-    // 扫描二维码
-    private static final int CODE_CAPTURE_QR = 1;
+    public static final String SITE_NAME = "siteName";  // 地点
+    public static final String DEVICE_DEPENDENT = "deviceDependent";    // 是否与设备相关
+    private static final int CODE_TAKE_PHOTO = 0;   // 拍照
+    private static final int CODE_CAPTURE_QR = 1;   // 扫描二维码
 
     private SubmitProblemContact.Presenter mPresenter;
     private String devicePatrolDetailId;
@@ -124,7 +120,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
                         checkDeviceId(deviceId);
                     }
                 });
-                builder.setNegativeButton(R.string.cancel, (DialogInterface dialog, int which) -> dialog.dismiss());
+                builder.setNegativeButton(R.string.btn_cancel, (DialogInterface dialog, int which) -> dialog.dismiss());
                 builder.create().show();
 
                 int margin = getResources().getDimensionPixelSize(R.dimen.d10);

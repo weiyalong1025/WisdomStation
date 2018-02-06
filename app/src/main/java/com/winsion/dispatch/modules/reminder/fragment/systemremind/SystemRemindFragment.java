@@ -87,7 +87,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         mLvAdapter = new SystemRemindAdapter(mContext, listData);
         mLvAdapter.setOnDeleteBtnClickListener(remindEntity -> {
             if (remindEntity.getReaded() == ReadStatus.UNREAD) {
-                showToast(R.string.only_read_remind_can_be_deleted);
+                showToast(R.string.toast_only_read_remind_can_be_deleted);
             } else {
                 ArrayList<RemindEntity> list = new ArrayList<>();
                 list.add(remindEntity);
@@ -100,7 +100,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
 
     // 获取已选项提示信息
     private String getSelectCountHint(int selectSize) {
-        return String.format("%s%s%s", getString(R.string.selected), selectSize, getString(R.string.item));
+        return String.format("%s%s%s", getString(R.string.prefix_selected), selectSize, getString(R.string.suffix_item));
     }
 
     private void initListener() {
@@ -173,7 +173,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
 
         // 显示头布局
         btnSelectCount.setText(getSelectCountHint(0));
-        btnSelectAll.setText(R.string.select_all);
+        btnSelectAll.setText(R.string.btn_select_all);
         TranslateAnimation translateAnimationHeader;
         translateAnimationHeader = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0f,
                 Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, -1f,
@@ -199,9 +199,9 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         // 全选按钮点击事件
         btnSelectAll.setOnClickListener(v -> {
             if (isSelectAll) {
-                btnSelectAll.setText(R.string.select_all);
+                btnSelectAll.setText(R.string.btn_select_all);
             } else {
-                btnSelectAll.setText(R.string.select_none);
+                btnSelectAll.setText(R.string.btn_select_none);
             }
             isSelectAll = !isSelectAll;
             mLvAdapter.selectAll(isSelectAll);
@@ -217,7 +217,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     private void deleteSelectData() {
         List<RemindEntity> selectData = mLvAdapter.getSelectData();
         if (selectData.size() == 0) {
-            showToast(getString(R.string.currently_no_selected_item));
+            showToast(getString(R.string.toast_no_selected_item));
         } else {
             new AlertDialog.Builder(getActivity())
                     .setMessage(getConfirmDeleteHint(selectData.size()))
@@ -225,14 +225,14 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
                         mPresenter.handleReminds(selectData, HandleType.HANDLE_DELETE);
                         dialog.cancel();
                     })
-                    .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.cancel())
+                    .setNegativeButton(getString(R.string.btn_cancel), (dialog, which) -> dialog.cancel())
                     .show();
         }
     }
 
     // 获取确认删除提示信息
     private String getConfirmDeleteHint(int selectSize) {
-        return String.format("%s%s%s", getString(R.string.sure_to_delete), selectSize, getString(R.string.items));
+        return String.format("%s%s%s", getString(R.string.prefix_sure_to_delete), selectSize, getString(R.string.prefix_items));
     }
 
     /**
@@ -282,14 +282,14 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
             swipeRefresh.setRefreshing(false);
             showView(flContainer, swipeRefresh);
         } else {
-            tvHint.setText(R.string.no_data_click_to_retry);
+            tvHint.setText(R.string.hint_no_data_click_retry);
             showView(flContainer, tvHint);
         }
     }
 
     @Override
     public void getRemindDataFailed() {
-        tvHint.setText(R.string.msg_load_failed_click_retry);
+        tvHint.setText(R.string.hint_load_failed_click_retry);
         showView(flContainer, tvHint);
     }
 
@@ -305,7 +305,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
                 break;
             case HandleType.HANDLE_DELETE:
                 if (listData.containsAll(reminds)) {
-                    showToast(R.string.delete_success);
+                    showToast(R.string.toast_delete_success);
                     listData.removeAll(reminds);
                     if (isMultipleDeleteLayoutDisplaying) {
                         hideMultipleDeleteLayout();
@@ -313,7 +313,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
                         mLvAdapter.notifyDataSetChanged();
                     }
                     if (listData.size() == 0) {
-                        tvHint.setText(R.string.no_data_click_to_retry);
+                        tvHint.setText(R.string.hint_no_data_click_retry);
                         showView(flContainer, tvHint);
                     }
                 }
@@ -341,10 +341,10 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     public void handleRemindsFailed(int handleType) {
         switch (handleType) {
             case HandleType.HANDLE_READ:
-                showToast(R.string.set_read_status_failed);
+                showToast(R.string.toast_set_read_failed);
                 break;
             case HandleType.HANDLE_DELETE:
-                showToast(R.string.delete_failed);
+                showToast(R.string.toast_delete_failed);
                 break;
         }
     }

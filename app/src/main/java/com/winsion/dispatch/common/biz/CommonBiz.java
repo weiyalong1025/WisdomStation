@@ -75,13 +75,13 @@ public class CommonBiz {
                     showUpdateDialog(context, updateEntity);
                 } else if (showHint) {
                     // 不需要更新
-                    ToastUtils.showToast(context, R.string.current_version_is_the_latest);
+                    ToastUtils.showToast(context, R.string.toast_current_version_is_the_latest);
                 }
             }
 
             @Override
             public void onFailed(int errorCode, String errorInfo) {
-                if (showHint) ToastUtils.showToast(context, R.string.check_update_failed);
+                if (showHint) ToastUtils.showToast(context, R.string.toast_check_update_failed);
             }
         });
     }
@@ -95,11 +95,11 @@ public class CommonBiz {
     private static void showUpdateDialog(Context context, UpdateEntity updateEntity) {
         // 需要更新,弹出对话框
         new AlertDialog.Builder(context)
-                .setTitle(R.string.discover_new_version)
+                .setTitle(R.string.title_discover_new_version)
                 .setMessage(updateEntity.getVersionContent())
                 .setCancelable(false)
-                .setPositiveButton(R.string.update_now, (dialog, which) -> downloadNewVersion(context, updateEntity.getFilePath()))
-                .setNegativeButton(R.string.update_later, (dialog, which) -> dialog.dismiss())
+                .setPositiveButton(R.string.btn_update_now, (dialog, which) -> downloadNewVersion(context, updateEntity.getFilePath()))
+                .setNegativeButton(R.string.btn_update_later, (dialog, which) -> dialog.dismiss())
                 .show();
     }
 
@@ -120,11 +120,11 @@ public class CommonBiz {
 
             // 显示下载进度对话框
             ProgressDialog progressDialog = new ProgressDialog(context);
-            progressDialog.setTitle(R.string.version_update);
-            progressDialog.setMessage(context.getString(R.string.downloading_installation_package));
+            progressDialog.setTitle(R.string.title_version_update);
+            progressDialog.setMessage(context.getString(R.string.dialog_downloading_installation_package));
             progressDialog.setCancelable(false);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.cancel), (dialog, which) -> {
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.btn_cancel), (dialog, which) -> {
                 NetDataSource.unSubscribe(downloadUrl);
                 dialog.dismiss();
             });
@@ -151,12 +151,12 @@ public class CommonBiz {
 
                 @Override
                 public void downloadFailed(String serverUri) {
-                    progressDialog.setMessage(context.getString(R.string.download_failed));
+                    progressDialog.setMessage(context.getString(R.string.toast_download_failed));
                 }
             });
 
         } catch (IOException e) {
-            ToastUtils.showToast(context, R.string.please_check_sdcard_state);
+            ToastUtils.showToast(context, R.string.toast_check_sdcard);
         }
     }
 

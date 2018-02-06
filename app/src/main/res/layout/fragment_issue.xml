@@ -32,7 +32,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/d10"
             android:layout_toEndOf="@+id/iv_command"
-            android:text="@string/command"
+            android:text="@string/btn_command"
             android:textColor="@color/white1"
             android:textSize="@dimen/s21"
             tools:ignore="RelativeOverlap" />
@@ -74,7 +74,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/d10"
             android:layout_toEndOf="@+id/iv_cooperation"
-            android:text="@string/cooperation"
+            android:text="@string/btn_cooperation"
             android:textColor="@color/white1"
             android:textSize="@dimen/s21"
             tools:ignore="RelativeOverlap" />

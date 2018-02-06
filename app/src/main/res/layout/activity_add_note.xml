@@ -9,7 +9,7 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleText="@string/note" />
+        app:titleText="@string/title_btn_note" />
 
     <EditText
         android:id="@+id/et_note_content"
@@ -18,7 +18,7 @@
         android:layout_below="@id/tv_title"
         android:background="@color/gray8"
         android:gravity="start|top"
-        android:hint="@string/note_content"
+        android:hint="@string/name_note_content"
         android:maxLength="150"
         android:paddingBottom="@dimen/d40"
         android:paddingEnd="@dimen/d10"

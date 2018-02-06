@@ -42,19 +42,19 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
     @Override
     protected void convert(ViewHolder viewHolder, RemindEntity remindEntity, int position) {
         int taskType = remindEntity.getTaskType();
-        int typeTextResId = R.string.homework_remind;
+        int typeTextResId = R.string.title_operation_remind;
         switch (taskType) {
             case TaskType.COMMAND:
-                typeTextResId = R.string.command_remind;
+                typeTextResId = R.string.title_command_remind;
                 break;
             case TaskType.COOPERATE:
-                typeTextResId = R.string.cooperation_remind;
+                typeTextResId = R.string.title_cooperation_remind;
                 break;
             case TaskType.GRID:
-                typeTextResId = R.string.grid_remind;
+                typeTextResId = R.string.title_grid_remind;
                 break;
             case TaskType.PLAN:
-                typeTextResId = R.string.plan_remind;
+                typeTextResId = R.string.title_plan_remind;
                 break;
         }
         viewHolder.setText(R.id.tv_remind_type, mContext.getString(typeTextResId));
@@ -93,14 +93,14 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
 
         viewHolder.setOnClickListener(R.id.iv_delete, v ->
                 new AlertDialog.Builder(mContext)
-                        .setMessage(getString(R.string.sure_to_delete_it))
+                        .setMessage(getString(R.string.dialog_sure_to_delete))
                         .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
                             if (mListener != null) {
                                 mListener.onClick(remindEntity);
                                 dialog.dismiss();
                             }
                         })
-                        .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.cancel())
+                        .setNegativeButton(getString(R.string.btn_cancel), (dialog, which) -> dialog.cancel())
                         .create()
                         .show());
 
@@ -110,7 +110,7 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
     public void selectOneItem(ViewHolder viewHolder, int position) {
         RemindEntity remindEntity = mDatas.get(position);
         if (remindEntity.getReaded() == ReadStatus.UNREAD) {
-            ToastUtils.showToast(mContext, R.string.only_read_remind_can_be_selected);
+            ToastUtils.showToast(mContext, R.string.toast_only_read_remind_can_be_selected);
         } else {
             if (selectData.contains(remindEntity)) {
                 selectData.remove(remindEntity);

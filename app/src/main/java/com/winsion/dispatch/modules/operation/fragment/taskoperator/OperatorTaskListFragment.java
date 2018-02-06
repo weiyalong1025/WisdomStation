@@ -160,7 +160,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         if (workStatus == TaskState.RUN || workStatus == TaskState.NOT_STARTED || workStatus == TaskState.GRID_NOT_PASS) {
             boolean isFinish = workStatus == TaskState.RUN;
             new AlertDialog.Builder(mContext)
-                    .setMessage(getString(isFinish ? R.string.sure_you_want_to_finish : R.string.sure_you_want_to_start))
+                    .setMessage(getString(isFinish ? R.string.dialog_sure_to_finish : R.string.dialog_sure_to_start))
                     .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
                         button.setEnabled(false);
                         int opeType = isFinish ? OpeType.COMPLETE : OpeType.BEGIN;
@@ -187,11 +187,11 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
                             @Override
                             public void onFailed() {
                                 button.setEnabled(true);
-                                showToast(R.string.change_the_state_of_failure);
+                                showToast(R.string.toast_change_state_failed);
                             }
                         });
                     })
-                    .setNegativeButton(getString(R.string.cancel), null)
+                    .setNegativeButton(getString(R.string.btn_cancel), null)
                     .show();
         }
     }
@@ -224,7 +224,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         if (listData.size() >= 2) {
             String trainNumber = listData.get(firstVisibleItem + 1).getTrainnumber();
             if (isEmpty(trainNumber)) {
-                trainNumber = getString(R.string.nothing);
+                trainNumber = getString(R.string.value_nothing);
             }
             trainNumberIndex.setText(trainNumber);
         }
@@ -247,7 +247,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
             listData.clear();
             for (JobEntity task : getSameStatusList(statusPosition)) {
                 String number = task.getTrainnumber();
-                number = TextUtils.isEmpty(number) ? getString(R.string.nothing) : number;
+                number = TextUtils.isEmpty(number) ? getString(R.string.value_nothing) : number;
                 String trainNumber = number.toLowerCase();
                 if (trainNumber.startsWith(s1)) {
                     listData.add(task);
@@ -333,7 +333,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
             }
         }
         if (unStartedData.size() + underwayData.size() + doneData.size() == 0) {
-            tvHint.setText(R.string.no_data_click_to_retry);
+            tvHint.setText(R.string.hint_no_data_click_retry);
             showView(flContainer, tvHint);
         } else {
             filterData();
@@ -344,7 +344,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @Override
     public void getMyTaskDataFailed() {
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(getString(R.string.msg_load_failed_click_retry));
+        tvHint.setText(getString(R.string.hint_load_failed_click_retry));
         showView(flContainer, tvHint);
     }
 

@@ -294,10 +294,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
      * @param taskType 作业类型(命令/协作)
      */
     private void initOrderModuleView(int taskType) {
-        tvMonitorGroupHint.setText(taskType == TaskType.COMMAND ? R.string.issue_order_group
-                : R.string.issue_cooperation_group);
-        tvPerformerGroupHint.setText(taskType == TaskType.COMMAND ? R.string.order_group
-                : R.string.cooperation_group);
+        tvMonitorGroupHint.setText(taskType == TaskType.COMMAND ? R.string.name_issue_order_group
+                : R.string.name_issue_cooperation_group);
+        tvPerformerGroupHint.setText(taskType == TaskType.COMMAND ? R.string.name_order_group
+                : R.string.name_cooperation_group);
         tvMonitorTeam.setText(mJobEntity.getMonitorteamname());
         tvPerformerTeam.setText(mJobEntity.getOpteamname());
         tvTitle1.setText(mJobEntity.getTaskname());
@@ -305,8 +305,8 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         tvStartTime.setText(mJobEntity.getPlanstarttime());
         tvEndTime.setText(mJobEntity.getPlanendtime());
 
-        String prefix = taskType == TaskType.COMMAND ? getString(R.string.command_content) + "   "
-                : getString(R.string.cooperation_content) + "   ";
+        String prefix = taskType == TaskType.COMMAND ? getString(R.string.name_command_content) + "   "
+                : getString(R.string.name_cooperation_content) + "   ";
         ForegroundColorSpan gray = new ForegroundColorSpan(0xFF69696D);
         SpannableStringBuilder builder = new SpannableStringBuilder()
                 .append(prefix)
@@ -398,35 +398,35 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         switch (taskType) {
             // 任务
             case TaskType.TASK:
-                tvTitle.setTitleText(getString(R.string.task_detail));
-                taskTypeName.setText(R.string.label_task_name);
+                tvTitle.setTitleText(getString(R.string.title_operation_detail));
+                taskTypeName.setText(R.string.name_operation_name);
                 ivIconOrder.setVisibility(View.GONE);
                 break;
             // 命令
             case TaskType.COMMAND:
-                tvTitle.setTitleText(getString(R.string.command_detail));
-                taskTypeName.setText(R.string.command_name);
+                tvTitle.setTitleText(getString(R.string.title_command_detail));
+                taskTypeName.setText(R.string.name_command_name);
                 ivIconOrder.setImageResource(R.drawable.ic_command);
                 ivIconOrder.setVisibility(View.VISIBLE);
                 break;
             // 协作
             case TaskType.COOPERATE:
-                tvTitle.setTitleText(getString(R.string.cooperation_detail));
-                taskTypeName.setText(R.string.cooperation_name);
+                tvTitle.setTitleText(getString(R.string.title_cooperation_detail));
+                taskTypeName.setText(R.string.name_cooperation_name);
                 ivIconOrder.setImageResource(R.drawable.ic_cooperation);
                 ivIconOrder.setVisibility(View.VISIBLE);
                 break;
             // 网格
             case TaskType.GRID:
-                tvTitle.setTitleText(getString(R.string.grid_detail));
-                taskTypeName.setText(R.string.grid_task);
+                tvTitle.setTitleText(getString(R.string.title_grid_detail));
+                taskTypeName.setText(R.string.value_grid_task);
                 ivIconOrder.setImageResource(R.drawable.ic_grid1);
                 ivIconOrder.setVisibility(View.VISIBLE);
                 break;
             // 预案
             case TaskType.PLAN:
-                tvTitle.setTitleText(getString(R.string.alarm_detail));
-                taskTypeName.setText(R.string.alarm_task);
+                tvTitle.setTitleText(getString(R.string.title_alarm_detail));
+                taskTypeName.setText(R.string.value_alarm_task);
                 ivIconOrder.setImageResource(R.drawable.ic_alarm);
                 ivIconOrder.setVisibility(View.VISIBLE);
                 break;
@@ -466,7 +466,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 btnStatus.setBackgroundResource(R.drawable.btn_bg_start);
                 btnStatus.setText(getString(R.string.btn_click_to_start));
                 // 设置持续时间
-                tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.minute)));
+                tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.suffix_minute)));
                 // 判断是否超时
                 isTimeOut = planStartTime < currentTime;
                 if (isTimeOut) {
@@ -479,10 +479,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 进行中
                 // 设置按钮背景和文字
                 btnStatus.setBackgroundResource(R.drawable.btn_bg_finish);
-                btnStatus.setText(getString(R.string.click_to_finish));
+                btnStatus.setText(getString(R.string.btn_click_to_finish));
                 // 设置持续时间
                 lastTime = (int) ((System.currentTimeMillis() - realStartTime) / (60 * 1000));
-                tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.minute)));
+                tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.suffix_minute)));
                 // 判断是否超时
                 isTimeOut = planEndTime < currentTime;
                 if (isTimeOut) {
@@ -498,7 +498,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 btnStatus.setText(getString(R.string.spinner_done));
                 // 设置持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / (60 * 1000));
-                tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.minute)));
+                tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.suffix_minute)));
                 // 判断是否超时
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
@@ -509,17 +509,17 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 如果是网格任务已完成状态则显示为待验收
                 if (taskType == TaskType.GRID) {
                     ivStatus.setImageResource(R.drawable.ic_wait_pass);
-                    btnStatus.setText(R.string.wait_acceptance);
+                    btnStatus.setText(R.string.btn_wait_acceptance);
                 }
                 break;
             case TaskState.GRID_NOT_PASS:
                 // 验收未通过
                 // 设置按钮背景和文字
                 btnStatus.setBackgroundResource(R.drawable.btn_bg_restart);
-                btnStatus.setText(getString(R.string.restart));
+                btnStatus.setText(getString(R.string.btn_restart));
                 // 设置持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / (60 * 1000));
-                tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.minute)));
+                tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.suffix_minute)));
                 // 判断是否超时
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
@@ -589,7 +589,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 File performerDir = DirAndFileUtils.getPerformerDir(userId, jobOperatorsId);
                 mPresenter.download(localRecordEntity.getServerUri(), performerDir.getAbsolutePath(), this);
             } catch (IOException e) {
-                showToast(R.string.please_check_sdcard_state);
+                showToast(R.string.toast_check_sdcard);
             }
         });
         int taskType = mJobEntity.getTaktype();
@@ -614,7 +614,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 File performerDir = DirAndFileUtils.getPerformerDir(userId, jobOperatorsId);
                 mPresenter.download(localRecordEntity.getServerUri(), performerDir.getAbsolutePath(), this);
             } catch (IOException e) {
-                showToast(R.string.please_check_sdcard_state);
+                showToast(R.string.toast_check_sdcard);
             }
         });
         lvRecordPerformer.setAdapter(performerRecordAdapter);
@@ -638,7 +638,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             if (localRecordEntity.getFile() == uploadFile) {
                 localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
                 performerRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.upload_success);
+                showToast(R.string.toast_upload_success);
                 break;
             }
         }
@@ -650,7 +650,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             if (localRecordEntity.getFile() == uploadFile) {
                 localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
                 performerRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.upload_failed);
+                showToast(R.string.toast_upload_failed);
                 break;
             }
         }
@@ -682,7 +682,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             if (equals(localRecordEntity.getServerUri(), serverUri)) {
                 localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
                 performerRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.download_success);
+                showToast(R.string.toast_download_success);
                 break;
             }
         }
@@ -690,7 +690,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             if (equals(localRecordEntity.getServerUri(), serverUri)) {
                 localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
                 publisherRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.download_success);
+                showToast(R.string.toast_download_success);
                 break;
             }
         }
@@ -702,7 +702,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             if (equals(localRecordEntity.getServerUri(), serverUri)) {
                 localRecordEntity.setFileStatus(FileStatus.NO_DOWNLOAD);
                 performerRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.download_failed);
+                showToast(R.string.toast_download_failed);
                 break;
             }
         }
@@ -710,7 +710,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             if (equals(localRecordEntity.getServerUri(), serverUri)) {
                 localRecordEntity.setFileStatus(FileStatus.NO_DOWNLOAD);
                 publisherRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.download_failed);
+                showToast(R.string.toast_download_failed);
                 break;
             }
         }
@@ -862,7 +862,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     bundle.putSerializable(AddNoteActivity.FILE, noteFile);
                     startActivityForResult(AddNoteActivity.class, CODE_NOTE, bundle);
                 } catch (IOException e) {
-                    showToast(R.string.please_check_sdcard_state);
+                    showToast(R.string.toast_check_sdcard);
                 }
                 break;
             case R.id.btn_take_photo:
@@ -871,7 +871,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     bundle.putSerializable(TakePhotoActivity.FILE, photoFile);
                     startActivityForResult(TakePhotoActivity.class, CODE_TAKE_PHOTO, bundle);
                 } catch (IOException e) {
-                    showToast(R.string.please_check_sdcard_state);
+                    showToast(R.string.toast_check_sdcard);
                 }
                 break;
             case R.id.btn_video:
@@ -880,7 +880,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     bundle.putSerializable(RecordVideoActivity.FILE, videoFile);
                     startActivityForResult(RecordVideoActivity.class, CODE_RECORD_VIDEO, bundle);
                 } catch (IOException e) {
-                    showToast(R.string.please_check_sdcard_state);
+                    showToast(R.string.toast_check_sdcard);
                 }
                 break;
             case R.id.btn_record:
@@ -889,7 +889,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     bundle.putSerializable(RecordAudioActivity.FILE, audioFile);
                     startActivityForResult(RecordAudioActivity.class, CODE_RECORD_AUDIO, bundle);
                 } catch (IOException e) {
-                    showToast(R.string.please_check_sdcard_state);
+                    showToast(R.string.toast_check_sdcard);
                 }
                 break;
         }
@@ -903,7 +903,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
      */
     private void showDialog(boolean isRunning, View btn) {
         new AlertDialog.Builder(mContext)
-                .setMessage(getString(isRunning ? R.string.sure_you_want_to_finish : R.string.sure_you_want_to_start))
+                .setMessage(getString(isRunning ? R.string.dialog_sure_to_finish : R.string.dialog_sure_to_start))
                 .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
                     btn.setEnabled(false);
                     int opeType = isRunning ? OpeType.COMPLETE : OpeType.BEGIN;
@@ -928,11 +928,11 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                         @Override
                         public void onFailed() {
                             btn.setEnabled(true);
-                            showToast(R.string.change_the_state_of_failure);
+                            showToast(R.string.toast_change_state_failed);
                         }
                     });
                 })
-                .setNegativeButton(getString(R.string.cancel), null)
+                .setNegativeButton(getString(R.string.btn_cancel), null)
                 .show();
     }
 

@@ -86,7 +86,7 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
                 setResult(RESULT_OK, data);
                 finish();
             } else {
-                showToast(R.string.currently_no_selected_item);
+                showToast(R.string.toast_no_selected_item);
             }
         });
         etSearch.addTextChangedListener(this);
@@ -136,7 +136,7 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
                     public void onSuccess(ResponseForQueryData<List<RunEntity>> result) {
                         List<RunEntity> dataList = result.getDataList();
                         if (dataList.size() == 0) {
-                            tvHint.setText(R.string.no_data_click_to_retry);
+                            tvHint.setText(R.string.hint_no_data_click_retry);
                             showView(flContainer, tvHint);
                         } else {
                             allData.clear();
@@ -151,7 +151,7 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
 
                     @Override
                     public void onFailed(int errorCode, String errorInfo) {
-                        tvHint.setText(R.string.msg_load_failed_click_retry);
+                        tvHint.setText(R.string.hint_load_failed_click_retry);
                         showView(flContainer, tvHint);
                     }
                 });

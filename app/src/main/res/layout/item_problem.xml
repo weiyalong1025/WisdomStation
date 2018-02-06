@@ -44,7 +44,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/device_name"
+                    android:text="@string/name_device_name"
                     android:textColor="@color/gray2"
                     android:textSize="@dimen/s15"
                     app:layout_column="0"
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/d8"
-                    android:text="@string/submit_time"
+                    android:text="@string/name_submit_time"
                     android:textColor="@color/gray2"
                     android:textSize="@dimen/s15"
                     app:layout_column="0"
@@ -223,7 +223,7 @@
                     android:layout_height="@dimen/d38"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/btn_yellow"
-                    android:text="@string/not_pass"
+                    android:text="@string/btn_not_pass"
                     android:textSize="@dimen/s20" />
 
                 <Button
@@ -231,7 +231,7 @@
                     android:layout_width="@dimen/d88"
                     android:layout_height="@dimen/d38"
                     android:background="@drawable/btn_yellow"
-                    android:text="@string/pass"
+                    android:text="@string/btn_pass"
                     android:textSize="@dimen/s20" />
             </LinearLayout>
         </LinearLayout>

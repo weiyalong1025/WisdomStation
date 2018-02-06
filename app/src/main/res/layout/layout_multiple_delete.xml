@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/cancel"
+            android:text="@string/btn_cancel"
             android:textColor="@color/blue1"
             android:textSize="@dimen/s16" />
 
@@ -41,7 +41,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:gravity="center"
-            android:text="@string/select_all"
+            android:text="@string/btn_select_all"
             android:textColor="@color/blue1"
             android:textSize="@dimen/s16" />
     </FrameLayout>
@@ -55,7 +55,7 @@
         android:drawablePadding="@dimen/d5"
         android:drawableStart="@drawable/ic_delete1"
         android:gravity="center"
-        android:text="@string/delete"
+        android:text="@string/btn_delete"
         android:textColor="@color/red2"
         android:textSize="@dimen/s18" />
 </RelativeLayout>

@@ -72,7 +72,7 @@ public class SelectTeamActivity extends BaseActivity {
         tvTitle.setOnBackClickListener((View v) -> finish());
         tvTitle.setOnConfirmClickListener((View v) -> {
             if (mLvAdapter.getSelectedList().size() == 0) {
-                showToast(R.string.currently_no_selected_item);
+                showToast(R.string.toast_no_selected_item);
             } else {
                 Intent selectData = new Intent().putExtra("selectData", mLvAdapter.getSelectedList());
                 setResult(RESULT_OK, selectData);
@@ -96,7 +96,7 @@ public class SelectTeamActivity extends BaseActivity {
                     public void onSuccess(ResponseForQueryData<List<TeamEntity>> result) {
                         List<TeamEntity> dataList = result.getDataList();
                         if (dataList.size() == 0) {
-                            tvHint.setText(R.string.no_data_click_to_retry);
+                            tvHint.setText(R.string.hint_no_data_click_retry);
                             showView(flContainer, tvHint);
                         } else {
                             listData.clear();
@@ -108,7 +108,7 @@ public class SelectTeamActivity extends BaseActivity {
 
                     @Override
                     public void onFailed(int errorCode, String errorInfo) {
-                        tvHint.setText(R.string.msg_load_failed_click_retry);
+                        tvHint.setText(R.string.hint_load_failed_click_retry);
                         showView(flContainer, tvHint);
                     }
                 });

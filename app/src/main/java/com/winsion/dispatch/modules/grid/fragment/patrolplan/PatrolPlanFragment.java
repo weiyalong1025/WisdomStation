@@ -213,7 +213,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
 
     private boolean verifyBluetooth() {
         if (mBtAdapter == null) {
-            showToast(R.string.your_device_does_not_support_bluetooth);
+            showToast(R.string.toast_bluetooth_not_support);
             return false;
         }
         if (!mBtAdapter.isEnabled()) {
@@ -228,7 +228,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_CANCELED && requestCode == REQUEST_ENABLE_BT) {
-            showToast(R.string.Failed_to_open_the_bluetooth);
+            showToast(R.string.toast_open_bluetooth_failed);
         }
     }
 
@@ -309,7 +309,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     public void getPatrolPlanDataSuccess(List<PatrolPlanEntity> patrolPlanDate) {
         swipeRefresh.setRefreshing(false);
         if (patrolPlanDate.size() == 0) {
-            tvHint.setText(R.string.no_data_click_to_retry);
+            tvHint.setText(R.string.hint_no_data_click_retry);
             showView(flContainer, tvHint);
         } else {
             listData.clear();
@@ -326,7 +326,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     @Override
     public void getPatrolPlanDataFailed() {
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(R.string.msg_load_failed_click_retry);
+        tvHint.setText(R.string.hint_load_failed_click_retry);
         showView(flContainer, tvHint);
     }
 

@@ -91,7 +91,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/track"
+                        android:text="@string/suffix_track"
                         android:textColor="@color/white1"
                         android:textSize="@dimen/s16"
                         android:visibility="gone" />
@@ -143,7 +143,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/platform"
+                        android:text="@string/suffix_platform"
                         android:textColor="@color/white1"
                         android:textSize="@dimen/s16"
                         android:visibility="gone" />
@@ -173,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/d12"
                     android:layout_marginTop="@dimen/d12"
-                    android:text="@string/plan"
+                    android:text="@string/name_plan"
                     android:textColor="@color/gray2"
                     android:textSize="@dimen/s16" />
 
@@ -206,7 +206,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/waiting_room"
+                        android:text="@string/suffix_waiting_room"
                         android:textColor="@color/white1"
                         android:textSize="@dimen/s16"
                         android:visibility="gone" />
@@ -236,7 +236,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/d12"
                     android:layout_marginTop="@dimen/d12"
-                    android:text="@string/real"
+                    android:text="@string/name_real"
                     android:textColor="@color/gray2"
                     android:textSize="@dimen/s16" />
 
@@ -269,7 +269,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/check_port"
+                        android:text="@string/suffix_check_port"
                         android:textColor="@color/white1"
                         android:textSize="@dimen/s16"
                         android:visibility="gone" />

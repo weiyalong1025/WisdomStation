@@ -71,7 +71,7 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
             String desc = todoEntity.getContent();
             tvDate.setEnabled(false);
             tvTime.setEnabled(false);
-            btnSave.setText(R.string.update);
+            btnSave.setText(R.string.btn_update);
             etDesc.setText(desc);
             etDesc.setSelection(desc.length());
         } else {
@@ -101,7 +101,7 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
             case R.id.btn_save:
                 // 必须填写提醒内容
                 if (isEmpty(getText(etDesc))) {
-                    showToast(getString(R.string.please_complete));
+                    showToast(getString(R.string.toast_complete_info));
                 } else {
                     if (isUpdate) {
                         mPresenter.updateTodo(getText(etDesc), todoId);

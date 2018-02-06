@@ -112,7 +112,7 @@ public class RecordVideoActivity extends BaseActivity {
             Camera.Size size = svs.get(sps.size() / 2);
             parameters.setPreviewSize(size.width, size.height);
         } else {
-            showToast(R.string.your_device_does_not_support_video);
+            showToast(R.string.toast_video_not_support);
             finish();
             return;
         }
@@ -163,7 +163,7 @@ public class RecordVideoActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_cancel:
-                if (mFile.exists()) {
+                if (!mFile.exists()) {
                     mFile.delete();
                 }
                 mShutter.setVisibility(View.VISIBLE);

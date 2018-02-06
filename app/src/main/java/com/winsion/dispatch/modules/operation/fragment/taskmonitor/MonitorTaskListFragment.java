@@ -160,7 +160,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         if (listData.size() >= 2) {
             String trainNumber = listData.get(firstVisibleItem + 1).getTrainnumber();
             if (isEmpty(trainNumber)) {
-                trainNumber = getString(R.string.nothing);
+                trainNumber = getString(R.string.value_nothing);
             }
             trainNumberIndex.setText(trainNumber);
         }
@@ -183,7 +183,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
             listData.clear();
             for (TaskEntity task : getSameStatusList(statusPosition)) {
                 String number = task.getTrainnumber();
-                number = TextUtils.isEmpty(number) ? getString(R.string.nothing) : number;
+                number = TextUtils.isEmpty(number) ? getString(R.string.value_nothing) : number;
                 String trainNumber = number.toLowerCase();
                 if (trainNumber.startsWith(s1)) {
                     listData.add(task);
@@ -269,7 +269,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
             }
         }
         if (unStartedData.size() + underwayData.size() + doneData.size() == 0) {
-            tvHint.setText(R.string.no_data_click_to_retry);
+            tvHint.setText(R.string.hint_no_data_click_retry);
             showView(flContainer, tvHint);
         } else {
             filterData();
@@ -280,7 +280,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     @Override
     public void getMonitorTaskDataFailed() {
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(getString(R.string.msg_load_failed_click_retry));
+        tvHint.setText(getString(R.string.hint_load_failed_click_retry));
         showView(flContainer, tvHint);
     }
 

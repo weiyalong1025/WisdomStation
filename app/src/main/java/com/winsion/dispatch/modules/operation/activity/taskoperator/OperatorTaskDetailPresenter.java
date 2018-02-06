@@ -22,12 +22,12 @@ import com.winsion.dispatch.media.constants.FileStatus;
 import com.winsion.dispatch.media.constants.FileType;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
 import com.winsion.dispatch.media.entity.ServerRecordEntity;
+import com.winsion.dispatch.modules.operation.constants.TrainAreaType;
 import com.winsion.dispatch.modules.operation.entity.FileEntity;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
 import com.winsion.dispatch.modules.operation.entity.JobParameter;
 import com.winsion.dispatch.utils.DirAndFileUtils;
 import com.winsion.dispatch.utils.FileUtils;
-import com.winsion.dispatch.modules.operation.constants.TrainAreaType;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,10 +41,8 @@ import java.util.List;
  */
 
 public class OperatorTaskDetailPresenter implements OperatorTaskDetailContract.Presenter {
-    // 查询监控人上传附件用的字段
-    private static final String FIELD_MONITOR = "jobsid";
-    // 查询执行人上传附件用的字段
-    private static final String FIELD_PERFORMER = "joboperatorsid";
+    private static final String FIELD_MONITOR = "jobsid";   // 查询监控人上传附件用的字段
+    private static final String FIELD_PERFORMER = "joboperatorsid"; // 查询执行人上传附件用的字段
 
     private OperatorTaskDetailContract.View mView;
 

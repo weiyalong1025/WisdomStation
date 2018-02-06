@@ -110,7 +110,7 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
         playBeepSoundAndVibrate();
         String resultString = result.getText();
         if (TextUtils.isEmpty(resultString)) {
-            showToast(R.string.hint_capture_failed);
+            showToast(R.string.toast_capture_failed);
         } else {
             logI("capture result:" + resultString);
             Intent resultIntent = new Intent();

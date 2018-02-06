@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/bluetooth_address"
+            android:text="@string/name_bluetooth_address"
             android:textSize="@dimen/s18" />
 
         <TextView
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/last_time_receive_msg"
+            android:text="@string/name_last_time_receive_signal"
             android:textSize="@dimen/s18" />
 
         <TextView

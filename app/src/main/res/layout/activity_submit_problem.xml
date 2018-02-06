@@ -10,8 +10,8 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:confirmButtonText="@string/submit"
-        app:titleText="@string/add_problem" />
+        app:confirmButtonText="@string/btn_submit"
+        app:titleText="@string/btn_add_problem" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                     android:layout_below="@id/refer2"
                     android:layout_marginStart="@dimen/d15"
                     android:gravity="center_vertical"
-                    android:text="@string/device_name"
+                    android:text="@string/name_device_name"
                     android:textColor="@color/gray5"
                     android:textSize="@dimen/s20" />
 
@@ -220,7 +220,7 @@
                     android:layout_below="@id/refer7"
                     android:layout_marginStart="@dimen/d15"
                     android:gravity="center_vertical"
-                    android:text="@string/time_limit"
+                    android:text="@string/name_time_limit"
                     android:textColor="@color/gray5"
                     android:textSize="@dimen/s20" />
 
@@ -254,7 +254,7 @@
                 android:layout_below="@id/rl_device_info"
                 android:layout_marginStart="@dimen/d15"
                 android:background="@null"
-                android:hint="@string/problem_desc"
+                android:hint="@string/name_problem_desc"
                 android:maxLength="150"
                 android:paddingBottom="@dimen/d10"
                 android:paddingEnd="@dimen/d10"

@@ -63,13 +63,13 @@ public class SubmitProblemPresenter implements SubmitProblemContact.Presenter {
                             String classificationId = deviceDto.getClassificationid();
                             mView.checkDeviceIdSuccess(deviceName, classificationId, deviceId);
                         } else {
-                            mView.checkDeviceIdFailed(R.string.device_mismatch);
+                            mView.checkDeviceIdFailed(R.string.toast_device_mismatch);
                         }
                     }
 
                     @Override
                     public void onFailed(int errorCode, String errorInfo) {
-                        mView.checkDeviceIdFailed(R.string.check_device_failed);
+                        mView.checkDeviceIdFailed(R.string.toast_check_device_failed);
                     }
                 });
     }

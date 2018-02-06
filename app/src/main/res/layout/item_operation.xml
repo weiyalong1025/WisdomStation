@@ -80,7 +80,7 @@
                         android:id="@+id/task_type_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/label_task_name"
+                        android:text="@string/name_task_name"
                         android:textColor="@color/gray2"
                         android:textSize="@dimen/s15" />
                 </LinearLayout>
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/d4"
                     android:layout_marginTop="@dimen/d15"
-                    android:text="@string/label_train_number"
+                    android:text="@string/name_train_number"
                     android:textColor="@color/gray2"
                     android:textSize="@dimen/s15"
                     app:layout_columnWeight="1"
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/d4"
                     android:layout_marginTop="@dimen/d15"
-                    android:text="@string/label_execution_time"
+                    android:text="@string/name_execution_time"
                     android:textColor="@color/gray2"
                     android:textSize="@dimen/s15"
                     app:layout_columnWeight="1"
@@ -204,7 +204,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/label_plan_time"
+                    android:text="@string/name_plan_time"
                     android:textColor="@color/gray2"
                     android:textSize="@dimen/s15" />
 

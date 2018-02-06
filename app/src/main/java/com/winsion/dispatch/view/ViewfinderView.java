@@ -76,7 +76,7 @@ public final class ViewfinderView extends View {
     public static int scannerStart = 0;
     public static int scannerEnd = 0;
 
-    private Collection<ResultPoint> possibleResultPoints = new HashSet<>(5);
+    private Collection<ResultPoint> possibleResultPoints;
     private Collection<ResultPoint> lastPossibleResultPoints;
 
     // This constructor is used when the class is built from an XML resource.
@@ -141,6 +141,7 @@ public final class ViewfinderView extends View {
             if (currentPossible.isEmpty()) {
                 lastPossibleResultPoints = null;
             } else {
+                possibleResultPoints = new HashSet<>(5);
                 lastPossibleResultPoints = currentPossible;
                 paint.setAlpha(OPAQUE);
                 paint.setColor(resultPointColor);

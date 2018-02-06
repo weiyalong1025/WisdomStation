@@ -93,7 +93,7 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
             }
         }
         if (listData.size() == 0) {
-            tvHint.setText(R.string.no_data_click_to_retry);
+            tvHint.setText(R.string.hint_no_data_click_retry);
             showView(flContainer, tvHint);
             return;
         }
@@ -104,7 +104,7 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
     @Override
     public void getProblemDataFailed(String errorInfo) {
         swipeRefresh.setRefreshing(false);
-        tvHint.setText(R.string.msg_load_failed_click_retry);
+        tvHint.setText(R.string.hint_load_failed_click_retry);
         showView(flContainer, tvHint);
     }
 

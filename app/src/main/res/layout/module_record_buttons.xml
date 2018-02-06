@@ -13,7 +13,7 @@
         android:layout_marginEnd="@dimen/d5"
         android:layout_weight="1"
         android:background="@drawable/btn_yellow"
-        android:text="@string/take_photo_btn_str"
+        android:text="@string/btn_take_photo"
         android:textSize="@dimen/s18" />
 
     <Button
@@ -25,7 +25,7 @@
         android:layout_marginRight="@dimen/d5"
         android:layout_weight="1"
         android:background="@drawable/btn_yellow"
-        android:text="@string/video_btn_str"
+        android:text="@string/btn_video"
         android:textSize="@dimen/s18" />
 
     <Button
@@ -36,6 +36,6 @@
         android:layout_marginStart="@dimen/d5"
         android:layout_weight="1"
         android:background="@drawable/btn_yellow"
-        android:text="@string/record_btn_str"
+        android:text="@string/btn_record"
         android:textSize="@dimen/s18" />
 </LinearLayout>

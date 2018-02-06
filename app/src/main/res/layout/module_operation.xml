@@ -59,7 +59,7 @@
                 android:id="@+id/task_type_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_task_name"
+                android:text="@string/name_task_name"
                 android:textColor="@color/gray2"
                 android:textSize="@dimen/s15" />
         </LinearLayout>
@@ -70,7 +70,7 @@
             android:layout_marginBottom="@dimen/d4"
             android:layout_marginTop="@dimen/d15"
             android:gravity="center"
-            android:text="@string/label_execution_time"
+            android:text="@string/name_execution_time"
             android:textColor="@color/gray2"
             android:textSize="@dimen/s15"
             app:layout_columnWeight="1"
@@ -82,7 +82,7 @@
             android:layout_marginBottom="@dimen/d4"
             android:layout_marginTop="@dimen/d15"
             android:gravity="center"
-            android:text="@string/location"
+            android:text="@string/name_location"
             android:textColor="@color/gray2"
             android:textSize="@dimen/s15"
             app:layout_columnWeight="1"
@@ -160,7 +160,7 @@
                 android:drawableStart="@drawable/ic_notes"
                 android:focusable="false"
                 android:gravity="center_vertical"
-                android:text="@string/note"
+                android:text="@string/title_btn_note"
                 android:textColor="@color/black6"
                 android:textSize="@dimen/s18" />
 
@@ -204,7 +204,7 @@
                 android:drawableStart="@drawable/ic_broadcast"
                 android:focusable="false"
                 android:gravity="center_vertical"
-                android:text="@string/broadcast"
+                android:text="@string/btn_broadcast"
                 android:textColor="@color/black6"
                 android:textSize="@dimen/s18" />
         </LinearLayout>
@@ -225,7 +225,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/plan"
+                android:text="@string/name_plan"
                 android:textColor="@color/gray2"
                 android:textSize="@dimen/s18" />
 
@@ -253,7 +253,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/d5"
-                android:text="@string/real"
+                android:text="@string/name_real"
                 android:textColor="@color/gray2"
                 android:textSize="@dimen/s18" />
 

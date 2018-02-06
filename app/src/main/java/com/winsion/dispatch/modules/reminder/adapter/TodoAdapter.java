@@ -40,17 +40,17 @@ public class TodoAdapter extends CommonAdapter<TodoEntity> {
         String[] split = planData.split(" ");
         String[] split1 = split[0].split("-");
         // 年
-        viewHolder.setText(R.id.tv_year, split1[0] + getString(R.string.year));
+        viewHolder.setText(R.id.tv_year, split1[0] + getString(R.string.suffix_year));
         // 日期
-        viewHolder.setText(R.id.tv_date, split1[1] + getString(R.string.month) + split1[2]);
+        viewHolder.setText(R.id.tv_date, split1[1] + getString(R.string.suffix_month) + split1[2]);
         // 时间
         viewHolder.setText(R.id.tv_time, split[1].substring(0, 5));
         // 事项描述
         viewHolder.setText(R.id.tv_desc, todoEntity.getContent());
         viewHolder.setOnClickListener(R.id.iv_delete, (View v) ->
                 new AlertDialog.Builder(mContext)
-                        .setMessage(getString(R.string.sure_to_delete_it))
-                        .setNegativeButton(getString(R.string.cancel), (DialogInterface dialog, int which) -> dialog.cancel())
+                        .setMessage(getString(R.string.dialog_sure_to_delete))
+                        .setNegativeButton(getString(R.string.btn_cancel), (DialogInterface dialog, int which) -> dialog.cancel())
                         .setPositiveButton(getString(R.string.btn_confirm), (DialogInterface dialog, int which) -> {
                             if (onItemClickListener != null) {
                                 onItemClickListener.onClick(mDatas.get(position));

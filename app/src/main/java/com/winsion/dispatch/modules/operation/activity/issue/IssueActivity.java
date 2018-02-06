@@ -164,10 +164,10 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         }
         switch (issueType) {
             case TaskType.COMMAND:
-                tvTitle.setTitleText(getString(R.string.issue_command));
+                tvTitle.setTitleText(getString(R.string.title_issue_command));
                 break;
             case TaskType.COOPERATE:
-                tvTitle.setTitleText(getString(R.string.issue_cooperate));
+                tvTitle.setTitleText(getString(R.string.title_issue_cooperation));
                 break;
         }
         TeamEntity toTeamEntity = (TeamEntity) intent.getSerializableExtra(TO_TEAM_ENTITY);
@@ -188,12 +188,12 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         // 命令/协作内容  hint
         switch (issueType) {
             case TaskType.COMMAND:
-                tvPerformerGroupHint.setText(R.string.order_group);
-                etContent.setHint(R.string.command_content);
+                tvPerformerGroupHint.setText(R.string.name_order_group);
+                etContent.setHint(R.string.name_command_content);
                 break;
             case TaskType.COOPERATE:
-                tvPerformerGroupHint.setText(R.string.cooperation_group);
-                etContent.setHint(R.string.cooperation_content);
+                tvPerformerGroupHint.setText(R.string.name_cooperation_group);
+                etContent.setHint(R.string.name_cooperation_content);
                 break;
         }
         // 进入界面默任回写开始时间
@@ -218,7 +218,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         } else {
             for (LocalRecordEntity localRecordEntity : localRecordEntities) {
                 if (localRecordEntity.getFileStatus() != FileStatus.SYNCHRONIZED) {
-                    showToast(getString(R.string.please_wait_for_the_files_upload_complete));
+                    showToast(getString(R.string.toast_wait_for_files_upload_complete));
                     return;
                 }
             }
@@ -260,14 +260,14 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                         @Override
                         public void onSuccess(String result) {
                             mLoadingDialog.dismiss();
-                            showToast(R.string.issue_success);
+                            showToast(R.string.toast_issue_success);
                             finish();
                         }
 
                         @Override
                         public void onFailed(int errorCode, String errorInfo) {
                             mLoadingDialog.dismiss();
-                            showToast(R.string.issue_failed);
+                            showToast(R.string.toast_issue_failed);
                         }
                     });
         }
@@ -327,13 +327,13 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             if (type == 0) {
                 // 开始时间不能晚于结束时间
                 if (date.getTime() > ConvertUtils.parseDate(getText(tvEndTime), Formatter.DATE_FORMAT1)) {
-                    showToast(getString(R.string.start_time_not_later_than_the_end_of_time));
+                    showToast(getString(R.string.toast_start_time_cannot_be_later_than_finish_time));
                     return;
                 }
             } else if (type == 1) {
                 // 结束时间不能早于开始时间
                 if (date.getTime() < ConvertUtils.parseDate(getText(tvStartTime), Formatter.DATE_FORMAT1)) {
-                    showToast(getString(R.string.end_time_cannot_be_earlier_than_the_start_time));
+                    showToast(getString(R.string.toast_finish_time_cannot_be_earlier_than_start_time));
                     return;
                 }
             }
@@ -458,7 +458,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     bundle.putSerializable(TakePhotoActivity.FILE, photoFile);
                     startActivityForResult(TakePhotoActivity.class, CODE_TAKE_PHOTO, bundle);
                 } catch (IOException e) {
-                    showToast(R.string.please_check_sdcard_state);
+                    showToast(R.string.toast_check_sdcard);
                 }
                 break;
             case R.id.btn_video:
@@ -467,7 +467,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     bundle.putSerializable(RecordVideoActivity.FILE, videoFile);
                     startActivityForResult(RecordVideoActivity.class, CODE_RECORD_VIDEO, bundle);
                 } catch (IOException e) {
-                    showToast(R.string.please_check_sdcard_state);
+                    showToast(R.string.toast_check_sdcard);
                 }
                 break;
             case R.id.btn_record:
@@ -476,7 +476,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     bundle.putSerializable(RecordAudioActivity.FILE, audioFile);
                     startActivityForResult(RecordAudioActivity.class, CODE_RECORD_AUDIO, bundle);
                 } catch (IOException e) {
-                    showToast(R.string.please_check_sdcard_state);
+                    showToast(R.string.toast_check_sdcard);
                 }
                 break;
         }
@@ -500,7 +500,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             if (localRecordEntity.getFile() == uploadFile) {
                 localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
                 recordAdapter.notifyDataSetChanged();
-                showToast(R.string.upload_success);
+                showToast(R.string.toast_upload_success);
                 break;
             }
         }
@@ -512,7 +512,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             if (localRecordEntity.getFile() == uploadFile) {
                 localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
                 recordAdapter.notifyDataSetChanged();
-                showToast(R.string.upload_failed);
+                showToast(R.string.toast_upload_failed);
                 break;
             }
         }
@@ -529,14 +529,14 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     private void showHintDialog() {
         new AlertDialog.Builder(mContext)
-                .setMessage(R.string.will_you_clear_out_the_data_after_you_exit)
+                .setMessage(R.string.dialog_after_exiting_data_will_be_cleared_are_you_sure)
                 .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
                     // 删除附件
                     deleteRecordFiles();
                     dialog.dismiss();
                     finish();
                 })
-                .setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss())
+                .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
                 .show();
     }
 
@@ -551,9 +551,9 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                 if (file.delete()) deleteFileSize++;
             }
             if (deleteFileSize != localRecordEntities.size()) {
-                showToast(R.string.local_file_clear_failed);
+                showToast(R.string.toast_local_file_clear_failed);
             } else {
-                showToast(R.string.local_file_clear_success);
+                showToast(R.string.toast_local_file_clear_success);
             }
         }
     }

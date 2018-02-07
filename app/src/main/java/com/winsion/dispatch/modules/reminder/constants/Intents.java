@@ -6,6 +6,11 @@ package com.winsion.dispatch.modules.reminder.constants;
  * 创建时间：2017/12/27 4:06
  */
 
-public interface ExtraName {
-    String NAME_TODO_ID = "nameTodoId";
+public interface Intents {
+    interface Todo {
+        /**
+         * 待办事项ID
+         */
+        String TODO_ID = "TODO_ID";
+    }
 }

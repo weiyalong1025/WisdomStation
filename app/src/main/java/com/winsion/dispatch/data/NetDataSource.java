@@ -52,12 +52,12 @@ import okhttp3.OkHttpClient;
  */
 
 public class NetDataSource {
-    private static final int PAGE_START = 1;
-    private static final int PAGE_SIZE = 999;
-    private static final int READ_TIMEOUT = 10;
-    private static final int WRITE_TIMEOUT = 10;
-    private static final int CONNECT_TIMEOUT = 10;
-    private static final int RETRY_COUNT = 0;
+    private static final int PAGE_START = 1;    // 查询起始页
+    private static final int PAGE_SIZE = 999;   // 查询结束页
+    private static final int READ_TIMEOUT = 10; // 读取超时时间
+    private static final int WRITE_TIMEOUT = 10;    // 写入超时时间
+    private static final int CONNECT_TIMEOUT = 10;  // 连接超时时间
+    private static final int RETRY_COUNT = 0;   // 请求重试次数
 
     private static HashMap<Object, CompositeDisposable> requestMap = new HashMap<>();
 

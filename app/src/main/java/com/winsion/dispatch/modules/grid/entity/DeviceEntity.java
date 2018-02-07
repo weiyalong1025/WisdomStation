@@ -4,25 +4,10 @@ package com.winsion.dispatch.modules.grid.entity;
  * Created by wyl on 2017/7/21
  */
 public class DeviceEntity {
-    /**
-     * 类别编号
-     */
-    private String classificationid;
-
-    /**
-     * 设备名称
-     */
-    private String devicename;
-
-    /**
-     * 区域编号
-     */
-    private String areaid;
-
-    /**
-     * 设备序号
-     */
-    private String deviceno;
+    private String classificationid;    // 类别编号
+    private String devicename;  // 设备名称
+    private String areaid;  // 区域编号
+    private String deviceno;    // 设备序号
 
     public String getClassificationid() {
         return classificationid;

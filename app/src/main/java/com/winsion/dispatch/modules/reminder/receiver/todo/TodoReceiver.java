@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.data.DBDataSource;
-import com.winsion.dispatch.modules.reminder.constants.ExtraName;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
 import com.winsion.dispatch.modules.reminder.event.UpdateTodoEvent;
 import com.winsion.dispatch.modules.reminder.fragment.todo.TodoListFragment;
@@ -25,6 +24,8 @@ import com.winsion.dispatch.modules.reminder.fragment.todo.TodoListFragment;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+
+import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_ID;
 
 
 /**
@@ -41,7 +42,7 @@ public class TodoReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        long id = intent.getLongExtra(ExtraName.NAME_TODO_ID, 0);
+        long id = intent.getLongExtra(TODO_ID, 0);
         if (id == 0) return;
         todoEntity = DBDataSource.getInstance().getTodoEntityById(id);
         // 响铃

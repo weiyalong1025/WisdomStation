@@ -47,8 +47,7 @@ public class SelectTeamActivity extends BaseActivity {
     @BindView(R.id.fl_container)
     FrameLayout flContainer;
 
-    // ListView数据
-    private ArrayList<TeamEntity> listData = new ArrayList<>();
+    private ArrayList<TeamEntity> listData = new ArrayList<>(); // ListView数据
     private SelectTeamAdapter mLvAdapter;
 
     @Override

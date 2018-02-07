@@ -53,10 +53,8 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     private List<RemindEntity> listData = new ArrayList<>();
     private SystemRemindContract.Presenter mPresenter;
     private SystemRemindAdapter mLvAdapter;
-    // 多选删除布局显示状态
-    private boolean isMultipleDeleteLayoutDisplaying;
-    // 是否是全选
-    private boolean isSelectAll;
+    private boolean isMultipleDeleteLayoutDisplaying;   // 多选删除布局显示状态
+    private boolean isSelectAll;    // 是否是全选
 
     private View multipleDeleteLayout;
     private Button btnMultipleDeleteFooter;

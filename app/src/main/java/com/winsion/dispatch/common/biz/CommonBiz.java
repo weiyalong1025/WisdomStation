@@ -142,10 +142,10 @@ public class CommonBiz {
                     progressDialog.dismiss();
                     Uri downloadFileUri = Uri.fromFile(updateFile);
                     if (downloadFileUri != null) {
-                        Intent install = new Intent(Intent.ACTION_VIEW);
-                        install.setDataAndType(downloadFileUri, "application/vnd.android.package-archive");
-                        install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(install);
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(downloadFileUri, "application/vnd.android.package-archive");
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
                     }
                 }
 

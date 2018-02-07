@@ -6,8 +6,12 @@ package com.winsion.dispatch.common.constants;
  */
 
 public interface SystemType {
-    // 系统类型-生产作业
+    /**
+     * 系统类型-生产作业
+     */
     int OPERATION = 0;
-    // 系统类型-网格
+    /**
+     * 系统类型-网格
+     */
     int GRID = 1;
 }

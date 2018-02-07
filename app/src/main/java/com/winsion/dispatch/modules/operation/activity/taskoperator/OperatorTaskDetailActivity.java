@@ -2,7 +2,6 @@ package com.winsion.dispatch.modules.operation.activity.taskoperator;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -62,6 +61,9 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.winsion.dispatch.data.constants.ParamKey.FILE;
+import static com.winsion.dispatch.modules.operation.constants.Intents.OperatorTaskDetail.JOB_ENTITY;
 
 /**
  * Created by 10295 on 2018/1/19.
@@ -177,30 +179,18 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     @BindView(R.id.et_content)
     EditText etContent;
 
-    // 备注
-    public static final int CODE_NOTE = 0;
-    // 拍照
-    public static final int CODE_TAKE_PHOTO = 1;
-    // 录像
-    public static final int CODE_RECORD_VIDEO = 2;
-    // 录音
-    public static final int CODE_RECORD_AUDIO = 3;
+    public static final int CODE_NOTE = 0;  // 备注
+    public static final int CODE_TAKE_PHOTO = 1;    // 拍照
+    public static final int CODE_RECORD_VIDEO = 2;  // 录像
+    public static final int CODE_RECORD_AUDIO = 3;  // 录音
 
     private OperatorTaskDetailContract.Presenter mPresenter;
 
-    public static final String JOB_ENTITY = "jobEntity";
-    // 上个页面带过来的
-    private JobEntity mJobEntity;
-
-    // 作业执行人上传附件集合
-    private List<LocalRecordEntity> performerRecordEntities = new ArrayList<>();
-    // 作业执行人上传附件列表Adapter
-    private RecordAdapter performerRecordAdapter;
-
-    // 命令/协作发布人上传附件集合
-    private List<LocalRecordEntity> publisherRecordEntities = new ArrayList<>();
-    // 命令/协作发布人上传附件列表Adapter(用于命令/协作)
-    private RecordAdapter publisherRecordAdapter;
+    private JobEntity mJobEntity;   // 上个页面带过来的
+    private List<LocalRecordEntity> performerRecordEntities = new ArrayList<>();    // 作业执行人上传附件集合
+    private RecordAdapter performerRecordAdapter;   // 作业执行人上传附件列表Adapter
+    private List<LocalRecordEntity> publisherRecordEntities = new ArrayList<>();    // 命令/协作发布人上传附件集合
+    private RecordAdapter publisherRecordAdapter;   // 命令/协作发布人上传附件列表Adapter(用于命令/协作)
 
     // 定时刷新器(刷新任务执行时间)
     private Disposable timer;
@@ -842,9 +832,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
 
     @OnClick({R.id.btn_status, R.id.btn_note, R.id.btn_broadcast, R.id.btn_take_photo, R.id.btn_video, R.id.btn_record})
     public void onViewClicked(View view) {
-        Bundle bundle = new Bundle();
         String userId = CacheDataSource.getUserId();
         String jobOperatorsId = mJobEntity.getJoboperatorsid();
+        Intent intent;
         switch (view.getId()) {
             case R.id.btn_status:
                 // 更改任务状态按钮点击事件
@@ -859,8 +849,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             case R.id.btn_note:
                 try {
                     noteFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.TEXT);
-                    bundle.putSerializable(AddNoteActivity.FILE, noteFile);
-                    startActivityForResult(AddNoteActivity.class, CODE_NOTE, bundle);
+                    intent = new Intent(mContext, AddNoteActivity.class);
+                    intent.putExtra(FILE, noteFile);
+                    startActivityForResult(intent, CODE_NOTE);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
                 }
@@ -868,8 +859,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             case R.id.btn_take_photo:
                 try {
                     photoFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.PICTURE);
-                    bundle.putSerializable(TakePhotoActivity.FILE, photoFile);
-                    startActivityForResult(TakePhotoActivity.class, CODE_TAKE_PHOTO, bundle);
+                    intent = new Intent(mContext, TakePhotoActivity.class);
+                    intent.putExtra(FILE, photoFile);
+                    startActivityForResult(intent, CODE_TAKE_PHOTO);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
                 }
@@ -877,8 +869,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             case R.id.btn_video:
                 try {
                     videoFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.VIDEO);
-                    bundle.putSerializable(RecordVideoActivity.FILE, videoFile);
-                    startActivityForResult(RecordVideoActivity.class, CODE_RECORD_VIDEO, bundle);
+                    intent = new Intent(mContext, RecordVideoActivity.class);
+                    intent.putExtra(FILE, videoFile);
+                    startActivityForResult(intent, CODE_RECORD_VIDEO);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
                 }
@@ -886,8 +879,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             case R.id.btn_record:
                 try {
                     audioFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.AUDIO);
-                    bundle.putSerializable(RecordAudioActivity.FILE, audioFile);
-                    startActivityForResult(RecordAudioActivity.class, CODE_RECORD_AUDIO, bundle);
+                    intent = new Intent(mContext, RecordAudioActivity.class);
+                    intent.putExtra(FILE, audioFile);
+                    startActivityForResult(intent, CODE_RECORD_AUDIO);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
                 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.winsion.dispatch.capture;
+package com.winsion.dispatch.capture.decode;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -22,6 +22,7 @@ import android.os.Looper;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
+import com.winsion.dispatch.capture.activity.CaptureActivity;
 
 import java.util.Hashtable;
 import java.util.Vector;
@@ -30,7 +31,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * This thread does all the heavy lifting of decoding the images.
  */
-final class DecodeThread extends Thread {
+public final class DecodeThread extends Thread {
 
     public static final String BARCODE_BITMAP = "barcode_bitmap";
     private final CaptureActivity activity;
@@ -38,10 +39,10 @@ final class DecodeThread extends Thread {
     private Handler handler;
     private final CountDownLatch handlerInitLatch;
 
-    DecodeThread(CaptureActivity activity,
-                 Vector<BarcodeFormat> decodeFormats,
-                 String characterSet,
-                 ResultPointCallback resultPointCallback) {
+    public DecodeThread(CaptureActivity activity,
+                        Vector<BarcodeFormat> decodeFormats,
+                        String characterSet,
+                        ResultPointCallback resultPointCallback) {
 
         this.activity = activity;
         handlerInitLatch = new CountDownLatch(1);
@@ -64,7 +65,7 @@ final class DecodeThread extends Thread {
         hints.put(DecodeHintType.NEED_RESULT_POINT_CALLBACK, resultPointCallback);
     }
 
-    Handler getHandler() {
+    public Handler getHandler() {
         try {
             handlerInitLatch.await();
         } catch (InterruptedException ie) {

@@ -1,4 +1,4 @@
-package com.winsion.dispatch.capture;
+package com.winsion.dispatch.capture.activity;
 
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;

@@ -4,60 +4,17 @@ package com.winsion.dispatch.modules.grid.entity;
  * Created by wyl on 2017/6/27
  */
 public class PatrolItemEntity {
-    /**
-     * 单条巡视任务ID
-     */
-    private String patrolitemsid;
-
-    /**
-     * 巡视任务总ID
-     */
-    private String patrolsid;
-
-    /**
-     * 操作设备时间
-     */
-    private String patroltime;
-
-    /**
-     * 操作用户名
-     */
-    private String commituser;
-
-    /**
-     * 设备状态
-     */
-    private String devicestate;
-
-    /**
-     * 操作用户ID
-     */
-    private String commituserid;
-
-    /**
-     * 操作用户所属班组ID
-     */
-    private String committeamid;
-
-    /**
-     * 操作用户所属班组名
-     */
-    private String committeamname;
-
-    /**
-     * 巡视项目描述
-     */
-    private String itemdescribe;
-
-    /**
-     * 地点
-     */
-    private String pointname;
-
-    /**
-     * detailId
-     */
-    private String id;
+    private String patrolitemsid;   // 单条巡视任务ID
+    private String patrolsid;   // 巡视任务总ID
+    private String patroltime;  // 操作设备时间
+    private String commituser;  // 操作用户名
+    private String devicestate; // 设备状态
+    private String commituserid;    // 操作用户ID
+    private String committeamid;    // 操作用户所属班组ID
+    private String committeamname;  // 操作用户所属班组名
+    private String itemdescribe;    // 巡视项目描述
+    private String pointname;   // 地点
+    private String id;  // detailId
 
     public String getPatrolitemsid() {
         return patrolitemsid;

@@ -6,190 +6,43 @@ import java.io.Serializable;
  * Created by wyl on 2017/6/13
  */
 public class JobEntity implements Serializable {
-    /**
-     * 作业操作ID
-     */
-    private String joboperatorsid;
-
-    /**
-     * 作业ID
-     */
-    private String jobsid;
-
-    /**
-     * 操作组编号
-     */
-    private String teamsid;
-
-    /**
-     * 操作组名称
-     */
-    private String opteamname;
-
-    /**
-     * 计划结束时间
-     */
-    private String planendtime;
-
-    /**
-     * 计划开始时间
-     */
-    private String planstarttime;
-
-    /**
-     * 作业状态
-     */
-    private int workstatus;
-
-    /**
-     * 任务id
-     */
-    private String tasksid;
-
-    /**
-     * 任务名称
-     */
-    private String taskname;
-
-    /**
-     * 任务类型
-     */
-    private int taktype;
-
-    /**
-     * 任务区域ID
-     */
-    private String taskareaid;
-
-    /**
-     * 任务区域名称
-     */
-    private String taskareaname;
-
-    /**
-     * 车辆运行编号
-     */
-    private String runsid;
-
-    /**
-     * 任务状态
-     */
-    private String taskstatus;
-
-    /**
-     * 列车计划到达时间
-     */
-    private String arrivetime;
-
-    /**
-     * 列车晚点状态
-     */
-    private int delaytime;
-
-    /**
-     * 列车计划出发时间
-     */
-    private String departtime;
-
-    /**
-     * 列车到达时间
-     */
-    private String realarrivetime;
-
-    /**
-     * 列车出发时间
-     */
-    private String realdeparttime;
-
-    /**
-     * 车次
-     */
-    private String trainnumber;
-
-    /**
-     * 列车状态(正在检票，完成检票，停止检票)
-     */
-    private int trainstatus;
-
-    /**
-     * 列车终点站名称
-     */
-    private String estname;
-
-    /**
-     * 列车终点站编号
-     */
-    private String endstationsid;
-
-    /**
-     * 列车始发站名称
-     */
-    private String sstname;
-
-    /**
-     * 列车始发站编号
-     */
-    private String startstationsid;
-
-    /**
-     * 任务规则编号
-     */
-    private String ruletasksid;
-
-    /**
-     * 列车任务类型
-     */
-    private String traintasktypesid;
-
-    /**
-     * 车辆关联区域名称("1站台,第3候车室,1道,3候第4检票口")
-     */
-    private String runareaname;
-
-    /**
-     * 车辆关联区域类型("站台,候车室,股道,检票口")
-     */
-    private String areatypename;
-
-    /**
-     * 车辆关联区域类型编号("120,121,119,108")
-     */
-    private String areatypeno;
-
-    /**
-     * 列车晚点状态(正点，晚点，晚点未定，停运)
-     */
-    private int trainlate;
-
-    /**
-     * 实际开始时间
-     */
-    private String realstarttime;
-
-    /**
-     * 实际结束时间
-     */
-    private String realendtime;
-
-    /**
-     * 备注
-     */
-    private String note;
-
-    /**
-     * 命令/协作内容
-     */
-    private String workcontent;
-
-    /**
-     * 监视组名
-     */
-    private String monitorteamname;
-
-    /**
-     * 监视组ID
-     */
-    private String monitorteamid;
+    private String joboperatorsid;  // 作业操作ID
+    private String jobsid;  // 作业ID
+    private String teamsid; // 操作组编号
+    private String opteamname;  // 操作组名称
+    private String planendtime; // 计划结束时间
+    private String planstarttime;   // 计划开始时间
+    private int workstatus; // 作业状态
+    private String tasksid; // 任务id
+    private String taskname;    // 任务名称
+    private int taktype;    // 任务类型
+    private String taskareaid;  // 任务区域ID
+    private String taskareaname;    // 任务区域名称
+    private String runsid;  // 车辆运行编号
+    private String taskstatus;  // 任务状态
+    private String arrivetime;  // 列车计划到达时间
+    private int delaytime;  // 列车晚点状态
+    private String departtime;  // 列车计划出发时间
+    private String realarrivetime;  // 列车到达时间
+    private String realdeparttime;  // 列车出发时间
+    private String trainnumber; // 车次
+    private int trainstatus;    // 列车状态(正在检票，完成检票，停止检票)
+    private String estname; // 列车终点站名称
+    private String endstationsid;   // 列车终点站编号
+    private String sstname; // 列车始发站名称
+    private String startstationsid; // 列车始发站编号
+    private String ruletasksid; // 任务规则编号
+    private String traintasktypesid;    // 列车任务类型
+    private String runareaname; // 车辆关联区域名称("1站台,第3候车室,1道,3候第4检票口")
+    private String areatypename;    // 车辆关联区域类型("站台,候车室,股道,检票口")
+    private String areatypeno;  // 车辆关联区域类型编号("120,121,119,108")
+    private int trainlate;  // 列车晚点状态(正点，晚点，晚点未定，停运)
+    private String realstarttime;   // 实际开始时间
+    private String realendtime; // 实际结束时间
+    private String note;    // 备注
+    private String workcontent; // 命令/协作内容
+    private String monitorteamname; // 监视组名
+    private String monitorteamid;   // 监视组ID
 
     public String getJoboperatorsid() {
         return joboperatorsid;

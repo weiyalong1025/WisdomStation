@@ -12,14 +12,10 @@ import io.objectbox.annotation.Id;
 public class TodoEntity implements Serializable {
     @Id
     private Long id;
-    // 提醒内容
-    private String content;
-    // 提醒时间
-    private long planDate;
-    // 是否已完成
-    private boolean finished;
-    // 是哪个用户添加的
-    private String belongUserId;
+    private String content; // 提醒内容
+    private long planDate;  // 提醒时间
+    private boolean finished;   // 是否已完成
+    private String belongUserId;    // 是哪个用户添加的
 
     public TodoEntity(Long id, String content, long planDate, boolean finished, String belongUserId) {
         this.id = id;

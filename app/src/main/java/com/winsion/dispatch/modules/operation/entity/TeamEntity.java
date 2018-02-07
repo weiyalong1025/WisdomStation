@@ -6,30 +6,11 @@ import java.io.Serializable;
  * Created by wyl on 2017/7/17
  */
 public class TeamEntity implements Serializable {
-    /**
-     * 班组ID
-     */
-    private String teamid;
-
-    /**
-     * 职能组ID
-     */
-    private String postid;
-
-    /**
-     * 班组名称
-     */
-    private String teamsName;
-
-    /**
-     * 会话组ID
-     */
-    private String talkgroupid;
-
-    /**
-     * 用户数量
-     */
-    private int userCount;
+    private String teamid;  // 班组ID
+    private String postid;  // 职能组ID
+    private String teamsName;   // 班组名称
+    private String talkgroupid; // 会话组ID
+    private int userCount;  // 用户数量
 
     public String getTeamid() {
         return teamid;

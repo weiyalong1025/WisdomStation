@@ -23,6 +23,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
+
 /**
  * Created by wyl on 2016/8/27.
  * 录制视频
@@ -43,8 +45,6 @@ public class RecordVideoActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TitleView tvTitle;
 
-    public static final String FILE = "file";
-
     private SurfaceHolder mSurfaceHolder;
     private Camera mCamera;
     private MediaRecorder mRecorder;
@@ -53,8 +53,7 @@ public class RecordVideoActivity extends BaseActivity {
 
     private File mFile;
 
-    // 记录按钮是否按下
-    private boolean isPressed = false;
+    private boolean isPressed = false;  // 记录按钮是否按下
     private boolean isPermissionDenied;
     private List<Camera.Size> svs;
 
@@ -71,7 +70,7 @@ public class RecordVideoActivity extends BaseActivity {
         });
         mCameraPreview.setKeepScreenOn(true);
         mCameraPreview.setFocusable(true);
-        mFile = (File) getIntent().getSerializableExtra(FILE);
+        mFile = (File) getIntent().getSerializableExtra(MEDIA_FILE);
         mSurfaceHolder = mCameraPreview.getHolder();
         mSurfaceHolder.addCallback(mSurfaceCallback);
         mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);

@@ -8,11 +8,12 @@ import android.os.Build;
 
 import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.DBDataSource;
-import com.winsion.dispatch.modules.reminder.constants.ExtraName;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
 import com.winsion.dispatch.modules.reminder.receiver.todo.TodoReceiver;
 
 import java.util.List;
+
+import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_ID;
 
 /**
  * Created by wyl on 2017/6/2
@@ -38,7 +39,7 @@ public class TodoListPresenter implements TodoListContract.Presenter {
     public void deleteTodo(TodoEntity todoEntity) {
         if (!todoEntity.getFinished()) {
             Intent intent = new Intent(mContext, TodoReceiver.class);
-            intent.putExtra(ExtraName.NAME_TODO_ID, todoEntity.getId());
+            intent.putExtra(TODO_ID, todoEntity.getId());
             long requestCode = todoEntity.getPlanDate();
             PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, (int) requestCode,
                     intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -68,7 +69,7 @@ public class TodoListPresenter implements TodoListContract.Presenter {
      */
     private void setAlarm(TodoEntity todoEntity) {
         Intent intent = new Intent(mContext, TodoReceiver.class);
-        intent.putExtra(ExtraName.NAME_TODO_ID, todoEntity.getId());
+        intent.putExtra(TODO_ID, todoEntity.getId());
         long requestCode = todoEntity.getPlanDate();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, (int) requestCode,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);

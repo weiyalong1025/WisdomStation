@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.winsion.dispatch.capture;
+package com.winsion.dispatch.capture.activity;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+
+import com.winsion.dispatch.capture.listener.FinishListener;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -28,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Finishes an activity after a period of inactivity.
  */
-final class InactivityTimer {
+public final class InactivityTimer {
 
     private static final int INACTIVITY_DELAY_SECONDS = 5 * 60;
 
@@ -37,7 +39,7 @@ final class InactivityTimer {
     private final Activity activity;
     private ScheduledFuture<?> inactivityFuture = null;
 
-    InactivityTimer(Activity activity) {
+    public InactivityTimer(Activity activity) {
         this.activity = activity;
         onActivity();
     }
@@ -49,16 +51,16 @@ final class InactivityTimer {
                 TimeUnit.SECONDS);
     }
 
+    public void shutdown() {
+        cancel();
+        inactivityTimer.shutdown();
+    }
+
     private void cancel() {
         if (inactivityFuture != null) {
             inactivityFuture.cancel(true);
             inactivityFuture = null;
         }
-    }
-
-    public void shutdown() {
-        cancel();
-        inactivityTimer.shutdown();
     }
 
     private static final class DaemonThreadFactory implements ThreadFactory {

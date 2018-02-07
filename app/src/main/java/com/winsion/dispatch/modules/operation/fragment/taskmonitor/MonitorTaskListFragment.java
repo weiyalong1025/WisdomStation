@@ -60,18 +60,12 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     private MonitorTaskListContract.Presenter mPresenter;
     private MonitorTaskListAdapter mLvAdapter;
     private int mCurrentSysType = -1;
-    // 当前显示数据
-    private List<TaskEntity> listData = new ArrayList<>();
-    // 全部的
-    private List<TaskEntity> allData = new ArrayList<>();
-    // 未开始
-    private List<TaskEntity> unStartedData = new ArrayList<>();
-    // 进行中
-    private List<TaskEntity> underwayData = new ArrayList<>();
-    // 已完成
-    private List<TaskEntity> doneData = new ArrayList<>();
-    // 记录选了哪个状态进行筛选
-    private int statusPosition = TaskSpinnerState.STATE_ALL;
+    private List<TaskEntity> listData = new ArrayList<>();  // 当前显示数据
+    private List<TaskEntity> allData = new ArrayList<>();   // 全部的
+    private List<TaskEntity> unStartedData = new ArrayList<>(); // 未开始
+    private List<TaskEntity> underwayData = new ArrayList<>();  // 进行中
+    private List<TaskEntity> doneData = new ArrayList<>();  // 已完成
+    private int statusPosition = TaskSpinnerState.STATE_ALL;    // 记录选了哪个状态进行筛选
 
     @SuppressLint("InflateParams")
     @Override

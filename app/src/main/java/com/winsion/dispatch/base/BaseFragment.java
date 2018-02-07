@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by yalong on 2016/6/13.
+ * 基类-Fragment
  */
 public abstract class BaseFragment extends Fragment implements HandlerUtils.OnReceiveMessageListener {
     private View mContentView;
@@ -95,20 +96,13 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      * @param cls
      */
     public void startActivity(Class<? extends Activity> cls) {
-        startActivity(cls, null);
+        Intent intent = new Intent(mContext, cls);
+        startActivity(intent);
     }
 
-    /**
-     * 跳转Activity
-     *
-     * @param cls
-     */
-    public void startActivity(Class<? extends Activity> cls, Bundle bundle) {
+    public void startActivityForResult(Class<? extends Activity> cls, int requestCode) {
         Intent intent = new Intent(mContext, cls);
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
-        startActivity(intent);
+        startActivityForResult(intent, requestCode);
     }
 
     public void showView(ViewGroup container, View v) {

@@ -31,6 +31,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
+
 /**
  * Created by wyl on 2016/8/27.
  * TODO 动态权限-相机
@@ -44,8 +46,6 @@ public class TakePhotoActivity extends BaseActivity {
     LinearLayout llButton;
     @BindView(R.id.tv_title)
     TitleView tvTitle;
-
-    public static final String FILE = "file";
 
     private SurfaceHolder holder;
     private Camera mCamera;
@@ -65,7 +65,7 @@ public class TakePhotoActivity extends BaseActivity {
         });
         svPreview.setKeepScreenOn(true);
         svPreview.setFocusable(true);
-        mFile = (File) getIntent().getSerializableExtra(FILE);
+        mFile = (File) getIntent().getSerializableExtra(MEDIA_FILE);
         holder = svPreview.getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override

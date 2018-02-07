@@ -20,14 +20,8 @@ public class AlphaTabsIndicator extends LinearLayout {
     private OnTabChangedListener mListener;
     private List<AlphaTabView> mTabViews;
     private boolean IS_INIT;
-    /**
-     * 子View的数量
-     */
-    private int mChildCounts;
-    /**
-     * 当前的条目索引
-     */
-    private int mCurrentItem = 0;
+    private int mChildCounts;   // 子View的数量
+    private int mCurrentItem = 0;   // 当前的条目索引
 
     public AlphaTabsIndicator(Context context) {
         this(context, null);

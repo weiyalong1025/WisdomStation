@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.winsion.dispatch.capture;
+package com.winsion.dispatch.capture.decode;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -25,6 +25,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Pattern;
+
+import static com.winsion.dispatch.capture.constants.Intents.Scan.DATA_MATRIX_MODE;
+import static com.winsion.dispatch.capture.constants.Intents.Scan.MODE;
+import static com.winsion.dispatch.capture.constants.Intents.Scan.ONE_D_MODE;
+import static com.winsion.dispatch.capture.constants.Intents.Scan.PRODUCT_MODE;
+import static com.winsion.dispatch.capture.constants.Intents.Scan.QR_CODE_MODE;
+import static com.winsion.dispatch.capture.constants.Intents.Scan.SCAN_FORMATS;
 
 final class DecodeFormatManager {
 
@@ -58,19 +65,19 @@ final class DecodeFormatManager {
 
     static Vector<BarcodeFormat> parseDecodeFormats(Intent intent) {
         List<String> scanFormats = null;
-        String scanFormatsString = intent.getStringExtra(Intents.Scan.SCAN_FORMATS);
+        String scanFormatsString = intent.getStringExtra(SCAN_FORMATS);
         if (scanFormatsString != null) {
             scanFormats = Arrays.asList(COMMA_PATTERN.split(scanFormatsString));
         }
-        return parseDecodeFormats(scanFormats, intent.getStringExtra(Intents.Scan.MODE));
+        return parseDecodeFormats(scanFormats, intent.getStringExtra(MODE));
     }
 
     static Vector<BarcodeFormat> parseDecodeFormats(Uri inputUri) {
-        List<String> formats = inputUri.getQueryParameters(Intents.Scan.SCAN_FORMATS);
+        List<String> formats = inputUri.getQueryParameters(SCAN_FORMATS);
         if (formats != null && formats.size() == 1 && formats.get(0) != null) {
             formats = Arrays.asList(COMMA_PATTERN.split(formats.get(0)));
         }
-        return parseDecodeFormats(formats, inputUri.getQueryParameter(Intents.Scan.MODE));
+        return parseDecodeFormats(formats, inputUri.getQueryParameter(MODE));
     }
 
     private static Vector<BarcodeFormat> parseDecodeFormats(Iterable<String> scanFormats,
@@ -87,16 +94,16 @@ final class DecodeFormatManager {
             }
         }
         if (decodeMode != null) {
-            if (Intents.Scan.PRODUCT_MODE.equals(decodeMode)) {
+            if (PRODUCT_MODE.equals(decodeMode)) {
                 return PRODUCT_FORMATS;
             }
-            if (Intents.Scan.QR_CODE_MODE.equals(decodeMode)) {
+            if (QR_CODE_MODE.equals(decodeMode)) {
                 return QR_CODE_FORMATS;
             }
-            if (Intents.Scan.DATA_MATRIX_MODE.equals(decodeMode)) {
+            if (DATA_MATRIX_MODE.equals(decodeMode)) {
                 return DATA_MATRIX_FORMATS;
             }
-            if (Intents.Scan.ONE_D_MODE.equals(decodeMode)) {
+            if (ONE_D_MODE.equals(decodeMode)) {
                 return ONE_D_FORMATS;
             }
         }

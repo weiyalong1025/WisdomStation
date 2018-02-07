@@ -10,7 +10,6 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseActivity;
 import com.winsion.dispatch.common.biz.CommonBiz;
-import com.winsion.dispatch.modules.reminder.constants.ExtraName;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
 import com.winsion.dispatch.utils.ConvertUtils;
 import com.winsion.dispatch.utils.constants.Formatter;
@@ -21,6 +20,8 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_ID;
 
 /**
  * 作者：10295
@@ -41,8 +42,7 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
     Button btnSave;
 
     private AddTodoContract.Presenter mPresenter;
-    // 是否是更新
-    private boolean isUpdate;
+    private boolean isUpdate;   // 是否是更新
     private long todoId;
 
     @Override
@@ -63,7 +63,7 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
     }
 
     private void initViewData() {
-        todoId = getIntent().getLongExtra(ExtraName.NAME_TODO_ID, 0);
+        todoId = getIntent().getLongExtra(TODO_ID, 0);
         String planDate;
         if (isUpdate = todoId != 0) {
             TodoEntity todoEntity = mPresenter.getTodoById(todoId);

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.winsion.dispatch.capture;
+package com.winsion.dispatch.capture.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,6 +31,7 @@ import com.google.zxing.ResultPoint;
 import com.google.zxing.ResultPointCallback;
 import com.google.zxing.camera.CameraManager;
 import com.winsion.dispatch.R;
+import com.winsion.dispatch.capture.decode.DecodeThread;
 import com.winsion.dispatch.view.ViewfinderView;
 
 import java.util.Vector;

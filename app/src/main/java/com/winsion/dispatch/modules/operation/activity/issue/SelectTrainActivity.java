@@ -53,10 +53,8 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
     @BindView(R.id.tv_hint)
     TextView tvHint;
 
-    // ListView显示的数据
-    private ArrayList<RunEntity> listData = new ArrayList<>();
-    // 所有的车站数据
-    private ArrayList<RunEntity> allData = new ArrayList<>();
+    private ArrayList<RunEntity> listData = new ArrayList<>();  // ListView显示的数据
+    private ArrayList<RunEntity> allData = new ArrayList<>();   // 所有的车站数据
     private SelectTrainAdapter mLvAdapter;
 
     @Override

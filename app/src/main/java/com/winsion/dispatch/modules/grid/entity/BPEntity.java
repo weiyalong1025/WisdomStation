@@ -6,10 +6,8 @@ package com.winsion.dispatch.modules.grid.entity;
  */
 
 public class BPEntity {
-    // 蓝牙点ID
-    private String bluetoothId;
-    // 最后一次接到蓝牙信号的时间
-    private long lastTime;
+    private String bluetoothId; // 蓝牙点ID
+    private long lastTime;  // 最后一次接到蓝牙信号的时间
 
     public String getBluetoothId() {
         return bluetoothId;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.winsion.dispatch.capture;
+package com.winsion.dispatch.capture.decode;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +31,7 @@ import com.google.zxing.camera.CameraManager;
 import com.google.zxing.camera.PlanarYUVLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import com.winsion.dispatch.R;
+import com.winsion.dispatch.capture.activity.CaptureActivity;
 
 import java.util.Hashtable;
 

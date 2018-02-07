@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseActivity;
-import com.winsion.dispatch.capture.CaptureActivity;
+import com.winsion.dispatch.capture.activity.CaptureActivity;
 import com.winsion.dispatch.modules.grid.entity.SubclassEntity;
 import com.winsion.dispatch.view.TipDialog;
 import com.winsion.dispatch.view.TitleView;
@@ -25,7 +25,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.winsion.dispatch.capture.CaptureActivity.INTENT_EXTRA_KEY_QR_SCAN;
+import static com.winsion.dispatch.capture.activity.CaptureActivity.INTENT_EXTRA_KEY_QR_SCAN;
+import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.DEVICE_DEPENDENT;
+import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.PATROL_DETAIL_ID;
+import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.SITE_NAME;
 
 /**
  * Created by 10295 on 2018/2/2.
@@ -52,9 +55,6 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     @BindView(R.id.lv_photo_list)
     ListView lvPhotoList;
 
-    public static final String PATROL_DETAIL_ID = "patrolDetailId";
-    public static final String SITE_NAME = "siteName";  // 地点
-    public static final String DEVICE_DEPENDENT = "deviceDependent";    // 是否与设备相关
     private static final int CODE_TAKE_PHOTO = 0;   // 拍照
     private static final int CODE_CAPTURE_QR = 1;   // 扫描二维码
 

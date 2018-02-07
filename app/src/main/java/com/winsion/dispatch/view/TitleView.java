@@ -17,7 +17,6 @@ import com.winsion.dispatch.R;
  */
 
 public class TitleView extends RelativeLayout {
-
     private TextView tvTitle;
     private ImageView ivBack;
     private TextView tvConfirm;

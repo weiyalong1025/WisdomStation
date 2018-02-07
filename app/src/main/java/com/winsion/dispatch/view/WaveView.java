@@ -30,10 +30,7 @@ public class WaveView extends View {
     private Paint paint;
     private Paint paintVoicLine;
     private int mode;
-    /**
-     * 灵敏度
-     */
-    private int sensibility = 4;
+    private int sensibility = 4;    // 灵敏度
 
     private float maxVolume = 100;
 
@@ -41,10 +38,7 @@ public class WaveView extends View {
     private float translateX = 0;
     private boolean isSet = false;
 
-    /**
-     * 音量
-     */
-    private float volume = 10;
+    private float volume = 10;  // 音量
     private int fineness = 1;
     private float targetVolume = 1;
 

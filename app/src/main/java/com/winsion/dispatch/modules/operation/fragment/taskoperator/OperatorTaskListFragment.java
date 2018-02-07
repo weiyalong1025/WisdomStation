@@ -43,6 +43,8 @@ import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
+import static com.winsion.dispatch.modules.operation.constants.Intents.OperatorTaskDetail.JOB_ENTITY;
+
 /**
  * Created by 10295 on 2017/12/15 0015
  * 我的任务Fragment
@@ -70,18 +72,12 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     private OperatorTaskListContract.Presenter mPresenter;
     private OperatorTaskListAdapter mLvAdapter;
     private int mCurrentSysType = -1;
-    // 当前显示数据
-    private List<JobEntity> listData = new ArrayList<>();
-    // 全部的
-    private List<JobEntity> allData = new ArrayList<>();
-    // 未开始
-    private List<JobEntity> unStartedData = new ArrayList<>();
-    // 进行中
-    private List<JobEntity> underwayData = new ArrayList<>();
-    // 已完成
-    private List<JobEntity> doneData = new ArrayList<>();
-    // 记录选了哪个状态进行筛选
-    private int statusPosition = TaskSpinnerState.STATE_ALL;
+    private List<JobEntity> listData = new ArrayList<>();   // 当前显示数据
+    private List<JobEntity> allData = new ArrayList<>();    // 全部的
+    private List<JobEntity> unStartedData = new ArrayList<>();  // 未开始
+    private List<JobEntity> underwayData = new ArrayList<>();   // 进行中
+    private List<JobEntity> doneData = new ArrayList<>();   // 已完成
+    private int statusPosition = TaskSpinnerState.STATE_ALL;    // 记录选了哪个状态进行筛选
 
     @SuppressLint("InflateParams")
     @Override
@@ -200,7 +196,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         JobEntity jobEntity = listData.get(position);
         Intent intent = new Intent(mContext, OperatorTaskDetailActivity.class);
-        intent.putExtra(OperatorTaskDetailActivity.JOB_ENTITY, jobEntity);
+        intent.putExtra(JOB_ENTITY, jobEntity);
         startActivity(intent);
     }
 

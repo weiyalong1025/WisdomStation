@@ -5,29 +5,11 @@ package com.winsion.dispatch.modules.grid.entity;
  * 提交问题提 - 类别下子类
  */
 public class SubclassEntity {
-    /**
-     * 子类编号
-     */
-    private String id;
-    /**
-     * 大类编号
-     */
-    private String classificationid;
-
-    /**
-     * 类型名称
-     */
-    private String typename;
-
-    /**
-     * 预计花费时长
-     */
-    private int plancosttime;
-
-    /**
-     * 优先级
-     */
-    private int priority;
+    private String id;  // 子类编号
+    private String classificationid;    // 大类编号
+    private String typename;    // 类型名称
+    private int plancosttime;   // 预计花费时长
+    private int priority;   // 优先级
 
     public String getClassificationid() {
         return classificationid;

@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by admin on 2016/11/18.
+ * 基类-Activity
  */
 
 public abstract class BaseActivity extends AppCompatActivity implements HandlerUtils.OnReceiveMessageListener {
@@ -94,7 +95,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
      * @param cls 要打开的activity
      */
     public void startActivity(Class<? extends Activity> cls) {
-        startActivity(cls, null, false);
+        startActivity(cls, false);
     }
 
     /**
@@ -104,21 +105,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
      * @param closeCurrentActivity 是否需要关闭当前页面
      */
     public void startActivity(Class<? extends Activity> cls, boolean closeCurrentActivity) {
-        startActivity(cls, null, closeCurrentActivity);
-    }
-
-    /**
-     * 开启activity
-     *
-     * @param cls                  要打开的activity
-     * @param bundle               传递的数据
-     * @param closeCurrentActivity 是否需要关闭当前页面
-     */
-    public void startActivity(Class<? extends Activity> cls, Bundle bundle, boolean closeCurrentActivity) {
         Intent intent = new Intent(this, cls);
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
         startActivity(intent);
         if (closeCurrentActivity) {
             finish();
@@ -126,14 +113,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
     }
 
     public void startActivityForResult(Class<? extends Activity> cls, int requestCode) {
-        startActivityForResult(cls, requestCode, null);
-    }
-
-    public void startActivityForResult(Class<? extends Activity> cls, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, cls);
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
         startActivityForResult(intent, requestCode);
     }
 

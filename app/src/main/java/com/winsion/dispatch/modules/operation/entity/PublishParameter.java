@@ -13,19 +13,10 @@ public class PublishParameter {
     private String monitorTeamId;
     private String planStartTime;
     private String planEndTime;
-    /**
-     * 标题
-     */
-    private String taskName;
-    /**
-     * 类型(命令/协作)
-     */
-    private int taskType;
+    private String taskName;    // 标题
+    private int taskType;   // 类型(命令/协作)
     private String usersId;
-    /**
-     * 内容
-     */
-    private String workContent;
+    private String workContent; // 工作内容
     private String ssId;
     private String note;
     private ArrayList<FileEntity> fileList;

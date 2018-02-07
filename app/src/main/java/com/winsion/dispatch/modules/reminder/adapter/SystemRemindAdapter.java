@@ -28,9 +28,7 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
         void onSelectChange(int selectSize);
     }
 
-    // 当前是否是多选删除状态
-    private boolean isMultipleDeleteStatus;
-
+    private boolean isMultipleDeleteStatus; // 当前是否是多选删除状态
     private ClickListener<RemindEntity> mListener;
     private OnSelectChangeListener onSelectChangeListener;
     private List<RemindEntity> selectData = new ArrayList<>();

@@ -30,6 +30,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.winsion.dispatch.modules.grid.constants.Intents.PatrolItem.PATROL_TASK_ENTITY;
+import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.DEVICE_DEPENDENT;
+import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.PATROL_DETAIL_ID;
+import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.SITE_NAME;
+
 /**
  * Created by 10295 on 2018/2/1.
  * 巡检项界面
@@ -53,15 +58,11 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     @BindView(R.id.fl_container)
     FrameLayout flContainer;
 
-    public static final String PATROL_TASK_ENTITY = "patrolPlanEntity";
-
-    // 上个页面带过来的
-    private PatrolPlanEntity patrolPlanEntity;
+    private PatrolPlanEntity patrolPlanEntity;  // 上个页面带过来的
     private PatrolItemContract.Presenter mPresenter;
     private List<PatrolItemEntity> listData = new ArrayList<>();
     private PatrolItemAdapter mAdapter;
-    // 跳转设备报修界面时带过去
-    private String devicePatrolDetailId;
+    private String devicePatrolDetailId;    // 跳转设备报修界面时带过去
 
     @Override
     protected int setContentView() {
@@ -114,9 +115,9 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
             } else {
                 // 设备报修
                 Intent intent = new Intent(mContext, SubmitProblemActivity.class);
-                intent.putExtra(SubmitProblemActivity.PATROL_DETAIL_ID, devicePatrolDetailId);
-                intent.putExtra(SubmitProblemActivity.SITE_NAME, patrolPlanEntity.getPointname());
-                intent.putExtra(SubmitProblemActivity.DEVICE_DEPENDENT, true);
+                intent.putExtra(PATROL_DETAIL_ID, devicePatrolDetailId);
+                intent.putExtra(SITE_NAME, patrolPlanEntity.getPointname());
+                intent.putExtra(DEVICE_DEPENDENT, true);
                 startActivityForResult(intent, 200);
             }
         });
@@ -148,9 +149,9 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
                     })
                     .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
                         Intent intent = new Intent(mContext, SubmitProblemActivity.class);
-                        intent.putExtra(SubmitProblemActivity.PATROL_DETAIL_ID, patrolItemEntity.getId());
-                        intent.putExtra(SubmitProblemActivity.SITE_NAME, patrolPlanEntity.getPointname());
-                        intent.putExtra(SubmitProblemActivity.DEVICE_DEPENDENT, false);
+                        intent.putExtra(PATROL_DETAIL_ID, patrolItemEntity.getId());
+                        intent.putExtra(SITE_NAME, patrolPlanEntity.getPointname());
+                        intent.putExtra(DEVICE_DEPENDENT, false);
                         startActivityForResult(intent, 200);
                     })
                     .create()

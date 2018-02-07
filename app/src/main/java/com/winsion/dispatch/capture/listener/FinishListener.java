@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.winsion.dispatch.capture;
+package com.winsion.dispatch.capture.listener;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -26,7 +26,7 @@ public final class FinishListener implements DialogInterface.OnClickListener, Di
 
     private final Activity activityToFinish;
 
-    FinishListener(Activity activityToFinish) {
+    public FinishListener(Activity activityToFinish) {
         this.activityToFinish = activityToFinish;
     }
 

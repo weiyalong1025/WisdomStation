@@ -15,6 +15,8 @@ import java.io.File;
 
 import butterknife.BindView;
 
+import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
+
 /**
  * Created by admin on 2016/8/13.
  * 添加备注
@@ -27,7 +29,6 @@ public class AddNoteActivity extends BaseActivity implements TextWatcher {
     @BindView(R.id.tv_counter)
     TextView tvCounter;
 
-    public static final String FILE = "file";
     private File file;
 
     @Override
@@ -47,7 +48,7 @@ public class AddNoteActivity extends BaseActivity implements TextWatcher {
 
         etNoteContent.addTextChangedListener(this);
 
-        file = (File) getIntent().getSerializableExtra(FILE);
+        file = (File) getIntent().getSerializableExtra(MEDIA_FILE);
         if (file.exists()) {
             String content = FileUtils.readFile2String(file, "UTF-8");
             etNoteContent.setText(content);

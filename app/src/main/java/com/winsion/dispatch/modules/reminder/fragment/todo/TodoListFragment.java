@@ -11,11 +11,10 @@ import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseFragment;
 import com.winsion.dispatch.main.activity.MainActivity;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
+import com.winsion.dispatch.modules.reminder.activity.todo.AddTodoActivity;
 import com.winsion.dispatch.modules.reminder.adapter.TodoAdapter;
-import com.winsion.dispatch.modules.reminder.constants.ExtraName;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
 import com.winsion.dispatch.modules.reminder.event.UpdateTodoEvent;
-import com.winsion.dispatch.modules.reminder.activity.todo.AddTodoActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,6 +27,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
+import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_ID;
 
 /**
  * Created by wyl on 2017/6/2
@@ -40,8 +40,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
 
     public static final int REQUEST_CODE = 911;
 
-    // 显示未完成/已完成的数据
-    private boolean mIsFinish;
+    private boolean mIsFinish;  // 显示未完成/已完成的数据
     private List<TodoEntity> listData = new ArrayList<>();
     private TodoAdapter mAdapter;
     private TodoListContract.Presenter mPresenter;
@@ -118,8 +117,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
                 initData(false);
                 break;
             case R.id.btn_add:
-                Intent intent = new Intent(mContext, AddTodoActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
+                startActivityForResult(AddTodoActivity.class, REQUEST_CODE);
                 break;
         }
     }
@@ -128,7 +126,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (!mIsFinish) {
             Intent intent = new Intent(mContext, AddTodoActivity.class);
-            intent.putExtra(ExtraName.NAME_TODO_ID, listData.get(position).getId());
+            intent.putExtra(TODO_ID, listData.get(position).getId());
             startActivityForResult(intent, REQUEST_CODE);
         }
     }

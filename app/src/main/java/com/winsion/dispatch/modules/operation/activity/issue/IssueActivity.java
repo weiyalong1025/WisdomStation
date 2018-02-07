@@ -2,7 +2,6 @@ package com.winsion.dispatch.modules.operation.activity.issue;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
@@ -52,6 +51,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
+import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.ISSUE_TYPE;
+import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.TO_TEAM_ENTITY;
+
 /**
  * 发布命令/协作界面
  * Created by wyl on 2016/8/1.
@@ -77,9 +80,6 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     TextView tvTrainNumber;
     @BindView(R.id.list_view)
     ListView listView;
-
-    private static final String ISSUE_TYPE = "issueType";
-    private static final String TO_TEAM_ENTITY = "toTeamEntity";
 
     // 选择班组
     public static final int CODE_SELECT_TEAM = 0;
@@ -430,7 +430,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     @OnClick({R.id.tv_station, R.id.tv_start_time, R.id.tv_end_time, R.id.iv_add_performer, R.id.tv_train_number,
             R.id.btn_take_photo, R.id.btn_video, R.id.btn_record})
     public void onViewClicked(View view) {
-        Bundle bundle = new Bundle();
+        Intent intent;
         switch (view.getId()) {
             case R.id.tv_station:
                 // 选择车站点击事件
@@ -455,8 +455,9 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             case R.id.btn_take_photo:
                 try {
                     photoFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
-                    bundle.putSerializable(TakePhotoActivity.FILE, photoFile);
-                    startActivityForResult(TakePhotoActivity.class, CODE_TAKE_PHOTO, bundle);
+                    intent = new Intent(mContext, TakePhotoActivity.class);
+                    intent.putExtra(MEDIA_FILE, photoFile);
+                    startActivityForResult(intent, CODE_TAKE_PHOTO);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
                 }
@@ -464,8 +465,9 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             case R.id.btn_video:
                 try {
                     videoFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.VIDEO);
-                    bundle.putSerializable(RecordVideoActivity.FILE, videoFile);
-                    startActivityForResult(RecordVideoActivity.class, CODE_RECORD_VIDEO, bundle);
+                    intent = new Intent(mContext, RecordVideoActivity.class);
+                    intent.putExtra(MEDIA_FILE, videoFile);
+                    startActivityForResult(intent, CODE_RECORD_VIDEO);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
                 }
@@ -473,8 +475,9 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             case R.id.btn_record:
                 try {
                     audioFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.AUDIO);
-                    bundle.putSerializable(RecordAudioActivity.FILE, audioFile);
-                    startActivityForResult(RecordAudioActivity.class, CODE_RECORD_AUDIO, bundle);
+                    intent = new Intent(mContext, RecordAudioActivity.class);
+                    intent.putExtra(MEDIA_FILE, audioFile);
+                    startActivityForResult(intent, CODE_RECORD_AUDIO);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
                 }

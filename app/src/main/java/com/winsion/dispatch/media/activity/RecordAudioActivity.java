@@ -20,6 +20,8 @@ import java.io.IOException;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
+
 /**
  * Created by admin on 2016/8/11.
  * 录制音频
@@ -37,11 +39,8 @@ public class RecordAudioActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TitleView tvTitle;
 
-    public static final String FILE = "file";
-
     private File mFile;
-    // 记录是否正在录音
-    private boolean isRecording = false;
+    private boolean isRecording = false;    // 记录是否正在录音
     private MediaRecorder recorder;
 
     @SuppressLint("SetTextI18n")
@@ -81,7 +80,7 @@ public class RecordAudioActivity extends BaseActivity {
     protected void start() {
         tvTitle.setOnBackClickListener((View v) -> finish());
         // 录音文件保存路径
-        mFile = (File) getIntent().getSerializableExtra(FILE);
+        mFile = (File) getIntent().getSerializableExtra(MEDIA_FILE);
         initRecorder();
     }
 

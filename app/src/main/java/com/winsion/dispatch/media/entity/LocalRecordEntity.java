@@ -6,30 +6,11 @@ import java.io.File;
  * Created by wyl on 2017/6/16
  */
 public class LocalRecordEntity {
-    /**
-     * 文件
-     */
-    private File file;
-
-    /**
-     * 文件类型 FileType
-     */
-    private int fileType;
-
-    /**
-     * 状态 FileState
-     */
-    private int fileStatus;
-
-    /**
-     * 文件服务器路径
-     */
-    private String serverUri;
-
-    /**
-     * 进度 0-100
-     */
-    private int progress;
+    private File file;  // 文件
+    private int fileType;   // 文件类型 FileType
+    private int fileStatus; // 状态 FileState
+    private String serverUri;   // 文件服务器路径
+    private int progress;   // 进度 0-100
 
     public File getFile() {
         return file;

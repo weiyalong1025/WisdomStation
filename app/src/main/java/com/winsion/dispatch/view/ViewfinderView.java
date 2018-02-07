@@ -55,22 +55,15 @@ public final class ViewfinderView extends View {
 
     private final Paint paint;
     private Bitmap resultBitmap;
-    //模糊区域颜色
-    private final int maskColor;
+    private final int maskColor;    // 模糊区域颜色
     private final int resultColor;
-    //扫描区域边框颜色
-    private final int frameColor;
-    //扫描线颜色
-    private final int laserColor;
-    //四角颜色
-    private final int cornerColor;
-    //扫描点的颜色
-    private final int resultPointColor;
+    private final int frameColor;   // 扫描区域边框颜色
+    private final int laserColor;   // 扫描线颜色
+    private final int cornerColor;  // 四角颜色
+    private final int resultPointColor; // 扫描点的颜色
     private int scannerAlpha;
-    //扫描区域提示文本
-    private final String labelText;
-    //扫描区域提示文本颜色
-    private final int labelTextColor;
+    private final String labelText; // 扫描区域提示文本
+    private final int labelTextColor;   // 扫描区域提示文本颜色
     private final float labelTextSize;
 
     public static int scannerStart = 0;

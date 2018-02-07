@@ -45,6 +45,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_CANCELED;
+import static com.winsion.dispatch.modules.grid.constants.Intents.PatrolItem.PATROL_TASK_ENTITY;
 
 /**
  * Created by 10295 on 2017/12/26.
@@ -273,7 +274,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
         PatrolPlanEntity patrolPlanEntity = listData.get(position);
         if (patrolPlanEntity.isArrive() || AppApplication.TEST_MODE) {
             Intent intent = new Intent(mContext, PatrolItemActivity.class);
-            intent.putExtra(PatrolItemActivity.PATROL_TASK_ENTITY, patrolPlanEntity);
+            intent.putExtra(PATROL_TASK_ENTITY, patrolPlanEntity);
             startActivity(intent);
         }
     }

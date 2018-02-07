@@ -6,95 +6,24 @@ import java.io.Serializable;
  * Created by wyl on 2017/6/17
  */
 public class TaskEntity implements Serializable {
-    /**
-     * 任务编号
-     */
-    private String tasksid;
-
-    /**
-     * 任务名称
-     */
-    private String taskname;
-
-    /**
-     * 作业数量
-     */
-    private int job;
-
-    /**
-     * 任务备注
-     */
-    private String notes;
-
-    /**
-     * 计划结束时间
-     */
-    private String planendtime;
-
-    /**
-     * 计划开始时间
-     */
-    private String planstarttime;
-
-    /**
-     * 实际结束时间
-     */
-    private String realendtime;
-
-    /**
-     * 实际开始时间
-     */
-    private String realstarttime;
-
-    /**
-     * 任务类型
-     */
-    private int taktype;
-
-    /**
-     * 任务状态
-     */
-    private int taskstatus;
-
-    /**
-     * 车次
-     */
-    private String trainnumber;
-
-    /**
-     * 起始车站名
-     */
-    private String sstname;
-
-    /**
-     * 终点车站名
-     */
-    private String estname;
-
-    /**
-     * 车辆关联区域类型("站台,候车室,股道,检票口")
-     */
-    private String areatypename;
-
-    /**
-     * 车辆关联区域类型编号("120,121,119,108")
-     */
-    private String areatypeno;
-
-    /**
-     * 列车晚点状态(正点，晚点，晚点未定，停运)
-     */
-    private int trainlate;
-
-    /**
-     * 区域名称
-     */
-    private String areaname;
-
-    /**
-     * 等级
-     */
-    private String memo;
+    private String tasksid; // 任务编号
+    private String taskname;    // 任务名称
+    private int job;    // 作业数量
+    private String notes;   // 任务备注
+    private String planendtime; // 计划结束时间
+    private String planstarttime;   // 计划开始时间
+    private String realendtime; // 实际结束时间
+    private String realstarttime;   // 实际开始时间
+    private int taktype;    // 任务类型
+    private int taskstatus; // 任务状态
+    private String trainnumber; // 车次
+    private String sstname; // 起始车站名
+    private String estname; // 终点车站名
+    private String areatypename;    // 车辆关联区域类型("站台,候车室,股道,检票口")
+    private String areatypeno;  // 车辆关联区域类型编号("120,121,119,108")
+    private int trainlate;  // 列车晚点状态(正点，晚点，晚点未定，停运)
+    private String areaname;    // 区域名称
+    private String memo;    // 等级
 
     public String getTasksid() {
         return tasksid;

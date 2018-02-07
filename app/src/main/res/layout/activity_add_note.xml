@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -35,7 +34,7 @@
         android:layout_alignBottom="@id/et_note_content"
         android:layout_alignEnd="@id/et_note_content"
         android:layout_margin="@dimen/d10"
+        android:text="@string/default_counter"
         android:textColor="@color/gray1"
-        android:textSize="@dimen/s16"
-        tools:text="0/150" />
+        android:textSize="@dimen/s16" />
 </RelativeLayout>

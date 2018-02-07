@@ -32,11 +32,14 @@
     <string name="btn_rephotograph">重拍</string>
 
     <string name="default_patrol_date">----年--月--日巡检计划</string>
+    <string name="default_check_state">默认状态</string>
+    <string name="default_counter">0/150</string>
 
     <string name="dialog_on_login">登录中</string>
     <string name="dialog_on_search">查询中</string>
     <string name="dialog_on_logout">注销中</string>
     <string name="dialog_on_issue">发布中</string>
+    <string name="dialog_on_submit">上报中</string>
     <string name="dialog_sure_to_start">确定要开始吗？</string>
     <string name="dialog_sure_to_finish">确定要完成吗？</string>
     <string name="dialog_sure_to_delete">确定要删除吗？</string>
@@ -163,6 +166,7 @@
     <string name="title_discover_new_version">发现新版本</string>
     <string name="title_patrol_item">巡视项目</string>
     <string name="title_qr_code">二维码/条码</string>
+    <string name="title_input_device_id">请输入设备ID</string>
 
     <string name="toast_complete_login_data">用户名密码不能为空</string>
     <string name="toast_need_config_ip_port">请先配置IP地址和端口号</string>
@@ -203,19 +207,21 @@
     <string name="toast_device_mismatch">设备不匹配</string>
     <string name="toast_check_device_failed">查询设备失败</string>
     <string name="toast_capture_failed">扫描失败</string>
+    <string name="toast_add_device_first">请先添加设备</string>
+    <string name="toast_get_subclass_failed">获取子类失败</string>
+    <string name="toast_no_subclass">没有可选子类</string>
 
     <string name="value_nothing">无</string>
     <string name="value_grid_task">网格任务</string>
     <string name="value_alarm_task">预警任务</string>
+    <string name="value_check_in_progress">正在检票</string>
+    <string name="value_check_finished">完成检票</string>
+    <string name="value_check_stopped">停止检票</string>
+    <string name="value_late">(晚点)</string>
+    <string name="value_late_unsure">(晚点未定)</string>
+    <string name="value_stop_run">(停运)</string>
 
     <string name="recording">录音中…</string>
-    <string name="tickets_check_in_progress">正在检票</string>
-    <string name="tickets_check_finished">完成检票</string>
-    <string name="stop_tickets_check">停止检票</string>
-    <string name="tickets_check_default_state">默认状态</string>
-    <string name="late">(晚点)</string>
-    <string name="late_unsure">(晚点未定)</string>
-    <string name="stop_run">(停运)</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

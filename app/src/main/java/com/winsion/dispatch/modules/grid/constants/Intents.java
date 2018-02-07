@@ -7,9 +7,9 @@ package com.winsion.dispatch.modules.grid.constants;
 public interface Intents {
     interface SubmitProblem {
         /**
-         * 问题关联巡检ID
+         * 巡检项对象
          */
-        String PATROL_DETAIL_ID = "PATROL_DETAIL_ID";
+        String PATROL_ITEM_ENTITY = "PATROL_ITEM_ENTITY";
         /**
          * 地点
          */

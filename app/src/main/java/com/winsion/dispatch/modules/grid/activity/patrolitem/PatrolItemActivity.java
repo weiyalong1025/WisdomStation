@@ -13,6 +13,7 @@ import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseActivity;
 import com.winsion.dispatch.modules.grid.activity.submitproblem.SubmitProblemActivity;
 import com.winsion.dispatch.modules.grid.adapter.PatrolItemAdapter;
+import com.winsion.dispatch.modules.grid.biz.SubmitBiz;
 import com.winsion.dispatch.modules.grid.constants.DeviceState;
 import com.winsion.dispatch.modules.grid.constants.PatrolItemState;
 import com.winsion.dispatch.modules.grid.entity.PatrolItemEntity;
@@ -32,7 +33,7 @@ import butterknife.OnClick;
 
 import static com.winsion.dispatch.modules.grid.constants.Intents.PatrolItem.PATROL_TASK_ENTITY;
 import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.DEVICE_DEPENDENT;
-import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.PATROL_DETAIL_ID;
+import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.PATROL_ITEM_ENTITY;
 import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.SITE_NAME;
 
 /**
@@ -40,7 +41,8 @@ import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.
  * 巡检项界面
  */
 
-public class PatrolItemActivity extends BaseActivity implements PatrolItemContract.View, PatrolItemAdapter.Operator {
+public class PatrolItemActivity extends BaseActivity implements PatrolItemContract.View,
+        PatrolItemAdapter.Operator, SubmitBiz.SubmitListener {
     @BindView(R.id.tv_title)
     TitleView tvTitle;
     @BindView(R.id.tv_arrive_time)
@@ -58,11 +60,13 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     @BindView(R.id.fl_container)
     FrameLayout flContainer;
 
+    private static final int CODE_SUBMIT = 0; // 上报问题REQUEST_CODE
+
     private PatrolPlanEntity patrolPlanEntity;  // 上个页面带过来的
     private PatrolItemContract.Presenter mPresenter;
     private List<PatrolItemEntity> listData = new ArrayList<>();
     private PatrolItemAdapter mAdapter;
-    private String devicePatrolDetailId;    // 跳转设备报修界面时带过去
+    private PatrolItemEntity devicePatrolItem;    // 跳转设备报修界面时带过去
 
     @Override
     protected int setContentView() {
@@ -110,15 +114,15 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     private void initListener() {
         tvTitle.setOnBackClickListener(v -> finish());
         tvTitle.setOnConfirmClickListener(v -> {
-            if (isEmpty(devicePatrolDetailId)) {
+            if (devicePatrolItem == null) {
                 showToast("需要先获取巡视项目");
             } else {
                 // 设备报修
                 Intent intent = new Intent(mContext, SubmitProblemActivity.class);
-                intent.putExtra(PATROL_DETAIL_ID, devicePatrolDetailId);
+                intent.putExtra(PATROL_ITEM_ENTITY, devicePatrolItem);
                 intent.putExtra(SITE_NAME, patrolPlanEntity.getPointname());
                 intent.putExtra(DEVICE_DEPENDENT, true);
-                startActivityForResult(intent, 200);
+                startActivityForResult(intent, CODE_SUBMIT);
             }
         });
         swipeRefresh.setColorSchemeResources(R.color.blue1);
@@ -134,7 +138,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     @Override
     public void onNormalClick(PatrolItemEntity patrolItemEntity) {
         if (equals(patrolItemEntity.getDevicestate(), PatrolItemState.UNDONE)) {
-            mPresenter.submitProblemWithoutDevice(patrolItemEntity, DeviceState.WORK);
+            ((SubmitBiz) mPresenter).submitWithoutDevice(patrolItemEntity, DeviceState.WORK, this);
         }
     }
 
@@ -145,14 +149,14 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
                     .setMessage(R.string.dialog_do_you_want_to_add_problem_desc)
                     .setNegativeButton(R.string.btn_cancel, (dialog, which) -> {
                         // 取消，直接上报问题
-                        mPresenter.submitProblemWithoutDevice(patrolItemEntity, DeviceState.FAILURE);
+                        ((SubmitBiz) mPresenter).submitWithoutDevice(patrolItemEntity, DeviceState.FAILURE, this);
                     })
                     .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
                         Intent intent = new Intent(mContext, SubmitProblemActivity.class);
-                        intent.putExtra(PATROL_DETAIL_ID, patrolItemEntity.getId());
+                        intent.putExtra(PATROL_ITEM_ENTITY, patrolItemEntity);
                         intent.putExtra(SITE_NAME, patrolPlanEntity.getPointname());
                         intent.putExtra(DEVICE_DEPENDENT, false);
-                        startActivityForResult(intent, 200);
+                        startActivityForResult(intent, CODE_SUBMIT);
                     })
                     .create()
                     .show();
@@ -160,7 +164,16 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     }
 
     @Override
-    public void problemStateChangeSuccess(PatrolItemEntity patrolItemEntity, String deviceState) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == CODE_SUBMIT) {
+            PatrolItemEntity patrolItemEntity = (PatrolItemEntity) data.getSerializableExtra(PATROL_ITEM_ENTITY);
+            submitSuccess(patrolItemEntity, DeviceState.FAILURE);
+        }
+    }
+
+    @Override
+    public void submitSuccess(PatrolItemEntity patrolItemEntity, String deviceState) {
         String currentTime = ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1);
         // 检查是否需要设置到位时间和完成时间
         if (isFirstItemFinish()) {
@@ -172,17 +185,34 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
             initViewData();
         }
 
-        // 设置巡检项操作后状态和操作时间
-        patrolItemEntity.setDevicestate(equals(deviceState, DeviceState.WORK) ? PatrolItemState.NORMAL : PatrolItemState.ABNORMAL);
-        patrolItemEntity.setPatroltime(currentTime);
-        mAdapter.notifyDataSetChanged();
+        // 是否是与设备相关的问题
+        boolean deviceDependent = true;
+        for (PatrolItemEntity entity : listData) {
+            if (entity.getId().equals(patrolItemEntity.getId())) {
+                deviceDependent = false;
+                patrolItemEntity = entity;
+                break;
+            }
+        }
 
-        // 已完成巡检项数量+1
-        int finishCount = patrolPlanEntity.getFinishcount();
-        patrolPlanEntity.setFinishcount(++finishCount);
+        if (!deviceDependent) {
+            // 设置巡检项操作后状态和操作时间
+            patrolItemEntity.setDevicestate(equals(deviceState, DeviceState.WORK) ? PatrolItemState.NORMAL : PatrolItemState.ABNORMAL);
+            patrolItemEntity.setPatroltime(currentTime);
+            mAdapter.notifyDataSetChanged();
 
-        // 发送广播通知上个界面(PatrolPlanFragment)同步状态
-        EventBus.getDefault().post(patrolPlanEntity);
+            // 已完成巡检项数量+1
+            int finishCount = patrolPlanEntity.getFinishcount();
+            patrolPlanEntity.setFinishcount(++finishCount);
+
+            // 发送广播通知上个界面(PatrolPlanFragment)同步状态
+            EventBus.getDefault().post(patrolPlanEntity);
+        }
+    }
+
+    @Override
+    public void submitFailed() {
+        showToast(R.string.toast_submit_failed);
     }
 
     private boolean isLastItemFinish() {
@@ -205,11 +235,6 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
         return count == 0;
     }
 
-    @Override
-    public void problemStateChangeFailed() {
-        showToast(R.string.toast_submit_failed);
-    }
-
     private void initPatrolItemData() {
         mPresenter.getPatrolItemData(patrolPlanEntity.getId());
     }
@@ -219,13 +244,13 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
         listData.clear();
         swipeRefresh.setRefreshing(false);
         if (patrolItemEntities.size() == 0) {
-            devicePatrolDetailId = null;
+            devicePatrolItem = null;
             tvHint.setText(R.string.hint_no_data_click_retry);
             showView(flContainer, tvHint);
         } else {
             for (PatrolItemEntity patrolItemDto : patrolItemEntities) {
                 if (equals(patrolItemDto.getItemdescribe(), "设备检查")) {
-                    devicePatrolDetailId = patrolItemDto.getId();
+                    devicePatrolItem = patrolItemDto;
                 } else {
                     listData.add(patrolItemDto);
                 }
@@ -238,7 +263,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     @Override
     public void getPatrolItemDataFailed() {
         listData.clear();
-        devicePatrolDetailId = null;
+        devicePatrolItem = null;
         swipeRefresh.setRefreshing(false);
         tvHint.setText(R.string.hint_load_failed_click_retry);
         showView(flContainer, tvHint);

@@ -22,6 +22,7 @@ import com.winsion.dispatch.media.constants.FileStatus;
 import com.winsion.dispatch.media.constants.FileType;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
 import com.winsion.dispatch.media.entity.ServerRecordEntity;
+import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;
 import com.winsion.dispatch.modules.operation.constants.TrainAreaType;
 import com.winsion.dispatch.modules.operation.entity.FileEntity;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
@@ -40,7 +41,7 @@ import java.util.List;
  * 我的任务Presenter
  */
 
-public class OperatorTaskDetailPresenter implements OperatorTaskDetailContract.Presenter {
+public class OperatorTaskDetailPresenter extends ChangeStatusBiz implements OperatorTaskDetailContract.Presenter {
     private static final String FIELD_MONITOR = "jobsid";   // 查询监控人上传附件用的字段
     private static final String FIELD_PERFORMER = "joboperatorsid"; // 查询执行人上传附件用的字段
 

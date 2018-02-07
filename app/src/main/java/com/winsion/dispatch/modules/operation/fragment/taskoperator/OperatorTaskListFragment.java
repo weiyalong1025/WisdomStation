@@ -21,7 +21,7 @@ import com.winsion.dispatch.common.listener.StateListener;
 import com.winsion.dispatch.data.constants.OpeType;
 import com.winsion.dispatch.modules.operation.activity.taskoperator.OperatorTaskDetailActivity;
 import com.winsion.dispatch.modules.operation.adapter.OperatorTaskListAdapter;
-import com.winsion.dispatch.modules.operation.biz.TaskCommBiz;
+import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;
 import com.winsion.dispatch.modules.operation.constants.TaskSpinnerState;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
@@ -160,7 +160,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
                     .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
                         button.setEnabled(false);
                         int opeType = isFinish ? OpeType.COMPLETE : OpeType.BEGIN;
-                        TaskCommBiz.changeJobStatus(mContext, jobEntity, opeType, new StateListener() {
+                        ((ChangeStatusBiz) mPresenter).changeJobStatus(mContext, jobEntity, opeType, new StateListener() {
                             @Override
                             public void onSuccess() {
                                 button.setEnabled(true);

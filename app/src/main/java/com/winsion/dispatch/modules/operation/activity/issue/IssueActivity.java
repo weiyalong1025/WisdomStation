@@ -211,17 +211,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
      */
     private void issue() {
         // 检查数据是否填写完整
-        String title = getText(etTitle);
-        String content = getText(etContent);
-        if (isEmpty(getText(tvStation)) || isEmpty(teamIds) || isEmpty(title) || isEmpty(runsId) || isEmpty(content)) {
-            showToast(getString(R.string.toast_complete_info));
-        } else {
-            for (LocalRecordEntity localRecordEntity : localRecordEntities) {
-                if (localRecordEntity.getFileStatus() != FileStatus.SYNCHRONIZED) {
-                    showToast(getString(R.string.toast_wait_for_files_upload_complete));
-                    return;
-                }
-            }
+        if (checkDataIsComplete()) {
             // 隐藏软键盘
             CommonBiz.hideKeyboard(tvTitle);
             // 发布中，显示dialog
@@ -271,6 +261,22 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                         }
                     });
         }
+    }
+
+    private boolean checkDataIsComplete() {
+        String title = getText(etTitle);
+        String content = getText(etContent);
+        if (isEmpty(getText(tvStation)) || isEmpty(teamIds) || isEmpty(title) || isEmpty(runsId) || isEmpty(content)) {
+            showToast(getString(R.string.toast_complete_info));
+            return false;
+        }
+        for (LocalRecordEntity localRecordEntity : localRecordEntities) {
+            if (localRecordEntity.getFileStatus() != FileStatus.SYNCHRONIZED) {
+                showToast(getString(R.string.toast_wait_for_files_upload_complete));
+                return false;
+            }
+        }
+        return true;
     }
 
     private void showOnIssueDialog() {

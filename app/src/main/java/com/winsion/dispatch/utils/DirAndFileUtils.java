@@ -92,7 +92,7 @@ public class DirAndFileUtils {
     }
 
     /**
-     * 获取任务监控人附件存储目录(主要指接收的命令/协作附带的附件)
+     * 获取任务监控人附件存储目录(主要指接收的命令/协作/网格附带的附件)
      *
      * @return 对应的目录
      * @throws IOException 没有挂载SD卡或创建文件失败抛出异常
@@ -119,7 +119,7 @@ public class DirAndFileUtils {
     }
 
     /**
-     * 获取发布命令/协作附件存储目录
+     * 获取发布命令/协作/网格附件存储目录
      *
      * @return 对应的目录
      * @throws IOException 没有挂载SD卡或创建文件失败抛出异常

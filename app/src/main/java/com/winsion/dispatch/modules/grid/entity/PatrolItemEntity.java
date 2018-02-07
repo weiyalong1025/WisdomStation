@@ -1,9 +1,11 @@
 package com.winsion.dispatch.modules.grid.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by wyl on 2017/6/27
  */
-public class PatrolItemEntity {
+public class PatrolItemEntity implements Serializable {
     private String patrolitemsid;   // 单条巡视任务ID
     private String patrolsid;   // 巡视任务总ID
     private String patroltime;  // 操作设备时间

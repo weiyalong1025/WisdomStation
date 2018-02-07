@@ -24,16 +24,16 @@ import java.io.IOException;
 
 /**
  * Created by 10295 on 2017/12/17 0017
- * 操作任务通用业务
+ * 操作作业状态
  */
 
-public class TaskCommBiz {
+public class ChangeStatusBiz {
     /**
      * 更改任务状态
      *
      * @param opType {@link OpeType}
      */
-    public static void changeJobStatus(Context context, JobEntity jobEntity, int opType, StateListener listener) {
+    public void changeJobStatus(Context context, JobEntity jobEntity, int opType, StateListener listener) {
         // 获取备注
         String note = getNote(context, jobEntity.getJoboperatorsid());
         JobParameter jobParameter = new JobParameter();
@@ -69,7 +69,7 @@ public class TaskCommBiz {
     /**
      * 确认预警
      */
-    private static void confirmWarning(Context context, String stepID) {
+    private void confirmWarning(Context context, String stepID) {
         WarnTaskStep warnTaskStep = new WarnTaskStep();
         warnTaskStep.setWarnTaskStepID(stepID);
         NetDataSource.post(null, Urls.WARN_TASK_STEP, warnTaskStep, 0, new ResponseListener<String>() {
@@ -93,7 +93,7 @@ public class TaskCommBiz {
     /**
      * 获取任务备注
      */
-    private static String getNote(Context context, String id) {
+    private String getNote(Context context, String id) {
         String note = "";
         try {
             File performerDir = DirAndFileUtils.getPerformerDir(CacheDataSource.getUserId(), id);

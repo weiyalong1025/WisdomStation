@@ -32,7 +32,7 @@ import com.winsion.dispatch.media.constants.FileStatus;
 import com.winsion.dispatch.media.constants.FileType;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
 import com.winsion.dispatch.media.entity.ServerRecordEntity;
-import com.winsion.dispatch.modules.operation.biz.TaskCommBiz;
+import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;
 import com.winsion.dispatch.modules.operation.constants.RunState;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
@@ -62,7 +62,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.winsion.dispatch.data.constants.ParamKey.FILE;
+import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
 import static com.winsion.dispatch.modules.operation.constants.Intents.OperatorTaskDetail.JOB_ENTITY;
 
 /**
@@ -313,15 +313,15 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         int color = 0xFFFFFFFF;
         switch (mJobEntity.getTrainlate()) {
             case RunState.LATE:
-                trainNumber = trainNumber + getString(R.string.late);
+                trainNumber = trainNumber + getString(R.string.value_late);
                 color = 0xFFE24D46;
                 break;
             case RunState.LATE_UNSURE:
-                trainNumber = trainNumber + getString(R.string.late_unsure);
+                trainNumber = trainNumber + getString(R.string.value_late_unsure);
                 color = 0xFFE24D46;
                 break;
             case RunState.STOP:
-                trainNumber = trainNumber + getString(R.string.stop_run);
+                trainNumber = trainNumber + getString(R.string.value_stop_run);
                 color = 0xFFE24D46;
                 break;
         }
@@ -332,16 +332,16 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         int trainStatus = mJobEntity.getTrainstatus();
         switch (trainStatus) {
             case TrainState.IN_PROGRESS:
-                tvTrainStatus.setText(R.string.tickets_check_in_progress);
+                tvTrainStatus.setText(R.string.value_check_in_progress);
                 break;
             case TrainState.FINISH:
-                tvTrainStatus.setText(R.string.tickets_check_finished);
+                tvTrainStatus.setText(R.string.value_check_finished);
                 break;
             case TrainState.STOP:
-                tvTrainStatus.setText(R.string.stop_tickets_check);
+                tvTrainStatus.setText(R.string.value_check_stopped);
                 break;
             default:
-                tvTrainStatus.setText(R.string.tickets_check_default_state);
+                tvTrainStatus.setText(R.string.default_check_state);
                 break;
         }
 
@@ -850,7 +850,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 try {
                     noteFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.TEXT);
                     intent = new Intent(mContext, AddNoteActivity.class);
-                    intent.putExtra(FILE, noteFile);
+                    intent.putExtra(MEDIA_FILE, noteFile);
                     startActivityForResult(intent, CODE_NOTE);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
@@ -860,7 +860,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 try {
                     photoFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.PICTURE);
                     intent = new Intent(mContext, TakePhotoActivity.class);
-                    intent.putExtra(FILE, photoFile);
+                    intent.putExtra(MEDIA_FILE, photoFile);
                     startActivityForResult(intent, CODE_TAKE_PHOTO);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
@@ -870,7 +870,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 try {
                     videoFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.VIDEO);
                     intent = new Intent(mContext, RecordVideoActivity.class);
-                    intent.putExtra(FILE, videoFile);
+                    intent.putExtra(MEDIA_FILE, videoFile);
                     startActivityForResult(intent, CODE_RECORD_VIDEO);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
@@ -880,7 +880,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 try {
                     audioFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.AUDIO);
                     intent = new Intent(mContext, RecordAudioActivity.class);
-                    intent.putExtra(FILE, audioFile);
+                    intent.putExtra(MEDIA_FILE, audioFile);
                     startActivityForResult(intent, CODE_RECORD_AUDIO);
                 } catch (IOException e) {
                     showToast(R.string.toast_check_sdcard);
@@ -901,7 +901,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
                     btn.setEnabled(false);
                     int opeType = isRunning ? OpeType.COMPLETE : OpeType.BEGIN;
-                    TaskCommBiz.changeJobStatus(mContext, mJobEntity, opeType, new StateListener() {
+                    ((ChangeStatusBiz)mPresenter).changeJobStatus(mContext, mJobEntity, opeType, new StateListener() {
                         @Override
                         public void onSuccess() {
                             btn.setEnabled(true);

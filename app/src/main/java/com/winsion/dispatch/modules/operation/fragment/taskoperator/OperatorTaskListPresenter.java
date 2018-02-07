@@ -18,6 +18,7 @@ import com.winsion.dispatch.data.entity.OrderBy;
 import com.winsion.dispatch.data.entity.ResponseForQueryData;
 import com.winsion.dispatch.data.entity.WhereClause;
 import com.winsion.dispatch.data.listener.ResponseListener;
+import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
 
@@ -29,7 +30,7 @@ import java.util.List;
  * Created by 10295 on 2017/12/15 0015
  */
 
-public class OperatorTaskListPresenter implements OperatorTaskListContract.Presenter {
+public class OperatorTaskListPresenter extends ChangeStatusBiz implements OperatorTaskListContract.Presenter {
     private OperatorTaskListContract.View mView;
     private Context mContext;
 

@@ -3,6 +3,7 @@ package com.winsion.dispatch.modules.grid.activity.submitproblem;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.winsion.dispatch.R;
+import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.data.NetDataSource;
 import com.winsion.dispatch.data.constants.FieldKey;
 import com.winsion.dispatch.data.constants.JoinKey;
@@ -11,9 +12,12 @@ import com.winsion.dispatch.data.constants.ViewName;
 import com.winsion.dispatch.data.entity.ResponseForQueryData;
 import com.winsion.dispatch.data.entity.WhereClause;
 import com.winsion.dispatch.data.listener.ResponseListener;
+import com.winsion.dispatch.data.listener.UploadListener;
+import com.winsion.dispatch.modules.grid.biz.SubmitBiz;
 import com.winsion.dispatch.modules.grid.entity.DeviceEntity;
-import com.winsion.dispatch.modules.operation.entity.FileEntity;
+import com.winsion.dispatch.modules.grid.entity.SubclassEntity;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +27,7 @@ import java.util.List;
  * 上报问题Presenter
  */
 
-public class SubmitProblemPresenter implements SubmitProblemContact.Presenter {
+public class SubmitProblemPresenter extends SubmitBiz implements SubmitProblemContact.Presenter {
     private SubmitProblemContact.View mView;
 
     SubmitProblemPresenter(SubmitProblemContact.View view) {
@@ -37,6 +41,10 @@ public class SubmitProblemPresenter implements SubmitProblemContact.Presenter {
 
     @Override
     public void checkDeviceId(String deviceId) {
+        if (AppApplication.TEST_MODE) {
+            mView.checkDeviceIdSuccess("水龙头", "666", deviceId);
+            return;
+        }
         ArrayList<WhereClause> whereClauses = new ArrayList<>();
         WhereClause whereClause = new WhereClause();
         whereClause.setFieldKey(FieldKey.EQUALS);
@@ -45,8 +53,8 @@ public class SubmitProblemPresenter implements SubmitProblemContact.Presenter {
         whereClause.setValueKey(deviceId);
         whereClauses.add(whereClause);
 
-        NetDataSource.post(getClass(), Urls.BASE_QUERY, whereClauses, null, ViewName.DEVICE_INFO, 1,
-                new ResponseListener<ResponseForQueryData<List<DeviceEntity>>>() {
+        NetDataSource.post(getClass(), Urls.BASE_QUERY, whereClauses, null, ViewName.DEVICE_INFO,
+                1, new ResponseListener<ResponseForQueryData<List<DeviceEntity>>>() {
                     @Override
                     public ResponseForQueryData<List<DeviceEntity>> convert(String jsonStr) {
                         Type type = new TypeReference<ResponseForQueryData<List<DeviceEntity>>>() {
@@ -76,17 +84,50 @@ public class SubmitProblemPresenter implements SubmitProblemContact.Presenter {
 
     @Override
     public void getSubclass(String classificationId) {
+        if (AppApplication.TEST_MODE) {
+            List<SubclassEntity> subclassEntities = new ArrayList<>();
+            SubclassEntity subclassEntity = new SubclassEntity();
+            subclassEntity.setId("123");
+            subclassEntity.setClassificationid("456");
+            subclassEntity.setPlancosttime(20);
+            subclassEntity.setPriority(2);
+            subclassEntity.setTypename("测试数据");
+            subclassEntities.add(subclassEntity);
+            mView.getSubclassSuccess(subclassEntities);
+            return;
+        }
+        ArrayList<WhereClause> whereClauses = new ArrayList<>();
+        WhereClause whereClause = new WhereClause();
+        whereClause.setJoinKey(JoinKey.OTHER);
+        whereClause.setFields("classificationId");
+        whereClause.setValueKey(classificationId);
+        whereClause.setFieldKey(FieldKey.EQUALS);
+        whereClauses.add(whereClause);
 
+        NetDataSource.post(getClass(), Urls.BASE_QUERY, whereClauses, null, ViewName.SUBCLASS_INFO,
+                1, new ResponseListener<ResponseForQueryData<List<SubclassEntity>>>() {
+                    @Override
+                    public ResponseForQueryData<List<SubclassEntity>> convert(String jsonStr) {
+                        Type type = new TypeReference<ResponseForQueryData<List<SubclassEntity>>>() {
+                        }.getType();
+                        return JSON.parseObject(jsonStr, type);
+                    }
+
+                    @Override
+                    public void onSuccess(ResponseForQueryData<List<SubclassEntity>> result) {
+                        mView.getSubclassSuccess(result.getDataList());
+                    }
+
+                    @Override
+                    public void onFailed(int errorCode, String errorInfo) {
+                        mView.getSubclassFailed();
+                    }
+                });
     }
 
     @Override
-    public void submitWithDevice(String patrolDetailId, String problemTypeId, List<FileEntity> fileEntities, String comment, String deviceId) {
-
-    }
-
-    @Override
-    public void submitWithoutDevice(String patrolDetailId, List<FileEntity> fileEntities, String comment) {
-
+    public void uploadFile(File uploadFile, UploadListener uploadListener) {
+        NetDataSource.uploadFileNoData(this, uploadFile, uploadListener);
     }
 
     @Override

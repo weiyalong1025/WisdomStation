@@ -16,15 +16,9 @@ class PatrolItemContract {
         void getPatrolItemDataSuccess(List<PatrolItemEntity> patrolItemEntities);
 
         void getPatrolItemDataFailed();
-
-        void problemStateChangeSuccess(PatrolItemEntity patrolItemEntity, String deviceState);
-
-        void problemStateChangeFailed();
     }
 
     interface Presenter extends BasePresenter {
         void getPatrolItemData(String patrolId);
-
-        void submitProblemWithoutDevice(PatrolItemEntity patrolItemEntity, String deviceState);
     }
 }

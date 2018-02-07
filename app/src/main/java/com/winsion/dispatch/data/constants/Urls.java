@@ -44,4 +44,8 @@ public interface Urls {
      * 设备无关问题上报
      */
     String SUBMIT_WITHOUT_DEVICE = "grid/0.01/patrolSubmit/submitProblem";
+    /**
+     * 设备相关问题上报
+     */
+    String SUBMIT_WITH_DEVICE = "grid/0.01/patrolSubmit/submitDevice";
 }

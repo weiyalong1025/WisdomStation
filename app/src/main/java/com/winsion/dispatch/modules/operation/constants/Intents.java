@@ -15,6 +15,10 @@ public interface Intents {
          * 接收班组(可为空)
          */
         String TO_TEAM_ENTITY = "TO_TEAM_ENTITY";
+        /**
+         * 选择的班组
+         */
+        String SELECT_TEAM = "SELECT_TEAM";
     }
 
     interface OperatorTaskDetail {

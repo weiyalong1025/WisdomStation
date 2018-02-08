@@ -52,6 +52,7 @@ import butterknife.OnClick;
 
 import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
 import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.ISSUE_TYPE;
+import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.SELECT_TEAM;
 import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.TO_TEAM_ENTITY;
 
 /**
@@ -365,7 +366,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             LocalRecordEntity localRecordEntity;
             switch (requestCode) {
                 case CODE_SELECT_TEAM:
-                    ArrayList selectData = (ArrayList) data.getSerializableExtra("selectData");
+                    ArrayList selectData = (ArrayList) data.getSerializableExtra(SELECT_TEAM);
                     StringBuilder teamIdsSb = new StringBuilder();
                     StringBuilder teamNamesSb = new StringBuilder();
                     for (int i = 0; i < selectData.size(); i++) {

@@ -28,6 +28,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.SELECT_TEAM;
+
 /**
  * Created by 10295 on 2018/1/8.
  * 发布命令/协作中选择班组
@@ -73,8 +75,9 @@ public class SelectTeamActivity extends BaseActivity {
             if (mLvAdapter.getSelectedList().size() == 0) {
                 showToast(R.string.toast_no_selected_item);
             } else {
-                Intent selectData = new Intent().putExtra("selectData", mLvAdapter.getSelectedList());
-                setResult(RESULT_OK, selectData);
+                Intent intent = new Intent();
+                intent.putExtra(SELECT_TEAM, mLvAdapter.getSelectedList());
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });

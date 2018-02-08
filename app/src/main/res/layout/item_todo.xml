@@ -32,7 +32,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="@dimen/d15"
                 tools:ignore="UseCompoundDrawables">
@@ -42,6 +41,7 @@
                     android:layout_width="@dimen/d8"
                     android:layout_height="@dimen/d8"
                     android:layout_marginEnd="@dimen/d5"
+                    android:layout_marginTop="@dimen/d8"
                     android:src="@drawable/bg_circle_red"
                     tools:ignore="ContentDescription" />
 

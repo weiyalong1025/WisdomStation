@@ -31,8 +31,10 @@ class AddTodoContract {
          * 更新一条待办事项
          *
          * @param desc   更新后的提醒内容
+         * @param date   更新后的提醒日期
+         * @param time   更新后的提醒时间
          * @param todoId 更新的待办事项的ID
          */
-        void updateTodo(String desc, long todoId);
+        void updateTodo(String desc, String date, String time, long todoId);
     }
 }

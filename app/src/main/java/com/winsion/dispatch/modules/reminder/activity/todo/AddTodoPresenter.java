@@ -58,10 +58,23 @@ public class AddTodoPresenter implements AddTodoContract.Presenter {
     }
 
     @Override
-    public void updateTodo(String desc, long todoId) {
-        TodoEntity toDoBeanDao = DBDataSource.getInstance().getTodoEntityById(todoId);
-        toDoBeanDao.setContent(desc);
-        DBDataSource.getInstance().updateOrAddTodo(toDoBeanDao);
+    public void updateTodo(String desc, String date, String time, long todoId) {
+        TodoEntity todoEntity = DBDataSource.getInstance().getTodoEntityById(todoId);
+        // 取消之前的闹钟
+        PendingIntent pendingIntent = getPendingIntent(todoEntity);
+        alarmManager.cancel(pendingIntent);
+
+        // 更新数据库中的数据
+        String planDate = date + " " + time;
+        long planDateMillis = ConvertUtils.parseDate(planDate, Formatter.DATE_FORMAT3);
+        todoEntity.setContent(desc);
+        todoEntity.setPlanDate(planDateMillis);
+        DBDataSource.getInstance().updateOrAddTodo(todoEntity);
+
+        // 设定新的闹钟
+        setAlarm(todoEntity);
+
+        // 回调更新成功状态
         mView.updateOrAddSuccess();
     }
 
@@ -69,17 +82,20 @@ public class AddTodoPresenter implements AddTodoContract.Presenter {
      * 开启提醒
      */
     private void setAlarm(TodoEntity todoEntity) {
-        Intent intent = new Intent(mContext, TodoReceiver.class);
-        intent.putExtra(TODO_ID, todoEntity.getId());
-        long requestCode = todoEntity.getPlanDate();
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, (int) requestCode,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = getPendingIntent(todoEntity);
         // API19之前set设置闹钟会精准提醒，API19之后需要用setExact
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, requestCode, pendingIntent);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, todoEntity.getPlanDate(), pendingIntent);
         } else {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, requestCode, pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, todoEntity.getPlanDate(), pendingIntent);
         }
+    }
+
+    private PendingIntent getPendingIntent(TodoEntity todoEntity) {
+        Intent intent = new Intent(mContext, TodoReceiver.class);
+        intent.putExtra(TODO_ID, todoEntity.getId());
+        long planDate = todoEntity.getPlanDate();
+        return PendingIntent.getBroadcast(mContext, (int) planDate, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     @Override

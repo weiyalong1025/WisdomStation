@@ -229,6 +229,7 @@
     <string name="value_stop_run">(停运)</string>
 
     <string name="recording">录音中…</string>
+    <string name="title_update_toto">更新代办事项</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

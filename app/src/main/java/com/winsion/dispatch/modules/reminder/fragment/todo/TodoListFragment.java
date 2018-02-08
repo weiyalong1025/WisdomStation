@@ -28,7 +28,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 import static android.app.Activity.RESULT_OK;
 import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_ID;
@@ -56,7 +55,6 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
      * 状态筛选-已完成
      */
     private static final int STATE_FINISHED = 2;
-    Unbinder unbinder;
 
     private List<TodoEntity> listData = new ArrayList<>();
     private TodoAdapter mAdapter;
@@ -211,11 +209,5 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
         super.onDestroy();
         mPresenter.exit();
         EventBus.getDefault().unregister(this);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 }

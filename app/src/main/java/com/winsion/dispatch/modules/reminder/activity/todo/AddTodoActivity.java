@@ -73,8 +73,7 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
             TodoEntity todoEntity = mPresenter.getTodoById(todoId);
             planDate = ConvertUtils.formatDate(todoEntity.getPlanDate(), Formatter.DATE_FORMAT1);
             String desc = todoEntity.getContent();
-            tvDate.setEnabled(false);
-            tvTime.setEnabled(false);
+            tvTitle.setTitleText(getString(R.string.title_update_toto));
             btnSave.setText(R.string.btn_update);
             etDesc.setText(desc);
             etDesc.setSelection(desc.length());
@@ -110,7 +109,7 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
                     showToast(getString(R.string.toast_complete_info));
                 } else {
                     if (isUpdate) {
-                        mPresenter.updateTodo(getText(etDesc), todoId);
+                        mPresenter.updateTodo(getText(etDesc), getText(tvDate), getText(tvTime), todoId);
                     } else {
                         mPresenter.addTodo(getText(etDesc), getText(tvDate), getText(tvTime));
                     }

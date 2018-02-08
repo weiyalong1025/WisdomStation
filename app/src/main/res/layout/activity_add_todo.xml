@@ -60,7 +60,6 @@
         android:layout_below="@id/refer1"
         android:background="@color/gray2" />
 
-
     <EditText
         android:id="@+id/et_desc"
         android:layout_width="match_parent"

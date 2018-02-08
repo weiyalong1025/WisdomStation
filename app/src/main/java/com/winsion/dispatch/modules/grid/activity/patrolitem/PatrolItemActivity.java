@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -99,7 +100,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
         if (!equals(realStartTime, "-- --")) {
             tvArriveTime.setText(realStartTime.split(" ")[1].substring(0, 5));
         } else {
-            tvArriveTime.setText("--:--");
+            tvArriveTime.setText(R.string.symbol_hour_minute);
         }
 
         // 完成时间
@@ -107,7 +108,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
         if (!equals(realEndTime, "-- --")) {
             tvFinishTime.setText(realEndTime.split(" ")[1].substring(0, 5));
         } else {
-            tvFinishTime.setText("--:--");
+            tvFinishTime.setText(R.string.symbol_hour_minute);
         }
     }
 
@@ -115,7 +116,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
         tvTitle.setOnBackClickListener(v -> finish());
         tvTitle.setOnConfirmClickListener(v -> {
             if (devicePatrolItem == null) {
-                showToast("需要先获取巡视项目");
+                showToast(R.string.toast_get_patrol_data_first);
             } else {
                 // 设备报修
                 Intent intent = new Intent(mContext, SubmitProblemActivity.class);
@@ -138,28 +139,45 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     @Override
     public void onNormalClick(PatrolItemEntity patrolItemEntity) {
         if (equals(patrolItemEntity.getDevicestate(), PatrolItemState.UNDONE)) {
-            ((SubmitBiz) mPresenter).submitWithoutDevice(patrolItemEntity, DeviceState.WORK, this);
+            new AlertDialog.Builder(mContext)
+                    .setMessage(R.string.dialog_sure_no_problem)
+                    .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
+                    .setPositiveButton(R.string.btn_confirm, (dialog, which) -> ((SubmitBiz) mPresenter)
+                            .submitWithoutDevice(patrolItemEntity, DeviceState.WORK, this))
+                    .show();
         }
     }
 
     @Override
     public void onAbnormalClick(PatrolItemEntity patrolItemEntity) {
         if (equals(patrolItemEntity.getDevicestate(), PatrolItemState.UNDONE)) {
+            CheckBox checkBox = new CheckBox(mContext);
+            checkBox.setText(R.string.dialog_add_problem_desc);
+            checkBox.setChecked(true);
             new AlertDialog.Builder(mContext)
-                    .setMessage(R.string.dialog_do_you_want_to_add_problem_desc)
-                    .setNegativeButton(R.string.btn_cancel, (dialog, which) -> {
-                        // 取消，直接上报问题
-                        ((SubmitBiz) mPresenter).submitWithoutDevice(patrolItemEntity, DeviceState.FAILURE, this);
-                    })
+                    .setMessage(R.string.dialog_sure_exist_problem)
+                    .setView(checkBox)
+                    .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
                     .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
-                        Intent intent = new Intent(mContext, SubmitProblemActivity.class);
-                        intent.putExtra(PATROL_ITEM_ENTITY, patrolItemEntity);
-                        intent.putExtra(SITE_NAME, patrolPlanEntity.getPointname());
-                        intent.putExtra(DEVICE_DEPENDENT, false);
-                        startActivityForResult(intent, CODE_SUBMIT);
+                        if (checkBox.isChecked()) {
+                            // 跳转添加描述信息界面
+                            Intent intent = new Intent(mContext, SubmitProblemActivity.class);
+                            intent.putExtra(PATROL_ITEM_ENTITY, patrolItemEntity);
+                            intent.putExtra(SITE_NAME, patrolPlanEntity.getPointname());
+                            intent.putExtra(DEVICE_DEPENDENT, false);
+                            startActivityForResult(intent, CODE_SUBMIT);
+                        } else {
+                            // 不添加描述，直接上报问题
+                            ((SubmitBiz) mPresenter).submitWithoutDevice(patrolItemEntity,
+                                    DeviceState.FAILURE, this);
+                        }
                     })
-                    .create()
                     .show();
+            // 调整CheckBox的Margin值
+            int margin = getResources().getDimensionPixelSize(R.dimen.d10);
+            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) checkBox.getLayoutParams();
+            layoutParams.setMargins(margin, 0, margin, 0);
+            checkBox.setLayoutParams(layoutParams);
         }
     }
 

@@ -3,7 +3,6 @@ package com.winsion.dispatch.modules.grid.adapter;
 import android.content.Context;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.common.listener.ClickListener;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.TaskEntity;
 import com.zhy.adapter.abslistview.CommonAdapter;
@@ -17,8 +16,13 @@ import java.util.List;
  */
 
 public class ProblemManageAdapter extends CommonAdapter<TaskEntity> {
-    private ClickListener<TaskEntity> passButtonListener;
-    private ClickListener<TaskEntity> notPassButtonListener;
+    public interface ConfirmButtonListener {
+        void onPassButtonClick(TaskEntity taskEntity);
+
+        void onNotPassButtonClick(TaskEntity taskEntity);
+    }
+
+    private ConfirmButtonListener confirmButtonListener;
 
     public ProblemManageAdapter(Context context, List<TaskEntity> data) {
         super(context, R.layout.item_problem, data);
@@ -67,12 +71,12 @@ public class ProblemManageAdapter extends CommonAdapter<TaskEntity> {
         viewHolder.setText(R.id.tv_state, processName);
 
         viewHolder.setOnClickListener(R.id.btn_pass, (view) -> {
-            if (process == TaskState.DONE && passButtonListener != null)
-                passButtonListener.onClick(taskEntity);
+            if (process == TaskState.DONE && confirmButtonListener != null)
+                confirmButtonListener.onPassButtonClick(taskEntity);
         });
         viewHolder.setOnClickListener(R.id.btn_not_pass, (view) -> {
-            if (process == TaskState.DONE && notPassButtonListener != null)
-                notPassButtonListener.onClick(taskEntity);
+            if (process == TaskState.DONE && confirmButtonListener != null)
+                confirmButtonListener.onNotPassButtonClick(taskEntity);
         });
 
         // 设置底色
@@ -109,11 +113,7 @@ public class ProblemManageAdapter extends CommonAdapter<TaskEntity> {
         }
     }
 
-    public void setOnPassClickListener(ClickListener<TaskEntity> listener) {
-        this.passButtonListener = listener;
-    }
-
-    public void setOnNotPassClickListener(ClickListener<TaskEntity> listener) {
-        this.notPassButtonListener = listener;
+    public void setConfirmButtonListener(ConfirmButtonListener listener) {
+        this.confirmButtonListener = listener;
     }
 }

@@ -1,9 +1,7 @@
 package com.winsion.dispatch.modules.reminder.adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.StringRes;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.winsion.dispatch.R;
@@ -23,7 +21,7 @@ import java.util.List;
  */
 
 public class TodoAdapter extends CommonAdapter<TodoEntity> {
-    private ClickListener<TodoEntity> onItemClickListener;
+    private ClickListener<TodoEntity> deleteBtnClickListener;
 
     public TodoAdapter(Context context, List<TodoEntity> data) {
         super(context, R.layout.item_todo, data);
@@ -47,18 +45,11 @@ public class TodoAdapter extends CommonAdapter<TodoEntity> {
         viewHolder.setText(R.id.tv_time, split[1].substring(0, 5));
         // 事项描述
         viewHolder.setText(R.id.tv_desc, todoEntity.getContent());
-        viewHolder.setOnClickListener(R.id.iv_delete, (View v) ->
-                new AlertDialog.Builder(mContext)
-                        .setMessage(getString(R.string.dialog_sure_to_delete))
-                        .setNegativeButton(getString(R.string.btn_cancel), (DialogInterface dialog, int which) -> dialog.cancel())
-                        .setPositiveButton(getString(R.string.btn_confirm), (DialogInterface dialog, int which) -> {
-                            if (onItemClickListener != null) {
-                                onItemClickListener.onClick(mDatas.get(position));
-                            }
-                            dialog.cancel();
-                        })
-                        .show()
-        );
+        viewHolder.setOnClickListener(R.id.iv_delete, (View v) -> {
+            if (deleteBtnClickListener != null) {
+                deleteBtnClickListener.onClick(mDatas.get(position));
+            }
+        });
         if (!todoEntity.getFinished() && todoEntity.getPlanDate() < System.currentTimeMillis()) {
             viewHolder.setVisible(R.id.iv_red_dot, true);
         } else {
@@ -66,8 +57,8 @@ public class TodoAdapter extends CommonAdapter<TodoEntity> {
         }
     }
 
-    public void setOnButtonClickListener(ClickListener<TodoEntity> listener) {
-        this.onItemClickListener = listener;
+    public void setDeleteBtnClickListener(ClickListener<TodoEntity> listener) {
+        this.deleteBtnClickListener = listener;
     }
 
     private String getString(@StringRes int strRes) {

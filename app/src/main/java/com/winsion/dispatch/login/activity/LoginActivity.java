@@ -27,6 +27,7 @@ import com.winsion.dispatch.SwitchSysActivity;
 import com.winsion.dispatch.base.BaseActivity;
 import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.config.activity.LoginConfigActivity;
+import com.winsion.dispatch.login.adapter.UserListAdapter;
 import com.winsion.dispatch.login.constants.LoginErrorCode;
 import com.winsion.dispatch.login.entity.UserEntity;
 import com.winsion.dispatch.login.listener.LoginListener;
@@ -35,8 +36,6 @@ import com.winsion.dispatch.utils.ViewUtils;
 import com.winsion.dispatch.view.CircleImageView;
 import com.winsion.dispatch.view.TipDialog;
 import com.winsion.dispatch.view.WrapContentListView;
-import com.zhy.adapter.abslistview.CommonAdapter;
-import com.zhy.adapter.abslistview.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,41 +175,28 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
 
     @SuppressLint("InflateParams")
     private void initUserListPopup() {
-        CommonAdapter<UserEntity> commonAdapter = new CommonAdapter<UserEntity>(mContext, R.layout.item_user_option, mAllSavedUser) {
-            @Override
-            protected void convert(ViewHolder viewHolder, UserEntity item, int position) {
-                // 设置头像
-                ImageView imageView = viewHolder.getView(R.id.civ_head);
-                ImageLoader.loadUrl(imageView, item.getHeaderUrl(), R.drawable.ic_head_single, R.drawable.ic_head_single);
-
-                // 设置用户名
-                String username = item.getUsername();
-                viewHolder.setText(R.id.item_text, username);
-
-                // 删除点击事件
-                viewHolder.setOnClickListener(R.id.iv_delete, (v) -> {
-                    mPresenter.deleteUser(item);
-                    mAllSavedUser.remove(item);
-                    notifyDataSetChanged();
-                    if (TextUtils.equals(username, getText(etUsername))) {
-                        // 如果删除的用户是当前回显的用户，清除界面数据
-                        etUsername.setText("");
-                        etPassword.setText("");
-                        civHead.setImageResource(R.drawable.ic_head_single);
-                    }
-                    if (mAllSavedUser.size() == 0) {
-                        mUserListPopup.dismiss();
-                    }
-                });
+        UserListAdapter userListAdapter = new UserListAdapter(mContext, mAllSavedUser);
+        userListAdapter.setDeleteBtnClickListener(userEntity -> {
+            mPresenter.deleteUser(userEntity);
+            mAllSavedUser.remove(userEntity);
+            userListAdapter.notifyDataSetChanged();
+            if (TextUtils.equals(userEntity.getUsername(), getText(etUsername))) {
+                // 如果删除的用户是当前回显的用户，清除界面数据
+                etUsername.setText("");
+                etPassword.setText("");
+                civHead.setImageResource(R.drawable.ic_head_single);
             }
-        };
+            if (mAllSavedUser.size() == 0) {
+                mUserListPopup.dismiss();
+            }
+        });
 
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View itemView = layoutInflater.inflate(R.layout.item_user_option, null);
         itemView.measure(0, 0);
         int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, itemView.getMeasuredHeight(), ViewUtils.ListType.TYPE_POPUP);
         ListView listView = new WrapContentListView(mContext, suggestMaxHeight);
-        listView.setAdapter(commonAdapter);
+        listView.setAdapter(userListAdapter);
         listView.setOnItemClickListener(this);
         listView.setDivider(new ColorDrawable(getResources().getColor(R.color.gray5)));
         listView.setDividerHeight(getResources().getDimensionPixelSize(R.dimen.d1));
@@ -289,9 +275,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
                     .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
                     .setTipWord(getString(R.string.dialog_on_login))
                     .create();
-        }
-        if (mLoadingDialog.isShowing()) {
-            mLoadingDialog.dismiss();
         }
         mLoadingDialog.show();
     }

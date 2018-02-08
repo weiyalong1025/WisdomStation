@@ -294,10 +294,10 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
                 ListView listView = new WrapContentListView(getContext(), suggestMaxHeight);
                 bluetoothAdapter = new BluetoothPointAdapter(mContext, BPEntities);
                 listView.setAdapter(bluetoothAdapter);
-                new AlertDialog.Builder(getActivity())
+                new AlertDialog.Builder(mContext)
                         .setView(listView)
                         .setCancelable(true)
-                        .create().show();
+                        .show();
                 break;
             case R.id.tv_hint:
                 initData();

@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/d54"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/selector_bg_back"
+        android:background="@drawable/selector_bg_button"
         android:drawablePadding="@dimen/d5"
         android:drawableStart="@drawable/ic_delete1"
         android:gravity="center"

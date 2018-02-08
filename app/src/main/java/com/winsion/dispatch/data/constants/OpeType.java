@@ -22,7 +22,7 @@ public interface OpeType {
     /**
      * 验收未通过
      */
-    int UN_PASS = 3;
+    int NOT_PASS = 3;
 
     /**
      * 作业监视
@@ -32,5 +32,5 @@ public interface OpeType {
     /**
      * 验收通过
      */
-    int CONFIRMED = 5;
+    int PASS = 5;
 }

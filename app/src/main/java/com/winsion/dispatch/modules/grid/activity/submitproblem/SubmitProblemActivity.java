@@ -90,6 +90,12 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     private int selectSubclassPosition; // 选中的子项在列表中的位置
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.exit();
+    }
+
+    @Override
     protected int setContentView() {
         return R.layout.activity_submit_problem;
     }
@@ -139,7 +145,6 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
             CommonBiz.hideKeyboard(tvTitle);
             // 上报中，显示对话框
             showDoingDialog(R.string.dialog_on_submit);
-
             // 获取上传的附件
             ArrayList<FileEntity> fileList = new ArrayList<>();
             for (LocalRecordEntity localRecordEntity : localRecordEntities) {
@@ -190,12 +195,13 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
      * @param tipWord 提示状态文字
      */
     private void showDoingDialog(@StringRes int tipWord) {
-        mLoadingDialog = new TipDialog.Builder(mContext)
-                .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
-                .setTipWord(getString(tipWord))
-                .create();
-        if (mLoadingDialog.isShowing()) {
-            mLoadingDialog.dismiss();
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new TipDialog.Builder(mContext)
+                    .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
+                    .setTipWord(getString(tipWord))
+                    .create();
+        } else {
+            mLoadingDialog.updateTipWord(getString(tipWord));
         }
         mLoadingDialog.show();
     }
@@ -217,13 +223,11 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
                             }
                         })
                         .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
-                        .create()
                         .show();
 
                 // 调整EditText的margin值
                 int margin = getResources().getDimensionPixelSize(R.dimen.d10);
-                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) editText.getLayoutParams();
                 layoutParams.setMargins(margin, 0, margin, 0);
                 editText.setLayoutParams(layoutParams);
                 break;
@@ -236,6 +240,11 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
                 if (isEmpty(mClassificationId)) {
                     showToast(R.string.toast_add_device_first);
                 } else {
+                    // 隐藏软键盘
+                    CommonBiz.hideKeyboard(etWordContent);
+                    // 显示查询中对话框
+                    showDoingDialog(R.string.dialog_on_search);
+                    // 获取子类数据
                     mPresenter.getSubclass(mClassificationId);
                 }
                 break;
@@ -287,14 +296,13 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
 
     @Override
     public void getSubclassSuccess(List<SubclassEntity> list) {
-        // 隐藏软键盘
-        CommonBiz.hideKeyboard(etWordContent);
+        mLoadingDialog.dismiss();
         // 创建选择器
         List<String> nameList = new ArrayList<>();
         for (SubclassEntity subclassDto : list) {
             nameList.add(subclassDto.getTypename());
         }
-        OptionsPickerView optionsPickerView = CommonBiz.getMyOptionPickerBuilder(mContext,
+        OptionsPickerView.Builder pickerBuilder = CommonBiz.getMyOptionPickerBuilder(mContext,
                 (int options1, int options2, int options3, View v1) -> {
                     SubclassEntity subclassDto = list.get(options1);
                     mSelectSubclassId = subclassDto.getId();
@@ -303,16 +311,17 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
                     int planCostTime = subclassDto.getPlancosttime();
                     tvTimeLimit.setText(String.format("%s%s", planCostTime, getString(R.string.suffix_minute)));
                     selectSubclassPosition = options1;
-                })
-                .build();
-        optionsPickerView.setPicker(nameList);
-        optionsPickerView.setSelectOptions(selectSubclassPosition);
-        CommonBiz.selfAdaptionTopBar(optionsPickerView);
-        optionsPickerView.show();
+                });
+        OptionsPickerView<String> pickerView = new OptionsPickerView<>(pickerBuilder);
+        pickerView.setPicker(nameList);
+        pickerView.setSelectOptions(selectSubclassPosition);
+        CommonBiz.selfAdaptionTopBar(pickerView);
+        pickerView.show();
     }
 
     @Override
     public void getSubclassFailed() {
+        mLoadingDialog.dismiss();
         showToast(R.string.toast_get_subclass_failed);
     }
 
@@ -437,9 +446,4 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
         return mContext;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.exit();
-    }
 }

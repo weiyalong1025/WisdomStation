@@ -83,15 +83,20 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
 
     private void initAdapter() {
         mLvAdapter = new SystemRemindAdapter(mContext, listData);
-        mLvAdapter.setOnDeleteBtnClickListener(remindEntity -> {
-            if (remindEntity.getReaded() == ReadStatus.UNREAD) {
-                showToast(R.string.toast_only_read_remind_can_be_deleted);
-            } else {
-                ArrayList<RemindEntity> list = new ArrayList<>();
-                list.add(remindEntity);
-                mPresenter.handleReminds(list, HandleType.HANDLE_DELETE);
-            }
-        });
+        // 删除按钮点击事件
+        mLvAdapter.setDeleteBtnClickListener(remindEntity -> new AlertDialog.Builder(mContext)
+                .setMessage(getString(R.string.dialog_sure_to_delete))
+                .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
+                    if (remindEntity.getReaded() == ReadStatus.UNREAD) {
+                        showToast(R.string.toast_only_read_remind_can_be_deleted);
+                    } else {
+                        ArrayList<RemindEntity> list = new ArrayList<>();
+                        list.add(remindEntity);
+                        mPresenter.handleReminds(list, HandleType.HANDLE_DELETE);
+                    }
+                })
+                .setNegativeButton(getString(R.string.btn_cancel), (dialog, which) -> dialog.cancel())
+                .show());
         mLvAdapter.setOnSelectChangeListener(selectSize -> btnSelectCount.setText(getSelectCountHint(selectSize)));
         lvList.setAdapter(mLvAdapter);
     }
@@ -217,7 +222,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         if (selectData.size() == 0) {
             showToast(getString(R.string.toast_no_selected_item));
         } else {
-            new AlertDialog.Builder(getActivity())
+            new AlertDialog.Builder(mContext)
                     .setMessage(getConfirmDeleteHint(selectData.size()))
                     .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
                         mPresenter.handleReminds(selectData, HandleType.HANDLE_DELETE);

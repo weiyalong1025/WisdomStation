@@ -898,36 +898,38 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private void showDialog(boolean isRunning, View btn) {
         new AlertDialog.Builder(mContext)
                 .setMessage(getString(isRunning ? R.string.dialog_sure_to_finish : R.string.dialog_sure_to_start))
-                .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
-                    btn.setEnabled(false);
-                    int opeType = isRunning ? OpeType.COMPLETE : OpeType.BEGIN;
-                    ((ChangeStatusBiz)mPresenter).changeJobStatus(mContext, mJobEntity, opeType, new StateListener() {
-                        @Override
-                        public void onSuccess() {
-                            btn.setEnabled(true);
-                            String currentTime = ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1);
-                            if (isRunning) {
-                                mJobEntity.setWorkstatus(TaskState.DONE);
-                                mJobEntity.setRealendtime(currentTime);
-                            } else {
-                                mJobEntity.setWorkstatus(TaskState.RUN);
-                                mJobEntity.setRealstarttime(currentTime);
-                            }
-                            initTaskModuleView();
-
-                            // 通知上个界面(OperatorTaskListFragment)同步数据
-                            EventBus.getDefault().post(mJobEntity);
-                        }
-
-                        @Override
-                        public void onFailed() {
-                            btn.setEnabled(true);
-                            showToast(R.string.toast_change_state_failed);
-                        }
-                    });
-                })
+                .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> changeStatus(isRunning, btn))
                 .setNegativeButton(getString(R.string.btn_cancel), null)
                 .show();
+    }
+
+    private void changeStatus(boolean isRunning, View btn) {
+        btn.setEnabled(false);
+        int opeType = isRunning ? OpeType.COMPLETE : OpeType.BEGIN;
+        ((ChangeStatusBiz) mPresenter).changeJobStatus(mContext, mJobEntity, opeType, new StateListener() {
+            @Override
+            public void onSuccess() {
+                btn.setEnabled(true);
+                String currentTime = ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1);
+                if (isRunning) {
+                    mJobEntity.setWorkstatus(TaskState.DONE);
+                    mJobEntity.setRealendtime(currentTime);
+                } else {
+                    mJobEntity.setWorkstatus(TaskState.RUN);
+                    mJobEntity.setRealstarttime(currentTime);
+                }
+                // 状态发生改变，重新初始化任务模块
+                initTaskModuleView();
+                // 通知上个界面(OperatorTaskListFragment)同步数据
+                EventBus.getDefault().post(mJobEntity);
+            }
+
+            @Override
+            public void onFailed() {
+                btn.setEnabled(true);
+                showToast(R.string.toast_change_state_failed);
+            }
+        });
     }
 
     @Override

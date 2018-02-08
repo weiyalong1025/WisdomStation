@@ -1,7 +1,9 @@
 package com.winsion.dispatch.modules.reminder.fragment.todo;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -73,7 +75,11 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
 
     private void initListener() {
         EventBus.getDefault().register(this);
-        mAdapter.setOnButtonClickListener(todoEntity -> mPresenter.deleteTodo(todoEntity));
+        mAdapter.setDeleteBtnClickListener(todoEntity -> new AlertDialog.Builder(mContext)
+                .setMessage(getString(R.string.dialog_sure_to_delete))
+                .setNegativeButton(getString(R.string.btn_cancel), (DialogInterface dialog, int which) -> dialog.cancel())
+                .setPositiveButton(getString(R.string.btn_confirm), (DialogInterface dialog, int which) -> mPresenter.deleteTodo(todoEntity))
+                .show());
         lvRemindersList.setOnItemClickListener(this);
     }
 

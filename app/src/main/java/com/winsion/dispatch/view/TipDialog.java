@@ -5,12 +5,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
-import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,10 +23,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * 提供一个浮层展示在屏幕中间, 一般使用 {@link TipDialog.Builder} 或 {@link TipDialog.CustomBuilder} 生成。
+ * 提供一个浮层展示在屏幕中间, 一般使用 {@link TipDialog.Builder} 生成。
  * <ul>
- * <li>{@link TipDialog.Builder} 提供了一个图标和一行文字的样式, 其中图标有几种类型可选, 见 {@link TipDialog.Builder.IconType}</li>
- * <li>{@link TipDialog.CustomBuilder} 支持传入自定义的 layoutResId, 达到自定义 TipDialog 的效果。</li>
+ * <li>{@link TipDialog.Builder} 提供了一个图标和一行文字的样式, 其中图标有几种类型可选,见{@link TipDialog.Builder.IconType}<li>
+ * </li>
  * </ul>
  *
  * @author cginechen
@@ -36,11 +35,11 @@ import java.lang.annotation.RetentionPolicy;
 
 public class TipDialog extends Dialog {
 
-    public TipDialog(Context context) {
+    private TipDialog(Context context) {
         this(context, R.style.TipDialog);
     }
 
-    public TipDialog(Context context, int themeResId) {
+    private TipDialog(Context context, int themeResId) {
         super(context, themeResId);
         setCanceledOnTouchOutside(false);
         setCancelable(false);
@@ -65,12 +64,27 @@ public class TipDialog extends Dialog {
     }
 
     /**
+     * 更新提示文字
+     *
+     * @param newTipWord 新提示文字
+     */
+    public void updateTipWord(String newTipWord) {
+        ViewGroup contentWrap = findViewById(R.id.contentWrap);
+        int childCount = contentWrap.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View childAt = contentWrap.getChildAt(i);
+            if (childAt instanceof TextView) {
+                ((TextView) childAt).setText(newTipWord);
+                break;
+            }
+        }
+    }
+
+    /**
      * 生成默认的 {@link TipDialog}
      * <p>
      * 提供了一个图标和一行文字的样式, 其中图标有几种类型可选。见 {@link IconType}
      * </p>
-     *
-     * @see CustomBuilder
      */
     public static class Builder {
         /**
@@ -181,37 +195,6 @@ public class TipDialog extends Dialog {
 
                 contentWrap.addView(tipView);
             }
-            return dialog;
-        }
-
-    }
-
-    /**
-     * 传入自定义的布局并使用这个布局生成 TipDialog
-     */
-    public static class CustomBuilder {
-        private Context mContext;
-        private int mContentLayoutId;
-
-        public CustomBuilder(Context context) {
-            mContext = context;
-        }
-
-        public CustomBuilder setContent(@LayoutRes int layoutId) {
-            mContentLayoutId = layoutId;
-            return this;
-        }
-
-        /**
-         * 创建 Dialog, 但没有弹出来, 如果要弹出来, 请调用返回值的 {@link Dialog#show()} 方法
-         *
-         * @return 创建的 Dialog
-         */
-        public TipDialog create() {
-            TipDialog dialog = new TipDialog(mContext);
-            dialog.setContentView(R.layout.dialog_tip);
-            ViewGroup contentWrap = dialog.findViewById(R.id.contentWrap);
-            LayoutInflater.from(mContext).inflate(mContentLayoutId, contentWrap, true);
             return dialog;
         }
     }

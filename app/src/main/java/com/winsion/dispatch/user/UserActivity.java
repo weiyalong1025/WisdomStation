@@ -66,9 +66,6 @@ public class UserActivity extends BaseActivity {
                     .setTipWord(getString(R.string.dialog_on_logout))
                     .create();
         }
-        if (mLoadingDialog.isShowing()) {
-            mLoadingDialog.dismiss();
-        }
         mLoadingDialog.show();
     }
 

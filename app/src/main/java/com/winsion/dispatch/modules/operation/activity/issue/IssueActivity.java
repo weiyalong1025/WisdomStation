@@ -42,7 +42,6 @@ import com.winsion.dispatch.view.TitleView;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -286,9 +285,6 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     .setTipWord(getString(R.string.dialog_on_issue))
                     .create();
         }
-        if (mLoadingDialog.isShowing()) {
-            mLoadingDialog.dismiss();
-        }
         mLoadingDialog.show();
     }
 
@@ -296,16 +292,16 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         // 隐藏软键盘
         CommonBiz.hideKeyboard(v);
         // 创建选择器
-        OptionsPickerView optionsPickerView = CommonBiz.getMyOptionPickerBuilder(mContext,
+        OptionsPickerView.Builder pickerBuilder = CommonBiz.getMyOptionPickerBuilder(mContext,
                 (int options1, int options2, int options3, View v1) -> {
                     selectStationIndex = options1;
                     tvStation.setText(stationList.get(options1));
-                })
-                .build();
-        optionsPickerView.setPicker(stationList);
-        optionsPickerView.setSelectOptions(selectStationIndex);
-        CommonBiz.selfAdaptionTopBar(optionsPickerView);
-        optionsPickerView.show();
+                });
+        OptionsPickerView<String> pickerView = new OptionsPickerView<>(pickerBuilder);
+        pickerView.setPicker(stationList);
+        pickerView.setSelectOptions(selectStationIndex);
+        CommonBiz.selfAdaptionTopBar(pickerView);
+        pickerView.show();
     }
 
     /**
@@ -369,18 +365,17 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             LocalRecordEntity localRecordEntity;
             switch (requestCode) {
                 case CODE_SELECT_TEAM:
-                    Serializable serializable = data.getSerializableExtra("selectData");
-                    ArrayList<TeamEntity> selectData = (ArrayList<TeamEntity>) serializable;
-
+                    ArrayList selectData = (ArrayList) data.getSerializableExtra("selectData");
                     StringBuilder teamIdsSb = new StringBuilder();
                     StringBuilder teamNamesSb = new StringBuilder();
                     for (int i = 0; i < selectData.size(); i++) {
+                        TeamEntity teamEntity = (TeamEntity) selectData.get(i);
                         if (i == selectData.size() - 1) {
-                            teamIdsSb.append(selectData.get(i).getTeamid());
-                            teamNamesSb.append(selectData.get(i).getTeamsName());
+                            teamIdsSb.append(teamEntity.getTeamid());
+                            teamNamesSb.append(teamEntity.getTeamsName());
                         } else {
-                            teamIdsSb.append(selectData.get(i).getTeamid()).append(",");
-                            teamNamesSb.append(selectData.get(i).getTeamsName()).append(",");
+                            teamIdsSb.append(teamEntity.getTeamid()).append(",");
+                            teamNamesSb.append(teamEntity.getTeamsName()).append(",");
                         }
                     }
 

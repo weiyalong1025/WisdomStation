@@ -2,7 +2,6 @@ package com.winsion.dispatch.modules.reminder.adapter;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
-import android.support.v7.app.AlertDialog;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.common.listener.ClickListener;
@@ -29,7 +28,7 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
     }
 
     private boolean isMultipleDeleteStatus; // 当前是否是多选删除状态
-    private ClickListener<RemindEntity> mListener;
+    private ClickListener<RemindEntity> deleteBtnClickListener;
     private OnSelectChangeListener onSelectChangeListener;
     private List<RemindEntity> selectData = new ArrayList<>();
 
@@ -89,18 +88,11 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
             viewHolder.setVisible(R.id.iv_select, false);
         }
 
-        viewHolder.setOnClickListener(R.id.iv_delete, v ->
-                new AlertDialog.Builder(mContext)
-                        .setMessage(getString(R.string.dialog_sure_to_delete))
-                        .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
-                            if (mListener != null) {
-                                mListener.onClick(remindEntity);
-                                dialog.dismiss();
-                            }
-                        })
-                        .setNegativeButton(getString(R.string.btn_cancel), (dialog, which) -> dialog.cancel())
-                        .create()
-                        .show());
+        viewHolder.setOnClickListener(R.id.iv_delete, v -> {
+            if (deleteBtnClickListener != null) {
+                deleteBtnClickListener.onClick(remindEntity);
+            }
+        });
 
         viewHolder.setOnClickListener(R.id.iv_select, v -> selectOneItem(viewHolder, position));
     }
@@ -154,8 +146,8 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
         this.onSelectChangeListener = listener;
     }
 
-    public void setOnDeleteBtnClickListener(ClickListener<RemindEntity> listener) {
-        this.mListener = listener;
+    public void setDeleteBtnClickListener(ClickListener<RemindEntity> listener) {
+        this.deleteBtnClickListener = listener;
     }
 
     private String getString(@StringRes int strRes) {

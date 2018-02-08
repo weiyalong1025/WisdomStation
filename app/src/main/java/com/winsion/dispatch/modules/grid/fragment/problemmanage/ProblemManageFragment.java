@@ -25,7 +25,8 @@ import butterknife.OnClick;
 /**
  * Created by wyl on 2017/6/29
  */
-public class ProblemManageFragment extends BaseFragment implements ProblemManageContract.View, AdapterView.OnItemClickListener {
+public class ProblemManageFragment extends BaseFragment implements ProblemManageContract.View,
+        AdapterView.OnItemClickListener, ProblemManageAdapter.ConfirmButtonListener {
     @BindView(R.id.lv_list)
     ListView lvList;
     @BindView(R.id.swipe_refresh)
@@ -68,8 +69,7 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
         swipeRefresh.setColorSchemeResources(R.color.blue1);
         swipeRefresh.setOnRefreshListener(this::initData);
         lvList.setOnItemClickListener(this);
-        mLvAdapter.setOnPassClickListener(taskEntity -> mPresenter.confirm(taskEntity, OpeType.CONFIRMED));
-        mLvAdapter.setOnNotPassClickListener(taskEntity -> mPresenter.confirm(taskEntity, OpeType.UN_PASS));
+        mLvAdapter.setConfirmButtonListener(this);
     }
 
     private void initData() {
@@ -109,14 +109,23 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
     }
 
     @Override
+    public void onPassButtonClick(TaskEntity taskEntity) {
+        mPresenter.confirm(taskEntity, OpeType.PASS);
+    }
+
+    @Override
+    public void onNotPassButtonClick(TaskEntity taskEntity) {
+        mPresenter.confirm(taskEntity, OpeType.NOT_PASS);
+    }
+
+    @Override
     public void confirmSuccess() {
-        swipeRefresh.setRefreshing(true);
-        initData();
+
     }
 
     @Override
     public void confirmFailed(String errorInfo) {
-        showToast("确认失败:" + errorInfo);
+        showToast(R.string.toast_confirm_failed);
     }
 
     @OnClick(R.id.tv_hint)

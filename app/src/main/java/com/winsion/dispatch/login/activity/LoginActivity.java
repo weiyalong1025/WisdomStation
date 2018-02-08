@@ -194,7 +194,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View itemView = layoutInflater.inflate(R.layout.item_user_option, null);
         itemView.measure(0, 0);
-        int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, itemView.getMeasuredHeight(), ViewUtils.ListType.TYPE_POPUP);
+        int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, itemView.getMeasuredHeight());
         ListView listView = new WrapContentListView(mContext, suggestMaxHeight);
         listView.setAdapter(userListAdapter);
         listView.setOnItemClickListener(this);

@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RadioButton;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseFragment;
@@ -16,17 +16,19 @@ import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.reminder.activity.todo.AddTodoActivity;
 import com.winsion.dispatch.modules.reminder.adapter.TodoAdapter;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
-import com.winsion.dispatch.modules.reminder.event.UpdateTodoEvent;
+import com.winsion.dispatch.view.SpinnerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 import static android.app.Activity.RESULT_OK;
 import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_ID;
@@ -35,17 +37,31 @@ import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_
  * Created by wyl on 2017/6/2
  */
 public class TodoListFragment extends BaseFragment implements TodoListContract.View, AdapterView.OnItemClickListener {
+    @BindView(R.id.sv_spinner)
+    SpinnerView svSpinner;
     @BindView(R.id.lv_reminders_list)
     ListView lvRemindersList;
-    @BindView(R.id.btn_unfinished)
-    RadioButton rbUnFinished;
+    @BindView(R.id.iv_shade)
+    ImageView ivShade;
 
-    public static final int REQUEST_CODE = 911;
+    /**
+     * 状态筛选-全部
+     */
+    private static final int STATE_ALL = 0;
+    /**
+     * 状态筛选-未完成
+     */
+    private static final int STATE_UNFINISHED = 1;
+    /**
+     * 状态筛选-已完成
+     */
+    private static final int STATE_FINISHED = 2;
+    Unbinder unbinder;
 
-    private boolean mIsFinish;  // 显示未完成/已完成的数据
     private List<TodoEntity> listData = new ArrayList<>();
     private TodoAdapter mAdapter;
     private TodoListContract.Presenter mPresenter;
+    private int currentState = STATE_ALL;   // 当前筛选状态，默认全部
 
     @SuppressLint("InflateParams")
     @Override
@@ -56,6 +72,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
     @Override
     protected void init() {
         initPresenter();
+        initSpinner();
         initAdapter();
         initListener();
         recoverAlarm();
@@ -67,10 +84,30 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
         mPresenter.start();
     }
 
+    private void initSpinner() {
+        List<String> statusList = Arrays.asList(getResources().getStringArray(R.array.todoStatusArray));
+        svSpinner.setFirstOptionData(statusList);
+        svSpinner.setFirstOptionItemClickListener(position -> {
+            currentState = position;
+            initData(false);
+        });
+
+        // 根据Spinner显示状态显隐透明背景
+        svSpinner.setPopupDisplayChangeListener(status -> {
+            switch (status) {
+                case SpinnerView.POPUP_SHOW:
+                    ivShade.setVisibility(View.VISIBLE);
+                    break;
+                case SpinnerView.POPUP_HIDE:
+                    ivShade.setVisibility(View.GONE);
+                    break;
+            }
+        });
+    }
+
     private void initAdapter() {
         mAdapter = new TodoAdapter(mContext, listData);
         lvRemindersList.setAdapter(mAdapter);
-        rbUnFinished.setChecked(true);
     }
 
     private void initListener() {
@@ -83,10 +120,25 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
         lvRemindersList.setOnItemClickListener(this);
     }
 
+    /**
+     * 获取代办事项数据
+     *
+     * @param isUpdateBadge 是否需要更新角标
+     */
     private void initData(boolean isUpdateBadge) {
-        List<TodoEntity> toDoBeen = mPresenter.queryTodo(mIsFinish);
         listData.clear();
-        listData.addAll(toDoBeen);
+        switch (currentState) {
+            case STATE_ALL:
+                listData.addAll(mPresenter.queryTodo(false));
+                listData.addAll(mPresenter.queryTodo(true));
+                break;
+            case STATE_UNFINISHED:
+                listData.addAll(mPresenter.queryTodo(false));
+                break;
+            case STATE_FINISHED:
+                listData.addAll(mPresenter.queryTodo(true));
+                break;
+        }
         mAdapter.notifyDataSetChanged();
 
         if (isUpdateBadge) {
@@ -111,50 +163,44 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
         mPresenter.recoverAlarm();
     }
 
-    @OnClick({R.id.btn_unfinished, R.id.btn_finished, R.id.btn_add})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_unfinished:
-                mIsFinish = false;
-                initData(false);
-                break;
-            case R.id.btn_finished:
-                mIsFinish = true;
-                initData(false);
-                break;
-            case R.id.btn_add:
-                startActivityForResult(AddTodoActivity.class, REQUEST_CODE);
-                break;
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (!listData.get(position).getFinished()) {
+            Intent intent = new Intent(mContext, AddTodoActivity.class);
+            intent.putExtra(TODO_ID, listData.get(position).getId());
+            startActivityForResult(intent);
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (!mIsFinish) {
-            Intent intent = new Intent(mContext, AddTodoActivity.class);
-            intent.putExtra(TODO_ID, listData.get(position).getId());
-            startActivityForResult(intent, REQUEST_CODE);
-        }
+    @OnClick(R.id.btn_add)
+    public void onViewClicked() {
+        startActivityForResult(AddTodoActivity.class);
     }
 
     /**
-     * 该事件由TodoReceiver发出
+     * 已读了一条代办事项，该事件由TodoReceiver发出
      *
      * @param event 提醒置为已读状态，刷新界面
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(UpdateTodoEvent event) {
+    public void onMessageEvent(TodoEntity event) {
         initData(true);
     }
 
+    /**
+     * 更新了一条代办事项
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            initData(true);
+        if (resultCode == RESULT_OK) {
+            initData(false);
         }
     }
 
+    /**
+     * 删除了一条代办事项
+     */
     @Override
     public void notifyLocalDataChange() {
         initData(true);
@@ -165,5 +211,11 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
         super.onDestroy();
         mPresenter.exit();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

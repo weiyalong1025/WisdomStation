@@ -290,7 +290,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
             case R.id.iv_bluetooth:
                 View inflate = LayoutInflater.from(getContext()).inflate(R.layout.item_bluetooth_info, null);
                 inflate.measure(0, 0);
-                int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, inflate.getMeasuredHeight(), ViewUtils.ListType.TYPE_DIALOG);
+                int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, inflate.getMeasuredHeight());
                 ListView listView = new WrapContentListView(getContext(), suggestMaxHeight);
                 bluetoothAdapter = new BluetoothPointAdapter(mContext, BPEntities);
                 listView.setAdapter(bluetoothAdapter);

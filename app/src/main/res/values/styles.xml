@@ -47,7 +47,7 @@
     <!-- Indicator中的RadioButton -->
     <style name="RadioButtonStyle">
         <item name="android:gravity">center</item>
-        <item name="android:layout_width">@dimen/d85</item>
+        <item name="android:layout_width">@dimen/d84</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textColor">@color/selector_indicator_text</item>
         <item name="android:button">@null</item>

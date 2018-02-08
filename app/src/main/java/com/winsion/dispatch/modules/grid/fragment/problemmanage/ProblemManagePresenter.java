@@ -96,6 +96,10 @@ public class ProblemManagePresenter implements ProblemManageContract.Presenter {
 
     @Override
     public void confirm(TaskEntity taskEntity, int opeType) {
+        if (AppApplication.TEST_MODE) {
+            mView.confirmSuccess(taskEntity.getTasksid(), opeType);
+            return;
+        }
         // 先用taskId查询JobEntity在调用确认接口
         List<WhereClause> whereClauses = new ArrayList<>();
 
@@ -121,13 +125,13 @@ public class ProblemManagePresenter implements ProblemManageContract.Presenter {
                         if (dataList != null && dataList.size() == 1) {
                             getJobInfoFinished(dataList.get(0), opeType);
                         } else {
-                            mView.confirmFailed("");
+                            mView.confirmFailed(taskEntity.getTasksid());
                         }
                     }
 
                     @Override
                     public void onFailed(int errorCode, String errorInfo) {
-                        mView.confirmFailed(errorInfo);
+                        mView.confirmFailed(taskEntity.getTasksid());
                     }
                 });
     }
@@ -148,12 +152,12 @@ public class ProblemManagePresenter implements ProblemManageContract.Presenter {
 
             @Override
             public void onSuccess(String result) {
-                mView.confirmSuccess();
+                mView.confirmSuccess(jobDto.getTasksid(), opeType);
             }
 
             @Override
             public void onFailed(int errorCode, String errorInfo) {
-                mView.confirmFailed(errorInfo);
+                mView.confirmFailed(jobDto.getTasksid());
             }
         });
     }

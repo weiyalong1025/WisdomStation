@@ -24,6 +24,7 @@ public class TaskEntity implements Serializable {
     private int trainlate;  // 列车晚点状态(正点，晚点，晚点未定，停运)
     private String areaname;    // 区域名称
     private String memo;    // 等级
+    private boolean inOperation; // 操作中
 
     public String getTasksid() {
         return tasksid;
@@ -167,5 +168,13 @@ public class TaskEntity implements Serializable {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public boolean isInOperation() {
+        return inOperation;
+    }
+
+    public void setInOperation(boolean inOperation) {
+        this.inOperation = inOperation;
     }
 }

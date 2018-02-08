@@ -33,7 +33,9 @@
 
     <declare-styleable name="SpinnerView">
         <attr name="showFirstOption" format="boolean" />
+        <attr name="showFirstDiv" format="boolean" />
         <attr name="showSecondOption" format="boolean" />
+        <attr name="showSecondDiv" format="boolean" />
         <attr name="showSearchView" format="boolean" />
     </declare-styleable>
 
@@ -111,15 +113,15 @@
     </declare-styleable>
 
     <declare-styleable name="ViewfinderView">
-        <attr name="corner_color" format="color"/>
-        <attr name="laser_color" format="color"/>
+        <attr name="corner_color" format="color" />
+        <attr name="laser_color" format="color" />
         <attr name="frame_color" format="color" />
         <attr name="mask_color" format="color" />
-        <attr name="result_point_color" format="color"/>
+        <attr name="result_point_color" format="color" />
         <attr name="result_color" format="color" />
-        <attr name="label_text_color" format="color"/>
-        <attr name="label_text" format="string"/>
-        <attr name="label_text_size" format="float"/>
+        <attr name="label_text_color" format="color" />
+        <attr name="label_text" format="string" />
+        <attr name="label_text_size" format="float" />
     </declare-styleable>
 
 </resources>

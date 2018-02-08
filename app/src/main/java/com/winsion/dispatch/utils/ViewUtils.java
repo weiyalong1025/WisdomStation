@@ -1,15 +1,11 @@
 package com.winsion.dispatch.utils;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by 10295 on 2018/1/26
@@ -19,18 +15,12 @@ public class ViewUtils {
     /**
      * 根据屏幕高度获取建议的ListView高度
      *
-     * @param context    你懂得
+     * @param context    上下文
      * @param itemHeight 一条item的高度
-     * @param listType   {@link ListType} 是什么类型上显示的ListView 可以是Dialog和PopupWindow
      * @return 建议的ListView高度
      */
-    public static int getSuggestMaxHeight(Context context, int itemHeight, @ListType int listType) {
-        float percent = 1.5f;
-        if (listType == ListType.TYPE_DIALOG) {
-            percent = 1.5f;
-        } else if (listType == ListType.TYPE_POPUP) {
-            percent = 2.5f;
-        }
+    public static int getSuggestMaxHeight(Context context, int itemHeight) {
+        float percent = 2.0f;
         int heightPixels = context.getResources().getDisplayMetrics().heightPixels;
         int a = (int) (heightPixels / percent);
         int b = a / itemHeight;
@@ -63,12 +53,5 @@ public class ViewUtils {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
-    }
-
-    @IntDef({ListType.TYPE_DIALOG, ListType.TYPE_POPUP})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface ListType {
-        int TYPE_DIALOG = 0;
-        int TYPE_POPUP = 1;
     }
 }

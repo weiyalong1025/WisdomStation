@@ -157,7 +157,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
             case TaskState.DONE:
                 // 设置按钮背景和文字
                 viewHolder.setBackgroundRes(R.id.btn_status, R.drawable.btn_bg_done);
-                viewHolder.setText(R.id.btn_status, getString(R.string.spinner_done));
+                viewHolder.setText(R.id.btn_status, getString(R.string.spinner_finished));
                 // 持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / 60000);
                 viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.suffix_minute));

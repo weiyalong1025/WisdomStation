@@ -34,7 +34,7 @@
         android:layout_alignBottom="@id/et_note_content"
         android:layout_alignEnd="@id/et_note_content"
         android:layout_margin="@dimen/d10"
-        android:text="@string/default_counter"
+        android:text="@string/default_counter_150"
         android:textColor="@color/gray1"
         android:textSize="@dimen/s16" />
 </RelativeLayout>

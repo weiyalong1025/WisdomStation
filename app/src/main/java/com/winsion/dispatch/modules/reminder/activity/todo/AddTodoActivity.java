@@ -1,6 +1,8 @@
 package com.winsion.dispatch.modules.reminder.activity.todo;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +31,7 @@ import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_
  * 创建时间：2017/12/27 1:53
  */
 
-public class AddTodoActivity extends BaseActivity implements AddTodoContract.View {
+public class AddTodoActivity extends BaseActivity implements AddTodoContract.View, TextWatcher {
     @BindView(R.id.tv_date)
     TextView tvDate;
     @BindView(R.id.tv_time)
@@ -40,6 +42,8 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
     TitleView tvTitle;
     @BindView(R.id.btn_save)
     Button btnSave;
+    @BindView(R.id.tv_counter)
+    TextView tvCounter;
 
     private AddTodoContract.Presenter mPresenter;
     private boolean isUpdate;   // 是否是更新
@@ -81,6 +85,8 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
         String[] split = planDate.split(" ");
         tvDate.setText(split[0]);
         tvTime.setText(split[1].substring(0, 5));
+
+        etDesc.addTextChangedListener(this);
     }
 
     private void initListener() {
@@ -172,5 +178,21 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
     public void updateOrAddSuccess() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        String note = s.toString();
+        tvCounter.setText(String.format("%s/100", String.valueOf(note.length())));
     }
 }

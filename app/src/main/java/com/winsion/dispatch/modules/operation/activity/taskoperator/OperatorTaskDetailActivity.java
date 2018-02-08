@@ -485,7 +485,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 已完成
                 // 设置按钮背景和文字
                 btnStatus.setBackgroundResource(R.drawable.btn_bg_done);
-                btnStatus.setText(getString(R.string.spinner_done));
+                btnStatus.setText(getString(R.string.spinner_finished));
                 // 设置持续时间
                 lastTime = (int) ((realEndTime - realStartTime) / (60 * 1000));
                 tvLastTime.setText(String.format("%s%s", String.valueOf(lastTime), getString(R.string.suffix_minute)));

@@ -2,6 +2,7 @@ package com.winsion.dispatch.modules.grid.fragment.problemmanage;
 
 import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -110,22 +111,56 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
 
     @Override
     public void onPassButtonClick(TaskEntity taskEntity) {
-        mPresenter.confirm(taskEntity, OpeType.PASS);
+        new AlertDialog.Builder(mContext)
+                .setMessage(R.string.dialog_sure_to_pass)
+                .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
+                .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
+                    taskEntity.setInOperation(true);
+                    mLvAdapter.notifyDataSetChanged();
+                    mPresenter.confirm(taskEntity, OpeType.PASS);
+                })
+                .show();
     }
 
     @Override
     public void onNotPassButtonClick(TaskEntity taskEntity) {
-        mPresenter.confirm(taskEntity, OpeType.NOT_PASS);
+        new AlertDialog.Builder(mContext)
+                .setMessage(R.string.dialog_sure_to_not_pass)
+                .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
+                .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
+                    taskEntity.setInOperation(true);
+                    mLvAdapter.notifyDataSetChanged();
+                    mPresenter.confirm(taskEntity, OpeType.NOT_PASS);
+                })
+                .show();
     }
 
     @Override
-    public void confirmSuccess() {
-
+    public void confirmSuccess(String tasksId, int opeType) {
+        for (TaskEntity taskEntity : listData) {
+            if (taskEntity.getTasksid().equals(tasksId)) {
+                if (opeType == OpeType.PASS) {
+                    listData.remove(taskEntity);
+                } else {
+                    taskEntity.setInOperation(false);
+                    taskEntity.setTaskstatus(TaskState.GRID_NOT_PASS);
+                    mLvAdapter.notifyDataSetChanged();
+                }
+                break;
+            }
+        }
     }
 
     @Override
-    public void confirmFailed(String errorInfo) {
+    public void confirmFailed(String tasksId) {
         showToast(R.string.toast_confirm_failed);
+        for (TaskEntity taskEntity : listData) {
+            if (taskEntity.getTasksid().equals(tasksId)) {
+                taskEntity.setInOperation(false);
+                mLvAdapter.notifyDataSetChanged();
+                break;
+            }
+        }
     }
 
     @OnClick(R.id.tv_hint)

@@ -55,6 +55,12 @@ public class TodoAdapter extends CommonAdapter<TodoEntity> {
         } else {
             viewHolder.setVisible(R.id.iv_red_dot, false);
         }
+
+        if (todoEntity.getFinished()) {
+            viewHolder.setImageResource(R.id.iv_finish_state, R.drawable.ic_finished);
+        } else {
+            viewHolder.setImageResource(R.id.iv_finish_state, R.drawable.ic_unfinished);
+        }
     }
 
     public void setDeleteBtnClickListener(ClickListener<TodoEntity> listener) {

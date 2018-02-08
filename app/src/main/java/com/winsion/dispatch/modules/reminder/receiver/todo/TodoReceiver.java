@@ -18,13 +18,13 @@ import android.widget.TextView;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.data.DBDataSource;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
-import com.winsion.dispatch.modules.reminder.event.UpdateTodoEvent;
 import com.winsion.dispatch.modules.reminder.fragment.todo.TodoListFragment;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
+import static android.content.Context.AUDIO_SERVICE;
 import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_ID;
 
 
@@ -54,23 +54,28 @@ public class TodoReceiver extends BroadcastReceiver {
     }
 
     private void playRing(Context context) {
-        try {
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(context, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-            mediaPlayer.setOnCompletionListener(MediaPlayer::release);
-            mediaPlayer.setLooping(true);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-        } catch (IOException e) {
-            e.printStackTrace();
+        // 当前为标准模式才响铃
+        AudioManager audioService = (AudioManager) context.getSystemService(AUDIO_SERVICE);
+        if (audioService != null && audioService.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+            try {
+                mediaPlayer = new MediaPlayer();
+                mediaPlayer.setDataSource(context, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+                mediaPlayer.setOnCompletionListener(MediaPlayer::release);
+                mediaPlayer.setLooping(true);
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private void startVibrator(Context context) {
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        assert vibrator != null;
-        vibrator.vibrate(new long[]{400, 1000}, 0);
+        if (vibrator != null) {
+            vibrator.vibrate(new long[]{400, 1000}, 0);
+        }
     }
 
     private boolean isFinish = false;
@@ -108,8 +113,8 @@ public class TodoReceiver extends BroadcastReceiver {
     private void operateState() {
         todoEntity.setFinished(isFinish);
         DBDataSource.getInstance().updateOrAddTodo(todoEntity);
-        EventBus.getDefault().post(new UpdateTodoEvent());
-        if (mediaPlayer.isPlaying()) {
+        EventBus.getDefault().post(new TodoEntity());
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
             mediaPlayer.release();
         }

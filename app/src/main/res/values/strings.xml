@@ -33,7 +33,8 @@
 
     <string name="default_patrol_date">----年--月--日巡检计划</string>
     <string name="default_check_state">默认状态</string>
-    <string name="default_counter">0/150</string>
+    <string name="default_counter_150">0/150</string>
+    <string name="default_counter_100">0/100</string>
 
     <string name="dialog_on_login">登录中</string>
     <string name="dialog_on_search">查询中</string>
@@ -48,6 +49,8 @@
     <string name="dialog_add_problem_desc">添加问题描述</string>
     <string name="dialog_sure_exist_problem">确定存在问题吗？</string>
     <string name="dialog_sure_no_problem">确定没有问题吗？</string>
+    <string name="dialog_sure_to_pass">确定通过吗？</string>
+    <string name="dialog_sure_to_not_pass">确定未通过吗？</string>
 
     <string name="hint_input_account">请输入账号</string>
     <string name="hint_input_password">请输入密码</string>
@@ -103,7 +106,8 @@
     <string name="spinner_all">全部</string>
     <string name="spinner_not_started">未开始</string>
     <string name="spinner_doing">进行中</string>
-    <string name="spinner_done">已完成</string>
+    <string name="spinner_finished">已完成</string>
+    <string name="spinner_unfinished">未完成</string>
     <string name="spinner_station_name">智慧车站</string>
 
     <string name="suffix_operation">个作业</string>
@@ -140,7 +144,6 @@
     <string name="tab_system_remind">系统提醒</string>
     <string name="tab_patrol_plan">巡视计划</string>
     <string name="tab_problem_manager">问题管理</string>
-    <string name="tab_unfinished">未完成</string>
 
     <string name="title_btn_login">登录</string>
     <string name="title_btn_login_config">登录配置</string>
@@ -232,6 +235,13 @@
         <item>@string/spinner_all</item>
         <item>@string/spinner_not_started</item>
         <item>@string/spinner_doing</item>
-        <item>@string/spinner_done</item>
+        <item>@string/spinner_finished</item>
+    </string-array>
+
+    <!-- 代办事项状态筛选 -->
+    <string-array name="todoStatusArray">
+        <item>@string/spinner_all</item>
+        <item>@string/spinner_unfinished</item>
+        <item>@string/spinner_finished</item>
     </string-array>
 </resources>

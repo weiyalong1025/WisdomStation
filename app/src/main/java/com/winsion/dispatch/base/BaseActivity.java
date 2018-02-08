@@ -29,6 +29,11 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends AppCompatActivity implements HandlerUtils.OnReceiveMessageListener {
+    /**
+     * 默认的REQUEST_CODE
+     */
+    private static final int CODE_DEFAULT = 0;
+
     public Context mContext;
     public LayoutInflater mInflater;
     public HandlerUtils.HandlerHolder mHandler;
@@ -110,6 +115,24 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
         if (closeCurrentActivity) {
             finish();
         }
+    }
+
+    /**
+     * 不需要requestCode时调用，会传入默认的code
+     *
+     * @param intent 要跳转的Activity
+     */
+    public void startActivityForResult(Intent intent) {
+        startActivityForResult(intent, CODE_DEFAULT);
+    }
+
+    /**
+     * 不需要requestCode时调用，会传入默认的code
+     *
+     * @param cls 要跳转的Activity
+     */
+    public void startActivityForResult(Class<? extends Activity> cls) {
+        startActivityForResult(cls, CODE_DEFAULT);
     }
 
     public void startActivityForResult(Class<? extends Activity> cls, int requestCode) {

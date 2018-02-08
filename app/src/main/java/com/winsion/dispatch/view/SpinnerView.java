@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
@@ -78,7 +79,9 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
         super(context, attrs, defStyleAttr);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SpinnerView, defStyleAttr, 0);
         boolean showFirstOption = typedArray.getBoolean(R.styleable.SpinnerView_showFirstOption, true);
+        boolean showFirstDiv = typedArray.getBoolean(R.styleable.SpinnerView_showFirstDiv, true);
         boolean showSecondOption = typedArray.getBoolean(R.styleable.SpinnerView_showSecondOption, true);
+        boolean showSecondDiv = typedArray.getBoolean(R.styleable.SpinnerView_showSecondDiv, true);
         boolean showSearchView = typedArray.getBoolean(R.styleable.SpinnerView_showSearchView, true);
         typedArray.recycle();
 
@@ -86,17 +89,26 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
         LinearLayout containerFirst = findViewById(R.id.ll_container_first);
         textFirst = findViewById(R.id.iv_text_first);
         arrowFirst = findViewById(R.id.iv_arrow_first);
+        View divFirst = findViewById(R.id.div_first);
 
         LinearLayout containerSecond = findViewById(R.id.ll_container_second);
         textSecond = findViewById(R.id.iv_text_second);
         arrowSecond = findViewById(R.id.iv_arrow_second);
+        View divSecond = findViewById(R.id.div_second);
 
         search = findViewById(R.id.et_search);
+        RelativeLayout rlSearch = findViewById(R.id.rl_search_view);
 
         if (showFirstOption) {
             containerFirst.setVisibility(VISIBLE);
         } else {
             containerFirst.setVisibility(GONE);
+        }
+
+        if (showFirstDiv) {
+            divFirst.setVisibility(VISIBLE);
+        } else {
+            divFirst.setVisibility(GONE);
         }
 
         if (showSecondOption) {
@@ -105,10 +117,16 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
             containerSecond.setVisibility(GONE);
         }
 
-        if (showSearchView) {
-            search.setVisibility(VISIBLE);
+        if (showSecondDiv) {
+            divSecond.setVisibility(VISIBLE);
         } else {
-            search.setVisibility(GONE);
+            divSecond.setVisibility(GONE);
+        }
+
+        if (showSearchView) {
+            rlSearch.setVisibility(VISIBLE);
+        } else {
+            rlSearch.setVisibility(GONE);
         }
 
         containerFirst.setOnClickListener((view) -> {
@@ -219,7 +237,7 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
         @SuppressLint("InflateParams")
         View itemView = layoutInflater.inflate(R.layout.item_spinner, null);
         itemView.measure(0, 0);
-        int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(getContext(), itemView.getMeasuredHeight(), ViewUtils.ListType.TYPE_POPUP);
+        int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(getContext(), itemView.getMeasuredHeight());
         ListView listView = new WrapContentListView(getContext(), suggestMaxHeight);
         listView.setBackgroundResource(R.color.gray7);
         listView.setAdapter(adapter);

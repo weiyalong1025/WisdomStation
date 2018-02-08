@@ -71,8 +71,9 @@ public class ProblemManageAdapter extends CommonAdapter<TaskEntity> {
         viewHolder.setText(R.id.tv_state, processName);
 
         viewHolder.setOnClickListener(R.id.btn_pass, (view) -> {
-            if (process == TaskState.DONE && confirmButtonListener != null)
+            if (process == TaskState.DONE && confirmButtonListener != null) {
                 confirmButtonListener.onPassButtonClick(taskEntity);
+            }
         });
         viewHolder.setOnClickListener(R.id.btn_not_pass, (view) -> {
             if (process == TaskState.DONE && confirmButtonListener != null)
@@ -110,6 +111,15 @@ public class ProblemManageAdapter extends CommonAdapter<TaskEntity> {
             viewHolder.setVisible(R.id.iv_bottom_split, true);
         } else {
             viewHolder.setVisible(R.id.iv_bottom_split, false);
+        }
+
+        // 操作中(接口调用中)按钮不可用
+        if (taskEntity.isInOperation()) {
+            viewHolder.getView(R.id.btn_pass).setEnabled(false);
+            viewHolder.getView(R.id.btn_not_pass).setEnabled(false);
+        } else {
+            viewHolder.getView(R.id.btn_pass).setEnabled(true);
+            viewHolder.getView(R.id.btn_not_pass).setEnabled(true);
         }
     }
 

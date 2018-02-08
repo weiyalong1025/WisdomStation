@@ -4,7 +4,7 @@
     android:id="@+id/ll_spinner"
     android:layout_width="match_parent"
     android:layout_height="@dimen/d40"
-    android:background="@color/gray8"
+    android:background="@color/gray10"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
@@ -34,6 +34,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/div_first"
         android:layout_width="@dimen/d1"
         android:layout_height="@dimen/d15"
         android:background="@color/black1" />
@@ -64,6 +65,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/div_second"
         android:layout_width="@dimen/d1"
         android:layout_height="@dimen/d15"
         android:background="@color/black1" />

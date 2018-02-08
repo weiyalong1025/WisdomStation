@@ -24,6 +24,11 @@ import butterknife.ButterKnife;
  * 基类-Fragment
  */
 public abstract class BaseFragment extends Fragment implements HandlerUtils.OnReceiveMessageListener {
+    /**
+     * 默认的REQUEST_CODE
+     */
+    private static final int CODE_DEFAULT = 0;
+
     private View mContentView;
     protected Context mContext;
     public HandlerUtils.HandlerHolder mHandler;
@@ -98,6 +103,24 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
     public void startActivity(Class<? extends Activity> cls) {
         Intent intent = new Intent(mContext, cls);
         startActivity(intent);
+    }
+
+    /**
+     * 不需要requestCode时调用，会传入默认的code
+     *
+     * @param intent 要跳转的Activity
+     */
+    public void startActivityForResult(Intent intent) {
+        startActivityForResult(intent, CODE_DEFAULT);
+    }
+
+    /**
+     * 不需要requestCode时调用，会传入默认的code
+     *
+     * @param cls 要跳转的Activity
+     */
+    public void startActivityForResult(Class<? extends Activity> cls) {
+        startActivityForResult(cls, CODE_DEFAULT);
     }
 
     public void startActivityForResult(Class<? extends Activity> cls, int requestCode) {

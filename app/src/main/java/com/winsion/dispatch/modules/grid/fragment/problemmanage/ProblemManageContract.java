@@ -16,9 +16,9 @@ class ProblemManageContract {
 
         void getProblemDataFailed(String errorInfo);
 
-        void confirmSuccess();
+        void confirmFailed(String tasksId);
 
-        void confirmFailed(String errorInfo);
+        void confirmSuccess(String tasksId, int opeType);
     }
 
     interface Presenter extends BasePresenter {

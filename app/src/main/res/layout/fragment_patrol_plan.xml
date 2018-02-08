@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/d40"
-        android:background="@color/gray8"
+        android:background="@color/gray10"
         android:padding="@dimen/d8">
 
         <TextView

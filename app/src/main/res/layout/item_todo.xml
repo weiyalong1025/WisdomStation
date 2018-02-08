@@ -99,6 +99,15 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/iv_finish_state"
+                    android:layout_width="@dimen/d24"
+                    android:layout_height="@dimen/d24"
+                    android:layout_marginEnd="@dimen/d10"
+                    android:layout_toStartOf="@id/iv_delete"
+                    android:src="@drawable/ic_unfinished"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
                     android:id="@+id/iv_delete"
                     android:layout_width="@dimen/d24"
                     android:layout_height="@dimen/d24"

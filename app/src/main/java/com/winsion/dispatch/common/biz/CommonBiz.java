@@ -188,7 +188,6 @@ public class CommonBiz {
         // 清除缓存信息
         CacheDataSource.clearCache();
         listener.onSuccess();
-        AppApplication.TEST_MODE = false;
         // 跳转登录界面
         Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -234,6 +233,7 @@ public class CommonBiz {
      * 针对给定的editText显示软键盘（editText会先获得焦点）.
      * 可以和{@link #hideKeyboard(View)}搭配使用，进行键盘的显示隐藏控制。
      */
+    @SuppressWarnings({"all"})
     public static void showKeyboard(final EditText editText, boolean delay) {
         if (null == editText || !editText.requestFocus()) return;
         InputMethodManager imm = (InputMethodManager) editText.getContext().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);

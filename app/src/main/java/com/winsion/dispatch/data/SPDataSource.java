@@ -117,7 +117,7 @@ public class SPDataSource {
         /**
          * 反射查找apply的方法
          */
-        @SuppressWarnings({"unchecked", "rawtypes"})
+        @SuppressWarnings({"unchecked"})
         private static Method findApplyMethod() {
             try {
                 Class clz = SharedPreferences.Editor.class;

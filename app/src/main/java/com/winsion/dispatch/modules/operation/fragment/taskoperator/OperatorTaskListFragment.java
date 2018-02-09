@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.common.listener.StateListener;
 import com.winsion.dispatch.data.constants.OpeType;
 import com.winsion.dispatch.modules.operation.activity.taskoperator.OperatorTaskDetailActivity;
@@ -372,7 +373,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     // 二级界面(OperatorTaskDetailActivity)更改了数据，同步该界面数据
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(JobEntity afterChangeEntity) {
-        int positionInList = getPositionInList(afterChangeEntity, allData);
+        int positionInList = CommonBiz.halfSearch(allData, afterChangeEntity);
         if (positionInList != -1) {
             JobEntity jobEntity = allData.get(positionInList);
             boolean isFinish = jobEntity.getWorkstatus() == TaskState.RUN;
@@ -390,31 +391,6 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
             filterData();
             scrollToItem(jobEntity);
         }
-    }
-
-    /**
-     * 根据状态改变后的对象的jobOperatorsId查找在集合中的位置
-     *
-     * @param findEntity 要查询的实体
-     * @return 该对象在集合中的位置，找不到返回-1
-     */
-    private int getPositionInList(JobEntity findEntity, List<JobEntity> list) {
-        int min = 0;
-        int max = list.size() - 1;
-        while (min <= max) {
-            int middle = (min + max) >>> 1;
-            JobEntity jobEntity = list.get(middle);
-            long time1 = ConvertUtils.parseDate(jobEntity.getPlanstarttime(), Formatter.DATE_FORMAT1);
-            long time2 = ConvertUtils.parseDate(findEntity.getPlanstarttime(), Formatter.DATE_FORMAT1);
-            if (equals(jobEntity.getJoboperatorsid(), findEntity.getJoboperatorsid())) {
-                return middle;
-            } else if (time1 < time2) {
-                min = middle + 1;
-            } else {
-                max = middle - 1;
-            }
-        }
-        return -1;
     }
 
     @Override

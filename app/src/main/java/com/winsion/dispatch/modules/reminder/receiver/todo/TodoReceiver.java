@@ -8,17 +8,14 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.Vibrator;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.data.DBDataSource;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
 import com.winsion.dispatch.modules.reminder.fragment.todo.TodoListFragment;
+import com.winsion.dispatch.view.CustomDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -38,7 +35,7 @@ public class TodoReceiver extends BroadcastReceiver {
     private TodoEntity todoEntity;
     private MediaPlayer mediaPlayer;
     private Vibrator vibrator;
-    private AlertDialog alertDialog;
+    private CustomDialog customDialog;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -85,29 +82,28 @@ public class TodoReceiver extends BroadcastReceiver {
      */
     @SuppressLint("InflateParams")
     private void showDialog(Context context) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.dialog_todo_remind, null);
-        alertDialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert)
-                .setView(inflate)
+        customDialog = new CustomDialog.Builder(context)
+                .setType(CustomDialog.DialogType.TYPE_NORMAL)
+                .setStyle(R.style.Theme_AppCompat_Dialog_Alert)
+                .setTitle(R.string.tab_reminder)
+                .setMessage(todoEntity.getContent())
+                .setPositiveButton((dialog, which) -> {
+                    isFinish = true;
+                    operateState();
+                })
                 .create();
 
-        TextView tvDesc = inflate.findViewById(R.id.tv_desc);
-        tvDesc.setText(todoEntity.getContent());
-        TextView tvConfirm = inflate.findViewById(R.id.tv_confirm);
-        tvConfirm.setOnClickListener(v -> {
-            isFinish = true;
-            operateState();
-        });
-
-        Window window = alertDialog.getWindow();
-        assert window != null;
-        window.setType(WindowManager.LayoutParams.TYPE_TOAST);
-        window.setBackgroundDrawableResource(android.R.color.transparent);
-        alertDialog.setOnDismissListener(dialog -> {
-            if (!isFinish) {
-                operateState();
-            }
-        });
-        alertDialog.show();
+        Window window = customDialog.getWindow();
+        if (window != null) {
+            window.setType(WindowManager.LayoutParams.TYPE_TOAST);
+            window.setBackgroundDrawableResource(android.R.color.transparent);
+            customDialog.setOnDismissListener(dialog -> {
+                if (!isFinish) {
+                    operateState();
+                }
+            });
+            customDialog.show();
+        }
     }
 
     private void operateState() {
@@ -119,6 +115,6 @@ public class TodoReceiver extends BroadcastReceiver {
             mediaPlayer.release();
         }
         if (vibrator != null) vibrator.cancel();
-        alertDialog.dismiss();
+        customDialog.dismiss();
     }
 }

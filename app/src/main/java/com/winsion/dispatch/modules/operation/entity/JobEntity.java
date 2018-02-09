@@ -1,11 +1,15 @@
 package com.winsion.dispatch.modules.operation.entity;
 
+import com.winsion.dispatch.common.biz.CommonBiz;
+import com.winsion.dispatch.utils.ConvertUtils;
+import com.winsion.dispatch.utils.constants.Formatter;
+
 import java.io.Serializable;
 
 /**
  * Created by wyl on 2017/6/13
  */
-public class JobEntity implements Serializable {
+public class JobEntity implements Serializable, CommonBiz.HalfSearchCondition {
     private String joboperatorsid;  // 作业操作ID
     private String jobsid;  // 作业ID
     private String teamsid; // 操作组编号
@@ -338,5 +342,15 @@ public class JobEntity implements Serializable {
 
     public void setMonitorteamid(String monitorteamid) {
         this.monitorteamid = monitorteamid;
+    }
+
+    @Override
+    public String equalFieldValue() {
+        return joboperatorsid;
+    }
+
+    @Override
+    public long compareFieldValue() {
+        return ConvertUtils.parseDate(planstarttime, Formatter.DATE_FORMAT1);
     }
 }

@@ -60,7 +60,10 @@ public class TodoListPresenter implements TodoListContract.Presenter {
     @Override
     public void recoverAlarm() {
         for (TodoEntity todoEntity : queryTodo(false)) {
-            setAlarm(todoEntity);
+            // 已经过了时间的不恢复
+            if (todoEntity.getPlanDate() >= System.currentTimeMillis()) {
+                setAlarm(todoEntity);
+            }
         }
     }
 

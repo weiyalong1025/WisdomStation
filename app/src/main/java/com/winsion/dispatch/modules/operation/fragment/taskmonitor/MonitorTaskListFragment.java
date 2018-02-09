@@ -301,31 +301,6 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         if (positionInList != -1) lvList.setSelection(positionInList);
     }
 
-    /**
-     * 根据状态改变后的对象的taskId查找在集合中的位置
-     *
-     * @param afterChangeEntity 状态改变后的对象
-     * @return 该对象在集合中的位置，找不到返回-1
-     */
-    private int getPositionInList(TaskEntity afterChangeEntity, List<TaskEntity> list) {
-        int min = 0;
-        int max = list.size() - 1;
-        while (min <= max) {
-            int middle = (min + max) >>> 1;
-            TaskEntity taskEntity = list.get(middle);
-            long time1 = ConvertUtils.parseDate(taskEntity.getPlanstarttime(), Formatter.DATE_FORMAT1);
-            long time2 = ConvertUtils.parseDate(afterChangeEntity.getPlanstarttime(), Formatter.DATE_FORMAT1);
-            if (equals(taskEntity.getTasksid(), taskEntity.getTasksid())) {
-                return middle;
-            } else if (time1 < time2) {
-                min = middle + 1;
-            } else {
-                max = middle - 1;
-            }
-        }
-        return -1;
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();

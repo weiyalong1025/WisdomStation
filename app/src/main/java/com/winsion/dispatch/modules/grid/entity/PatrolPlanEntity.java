@@ -1,12 +1,16 @@
 package com.winsion.dispatch.modules.grid.entity;
 
+import com.winsion.dispatch.common.biz.CommonBiz;
+import com.winsion.dispatch.utils.ConvertUtils;
+import com.winsion.dispatch.utils.constants.Formatter;
+
 import java.io.Serializable;
 
 /**
  * Created by wyl on 2017/6/26
  * 巡视计划一级界面数据
  */
-public class PatrolPlanEntity implements Serializable {
+public class PatrolPlanEntity implements Serializable, CommonBiz.HalfSearchCondition {
     private String id;  // ID
     private String pointsid;    // ID 巡视点编号
     private String planstarttime;   // 计划开始时间
@@ -150,5 +154,15 @@ public class PatrolPlanEntity implements Serializable {
 
     public void setArrive(boolean arrive) {
         isArrive = arrive;
+    }
+
+    @Override
+    public String equalFieldValue() {
+        return id;
+    }
+
+    @Override
+    public long compareFieldValue() {
+        return ConvertUtils.parseDate(planstarttime, Formatter.DATE_FORMAT1);
     }
 }

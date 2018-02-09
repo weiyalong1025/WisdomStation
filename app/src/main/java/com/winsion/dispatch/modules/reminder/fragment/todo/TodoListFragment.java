@@ -1,9 +1,7 @@
 package com.winsion.dispatch.modules.reminder.fragment.todo;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -16,6 +14,7 @@ import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.reminder.activity.todo.AddTodoActivity;
 import com.winsion.dispatch.modules.reminder.adapter.TodoAdapter;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
+import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.SpinnerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -110,10 +109,11 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
 
     private void initListener() {
         EventBus.getDefault().register(this);
-        mAdapter.setDeleteBtnClickListener(todoEntity -> new AlertDialog.Builder(mContext)
-                .setMessage(getString(R.string.dialog_sure_to_delete))
-                .setNegativeButton(getString(R.string.btn_cancel), (DialogInterface dialog, int which) -> dialog.cancel())
-                .setPositiveButton(getString(R.string.btn_confirm), (DialogInterface dialog, int which) -> mPresenter.deleteTodo(todoEntity))
+        mAdapter.setDeleteBtnClickListener(todoEntity -> new CustomDialog.Builder(mContext)
+                .setType(CustomDialog.DialogType.TYPE_NORMAL)
+                .setMessage(R.string.dialog_sure_to_delete)
+                .setPositiveButton((dialog, which) -> mPresenter.deleteTodo(todoEntity))
+                .create()
                 .show());
         lvRemindersList.setOnItemClickListener(this);
     }

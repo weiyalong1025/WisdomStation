@@ -29,13 +29,28 @@ public class AppApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplicationContext = getApplicationContext();
+
         // 全局捕获异常并保存异常信息
         CrashUtils.getInstance().init(this);
+
         // 初始化数据库
-        mBoxStore = MyObjectBox.builder().androidContext(this).build();
+        initDB();
+
         // 初始化网络库
         NetDataSource.init(this);
+
         // 初始化LOG
+        initLog();
+
+        // MQ运行状态检测
+        checkMQIsRunning();
+    }
+
+    private void initDB() {
+        mBoxStore = MyObjectBox.builder().androidContext(this).build();
+    }
+
+    private void initLog() {
         String logDir;
         try {
             logDir = DirAndFileUtils.getLogDir().toString();
@@ -44,6 +59,10 @@ public class AppApplication extends Application {
         }
         String logTag = getString(R.string.app_name);
         LogUtils.init(BuildConfig.DEBUG, true, logDir, LogUtils.FILTER_V, logTag);
+    }
+
+    private void checkMQIsRunning() {
+        // TODO: 2018/2/9 MQ运行状态检测
     }
 
     public static Context getContext() {

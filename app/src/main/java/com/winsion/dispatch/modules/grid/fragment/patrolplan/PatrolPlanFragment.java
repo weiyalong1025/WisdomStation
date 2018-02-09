@@ -21,15 +21,14 @@ import android.widget.TextView;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.modules.grid.activity.patrolitem.PatrolItemActivity;
 import com.winsion.dispatch.modules.grid.adapter.BluetoothPointAdapter;
 import com.winsion.dispatch.modules.grid.adapter.PatrolPlanAdapter;
 import com.winsion.dispatch.modules.grid.entity.BPEntity;
 import com.winsion.dispatch.modules.grid.entity.PatrolPlanEntity;
-import com.winsion.dispatch.utils.ConvertUtils;
 import com.winsion.dispatch.utils.IbeaconUtils;
 import com.winsion.dispatch.utils.ViewUtils;
-import com.winsion.dispatch.utils.constants.Formatter;
 import com.winsion.dispatch.view.WrapContentListView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -242,31 +241,12 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(PatrolPlanEntity patrolPlanEntity) {
         // 二级界面(PatrolItemActivity)更改了数据，同步该页面状态
-        int positionInList = getPositionInList(patrolPlanEntity, listData);
+        int positionInList = CommonBiz.halfSearch(listData, patrolPlanEntity);
         if (positionInList != -1) {
             listData.remove(positionInList);
             listData.add(positionInList, patrolPlanEntity);
             mLvAdapter.notifyDataSetChanged();
         }
-    }
-
-    private int getPositionInList(PatrolPlanEntity findEntity, List<PatrolPlanEntity> list) {
-        int min = 0;
-        int max = list.size() - 1;
-        while (min <= max) {
-            int middle = (min + max) >>> 1;
-            PatrolPlanEntity patrolPlanEntity = list.get(middle);
-            long time1 = ConvertUtils.parseDate(patrolPlanEntity.getPlanstarttime(), Formatter.DATE_FORMAT1);
-            long time2 = ConvertUtils.parseDate(findEntity.getPlanstarttime(), Formatter.DATE_FORMAT1);
-            if (equals(patrolPlanEntity.getId(), findEntity.getId())) {
-                return middle;
-            } else if (time1 < time2) {
-                min = middle + 1;
-            } else {
-                max = middle - 1;
-            }
-        }
-        return -1;
     }
 
     @Override

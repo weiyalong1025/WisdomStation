@@ -1,11 +1,15 @@
 package com.winsion.dispatch.modules.operation.entity;
 
+import com.winsion.dispatch.common.biz.CommonBiz;
+import com.winsion.dispatch.utils.ConvertUtils;
+import com.winsion.dispatch.utils.constants.Formatter;
+
 import java.io.Serializable;
 
 /**
  * Created by wyl on 2017/6/17
  */
-public class TaskEntity implements Serializable {
+public class TaskEntity implements Serializable, CommonBiz.HalfSearchCondition {
     private String tasksid; // 任务编号
     private String taskname;    // 任务名称
     private int job;    // 作业数量
@@ -176,5 +180,15 @@ public class TaskEntity implements Serializable {
 
     public void setInOperation(boolean inOperation) {
         this.inOperation = inOperation;
+    }
+
+    @Override
+    public String equalFieldValue() {
+        return tasksid;
+    }
+
+    @Override
+    public long compareFieldValue() {
+        return ConvertUtils.parseDate(planstarttime, Formatter.DATE_FORMAT1);
     }
 }

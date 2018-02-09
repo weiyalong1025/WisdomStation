@@ -1,10 +1,10 @@
 package com.winsion.dispatch.modules.operation.activity.taskoperator;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.NetDataSource;
@@ -46,9 +46,11 @@ public class OperatorTaskDetailPresenter extends ChangeStatusBiz implements Oper
     private static final String FIELD_PERFORMER = "joboperatorsid"; // 查询执行人上传附件用的字段
 
     private OperatorTaskDetailContract.View mView;
+    private Context mContext;
 
     OperatorTaskDetailPresenter(OperatorTaskDetailContract.View view) {
         this.mView = view;
+        this.mContext = view.getContext();
     }
 
     @Override
@@ -136,7 +138,7 @@ public class OperatorTaskDetailPresenter extends ChangeStatusBiz implements Oper
     @Override
     public void upload(JobEntity jobEntity, File file, UploadListener uploadListener) {
         JobParameter jobParameter = new JobParameter();
-        jobParameter.setSsId(CommonBiz.getBSSID(AppApplication.getContext()));
+        jobParameter.setSsId(CommonBiz.getBSSID(mContext));
         jobParameter.setTaskId(jobEntity.getTasksid());
         jobParameter.setOpormotId(jobEntity.getJoboperatorsid());
         jobParameter.setOpType(OpeType.RUNNING);

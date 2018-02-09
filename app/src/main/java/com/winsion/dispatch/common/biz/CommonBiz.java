@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by 10295 on 2017/12/21 0021.
@@ -292,7 +293,6 @@ public class CommonBiz {
         tvTopBar.setLayoutParams(layoutParams);
     }
 
-
     public static File getMediaFile(File file, @FileTypeLimit int type) {
         if (file.exists() || file.mkdirs()) {
             String timeStamp = Formatter.DATE_FORMAT11.format(new Date());
@@ -315,6 +315,54 @@ public class CommonBiz {
             return mediaFile;
         }
         return null;
+    }
+
+    /**
+     * 折半查找
+     * 条件：
+     * 1.集合必须有序
+     * 2.集合中元素必须实现{@link HalfSearchCondition}
+     *
+     * @param tList 在该集合中查找
+     * @param findT 要查找的元素(判断相等的条件equalFieldValue())
+     * @return 返回该元素在集合中的位置，不存在返回-1
+     */
+    public static int halfSearch(List<? extends HalfSearchCondition> tList, HalfSearchCondition findT) {
+        int min = 0;
+        int max = tList.size() - 1;
+        while (min <= max) {
+            int middle = (min + max) >>> 1;
+            HalfSearchCondition halfSearchCondition = tList.get(middle);
+            long time1 = halfSearchCondition.compareFieldValue();
+            long time2 = findT.compareFieldValue();
+            if (halfSearchCondition.equalFieldValue().equals(findT.equalFieldValue())) {
+                return middle;
+            } else if (time1 < time2) {
+                min = middle + 1;
+            } else {
+                max = middle - 1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 折半查找条件
+     */
+    public interface HalfSearchCondition {
+        /**
+         * 用来比较是否相等的字段的值，如果相等返回position
+         *
+         * @return
+         */
+        String equalFieldValue();
+
+        /**
+         * 用来比较顺序的字段值
+         *
+         * @return
+         */
+        long compareFieldValue();
     }
 
     /**

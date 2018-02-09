@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="@dimen/d300"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_dialog"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/tv_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d20"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:textColor="@color/gray9"
+            android:textSize="@dimen/s18"
+            tools:text="对话框标题" />
+
+        <TextView
+            android:id="@+id/tv_dialog_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d23"
+            android:maxLength="50"
+            android:textColor="@color/gray9"
+            android:textSize="@dimen/s16"
+            tools:text="对话框文字" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d1"
+            android:background="@color/gray1" />
+
+        <LinearLayout
+            android:id="@+id/refer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_dialog_negative"
+                style="?attr/buttonBarStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_bg_btn_left"
+                android:text="@string/btn_cancel"
+                android:textColor="@color/selector_dialog_button_text" />
+
+            <View
+                android:layout_width="@dimen/d1"
+                android:layout_height="match_parent"
+                android:background="@color/gray1" />
+
+            <Button
+                android:id="@+id/btn_dialog_positive"
+                style="?attr/buttonBarStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_bg_btn_right"
+                android:text="@string/btn_confirm"
+                android:textColor="@color/selector_dialog_button_text" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

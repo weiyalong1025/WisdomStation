@@ -21,6 +21,7 @@ import com.winsion.dispatch.modules.grid.entity.PatrolItemEntity;
 import com.winsion.dispatch.modules.grid.entity.PatrolPlanEntity;
 import com.winsion.dispatch.utils.ConvertUtils;
 import com.winsion.dispatch.utils.constants.Formatter;
+import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.TitleView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -139,10 +140,9 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     @Override
     public void onNormalClick(PatrolItemEntity patrolItemEntity) {
         if (equals(patrolItemEntity.getDevicestate(), PatrolItemState.UNDONE)) {
-            new AlertDialog.Builder(mContext)
+            new CustomDialog.Builder(mContext)
                     .setMessage(R.string.dialog_sure_no_problem)
-                    .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
-                    .setPositiveButton(R.string.btn_confirm, (dialog, which) -> ((SubmitBiz) mPresenter)
+                    .setPositiveButton((dialog, which) -> ((SubmitBiz) mPresenter)
                             .submitWithoutDevice(patrolItemEntity, DeviceState.WORK, this))
                     .show();
         }

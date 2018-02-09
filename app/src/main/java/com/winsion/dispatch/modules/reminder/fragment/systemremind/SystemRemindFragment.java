@@ -2,7 +2,6 @@ package com.winsion.dispatch.modules.reminder.fragment.systemremind;
 
 import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,7 @@ import com.winsion.dispatch.modules.reminder.adapter.SystemRemindAdapter;
 import com.winsion.dispatch.modules.reminder.constants.HandleType;
 import com.winsion.dispatch.modules.reminder.constants.ReadStatus;
 import com.winsion.dispatch.modules.reminder.entity.RemindEntity;
+import com.winsion.dispatch.view.CustomDialog;
 import com.zhy.adapter.abslistview.ViewHolder;
 
 import java.util.ArrayList;
@@ -84,9 +84,9 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     private void initAdapter() {
         mLvAdapter = new SystemRemindAdapter(mContext, listData);
         // 删除按钮点击事件
-        mLvAdapter.setDeleteBtnClickListener(remindEntity -> new AlertDialog.Builder(mContext)
+        mLvAdapter.setDeleteBtnClickListener(remindEntity -> new CustomDialog.Builder(mContext)
                 .setMessage(getString(R.string.dialog_sure_to_delete))
-                .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
+                .setPositiveButton((dialog, which) -> {
                     if (remindEntity.getReaded() == ReadStatus.UNREAD) {
                         showToast(R.string.toast_only_read_remind_can_be_deleted);
                     } else {
@@ -95,7 +95,6 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
                         mPresenter.handleReminds(list, HandleType.HANDLE_DELETE);
                     }
                 })
-                .setNegativeButton(getString(R.string.btn_cancel), (dialog, which) -> dialog.cancel())
                 .show());
         mLvAdapter.setOnSelectChangeListener(selectSize -> btnSelectCount.setText(getSelectCountHint(selectSize)));
         lvList.setAdapter(mLvAdapter);
@@ -222,13 +221,10 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         if (selectData.size() == 0) {
             showToast(getString(R.string.toast_no_selected_item));
         } else {
-            new AlertDialog.Builder(mContext)
+            new CustomDialog.Builder(mContext)
                     .setMessage(getConfirmDeleteHint(selectData.size()))
-                    .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> {
-                        mPresenter.handleReminds(selectData, HandleType.HANDLE_DELETE);
-                        dialog.cancel();
-                    })
-                    .setNegativeButton(getString(R.string.btn_cancel), (dialog, which) -> dialog.cancel())
+                    .setPositiveButton((dialog, which) -> mPresenter.handleReminds(selectData,
+                            HandleType.HANDLE_DELETE))
                     .show();
         }
     }

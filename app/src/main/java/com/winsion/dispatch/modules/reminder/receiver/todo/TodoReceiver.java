@@ -84,7 +84,6 @@ public class TodoReceiver extends BroadcastReceiver {
     private void showDialog(Context context) {
         customDialog = new CustomDialog.Builder(context)
                 .setType(CustomDialog.DialogType.TYPE_NORMAL)
-                .setStyle(R.style.Theme_AppCompat_Dialog_Alert)
                 .setTitle(R.string.tab_reminder)
                 .setMessage(todoEntity.getContent())
                 .setPositiveButton((dialog, which) -> {
@@ -96,7 +95,6 @@ public class TodoReceiver extends BroadcastReceiver {
         Window window = customDialog.getWindow();
         if (window != null) {
             window.setType(WindowManager.LayoutParams.TYPE_TOAST);
-            window.setBackgroundDrawableResource(android.R.color.transparent);
             customDialog.setOnDismissListener(dialog -> {
                 if (!isFinish) {
                     operateState();

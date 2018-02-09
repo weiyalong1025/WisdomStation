@@ -3,7 +3,6 @@ package com.winsion.dispatch.modules.operation.fragment.taskoperator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
@@ -28,6 +27,7 @@ import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
 import com.winsion.dispatch.utils.ConvertUtils;
 import com.winsion.dispatch.utils.constants.Formatter;
+import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.SpinnerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -79,6 +79,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     private List<JobEntity> underwayData = new ArrayList<>();   // 进行中
     private List<JobEntity> doneData = new ArrayList<>();   // 已完成
     private int statusPosition = TaskSpinnerState.STATE_ALL;    // 记录选了哪个状态进行筛选
+    private String lastText;    // 搜索框中上一次输入的文字
 
     @SuppressLint("InflateParams")
     @Override
@@ -156,10 +157,9 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         int workStatus = jobEntity.getWorkstatus();
         if (workStatus == TaskState.RUN || workStatus == TaskState.NOT_STARTED || workStatus == TaskState.GRID_NOT_PASS) {
             boolean isFinish = workStatus == TaskState.RUN;
-            new AlertDialog.Builder(mContext)
+            new CustomDialog.Builder(mContext)
                     .setMessage(getString(isFinish ? R.string.dialog_sure_to_finish : R.string.dialog_sure_to_start))
-                    .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> changeStatus(jobEntity, button, isFinish))
-                    .setNegativeButton(getString(R.string.btn_cancel), null)
+                    .setPositiveButton((dialog, which) -> changeStatus(jobEntity, button, isFinish))
                     .show();
         }
     }
@@ -228,8 +228,6 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
             trainNumberIndex.setText(trainNumber);
         }
     }
-
-    private String lastText;
 
     @Override
     public void afterTextChange(Editable s) {

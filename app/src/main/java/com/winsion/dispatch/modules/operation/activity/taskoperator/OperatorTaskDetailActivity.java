@@ -2,7 +2,6 @@ package com.winsion.dispatch.modules.operation.activity.taskoperator;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -43,6 +42,7 @@ import com.winsion.dispatch.utils.DirAndFileUtils;
 import com.winsion.dispatch.utils.FileUtils;
 import com.winsion.dispatch.utils.ViewUtils;
 import com.winsion.dispatch.utils.constants.Formatter;
+import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.DrawableCenterTextView;
 import com.winsion.dispatch.view.GifView;
 import com.winsion.dispatch.view.TitleView;
@@ -896,10 +896,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
      * @param btn       按钮Button
      */
     private void showDialog(boolean isRunning, View btn) {
-        new AlertDialog.Builder(mContext)
+        new CustomDialog.Builder(mContext)
                 .setMessage(getString(isRunning ? R.string.dialog_sure_to_finish : R.string.dialog_sure_to_start))
-                .setPositiveButton(getString(R.string.btn_confirm), (dialog, which) -> changeStatus(isRunning, btn))
-                .setNegativeButton(getString(R.string.btn_cancel), null)
+                .setPositiveButton((dialog, which) -> changeStatus(isRunning, btn))
                 .show();
     }
 

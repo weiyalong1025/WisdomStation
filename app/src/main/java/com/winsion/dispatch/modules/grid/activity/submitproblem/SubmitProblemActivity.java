@@ -6,7 +6,6 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -31,6 +30,7 @@ import com.winsion.dispatch.modules.grid.entity.SubclassEntity;
 import com.winsion.dispatch.modules.operation.entity.FileEntity;
 import com.winsion.dispatch.utils.DirAndFileUtils;
 import com.winsion.dispatch.utils.ViewUtils;
+import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.TipDialog;
 import com.winsion.dispatch.view.TitleView;
 
@@ -169,8 +169,6 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
 
     /**
      * 检查数据是否填写完整
-     *
-     * @return
      */
     private boolean checkDataIsComplete() {
         if (deviceDependent) {
@@ -411,15 +409,13 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     }
 
     private void showHintDialog() {
-        new AlertDialog.Builder(mContext)
+        new CustomDialog.Builder(mContext)
                 .setMessage(R.string.dialog_after_exiting_data_will_be_cleared_are_you_sure)
-                .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
+                .setPositiveButton((dialog, which) -> {
                     // 删除附件
                     deleteRecordFiles();
-                    dialog.dismiss();
                     finish();
                 })
-                .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
                 .show();
     }
 

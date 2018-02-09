@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.common.constants.SystemType;
 import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.NetDataSource;
@@ -21,6 +22,7 @@ import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
+import com.winsion.dispatch.utils.JsonUtils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -46,6 +48,10 @@ public class OperatorTaskListPresenter extends ChangeStatusBiz implements Operat
 
     @Override
     public void getMyTaskData(int sysType) {
+        if(AppApplication.TEST_MODE){
+            mView.getMyTaskDataSuccess(JsonUtils.getTestEntities(mContext, JobEntity.class));
+            return;
+        }
         boolean isGrid = sysType == SystemType.GRID;
         int fieldKey = isGrid ? FieldKey.EQUALS : FieldKey.NOEQUAL;
 

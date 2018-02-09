@@ -3,7 +3,6 @@ package com.winsion.dispatch.modules.operation.activity.issue;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -37,6 +36,7 @@ import com.winsion.dispatch.utils.ConvertUtils;
 import com.winsion.dispatch.utils.DirAndFileUtils;
 import com.winsion.dispatch.utils.ViewUtils;
 import com.winsion.dispatch.utils.constants.Formatter;
+import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.TipDialog;
 import com.winsion.dispatch.view.TitleView;
 
@@ -533,15 +533,13 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     }
 
     private void showHintDialog() {
-        new AlertDialog.Builder(mContext)
+        new CustomDialog.Builder(mContext)
                 .setMessage(R.string.dialog_after_exiting_data_will_be_cleared_are_you_sure)
-                .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
+                .setPositiveButton((dialog, which) -> {
                     // 删除附件
                     deleteRecordFiles();
-                    dialog.dismiss();
                     finish();
                 })
-                .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
                 .show();
     }
 

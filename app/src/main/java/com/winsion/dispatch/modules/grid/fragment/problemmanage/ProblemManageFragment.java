@@ -2,7 +2,6 @@ package com.winsion.dispatch.modules.grid.fragment.problemmanage;
 
 import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -16,6 +15,7 @@ import com.winsion.dispatch.data.constants.OpeType;
 import com.winsion.dispatch.modules.grid.adapter.ProblemManageAdapter;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.TaskEntity;
+import com.winsion.dispatch.view.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,10 +111,9 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
 
     @Override
     public void onPassButtonClick(TaskEntity taskEntity) {
-        new AlertDialog.Builder(mContext)
+        new CustomDialog.Builder(mContext)
                 .setMessage(R.string.dialog_sure_to_pass)
-                .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
-                .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
+                .setPositiveButton((dialog, which) -> {
                     taskEntity.setInOperation(true);
                     mLvAdapter.notifyDataSetChanged();
                     mPresenter.confirm(taskEntity, OpeType.PASS);
@@ -124,10 +123,9 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
 
     @Override
     public void onNotPassButtonClick(TaskEntity taskEntity) {
-        new AlertDialog.Builder(mContext)
+        new CustomDialog.Builder(mContext)
                 .setMessage(R.string.dialog_sure_to_not_pass)
-                .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
-                .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
+                .setPositiveButton((dialog, which) -> {
                     taskEntity.setInOperation(true);
                     mLvAdapter.notifyDataSetChanged();
                     mPresenter.confirm(taskEntity, OpeType.NOT_PASS);

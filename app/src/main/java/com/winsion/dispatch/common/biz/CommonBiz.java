@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.annotation.IntDef;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +39,7 @@ import com.winsion.dispatch.utils.ConvertUtils;
 import com.winsion.dispatch.utils.DirAndFileUtils;
 import com.winsion.dispatch.utils.ToastUtils;
 import com.winsion.dispatch.utils.constants.Formatter;
+import com.winsion.dispatch.view.CustomDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,6 +61,14 @@ public class CommonBiz {
      * @param showHint 没有更新/检查更新失败是否显示提示信息
      */
     public static void checkVersionUpdate(Context context, Object tag, boolean showHint) {
+        if (AppApplication.TEST_MODE) {
+            UpdateEntity updateEntity = new UpdateEntity();
+            updateEntity.setFilePath("https://172.16.0.17:9411/picures/IMG_20180209.jpg");
+            updateEntity.setVersionContent("更新了好多东西啊，赶紧更新看看吧！\n1.我是第一项。\n2.我是第二项。\n3.我是第三项。\n4.我是第四项。\n5.我是第五项。" +
+                    "\n6.我是第六项。\n7.我是第七项。\n8.我是第八项。\n1.我是第一项。\n2.我是第二项。\n3.我是第三项。\n4.我是第四项。\n5.我是第五项。");
+            showUpdateDialog(context, updateEntity);
+            return;
+        }
         HttpParams httpParams = new HttpParams();
         httpParams.put("key", "gridApp");
         NetDataSource.post(tag, Urls.CHECK_UPDATE, httpParams, new ResponseListener<UpdateEntity>() {
@@ -95,12 +103,13 @@ public class CommonBiz {
      */
     private static void showUpdateDialog(Context context, UpdateEntity updateEntity) {
         // 需要更新,弹出对话框
-        new AlertDialog.Builder(context)
+        new CustomDialog.Builder(context)
                 .setTitle(R.string.title_discover_new_version)
                 .setMessage(updateEntity.getVersionContent())
-                .setCancelable(false)
-                .setPositiveButton(R.string.btn_update_now, (dialog, which) -> downloadNewVersion(context, updateEntity.getFilePath()))
-                .setNegativeButton(R.string.btn_update_later, (dialog, which) -> dialog.dismiss())
+                .setPositiveButtonText(R.string.btn_update_now)
+                .setPositiveButton((dialog, which) -> downloadNewVersion(context, updateEntity.getFilePath()))
+                .setNegativeButtonText(R.string.btn_update_later)
+                .setIrrevocable()
                 .show();
     }
 
@@ -351,16 +360,12 @@ public class CommonBiz {
      */
     public interface HalfSearchCondition {
         /**
-         * 用来比较是否相等的字段的值，如果相等返回position
-         *
-         * @return
+         * 用来比较是否相等的字段的值
          */
         String equalFieldValue();
 
         /**
          * 用来比较顺序的字段值
-         *
-         * @return
          */
         long compareFieldValue();
     }

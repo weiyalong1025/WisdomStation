@@ -113,7 +113,6 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
                 .setType(CustomDialog.DialogType.TYPE_NORMAL)
                 .setMessage(R.string.dialog_sure_to_delete)
                 .setPositiveButton((dialog, which) -> mPresenter.deleteTodo(todoEntity))
-                .create()
                 .show());
         lvRemindersList.setOnItemClickListener(this);
     }

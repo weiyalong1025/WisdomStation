@@ -57,8 +57,8 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
     @Override
     protected void start() {
         initPresenter();
-        initViewData();
         initListener();
+        initViewData();
     }
 
     private void initPresenter() {
@@ -84,12 +84,11 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
         String[] split = planDate.split(" ");
         tvDate.setText(split[0]);
         tvTime.setText(split[1].substring(0, 5));
-
-        etDesc.addTextChangedListener(this);
     }
 
     private void initListener() {
         tvTitle.setOnBackClickListener(v -> finish());
+        etDesc.addTextChangedListener(this);
     }
 
     @OnClick({R.id.tv_date, R.id.tv_time, R.id.btn_save})

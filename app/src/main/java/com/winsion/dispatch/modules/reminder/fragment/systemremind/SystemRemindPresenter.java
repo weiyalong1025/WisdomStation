@@ -1,7 +1,10 @@
 package com.winsion.dispatch.modules.reminder.fragment.systemremind;
 
+import android.content.Context;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.NetDataSource;
 import com.winsion.dispatch.data.constants.FieldKey;
@@ -15,6 +18,7 @@ import com.winsion.dispatch.data.entity.WhereClause;
 import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.modules.reminder.entity.MessageHandling;
 import com.winsion.dispatch.modules.reminder.entity.RemindEntity;
+import com.winsion.dispatch.utils.JsonUtils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -28,9 +32,11 @@ import java.util.List;
 
 public class SystemRemindPresenter implements SystemRemindContract.Presenter {
     private SystemRemindContract.View mView;
+    private Context mContext;
 
     SystemRemindPresenter(SystemRemindContract.View view) {
         this.mView = view;
+        this.mContext = view.getContext();
     }
 
     @Override
@@ -40,6 +46,10 @@ public class SystemRemindPresenter implements SystemRemindContract.Presenter {
 
     @Override
     public void getRemindData() {
+        if (AppApplication.TEST_MODE) {
+            mView.getRemindDataSuccess(JsonUtils.getTestEntities(mContext, RemindEntity.class));
+            return;
+        }
         ArrayList<WhereClause> whereClauses = new ArrayList<>();
 
         WhereClause whereClause1 = new WhereClause();

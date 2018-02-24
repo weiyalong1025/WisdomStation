@@ -109,8 +109,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
 
     private void initListener() {
         EventBus.getDefault().register(this);
-        mAdapter.setDeleteBtnClickListener(todoEntity -> new CustomDialog.Builder(mContext)
-                .setType(CustomDialog.DialogType.TYPE_NORMAL)
+        mAdapter.setDeleteBtnClickListener(todoEntity -> new CustomDialog.NormalBuilder(mContext)
                 .setMessage(R.string.dialog_sure_to_delete)
                 .setPositiveButton((dialog, which) -> mPresenter.deleteTodo(todoEntity))
                 .show());

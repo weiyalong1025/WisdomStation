@@ -535,21 +535,6 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
 
         // 根据是否超时设置任务模块背景色
         if (isTimeOut) {
-            /*// 渐变效果
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                ValueAnimator valueAnimator = ValueAnimator.ofArgb(0xFF333339, 0xFF74592C);
-                valueAnimator.setDuration(2000);
-                valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
-                valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
-                valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-                valueAnimator.addUpdateListener(animation -> {
-                    int colorValue = (int) animation.getAnimatedValue();
-                    llBgColor.setBackgroundColor(colorValue);
-                });
-                valueAnimator.start();
-            } else {
-                llBgColor.setBackgroundResource(R.color.yellow1);
-            }*/
             llBgColor.setBackgroundResource(R.color.yellow1);
             tvLastTime.setTextColor(getResources().getColor(R.color.red2));
         } else {
@@ -896,7 +881,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
      * @param btn       按钮Button
      */
     private void showDialog(boolean isRunning, View btn) {
-        new CustomDialog.Builder(mContext)
+        new CustomDialog.NormalBuilder(mContext)
                 .setMessage(getString(isRunning ? R.string.dialog_sure_to_finish : R.string.dialog_sure_to_start))
                 .setPositiveButton((dialog, which) -> changeStatus(isRunning, btn))
                 .show();

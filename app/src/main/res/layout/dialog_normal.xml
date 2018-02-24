@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="@dimen/d300"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_dialog_normal"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/tv_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d15"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:textColor="@color/gray9"
+            android:textSize="@dimen/s20"
+            tools:text="对话框标题" />
+
+        <com.winsion.dispatch.view.MaxHeightScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:paddingBottom="@dimen/d20"
+            android:paddingTop="@dimen/d20">
+
+            <TextView
+                android:id="@+id/tv_dialog_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingEnd="@dimen/d20"
+                android:paddingStart="@dimen/d20"
+                android:textColor="@color/gray9"
+                android:textSize="@dimen/s18"
+                tools:text="对话框文字" />
+        </com.winsion.dispatch.view.MaxHeightScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d0_5"
+            android:background="@color/gray1" />
+
+        <LinearLayout
+            android:id="@+id/refer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_dialog_negative"
+                style="?attr/buttonBarStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d48"
+                android:layout_weight="1"
+                android:background="@drawable/selector_dialog_btn_left"
+                android:text="@string/btn_cancel"
+                android:textColor="@color/selector_dialog_button_text"
+                android:textSize="@dimen/s16" />
+
+            <View
+                android:layout_width="@dimen/d0_5"
+                android:layout_height="match_parent"
+                android:background="@color/gray1" />
+
+            <Button
+                android:id="@+id/btn_dialog_positive"
+                style="?attr/buttonBarStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d48"
+                android:layout_weight="1"
+                android:background="@drawable/selector_dialog_btn_right"
+                android:text="@string/btn_confirm"
+                android:textColor="@color/selector_dialog_button_text"
+                android:textSize="@dimen/s16" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

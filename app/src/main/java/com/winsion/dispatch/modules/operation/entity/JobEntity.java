@@ -47,6 +47,7 @@ public class JobEntity implements Serializable, CommonBiz.HalfSearchCondition {
     private String workcontent; // 命令/协作内容
     private String monitorteamname; // 监视组名
     private String monitorteamid;   // 监视组ID
+    private boolean inOperation; // 操作中
 
     public String getJoboperatorsid() {
         return joboperatorsid;
@@ -342,6 +343,14 @@ public class JobEntity implements Serializable, CommonBiz.HalfSearchCondition {
 
     public void setMonitorteamid(String monitorteamid) {
         this.monitorteamid = monitorteamid;
+    }
+
+    public boolean isInOperation() {
+        return inOperation;
+    }
+
+    public void setInOperation(boolean inOperation) {
+        this.inOperation = inOperation;
     }
 
     @Override

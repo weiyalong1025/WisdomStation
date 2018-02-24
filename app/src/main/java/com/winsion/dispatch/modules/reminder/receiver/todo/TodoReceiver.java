@@ -82,8 +82,7 @@ public class TodoReceiver extends BroadcastReceiver {
      */
     @SuppressLint("InflateParams")
     private void showDialog(Context context) {
-        customDialog = new CustomDialog.Builder(context)
-                .setType(CustomDialog.DialogType.TYPE_NORMAL)
+        customDialog = new CustomDialog.NormalBuilder(context)
                 .setTitle(R.string.tab_reminder)
                 .setMessage(todoEntity.getContent())
                 .setPositiveButton((dialog, which) -> {

@@ -15,7 +15,7 @@
         android:id="@+id/ll_issue_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray8"
+        android:background="@drawable/selector_common"
         android:padding="@dimen/d15">
 
         <ImageView
@@ -56,7 +56,7 @@
         android:id="@+id/ll_issue_cooperation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray8"
+        android:background="@drawable/selector_common"
         android:orientation="horizontal"
         android:padding="@dimen/d15">
 

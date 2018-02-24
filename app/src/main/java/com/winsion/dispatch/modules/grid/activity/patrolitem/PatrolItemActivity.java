@@ -3,8 +3,6 @@ package com.winsion.dispatch.modules.grid.activity.patrolitem;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -140,7 +138,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     @Override
     public void onNormalClick(PatrolItemEntity patrolItemEntity) {
         if (equals(patrolItemEntity.getDevicestate(), PatrolItemState.UNDONE)) {
-            new CustomDialog.Builder(mContext)
+            new CustomDialog.NormalBuilder(mContext)
                     .setMessage(R.string.dialog_sure_no_problem)
                     .setPositiveButton((dialog, which) -> ((SubmitBiz) mPresenter)
                             .submitWithoutDevice(patrolItemEntity, DeviceState.WORK, this))
@@ -151,15 +149,13 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     @Override
     public void onAbnormalClick(PatrolItemEntity patrolItemEntity) {
         if (equals(patrolItemEntity.getDevicestate(), PatrolItemState.UNDONE)) {
-            CheckBox checkBox = new CheckBox(mContext);
-            checkBox.setText(R.string.dialog_add_problem_desc);
-            checkBox.setChecked(true);
-            new AlertDialog.Builder(mContext)
+            new CustomDialog.CheckBoxBuilder(mContext)
                     .setMessage(R.string.dialog_sure_exist_problem)
-                    .setView(checkBox)
-                    .setNegativeButton(R.string.btn_cancel, (dialog, which) -> dialog.dismiss())
-                    .setPositiveButton(R.string.btn_confirm, (dialog, which) -> {
-                        if (checkBox.isChecked()) {
+                    .setCbHint(R.string.dialog_add_problem_desc)
+                    .setPositiveButton((dialog, which) -> {
+                        CustomDialog customDialog = (CustomDialog) dialog;
+                        CustomDialog.CheckBoxBuilder builder = (CustomDialog.CheckBoxBuilder) customDialog.getBuilder();
+                        if (builder.getCheckState()) {
                             // 跳转添加描述信息界面
                             Intent intent = new Intent(mContext, SubmitProblemActivity.class);
                             intent.putExtra(PATROL_ITEM_ENTITY, patrolItemEntity);
@@ -173,11 +169,6 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
                         }
                     })
                     .show();
-            // 调整CheckBox的Margin值
-            int margin = getResources().getDimensionPixelSize(R.dimen.d10);
-            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) checkBox.getLayoutParams();
-            layoutParams.setMargins(margin, 0, margin, 0);
-            checkBox.setLayoutParams(layoutParams);
         }
     }
 

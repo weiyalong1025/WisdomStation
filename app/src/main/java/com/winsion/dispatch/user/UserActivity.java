@@ -10,7 +10,7 @@ import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.NetDataSource;
 import com.winsion.dispatch.utils.ImageLoader;
 import com.winsion.dispatch.view.CircleImageView;
-import com.winsion.dispatch.view.TipDialog;
+import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.TitleView;
 
 import butterknife.BindView;
@@ -31,7 +31,7 @@ public class UserActivity extends BaseActivity {
     @BindView(R.id.tv_role_name)
     TextView tvRoleName;
 
-    private TipDialog mLoadingDialog;
+    private CustomDialog customDialog;
 
     @Override
     protected int setContentView() {
@@ -60,18 +60,18 @@ public class UserActivity extends BaseActivity {
 
     private void showDialog() {
         // 注销中，显示dialog
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new TipDialog.Builder(mContext)
-                    .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord(getString(R.string.dialog_on_logout))
+        if (customDialog == null) {
+            customDialog = new CustomDialog.StateBuilder(mContext)
+                    .setStateText(getString(R.string.dialog_on_logout))
+                    .setIrrevocable()
                     .create();
         }
-        mLoadingDialog.show();
+        customDialog.show();
     }
 
     private void hideDialog() {
-        if (mLoadingDialog != null) {
-            mLoadingDialog.dismiss();
+        if (customDialog != null) {
+            customDialog.dismiss();
         }
     }
 

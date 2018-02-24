@@ -111,7 +111,7 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
 
     @Override
     public void onPassButtonClick(TaskEntity taskEntity) {
-        new CustomDialog.Builder(mContext)
+        new CustomDialog.NormalBuilder(mContext)
                 .setMessage(R.string.dialog_sure_to_pass)
                 .setPositiveButton((dialog, which) -> {
                     taskEntity.setInOperation(true);
@@ -123,7 +123,7 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
 
     @Override
     public void onNotPassButtonClick(TaskEntity taskEntity) {
-        new CustomDialog.Builder(mContext)
+        new CustomDialog.NormalBuilder(mContext)
                 .setMessage(R.string.dialog_sure_to_not_pass)
                 .setPositiveButton((dialog, which) -> {
                     taskEntity.setInOperation(true);

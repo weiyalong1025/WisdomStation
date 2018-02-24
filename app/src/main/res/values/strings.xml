@@ -125,6 +125,7 @@
 
     <string name="symbol_separator">/</string>
     <string name="symbol_hour_minute">"--:--"</string>
+    <string name="symbol_progress">0/100</string>
 
     <string name="tab_dispatch">到发</string>
     <string name="tab_operation">作业</string>

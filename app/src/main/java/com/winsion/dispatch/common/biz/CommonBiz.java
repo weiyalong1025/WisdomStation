@@ -1,9 +1,7 @@
 package com.winsion.dispatch.common.biz;
 
 import android.app.NotificationManager;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
@@ -63,9 +61,8 @@ public class CommonBiz {
     public static void checkVersionUpdate(Context context, Object tag, boolean showHint) {
         if (AppApplication.TEST_MODE) {
             UpdateEntity updateEntity = new UpdateEntity();
-            updateEntity.setFilePath("https://172.16.0.17:9411/picures/IMG_20180209.jpg");
-            updateEntity.setVersionContent("更新了好多东西啊，赶紧更新看看吧！\n1.我是第一项。\n2.我是第二项。\n3.我是第三项。\n4.我是第四项。\n5.我是第五项。" +
-                    "\n6.我是第六项。\n7.我是第七项。\n8.我是第八项。\n1.我是第一项。\n2.我是第二项。\n3.我是第三项。\n4.我是第四项。\n5.我是第五项。");
+            updateEntity.setFilePath("https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk");
+            updateEntity.setVersionContent("新年快乐，大吉大利。");
             showUpdateDialog(context, updateEntity);
             return;
         }
@@ -103,7 +100,7 @@ public class CommonBiz {
      */
     private static void showUpdateDialog(Context context, UpdateEntity updateEntity) {
         // 需要更新,弹出对话框
-        new CustomDialog.Builder(context)
+        new CustomDialog.NormalBuilder(context)
                 .setTitle(R.string.title_discover_new_version)
                 .setMessage(updateEntity.getVersionContent())
                 .setPositiveButtonText(R.string.btn_update_now)
@@ -129,27 +126,27 @@ public class CommonBiz {
             File updateFile = new File(targetDir, fileName);
 
             // 显示下载进度对话框
-            ProgressDialog progressDialog = new ProgressDialog(context);
-            progressDialog.setTitle(R.string.title_version_update);
-            progressDialog.setMessage(context.getString(R.string.dialog_downloading_installation_package));
-            progressDialog.setCancelable(false);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.btn_cancel), (dialog, which) -> {
-                NetDataSource.unSubscribe(downloadUrl);
-                dialog.dismiss();
-            });
-            progressDialog.show();
+            CustomDialog.ProgressBuilder progressBuilder = (CustomDialog.ProgressBuilder)
+                    new CustomDialog.ProgressBuilder(context)
+                            .setMessage(R.string.dialog_downloading_installation_package)
+                            .setNegativeButton((dialog, which) -> {
+                                NetDataSource.unSubscribe(downloadUrl);
+                                dialog.dismiss();
+                            })
+                            .setIrrevocable();
+            CustomDialog customDialog = progressBuilder.create();
+            customDialog.show();
 
             // 下载更新包
             NetDataSource.downloadFile(downloadUrl, downloadUrl, targetDir, new DownloadListener() {
                 @Override
                 public void downloadProgress(String serverUri, int progress) {
-                    progressDialog.setProgress(progress);
+                    progressBuilder.setProgress(progress);
                 }
 
                 @Override
                 public void downloadSuccess(String serverUri) {
-                    progressDialog.dismiss();
+                    customDialog.dismiss();
                     Uri downloadFileUri = Uri.fromFile(updateFile);
                     if (downloadFileUri != null) {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -161,7 +158,7 @@ public class CommonBiz {
 
                 @Override
                 public void downloadFailed(String serverUri) {
-                    progressDialog.setMessage(context.getString(R.string.toast_download_failed));
+                    progressBuilder.updateMessage(context.getString(R.string.toast_download_failed));
                 }
             });
 

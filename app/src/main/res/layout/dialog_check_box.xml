@@ -1,48 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="@dimen/d300"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/bg_dialog"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_dialog_normal"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
         <TextView
-            android:id="@+id/tv_dialog_title"
+            android:id="@+id/tv_dialog_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d15"
-            android:maxLength="10"
-            android:singleLine="true"
-            android:textColor="@color/gray9"
-            android:textSize="@dimen/s20"
-            tools:text="对话框标题" />
-
-        <com.winsion.dispatch.view.MaxHeightScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"
             android:paddingBottom="@dimen/d20"
-            android:paddingTop="@dimen/d20">
+            android:paddingEnd="@dimen/d20"
+            android:paddingStart="@dimen/d20"
+            android:paddingTop="@dimen/d20"
+            android:textColor="@color/gray9"
+            android:textSize="@dimen/s18"
+            tools:text="对话框文字" />
 
-            <TextView
-                android:id="@+id/tv_dialog_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingEnd="@dimen/d20"
-                android:paddingStart="@dimen/d20"
-                android:textColor="@color/gray9"
-                android:textSize="@dimen/s18"
-                tools:text="对话框文字" />
-        </com.winsion.dispatch.view.MaxHeightScrollView>
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/cb_dialog_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/d20"
+            android:textSize="@dimen/s16"
+            tools:text="提示文字" />
 
         <View
             android:layout_width="match_parent"
@@ -61,7 +50,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/d48"
                 android:layout_weight="1"
-                android:background="@drawable/selector_bg_btn_left"
+                android:background="@drawable/selector_dialog_btn_left"
                 android:text="@string/btn_cancel"
                 android:textColor="@color/selector_dialog_button_text"
                 android:textSize="@dimen/s16" />
@@ -77,10 +66,10 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/d48"
                 android:layout_weight="1"
-                android:background="@drawable/selector_bg_btn_right"
+                android:background="@drawable/selector_dialog_btn_right"
                 android:text="@string/btn_confirm"
                 android:textColor="@color/selector_dialog_button_text"
                 android:textSize="@dimen/s16" />
         </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</FrameLayout>

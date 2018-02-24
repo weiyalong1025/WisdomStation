@@ -63,7 +63,7 @@
         android:id="@+id/rl_check_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray8"
+        android:background="@drawable/selector_common"
         android:padding="@dimen/d15">
 
         <TextView
@@ -94,7 +94,7 @@
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray8"
+        android:background="@drawable/selector_common"
         android:gravity="center"
         android:padding="@dimen/d15"
         android:text="@string/btn_logout"

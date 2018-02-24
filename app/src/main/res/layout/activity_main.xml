@@ -67,7 +67,7 @@
         android:id="@+id/iv_switch"
         android:layout_width="@dimen/d48"
         android:layout_height="@dimen/d48"
-        android:background="@drawable/selector_bg_button"
+        android:background="?android:attr/selectableItemBackground"
         android:padding="@dimen/d11"
         android:src="@drawable/ic_switch"
         tools:ignore="ContentDescription" />
@@ -77,7 +77,7 @@
         android:layout_width="@dimen/d48"
         android:layout_height="@dimen/d48"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/selector_bg_button"
+        android:background="?android:attr/selectableItemBackground"
         android:padding="@dimen/d9"
         android:src="@drawable/ic_head"
         app:civ_border_color="@color/black6"

@@ -3,7 +3,7 @@ package com.winsion.dispatch.modules.operation.adapter;
 import android.content.Context;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
-import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
@@ -28,7 +28,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
     private OnButtonClickListener mListener;
 
     public interface OnButtonClickListener {
-        void onButtonClick(JobEntity jobEntity, View button);
+        void onButtonClick(JobEntity jobEntity);
     }
 
     public OperatorTaskListAdapter(Context context, List<JobEntity> data) {
@@ -192,6 +192,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
                 }
                 break;
         }
+
         switch (workStatus) {
             case TaskState.NOT_STARTED:
             case TaskState.DONE:
@@ -203,43 +204,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
                 viewHolder.setVisible(R.id.doing_gif, true);
                 viewHolder.setVisible(R.id.iv_status, false);
                 break;
-
         }
-
-        /*
-        渐变效果
-        if (isTimeOut) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                View view = viewHolder.getView(R.id.ll_bg_color);
-                ValueAnimator valueAnimator = (ValueAnimator) view.getTag();
-                if (valueAnimator == null) {
-                    valueAnimator = ValueAnimator.ofArgb(0xFF333339, 0xFF74592C);
-                    valueAnimator.setDuration(2000);
-                    valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
-                    valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
-                    valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-                    valueAnimator.addUpdateListener(animation -> {
-                        int colorValue = (int) animation.getAnimatedValue();
-                        viewHolder.setBackgroundColor(R.id.ll_bg_color, colorValue);
-                    });
-                }
-                viewHolder.setTag(R.id.ll_bg_color, valueAnimator);
-                valueAnimator.start();
-            } else {
-                viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.yellow1);
-            }
-            viewHolder.setTextColorRes(R.id.tv_last_time, R.color.red2);
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                View view = viewHolder.getView(R.id.ll_bg_color);
-                ValueAnimator valueAnimator = (ValueAnimator) view.getTag();
-                if (valueAnimator != null) {
-                    valueAnimator.cancel();
-                }
-            }
-            viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.gray8);
-            viewHolder.setTextColorRes(R.id.tv_last_time, R.color.blue1);
-        }*/
 
         if (isTimeOut) {
             viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.yellow1);
@@ -252,9 +217,16 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
         // 更改任务状态按钮点击事件
         viewHolder.setOnClickListener(R.id.btn_status, view -> {
             if (mListener != null) {
-                mListener.onButtonClick(jobEntity, view);
+                mListener.onButtonClick(jobEntity);
             }
         });
+
+        Button btnStatus = viewHolder.getView(R.id.btn_status);
+        if (jobEntity.isInOperation()) {
+            btnStatus.setEnabled(false);
+        } else {
+            btnStatus.setEnabled(true);
+        }
     }
 
     private String getString(@StringRes int strRes) {

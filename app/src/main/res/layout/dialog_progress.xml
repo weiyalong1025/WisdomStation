@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="@dimen/d300"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_dialog_normal"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/tv_dialog_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/d20"
+            android:paddingEnd="@dimen/d20"
+            android:paddingStart="@dimen/d20"
+            android:paddingTop="@dimen/d20"
+            android:textColor="@color/gray9"
+            android:textSize="@dimen/s18"
+            tools:text="对话框文字" />
+
+        <ProgressBar
+            android:id="@+id/pb_progress"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/d20"
+            android:layout_marginStart="@dimen/d20" />
+
+        <TextView
+            android:id="@+id/tv_progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="@dimen/d20"
+            android:layout_marginEnd="@dimen/d20"
+            android:text="@string/symbol_progress"
+            android:textColor="@color/gray9"
+            android:textSize="@dimen/s14" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d0_5"
+            android:background="@color/gray1" />
+
+        <Button
+            android:id="@+id/btn_dialog_negative"
+            style="?attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d48"
+            android:background="@drawable/selector_dialog_btn"
+            android:text="@string/btn_cancel"
+            android:textColor="@color/selector_dialog_button_text"
+            android:textSize="@dimen/s16" />
+    </LinearLayout>
+</FrameLayout>

@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="LoadingView">
-        <attr name="loading_view_size" format="dimension" />
-        <attr name="android:color" />
-    </declare-styleable>
-
     <declare-styleable name="CircleImageView">
         <attr name="civ_border_width" format="dimension" />
         <attr name="civ_border_color" format="color" />
@@ -122,6 +117,11 @@
         <attr name="label_text_color" format="color" />
         <attr name="label_text" format="string" />
         <attr name="label_text_size" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="LoadingView">
+        <attr name="loading_view_size" format="dimension" />
+        <attr name="android:color" />
     </declare-styleable>
 
 </resources>

@@ -84,7 +84,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     private void initAdapter() {
         mLvAdapter = new SystemRemindAdapter(mContext, listData);
         // 删除按钮点击事件
-        mLvAdapter.setDeleteBtnClickListener(remindEntity -> new CustomDialog.Builder(mContext)
+        mLvAdapter.setDeleteBtnClickListener(remindEntity -> new CustomDialog.NormalBuilder(mContext)
                 .setMessage(getString(R.string.dialog_sure_to_delete))
                 .setPositiveButton((dialog, which) -> {
                     if (remindEntity.getReaded() == ReadStatus.UNREAD) {
@@ -221,7 +221,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         if (selectData.size() == 0) {
             showToast(getString(R.string.toast_no_selected_item));
         } else {
-            new CustomDialog.Builder(mContext)
+            new CustomDialog.NormalBuilder(mContext)
                     .setMessage(getConfirmDeleteHint(selectData.size()))
                     .setPositiveButton((dialog, which) -> mPresenter.handleReminds(selectData,
                             HandleType.HANDLE_DELETE))

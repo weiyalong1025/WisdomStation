@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ import com.winsion.dispatch.login.listener.LoginListener;
 import com.winsion.dispatch.utils.ImageLoader;
 import com.winsion.dispatch.utils.ViewUtils;
 import com.winsion.dispatch.view.CircleImageView;
-import com.winsion.dispatch.view.TipDialog;
+import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.WrapContentListView;
 
 import java.util.ArrayList;
@@ -59,11 +60,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
     LinearLayout llUsername;
     @BindView(R.id.iv_arrow)
     ImageView ivArrow;
+    @BindView(R.id.iv_visibility)
+    ImageView ivVisibility;
 
     private List<UserEntity> mAllSavedUser = new ArrayList<>();
 
     private LoginContract.Presenter mPresenter;
-    private TipDialog mLoadingDialog;
+    private CustomDialog customDialog;
     private PopupWindow mUserListPopup;
     private RotateAnimation mUpAnim;
     private RotateAnimation mDownAnim;
@@ -137,11 +140,24 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         });
     }
 
-    @OnClick({R.id.iv_arrow, R.id.btn_login, R.id.tv_login_config})
+    private boolean mVisibility = false;
+
+    @OnClick({R.id.iv_arrow, R.id.iv_visibility, R.id.btn_login, R.id.tv_login_config})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_arrow:
                 showPopupWindow(view);
+                break;
+            case R.id.iv_visibility:
+                mVisibility = !mVisibility;
+                if (mVisibility) {
+                    ivVisibility.setImageResource(R.drawable.ic_visibility);
+                    etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    ivVisibility.setImageResource(R.drawable.ic_visibility_off);
+                    etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+                etPassword.setSelection(etPassword.getText().toString().length());
                 break;
             case R.id.btn_login:
                 mPresenter.login(getText(etUsername), getText(etPassword), this);
@@ -270,13 +286,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         // 隐藏软键盘
         CommonBiz.hideKeyboard(etUsername);
         // 登陆中，显示dialog
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new TipDialog.Builder(mContext)
-                    .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord(getString(R.string.dialog_on_login))
+        if (customDialog == null) {
+            customDialog = new CustomDialog.StateBuilder(mContext)
+                    .setStateText(R.string.dialog_on_login)
+                    .setIrrevocable()
                     .create();
         }
-        mLoadingDialog.show();
+        customDialog.show();
     }
 
     @Override
@@ -310,11 +326,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
     }
 
     /**
-     * 隐藏用户列表下拉框
+     * 隐藏状态对话框
      */
     private void hideDialog() {
-        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
-            mLoadingDialog.dismiss();
+        if (customDialog != null && customDialog.isShowing()) {
+            customDialog.dismiss();
         }
     }
 
@@ -334,6 +350,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         etUsername.setText(username);
         etPassword.setText(password);
         etUsername.setSelection(username.length());
+        etPassword.setSelection(password.length());
     }
 
     @Override

@@ -31,7 +31,6 @@ import com.winsion.dispatch.modules.operation.entity.FileEntity;
 import com.winsion.dispatch.utils.DirAndFileUtils;
 import com.winsion.dispatch.utils.ViewUtils;
 import com.winsion.dispatch.view.CustomDialog;
-import com.winsion.dispatch.view.TipDialog;
 import com.winsion.dispatch.view.TitleView;
 
 import java.io.File;
@@ -80,7 +79,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     private PatrolItemEntity patrolItemEntity;
     private String siteName;
     private boolean deviceDependent;
-    private TipDialog mLoadingDialog;
+    private CustomDialog customDialog;
     private File photoFile; // 拍摄的照片文件
     private List<LocalRecordEntity> localRecordEntities = new ArrayList<>(); // 上传的附件
     private RecordAdapter recordAdapter;
@@ -193,15 +192,15 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
      * @param tipWord 提示状态文字
      */
     private void showDoingDialog(@StringRes int tipWord) {
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new TipDialog.Builder(mContext)
-                    .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord(getString(tipWord))
+        if (customDialog == null) {
+            customDialog = new CustomDialog.StateBuilder(mContext)
+                    .setStateText(tipWord)
+                    .setIrrevocable()
                     .create();
         } else {
-            mLoadingDialog.updateTipWord(getString(tipWord));
+            ((CustomDialog.StateBuilder) customDialog.getBuilder()).updateTipWord(tipWord);
         }
-        mLoadingDialog.show();
+        customDialog.show();
     }
 
     @OnClick({R.id.tv_device_name, R.id.iv_scan, R.id.tv_subclass, R.id.iv_take_photo})
@@ -273,7 +272,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
 
     @Override
     public void checkDeviceIdSuccess(String deviceName, String classificationId, String deviceId) {
-        mLoadingDialog.dismiss();
+        customDialog.dismiss();
         tvDeviceName.setText(deviceName);
         mClassificationId = classificationId;
         mDeviceId = deviceId;
@@ -288,13 +287,13 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
 
     @Override
     public void checkDeviceIdFailed(@StringRes int errorInfo) {
-        mLoadingDialog.dismiss();
+        customDialog.dismiss();
         showToast(errorInfo);
     }
 
     @Override
     public void getSubclassSuccess(List<SubclassEntity> list) {
-        mLoadingDialog.dismiss();
+        customDialog.dismiss();
         // 创建选择器
         List<String> nameList = new ArrayList<>();
         for (SubclassEntity subclassDto : list) {
@@ -319,13 +318,13 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
 
     @Override
     public void getSubclassFailed() {
-        mLoadingDialog.dismiss();
+        customDialog.dismiss();
         showToast(R.string.toast_get_subclass_failed);
     }
 
     @Override
     public void submitSuccess(PatrolItemEntity patrolItemEntity, String deviceState) {
-        mLoadingDialog.dismiss();
+        customDialog.dismiss();
         Intent intent = new Intent();
         intent.putExtra(PATROL_ITEM_ENTITY, patrolItemEntity);
         setResult(RESULT_OK, intent);
@@ -335,7 +334,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     @Override
     public void submitFailed() {
         showToast(R.string.toast_submit_failed);
-        mLoadingDialog.dismiss();
+        customDialog.dismiss();
     }
 
     @Override
@@ -409,7 +408,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     }
 
     private void showHintDialog() {
-        new CustomDialog.Builder(mContext)
+        new CustomDialog.NormalBuilder(mContext)
                 .setMessage(R.string.dialog_after_exiting_data_will_be_cleared_are_you_sure)
                 .setPositiveButton((dialog, which) -> {
                     // 删除附件

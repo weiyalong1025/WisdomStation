@@ -149,28 +149,29 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
      * 更改任务状态按钮点击事件
      *
      * @param jobEntity 该条目对应的job
-     * @param button    该条目上的button按钮
      */
     @Override
-    public void onButtonClick(JobEntity jobEntity, View button) {
+    public void onButtonClick(JobEntity jobEntity) {
         // 更改任务状态按钮点击事件
         int workStatus = jobEntity.getWorkstatus();
         if (workStatus == TaskState.RUN || workStatus == TaskState.NOT_STARTED || workStatus == TaskState.GRID_NOT_PASS) {
             boolean isFinish = workStatus == TaskState.RUN;
-            new CustomDialog.Builder(mContext)
+            new CustomDialog.NormalBuilder(mContext)
                     .setMessage(getString(isFinish ? R.string.dialog_sure_to_finish : R.string.dialog_sure_to_start))
-                    .setPositiveButton((dialog, which) -> changeStatus(jobEntity, button, isFinish))
+                    .setPositiveButton((dialog, which) -> changeStatus(jobEntity, isFinish))
                     .show();
         }
     }
 
-    private void changeStatus(JobEntity jobEntity, View button, boolean isFinish) {
-        button.setEnabled(false);
+    private void changeStatus(JobEntity jobEntity, boolean isFinish) {
+        jobEntity.setInOperation(true);
+        mLvAdapter.notifyDataSetChanged();
         int opeType = isFinish ? OpeType.COMPLETE : OpeType.BEGIN;
         ((ChangeStatusBiz) mPresenter).changeJobStatus(mContext, jobEntity, opeType, new StateListener() {
             @Override
             public void onSuccess() {
-                button.setEnabled(true);
+                jobEntity.setInOperation(false);
+                mLvAdapter.notifyDataSetChanged();
                 String currentTime = ConvertUtils.formatDate(System.currentTimeMillis(), Formatter.DATE_FORMAT1);
                 if (isFinish) {
                     jobEntity.setWorkstatus(TaskState.DONE);
@@ -189,7 +190,8 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
             @Override
             public void onFailed() {
-                button.setEnabled(true);
+                jobEntity.setInOperation(false);
+                mLvAdapter.notifyDataSetChanged();
                 showToast(R.string.toast_change_state_failed);
             }
         });

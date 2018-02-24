@@ -37,7 +37,6 @@ import com.winsion.dispatch.utils.DirAndFileUtils;
 import com.winsion.dispatch.utils.ViewUtils;
 import com.winsion.dispatch.utils.constants.Formatter;
 import com.winsion.dispatch.view.CustomDialog;
-import com.winsion.dispatch.view.TipDialog;
 import com.winsion.dispatch.view.TitleView;
 
 import java.io.File;
@@ -113,7 +112,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     private File videoFile;
     private File audioFile;
     // 发布中显示dialog
-    private TipDialog mLoadingDialog;
+    private CustomDialog customDialog;
 
     /**
      * @param context   上下文
@@ -249,14 +248,14 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
                         @Override
                         public void onSuccess(String result) {
-                            mLoadingDialog.dismiss();
+                            customDialog.dismiss();
                             showToast(R.string.toast_issue_success);
                             finish();
                         }
 
                         @Override
                         public void onFailed(int errorCode, String errorInfo) {
-                            mLoadingDialog.dismiss();
+                            customDialog.dismiss();
                             showToast(R.string.toast_issue_failed);
                         }
                     });
@@ -280,13 +279,13 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     }
 
     private void showOnIssueDialog() {
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new TipDialog.Builder(mContext)
-                    .setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord(getString(R.string.dialog_on_issue))
+        if (customDialog == null) {
+            customDialog = new CustomDialog.StateBuilder(mContext)
+                    .setStateText(R.string.dialog_on_issue)
+                    .setIrrevocable()
                     .create();
         }
-        mLoadingDialog.show();
+        customDialog.show();
     }
 
     private void showStationPickerView(View v) {
@@ -533,7 +532,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     }
 
     private void showHintDialog() {
-        new CustomDialog.Builder(mContext)
+        new CustomDialog.NormalBuilder(mContext)
                 .setMessage(R.string.dialog_after_exiting_data_will_be_cleared_are_you_sure)
                 .setPositiveButton((dialog, which) -> {
                     // 删除附件

@@ -44,7 +44,7 @@ public class ChangeStatusBiz {
         jobParameter.setOpormotId(jobEntity.getJoboperatorsid());
         jobParameter.setNote(note);
         jobParameter.setOpType(opType);
-        NetDataSource.post(null, Urls.JOb, jobParameter, OpeCode.TASK, new ResponseListener<String>() {
+        NetDataSource.post(this, Urls.JOb, jobParameter, OpeCode.TASK, new ResponseListener<String>() {
             @Override
             public String convert(String jsonStr) {
                 return jsonStr;
@@ -72,7 +72,7 @@ public class ChangeStatusBiz {
     private void confirmWarning(Context context, String stepID) {
         WarnTaskStep warnTaskStep = new WarnTaskStep();
         warnTaskStep.setWarnTaskStepID(stepID);
-        NetDataSource.post(null, Urls.WARN_TASK_STEP, warnTaskStep, 0, new ResponseListener<String>() {
+        NetDataSource.post(this, Urls.WARN_TASK_STEP, warnTaskStep, 0, new ResponseListener<String>() {
             @Override
             public String convert(String jsonStr) {
                 return jsonStr;

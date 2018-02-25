@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <corners
-        android:bottomRightRadius="@dimen/d20"
-        android:topRightRadius="@dimen/d20" />
+        android:bottomRightRadius="20dp"
+        android:topRightRadius="20dp" />
     <solid android:color="@color/yellow2" />
 </shape>

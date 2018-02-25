@@ -87,8 +87,9 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
     private MQTTClient(Connector connector) {
         this.mConnectListener = connector.connectListener;
         this.mConnector = connector;
-        this.mContext = new WeakReference<>(connector.context);
-        mServerUrl = connector.host;
+        this.mContext = new WeakReference<>(connector.context.getApplicationContext());
+        this.mServerUrl = connector.host;
+        this.needReconnect = connector.needReconnect;
         String CLIENT_ID = "yalong" + System.currentTimeMillis();
         mClient = new MqttAndroidClient(mContext.get(), "tcp://" + mServerUrl + ":" + MQ_PORT, CLIENT_ID, new MemoryPersistence());
         mClient.setCallback(new MqttCallback() {
@@ -128,9 +129,11 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
         private Context context;
         private ConnectListener connectListener;
         private String host;
+        private boolean needReconnect;
 
-        public Connector(Context context) {
+        public Connector(Context context, String host) {
             this.context = context;
+            this.host = host;
         }
 
         public Connector listener(ConnectListener connectListener) {
@@ -138,8 +141,8 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
             return this;
         }
 
-        public Connector host(String host) {
-            this.host = host;
+        public Connector reconnect(boolean needReconnect) {
+            this.needReconnect = needReconnect;
             return this;
         }
 

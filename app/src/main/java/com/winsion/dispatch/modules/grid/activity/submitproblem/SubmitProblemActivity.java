@@ -177,6 +177,10 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
                 return false;
             }
         }
+        if (isEmpty(getText(etWordContent))) {
+            showToast(R.string.toast_complete_info);
+            return false;
+        }
         for (LocalRecordEntity localRecordEntity : localRecordEntities) {
             if (localRecordEntity.getFileStatus() != FileStatus.SYNCHRONIZED) {
                 showToast(getString(R.string.toast_wait_for_files_upload_complete));

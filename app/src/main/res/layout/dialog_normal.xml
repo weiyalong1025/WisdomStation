@@ -48,38 +48,6 @@
             android:layout_height="@dimen/d0_5"
             android:background="@color/gray1" />
 
-        <LinearLayout
-            android:id="@+id/refer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_dialog_negative"
-                style="?attr/buttonBarStyle"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/d48"
-                android:layout_weight="1"
-                android:background="@drawable/selector_dialog_btn_left"
-                android:text="@string/btn_cancel"
-                android:textColor="@color/selector_dialog_button_text"
-                android:textSize="@dimen/s16" />
-
-            <View
-                android:layout_width="@dimen/d0_5"
-                android:layout_height="match_parent"
-                android:background="@color/gray1" />
-
-            <Button
-                android:id="@+id/btn_dialog_positive"
-                style="?attr/buttonBarStyle"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/d48"
-                android:layout_weight="1"
-                android:background="@drawable/selector_dialog_btn_right"
-                android:text="@string/btn_confirm"
-                android:textColor="@color/selector_dialog_button_text"
-                android:textSize="@dimen/s16" />
-        </LinearLayout>
+        <include layout="@layout/layout_dialog_btn"/>
     </LinearLayout>
 </FrameLayout>

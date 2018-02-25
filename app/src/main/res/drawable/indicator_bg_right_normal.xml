@@ -5,8 +5,8 @@
         <shape android:shape="rectangle">
             <solid android:color="@color/blue1" />
             <corners
-                android:bottomRightRadius="@dimen/d4"
-                android:topRightRadius="@dimen/d4" />
+                android:bottomRightRadius="4dp"
+                android:topRightRadius="4dp" />
         </shape>
     </item>
     <!-- 主体背景颜色值 -->
@@ -17,8 +17,8 @@
         <shape android:shape="rectangle">
             <solid android:color="@color/black3" />
             <corners
-                android:bottomRightRadius="@dimen/d4"
-                android:topRightRadius="@dimen/d4" />
+                android:bottomRightRadius="4dp"
+                android:topRightRadius="4dp" />
         </shape>
     </item>
 </layer-list>

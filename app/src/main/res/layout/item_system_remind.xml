@@ -8,7 +8,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -18,7 +19,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/div_vertical" />
+            android:background="@drawable/div_vertical"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -39,7 +41,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/d5"
                     android:gravity="center"
-                    android:src="@drawable/bg_circle_red" />
+                    android:src="@drawable/bg_circle_red"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_remind_type"
@@ -47,9 +50,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/iv_red_dot"
-                    tools:text="[提醒分类]"
                     android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21" />
+                    android:textSize="@dimen/s21"
+                    tools:text="[提醒分类]" />
 
                 <TextView
                     android:id="@+id/tv_remind_date"
@@ -58,9 +61,10 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:gravity="center"
-                    tools:text="[日期时间]"
                     android:textColor="@color/gray2"
-                    android:textSize="@dimen/s16" />
+                    android:textSize="@dimen/s16"
+                    tools:ignore="RelativeOverlap"
+                    tools:text="[日期时间]" />
             </RelativeLayout>
 
             <View
@@ -81,6 +85,7 @@
                     android:padding="@dimen/d15"
                     android:textColor="@color/white1"
                     android:textSize="@dimen/s21"
+                    tools:ignore="RelativeOverlap"
                     tools:text="[提醒内容]" />
 
                 <ImageView
@@ -90,7 +95,8 @@
                     android:layout_alignParentEnd="true"
                     android:padding="@dimen/d15"
                     android:src="@drawable/ic_check_box_outline"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/iv_delete"
@@ -98,7 +104,8 @@
                     android:layout_height="@dimen/d54"
                     android:layout_alignParentEnd="true"
                     android:padding="@dimen/d15"
-                    android:src="@drawable/ic_delete1" />
+                    android:src="@drawable/ic_delete1"
+                    tools:ignore="ContentDescription" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -106,12 +113,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/div_vertical" />
+            android:background="@drawable/div_vertical"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal" />
+        android:background="@drawable/div_horizontal"
+        tools:ignore="ContentDescription" />
 </LinearLayout>

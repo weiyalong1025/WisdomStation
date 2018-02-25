@@ -3,7 +3,6 @@ package com.winsion.dispatch.modules.operation.adapter;
 import android.content.Context;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
@@ -23,11 +22,6 @@ import java.util.List;
  */
 
 public class MonitorTaskListAdapter extends CommonAdapter<TaskEntity> {
-    private OnButtonClickListener mListener;
-
-    public interface OnButtonClickListener {
-        void onButtonClick(TaskEntity taskEntity, View button);
-    }
 
     public MonitorTaskListAdapter(Context context, List<TaskEntity> data) {
         super(context, R.layout.item_operation, data);
@@ -205,20 +199,9 @@ public class MonitorTaskListAdapter extends CommonAdapter<TaskEntity> {
             viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.gray8);
             viewHolder.setTextColorRes(R.id.tv_last_time, R.color.blue1);
         }
-
-        // 更改任务状态按钮点击事件
-        viewHolder.setOnClickListener(R.id.btn_status, view -> {
-            if (mListener != null) {
-                mListener.onButtonClick(taskEntity, view);
-            }
-        });
     }
 
     private String getString(@StringRes int strRes) {
         return mContext.getString(strRes);
-    }
-
-    public void setOnButtonClickListener(OnButtonClickListener listener) {
-        this.mListener = listener;
     }
 }

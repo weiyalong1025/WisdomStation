@@ -106,9 +106,10 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
             public void onSuccess(AuthEntity authEntity) {
                 mAuthEntity = authEntity;
                 // 开启MQ
-                new MQTTClient.Connector(mContext)
+                new MQTTClient.Connector(mContext, ip)
                         .listener(LoginPresenter.this)
-                        .host(ip).connect();
+                        .reconnect(false)
+                        .connect();
                 LogUtils.i(TAG, "用户名:" + mUsername + ",密码:" + mPassword);
                 LogUtils.i(TAG, "IP地址:" + ip + ",端口号:" + port);
                 LogUtils.i(TAG, "BSSID地址:" + bssid);

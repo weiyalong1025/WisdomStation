@@ -41,9 +41,6 @@ public class AppApplication extends Application {
 
         // 初始化LOG
         initLog();
-
-        // MQ运行状态检测
-        checkMQIsRunning();
     }
 
     private void initDB() {
@@ -59,10 +56,6 @@ public class AppApplication extends Application {
         }
         String logTag = getString(R.string.app_name);
         LogUtils.init(BuildConfig.DEBUG, true, logDir, LogUtils.FILTER_V, logTag);
-    }
-
-    private void checkMQIsRunning() {
-        // TODO: 2018/2/9 MQ运行状态检测
     }
 
     public static Context getContext() {

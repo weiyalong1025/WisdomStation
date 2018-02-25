@@ -9,15 +9,19 @@ import android.widget.ImageView;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.SwitchSysActivity;
+import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.base.BaseActivity;
 import com.winsion.dispatch.common.constants.SystemType;
 import com.winsion.dispatch.data.CacheDataSource;
+import com.winsion.dispatch.data.SPDataSource;
+import com.winsion.dispatch.data.constants.SPKey;
 import com.winsion.dispatch.modules.contacts.fragment.ContactsRootFragment;
 import com.winsion.dispatch.modules.daofa.fragment.DaofaRootFragment;
 import com.winsion.dispatch.modules.grid.fragment.GridRootFragment;
 import com.winsion.dispatch.modules.operation.fragment.OperationRootFragment;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.scene.fragment.SceneRootFragment;
+import com.winsion.dispatch.mqtt.MQTTClient;
 import com.winsion.dispatch.user.UserActivity;
 import com.winsion.dispatch.utils.ImageLoader;
 import com.winsion.dispatch.view.AlphaTabView;
@@ -70,6 +74,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
         initAdapter();
         initListener();
         loadUserHead();
+        startMQClient();
     }
 
     @Override
@@ -144,6 +149,16 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
 
     private void loadUserHead() {
         ImageLoader.loadUrl(ivHead, CacheDataSource.getUserHeadAddress(), R.drawable.ic_head_single, R.drawable.ic_head_single);
+    }
+
+    private void startMQClient() {
+        if (AppApplication.TEST_MODE) {
+            return;
+        }
+        String host = (String) SPDataSource.get(mContext, SPKey.KEY_IP, "");
+        new MQTTClient.Connector(mContext, host)
+                .reconnect(true)
+                .connect();
     }
 
     @Override

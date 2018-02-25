@@ -19,8 +19,6 @@ import com.winsion.dispatch.modules.operation.adapter.MonitorTaskListAdapter;
 import com.winsion.dispatch.modules.operation.constants.TaskSpinnerState;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.TaskEntity;
-import com.winsion.dispatch.utils.ConvertUtils;
-import com.winsion.dispatch.utils.constants.Formatter;
 import com.winsion.dispatch.view.SpinnerView;
 
 import java.util.ArrayList;

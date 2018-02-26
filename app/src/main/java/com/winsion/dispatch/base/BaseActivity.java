@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -21,14 +22,12 @@ import com.winsion.dispatch.utils.ToastUtils;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-
 /**
  * Created by admin on 2016/11/18.
  * 基类-Activity
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements HandlerUtils.OnReceiveMessageListener {
+public abstract class BaseActivity extends AppCompatActivity implements HandlerUtils.OnReceiveMessageListener, View.OnClickListener {
     /**
      * 默认的REQUEST_CODE
      */
@@ -51,7 +50,6 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
         mHandler = new HandlerUtils.HandlerHolder(this);
         if (setContentView() != 0) {
             setContentView(setContentView());
-            ButterKnife.bind(this);
         }
         start();
     }
@@ -196,5 +194,17 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
             moveTaskToBack(false);
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void addOnClickListeners(@IdRes int... ids) {
+        if (ids != null) {
+            for (@IdRes int id : ids) {
+                findViewById(id).setOnClickListener(this);
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
     }
 }

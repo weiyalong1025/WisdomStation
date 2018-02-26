@@ -18,23 +18,16 @@ import com.winsion.dispatch.view.BadgeRadioButton;
 import com.winsion.dispatch.view.MyIndicator;
 import com.winsion.dispatch.view.NoScrollViewPager;
 
-import butterknife.BindView;
-
 /**
  * Created by 10295 on 2017/12/10 0010
  */
 
 public class ReminderRootFragment extends BaseFragment {
-    @BindView(R.id.vp_content)
-    NoScrollViewPager vpContent;
-    @BindView(R.id.mi_container)
-    MyIndicator mIndicator;
-    @BindView(R.id.brb0)
-    BadgeRadioButton brb0;
-    @BindView(R.id.brb1)
-    BadgeRadioButton brb1;
-    @BindView(R.id.brb2)
-    BadgeRadioButton brb2;
+    private NoScrollViewPager vpContent;
+    private MyIndicator mIndicator;
+    private BadgeRadioButton brb0;
+    private BadgeRadioButton brb1;
+    private BadgeRadioButton brb2;
 
     private Fragment[] mFragments = {new PlaceHolderFragment(), new TodoListFragment(), new SystemRemindFragment()};
     private int[] mTitles = {R.string.tab_user_message, R.string.tab_todo, R.string.tab_system_remind};
@@ -48,10 +41,19 @@ public class ReminderRootFragment extends BaseFragment {
 
     @Override
     protected void init() {
+        initView();
         vpContent.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         mIndicator.setViewPager(vpContent);
         // 预加载所有界面
         vpContent.setOffscreenPageLimit(2);
+    }
+
+    private void initView() {
+        vpContent = findViewById(R.id.vp_content);
+        mIndicator = findViewById(R.id.mi_container);
+        brb0 = findViewById(R.id.brb0);
+        brb1 = findViewById(R.id.brb1);
+        brb2 = findViewById(R.id.brb2);
     }
 
     @Override

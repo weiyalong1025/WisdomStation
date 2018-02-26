@@ -20,9 +20,6 @@ import com.winsion.dispatch.view.TitleView;
 import java.util.Calendar;
 import java.util.Date;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_ID;
 
 /**
@@ -32,18 +29,12 @@ import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_
  */
 
 public class AddTodoActivity extends BaseActivity implements AddTodoContract.View, TextWatcher {
-    @BindView(R.id.tv_date)
-    TextView tvDate;
-    @BindView(R.id.tv_time)
-    TextView tvTime;
-    @BindView(R.id.et_desc)
-    EditText etDesc;
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
-    @BindView(R.id.btn_save)
-    Button btnSave;
-    @BindView(R.id.tv_counter)
-    TextView tvCounter;
+    private TextView tvDate;
+    private TextView tvTime;
+    private EditText etDesc;
+    private TitleView tvTitle;
+    private Button btnSave;
+    private TextView tvCounter;
 
     private AddTodoContract.Presenter mPresenter;
     private boolean isUpdate;   // 是否是更新
@@ -57,8 +48,9 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
     @Override
     protected void start() {
         initPresenter();
+        initView();
+        initData();
         initListener();
-        initViewData();
     }
 
     private void initPresenter() {
@@ -66,7 +58,16 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
         mPresenter.start();
     }
 
-    private void initViewData() {
+    private void initView() {
+        tvDate = findViewById(R.id.tv_date);
+        tvTime = findViewById(R.id.tv_time);
+        etDesc = findViewById(R.id.et_desc);
+        tvTitle = findViewById(R.id.tv_title);
+        btnSave = findViewById(R.id.btn_save);
+        tvCounter = findViewById(R.id.tv_counter);
+    }
+
+    private void initData() {
         todoId = getIntent().getLongExtra(TODO_ID, 0);
         String planDate;
         if (isUpdate = todoId != 0) {
@@ -89,10 +90,11 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
     private void initListener() {
         tvTitle.setOnBackClickListener(v -> finish());
         etDesc.addTextChangedListener(this);
+        addOnClickListeners(R.id.tv_date, R.id.tv_time, R.id.btn_save);
     }
 
-    @OnClick({R.id.tv_date, R.id.tv_time, R.id.btn_save})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_date:
                 // 显示日期选择器对话框

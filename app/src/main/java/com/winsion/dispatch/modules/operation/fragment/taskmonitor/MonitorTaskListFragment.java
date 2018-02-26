@@ -26,8 +26,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -38,22 +36,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MonitorTaskListFragment extends BaseFragment implements MonitorTaskListContract.View, AdapterView.OnItemClickListener,
         AbsListView.OnScrollListener, SpinnerView.AfterTextChangeListener {
-    @BindView(R.id.sv_spinner)
-    SpinnerView svSpinner;
-    @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout swipeRefresh;
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-    @BindView(R.id.tv_hint)
-    TextView tvHint;
-    @BindView(R.id.fl_container)
-    FrameLayout flContainer;
-    @BindView(R.id.lv_list)
-    ListView lvList;
-    @BindView(R.id.train_number_index)
-    TextView trainNumberIndex;
-    @BindView(R.id.iv_shade)
-    ImageView ivShade;
+    private SpinnerView svSpinner;
+    private SwipeRefreshLayout swipeRefresh;
+    private ProgressBar progressBar;
+    private TextView tvHint;
+    private FrameLayout flContainer;
+    private ListView lvList;
+    private TextView trainNumberIndex;
+    private ImageView ivShade;
 
     private MonitorTaskListContract.Presenter mPresenter;
     private MonitorTaskListAdapter mLvAdapter;
@@ -64,6 +54,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     private List<TaskEntity> underwayData = new ArrayList<>();  // 进行中
     private List<TaskEntity> doneData = new ArrayList<>();  // 已完成
     private int statusPosition = TaskSpinnerState.STATE_ALL;    // 记录选了哪个状态进行筛选
+    private String lastText;    // 搜索框中上一次输入的文字
 
     @SuppressLint("InflateParams")
     @Override
@@ -76,6 +67,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         initPresenter();
         initView();
         initListener();
+        initAdapter();
         startCountTimeByRxAndroid();
     }
 
@@ -84,20 +76,38 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     }
 
     private void initView() {
+        svSpinner = findViewById(R.id.sv_spinner);
+        swipeRefresh = findViewById(R.id.swipe_refresh);
+        progressBar = findViewById(R.id.progress_bar);
+        tvHint = findViewById(R.id.tv_hint);
+        flContainer = findViewById(R.id.fl_container);
+        lvList = findViewById(R.id.lv_list);
+        trainNumberIndex = findViewById(R.id.train_number_index);
+        ivShade = findViewById(R.id.iv_shade);
+
         swipeRefresh.setColorSchemeResources(R.color.blue1);
 
         // 初始化车站选项
         List<String> stationList = new ArrayList<>();
         stationList.add(getString(R.string.spinner_station_name));
         svSpinner.setFirstOptionData(stationList);
+
+        // 初始化状态选项
+        List<String> statusList = Arrays.asList(getResources().getStringArray(R.array.taskStatusArray));
+        svSpinner.setSecondOptionData(statusList);
+    }
+
+    private void initListener() {
+        swipeRefresh.setOnRefreshListener(() -> mPresenter.getMonitorTaskData(mCurrentSysType));
+        lvList.setOnItemClickListener(this);
+        lvList.setOnScrollListener(this);
+        svSpinner.setAfterTextChangeListener(this);
+
         svSpinner.setFirstOptionItemClickListener((position) -> {
             showView(flContainer, progressBar);
             mPresenter.getMonitorTaskData(mCurrentSysType);
         });
 
-        // 初始化状态选项
-        List<String> statusList = Arrays.asList(getResources().getStringArray(R.array.taskStatusArray));
-        svSpinner.setSecondOptionData(statusList);
         svSpinner.setSecondOptionItemClickListener((position) -> {
             svSpinner.clearSearchContent();
             statusPosition = position;
@@ -116,15 +126,12 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
             }
         });
 
-        mLvAdapter = new MonitorTaskListAdapter(mContext, listData);
-        lvList.setAdapter(mLvAdapter);
+        addOnClickListeners(R.id.tv_hint);
     }
 
-    private void initListener() {
-        swipeRefresh.setOnRefreshListener(() -> mPresenter.getMonitorTaskData(mCurrentSysType));
-        lvList.setOnItemClickListener(this);
-        lvList.setOnScrollListener(this);
-        svSpinner.setAfterTextChangeListener(this);
+    private void initAdapter() {
+        mLvAdapter = new MonitorTaskListAdapter(mContext, listData);
+        lvList.setAdapter(mLvAdapter);
     }
 
     @Override
@@ -157,8 +164,6 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
             trainNumberIndex.setText(trainNumber);
         }
     }
-
-    private String lastText;
 
     @Override
     public void afterTextChange(Editable s) {
@@ -285,8 +290,8 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         mLvAdapter.notifyDataSetChanged();
     }
 
-    @OnClick(R.id.tv_hint)
-    public void onViewClicked() {
+    @Override
+    public void onClick(View v) {
         showView(flContainer, progressBar);
         mPresenter.getMonitorTaskData(mCurrentSysType);
     }

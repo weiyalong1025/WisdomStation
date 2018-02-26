@@ -17,17 +17,13 @@ import com.winsion.dispatch.modules.operation.fragment.taskoperator.OperatorTask
 import com.winsion.dispatch.view.MyIndicator;
 import com.winsion.dispatch.view.NoScrollViewPager;
 
-import butterknife.BindView;
-
 /**
  * Created by 10295 on 2017/12/10 0010
  */
 
 public class OperationRootFragment extends BaseFragment {
-    @BindView(R.id.vp_content)
-    NoScrollViewPager vpContent;
-    @BindView(R.id.mi_container)
-    MyIndicator mIndicator;
+    private NoScrollViewPager vpContent;
+    private MyIndicator mIndicator;
 
     private Fragment[] mFragments = {new OperatorTaskListFragment(), new MonitorTaskListFragment(), new IssueFragment()};
     private int[] mTitles = {R.string.tab_my_task, R.string.tab_task_monitor, R.string.tab_command_and_cooperation};
@@ -41,6 +37,16 @@ public class OperationRootFragment extends BaseFragment {
 
     @Override
     protected void init() {
+        initView();
+        initAdapter();
+    }
+
+    private void initView() {
+        vpContent = findViewById(R.id.vp_content);
+        mIndicator = findViewById(R.id.mi_container);
+    }
+
+    private void initAdapter() {
         vpContent.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         mIndicator.setViewPager(vpContent);
     }

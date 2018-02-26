@@ -29,29 +29,19 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * Created by 10295 on 2018/1/8.
  * 发送命令/协作中选择车次
  */
 
 public class SelectTrainActivity extends BaseActivity implements TextWatcher {
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
-    @BindView(R.id.et_search)
-    EditText etSearch;
-    @BindView(R.id.lv_list)
-    ListView lvList;
-    @BindView(R.id.ll_content)
-    LinearLayout llContent;
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-    @BindView(R.id.fl_container)
-    FrameLayout flContainer;
-    @BindView(R.id.tv_hint)
-    TextView tvHint;
+    private TitleView tvTitle;
+    private EditText etSearch;
+    private ListView lvList;
+    private LinearLayout llContent;
+    private ProgressBar progressBar;
+    private FrameLayout flContainer;
+    private TextView tvHint;
 
     private ArrayList<RunEntity> listData = new ArrayList<>();  // ListView显示的数据
     private ArrayList<RunEntity> allData = new ArrayList<>();   // 所有的车站数据
@@ -64,14 +54,20 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
 
     @Override
     protected void start() {
-        initAdapter();
+        initView();
         initListener();
+        initAdapter();
         initData();
     }
 
-    private void initAdapter() {
-        mLvAdapter = new SelectTrainAdapter(mContext, listData);
-        lvList.setAdapter(mLvAdapter);
+    private void initView() {
+        tvTitle = findViewById(R.id.tv_title);
+        etSearch = findViewById(R.id.et_search);
+        lvList = findViewById(R.id.lv_list);
+        llContent = findViewById(R.id.ll_content);
+        progressBar = findViewById(R.id.progress_bar);
+        flContainer = findViewById(R.id.fl_container);
+        tvHint = findViewById(R.id.tv_hint);
     }
 
     private void initListener() {
@@ -88,6 +84,12 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
             }
         });
         etSearch.addTextChangedListener(this);
+        addOnClickListeners(R.id.tv_hint);
+    }
+
+    private void initAdapter() {
+        mLvAdapter = new SelectTrainAdapter(mContext, listData);
+        lvList.setAdapter(mLvAdapter);
     }
 
     @Override
@@ -155,8 +157,8 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
                 });
     }
 
-    @OnClick(R.id.tv_hint)
-    public void onViewClicked() {
+    @Override
+    public void onClick(View view) {
         showView(flContainer, progressBar);
         initData();
     }

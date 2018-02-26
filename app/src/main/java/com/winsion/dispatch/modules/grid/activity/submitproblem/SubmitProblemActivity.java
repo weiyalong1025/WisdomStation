@@ -38,9 +38,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 import static com.winsion.dispatch.capture.activity.CaptureActivity.INTENT_EXTRA_KEY_QR_SCAN;
 import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
 import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.DEVICE_DEPENDENT;
@@ -53,24 +50,15 @@ import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.
  */
 
 public class SubmitProblemActivity extends BaseActivity implements SubmitProblemContact.View, UploadListener, SubmitBiz.SubmitListener {
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
-    @BindView(R.id.rl_device_info)
-    RelativeLayout rlDeviceInfo;
-    @BindView(R.id.tv_site)
-    TextView tvSite;
-    @BindView(R.id.tv_device_name)
-    TextView tvDeviceName;
-    @BindView(R.id.tv_subclass)
-    TextView tvSubclass;
-    @BindView(R.id.tv_grade)
-    TextView tvGrade;
-    @BindView(R.id.tv_time_limit)
-    TextView tvTimeLimit;
-    @BindView(R.id.et_word_content)
-    EditText etWordContent;
-    @BindView(R.id.lv_record)
-    ListView lvRecordList;
+    private TitleView tvTitle;
+    private RelativeLayout rlDeviceInfo;
+    private TextView tvSite;
+    private TextView tvDeviceName;
+    private TextView tvSubclass;
+    private TextView tvGrade;
+    private TextView tvTimeLimit;
+    private EditText etWordContent;
+    private ListView lvRecordList;
 
     private static final int CODE_TAKE_PHOTO = 0;   // 拍照
     private static final int CODE_CAPTURE_QR = 1;   // 扫描二维码
@@ -89,12 +77,6 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     private int selectSubclassPosition; // 选中的子项在列表中的位置
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.exit();
-    }
-
-    @Override
     protected int setContentView() {
         return R.layout.activity_submit_problem;
     }
@@ -102,8 +84,9 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     @Override
     protected void start() {
         initPresenter();
-        getIntentData();
         initView();
+        initData();
+        initListener();
         initAdapter();
     }
 
@@ -111,16 +94,29 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
         mPresenter = new SubmitProblemPresenter(this);
     }
 
-    private void getIntentData() {
+    private void initView() {
+        tvTitle = findViewById(R.id.tv_title);
+        rlDeviceInfo = findViewById(R.id.rl_device_info);
+        tvSite = findViewById(R.id.tv_site);
+        tvDeviceName = findViewById(R.id.tv_device_name);
+        tvSubclass = findViewById(R.id.tv_subclass);
+        tvGrade = findViewById(R.id.tv_grade);
+        tvTimeLimit = findViewById(R.id.tv_time_limit);
+        etWordContent = findViewById(R.id.et_word_content);
+        lvRecordList = findViewById(R.id.lv_record);
+    }
+
+    private void initData() {
         Intent intent = getIntent();
         patrolItemEntity = (PatrolItemEntity) intent.getSerializableExtra(PATROL_ITEM_ENTITY);
         siteName = intent.getStringExtra(SITE_NAME);
         deviceDependent = intent.getBooleanExtra(DEVICE_DEPENDENT, false);
     }
 
-    private void initView() {
+    private void initListener() {
         tvTitle.setOnBackClickListener(v -> showHintDialog());
         tvTitle.setOnConfirmClickListener(v -> submit());
+        addOnClickListeners(R.id.tv_device_name, R.id.iv_scan, R.id.tv_subclass, R.id.iv_take_photo);
 
         if (!deviceDependent) {
             rlDeviceInfo.setVisibility(View.GONE);
@@ -207,8 +203,8 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
         customDialog.show();
     }
 
-    @OnClick({R.id.tv_device_name, R.id.iv_scan, R.id.tv_subclass, R.id.iv_take_photo})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_device_name:
                 // 创建对话框
@@ -445,4 +441,9 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
         return mContext;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.exit();
+    }
 }

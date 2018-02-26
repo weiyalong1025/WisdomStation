@@ -20,9 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
 
 /**
@@ -32,18 +29,12 @@ import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
  * TODO 动态权限-录音
  */
 public class RecordVideoActivity extends BaseActivity {
-    @BindView(R.id.camera_preview)
-    SurfaceView mCameraPreview;
-    @BindView(R.id.timestamp_second_prefix)
-    TextView mSecondPrefix;
-    @BindView(R.id.timestamp_second_text)
-    TextView mSecondText;
-    @BindView(R.id.iv_shutter)
-    ImageView mShutter;
-    @BindView(R.id.ll_button)
-    LinearLayout llButton;
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
+    private SurfaceView mCameraPreview;
+    private TextView mSecondPrefix;
+    private TextView mSecondText;
+    private ImageView mShutter;
+    private LinearLayout llButton;
+    private TitleView tvTitle;
 
     private SurfaceHolder mSurfaceHolder;
     private Camera mCamera;
@@ -64,10 +55,29 @@ public class RecordVideoActivity extends BaseActivity {
 
     @Override
     protected void start() {
+        initView();
+        initListener();
+        initData();
+    }
+
+    private void initView() {
+        mCameraPreview = findViewById(R.id.camera_preview);
+        mSecondPrefix = findViewById(R.id.timestamp_second_prefix);
+        mSecondText = findViewById(R.id.timestamp_second_text);
+        mShutter = findViewById(R.id.iv_shutter);
+        llButton = findViewById(R.id.ll_button);
+        tvTitle = findViewById(R.id.tv_title);
+    }
+
+    private void initListener() {
         tvTitle.setOnBackClickListener(v -> {
             deleteFile();
             finish();
         });
+        addOnClickListeners(R.id.iv_shutter, R.id.btn_confirm, R.id.btn_cancel);
+    }
+
+    private void initData() {
         mCameraPreview.setKeepScreenOn(true);
         mCameraPreview.setFocusable(true);
         mFile = (File) getIntent().getSerializableExtra(MEDIA_FILE);
@@ -134,8 +144,8 @@ public class RecordVideoActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_shutter, R.id.btn_confirm, R.id.btn_cancel})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_shutter:
                 if (!isPressed) {

@@ -28,9 +28,6 @@ import com.zhy.adapter.abslistview.ViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * 作者：10295
  * 邮箱：10295010@qq.com
@@ -39,16 +36,11 @@ import butterknife.OnClick;
 
 public class SystemRemindFragment extends BaseFragment implements SystemRemindContract.View,
         AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
-    @BindView(R.id.lv_list)
-    ListView lvList;
-    @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout swipeRefresh;
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-    @BindView(R.id.tv_hint)
-    TextView tvHint;
-    @BindView(R.id.fl_container)
-    FrameLayout flContainer;
+    private ListView lvList;
+    private SwipeRefreshLayout swipeRefresh;
+    private ProgressBar progressBar;
+    private TextView tvHint;
+    private FrameLayout flContainer;
 
     private List<RemindEntity> listData = new ArrayList<>();
     private SystemRemindContract.Presenter mPresenter;
@@ -71,6 +63,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     @Override
     protected void init() {
         initPresenter();
+        initView();
         initAdapter();
         initListener();
         initData();
@@ -81,8 +74,28 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         mPresenter.start();
     }
 
+    private void initView() {
+        lvList = findViewById(R.id.lv_list);
+        swipeRefresh = findViewById(R.id.swipe_refresh);
+        progressBar = findViewById(R.id.progress_bar);
+        tvHint = findViewById(R.id.tv_hint);
+        flContainer = findViewById(R.id.fl_container);
+
+        swipeRefresh.setColorSchemeResources(R.color.blue1);
+    }
+
     private void initAdapter() {
         mLvAdapter = new SystemRemindAdapter(mContext, listData);
+        lvList.setAdapter(mLvAdapter);
+    }
+
+    // 获取已选项提示信息
+    private String getSelectCountHint(int selectSize) {
+        return String.format("%s%s%s", getString(R.string.prefix_selected), selectSize, getString(R.string.suffix_item));
+    }
+
+    private void initListener() {
+        swipeRefresh.setOnRefreshListener(this::initData);
         // 删除按钮点击事件
         mLvAdapter.setDeleteBtnClickListener(remindEntity -> new CustomDialog.NormalBuilder(mContext)
                 .setMessage(getString(R.string.dialog_sure_to_delete))
@@ -97,19 +110,9 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
                 })
                 .show());
         mLvAdapter.setOnSelectChangeListener(selectSize -> btnSelectCount.setText(getSelectCountHint(selectSize)));
-        lvList.setAdapter(mLvAdapter);
-    }
-
-    // 获取已选项提示信息
-    private String getSelectCountHint(int selectSize) {
-        return String.format("%s%s%s", getString(R.string.prefix_selected), selectSize, getString(R.string.suffix_item));
-    }
-
-    private void initListener() {
-        swipeRefresh.setColorSchemeResources(R.color.blue1);
-        swipeRefresh.setOnRefreshListener(this::initData);
         lvList.setOnItemClickListener(this);
         lvList.setOnItemLongClickListener(this);
+        addOnClickListeners(R.id.tv_hint);
     }
 
     private void initData() {
@@ -265,8 +268,8 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         isSelectAll = false;
     }
 
-    @OnClick(R.id.tv_hint)
-    public void onViewClicked() {
+    @Override
+    public void onClick(View view) {
         showView(flContainer, progressBar);
         initData();
     }

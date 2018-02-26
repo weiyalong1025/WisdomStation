@@ -46,9 +46,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
 import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.ISSUE_TYPE;
 import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.SELECT_TEAM;
@@ -59,26 +56,16 @@ import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.TO_
  * Created by wyl on 2016/8/1.
  */
 public class IssueActivity extends BaseActivity implements UploadListener {
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
-    @BindView(R.id.tv_performer_group_hint)
-    TextView tvPerformerGroupHint;
-    @BindView(R.id.et_content)
-    EditText etContent;
-    @BindView(R.id.tv_station)
-    TextView tvStation;
-    @BindView(R.id.tv_start_time)
-    TextView tvStartTime;
-    @BindView(R.id.tv_end_time)
-    TextView tvEndTime;
-    @BindView(R.id.tv_team_list)
-    TextView tvTeamList;
-    @BindView(R.id.et_title)
-    EditText etTitle;
-    @BindView(R.id.tv_train_number)
-    TextView tvTrainNumber;
-    @BindView(R.id.list_view)
-    ListView listView;
+    private TitleView tvTitle;
+    private TextView tvPerformerGroupHint;
+    private EditText etContent;
+    private TextView tvStation;
+    private TextView tvStartTime;
+    private TextView tvEndTime;
+    private TextView tvTeamList;
+    private EditText etTitle;
+    private TextView tvTrainNumber;
+    private ListView listView;
 
     // 选择班组
     public static final int CODE_SELECT_TEAM = 0;
@@ -145,14 +132,29 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     @Override
     protected void start() {
-        initData();
         initView();
+        initData();
+        initListener();
         initAdapter();
+    }
+
+    private void initView() {
+        tvTitle = findViewById(R.id.tv_title);
+        tvPerformerGroupHint = findViewById(R.id.tv_performer_group_hint);
+        etContent = findViewById(R.id.et_content);
+        tvStation = findViewById(R.id.tv_station);
+        tvStartTime = findViewById(R.id.tv_start_time);
+        tvEndTime = findViewById(R.id.tv_end_time);
+        tvTeamList = findViewById(R.id.tv_team_list);
+        etTitle = findViewById(R.id.et_title);
+        tvTrainNumber = findViewById(R.id.tv_train_number);
+        listView = findViewById(R.id.list_view);
     }
 
     private void initData() {
         initIntentData();
         initStationData();
+        initViewData();
     }
 
     private void initIntentData() {
@@ -181,9 +183,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         stationList.add(getString(R.string.spinner_station_name));
     }
 
-    private void initView() {
-        tvTitle.setOnBackClickListener(v -> showHintDialog());
-        tvTitle.setOnConfirmClickListener(v -> issue());
+    private void initViewData() {
         // 命令/协作内容  hint
         switch (issueType) {
             case TaskType.COMMAND:
@@ -203,6 +203,20 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         if (isEmpty(teamNames)) {
             tvTeamList.setText(teamNames);
         }
+    }
+
+    private void initListener() {
+        tvTitle.setOnBackClickListener(v -> showHintDialog());
+        tvTitle.setOnConfirmClickListener(v -> issue());
+        addOnClickListeners(R.id.tv_station, R.id.tv_start_time, R.id.tv_end_time, R.id.iv_add_performer,
+                R.id.tv_train_number, R.id.btn_take_photo, R.id.btn_video, R.id.btn_record);
+    }
+
+    private void initAdapter() {
+        recordAdapter = new RecordAdapter(mContext, localRecordEntities);
+        recordAdapter.setUploadPerformer(localRecordEntity -> NetDataSource.uploadFileNoData(this,
+                localRecordEntity.getFile(), this));
+        listView.setAdapter(recordAdapter);
     }
 
     /**
@@ -288,6 +302,63 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         customDialog.show();
     }
 
+    @Override
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.tv_station:
+                // 选择车站点击事件
+                showStationPickerView(view);
+                break;
+            case R.id.tv_start_time:
+                // 开始时间点击事件
+                showTimePickerView((TextView) view, 0);
+                break;
+            case R.id.tv_end_time:
+                // 结束时间点击事件
+                showTimePickerView((TextView) view, 1);
+                break;
+            case R.id.iv_add_performer:
+                // 选择班组按钮点击事件
+                startActivityForResult(SelectTeamActivity.class, CODE_SELECT_TEAM);
+                break;
+            case R.id.tv_train_number:
+                // 选择车次
+                startActivityForResult(SelectTrainActivity.class, CODE_SELECT_TRAIN);
+                break;
+            case R.id.btn_take_photo:
+                try {
+                    photoFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
+                    intent = new Intent(mContext, TakePhotoActivity.class);
+                    intent.putExtra(MEDIA_FILE, photoFile);
+                    startActivityForResult(intent, CODE_TAKE_PHOTO);
+                } catch (IOException e) {
+                    showToast(R.string.toast_check_sdcard);
+                }
+                break;
+            case R.id.btn_video:
+                try {
+                    videoFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.VIDEO);
+                    intent = new Intent(mContext, RecordVideoActivity.class);
+                    intent.putExtra(MEDIA_FILE, videoFile);
+                    startActivityForResult(intent, CODE_RECORD_VIDEO);
+                } catch (IOException e) {
+                    showToast(R.string.toast_check_sdcard);
+                }
+                break;
+            case R.id.btn_record:
+                try {
+                    audioFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.AUDIO);
+                    intent = new Intent(mContext, RecordAudioActivity.class);
+                    intent.putExtra(MEDIA_FILE, audioFile);
+                    startActivityForResult(intent, CODE_RECORD_AUDIO);
+                } catch (IOException e) {
+                    showToast(R.string.toast_check_sdcard);
+                }
+                break;
+        }
+    }
+
     private void showStationPickerView(View v) {
         // 隐藏软键盘
         CommonBiz.hideKeyboard(v);
@@ -350,12 +421,6 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                 .build();
         CommonBiz.selfAdaptionTopBar(timePickerView);
         timePickerView.show();
-    }
-
-    private void initAdapter() {
-        recordAdapter = new RecordAdapter(mContext, localRecordEntities);
-        recordAdapter.setUploadPerformer(localRecordEntity -> NetDataSource.uploadFileNoData(this, localRecordEntity.getFile(), this));
-        listView.setAdapter(recordAdapter);
     }
 
     @Override
@@ -425,64 +490,6 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     NetDataSource.uploadFileNoData(this, audioFile, this);
                     break;
             }
-        }
-    }
-
-    @OnClick({R.id.tv_station, R.id.tv_start_time, R.id.tv_end_time, R.id.iv_add_performer, R.id.tv_train_number,
-            R.id.btn_take_photo, R.id.btn_video, R.id.btn_record})
-    public void onViewClicked(View view) {
-        Intent intent;
-        switch (view.getId()) {
-            case R.id.tv_station:
-                // 选择车站点击事件
-                showStationPickerView(view);
-                break;
-            case R.id.tv_start_time:
-                // 开始时间点击事件
-                showTimePickerView((TextView) view, 0);
-                break;
-            case R.id.tv_end_time:
-                // 结束时间点击事件
-                showTimePickerView((TextView) view, 1);
-                break;
-            case R.id.iv_add_performer:
-                // 选择班组按钮点击事件
-                startActivityForResult(SelectTeamActivity.class, CODE_SELECT_TEAM);
-                break;
-            case R.id.tv_train_number:
-                // 选择车次
-                startActivityForResult(SelectTrainActivity.class, CODE_SELECT_TRAIN);
-                break;
-            case R.id.btn_take_photo:
-                try {
-                    photoFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
-                    intent = new Intent(mContext, TakePhotoActivity.class);
-                    intent.putExtra(MEDIA_FILE, photoFile);
-                    startActivityForResult(intent, CODE_TAKE_PHOTO);
-                } catch (IOException e) {
-                    showToast(R.string.toast_check_sdcard);
-                }
-                break;
-            case R.id.btn_video:
-                try {
-                    videoFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.VIDEO);
-                    intent = new Intent(mContext, RecordVideoActivity.class);
-                    intent.putExtra(MEDIA_FILE, videoFile);
-                    startActivityForResult(intent, CODE_RECORD_VIDEO);
-                } catch (IOException e) {
-                    showToast(R.string.toast_check_sdcard);
-                }
-                break;
-            case R.id.btn_record:
-                try {
-                    audioFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.AUDIO);
-                    intent = new Intent(mContext, RecordAudioActivity.class);
-                    intent.putExtra(MEDIA_FILE, audioFile);
-                    startActivityForResult(intent, CODE_RECORD_AUDIO);
-                } catch (IOException e) {
-                    showToast(R.string.toast_check_sdcard);
-                }
-                break;
         }
     }
 

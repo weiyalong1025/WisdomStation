@@ -13,23 +13,16 @@ import com.winsion.dispatch.view.CircleImageView;
 import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.TitleView;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * Created by 10295 on 2017/12/19 0019
  * 用户信息界面
  */
 
 public class UserActivity extends BaseActivity {
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
-    @BindView(R.id.iv_head)
-    CircleImageView ivHead;
-    @BindView(R.id.tv_username)
-    TextView tvUsername;
-    @BindView(R.id.tv_role_name)
-    TextView tvRoleName;
+    private TitleView tvTitle;
+    private CircleImageView ivHead;
+    private TextView tvUsername;
+    private TextView tvRoleName;
 
     private CustomDialog customDialog;
 
@@ -40,13 +33,30 @@ public class UserActivity extends BaseActivity {
 
     @Override
     protected void start() {
-        tvUsername.setText(CacheDataSource.getRealName());
-        ImageLoader.loadUrl(ivHead, CacheDataSource.getUserHeadAddress(), R.drawable.ic_head_single, R.drawable.ic_head_single);
-        tvTitle.setOnBackClickListener(v -> finish());
+        initView();
+        initData();
+        initListener();
     }
 
-    @OnClick({R.id.rl_check_update, R.id.btn_logout})
-    public void onViewClicked(View view) {
+    private void initView() {
+        tvTitle = findViewById(R.id.tv_title);
+        ivHead = findViewById(R.id.iv_head);
+        tvUsername = findViewById(R.id.tv_username);
+        tvRoleName = findViewById(R.id.tv_role_name);
+    }
+
+    private void initData() {
+        tvUsername.setText(CacheDataSource.getRealName());
+        ImageLoader.loadUrl(ivHead, CacheDataSource.getUserHeadAddress(), R.drawable.ic_head_single, R.drawable.ic_head_single);
+    }
+
+    private void initListener() {
+        tvTitle.setOnBackClickListener(v -> finish());
+        addOnClickListeners(R.id.rl_check_update, R.id.btn_logout);
+    }
+
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_check_update:
                 CommonBiz.checkVersionUpdate(mContext, this, true);

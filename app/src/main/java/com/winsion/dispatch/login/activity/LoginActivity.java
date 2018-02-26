@@ -41,27 +41,18 @@ import com.winsion.dispatch.view.WrapContentListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * Created by wyl on 2017/12/5
  */
-public class LoginActivity extends BaseActivity implements LoginContract.View, TextWatcher, LoginListener, AdapterView.OnItemClickListener {
-    @BindView(R.id.et_username)
-    EditText etUsername;
-    @BindView(R.id.et_password)
-    EditText etPassword;
-    @BindView(R.id.civ_head)
-    CircleImageView civHead;
-    @BindView(R.id.rl_username)
-    RelativeLayout rlUsername;
-    @BindView(R.id.ll_username)
-    LinearLayout llUsername;
-    @BindView(R.id.iv_arrow)
-    ImageView ivArrow;
-    @BindView(R.id.iv_visibility)
-    ImageView ivVisibility;
+public class LoginActivity extends BaseActivity implements LoginContract.View, TextWatcher,
+        LoginListener, AdapterView.OnItemClickListener {
+    private EditText etUsername;
+    private EditText etPassword;
+    private CircleImageView civHead;
+    private RelativeLayout rlUsername;
+    private LinearLayout llUsername;
+    private ImageView ivArrow;
+    private ImageView ivVisibility;
 
     private List<UserEntity> mAllSavedUser = new ArrayList<>();
 
@@ -71,6 +62,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
     private RotateAnimation mUpAnim;
     private RotateAnimation mDownAnim;
     private boolean isSoftShow;
+    // 密码是否可见
+    private boolean mVisibility = false;
 
     @Override
     protected int setContentView() {
@@ -79,9 +72,20 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
 
     @Override
     protected void start() {
+        initView();
         initPresenter();
         initListener();
         initData();
+    }
+
+    private void initView() {
+        etUsername = findViewById(R.id.et_username);
+        etPassword = findViewById(R.id.et_password);
+        civHead = findViewById(R.id.civ_head);
+        rlUsername = findViewById(R.id.rl_username);
+        llUsername = findViewById(R.id.ll_username);
+        ivArrow = findViewById(R.id.iv_arrow);
+        ivVisibility = findViewById(R.id.iv_visibility);
     }
 
     private void initPresenter() {
@@ -94,6 +98,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
      */
     private void initListener() {
         etUsername.addTextChangedListener(this);
+        addOnClickListeners(R.id.iv_arrow, R.id.iv_visibility, R.id.btn_login, R.id.tv_login_config);
     }
 
     /**
@@ -140,10 +145,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         });
     }
 
-    private boolean mVisibility = false;
-
-    @OnClick({R.id.iv_arrow, R.id.iv_visibility, R.id.btn_login, R.id.tv_login_config})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_arrow:
                 showPopupWindow(view);

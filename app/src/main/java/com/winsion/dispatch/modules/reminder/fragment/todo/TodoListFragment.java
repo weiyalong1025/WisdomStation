@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 import static android.app.Activity.RESULT_OK;
 import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_ID;
 
@@ -35,12 +32,9 @@ import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_
  * Created by wyl on 2017/6/2
  */
 public class TodoListFragment extends BaseFragment implements TodoListContract.View, AdapterView.OnItemClickListener {
-    @BindView(R.id.sv_spinner)
-    SpinnerView svSpinner;
-    @BindView(R.id.lv_reminders_list)
-    ListView lvRemindersList;
-    @BindView(R.id.iv_shade)
-    ImageView ivShade;
+    private SpinnerView svSpinner;
+    private ListView lvRemindersList;
+    private ImageView ivShade;
 
     /**
      * 状态筛选-全部
@@ -69,6 +63,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
     @Override
     protected void init() {
         initPresenter();
+        initView();
         initSpinner();
         initAdapter();
         initListener();
@@ -79,6 +74,12 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
     private void initPresenter() {
         mPresenter = new TodoListPresenter(this);
         mPresenter.start();
+    }
+
+    private void initView() {
+        svSpinner = findViewById(R.id.sv_spinner);
+        lvRemindersList = findViewById(R.id.lv_reminders_list);
+        ivShade = findViewById(R.id.iv_shade);
     }
 
     private void initSpinner() {
@@ -114,6 +115,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
                 .setPositiveButton((dialog, which) -> mPresenter.deleteTodo(todoEntity))
                 .show());
         lvRemindersList.setOnItemClickListener(this);
+        addOnClickListeners(R.id.btn_add);
     }
 
     /**
@@ -168,8 +170,8 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
         }
     }
 
-    @OnClick(R.id.btn_add)
-    public void onViewClicked() {
+    @Override
+    public void onClick(View view) {
         startActivityForResult(AddTodoActivity.class);
     }
 

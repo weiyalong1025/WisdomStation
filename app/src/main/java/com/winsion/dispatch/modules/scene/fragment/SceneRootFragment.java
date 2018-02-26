@@ -6,8 +6,6 @@ import android.view.View;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseFragment;
 
-import butterknife.OnClick;
-
 /**
  * Created by 10295 on 2017/12/10 0010.
  * 现场一级界面
@@ -23,14 +21,14 @@ public class SceneRootFragment extends BaseFragment {
 
     @Override
     protected void init() {
-
+        addOnClickListeners(R.id.ib_main_passenger, R.id.iv_lost, R.id.iv_area_broadcast, R.id.iv_broadcast,
+                R.id.iv_transfer, R.id.iv_elevator, R.id.iv_water, R.id.iv_video, R.id.iv_door,
+                R.id.iv_air_conditioner, R.id.iv_air_handing, R.id.iv_pump, R.id.iv_cooling_tower,
+                R.id.iv_light);
     }
 
-    @OnClick({R.id.ib_main_passenger, R.id.iv_lost, R.id.iv_area_broadcast, R.id.iv_broadcast,
-            R.id.iv_transfer, R.id.iv_elevator, R.id.iv_water, R.id.iv_video, R.id.iv_door,
-            R.id.iv_air_conditioner, R.id.iv_air_handing, R.id.iv_pump, R.id.iv_cooling_tower,
-            R.id.iv_light})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_main_passenger:
                 showToast("重点旅客");

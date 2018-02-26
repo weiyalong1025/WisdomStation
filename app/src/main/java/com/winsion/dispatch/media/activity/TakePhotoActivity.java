@@ -28,9 +28,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
 
 /**
@@ -38,14 +35,10 @@ import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
  * TODO 动态权限-相机
  */
 public class TakePhotoActivity extends BaseActivity {
-    @BindView(R.id.sv_preview)
-    SurfaceView svPreview;
-    @BindView(R.id.iv_shutter)
-    ImageView ivButton;
-    @BindView(R.id.ll_button)
-    LinearLayout llButton;
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
+    private SurfaceView svPreview;
+    private ImageView ivButton;
+    private LinearLayout llButton;
+    private TitleView tvTitle;
 
     private SurfaceHolder holder;
     private Camera mCamera;
@@ -59,10 +52,19 @@ public class TakePhotoActivity extends BaseActivity {
 
     @Override
     protected void start() {
-        tvTitle.setOnBackClickListener(v -> {
-            deleteFile();
-            finish();
-        });
+        initView();
+        initData();
+        initListener();
+    }
+
+    private void initView() {
+        svPreview = findViewById(R.id.sv_preview);
+        ivButton = findViewById(R.id.iv_shutter);
+        llButton = findViewById(R.id.ll_button);
+        tvTitle = findViewById(R.id.tv_title);
+    }
+
+    private void initData() {
         svPreview.setKeepScreenOn(true);
         svPreview.setFocusable(true);
         mFile = (File) getIntent().getSerializableExtra(MEDIA_FILE);
@@ -90,6 +92,14 @@ public class TakePhotoActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void initListener() {
+        tvTitle.setOnBackClickListener(v -> {
+            deleteFile();
+            finish();
+        });
+        addOnClickListeners(R.id.iv_shutter, R.id.btn_confirm, R.id.btn_cancel);
     }
 
     /**
@@ -196,7 +206,7 @@ public class TakePhotoActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_shutter, R.id.btn_confirm, R.id.btn_cancel})
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_shutter:

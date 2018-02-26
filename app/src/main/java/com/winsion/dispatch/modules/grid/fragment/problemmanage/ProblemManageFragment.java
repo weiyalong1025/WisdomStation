@@ -20,24 +20,16 @@ import com.winsion.dispatch.view.CustomDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * Created by wyl on 2017/6/29
  */
 public class ProblemManageFragment extends BaseFragment implements ProblemManageContract.View,
         AdapterView.OnItemClickListener, ProblemManageAdapter.ConfirmButtonListener {
-    @BindView(R.id.lv_list)
-    ListView lvList;
-    @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout swipeRefresh;
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-    @BindView(R.id.tv_hint)
-    TextView tvHint;
-    @BindView(R.id.fl_container)
-    FrameLayout flContainer;
+    private ListView lvList;
+    private SwipeRefreshLayout swipeRefresh;
+    private ProgressBar progressBar;
+    private TextView tvHint;
+    private FrameLayout flContainer;
 
     private ProblemManageContract.Presenter mPresenter;
     private List<TaskEntity> listData = new ArrayList<>();
@@ -52,6 +44,7 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
     @Override
     protected void init() {
         initPresenter();
+        initView();
         initAdapter();
         initListener();
         initData();
@@ -61,16 +54,26 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
         mPresenter = new ProblemManagePresenter(this);
     }
 
+    private void initView() {
+        lvList = findViewById(R.id.lv_list);
+        swipeRefresh = findViewById(R.id.swipe_refresh);
+        progressBar = findViewById(R.id.progress_bar);
+        tvHint = findViewById(R.id.tv_hint);
+        flContainer = findViewById(R.id.fl_container);
+
+        swipeRefresh.setColorSchemeResources(R.color.blue1);
+    }
+
     private void initAdapter() {
         mLvAdapter = new ProblemManageAdapter(mContext, listData);
         lvList.setAdapter(mLvAdapter);
     }
 
     private void initListener() {
-        swipeRefresh.setColorSchemeResources(R.color.blue1);
         swipeRefresh.setOnRefreshListener(this::initData);
         lvList.setOnItemClickListener(this);
         mLvAdapter.setConfirmButtonListener(this);
+        addOnClickListeners(R.id.tv_hint);
     }
 
     private void initData() {
@@ -161,8 +164,8 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
         }
     }
 
-    @OnClick(R.id.tv_hint)
-    public void onViewClicked() {
+    @Override
+    public void onClick(View view) {
         showView(flContainer, progressBar);
         initData();
     }

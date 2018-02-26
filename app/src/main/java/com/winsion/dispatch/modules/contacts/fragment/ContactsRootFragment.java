@@ -12,18 +12,14 @@ import com.winsion.dispatch.base.BaseFragment;
 import com.winsion.dispatch.view.MyIndicator;
 import com.winsion.dispatch.view.NoScrollViewPager;
 
-import butterknife.BindView;
-
 /**
  * Created by 10295 on 2017/12/10 0010.
  * 联系人一级界面
  */
 
 public class ContactsRootFragment extends BaseFragment {
-    @BindView(R.id.vp_content)
-    NoScrollViewPager vpContent;
-    @BindView(R.id.mi_container)
-    MyIndicator mIndicator;
+    private NoScrollViewPager vpContent;
+    private MyIndicator mIndicator;
 
     private Fragment[] mFragments = {new PlaceHolderFragment(), new PlaceHolderFragment(), new PlaceHolderFragment()};
     private int[] mTitles = {R.string.tab_contacts, R.string.tab_team_group, R.string.tab_contact_group};
@@ -36,6 +32,16 @@ public class ContactsRootFragment extends BaseFragment {
 
     @Override
     protected void init() {
+        initView();
+        initAdapter();
+    }
+
+    private void initView() {
+        vpContent = findViewById(R.id.vp_content);
+        mIndicator = findViewById(R.id.mi_container);
+    }
+
+    private void initAdapter() {
         vpContent.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         mIndicator.setViewPager(vpContent);
     }

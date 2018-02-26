@@ -25,9 +25,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.SELECT_TEAM;
 
 /**
@@ -36,18 +33,12 @@ import static com.winsion.dispatch.modules.operation.constants.Intents.Issue.SEL
  */
 
 public class SelectTeamActivity extends BaseActivity {
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
-    @BindView(R.id.lv_list)
-    ListView lvList;
-    @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout swipeRefresh;
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-    @BindView(R.id.tv_hint)
-    TextView tvHint;
-    @BindView(R.id.fl_container)
-    FrameLayout flContainer;
+    private TitleView tvTitle;
+    private ListView lvList;
+    private SwipeRefreshLayout swipeRefresh;
+    private ProgressBar progressBar;
+    private TextView tvHint;
+    private FrameLayout flContainer;
 
     private ArrayList<TeamEntity> listData = new ArrayList<>(); // ListView数据
     private SelectTeamAdapter mLvAdapter;
@@ -59,17 +50,22 @@ public class SelectTeamActivity extends BaseActivity {
 
     @Override
     protected void start() {
-        initAdapter();
         initView();
+        initListener();
+        initAdapter();
         initData();
     }
 
-    private void initAdapter() {
-        mLvAdapter = new SelectTeamAdapter(mContext, listData);
-        lvList.setAdapter(mLvAdapter);
+    private void initView() {
+        tvTitle = findViewById(R.id.tv_title);
+        lvList = findViewById(R.id.lv_list);
+        swipeRefresh = findViewById(R.id.swipe_refresh);
+        progressBar = findViewById(R.id.progress_bar);
+        tvHint = findViewById(R.id.tv_hint);
+        flContainer = findViewById(R.id.fl_container);
     }
 
-    private void initView() {
+    private void initListener() {
         tvTitle.setOnBackClickListener((View v) -> finish());
         tvTitle.setOnConfirmClickListener((View v) -> {
             if (mLvAdapter.getSelectedList().size() == 0) {
@@ -81,7 +77,13 @@ public class SelectTeamActivity extends BaseActivity {
                 finish();
             }
         });
+        addOnClickListeners(R.id.tv_hint);
         swipeRefresh.setEnabled(false);
+    }
+
+    private void initAdapter() {
+        mLvAdapter = new SelectTeamAdapter(mContext, listData);
+        lvList.setAdapter(mLvAdapter);
     }
 
     private void initData() {
@@ -116,8 +118,8 @@ public class SelectTeamActivity extends BaseActivity {
                 });
     }
 
-    @OnClick(R.id.tv_hint)
-    public void onViewClicked() {
+    @Override
+    public void onClick(View view) {
         showView(flContainer, progressBar);
         initData();
     }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.ColorRes;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,13 +18,11 @@ import com.winsion.dispatch.utils.HandlerUtils;
 import com.winsion.dispatch.utils.LogUtils;
 import com.winsion.dispatch.utils.ToastUtils;
 
-import butterknife.ButterKnife;
-
 /**
  * Created by yalong on 2016/6/13.
  * 基类-Fragment
  */
-public abstract class BaseFragment extends Fragment implements HandlerUtils.OnReceiveMessageListener {
+public abstract class BaseFragment extends Fragment implements HandlerUtils.OnReceiveMessageListener, View.OnClickListener {
     /**
      * 默认的REQUEST_CODE
      */
@@ -49,7 +48,6 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
         // 缓存Fragment，防止切换造成UI的重绘
         if (mContentView == null) {
             mContentView = setContentView();
-            ButterKnife.bind(this, mContentView);
             init();
         }
         ViewGroup parent = (ViewGroup) mContentView.getParent();
@@ -164,5 +162,21 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
 
     public boolean onKeyDown(int keyCode) {
         return false;
+    }
+
+    public <T extends View> T findViewById(@IdRes int id) {
+        return mContentView.findViewById(id);
+    }
+
+    public void addOnClickListeners(@IdRes int... ids) {
+        if (ids != null) {
+            for (@IdRes int id : ids) {
+                findViewById(id).setOnClickListener(this);
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
     }
 }

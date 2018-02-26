@@ -10,6 +10,7 @@ import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -22,19 +23,17 @@ import com.winsion.dispatch.view.ViewfinderView;
 import java.io.IOException;
 import java.util.Vector;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * Created by wyl on 2017/7/6
  */
 public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callback {
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
-    @BindView(R.id.scanner_view)
-    SurfaceView surfaceView;
-    @BindView(R.id.viewfinder_content)
-    ViewfinderView viewfinderView;
+    private TitleView tvTitle;
+    private SurfaceView surfaceView;
+    private ViewfinderView viewfinderView;
+
+    private static final long VIBRATE_DURATION = 200L;
+    private static final float BEEP_VOLUME = 0.10f;
+    public static final String INTENT_EXTRA_KEY_QR_SCAN = "qr_scan_result";
 
     private CaptureActivityHandler handler;
     private boolean hasSurface;
@@ -45,10 +44,6 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
     private boolean playBeep;
     private boolean vibrate;
 
-    private static final long VIBRATE_DURATION = 200L;
-    private static final float BEEP_VOLUME = 0.10f;
-    public static final String INTENT_EXTRA_KEY_QR_SCAN = "qr_scan_result";
-
     @Override
     protected int setContentView() {
         return R.layout.activity_capture;
@@ -56,14 +51,30 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
 
     @Override
     protected void start() {
+        initView();
+        initData();
+        initListener();
+    }
+
+    private void initView() {
+        tvTitle = findViewById(R.id.tv_title);
+        surfaceView = findViewById(R.id.scanner_view);
+        viewfinderView = findViewById(R.id.viewfinder_content);
+    }
+
+    private void initData() {
         CameraManager.init(getApplication());
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
-        tvTitle.setOnBackClickListener(v -> finish());
     }
 
-    @OnClick({R.id.btn_flashLight})
-    public void onViewClicked() {
+    private void initListener() {
+        tvTitle.setOnBackClickListener(v -> finish());
+        addOnClickListeners(R.id.btn_flashLight);
+    }
+
+    @Override
+    public void onClick(View view) {
         CameraManager.get().flashHandler();
     }
 

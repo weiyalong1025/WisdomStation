@@ -3,6 +3,7 @@ package com.winsion.dispatch.modules.grid.activity.patrolitem;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -28,9 +29,6 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 import static com.winsion.dispatch.modules.grid.constants.Intents.PatrolItem.PATROL_TASK_ENTITY;
 import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.DEVICE_DEPENDENT;
 import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.PATROL_ITEM_ENTITY;
@@ -43,22 +41,14 @@ import static com.winsion.dispatch.modules.grid.constants.Intents.SubmitProblem.
 
 public class PatrolItemActivity extends BaseActivity implements PatrolItemContract.View,
         PatrolItemAdapter.Operator, SubmitBiz.SubmitListener {
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
-    @BindView(R.id.tv_arrive_time)
-    TextView tvArriveTime;
-    @BindView(R.id.tv_finish_time)
-    TextView tvFinishTime;
-    @BindView(R.id.lv_list)
-    ListView lvList;
-    @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout swipeRefresh;
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-    @BindView(R.id.tv_hint)
-    TextView tvHint;
-    @BindView(R.id.fl_container)
-    FrameLayout flContainer;
+    private TitleView tvTitle;
+    private TextView tvArriveTime;
+    private TextView tvFinishTime;
+    private ListView lvList;
+    private SwipeRefreshLayout swipeRefresh;
+    private ProgressBar progressBar;
+    private TextView tvHint;
+    private FrameLayout flContainer;
 
     private static final int CODE_SUBMIT = 0; // 上报问题REQUEST_CODE
 
@@ -76,6 +66,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     @Override
     protected void start() {
         initPresenter();
+        initView();
         initIntentData();
         initViewData();
         initListener();
@@ -86,6 +77,17 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
     private void initPresenter() {
         mPresenter = new PatrolItemPresenter(this);
         mPresenter.start();
+    }
+
+    private void initView() {
+        tvTitle = findViewById(R.id.tv_title);
+        tvArriveTime = findViewById(R.id.tv_arrive_time);
+        tvFinishTime = findViewById(R.id.tv_finish_time);
+        lvList = findViewById(R.id.lv_list);
+        swipeRefresh = findViewById(R.id.swipe_refresh);
+        progressBar = findViewById(R.id.progress_bar);
+        tvHint = findViewById(R.id.tv_hint);
+        flContainer = findViewById(R.id.fl_container);
     }
 
     private void initIntentData() {
@@ -127,6 +129,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
         });
         swipeRefresh.setColorSchemeResources(R.color.blue1);
         swipeRefresh.setOnRefreshListener(() -> mPresenter.getPatrolItemData(patrolPlanEntity.getId()));
+        addOnClickListeners(R.id.tv_hint);
     }
 
     private void initAdapter() {
@@ -278,8 +281,8 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
         showView(flContainer, tvHint);
     }
 
-    @OnClick(R.id.tv_hint)
-    public void onViewClicked() {
+    @Override
+    public void onClick(View view) {
         showView(flContainer, progressBar);
         mPresenter.getPatrolItemData(patrolPlanEntity.getId());
     }

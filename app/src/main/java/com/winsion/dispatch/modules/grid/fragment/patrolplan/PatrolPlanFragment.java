@@ -40,9 +40,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 import static android.app.Activity.RESULT_CANCELED;
 import static com.winsion.dispatch.modules.grid.constants.Intents.PatrolItem.PATROL_TASK_ENTITY;
 
@@ -52,18 +49,12 @@ import static com.winsion.dispatch.modules.grid.constants.Intents.PatrolItem.PAT
  * TODO 蓝牙需要动态权限
  */
 public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContract.View, AdapterView.OnItemClickListener, BluetoothAdapter.LeScanCallback {
-    @BindView(R.id.tv_date)
-    TextView tvDate;
-    @BindView(R.id.lv_list)
-    ListView lvList;
-    @BindView(R.id.swipe_refresh)
-    SwipeRefreshLayout swipeRefresh;
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-    @BindView(R.id.tv_hint)
-    TextView tvHint;
-    @BindView(R.id.fl_container)
-    FrameLayout flContainer;
+    private TextView tvDate;
+    private ListView lvList;
+    private SwipeRefreshLayout swipeRefresh;
+    private ProgressBar progressBar;
+    private TextView tvHint;
+    private FrameLayout flContainer;
 
     private static final int REQUEST_ENABLE_BT = 100;
 
@@ -147,6 +138,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     protected void init() {
         initPresenter();
         initView();
+        initAdapter();
         initBluetooth();
         initListener();
         initData();
@@ -157,8 +149,17 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     }
 
     private void initView() {
+        tvDate = findViewById(R.id.tv_date);
+        lvList = findViewById(R.id.lv_list);
+        swipeRefresh = findViewById(R.id.swipe_refresh);
+        progressBar = findViewById(R.id.progress_bar);
+        tvHint = findViewById(R.id.tv_hint);
+        flContainer = findViewById(R.id.fl_container);
+
         swipeRefresh.setColorSchemeResources(R.color.blue1);
-        // adapter
+    }
+
+    private void initAdapter() {
         mLvAdapter = new PatrolPlanAdapter(mContext, listData);
         lvList.setAdapter(mLvAdapter);
     }
@@ -236,6 +237,8 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
         EventBus.getDefault().register(this);
         swipeRefresh.setOnRefreshListener(this::initData);
         lvList.setOnItemClickListener(this);
+
+        addOnClickListeners(R.id.iv_bluetooth, R.id.tv_hint);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -263,11 +266,11 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
         mPresenter.getPatrolPlanData();
     }
 
-    @SuppressLint("InflateParams")
-    @OnClick({R.id.iv_bluetooth, R.id.tv_hint})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_bluetooth:
+                @SuppressLint("InflateParams")
                 View inflate = LayoutInflater.from(getContext()).inflate(R.layout.item_bluetooth_info, null);
                 inflate.measure(0, 0);
                 int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, inflate.getMeasuredHeight());

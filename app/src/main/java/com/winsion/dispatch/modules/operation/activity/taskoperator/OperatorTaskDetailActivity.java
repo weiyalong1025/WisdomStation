@@ -55,8 +55,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -72,112 +70,59 @@ import static com.winsion.dispatch.modules.operation.constants.Intents.OperatorT
  */
 
 public class OperatorTaskDetailActivity extends BaseActivity implements OperatorTaskDetailContract.View, UploadListener, DownloadListener {
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
-    @BindView(R.id.tv_number)
-    TextView tvNumber;
-    @BindView(R.id.tv_startStationName)
-    TextView tvStartStationName;
-    @BindView(R.id.tv_train_status)
-    TextView tvTrainStatus;
-    @BindView(R.id.tv_endStationName)
-    TextView tvEndStationName;
-    @BindView(R.id.tv_track)
-    TextView tvTrack;
-    @BindView(R.id.ll_track)
-    LinearLayout llTrack;
-    @BindView(R.id.tv_platform)
-    TextView tvPlatform;
-    @BindView(R.id.ll_platform)
-    LinearLayout llPlatform;
-    @BindView(R.id.tv_plan_arrive)
-    TextView tvPlanArrive;
-    @BindView(R.id.tv_plan_depart)
-    TextView tvPlanDepart;
-    @BindView(R.id.tv_wait_room)
-    TextView tvWaitRoom;
-    @BindView(R.id.ll_wait_room)
-    LinearLayout llWaitRoom;
-    @BindView(R.id.tv_real_arrive)
-    TextView tvRealArrive;
-    @BindView(R.id.tv_real_depart)
-    TextView tvRealDepart;
-    @BindView(R.id.tv_check_port)
-    TextView tvCheckPort;
-    @BindView(R.id.ll_check_port)
-    LinearLayout llCheckPort;
-    @BindView(R.id.ll_train_module)
-    LinearLayout llTrainModule;
-    @BindView(R.id.div_header)
-    ImageView divHeader;
-    @BindView(R.id.iv_status)
-    ImageView ivStatus;
-    @BindView(R.id.doing_gif)
-    GifView doingGif;
-    @BindView(R.id.iv_icon_order)
-    ImageView ivIconOrder;
-    @BindView(R.id.task_type_name)
-    TextView taskTypeName;
-    @BindView(R.id.iv_job_icon)
-    ImageView ivJobIcon;
-    @BindView(R.id.tv_task_name)
-    TextView tvTaskName;
-    @BindView(R.id.tv_last_time)
-    TextView tvLastTime;
-    @BindView(R.id.tv_location)
-    TextView tvLocation;
-    @BindView(R.id.btn_note)
-    DrawableCenterTextView btnNote;
-    @BindView(R.id.btn_status)
-    Button btnStatus;
-    @BindView(R.id.btn_broadcast)
-    DrawableCenterTextView btnBroadcast;
-    @BindView(R.id.tv_plan_time)
-    TextView tvPlanTime;
-    @BindView(R.id.tv_real_time)
-    TextView tvRealTime;
-    @BindView(R.id.btn_take_photo)
-    Button btnTakePhoto;
-    @BindView(R.id.btn_video)
-    Button btnVideo;
-    @BindView(R.id.btn_record)
-    Button btnRecord;
-    @BindView(R.id.ll_bg_color)
-    LinearLayout llBgColor;
-    @BindView(R.id.tv_publisher_title)
-    TextView tvPublisherTitle;
-    @BindView(R.id.lv_record_publisher_grid)
-    ListView lvRecordPublisherGrid;
-    @BindView(R.id.tv_performer_title)
-    TextView tvPerformerTitle;
-    @BindView(R.id.lv_record_performer)
-    ListView lvRecordPerformer;
-    @BindView(R.id.iv_record_div1)
-    ImageView ivRecordDiv1;
-    @BindView(R.id.iv_record_div2)
-    ImageView ivRecordDiv2;
-    @BindView(R.id.ll_order_module)
-    LinearLayout llOrderModule;
-    @BindView(R.id.lv_record_publisher)
-    ListView lvRecordPublisher;
-    @BindView(R.id.tv_monitor_group_hint)
-    TextView tvMonitorGroupHint;
-    @BindView(R.id.tv_monitor_team)
-    TextView tvMonitorTeam;
-    @BindView(R.id.tv_performer_group_hint)
-    TextView tvPerformerGroupHint;
-    @BindView(R.id.tv_performer_team)
-    TextView tvPerformerTeam;
-    @BindView(R.id.tv_title1)
-    TextView tvTitle1;
-    @BindView(R.id.tv_train_number)
-    TextView tvTrainNumber;
-    @BindView(R.id.tv_start_time)
-    TextView tvStartTime;
-    @BindView(R.id.tv_end_time)
-    TextView tvEndTime;
-    @BindView(R.id.et_content)
-    EditText etContent;
+    private TitleView tvTitle;
+    private TextView tvNumber;
+    private TextView tvStartStationName;
+    private TextView tvTrainStatus;
+    private TextView tvEndStationName;
+    private TextView tvTrack;
+    private LinearLayout llTrack;
+    private TextView tvPlatform;
+    private LinearLayout llPlatform;
+    private TextView tvPlanArrive;
+    private TextView tvPlanDepart;
+    private TextView tvWaitRoom;
+    private LinearLayout llWaitRoom;
+    private TextView tvRealArrive;
+    private TextView tvRealDepart;
+    private TextView tvCheckPort;
+    private LinearLayout llCheckPort;
+    private LinearLayout llTrainModule;
+    private ImageView divHeader;
+    private ImageView ivStatus;
+    private GifView doingGif;
+    private ImageView ivIconOrder;
+    private TextView taskTypeName;
+    private ImageView ivJobIcon;
+    private TextView tvTaskName;
+    private TextView tvLastTime;
+    private TextView tvLocation;
+    private DrawableCenterTextView btnNote;
+    private Button btnStatus;
+    private DrawableCenterTextView btnBroadcast;
+    private TextView tvPlanTime;
+    private TextView tvRealTime;
+    private Button btnTakePhoto;
+    private Button btnVideo;
+    private Button btnRecord;
+    private LinearLayout llBgColor;
+    private TextView tvPublisherTitle;
+    private ListView lvRecordPublisherGrid;
+    private TextView tvPerformerTitle;
+    private ListView lvRecordPerformer;
+    private ImageView ivRecordDiv1;
+    private ImageView ivRecordDiv2;
+    private LinearLayout llOrderModule;
+    private ListView lvRecordPublisher;
+    private TextView tvMonitorGroupHint;
+    private TextView tvMonitorTeam;
+    private TextView tvPerformerGroupHint;
+    private TextView tvPerformerTeam;
+    private TextView tvTitle1;
+    private TextView tvTrainNumber;
+    private TextView tvStartTime;
+    private TextView tvEndTime;
+    private EditText etContent;
 
     public static final int CODE_NOTE = 0;  // 备注
     public static final int CODE_TAKE_PHOTO = 1;    // 拍照
@@ -192,6 +137,11 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private List<LocalRecordEntity> publisherRecordEntities = new ArrayList<>();    // 命令/协作发布人上传附件集合
     private RecordAdapter publisherRecordAdapter;   // 命令/协作发布人上传附件列表Adapter(用于命令/协作)
 
+    private File noteFile;
+    private File photoFile;
+    private File videoFile;
+    private File audioFile;
+
     // 定时刷新器(刷新任务执行时间)
     private Disposable timer;
 
@@ -202,29 +152,105 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
 
     @Override
     protected void start() {
-        initPresenter();
-        getIntentData();
         initView();
-        initAdapter();
+        initPresenter();
         initData();
+        initListener();
+        initAdapter();
         updateLastTime();
+    }
+
+    private void initView() {
+        tvTitle = findViewById(R.id.tv_title);
+        tvNumber = findViewById(R.id.tv_number);
+        tvStartStationName = findViewById(R.id.tv_startStationName);
+        tvTrainStatus = findViewById(R.id.tv_train_status);
+        tvEndStationName = findViewById(R.id.tv_endStationName);
+        tvTrack = findViewById(R.id.tv_track);
+        llTrack = findViewById(R.id.ll_track);
+        tvPlatform = findViewById(R.id.tv_platform);
+        llPlatform = findViewById(R.id.ll_platform);
+        tvPlanArrive = findViewById(R.id.tv_plan_arrive);
+        tvPlanDepart = findViewById(R.id.tv_plan_depart);
+        tvWaitRoom = findViewById(R.id.tv_wait_room);
+        llWaitRoom = findViewById(R.id.ll_wait_room);
+        tvRealArrive = findViewById(R.id.tv_real_arrive);
+        tvRealDepart = findViewById(R.id.tv_real_depart);
+        tvCheckPort = findViewById(R.id.tv_check_port);
+        llCheckPort = findViewById(R.id.ll_check_port);
+        llTrainModule = findViewById(R.id.ll_train_module);
+        divHeader = findViewById(R.id.div_header);
+        ivStatus = findViewById(R.id.iv_status);
+        doingGif = findViewById(R.id.doing_gif);
+        ivIconOrder = findViewById(R.id.iv_icon_order);
+        taskTypeName = findViewById(R.id.task_type_name);
+        ivJobIcon = findViewById(R.id.iv_job_icon);
+        tvTaskName = findViewById(R.id.tv_task_name);
+        tvLastTime = findViewById(R.id.tv_last_time);
+        tvLocation = findViewById(R.id.tv_location);
+        btnNote = findViewById(R.id.btn_note);
+        btnStatus = findViewById(R.id.btn_status);
+        btnBroadcast = findViewById(R.id.btn_broadcast);
+        tvPlanTime = findViewById(R.id.tv_plan_time);
+        tvRealTime = findViewById(R.id.tv_real_time);
+        btnTakePhoto = findViewById(R.id.btn_take_photo);
+        btnVideo = findViewById(R.id.btn_video);
+        btnRecord = findViewById(R.id.btn_record);
+        llBgColor = findViewById(R.id.ll_bg_color);
+        tvPublisherTitle = findViewById(R.id.tv_publisher_title);
+        lvRecordPublisherGrid = findViewById(R.id.lv_record_publisher_grid);
+        tvPerformerTitle = findViewById(R.id.tv_performer_title);
+        lvRecordPerformer = findViewById(R.id.lv_record_performer);
+        ivRecordDiv1 = findViewById(R.id.iv_record_div1);
+        ivRecordDiv2 = findViewById(R.id.iv_record_div2);
+        llOrderModule = findViewById(R.id.ll_order_module);
+        lvRecordPublisher = findViewById(R.id.lv_record_publisher);
+        tvMonitorGroupHint = findViewById(R.id.tv_monitor_group_hint);
+        tvMonitorTeam = findViewById(R.id.tv_monitor_team);
+        tvPerformerGroupHint = findViewById(R.id.tv_performer_group_hint);
+        tvPerformerTeam = findViewById(R.id.tv_performer_team);
+        tvTitle1 = findViewById(R.id.tv_title1);
+        tvTrainNumber = findViewById(R.id.tv_train_number);
+        tvStartTime = findViewById(R.id.tv_start_time);
+        tvStartTime = findViewById(R.id.tv_start_time);
+        tvEndTime = findViewById(R.id.tv_end_time);
+        etContent = findViewById(R.id.et_content);
     }
 
     private void initPresenter() {
         mPresenter = new OperatorTaskDetailPresenter(this);
     }
 
-    private void getIntentData() {
+    private void initData() {
         mJobEntity = (JobEntity) getIntent().getSerializableExtra(JOB_ENTITY);
-    }
 
-    private void initView() {
-        initTitleView();
         initViewModule();
-    }
 
-    private void initTitleView() {
-        tvTitle.setOnBackClickListener(v -> finish());
+        // 获取作业执行人本地保存的和已经上传到服务器的附件记录
+        String jobOperatorsId = mJobEntity.getJoboperatorsid();
+        ArrayList<LocalRecordEntity> localFile = mPresenter.getPerformerLocalFile(jobOperatorsId);
+        if (localFile.size() != 0) {
+            performerRecordEntities.addAll(localFile);
+            performerRecordAdapter.notifyDataSetChanged();
+            ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
+        }
+        mPresenter.getPerformerUploadedFile(jobOperatorsId);
+
+        if (mJobEntity.getTaktype() == TaskType.COMMAND ||
+                mJobEntity.getTaktype() == TaskType.COOPERATE ||
+                mJobEntity.getTaktype() == TaskType.GRID) {
+            // 获取命令/协作/网格任务发布人本地保存的和已经上传到服务器的附件记录
+            String jobsId = mJobEntity.getJobsid();
+            localFile = mPresenter.getPublisherLocalFile(jobsId);
+            if (localFile.size() != 0) {
+                publisherRecordEntities.addAll(localFile);
+                publisherRecordAdapter.notifyDataSetChanged();
+                ListView listView = mJobEntity.getTaktype() == TaskType.GRID ?
+                        lvRecordPublisherGrid : lvRecordPublisher;
+                ViewUtils.setListViewHeightBasedOnChildren(listView);
+            }
+            mPresenter.getPublisherUploadedFile(jobsId);
+        }
     }
 
     /**
@@ -276,6 +302,12 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             initTrainModuleView();
         }
         initTaskModuleView();
+    }
+
+    private void initListener() {
+        tvTitle.setOnBackClickListener(v -> finish());
+        addOnClickListeners(R.id.btn_status, R.id.btn_note, R.id.btn_broadcast,
+                R.id.btn_take_photo, R.id.btn_video, R.id.btn_record);
     }
 
     /**
@@ -691,44 +723,6 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         }
     }
 
-    private void initData() {
-        initPerformerData();
-        if (mJobEntity.getTaktype() == TaskType.COMMAND
-                || mJobEntity.getTaktype() == TaskType.COOPERATE
-                || mJobEntity.getTaktype() == TaskType.GRID)
-            initPublisherData();
-    }
-
-    /**
-     * 获取作业执行人本地保存的和已经上传到服务器的附件记录
-     */
-    private void initPerformerData() {
-        String jobOperatorsId = mJobEntity.getJoboperatorsid();
-        ArrayList<LocalRecordEntity> localFile = mPresenter.getPerformerLocalFile(jobOperatorsId);
-        if (localFile.size() != 0) {
-            performerRecordEntities.addAll(localFile);
-            performerRecordAdapter.notifyDataSetChanged();
-            ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
-        }
-        mPresenter.getPerformerUploadedFile(jobOperatorsId);
-    }
-
-    /**
-     * 获取命令/协作/网格任务发布人本地保存的和已经上传到服务器的附件记录
-     */
-    private void initPublisherData() {
-        String jobsId = mJobEntity.getJobsid();
-        ArrayList<LocalRecordEntity> localFile = mPresenter.getPublisherLocalFile(jobsId);
-        if (localFile.size() != 0) {
-            publisherRecordEntities.addAll(localFile);
-            publisherRecordAdapter.notifyDataSetChanged();
-            ListView listView = mJobEntity.getTaktype() == TaskType.GRID ?
-                    lvRecordPublisherGrid : lvRecordPublisher;
-            ViewUtils.setListViewHeightBasedOnChildren(listView);
-        }
-        mPresenter.getPublisherUploadedFile(jobsId);
-    }
-
     /**
      * 获取执行人上传到服务器的附件记录成功
      *
@@ -810,13 +804,8 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         return position;
     }
 
-    private File noteFile;
-    private File photoFile;
-    private File videoFile;
-    private File audioFile;
-
-    @OnClick({R.id.btn_status, R.id.btn_note, R.id.btn_broadcast, R.id.btn_take_photo, R.id.btn_video, R.id.btn_record})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         String userId = CacheDataSource.getUserId();
         String jobOperatorsId = mJobEntity.getJoboperatorsid();
         Intent intent;

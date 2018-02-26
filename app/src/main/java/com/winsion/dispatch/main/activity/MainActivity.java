@@ -29,34 +29,21 @@ import com.winsion.dispatch.view.AlphaTabsIndicator;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * Created by 10295 on 2017/12/6 0006
  */
 
 public class MainActivity extends BaseActivity implements MainContract.View, ViewPager.OnPageChangeListener {
-    @BindView(R.id.vp_content)
-    ViewPager vpContent;
-    @BindView(R.id.atv_operation)
-    AlphaTabView atvOperation;
-    @BindView(R.id.atv_dispatch)
-    AlphaTabView atvDispatch;
-    @BindView(R.id.atv_contacts)
-    AlphaTabView atvContacts;
-    @BindView(R.id.atv_grid)
-    AlphaTabView atvGrid;
-    @BindView(R.id.atv_scene)
-    AlphaTabView atvScene;
-    @BindView(R.id.atv_reminder)
-    AlphaTabView atvReminder;
-    @BindView(R.id.ati_indicator)
-    AlphaTabsIndicator atiIndicator;
-    @BindView(R.id.iv_switch)
-    ImageView ivSwitch;
-    @BindView(R.id.iv_head)
-    ImageView ivHead;
+    private ViewPager vpContent;
+    private AlphaTabView atvOperation;
+    private AlphaTabView atvDispatch;
+    private AlphaTabView atvContacts;
+    private AlphaTabView atvGrid;
+    private AlphaTabView atvScene;
+    private AlphaTabView atvReminder;
+    private AlphaTabsIndicator atiIndicator;
+    private ImageView ivSwitch;
+    private ImageView ivHead;
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private int mCurrentSysType = -1;
@@ -69,6 +56,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
 
     @Override
     protected void start() {
+        initView();
         initPresenter();
         initData();
         initAdapter();
@@ -80,6 +68,19 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     @Override
     public Context getContext() {
         return mContext;
+    }
+
+    private void initView() {
+        vpContent = findViewById(R.id.vp_content);
+        atvOperation = findViewById(R.id.atv_operation);
+        atvDispatch = findViewById(R.id.atv_dispatch);
+        atvContacts = findViewById(R.id.atv_contacts);
+        atvGrid = findViewById(R.id.atv_grid);
+        atvScene = findViewById(R.id.atv_scene);
+        atvReminder = findViewById(R.id.atv_reminder);
+        atiIndicator = findViewById(R.id.ati_indicator);
+        ivSwitch = findViewById(R.id.iv_switch);
+        ivHead = findViewById(R.id.iv_head);
     }
 
     private void initPresenter() {
@@ -115,6 +116,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
 
     private void initListener() {
         vpContent.setOnPageChangeListener(this);
+        addOnClickListeners(R.id.iv_switch, R.id.iv_head);
     }
 
     /**
@@ -194,8 +196,8 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
         }
     }
 
-    @OnClick({R.id.iv_switch, R.id.iv_head})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_switch:
                 startActivity(SwitchSysActivity.class, false);

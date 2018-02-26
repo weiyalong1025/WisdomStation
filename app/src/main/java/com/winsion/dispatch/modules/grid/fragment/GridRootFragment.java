@@ -13,18 +13,14 @@ import com.winsion.dispatch.modules.grid.fragment.problemmanage.ProblemManageFra
 import com.winsion.dispatch.view.MyIndicator;
 import com.winsion.dispatch.view.NoScrollViewPager;
 
-import butterknife.BindView;
-
 /**
  * Created by 10295 on 2017/12/10 0010.
  * 网格管理一级界面
  */
 
 public class GridRootFragment extends BaseFragment {
-    @BindView(R.id.vp_content)
-    NoScrollViewPager vpContent;
-    @BindView(R.id.mi_container)
-    MyIndicator mIndicator;
+    private NoScrollViewPager vpContent;
+    private MyIndicator mIndicator;
 
     private Fragment[] mFragments = {new PatrolPlanFragment(), new ProblemManageFragment()};
     private int[] mTitles = {R.string.tab_patrol_plan, R.string.tab_problem_manager};
@@ -37,6 +33,16 @@ public class GridRootFragment extends BaseFragment {
 
     @Override
     protected void init() {
+        initView();
+        initAdapter();
+    }
+
+    private void initView() {
+        vpContent = findViewById(R.id.vp_content);
+        mIndicator = findViewById(R.id.mi_container);
+    }
+
+    private void initAdapter() {
         vpContent.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         mIndicator.setViewPager(vpContent);
     }

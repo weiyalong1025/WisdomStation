@@ -8,8 +8,6 @@ import com.winsion.dispatch.base.BaseFragment;
 import com.winsion.dispatch.modules.operation.activity.issue.IssueActivity;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
 
-import butterknife.OnClick;
-
 /**
  * Created by admin on 2016/8/11.
  * 发布命令/协作一级界面
@@ -24,10 +22,9 @@ public class IssueFragment extends BaseFragment {
 
     @Override
     protected void init() {
-
+        addOnClickListeners(R.id.ll_issue_order, R.id.ll_issue_cooperation);
     }
 
-    @OnClick({R.id.ll_issue_order, R.id.ll_issue_cooperation})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_issue_order:

@@ -17,9 +17,6 @@ import com.winsion.dispatch.view.WaveView;
 import java.io.File;
 import java.io.IOException;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
 
 /**
@@ -28,16 +25,11 @@ import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
  * TODO 动态权限-录音
  */
 public class RecordAudioActivity extends BaseActivity {
-    @BindView(R.id.btn_record)
-    ImageView btnRecord;
-    @BindView(R.id.tv_time)
-    TextView tvTime;
-    @BindView(R.id.tv_recording)
-    TextView tvRecording;
-    @BindView(R.id.wave_view)
-    WaveView waveView;
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
+    private ImageView btnRecord;
+    private TextView tvTime;
+    private TextView tvRecording;
+    private WaveView waveView;
+    private TitleView tvTitle;
 
     private File mFile;
     private boolean isRecording = false;    // 记录是否正在录音
@@ -78,13 +70,28 @@ public class RecordAudioActivity extends BaseActivity {
 
     @Override
     protected void start() {
-        tvTitle.setOnBackClickListener((View v) -> finish());
-        // 录音文件保存路径
-        mFile = (File) getIntent().getSerializableExtra(MEDIA_FILE);
-        initRecorder();
+        initView();
+        initListener();
+        initData();
     }
 
-    private void initRecorder() {
+    private void initView() {
+        btnRecord = findViewById(R.id.btn_record);
+        tvTime = findViewById(R.id.tv_time);
+        tvRecording = findViewById(R.id.tv_recording);
+        waveView = findViewById(R.id.wave_view);
+        tvTitle = findViewById(R.id.tv_title);
+    }
+
+    private void initListener() {
+        tvTitle.setOnBackClickListener((View v) -> finish());
+        addOnClickListeners(R.id.btn_record);
+    }
+
+    private void initData() {
+        // 录音文件保存路径
+        mFile = (File) getIntent().getSerializableExtra(MEDIA_FILE);
+
         recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         // 设置封装格式
@@ -94,31 +101,27 @@ public class RecordAudioActivity extends BaseActivity {
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
     }
 
-    @OnClick({R.id.btn_record})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_record:
-                if (!isRecording) {
-                    btnRecord.setEnabled(false);
-                    mHandler.postDelayed(() -> btnRecord.setEnabled(true), 1000);
-                    // 录音
-                    try {
-                        recorder.prepare();
-                        recorder.start();
-                        isRecording = true;
-                        btnRecord.setImageResource(R.drawable.btn_record_reverse);
-                        tvRecording.setVisibility(View.VISIBLE);
-                        waveView.setVisibility(View.VISIBLE);
-                        mHandler.sendEmptyMessageDelayed(1, 1000);
-                        mHandler.sendEmptyMessageDelayed(-1, 100);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    stop();
-                    btnRecord.setImageResource(R.drawable.btn_record);
-                }
-                break;
+    @Override
+    public void onClick(View view) {
+        if (!isRecording) {
+            btnRecord.setEnabled(false);
+            mHandler.postDelayed(() -> btnRecord.setEnabled(true), 1000);
+            // 录音
+            try {
+                recorder.prepare();
+                recorder.start();
+                isRecording = true;
+                btnRecord.setImageResource(R.drawable.btn_record_reverse);
+                tvRecording.setVisibility(View.VISIBLE);
+                waveView.setVisibility(View.VISIBLE);
+                mHandler.sendEmptyMessageDelayed(1, 1000);
+                mHandler.sendEmptyMessageDelayed(-1, 100);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            stop();
+            btnRecord.setImageResource(R.drawable.btn_record);
         }
     }
 

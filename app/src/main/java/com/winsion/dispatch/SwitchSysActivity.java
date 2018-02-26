@@ -9,8 +9,6 @@ import com.winsion.dispatch.data.SPDataSource;
 import com.winsion.dispatch.data.constants.SPKey;
 import com.winsion.dispatch.main.activity.MainActivity;
 
-import butterknife.OnClick;
-
 /**
  * Created by wyl on 2017/8/2
  * 切换系统
@@ -24,10 +22,11 @@ public class SwitchSysActivity extends BaseActivity {
 
     @Override
     protected void start() {
+        addOnClickListeners(R.id.ib_switch_oper, R.id.ib_switch_grid);
     }
 
-    @OnClick({R.id.ib_switch_oper, R.id.ib_switch_grid})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_switch_oper:
                 SPDataSource.put(this, SPKey.KEY_SYS_TYPE, SystemType.OPERATION);

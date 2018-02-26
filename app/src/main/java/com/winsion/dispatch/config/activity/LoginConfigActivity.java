@@ -2,6 +2,7 @@ package com.winsion.dispatch.config.activity;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
 
 import com.winsion.dispatch.R;
@@ -10,21 +11,15 @@ import com.winsion.dispatch.config.constants.SaveErrorCode;
 import com.winsion.dispatch.config.listener.SaveListener;
 import com.winsion.dispatch.view.TitleView;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * Created by 10295 on 2017/12/6 0006.
  * 登录配置界面
  */
 
 public class LoginConfigActivity extends BaseActivity implements LoginConfigContract.View, SaveListener {
-    @BindView(R.id.tv_title)
-    TitleView tvTitle;
-    @BindView(R.id.et_address)
-    EditText etAddress;
-    @BindView(R.id.et_port)
-    EditText etPort;
+    private TitleView tvTitle;
+    private EditText etAddress;
+    private EditText etPort;
 
     private LoginConfigContract.Presenter mPresenter;
 
@@ -35,13 +30,25 @@ public class LoginConfigActivity extends BaseActivity implements LoginConfigCont
 
     @Override
     public void start() {
-        tvTitle.setOnBackClickListener((view) -> finish());
         initPresenter();
+        initView();
+        initListener();
     }
 
     private void initPresenter() {
         mPresenter = new LoginConfigPresenter(this);
         mPresenter.start();
+    }
+
+    private void initView() {
+        tvTitle = findViewById(R.id.tv_title);
+        etAddress = findViewById(R.id.et_address);
+        etPort = findViewById(R.id.et_port);
+    }
+
+    private void initListener() {
+        tvTitle.setOnBackClickListener((view) -> finish());
+        addOnClickListeners(R.id.btn_confirm);
     }
 
     @Override
@@ -61,8 +68,8 @@ public class LoginConfigActivity extends BaseActivity implements LoginConfigCont
         return mContext;
     }
 
-    @OnClick(R.id.btn_confirm)
-    public void onViewClicked() {
+    @Override
+    public void onClick(View view) {
         mPresenter.saveHost(getText(etAddress), getText(etPort), this);
     }
 
@@ -82,5 +89,4 @@ public class LoginConfigActivity extends BaseActivity implements LoginConfigCont
                 break;
         }
     }
-
 }

@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 
 /**
  * Created by rexxar on 17-4-5.
+ * HashUtils
  */
 public class HashUtils {
     /**
@@ -20,7 +21,7 @@ public class HashUtils {
                     .getInstance("SHA-1");
             digest.update(source.getBytes());
             byte messageDigest[] = digest.digest();
-            StringBuffer hexString = new StringBuffer();
+            StringBuilder hexString = new StringBuilder();
             for (byte aMessageDigest : messageDigest) {
                 String shaHex = Integer.toHexString(aMessageDigest & 0xFF);
                 if (shaHex.length() < 2) {

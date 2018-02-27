@@ -5,6 +5,7 @@ import java.util.Locale;
 
 /**
  * Created by wyl on 2017/4/24.
+ * Formatter
  */
 
 public interface Formatter {

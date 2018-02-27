@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by 10295 on 2018/2/8.
+ * UserListAdapter
  */
 
 public class UserListAdapter extends CommonAdapter<UserEntity> {

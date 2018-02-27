@@ -5,7 +5,7 @@ package com.winsion.dispatch.data.listener;
  * 上传文件事件监听
  */
 
-public interface DownloadListener {
+public interface MyDownloadListener {
     void downloadProgress(String serverUri, int progress);
 
     void downloadSuccess(String serverUri);

@@ -36,6 +36,7 @@
             android:layout_width="@dimen/d17"
             android:layout_height="@dimen/d12"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_select" />
+            android:src="@drawable/ic_select"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </LinearLayout>

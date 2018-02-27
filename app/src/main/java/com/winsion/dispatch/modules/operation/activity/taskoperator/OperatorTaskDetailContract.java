@@ -2,7 +2,7 @@ package com.winsion.dispatch.modules.operation.activity.taskoperator;
 
 import com.winsion.dispatch.base.BasePresenter;
 import com.winsion.dispatch.base.BaseView;
-import com.winsion.dispatch.data.listener.DownloadListener;
+import com.winsion.dispatch.data.listener.MyDownloadListener;
 import com.winsion.dispatch.data.listener.UploadListener;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
 import com.winsion.dispatch.media.entity.ServerRecordEntity;
@@ -33,7 +33,7 @@ class OperatorTaskDetailContract {
 
         void getPerformerUploadedFile(String jobOperatorsId);
 
-        void download(String url, String targetPath, DownloadListener downloadListener);
+        void download(String url, String targetPath, MyDownloadListener myDownloadListener);
 
         void upload(JobEntity jobEntity, File file, UploadListener uploadListener);
 

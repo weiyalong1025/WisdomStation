@@ -7,15 +7,20 @@ import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
-import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.MemoryCookieStore;
+import com.lzy.okgo.exception.OkGoException;
+import com.lzy.okgo.exception.StorageException;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 import com.lzy.okrx2.adapter.ObservableBody;
+import com.lzy.okserver.OkDownload;
+import com.lzy.okserver.download.DownloadListener;
+import com.lzy.okserver.download.DownloadTask;
 import com.winsion.dispatch.BuildConfig;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.data.constants.ParamKey;
@@ -24,7 +29,7 @@ import com.winsion.dispatch.data.converter.ObjectConverter;
 import com.winsion.dispatch.data.entity.OrderBy;
 import com.winsion.dispatch.data.entity.QueryParameter;
 import com.winsion.dispatch.data.entity.WhereClause;
-import com.winsion.dispatch.data.listener.DownloadListener;
+import com.winsion.dispatch.data.listener.MyDownloadListener;
 import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.data.listener.UploadListener;
 import com.winsion.dispatch.utils.HashUtils;
@@ -267,36 +272,46 @@ public class NetDataSource {
     /**
      * 下载文件
      *
-     * @param serverUri        文件服务器地址
-     * @param targetDir        文件目标存储目录
-     * @param downloadListener 下载状态监听
+     * @param serverUri          文件服务器地址
+     * @param targetDir          文件目标存储目录
+     * @param myDownloadListener 下载状态监听
      */
-    public static void downloadFile(Object tag, String serverUri, String targetDir, DownloadListener downloadListener) {
-        String[] split = serverUri.split("/");
-        if (split.length != 0) {
-            String fileName = split[split.length - 1];
-            OkGo.<File>get(serverUri)
-                    .tag(tag)
-                    .execute(new FileCallback(targetDir, fileName) {
-                        @Override
-                        public void onSuccess(Response<File> response) {
-                            LogUtils.i("下载文件", fileName + "下载成功");
-                            downloadListener.downloadSuccess(serverUri);
-                        }
+    public static DownloadTask downloadFile(Object tag, String serverUri, String targetDir, MyDownloadListener myDownloadListener) {
+        GetRequest<File> fileGetRequest = OkGo.get(serverUri);
+        return OkDownload.request(serverUri, fileGetRequest)
+                .folder(targetDir)
+                .register(new DownloadListener(tag) {
+                    @Override
+                    public void onStart(Progress progress) {
 
-                        @Override
-                        public void downloadProgress(Progress progress) {
-                            LogUtils.i("下载文件", fileName + "下载进度：" + progress.fraction + "%");
-                            downloadListener.downloadProgress(serverUri, (int) (progress.fraction * 100));
-                        }
+                    }
 
-                        @Override
-                        public void onError(Response<File> response) {
-                            LogUtils.i("下载文件", fileName + "下载失败");
-                            downloadListener.downloadFailed(serverUri);
+                    @Override
+                    public void onProgress(Progress progress) {
+                        myDownloadListener.downloadProgress(serverUri, (int) (progress.fraction * 100));
+                    }
+
+                    @Override
+                    public void onError(Progress progress) {
+                        if (progress.exception instanceof OkGoException) {
+                            OkDownload.getInstance().getTask(serverUri).restart();
+                        } else if (progress.exception instanceof StorageException) {
+                            OkDownload.getInstance().getTask(serverUri).restart();
+                        } else {
+                            myDownloadListener.downloadFailed(serverUri);
                         }
-                    });
-        }
+                    }
+
+                    @Override
+                    public void onFinish(File file, Progress progress) {
+                        myDownloadListener.downloadSuccess(serverUri);
+                    }
+
+                    @Override
+                    public void onRemove(Progress progress) {
+
+                    }
+                });
     }
 
     private static <T> Observer<T> getObserver(Object tag, String url, ResponseListener<T> listener) {

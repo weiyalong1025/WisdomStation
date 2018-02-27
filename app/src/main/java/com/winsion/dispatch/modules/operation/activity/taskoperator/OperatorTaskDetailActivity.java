@@ -20,7 +20,7 @@ import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.common.listener.StateListener;
 import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.constants.OpeType;
-import com.winsion.dispatch.data.listener.DownloadListener;
+import com.winsion.dispatch.data.listener.MyDownloadListener;
 import com.winsion.dispatch.data.listener.UploadListener;
 import com.winsion.dispatch.media.activity.AddNoteActivity;
 import com.winsion.dispatch.media.activity.RecordAudioActivity;
@@ -69,7 +69,7 @@ import static com.winsion.dispatch.modules.operation.constants.Intents.OperatorT
  * 协作/命令/任务/网格/预案
  */
 
-public class OperatorTaskDetailActivity extends BaseActivity implements OperatorTaskDetailContract.View, UploadListener, DownloadListener {
+public class OperatorTaskDetailActivity extends BaseActivity implements OperatorTaskDetailContract.View, UploadListener, MyDownloadListener {
     private TitleView tvTitle;
     private TextView tvNumber;
     private TextView tvStartStationName;
@@ -154,9 +154,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     protected void start() {
         initView();
         initPresenter();
+        initAdapter();
         initData();
         initListener();
-        initAdapter();
         updateLastTime();
     }
 
@@ -219,11 +219,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
 
     private void initPresenter() {
         mPresenter = new OperatorTaskDetailPresenter(this);
+        mJobEntity = (JobEntity) getIntent().getSerializableExtra(JOB_ENTITY);
     }
 
     private void initData() {
-        mJobEntity = (JobEntity) getIntent().getSerializableExtra(JOB_ENTITY);
-
         initViewModule();
 
         // 获取作业执行人本地保存的和已经上传到服务器的附件记录

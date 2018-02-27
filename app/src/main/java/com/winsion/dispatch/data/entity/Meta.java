@@ -2,6 +2,7 @@ package com.winsion.dispatch.data.entity;
 
 /**
  * Created by yalong on 2016/6/22.
+ * Meta
  */
 public class Meta {
     private int code;

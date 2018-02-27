@@ -15,7 +15,7 @@ import com.winsion.dispatch.data.constants.Urls;
 import com.winsion.dispatch.data.constants.ViewName;
 import com.winsion.dispatch.data.entity.ResponseForQueryData;
 import com.winsion.dispatch.data.entity.WhereClause;
-import com.winsion.dispatch.data.listener.DownloadListener;
+import com.winsion.dispatch.data.listener.MyDownloadListener;
 import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.data.listener.UploadListener;
 import com.winsion.dispatch.media.constants.FileStatus;
@@ -131,8 +131,8 @@ public class OperatorTaskDetailPresenter extends ChangeStatusBiz implements Oper
     }
 
     @Override
-    public void download(String url, String targetPath, DownloadListener downloadListener) {
-        NetDataSource.downloadFile(this, url, targetPath, downloadListener);
+    public void download(String url, String targetPath, MyDownloadListener myDownloadListener) {
+        NetDataSource.downloadFile(this, url, targetPath, myDownloadListener).start();
     }
 
     @Override

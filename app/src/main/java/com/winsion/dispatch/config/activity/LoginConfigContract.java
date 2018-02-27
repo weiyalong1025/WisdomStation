@@ -6,6 +6,7 @@ import com.winsion.dispatch.config.listener.SaveListener;
 
 /**
  * Created by wyl on 2017/3/28.
+ * 登录配置Contract
  */
 
 class LoginConfigContract {

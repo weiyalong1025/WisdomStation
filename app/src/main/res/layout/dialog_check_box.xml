@@ -17,10 +17,7 @@
             android:id="@+id/tv_dialog_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/d20"
-            android:paddingEnd="@dimen/d20"
-            android:paddingStart="@dimen/d20"
-            android:paddingTop="@dimen/d20"
+            android:layout_marginTop="@dimen/d20"
             android:textColor="@color/gray9"
             android:textSize="@dimen/s18"
             tools:text="对话框文字" />
@@ -29,8 +26,9 @@
             android:id="@+id/cb_dialog_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/d20"
-            android:textSize="@dimen/s16"
+            android:layout_margin="@dimen/d20"
+            android:textColor="@color/gray9"
+            android:textSize="@dimen/s18"
             tools:text="提示文字" />
 
         <View
@@ -38,6 +36,6 @@
             android:layout_height="@dimen/d0_5"
             android:background="@color/gray1" />
 
-        <include layout="@layout/layout_dialog_btn"/>
+        <include layout="@layout/layout_dialog_btn" />
     </LinearLayout>
 </FrameLayout>

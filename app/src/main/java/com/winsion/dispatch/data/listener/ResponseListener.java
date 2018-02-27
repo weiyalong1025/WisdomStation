@@ -2,6 +2,7 @@ package com.winsion.dispatch.data.listener;
 
 /**
  * Created by admin on 2016/7/28.
+ * ResponseListener
  */
 public interface ResponseListener<T> {
     /**

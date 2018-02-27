@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -446,6 +447,105 @@ public class CustomDialog extends AlertDialog {
         public void setProgress(@IntRange(from = 0, to = 100) int progress) {
             pbProgress.setProgress(progress);
             tvProgressText.setText(String.format("%s/100", String.valueOf(progress)));
+        }
+    }
+
+    /**
+     * 编辑框对话框
+     */
+    public static class EditTextBuilder extends Builder {
+        private String mMessage;    // 对话框文字
+        private OnClickListener mNegativeButton;    // 取消按钮点击事件
+        private OnClickListener mPositiveButton;    // 确定按钮点击事件
+        private int mNegativeButtonText = R.string.btn_cancel;  // 取消按钮显示字体
+        private int mPositiveButtonText = R.string.btn_confirm; // 确定按钮显示字体
+        private EditText etDialogInput; // 输入框
+
+        public EditTextBuilder(Context context) {
+            super(context);
+        }
+
+        /**
+         * 设置文字信息
+         */
+        public EditTextBuilder setMessage(String message) {
+            this.mMessage = message;
+            return this;
+        }
+
+        /**
+         * 设置文字信息
+         */
+        public EditTextBuilder setMessage(@StringRes int messageRes) {
+            this.mMessage = mContext.getString(messageRes);
+            return this;
+        }
+
+        /**
+         * 取消按钮点击事件
+         */
+        public EditTextBuilder setNegativeButton(OnClickListener negativeButton) {
+            this.mNegativeButton = negativeButton;
+            return this;
+        }
+
+        /**
+         * 取消按钮显示文字
+         */
+        public EditTextBuilder setNegativeButtonText(@StringRes int negativeButtonText) {
+            this.mNegativeButtonText = negativeButtonText;
+            return this;
+        }
+
+        /**
+         * 确定按钮点击事件
+         */
+        public EditTextBuilder setPositiveButton(OnClickListener positiveButton) {
+            this.mPositiveButton = positiveButton;
+            return this;
+        }
+
+        /**
+         * 确定按钮显示文字
+         */
+        public EditTextBuilder setPositiveButtonText(@StringRes int positiveButtonText) {
+            this.mPositiveButtonText = positiveButtonText;
+            return this;
+        }
+
+        @SuppressLint("InflateParams")
+        @Override
+        void setView(CustomDialog dialog) {
+            View dialogView = LayoutInflater.from(mContext).inflate(R.layout.dialog_edit_text, null);
+
+            TextView tvDialogMessage = dialogView.findViewById(R.id.tv_dialog_message);
+            etDialogInput = dialogView.findViewById(R.id.et_dialog_input);
+            Button btnDialogNegative = dialogView.findViewById(R.id.btn_dialog_negative);
+            Button btnDialogPositive = dialogView.findViewById(R.id.btn_dialog_positive);
+
+            tvDialogMessage.setText(mMessage);
+
+            btnDialogNegative.setOnClickListener(v -> {
+                if (mNegativeButton != null) {
+                    mNegativeButton.onClick(dialog, BUTTON_NEGATIVE);
+                }
+                dialog.dismiss();
+            });
+            btnDialogPositive.setOnClickListener(v -> {
+                if (mPositiveButton != null) {
+                    mPositiveButton.onClick(dialog, BUTTON_POSITIVE);
+                }
+                dialog.dismiss();
+            });
+
+            btnDialogNegative.setText(mNegativeButtonText);
+            btnDialogPositive.setText(mPositiveButtonText);
+
+            dialog.setView(dialogView);
+        }
+
+        public String getInputText() {
+            return etDialogInput.getText().toString();
         }
     }
 }

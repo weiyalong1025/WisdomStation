@@ -13,6 +13,7 @@ import com.winsion.dispatch.R;
 
 /**
  * Created by Cuneyt on 4.10.2015.
+ * GifView
  */
 public class GifView extends View {
     private static final int DEFAULT_MOVIEW_DURATION = 1000;
@@ -59,10 +60,7 @@ public class GifView extends View {
     @SuppressLint("NewApi")
     private void setViewAttributes(Context context, AttributeSet attrs, int defStyle) {
 
-        /**
-         * Starting from HONEYCOMB(Api Level:11) have to turn off HW acceleration to draw
-         * Movie on Canvas.
-         */
+        //Starting from HONEYCOMB(Api Level:11) have to turn off HW acceleration to draw Movie on Canvas.
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
         final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.GifView, defStyle, 0);
@@ -101,10 +99,7 @@ public class GifView extends View {
     public void setPaused(boolean paused) {
         this.mPaused = paused;
 
-        /**
-         * Calculate new movie start time, so that it resumes from the same
-         * frame.
-         */
+        //Calculate new movie start time, so that it resumes from the same frame.
         if (!paused) {
             mMovieStart = android.os.SystemClock.uptimeMillis() - mCurrentAnimationTime;
         }
@@ -227,7 +222,7 @@ public class GifView extends View {
 
         mMovie.setTime(mCurrentAnimationTime);
 
-        canvas.save(Canvas.MATRIX_SAVE_FLAG);
+        canvas.save();
         canvas.scale(mScale, mScale);
         mMovie.draw(canvas, mLeft / mScale, mTop / mScale);
         canvas.restore();

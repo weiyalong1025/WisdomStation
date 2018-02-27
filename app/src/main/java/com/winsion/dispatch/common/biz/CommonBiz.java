@@ -19,6 +19,7 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.bigkoo.pickerview.view.BasePickerView;
 import com.lzy.okgo.model.HttpParams;
+import com.lzy.okserver.download.DownloadTask;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.common.entity.UpdateEntity;
@@ -27,7 +28,7 @@ import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.DBDataSource;
 import com.winsion.dispatch.data.NetDataSource;
 import com.winsion.dispatch.data.constants.Urls;
-import com.winsion.dispatch.data.listener.DownloadListener;
+import com.winsion.dispatch.data.listener.MyDownloadListener;
 import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.login.activity.LoginActivity;
 import com.winsion.dispatch.media.constants.FileType;
@@ -129,39 +130,43 @@ public class CommonBiz {
             CustomDialog.ProgressBuilder progressBuilder = (CustomDialog.ProgressBuilder)
                     new CustomDialog.ProgressBuilder(context)
                             .setMessage(R.string.dialog_downloading_installation_package)
-                            .setNegativeButton((dialog, which) -> {
-                                NetDataSource.unSubscribe(downloadUrl);
-                                dialog.dismiss();
-                            })
                             .setIrrevocable();
             CustomDialog customDialog = progressBuilder.create();
             customDialog.show();
 
             // 下载更新包
-            NetDataSource.downloadFile(downloadUrl, downloadUrl, targetDir, new DownloadListener() {
-                @Override
-                public void downloadProgress(String serverUri, int progress) {
-                    progressBuilder.setProgress(progress);
-                }
+            DownloadTask downloadTask = NetDataSource.downloadFile(downloadUrl, downloadUrl, targetDir,
+                    new MyDownloadListener() {
+                        @Override
+                        public void downloadProgress(String serverUri, int progress) {
+                            progressBuilder.setProgress(progress);
+                        }
 
-                @Override
-                public void downloadSuccess(String serverUri) {
-                    customDialog.dismiss();
-                    Uri downloadFileUri = Uri.fromFile(updateFile);
-                    if (downloadFileUri != null) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(downloadFileUri, "application/vnd.android.package-archive");
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(intent);
-                    }
-                }
+                        @Override
+                        public void downloadSuccess(String serverUri) {
+                            customDialog.dismiss();
+                            Uri downloadFileUri = Uri.fromFile(updateFile);
+                            if (downloadFileUri != null) {
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.setDataAndType(downloadFileUri, "application/vnd.android.package-archive");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(intent);
+                            }
+                        }
 
-                @Override
-                public void downloadFailed(String serverUri) {
-                    progressBuilder.updateMessage(context.getString(R.string.toast_download_failed));
-                }
+                        @Override
+                        public void downloadFailed(String serverUri) {
+                            progressBuilder.updateMessage(context.getString(R.string.toast_download_failed));
+                        }
+                    });
+            downloadTask.start();
+
+            // 取消下载
+            progressBuilder.setNegativeButton((dialog, which) -> {
+                downloadTask.pause();
+                NetDataSource.unSubscribe(downloadUrl);
+                dialog.dismiss();
             });
-
         } catch (IOException e) {
             ToastUtils.showToast(context, R.string.toast_check_sdcard);
         }

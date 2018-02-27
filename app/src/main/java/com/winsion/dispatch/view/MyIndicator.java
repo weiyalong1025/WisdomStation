@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 
 /**
  * Created by yalong on 2016/6/14.
+ * MyIndicator
  */
 public class MyIndicator extends RadioGroup implements RadioGroup.OnCheckedChangeListener {
     private ViewPager mViewPager;

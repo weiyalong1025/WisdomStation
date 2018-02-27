@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by admin on 2017/1/3.
+ * RemindEntity
  */
 
 public class RemindEntity implements Serializable {

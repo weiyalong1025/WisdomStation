@@ -2,6 +2,7 @@ package com.winsion.dispatch.base;
 
 /**
  * Created by wyl on 2017/3/20.
+ * BasePresenter
  */
 
 public interface BasePresenter {

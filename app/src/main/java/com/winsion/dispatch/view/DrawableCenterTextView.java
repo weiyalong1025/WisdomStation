@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 
 /**
  * Created by admin on 2016/7/19.
+ * DrawableCenterTextView
  */
 public class DrawableCenterTextView extends AppCompatTextView {
 

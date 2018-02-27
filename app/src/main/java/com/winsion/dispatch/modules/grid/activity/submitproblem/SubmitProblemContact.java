@@ -6,7 +6,6 @@ import com.winsion.dispatch.base.BasePresenter;
 import com.winsion.dispatch.base.BaseView;
 import com.winsion.dispatch.data.listener.UploadListener;
 import com.winsion.dispatch.modules.grid.entity.SubclassEntity;
-import com.winsion.dispatch.modules.operation.entity.FileEntity;
 
 import java.io.File;
 import java.util.List;

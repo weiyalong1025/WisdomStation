@@ -280,11 +280,12 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
     }
 
     /**
-     * 清除搜索框内容
+     * 设置搜索框内容
      */
-    public void clearSearchContent() {
-        search.removeTextChangedListener(this);
-        search.setText("");
-        search.addTextChangedListener(this);
+    public void setSearchContent(String content) {
+        if (content != null) {
+            search.setText(content);
+            search.setSelection(content.length());
+        }
     }
 }

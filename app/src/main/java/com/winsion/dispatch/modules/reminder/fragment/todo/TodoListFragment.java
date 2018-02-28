@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseFragment;
@@ -35,6 +36,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
     private SpinnerView svSpinner;
     private ListView lvRemindersList;
     private ImageView ivShade;
+    private TextView tvHint;
 
     /**
      * 状态筛选-全部
@@ -80,6 +82,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
         svSpinner = findViewById(R.id.sv_spinner);
         lvRemindersList = findViewById(R.id.lv_reminders_list);
         ivShade = findViewById(R.id.iv_shade);
+        tvHint = findViewById(R.id.tv_hint);
     }
 
     private void initSpinner() {
@@ -115,7 +118,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
                 .setPositiveButton((dialog, which) -> mPresenter.deleteTodo(todoEntity))
                 .show());
         lvRemindersList.setOnItemClickListener(this);
-        addOnClickListeners(R.id.btn_add);
+        addOnClickListeners(R.id.btn_add, R.id.tv_hint);
     }
 
     /**
@@ -138,6 +141,14 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
                 break;
         }
         mAdapter.notifyDataSetChanged();
+
+        if (listData.size() == 0) {
+            tvHint.setVisibility(View.VISIBLE);
+            lvRemindersList.setVisibility(View.GONE);
+        } else {
+            tvHint.setVisibility(View.GONE);
+            lvRemindersList.setVisibility(View.VISIBLE);
+        }
 
         if (isUpdateBadge) {
             // 更新角标
@@ -172,7 +183,14 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
 
     @Override
     public void onClick(View view) {
-        startActivityForResult(AddTodoActivity.class);
+        switch (view.getId()) {
+            case R.id.btn_add:
+                startActivityForResult(AddTodoActivity.class);
+                break;
+            case R.id.tv_hint:
+                initData(false);
+                break;
+        }
     }
 
     /**

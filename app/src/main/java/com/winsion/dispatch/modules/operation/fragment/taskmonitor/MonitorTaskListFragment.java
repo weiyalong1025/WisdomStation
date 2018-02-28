@@ -109,9 +109,8 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         });
 
         svSpinner.setSecondOptionItemClickListener((position) -> {
-            svSpinner.clearSearchContent();
             statusPosition = position;
-            filterData();
+            filterData(true);
         });
 
         // 根据Spinner显示状态显隐透明背景
@@ -167,26 +166,29 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
     @Override
     public void afterTextChange(Editable s) {
-        // 解决fragment切换造成多次调用该方法
-        String s1 = s.toString().trim().toLowerCase();
-        if (equals(lastText, s1)) {
-            return;
-        }
+        lastText = s.toString().trim();
 
-        lastText = s1;
-        if (TextUtils.isEmpty(s.toString())) {
-            filterData();
+        if (TextUtils.isEmpty(lastText)) {
+            filterData(false);
         } else {
+            String filterStr = lastText.toLowerCase();
             listData.clear();
             for (TaskEntity task : getSameStatusList(statusPosition)) {
                 String number = task.getTrainnumber();
                 number = TextUtils.isEmpty(number) ? getString(R.string.value_nothing) : number;
                 String trainNumber = number.toLowerCase();
-                if (trainNumber.startsWith(s1)) {
+                if (trainNumber.contains(filterStr)) {
                     listData.add(task);
                 }
             }
             mLvAdapter.notifyDataSetChanged();
+
+            if (listData.size() == 0) {
+                tvHint.setText(R.string.hint_no_data_click_retry);
+                showView(flContainer, tvHint);
+            } else {
+                showView(flContainer, swipeRefresh);
+            }
         }
     }
 
@@ -243,7 +245,6 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     @Override
     public void getMonitorTaskDataSuccess(List<TaskEntity> data) {
         swipeRefresh.setRefreshing(false);
-        svSpinner.clearSearchContent();
         allData.clear();
         allData.addAll(data);
         unStartedData.clear();
@@ -265,13 +266,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
                     break;
             }
         }
-        if (unStartedData.size() + underwayData.size() + doneData.size() == 0) {
-            tvHint.setText(R.string.hint_no_data_click_retry);
-            showView(flContainer, tvHint);
-        } else {
-            filterData();
-            showView(flContainer, swipeRefresh);
-        }
+        filterData(true);
     }
 
     @Override
@@ -283,11 +278,24 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
     /**
      * 过滤显示的数据
+     *
+     * @param restoreSearchContent 是否按照搜索框中文字进行筛选
      */
-    private void filterData() {
+    private void filterData(boolean restoreSearchContent) {
         listData.clear();
         listData.addAll(getSameStatusList(statusPosition));
         mLvAdapter.notifyDataSetChanged();
+
+        if (listData.size() == 0) {
+            tvHint.setText(R.string.hint_no_data_click_retry);
+            showView(flContainer, tvHint);
+        } else {
+            showView(flContainer, swipeRefresh);
+        }
+
+        if (restoreSearchContent) {
+            svSpinner.setSearchContent(lastText);
+        }
     }
 
     @Override

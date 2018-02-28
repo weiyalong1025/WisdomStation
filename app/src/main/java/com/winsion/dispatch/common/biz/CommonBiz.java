@@ -143,7 +143,7 @@ public class CommonBiz {
                         }
 
                         @Override
-                        public void downloadSuccess(String serverUri) {
+                        public void downloadSuccess(File file, String serverUri) {
                             customDialog.dismiss();
                             Uri downloadFileUri = Uri.fromFile(updateFile);
                             if (downloadFileUri != null) {

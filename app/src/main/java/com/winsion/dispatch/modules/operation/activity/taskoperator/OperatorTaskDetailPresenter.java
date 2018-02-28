@@ -93,6 +93,7 @@ public class OperatorTaskDetailPresenter extends ChangeStatusBiz implements Oper
                 LocalRecordEntity localRecordEntity = new LocalRecordEntity();
                 localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
                 localRecordEntity.setFile(file);
+                localRecordEntity.setFileName(file.getName());
                 if (name.endsWith(".jpg")) {
                     localRecordEntity.setFileType(FileType.PICTURE);
                     recordEntities.add(localRecordEntity);

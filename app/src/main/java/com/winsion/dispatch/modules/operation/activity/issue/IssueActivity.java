@@ -2,7 +2,6 @@ package com.winsion.dispatch.modules.operation.activity.issue;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -88,7 +87,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     // 选中的班组名
     private String teamNames;
     // 车次ID
-    private String runsId;
+    private String runsId = "";
     // 发布类型 命令/协作 从上个页面带过来
     private int issueType;
 
@@ -116,7 +115,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
      *                   {@link TaskType}
      * @param teamEntity 发布给班组的班组对象，可以为空
      */
-    public static void startIssueActivity(Context context, @TaskType int issueType, @Nullable TeamEntity teamEntity) {
+    public static void startIssueActivity(Context context, @TaskType int issueType, TeamEntity teamEntity) {
         Intent intent = new Intent(context, IssueActivity.class);
         intent.putExtra(ISSUE_TYPE, issueType);
         if (teamEntity != null) {
@@ -233,7 +232,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             ArrayList<FileEntity> fileList = new ArrayList<>();
             for (LocalRecordEntity localRecordEntity : localRecordEntities) {
                 FileEntity fileEntity = new FileEntity();
-                fileEntity.setFileName(localRecordEntity.getFile().getName());
+                fileEntity.setFileName(localRecordEntity.getFileName());
                 fileEntity.setFileType(localRecordEntity.getFileType());
                 fileList.add(fileEntity);
             }
@@ -279,7 +278,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     private boolean checkDataIsComplete() {
         String title = getText(etTitle);
         String content = getText(etContent);
-        if (isEmpty(getText(tvStation)) || isEmpty(teamIds) || isEmpty(title) || isEmpty(runsId) || isEmpty(content)) {
+        if (isEmpty(getText(tvStation)) || isEmpty(teamIds) || isEmpty(title) || isEmpty(content)) {
             showToast(getString(R.string.toast_complete_info));
             return false;
         }

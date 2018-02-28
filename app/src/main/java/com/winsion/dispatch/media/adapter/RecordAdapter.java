@@ -66,13 +66,9 @@ public class RecordAdapter extends CommonAdapter<LocalRecordEntity> {
             case FileStatus.NO_UPLOAD:
             case FileStatus.UPLOADING:
             case FileStatus.SYNCHRONIZED:
-                viewHolder.setText(R.id.tv_file_name, localRecordEntity.getFile().getName());
-                break;
             case FileStatus.NO_DOWNLOAD:
             case FileStatus.DOWNLOADING:
-                String[] split = localRecordEntity.getServerUri().split("/");
-                if (split.length != 0)
-                    viewHolder.setText(R.id.tv_file_name, split[split.length - 1]);
+                viewHolder.setText(R.id.tv_file_name, localRecordEntity.getFileName());
                 break;
         }
 

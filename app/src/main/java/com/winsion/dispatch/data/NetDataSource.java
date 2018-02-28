@@ -304,7 +304,7 @@ public class NetDataSource {
 
                     @Override
                     public void onFinish(File file, Progress progress) {
-                        myDownloadListener.downloadSuccess(serverUri);
+                        myDownloadListener.downloadSuccess(file, serverUri);
                     }
 
                     @Override

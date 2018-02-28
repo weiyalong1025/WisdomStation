@@ -5,7 +5,6 @@
     android:id="@+id/ll_bg_color"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/gray8"
     android:orientation="vertical">
 
     <android.support.v7.widget.GridLayout

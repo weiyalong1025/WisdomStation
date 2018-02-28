@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray8"
     android:orientation="vertical">
 
     <com.winsion.dispatch.view.TitleView
@@ -344,7 +345,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/refer11"
-                android:background="@color/black3"
                 android:divider="@null"
                 android:scrollbars="none"
                 tools:ignore="NestedScrolling"

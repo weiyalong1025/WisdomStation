@@ -142,7 +142,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
             ArrayList<FileEntity> fileList = new ArrayList<>();
             for (LocalRecordEntity localRecordEntity : localRecordEntities) {
                 FileEntity fileEntity = new FileEntity();
-                fileEntity.setFileName(localRecordEntity.getFile().getName());
+                fileEntity.setFileName(localRecordEntity.getFileName());
                 fileEntity.setFileType(localRecordEntity.getFileType());
                 fileList.add(fileEntity);
             }
@@ -342,6 +342,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
                     localRecordEntity.setFileType(FileType.PICTURE);
                     localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
                     localRecordEntity.setFile(photoFile);
+                    localRecordEntity.setFileName(photoFile.getName());
                     localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
                     ViewUtils.setListViewHeightBasedOnChildren(lvRecordList);

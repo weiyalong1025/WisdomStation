@@ -11,6 +11,7 @@ public class LocalRecordEntity {
     private int fileStatus; // 状态 FileState
     private String serverUri;   // 文件服务器路径
     private int progress;   // 进度 0-100
+    private String fileName;
 
     public File getFile() {
         return file;
@@ -50,5 +51,13 @@ public class LocalRecordEntity {
 
     public void setProgress(int progress) {
         this.progress = progress;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

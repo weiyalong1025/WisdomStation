@@ -41,11 +41,11 @@ import com.winsion.dispatch.modules.operation.entity.JobEntity;
 import com.winsion.dispatch.utils.ConvertUtils;
 import com.winsion.dispatch.utils.DirAndFileUtils;
 import com.winsion.dispatch.utils.FileUtils;
+import com.winsion.dispatch.utils.ImageLoader;
 import com.winsion.dispatch.utils.ViewUtils;
 import com.winsion.dispatch.utils.constants.Formatter;
 import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.DrawableCenterTextView;
-import com.winsion.dispatch.view.GifView;
 import com.winsion.dispatch.view.TitleView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -91,8 +91,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private LinearLayout llTrainModule;
     private ImageView divHeader;
     private ImageView ivStatus;
-    private GifView doingGif;
-    private ImageView ivIconOrder;
+    private ImageView ivTypeIcon;
     private TextView taskTypeName;
     private ImageView ivJobIcon;
     private TextView tvTaskName;
@@ -182,8 +181,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         llTrainModule = findViewById(R.id.ll_train_module);
         divHeader = findViewById(R.id.div_header);
         ivStatus = findViewById(R.id.iv_status);
-        doingGif = findViewById(R.id.doing_gif);
-        ivIconOrder = findViewById(R.id.iv_icon_order);
+        ivTypeIcon = findViewById(R.id.iv_type_icon);
         taskTypeName = findViewById(R.id.task_type_name);
         ivJobIcon = findViewById(R.id.iv_job_icon);
         tvTaskName = findViewById(R.id.tv_task_name);
@@ -422,35 +420,35 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             case TaskType.TASK:
                 tvTitle.setTitleText(getString(R.string.title_operation_detail));
                 taskTypeName.setText(R.string.name_operation_name);
-                ivIconOrder.setVisibility(View.GONE);
+                ivTypeIcon.setVisibility(View.GONE);
                 break;
             // 命令
             case TaskType.COMMAND:
                 tvTitle.setTitleText(getString(R.string.title_command_detail));
                 taskTypeName.setText(R.string.name_command_name);
-                ivIconOrder.setImageResource(R.drawable.ic_command);
-                ivIconOrder.setVisibility(View.VISIBLE);
+                ivTypeIcon.setImageResource(R.drawable.ic_command);
+                ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
             // 协作
             case TaskType.COOPERATE:
                 tvTitle.setTitleText(getString(R.string.title_cooperation_detail));
                 taskTypeName.setText(R.string.name_cooperation_name);
-                ivIconOrder.setImageResource(R.drawable.ic_cooperation);
-                ivIconOrder.setVisibility(View.VISIBLE);
+                ivTypeIcon.setImageResource(R.drawable.ic_cooperation);
+                ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
             // 网格
             case TaskType.GRID:
                 tvTitle.setTitleText(getString(R.string.title_grid_detail));
                 taskTypeName.setText(R.string.value_grid_task);
-                ivIconOrder.setImageResource(R.drawable.ic_grid1);
-                ivIconOrder.setVisibility(View.VISIBLE);
+                ivTypeIcon.setImageResource(R.drawable.ic_grid1);
+                ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
             // 预案
             case TaskType.PLAN:
                 tvTitle.setTitleText(getString(R.string.title_alarm_detail));
                 taskTypeName.setText(R.string.value_alarm_task);
-                ivIconOrder.setImageResource(R.drawable.ic_alarm);
-                ivIconOrder.setVisibility(View.VISIBLE);
+                ivTypeIcon.setImageResource(R.drawable.ic_alarm);
+                ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
         }
 
@@ -508,9 +506,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 判断是否超时
                 isTimeOut = planEndTime < currentTime;
                 if (isTimeOut) {
-                    doingGif.setMovieResource(R.drawable.gif_doing_timeout);
+                    ImageLoader.loadGif(ivStatus, R.drawable.gif_doing_timeout);
                 } else {
-                    doingGif.setMovieResource(R.drawable.gif_doing);
+                    ImageLoader.loadGif(ivStatus, R.drawable.gif_doing);
                 }
                 break;
             case TaskState.DONE:
@@ -549,19 +547,6 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 } else {
                     ivStatus.setImageResource(R.drawable.ic_not_pass);
                 }
-                break;
-        }
-
-        switch (workStatus) {
-            case TaskState.NOT_STARTED:
-            case TaskState.DONE:
-            case TaskState.GRID_NOT_PASS:
-                doingGif.setVisibility(View.GONE);
-                ivStatus.setVisibility(View.VISIBLE);
-                break;
-            case TaskState.RUN:
-                doingGif.setVisibility(View.VISIBLE);
-                ivStatus.setVisibility(View.GONE);
                 break;
         }
 

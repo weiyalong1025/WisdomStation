@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
@@ -11,8 +12,8 @@ import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
 import com.winsion.dispatch.utils.ConvertUtils;
+import com.winsion.dispatch.utils.ImageLoader;
 import com.winsion.dispatch.utils.constants.Formatter;
-import com.winsion.dispatch.view.GifView;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 
@@ -52,11 +53,9 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
 
         // 网格和预案任务不显示车次
         if (taskType == TaskType.GRID || taskType == TaskType.PLAN) {
-            viewHolder.setVisible(R.id.tv_train_number, false);
-            viewHolder.setVisible(R.id.tv_train_number_title, false);
+            viewHolder.setVisible(R.id.ll_train_info, false);
         } else {
-            viewHolder.setVisible(R.id.tv_train_number, true);
-            viewHolder.setVisible(R.id.tv_train_number_title, true);
+            viewHolder.setVisible(R.id.ll_train_info, true);
             String trainNumber = jobEntity.getTrainnumber();
             trainNumber = TextUtils.isEmpty(trainNumber) ? getString(R.string.value_nothing) : trainNumber;
             viewHolder.setText(R.id.tv_train_number, trainNumber);
@@ -147,11 +146,11 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
                 viewHolder.setText(R.id.tv_last_time, lastTime + getString(R.string.suffix_minute));
                 // 判断是否超时
                 isTimeOut = planEndTime < currentTime;
-                GifView gifView = viewHolder.getView(R.id.doing_gif);
+                ImageView ivStatus = viewHolder.getView(R.id.iv_status);
                 if (isTimeOut) {
-                    gifView.setMovieResource(R.drawable.gif_doing_timeout);
+                    ImageLoader.loadGif(ivStatus, R.drawable.gif_doing_timeout);
                 } else {
-                    gifView.setMovieResource(R.drawable.gif_doing);
+                    ImageLoader.loadGif(ivStatus, R.drawable.gif_doing);
                 }
                 break;
             case TaskState.DONE:
@@ -190,19 +189,6 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
                 } else {
                     viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_not_pass);
                 }
-                break;
-        }
-
-        switch (workStatus) {
-            case TaskState.NOT_STARTED:
-            case TaskState.DONE:
-            case TaskState.GRID_NOT_PASS:
-                viewHolder.setVisible(R.id.doing_gif, false);
-                viewHolder.setVisible(R.id.iv_status, true);
-                break;
-            case TaskState.RUN:
-                viewHolder.setVisible(R.id.doing_gif, true);
-                viewHolder.setVisible(R.id.iv_status, false);
                 break;
         }
 

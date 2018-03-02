@@ -112,6 +112,11 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         svSpinner.setSecondOptionData(statusList);
     }
 
+    private void initAdapter() {
+        mLvAdapter = new OperatorTaskListAdapter(mContext, listData);
+        lvList.setAdapter(mLvAdapter);
+    }
+
     private void initListener() {
         EventBus.getDefault().register(this);
         swipeRefresh.setOnRefreshListener(() -> mPresenter.getMyTaskData(mCurrentSysType));
@@ -143,11 +148,6 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         });
 
         addOnClickListeners(R.id.tv_hint);
-    }
-
-    private void initAdapter() {
-        mLvAdapter = new OperatorTaskListAdapter(mContext, listData);
-        lvList.setAdapter(mLvAdapter);
     }
 
     /**

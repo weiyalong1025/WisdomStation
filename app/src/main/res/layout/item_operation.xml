@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -31,131 +30,143 @@
             android:background="@color/gray8"
             android:orientation="vertical">
 
-            <android.support.v7.widget.GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d85"
-                android:layout_marginBottom="@dimen/d5"
-                app:columnCount="4">
+                android:layout_height="@dimen/d90"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/d5">
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_columnWeight="1"
-                    app:layout_gravity="center"
-                    app:layout_rowSpan="2">
-
-                    <ImageView
-                        android:id="@+id/iv_status"
-                        android:layout_width="@dimen/d45"
-                        android:layout_height="@dimen/d45"
-                        android:src="@drawable/ic_not_start"
-                        tools:ignore="ContentDescription" />
-
-                    <com.winsion.dispatch.view.GifView
-                        android:id="@+id/doing_gif"
-                        android:layout_width="@dimen/d45"
-                        android:layout_height="@dimen/d45"
-                        android:visibility="gone"
-                        app:gif="@drawable/gif_doing" />
-                </FrameLayout>
+                <ImageView
+                    android:id="@+id/iv_status"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/d45"
+                    android:layout_weight="0.9"
+                    android:src="@drawable/ic_not_start"
+                    tools:ignore="ContentDescription" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/d4"
-                    android:layout_marginTop="@dimen/d15"
-                    app:layout_columnWeight="1"
-                    app:layout_gravity="center"
-                    tools:ignore="UseCompoundDrawables">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/iv_type_icon"
-                        android:layout_width="@dimen/d23"
-                        android:layout_height="@dimen/d23"
-                        android:layout_marginEnd="@dimen/d3"
-                        android:visibility="gone"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:id="@+id/task_type_name"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/name_task_name"
-                        android:textColor="@color/gray2"
-                        android:textSize="@dimen/s15" />
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        tools:ignore="NestedWeights">
+
+                        <ImageView
+                            android:id="@+id/iv_type_icon"
+                            android:layout_width="@dimen/d23"
+                            android:layout_height="@dimen/d23"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/d3"
+                            android:src="@drawable/ic_command"
+                            android:visibility="gone"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/task_type_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/iv_type_icon"
+                            android:text="@string/name_task_name"
+                            android:textColor="@color/gray2"
+                            android:textSize="@dimen/s15" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/iv_job_icon"
+                            android:layout_width="@dimen/d20"
+                            android:layout_height="@dimen/d20"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/d3"
+                            android:src="@drawable/ic_normal"
+                            android:visibility="gone"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/tv_task_name"
+                            style="@style/MarqueeTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/iv_job_icon"
+                            android:textColor="@color/blue1"
+                            android:textSize="@dimen/s21"
+                            android:textStyle="bold"
+                            tools:text="接站作业" />
+                    </RelativeLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_train_number_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/d4"
-                    android:layout_marginTop="@dimen/d15"
-                    android:text="@string/name_train_number"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
-                    app:layout_columnWeight="1"
-                    app:layout_gravity="center" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/d4"
-                    android:layout_marginTop="@dimen/d15"
-                    android:text="@string/name_execution_time"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
-                    app:layout_columnWeight="1"
-                    app:layout_gravity="center" />
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_columnWeight="1"
-                    app:layout_gravity="center"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <ImageView
-                        android:id="@+id/iv_job_icon"
-                        android:layout_width="@dimen/d20"
-                        android:layout_height="@dimen/d20"
-                        android:layout_marginEnd="@dimen/d3"
-                        android:visibility="gone"
-                        tools:ignore="ContentDescription" />
+                    android:id="@+id/ll_train_info"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_task_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/name_train_number"
+                        android:textColor="@color/gray2"
+                        android:textSize="@dimen/s15"
+                        tools:ignore="NestedWeights" />
+
+                    <TextView
+                        android:id="@+id/tv_train_number"
                         style="@style/MarqueeTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxWidth="@dimen/d120"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:textColor="@color/blue1"
                         android:textSize="@dimen/s21"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="G506" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_train_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21"
-                    android:textStyle="bold"
-                    app:layout_columnWeight="1"
-                    app:layout_gravity="center" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_last_time"
-                    style="@style/MarqueeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxWidth="@dimen/d60"
-                    android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21"
-                    app:layout_columnWeight="1"
-                    app:layout_gravity="center" />
-            </android.support.v7.widget.GridLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/name_execution_time"
+                        android:textColor="@color/gray2"
+                        android:textSize="@dimen/s15"
+                        tools:ignore="NestedWeights" />
+
+                    <TextView
+                        android:id="@+id/tv_last_time"
+                        style="@style/MarqueeTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/blue1"
+                        android:textSize="@dimen/s21"
+                        tools:text="120分" />
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -48,6 +48,7 @@
     <dimen name="d84">112dp</dimen>
     <dimen name="d85">113.33dp</dimen>
     <dimen name="d88">117.33dp</dimen>
+    <dimen name="d90">120dp</dimen>
     <dimen name="d95">126.67dp</dimen>
     <dimen name="d100">133.33dp</dimen>
     <dimen name="d105">140dp</dimen>

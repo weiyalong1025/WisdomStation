@@ -34,11 +34,6 @@
         <attr name="showSearchView" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="GifView">
-        <attr name="gif" format="reference" />
-        <attr name="paused" format="boolean" />
-    </declare-styleable>
-
     <declare-styleable name="CircleProgressBar">
         <attr name="line_count" format="integer" />
         <attr name="draw_progress_text" format="boolean" />

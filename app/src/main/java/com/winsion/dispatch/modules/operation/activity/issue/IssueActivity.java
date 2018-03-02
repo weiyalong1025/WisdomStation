@@ -458,6 +458,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     localRecordEntity.setFileType(FileType.PICTURE);
                     localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
                     localRecordEntity.setFile(photoFile);
+                    localRecordEntity.setFileName(photoFile.getName());
                     localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
                     ViewUtils.setListViewHeightBasedOnChildren(listView);
@@ -470,6 +471,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     localRecordEntity.setFileType(FileType.VIDEO);
                     localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
                     localRecordEntity.setFile(videoFile);
+                    localRecordEntity.setFileName(videoFile.getName());
                     localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
                     ViewUtils.setListViewHeightBasedOnChildren(listView);
@@ -482,6 +484,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     localRecordEntity.setFileType(FileType.AUDIO);
                     localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
                     localRecordEntity.setFile(audioFile);
+                    localRecordEntity.setFileName(audioFile.getName());
                     localRecordEntities.add(localRecordEntity);
                     recordAdapter.notifyDataSetChanged();
                     ViewUtils.setListViewHeightBasedOnChildren(listView);

@@ -48,6 +48,7 @@
     <dimen name="d84">210dp</dimen>
     <dimen name="d85">212.5dp</dimen>
     <dimen name="d88">220dp</dimen>
+    <dimen name="d90">225dp</dimen>
     <dimen name="d95">237.5dp</dimen>
     <dimen name="d100">250dp</dimen>
     <dimen name="d105">262.5dp</dimen>

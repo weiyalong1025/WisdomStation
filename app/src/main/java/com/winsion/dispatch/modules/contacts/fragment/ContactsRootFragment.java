@@ -9,6 +9,7 @@ import android.view.View;
 import com.winsion.dispatch.PlaceHolderFragment;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.dispatch.modules.contacts.activity.contacts.ContactsFragment;
 import com.winsion.dispatch.view.MyIndicator;
 import com.winsion.dispatch.view.NoScrollViewPager;
 
@@ -21,7 +22,7 @@ public class ContactsRootFragment extends BaseFragment {
     private NoScrollViewPager vpContent;
     private MyIndicator mIndicator;
 
-    private Fragment[] mFragments = {new PlaceHolderFragment(), new PlaceHolderFragment(), new PlaceHolderFragment()};
+    private Fragment[] mFragments = {new ContactsFragment(), new PlaceHolderFragment(), new PlaceHolderFragment()};
     private int[] mTitles = {R.string.tab_contacts, R.string.tab_team_group, R.string.tab_contact_group};
 
     @SuppressLint("InflateParams")

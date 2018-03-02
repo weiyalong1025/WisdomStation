@@ -30,8 +30,8 @@ public class LoginConfigActivity extends BaseActivity implements LoginConfigCont
 
     @Override
     public void start() {
-        initPresenter();
         initView();
+        initPresenter();
         initListener();
     }
 

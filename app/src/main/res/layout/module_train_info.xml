@@ -22,7 +22,8 @@
             android:paddingRight="@dimen/d26"
             android:textColor="@color/black6"
             android:textSize="@dimen/s24"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="D924" />
     </LinearLayout>
 
     <FrameLayout
@@ -49,7 +50,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21" />
+                    android:textSize="@dimen/s21"
+                    tools:text="珠海" />
 
                 <TextView
                     android:id="@+id/tv_train_status"
@@ -58,14 +60,16 @@
                     android:layout_marginBottom="@dimen/d12"
                     android:layout_marginTop="@dimen/d12"
                     android:textColor="@color/white1"
-                    android:textSize="@dimen/s16" />
+                    android:textSize="@dimen/s16"
+                    tools:text="正在检票" />
 
                 <TextView
                     android:id="@+id/tv_endStationName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21" />
+                    android:textSize="@dimen/s21"
+                    tools:text="北京西" />
 
                 <View
                     android:layout_width="match_parent"
@@ -84,7 +88,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white1"
-                        android:textSize="@dimen/s21" />
+                        android:textSize="@dimen/s21"
+                        tools:text="3出站口" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -136,7 +141,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white1"
-                        android:textSize="@dimen/s21" />
+                        android:textSize="@dimen/s21"
+                        tools:text="3站台" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -164,7 +170,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white1"
-                    android:textSize="@dimen/s21" />
+                    android:textSize="@dimen/s21"
+                    tools:text="03:20" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -180,7 +187,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white1"
-                    android:textSize="@dimen/s21" />
+                    android:textSize="@dimen/s21"
+                    tools:text="03:38" />
 
                 <View
                     android:layout_width="match_parent"
@@ -199,7 +207,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white1"
-                        android:textSize="@dimen/s21" />
+                        android:textSize="@dimen/s21"
+                        tools:text="候车区" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -227,7 +236,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21" />
+                    android:textSize="@dimen/s21"
+                    tools:text="03:20" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -243,7 +253,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21" />
+                    android:textSize="@dimen/s21"
+                    tools:text="03:38" />
 
                 <View
                     android:layout_width="match_parent"
@@ -262,7 +273,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white1"
-                        android:textSize="@dimen/s21" />
+                        android:textSize="@dimen/s21"
+                        tools:text="B3,A3" />
 
                     <TextView
                         android:layout_width="wrap_content"

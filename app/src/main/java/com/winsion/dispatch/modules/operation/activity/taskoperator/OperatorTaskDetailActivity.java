@@ -418,34 +418,34 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         switch (taskType) {
             // 任务
             case TaskType.TASK:
-                tvTitle.setTitleText(getString(R.string.title_operation_detail));
+                tvTitle.setTitleText(R.string.title_operation_detail);
                 taskTypeName.setText(R.string.name_operation_name);
                 ivTypeIcon.setVisibility(View.GONE);
                 break;
             // 命令
             case TaskType.COMMAND:
-                tvTitle.setTitleText(getString(R.string.title_command_detail));
+                tvTitle.setTitleText(R.string.title_command_detail);
                 taskTypeName.setText(R.string.name_command_name);
                 ivTypeIcon.setImageResource(R.drawable.ic_command);
                 ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
             // 协作
             case TaskType.COOPERATE:
-                tvTitle.setTitleText(getString(R.string.title_cooperation_detail));
+                tvTitle.setTitleText(R.string.title_cooperation_detail);
                 taskTypeName.setText(R.string.name_cooperation_name);
                 ivTypeIcon.setImageResource(R.drawable.ic_cooperation);
                 ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
             // 网格
             case TaskType.GRID:
-                tvTitle.setTitleText(getString(R.string.title_grid_detail));
+                tvTitle.setTitleText(R.string.title_grid_detail);
                 taskTypeName.setText(R.string.value_grid_task);
                 ivTypeIcon.setImageResource(R.drawable.ic_grid1);
                 ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
             // 预案
             case TaskType.PLAN:
-                tvTitle.setTitleText(getString(R.string.title_alarm_detail));
+                tvTitle.setTitleText(R.string.title_alarm_detail);
                 taskTypeName.setText(R.string.value_alarm_task);
                 ivTypeIcon.setImageResource(R.drawable.ic_alarm);
                 ivTypeIcon.setVisibility(View.VISIBLE);

@@ -74,7 +74,7 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
             TodoEntity todoEntity = mPresenter.getTodoById(todoId);
             planDate = ConvertUtils.formatDate(todoEntity.getPlanDate(), Formatter.DATE_FORMAT1);
             String desc = todoEntity.getContent();
-            tvTitle.setTitleText(getString(R.string.title_update_toto));
+            tvTitle.setTitleText(R.string.title_update_toto);
             btnSave.setText(R.string.btn_update);
             etDesc.setText(desc);
             etDesc.setSelection(desc.length());

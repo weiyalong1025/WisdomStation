@@ -120,6 +120,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
             rlDeviceInfo.setVisibility(View.GONE);
         } else {
             tvSite.setText(siteName);
+            tvTitle.setTitleText(R.string.btn_device_repair);
         }
     }
 

@@ -2,6 +2,7 @@ package com.winsion.dispatch.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -57,8 +58,12 @@ public class TitleView extends RelativeLayout {
         tvConfirm.setVisibility(isShow ? VISIBLE : GONE);
     }
 
-    public void setTitleText(String title) {
-        tvTitle.setText(title);
+    public void setTitleText(String titleStr) {
+        tvTitle.setText(titleStr);
+    }
+
+    public void setTitleText(@StringRes int titleStrResId) {
+        tvTitle.setText(titleStrResId);
     }
 
     public void setConfirmButtonText(String confirmButtonText) {

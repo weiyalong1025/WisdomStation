@@ -164,10 +164,10 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         }
         switch (issueType) {
             case TaskType.COMMAND:
-                tvTitle.setTitleText(getString(R.string.title_issue_command));
+                tvTitle.setTitleText(R.string.title_issue_command);
                 break;
             case TaskType.COOPERATE:
-                tvTitle.setTitleText(getString(R.string.title_issue_cooperation));
+                tvTitle.setTitleText(R.string.title_issue_cooperation);
                 break;
         }
         TeamEntity toTeamEntity = (TeamEntity) intent.getSerializableExtra(TO_TEAM_ENTITY);

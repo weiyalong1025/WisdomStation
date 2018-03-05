@@ -73,7 +73,7 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
         if (!mObservers.contains(observer)) mObservers.add(observer);
     }
 
-    public synchronized void removeObserver(Observer observer) {
+    public synchronized static void removeObserver(Observer observer) {
         mObservers.remove(observer);
     }
 

@@ -8,16 +8,13 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.SwitchSysActivity;
 import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.base.BaseActivity;
-import com.winsion.dispatch.common.constants.SystemType;
 import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.SPDataSource;
 import com.winsion.dispatch.data.constants.SPKey;
 import com.winsion.dispatch.modules.contacts.fragment.ContactsRootFragment;
 import com.winsion.dispatch.modules.daofa.fragment.DaofaRootFragment;
-import com.winsion.dispatch.modules.grid.fragment.GridRootFragment;
 import com.winsion.dispatch.modules.operation.fragment.OperationRootFragment;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.scene.fragment.SceneRootFragment;
@@ -38,15 +35,12 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     private AlphaTabView atvOperation;
     private AlphaTabView atvDispatch;
     private AlphaTabView atvContacts;
-    private AlphaTabView atvGrid;
     private AlphaTabView atvScene;
     private AlphaTabView atvReminder;
     private AlphaTabsIndicator atiIndicator;
-    private ImageView ivSwitch;
     private ImageView ivHead;
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
-    private int mCurrentSysType = -1;
     private MainContract.Presenter mPresenter;
 
     @Override
@@ -75,11 +69,9 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
         atvOperation = findViewById(R.id.atv_operation);
         atvDispatch = findViewById(R.id.atv_dispatch);
         atvContacts = findViewById(R.id.atv_contacts);
-        atvGrid = findViewById(R.id.atv_grid);
         atvScene = findViewById(R.id.atv_scene);
         atvReminder = findViewById(R.id.atv_reminder);
         atiIndicator = findViewById(R.id.ati_indicator);
-        ivSwitch = findViewById(R.id.iv_switch);
         ivHead = findViewById(R.id.iv_head);
     }
 
@@ -92,7 +84,6 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
         mFragments.add(new OperationRootFragment());
         mFragments.add(new DaofaRootFragment());
         mFragments.add(new ContactsRootFragment());
-        mFragments.add(new GridRootFragment());
         mFragments.add(new SceneRootFragment());
         mFragments.add(new ReminderRootFragment());
     }
@@ -111,12 +102,12 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
         });
         atiIndicator.setViewPager(vpContent);
         // 预加载所有界面
-        vpContent.setOffscreenPageLimit(5);
+        vpContent.setOffscreenPageLimit(4);
     }
 
     private void initListener() {
         vpContent.setOnPageChangeListener(this);
-        addOnClickListeners(R.id.iv_switch, R.id.iv_head);
+        addOnClickListeners(R.id.iv_head);
     }
 
     /**
@@ -136,7 +127,6 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
             alpha = 0;
         }
         ivHead.setAlpha(alpha);
-        ivSwitch.setAlpha(alpha);
     }
 
     @Override
@@ -164,49 +154,8 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        // 切换生产作业/网格
-        int sysType = mPresenter.getCurrentSystemType();
-        if (mCurrentSysType != sysType) {
-            mCurrentSysType = sysType;
-            switchSystem(mCurrentSysType);
-        }
-    }
-
-    /**
-     * 切换系统
-     */
-    private void switchSystem(int systemType) {
-        switch (systemType) {
-            case SystemType.OPERATION:
-                atvDispatch.setVisibility(View.VISIBLE);
-                atvContacts.setVisibility(View.VISIBLE);
-                atvGrid.setVisibility(View.GONE);
-                atvScene.setVisibility(View.VISIBLE);
-                atiIndicator.setTabCurrentItem(0);
-                break;
-            case SystemType.GRID:
-                atvDispatch.setVisibility(View.GONE);
-                atvContacts.setVisibility(View.GONE);
-                atvGrid.setVisibility(View.VISIBLE);
-                atvScene.setVisibility(View.GONE);
-                atiIndicator.setTabCurrentItem(0);
-                break;
-        }
-    }
-
-    @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.iv_switch:
-                startActivity(SwitchSysActivity.class, false);
-                overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
-                break;
-            case R.id.iv_head:
-                startActivity(UserActivity.class, false);
-                break;
-        }
+        startActivity(UserActivity.class, false);
     }
 
     /**

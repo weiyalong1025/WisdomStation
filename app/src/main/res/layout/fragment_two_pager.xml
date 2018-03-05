@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -20,5 +21,15 @@
     <com.winsion.dispatch.view.NoScrollViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mi_container" />
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/d48"
+        android:layout_height="@dimen/d48"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/ic_arrow_left"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>

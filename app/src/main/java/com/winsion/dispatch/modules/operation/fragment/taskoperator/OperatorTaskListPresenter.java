@@ -5,14 +5,11 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.winsion.dispatch.application.AppApplication;
-import com.winsion.dispatch.common.constants.SystemType;
 import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.NetDataSource;
-import com.winsion.dispatch.data.SPDataSource;
 import com.winsion.dispatch.data.constants.FieldKey;
 import com.winsion.dispatch.data.constants.JoinKey;
 import com.winsion.dispatch.data.constants.Mode;
-import com.winsion.dispatch.data.constants.SPKey;
 import com.winsion.dispatch.data.constants.Urls;
 import com.winsion.dispatch.data.constants.ViewName;
 import com.winsion.dispatch.data.entity.OrderBy;
@@ -20,7 +17,6 @@ import com.winsion.dispatch.data.entity.ResponseForQueryData;
 import com.winsion.dispatch.data.entity.WhereClause;
 import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;
-import com.winsion.dispatch.modules.operation.constants.TaskType;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
 import com.winsion.dispatch.utils.JsonUtils;
 
@@ -47,28 +43,19 @@ public class OperatorTaskListPresenter extends ChangeStatusBiz implements Operat
     }
 
     @Override
-    public void getMyTaskData(int sysType) {
-        if(AppApplication.TEST_MODE){
+    public void getMyTaskData() {
+        if (AppApplication.TEST_MODE) {
             mView.getMyTaskDataSuccess(JsonUtils.getTestEntities(mContext, JobEntity.class));
             return;
         }
-        boolean isGrid = sysType == SystemType.GRID;
-        int fieldKey = isGrid ? FieldKey.EQUALS : FieldKey.NOEQUAL;
 
         List<WhereClause> whereClauses = new ArrayList<>();
         WhereClause whereClause = new WhereClause();
         whereClause.setFieldKey(FieldKey.EQUALS);
-        whereClause.setJoinKey(JoinKey.AND);
+        whereClause.setJoinKey(JoinKey.OTHER);
         whereClause.setValueKey(CacheDataSource.getTeamId());
         whereClause.setFields("teamsid");
         whereClauses.add(whereClause);
-
-        WhereClause whereClause1 = new WhereClause();
-        whereClause1.setFields("taktype");
-        whereClause1.setValueKey(String.valueOf(TaskType.GRID));
-        whereClause1.setJoinKey(JoinKey.OTHER);
-        whereClause1.setFieldKey(fieldKey);
-        whereClauses.add(whereClause1);
 
         List<OrderBy> orderBy = new ArrayList<>();
         OrderBy order = new OrderBy();
@@ -95,11 +82,6 @@ public class OperatorTaskListPresenter extends ChangeStatusBiz implements Operat
                         mView.getMyTaskDataFailed();
                     }
                 });
-    }
-
-    @Override
-    public int getCurrentSystemType() {
-        return (int) SPDataSource.get(mContext, SPKey.KEY_SYS_TYPE, SystemType.OPERATION);
     }
 
     @Override

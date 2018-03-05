@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -36,13 +35,6 @@
             app:tabText="@string/tab_contacts" />
 
         <com.winsion.dispatch.view.AlphaTabView
-            android:id="@+id/atv_grid"
-            style="@style/BottomTabBarStyle"
-            app:tabIconNormal="@drawable/ic_grid"
-            app:tabIconSelected="@drawable/ic_grid_selected"
-            app:tabText="@string/tab_grid" />
-
-        <com.winsion.dispatch.view.AlphaTabView
             android:id="@+id/atv_scene"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_scene"
@@ -62,15 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/ati_indicator" />
-
-    <ImageView
-        android:id="@+id/iv_switch"
-        android:layout_width="@dimen/d48"
-        android:layout_height="@dimen/d48"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="@dimen/d11"
-        android:src="@drawable/ic_switch"
-        tools:ignore="ContentDescription" />
 
     <com.winsion.dispatch.view.CircleImageView
         android:id="@+id/iv_head"

@@ -1,7 +1,6 @@
 package com.winsion.dispatch.utils;
 
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -81,7 +80,7 @@ public class ImageLoader {
                 .into(view);
     }
 
-    public static void loadGif(ImageView view, @DrawableRes int drawableRes){
+    public static void loadGif(ImageView view, @DrawableRes int drawableRes) {
         Glide.with(view.getContext())
                 .asGif()
                 .load(drawableRes)

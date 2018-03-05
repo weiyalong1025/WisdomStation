@@ -102,7 +102,7 @@ public class CommonBiz {
     private static void showUpdateDialog(Context context, UpdateEntity updateEntity) {
         // 需要更新,弹出对话框
         new CustomDialog.NormalBuilder(context)
-                .setTitle(R.string.title_discover_new_version)
+                .setTitle(R.string.title_version_update)
                 .setMessage(updateEntity.getVersionContent())
                 .setPositiveButtonText(R.string.btn_update_now)
                 .setPositiveButton((dialog, which) -> downloadNewVersion(context, updateEntity.getFilePath()))
@@ -189,7 +189,9 @@ public class CommonBiz {
         NetDataSource.post(null, Urls.USER_LOGOUT, httpParams, null);
         // 清除缓存信息
         CacheDataSource.clearCache();
-        listener.onSuccess();
+        if (listener != null) {
+            listener.onSuccess();
+        }
         // 跳转登录界面
         Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

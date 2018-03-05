@@ -32,7 +32,7 @@ public class TitleView extends RelativeLayout {
 
     public TitleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleView, defStyleAttr, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleView);
         boolean showBackButton = typedArray.getBoolean(R.styleable.TitleView_showBackButton, true);
         boolean showConfirmButton = typedArray.getBoolean(R.styleable.TitleView_showConfirmButton, true);
         String titleText = typedArray.getString(R.styleable.TitleView_titleText);

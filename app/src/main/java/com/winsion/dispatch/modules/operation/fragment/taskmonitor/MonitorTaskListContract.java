@@ -18,8 +18,6 @@ class MonitorTaskListContract {
     }
 
     interface Presenter extends BasePresenter {
-        void getMonitorTaskData(int sysType);
-
-        int getCurrentSystemType();
+        void getMonitorTaskData();
     }
 }

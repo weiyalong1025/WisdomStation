@@ -44,6 +44,7 @@
     <dimen name="d60">53.33dp</dimen>
     <dimen name="d64">56.89dp</dimen>
     <dimen name="d70">62.22dp</dimen>
+    <dimen name="d71">63.11dp</dimen>
     <dimen name="d80">71.11dp</dimen>
     <dimen name="d84">74.67dp</dimen>
     <dimen name="d85">75.56dp</dimen>

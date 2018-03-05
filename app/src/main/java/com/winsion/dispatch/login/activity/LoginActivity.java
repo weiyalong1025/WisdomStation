@@ -24,7 +24,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.SwitchSysActivity;
 import com.winsion.dispatch.base.BaseActivity;
 import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.config.activity.LoginConfigActivity;
@@ -32,6 +31,7 @@ import com.winsion.dispatch.login.adapter.UserListAdapter;
 import com.winsion.dispatch.login.constants.LoginErrorCode;
 import com.winsion.dispatch.login.entity.UserEntity;
 import com.winsion.dispatch.login.listener.LoginListener;
+import com.winsion.dispatch.main.activity.MainActivity;
 import com.winsion.dispatch.utils.ImageLoader;
 import com.winsion.dispatch.utils.ViewUtils;
 import com.winsion.dispatch.view.CircleImageView;
@@ -302,7 +302,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
     public void loginSuccess() {
         // 隐藏dialog
         hideDialog();
-        startActivity(SwitchSysActivity.class, true);
+        startActivity(MainActivity.class, true);
     }
 
     @Override

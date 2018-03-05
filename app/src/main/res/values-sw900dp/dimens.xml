@@ -44,6 +44,7 @@
     <dimen name="d60">150dp</dimen>
     <dimen name="d64">160dp</dimen>
     <dimen name="d70">175dp</dimen>
+    <dimen name="d71">177.5dp</dimen>
     <dimen name="d80">200dp</dimen>
     <dimen name="d84">210dp</dimen>
     <dimen name="d85">212.5dp</dimen>

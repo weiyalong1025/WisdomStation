@@ -5,6 +5,8 @@
     <color name="white1">#FFFFFF</color>
     <color name="white2">#E1DFE0</color>
     <color name="white3">#90FFFFFF</color>
+    <color name="white4">#26FFFFFF</color>
+    <color name="white5">#1AFFFFFF</color>
 
     <!-- 灰色 -->
     <color name="gray1">#999999</color>
@@ -36,7 +38,6 @@
     <!-- 蓝色 -->
     <color name="blue1">#46DBE2</color>
     <color name="blue2">#CC46DBE2</color>
-    <color name="blue3">#1296DB</color>
     <color name="blue4">#007AFE</color>
 
     <!-- 黄色 -->

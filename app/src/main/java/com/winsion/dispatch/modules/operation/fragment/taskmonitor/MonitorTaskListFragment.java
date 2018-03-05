@@ -47,7 +47,6 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
     private MonitorTaskListContract.Presenter mPresenter;
     private MonitorTaskListAdapter mLvAdapter;
-    private int mCurrentSysType = -1;
     private List<TaskEntity> listData = new ArrayList<>();  // 当前显示数据
     private List<TaskEntity> allData = new ArrayList<>();   // 全部的
     private List<TaskEntity> unStartedData = new ArrayList<>(); // 未开始
@@ -66,8 +65,9 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     protected void init() {
         initPresenter();
         initView();
-        initListener();
         initAdapter();
+        initListener();
+        mPresenter.getMonitorTaskData();
         startCountTimeByRxAndroid();
     }
 
@@ -97,15 +97,20 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         svSpinner.setSecondOptionData(statusList);
     }
 
+    private void initAdapter() {
+        mLvAdapter = new MonitorTaskListAdapter(mContext, listData);
+        lvList.setAdapter(mLvAdapter);
+    }
+
     private void initListener() {
-        swipeRefresh.setOnRefreshListener(() -> mPresenter.getMonitorTaskData(mCurrentSysType));
+        swipeRefresh.setOnRefreshListener(() -> mPresenter.getMonitorTaskData());
         lvList.setOnItemClickListener(this);
         lvList.setOnScrollListener(this);
         svSpinner.setAfterTextChangeListener(this);
 
         svSpinner.setFirstOptionItemClickListener((position) -> {
             showView(flContainer, progressBar);
-            mPresenter.getMonitorTaskData(mCurrentSysType);
+            mPresenter.getMonitorTaskData();
         });
 
         svSpinner.setSecondOptionItemClickListener((position) -> {
@@ -126,11 +131,6 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         });
 
         addOnClickListeners(R.id.tv_hint);
-    }
-
-    private void initAdapter() {
-        mLvAdapter = new MonitorTaskListAdapter(mContext, listData);
-        lvList.setAdapter(mLvAdapter);
     }
 
     @Override
@@ -231,18 +231,6 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        // 根据系统类型获取数据 生产/网格
-        int sysType = mPresenter.getCurrentSystemType();
-        if (mCurrentSysType != sysType) {
-            mCurrentSysType = sysType;
-            showView(flContainer, progressBar);
-            mPresenter.getMonitorTaskData(mCurrentSysType);
-        }
-    }
-
-    @Override
     public void getMonitorTaskDataSuccess(List<TaskEntity> data) {
         swipeRefresh.setRefreshing(false);
         allData.clear();
@@ -301,7 +289,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     @Override
     public void onClick(View v) {
         showView(flContainer, progressBar);
-        mPresenter.getMonitorTaskData(mCurrentSysType);
+        mPresenter.getMonitorTaskData();
     }
 
     /**

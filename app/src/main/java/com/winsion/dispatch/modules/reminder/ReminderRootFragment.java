@@ -9,9 +9,6 @@ import android.view.View;
 import com.winsion.dispatch.PlaceHolderFragment;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.base.BaseFragment;
-import com.winsion.dispatch.common.constants.SystemType;
-import com.winsion.dispatch.data.SPDataSource;
-import com.winsion.dispatch.data.constants.SPKey;
 import com.winsion.dispatch.modules.reminder.fragment.systemremind.SystemRemindFragment;
 import com.winsion.dispatch.modules.reminder.fragment.todo.TodoListFragment;
 import com.winsion.dispatch.view.BadgeRadioButton;
@@ -31,7 +28,6 @@ public class ReminderRootFragment extends BaseFragment {
 
     private Fragment[] mFragments = {new PlaceHolderFragment(), new TodoListFragment(), new SystemRemindFragment()};
     private int[] mTitles = {R.string.tab_user_message, R.string.tab_todo, R.string.tab_system_remind};
-    private int mCurrentSysType = -1;
 
     @SuppressLint("InflateParams")
     @Override
@@ -54,29 +50,6 @@ public class ReminderRootFragment extends BaseFragment {
         brb0 = findViewById(R.id.brb0);
         brb1 = findViewById(R.id.brb1);
         brb2 = findViewById(R.id.brb2);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        int sysType = (int) SPDataSource.get(mContext, SPKey.KEY_SYS_TYPE, SystemType.OPERATION);
-        if (mCurrentSysType != sysType) {
-            mCurrentSysType = sysType;
-            View left = mIndicator.getChildAt(0);
-            View middle = mIndicator.getChildAt(1);
-            switch (mCurrentSysType) {
-                case SystemType.OPERATION:
-                    middle.setBackgroundResource(R.drawable.selector_indicator_bg_middle);
-                    left.setVisibility(View.VISIBLE);
-                    mIndicator.whichChecked(0);
-                    break;
-                case SystemType.GRID:
-                    middle.setBackgroundResource(R.drawable.selector_indicator_bg_left);
-                    left.setVisibility(View.GONE);
-                    mIndicator.whichChecked(1);
-                    break;
-            }
-        }
     }
 
     public BadgeRadioButton getBrbView(int index) {

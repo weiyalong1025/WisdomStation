@@ -440,14 +440,14 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             case TaskType.GRID:
                 tvTitle.setTitleText(R.string.title_grid_detail);
                 taskTypeName.setText(R.string.value_grid_task);
-                ivTypeIcon.setImageResource(R.drawable.ic_grid1);
+                ivTypeIcon.setImageResource(R.drawable.ic_type_grid);
                 ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
             // 预案
             case TaskType.PLAN:
                 tvTitle.setTitleText(R.string.title_alarm_detail);
                 taskTypeName.setText(R.string.value_alarm_task);
-                ivTypeIcon.setImageResource(R.drawable.ic_alarm);
+                ivTypeIcon.setImageResource(R.drawable.ic_type_alarm);
                 ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
         }

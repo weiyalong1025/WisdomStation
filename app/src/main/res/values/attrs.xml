@@ -119,4 +119,10 @@
         <attr name="android:color" />
     </declare-styleable>
 
+    <declare-styleable name="ModuleView">
+        <attr name="moduleIcon" format="reference" />
+        <attr name="moduleName" format="string" />
+        <attr name="showRedDot" format="boolean" />
+    </declare-styleable>
+
 </resources>

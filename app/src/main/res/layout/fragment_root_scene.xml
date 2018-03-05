@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -30,26 +29,22 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/ib_main_passenger"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_grid"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
+                    android:layout_marginEnd="@dimen/d5"
                     android:layout_weight="36"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_main_passenger" />
+                    app:moduleIcon="@drawable/ic_grid"
+                    app:moduleName="@string/tab_grid" />
 
-                <View
-                    android:layout_width="@dimen/d5"
-                    android:layout_height="match_parent" />
-
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_lost"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_main_passenger"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
                     android:layout_weight="31"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_lost" />
-
+                    app:moduleIcon="@drawable/ic_main_passenger"
+                    app:moduleName="@string/title_key_passenger" />
             </LinearLayout>
 
             <LinearLayout
@@ -61,25 +56,22 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_area_broadcast"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_area_broadcast"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
+                    android:layout_marginEnd="@dimen/d5"
                     android:layout_weight="31"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_area_broadcast" />
+                    app:moduleIcon="@drawable/ic_area_broadcast"
+                    app:moduleName="@string/title_area_broadcast" />
 
-                <View
-                    android:layout_width="@dimen/d5"
-                    android:layout_height="match_parent" />
-
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_broadcast"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_broadcast"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
                     android:layout_weight="36"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_passenger_broadcast" />
+                    app:moduleIcon="@drawable/ic_passenger_broadcast"
+                    app:moduleName="@string/title_passenger_broadcast" />
             </LinearLayout>
 
             <LinearLayout
@@ -91,39 +83,22 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <RelativeLayout
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_transfer"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="36">
+                    android:layout_height="@dimen/d120"
+                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_weight="36"
+                    app:moduleIcon="@drawable/ic_transfer"
+                    app:moduleName="@string/title_transfer" />
 
-                    <com.winsion.dispatch.view.AdjustImageView
-                        android:id="@+id/iv_transfer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:src="@drawable/bg_transfer" />
-
-                    <ImageView
-                        android:id="@+id/iv_red_dot"
-                        android:layout_width="@dimen/d8"
-                        android:layout_height="@dimen/d8"
-                        android:layout_alignEnd="@id/iv_transfer"
-                        android:background="@drawable/bg_circle_red"
-                        android:visibility="gone"
-                        tools:ignore="ContentDescription" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="@dimen/d5"
-                    android:layout_height="match_parent" />
-
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_light"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_light"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
                     android:layout_weight="31"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_light" />
+                    app:moduleIcon="@drawable/ic_light"
+                    app:moduleName="@string/title_light" />
             </LinearLayout>
 
             <LinearLayout
@@ -135,25 +110,22 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_elevator"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_elevator"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
+                    android:layout_marginEnd="@dimen/d5"
                     android:layout_weight="31"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_elevator" />
+                    app:moduleIcon="@drawable/ic_elevator"
+                    app:moduleName="@string/title_elevator" />
 
-                <View
-                    android:layout_width="@dimen/d5"
-                    android:layout_height="match_parent" />
-
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_water"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_water"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
                     android:layout_weight="36"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_water" />
+                    app:moduleIcon="@drawable/ic_water"
+                    app:moduleName="@string/title_water" />
             </LinearLayout>
 
             <LinearLayout
@@ -165,25 +137,22 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_video"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_video"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
+                    android:layout_marginEnd="@dimen/d5"
                     android:layout_weight="36"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_video" />
+                    app:moduleIcon="@drawable/ic_video1"
+                    app:moduleName="@string/title_video" />
 
-                <View
-                    android:layout_width="@dimen/d5"
-                    android:layout_height="match_parent" />
-
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_door"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_door"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
                     android:layout_weight="31"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_door" />
+                    app:moduleIcon="@drawable/ic_door"
+                    app:moduleName="@string/title_door" />
             </LinearLayout>
 
             <LinearLayout
@@ -195,25 +164,22 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_air_conditioner"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_air_conditioner"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
+                    android:layout_marginEnd="@dimen/d5"
                     android:layout_weight="31"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_conditioner" />
+                    app:moduleIcon="@drawable/ic_air_conditioner"
+                    app:moduleName="@string/title_air_conditioner" />
 
-                <View
-                    android:layout_width="@dimen/d5"
-                    android:layout_height="match_parent" />
-
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_air_handing"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_air_handing"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
                     android:layout_weight="36"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_air_handing" />
+                    app:moduleIcon="@drawable/ic_air_handing"
+                    app:moduleName="@string/title_air_handing" />
             </LinearLayout>
 
             <LinearLayout
@@ -225,25 +191,45 @@
                 android:layout_marginTop="@dimen/d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_pump"
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_pump"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/d120"
+                    android:layout_marginEnd="@dimen/d5"
                     android:layout_weight="36"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_pump" />
+                    app:moduleIcon="@drawable/ic_pump"
+                    app:moduleName="@string/title_pump" />
+
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_cooling_tower"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/d120"
+                    android:layout_weight="31"
+                    app:moduleIcon="@drawable/ic_cooling_tower"
+                    app:moduleName="@string/title_cooling_tower" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll7"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/d5"
+                android:orientation="horizontal">
+
+                <com.winsion.dispatch.view.ModuleView
+                    android:id="@+id/mv_lost"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/d120"
+                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_weight="31"
+                    app:moduleIcon="@drawable/ic_lost"
+                    app:moduleName="@string/title_lost" />
 
                 <View
-                    android:layout_width="@dimen/d5"
-                    android:layout_height="match_parent" />
-
-                <com.winsion.dispatch.view.AdjustImageView
-                    android:id="@+id/iv_cooling_tower"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="31"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/bg_cooling_tower" />
+                    android:layout_height="@dimen/d120"
+                    android:layout_weight="36" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

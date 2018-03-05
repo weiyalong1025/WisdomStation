@@ -85,14 +85,14 @@ public class MonitorTaskListAdapter extends CommonAdapter<TaskEntity> {
             // 网格
             case TaskType.GRID:
                 viewHolder.setText(R.id.task_type_name, getString(R.string.value_grid_task));
-                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_grid1);
+                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_type_grid);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 viewHolder.setText(R.id.btn_status, jobSize + getString(R.string.suffix_operation));
                 break;
             // 预案
             case TaskType.PLAN:
                 viewHolder.setText(R.id.task_type_name, getString(R.string.value_alarm_task));
-                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_alarm);
+                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_type_alarm);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 viewHolder.setText(R.id.btn_status, jobSize + getString(R.string.suffix_plan));
                 break;

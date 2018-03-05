@@ -18,8 +18,6 @@ class OperatorTaskListContract {
     }
 
     interface Presenter extends BasePresenter {
-        void getMyTaskData(int sysType);
-
-        int getCurrentSystemType();
+        void getMyTaskData();
     }
 }

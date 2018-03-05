@@ -4,14 +4,11 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.winsion.dispatch.common.constants.SystemType;
 import com.winsion.dispatch.data.CacheDataSource;
 import com.winsion.dispatch.data.NetDataSource;
-import com.winsion.dispatch.data.SPDataSource;
 import com.winsion.dispatch.data.constants.FieldKey;
 import com.winsion.dispatch.data.constants.JoinKey;
 import com.winsion.dispatch.data.constants.Mode;
-import com.winsion.dispatch.data.constants.SPKey;
 import com.winsion.dispatch.data.constants.Urls;
 import com.winsion.dispatch.data.constants.ViewName;
 import com.winsion.dispatch.data.entity.OrderBy;
@@ -44,10 +41,7 @@ public class MonitorTaskListPresenter implements MonitorTaskListContract.Present
     }
 
     @Override
-    public void getMonitorTaskData(int sysType) {
-        boolean isGrid = sysType == SystemType.GRID;
-        int fieldKey = isGrid ? FieldKey.EQUALS : FieldKey.NOEQUAL;
-
+    public void getMonitorTaskData() {
         List<WhereClause> whereClauses = new ArrayList<>();
         WhereClause whereClause = new WhereClause();
         whereClause.setFieldKey(FieldKey.LIKE);
@@ -60,7 +54,7 @@ public class MonitorTaskListPresenter implements MonitorTaskListContract.Present
         whereClause1.setFields("taktype");
         whereClause1.setValueKey(String.valueOf(TaskType.GRID));
         whereClause1.setJoinKey(JoinKey.OTHER);
-        whereClause1.setFieldKey(fieldKey);
+        whereClause1.setFieldKey(FieldKey.NOEQUAL);
         whereClauses.add(whereClause1);
 
         List<OrderBy> orderBy = new ArrayList<>();
@@ -88,11 +82,6 @@ public class MonitorTaskListPresenter implements MonitorTaskListContract.Present
                         mView.getMonitorTaskDataFailed();
                     }
                 });
-    }
-
-    @Override
-    public int getCurrentSystemType() {
-        return (int) SPDataSource.get(mContext, SPKey.KEY_SYS_TYPE, SystemType.OPERATION);
     }
 
     @Override

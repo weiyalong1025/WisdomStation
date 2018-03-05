@@ -12,6 +12,6 @@ class MainContract {
     }
 
     interface Presenter extends BasePresenter {
-        int getCurrentSystemType();
+
     }
 }

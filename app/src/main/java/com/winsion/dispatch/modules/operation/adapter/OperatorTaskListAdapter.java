@@ -88,13 +88,13 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
             // 网格
             case TaskType.GRID:
                 viewHolder.setText(R.id.task_type_name, getString(R.string.value_grid_task));
-                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_grid1);
+                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_type_grid);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 break;
             // 预案
             case TaskType.PLAN:
                 viewHolder.setText(R.id.task_type_name, getString(R.string.value_alarm_task));
-                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_alarm);
+                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_type_alarm);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 break;
         }

@@ -10,10 +10,6 @@ public interface SPKey {
     String KEY_TOKEN = "token";
     String KEY_MQ_KEY = "mqKey";
     /**
-     * 系统类型 (生产作业/网格)
-     */
-    String KEY_SYS_TYPE = "sysType";
-    /**
      * 配置的SSID，人员定位用到，符合该SSID的再上报BSSID
      */
     String KEY_SSID = "ssid";

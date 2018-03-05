@@ -62,7 +62,6 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
     private OperatorTaskListContract.Presenter mPresenter;
     private OperatorTaskListAdapter mLvAdapter;
-    private int mCurrentSysType = -1;
     private List<JobEntity> listData = new ArrayList<>();   // 当前显示数据
     private List<JobEntity> allData = new ArrayList<>();    // 全部的
     private List<JobEntity> unStartedData = new ArrayList<>();  // 未开始
@@ -83,6 +82,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         initView();
         initAdapter();
         initListener();
+        mPresenter.getMyTaskData();
         startCountTimeByRxAndroid();
     }
 
@@ -119,7 +119,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
     private void initListener() {
         EventBus.getDefault().register(this);
-        swipeRefresh.setOnRefreshListener(() -> mPresenter.getMyTaskData(mCurrentSysType));
+        swipeRefresh.setOnRefreshListener(() -> mPresenter.getMyTaskData());
         lvList.setOnItemClickListener(this);
         lvList.setOnScrollListener(this);
         svSpinner.setAfterTextChangeListener(this);
@@ -127,7 +127,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
         svSpinner.setFirstOptionItemClickListener((position) -> {
             showView(flContainer, progressBar);
-            mPresenter.getMyTaskData(mCurrentSysType);
+            mPresenter.getMyTaskData();
         });
 
         svSpinner.setSecondOptionItemClickListener((position) -> {
@@ -303,18 +303,6 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        // 根据系统类型获取数据 生产/网格
-        int sysType = mPresenter.getCurrentSystemType();
-        if (mCurrentSysType != sysType) {
-            mCurrentSysType = sysType;
-            showView(flContainer, progressBar);
-            mPresenter.getMyTaskData(mCurrentSysType);
-        }
-    }
-
-    @Override
     public void getMyTaskDataSuccess(List<JobEntity> data) {
         swipeRefresh.setRefreshing(false);
         allData.clear();
@@ -373,7 +361,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @Override
     public void onClick(View v) {
         showView(flContainer, progressBar);
-        mPresenter.getMyTaskData(mCurrentSysType);
+        mPresenter.getMyTaskData();
     }
 
     /**

@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 /**
  * Created by admin on 2017/1/3.
- * RemindEntity
+ * SystemRemindEntity
  */
 
-public class RemindEntity implements Serializable {
+public class SystemRemindEntity implements Serializable {
     private String id;
     private String operatorteamid;
     private String monitorteamid;

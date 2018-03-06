@@ -7,7 +7,7 @@ import com.winsion.dispatch.R;
 import com.winsion.dispatch.common.listener.ClickListener;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
 import com.winsion.dispatch.modules.reminder.constants.ReadStatus;
-import com.winsion.dispatch.modules.reminder.entity.RemindEntity;
+import com.winsion.dispatch.modules.reminder.entity.SystemRemindEntity;
 import com.winsion.dispatch.utils.ToastUtils;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
@@ -21,24 +21,24 @@ import java.util.List;
  * 创建时间：2017/12/27 7:28
  */
 
-public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
+public class SystemRemindAdapter extends CommonAdapter<SystemRemindEntity> {
 
     public interface OnSelectChangeListener {
         void onSelectChange(int selectSize);
     }
 
     private boolean isMultipleDeleteStatus; // 当前是否是多选删除状态
-    private ClickListener<RemindEntity> deleteBtnClickListener;
+    private ClickListener<SystemRemindEntity> deleteBtnClickListener;
     private OnSelectChangeListener onSelectChangeListener;
-    private List<RemindEntity> selectData = new ArrayList<>();
+    private List<SystemRemindEntity> selectData = new ArrayList<>();
 
-    public SystemRemindAdapter(Context context, List<RemindEntity> data) {
+    public SystemRemindAdapter(Context context, List<SystemRemindEntity> data) {
         super(context, R.layout.item_system_remind, data);
     }
 
     @Override
-    protected void convert(ViewHolder viewHolder, RemindEntity remindEntity, int position) {
-        int taskType = remindEntity.getTaskType();
+    protected void convert(ViewHolder viewHolder, SystemRemindEntity systemRemindEntity, int position) {
+        int taskType = systemRemindEntity.getTaskType();
         int typeTextResId = R.string.title_operation_remind;
         switch (taskType) {
             case TaskType.COMMAND:
@@ -55,11 +55,11 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
                 break;
         }
         viewHolder.setText(R.id.tv_remind_type, mContext.getString(typeTextResId));
-        viewHolder.setText(R.id.tv_remind_content, remindEntity.getVoicecontent());
-        String sendTime = remindEntity.getSendtime();
+        viewHolder.setText(R.id.tv_remind_content, systemRemindEntity.getVoicecontent());
+        String sendTime = systemRemindEntity.getSendtime();
         viewHolder.setText(R.id.tv_remind_date, sendTime.substring(0, sendTime.length() - 2));
 
-        if (remindEntity.getReaded() == 1) {
+        if (systemRemindEntity.getReaded() == 1) {
             viewHolder.setVisible(R.id.iv_red_dot, false);
             viewHolder.setTextColorRes(R.id.tv_remind_type, R.color.gray2);
             viewHolder.setTextColorRes(R.id.tv_remind_content, R.color.gray2);
@@ -78,7 +78,7 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
         if (isMultipleDeleteStatus) {
             viewHolder.setVisible(R.id.iv_delete, false);
             viewHolder.setVisible(R.id.iv_select, true);
-            if (selectData.contains(remindEntity)) {
+            if (selectData.contains(systemRemindEntity)) {
                 viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box);
             } else {
                 viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box_outline);
@@ -90,7 +90,7 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
 
         viewHolder.setOnClickListener(R.id.iv_delete, v -> {
             if (deleteBtnClickListener != null) {
-                deleteBtnClickListener.onClick(remindEntity);
+                deleteBtnClickListener.onClick(systemRemindEntity);
             }
         });
 
@@ -98,15 +98,15 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
     }
 
     public void selectOneItem(ViewHolder viewHolder, int position) {
-        RemindEntity remindEntity = mDatas.get(position);
-        if (remindEntity.getReaded() == ReadStatus.UNREAD) {
+        SystemRemindEntity systemRemindEntity = mDatas.get(position);
+        if (systemRemindEntity.getReaded() == ReadStatus.UNREAD) {
             ToastUtils.showToast(mContext, R.string.toast_only_read_remind_can_be_selected);
         } else {
-            if (selectData.contains(remindEntity)) {
-                selectData.remove(remindEntity);
+            if (selectData.contains(systemRemindEntity)) {
+                selectData.remove(systemRemindEntity);
                 viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box_outline);
             } else {
-                selectData.add(remindEntity);
+                selectData.add(systemRemindEntity);
                 viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box);
             }
             if (onSelectChangeListener != null) {
@@ -118,7 +118,7 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
     public void selectAll(boolean isSelectAll) {
         selectData.clear();
         if (isSelectAll) {
-            for (RemindEntity mData : mDatas) {
+            for (SystemRemindEntity mData : mDatas) {
                 if (mData.getReaded() == ReadStatus.READ) {
                     selectData.add(mData);
                 }
@@ -138,7 +138,7 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
         notifyDataSetChanged();
     }
 
-    public List<RemindEntity> getSelectData() {
+    public List<SystemRemindEntity> getSelectData() {
         return selectData;
     }
 
@@ -146,7 +146,7 @@ public class SystemRemindAdapter extends CommonAdapter<RemindEntity> {
         this.onSelectChangeListener = listener;
     }
 
-    public void setDeleteBtnClickListener(ClickListener<RemindEntity> listener) {
+    public void setDeleteBtnClickListener(ClickListener<SystemRemindEntity> listener) {
         this.deleteBtnClickListener = listener;
     }
 

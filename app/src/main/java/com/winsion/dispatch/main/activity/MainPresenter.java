@@ -1,7 +1,13 @@
 package com.winsion.dispatch.main.activity;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.app.NotificationCompat;
 
+import com.alibaba.fastjson.JSON;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.data.CacheDataSource;
@@ -9,6 +15,7 @@ import com.winsion.dispatch.data.NetDataSource;
 import com.winsion.dispatch.mqtt.MQTTClient;
 import com.winsion.dispatch.mqtt.constants.MQType;
 import com.winsion.dispatch.mqtt.entity.MQMessage;
+import com.winsion.dispatch.mqtt.entity.TaskMessage;
 import com.winsion.dispatch.utils.ToastUtils;
 
 /**
@@ -33,13 +40,67 @@ public class MainPresenter implements MainContract.Presenter, MQTTClient.Observe
 
     @Override
     public void onMessageArrive(MQMessage msg) {
-        int messageType = msg.getMessageType();
-        String data = msg.getData();
-        if (messageType == MQType.USER_LOGIN && data.equals(CacheDataSource.getUserId())) {
-            // 用户在别的设备登录，强制下线
-            ToastUtils.showToast(mContext, R.string.toast_user_login_on_other_device);
-            CommonBiz.logout(mContext, null);
+        switch (msg.getMessageType()) {
+            case MQType.USER_LOGIN:
+                String data = msg.getData();
+                if (data.equals(CacheDataSource.getUserId())) {
+                    // 用户在别的设备登录，强制下线
+                    ToastUtils.showToast(mContext, R.string.toast_user_login_on_other_device);
+                    CommonBiz.logout(mContext, null);
+                }
+                break;
+            case MQType.TASK_STATE:
+                TaskMessage taskEvent = JSON.parseObject(msg.getData(), TaskMessage.class);
+                if (taskEvent.getMonitorteamid().equals(CacheDataSource.getTeamId())) {
+
+                }
+                break;
         }
+    }
+
+    /**
+     * 发送通知
+     */
+    private void sendNotification(String title,String content,boolean tts,PendingIntent pendingIntent){
+        /*NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(notificationId, builder.build());
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.ic_launcher);
+        Integer notificationId = 0;
+        switch (dto.getType()) {
+            case NotificationType.TYPE_MESSAGE:
+                ChatUserDto chatUserDto = (ChatUserDto) intent.getSerializableExtra("ChatUserDto");
+                String chatId = chatUserDto.getId();
+                notificationId = map.get(chatId);
+                if (notificationId == null) {
+                    notificationId = ++mRequestCode;
+                    map.put(chatId, notificationId);
+                }
+                break;
+            case NotificationType.TYPE_TASK:
+                notificationId = map.get(msg);
+                if (notificationId == null) {
+                    notificationId = ++mRequestCode;
+                    map.put(msg, notificationId);
+                }
+                break;
+        }
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        //Ticker是状态栏显示的提示
+        builder.setTicker(msg)
+                //第一行内容  通常作为通知栏标题
+                .setContentTitle(dto.getContentTitle())
+                //第二行内容 通常是通知正文
+                .setContentText(msg)
+                //可以点击通知栏的删除按钮删除
+                .setAutoCancel(true)
+                //点击跳转的intent
+                .setContentIntent(pIntent)
+                //通知默认的声音 震动 呼吸灯
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                //系统状态栏显示的小图标
+                .setSmallIcon(R.mipmap.ic_launcher)
+                //下拉显示的大图标
+                .setLargeIcon(bitmap);*/
     }
 
     @Override

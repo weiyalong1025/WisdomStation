@@ -17,7 +17,7 @@ import com.winsion.dispatch.data.entity.ResponseForQueryData;
 import com.winsion.dispatch.data.entity.WhereClause;
 import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.modules.reminder.entity.MessageHandling;
-import com.winsion.dispatch.modules.reminder.entity.RemindEntity;
+import com.winsion.dispatch.modules.reminder.entity.SystemRemindEntity;
 import com.winsion.dispatch.utils.JsonUtils;
 
 import java.lang.reflect.Type;
@@ -47,7 +47,7 @@ public class SystemRemindPresenter implements SystemRemindContract.Presenter {
     @Override
     public void getRemindData() {
         if (AppApplication.TEST_MODE) {
-            mView.getRemindDataSuccess(JsonUtils.getTestEntities(mContext, RemindEntity.class));
+            mView.getRemindDataSuccess(JsonUtils.getTestEntities(mContext, SystemRemindEntity.class));
             return;
         }
         ArrayList<WhereClause> whereClauses = new ArrayList<>();
@@ -73,16 +73,16 @@ public class SystemRemindPresenter implements SystemRemindContract.Presenter {
         orderBies.add(orderBy);
 
         NetDataSource.post(this, Urls.BASE_QUERY, whereClauses, orderBies, ViewName.TASK_REMIND_INFO,
-                1, new ResponseListener<ResponseForQueryData<List<RemindEntity>>>() {
+                1, new ResponseListener<ResponseForQueryData<List<SystemRemindEntity>>>() {
                     @Override
-                    public ResponseForQueryData<List<RemindEntity>> convert(String jsonStr) {
-                        Type type = new TypeReference<ResponseForQueryData<List<RemindEntity>>>() {
+                    public ResponseForQueryData<List<SystemRemindEntity>> convert(String jsonStr) {
+                        Type type = new TypeReference<ResponseForQueryData<List<SystemRemindEntity>>>() {
                         }.getType();
                         return JSON.parseObject(jsonStr, type);
                     }
 
                     @Override
-                    public void onSuccess(ResponseForQueryData<List<RemindEntity>> result) {
+                    public void onSuccess(ResponseForQueryData<List<SystemRemindEntity>> result) {
                         mView.getRemindDataSuccess(result.getDataList());
                     }
 
@@ -97,10 +97,10 @@ public class SystemRemindPresenter implements SystemRemindContract.Presenter {
      * 处理提醒信息，已读/删除(可以是多条)
      */
     @Override
-    public void handleReminds(List<RemindEntity> reminds, int handleType) {
+    public void handleReminds(List<SystemRemindEntity> reminds, int handleType) {
         MessageHandling messageHandling = new MessageHandling();
         ArrayList<String> ids = new ArrayList<>();
-        for (RemindEntity bean : reminds) {
+        for (SystemRemindEntity bean : reminds) {
             ids.add(bean.getId());
         }
         messageHandling.setId(ids);

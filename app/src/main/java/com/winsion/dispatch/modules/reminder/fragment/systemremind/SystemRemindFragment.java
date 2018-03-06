@@ -21,7 +21,7 @@ import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.reminder.adapter.SystemRemindAdapter;
 import com.winsion.dispatch.modules.reminder.constants.HandleType;
 import com.winsion.dispatch.modules.reminder.constants.ReadStatus;
-import com.winsion.dispatch.modules.reminder.entity.RemindEntity;
+import com.winsion.dispatch.modules.reminder.entity.SystemRemindEntity;
 import com.winsion.dispatch.view.CustomDialog;
 import com.zhy.adapter.abslistview.ViewHolder;
 
@@ -42,7 +42,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     private TextView tvHint;
     private FrameLayout flContainer;
 
-    private List<RemindEntity> listData = new ArrayList<>();
+    private List<SystemRemindEntity> listData = new ArrayList<>();
     private SystemRemindContract.Presenter mPresenter;
     private SystemRemindAdapter mLvAdapter;
     private boolean isMultipleDeleteLayoutDisplaying;   // 多选删除布局显示状态
@@ -97,14 +97,14 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     private void initListener() {
         swipeRefresh.setOnRefreshListener(this::initData);
         // 删除按钮点击事件
-        mLvAdapter.setDeleteBtnClickListener(remindEntity -> new CustomDialog.NormalBuilder(mContext)
+        mLvAdapter.setDeleteBtnClickListener(systemRemindEntity -> new CustomDialog.NormalBuilder(mContext)
                 .setMessage(getString(R.string.dialog_sure_to_delete))
                 .setPositiveButton((dialog, which) -> {
-                    if (remindEntity.getReaded() == ReadStatus.UNREAD) {
+                    if (systemRemindEntity.getReaded() == ReadStatus.UNREAD) {
                         showToast(R.string.toast_only_read_remind_can_be_deleted);
                     } else {
-                        ArrayList<RemindEntity> list = new ArrayList<>();
-                        list.add(remindEntity);
+                        ArrayList<SystemRemindEntity> list = new ArrayList<>();
+                        list.add(systemRemindEntity);
                         mPresenter.handleReminds(list, HandleType.HANDLE_DELETE);
                     }
                 })
@@ -121,12 +121,12 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        RemindEntity remindEntity = listData.get(position);
+        SystemRemindEntity systemRemindEntity = listData.get(position);
         if (isMultipleDeleteLayoutDisplaying) {
             mLvAdapter.selectOneItem((ViewHolder) view.getTag(), position);
-        } else if (remindEntity.getReaded() == ReadStatus.UNREAD) {
-            ArrayList<RemindEntity> list = new ArrayList<>();
-            list.add(remindEntity);
+        } else if (systemRemindEntity.getReaded() == ReadStatus.UNREAD) {
+            ArrayList<SystemRemindEntity> list = new ArrayList<>();
+            list.add(systemRemindEntity);
             mPresenter.handleReminds(list, HandleType.HANDLE_READ);
         }
     }
@@ -220,7 +220,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     }
 
     private void deleteSelectData() {
-        List<RemindEntity> selectData = mLvAdapter.getSelectData();
+        List<SystemRemindEntity> selectData = mLvAdapter.getSelectData();
         if (selectData.size() == 0) {
             showToast(getString(R.string.toast_no_selected_item));
         } else {
@@ -275,7 +275,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     }
 
     @Override
-    public void getRemindDataSuccess(List<RemindEntity> remindEntities) {
+    public void getRemindDataSuccess(List<SystemRemindEntity> remindEntities) {
         if (remindEntities.size() != 0) {
             listData.clear();
             listData.addAll(remindEntities);
@@ -296,10 +296,10 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     }
 
     @Override
-    public void handleRemindsSuccess(List<RemindEntity> reminds, int handleType) {
+    public void handleRemindsSuccess(List<SystemRemindEntity> reminds, int handleType) {
         switch (handleType) {
             case HandleType.HANDLE_READ:
-                for (RemindEntity remind : reminds) {
+                for (SystemRemindEntity remind : reminds) {
                     remind.setReaded(ReadStatus.READ);
                 }
                 mLvAdapter.notifyDataSetChanged();
@@ -328,8 +328,8 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
      */
     private void updateUnreadCount() {
         int unreadCount = 0;
-        for (RemindEntity remindEntity : listData) {
-            if (remindEntity.getReaded() == ReadStatus.UNREAD) {
+        for (SystemRemindEntity systemRemindEntity : listData) {
+            if (systemRemindEntity.getReaded() == ReadStatus.UNREAD) {
                 unreadCount++;
             }
         }

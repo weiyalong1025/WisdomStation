@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 白色 -->
+    <color name="basic_white1">#FFFFFF</color>
+    <color name="basic_white2">#E1DFE0</color>
+    <color name="basic_white3">#90FFFFFF</color>
+    <color name="basic_white4">#26FFFFFF</color>
+    <color name="basic_white5">#1AFFFFFF</color>
+
+    <!-- 灰色 -->
+    <color name="basic_gray1">#999999</color>
+    <color name="basic_gray2">#949494</color>
+    <color name="basic_gray3">#7D7D85</color>
+    <color name="basic_gray4">#666666</color>
+    <color name="basic_gray5">#69696D</color>
+    <color name="basic_gray6">#4C4C50</color>
+    <color name="basic_gray7">#3B3B3D</color>
+    <color name="basic_gray8">#333339</color>
+    <color name="basic_gray9">#323232</color>
+    <color name="basic_gray10">#2F2F35</color>
+
+    <!-- 黑色 -->
+    <color name="basic_black1">#29292F</color>
+    <color name="basic_black2">#4D000000</color>
+    <color name="basic_black3">#1F1F22</color>
+    <color name="basic_black4">#1A1A1D</color>
+    <color name="basic_black5">#C0000000</color>
+    <color name="basic_black6">#000000</color>
+    <color name="basic_black7">#60000000</color>
+
+    <!-- 红色 -->
+    <color name="basic_red1">#FF0000</color>
+    <color name="basic_red2">#E24D46</color>
+    <color name="basic_red3">#5A1B22</color>
+    <color name="basic_red4">#E3243A</color>
+
+    <!-- 蓝色 -->
+    <color name="basic_blue1">#46DBE2</color>
+    <color name="basic_blue2">#CC46DBE2</color>
+    <color name="basic_blue4">#007AFE</color>
+
+    <!-- 黄色 -->
+    <color name="basic_yellow1">#74592C</color>
+    <color name="basic_yellow2">#B67801</color>
+    <color name="basic_yellow3">#56380F</color>
+    <color name="basic_yellow4">#D4CA22</color>
+
+    <!-- 绿色 -->
+    <color name="basic_green1">#2B4B35</color>
+    <color name="basic_green2">#2AC246</color>
+
+</resources>

@@ -10,23 +10,23 @@
     <EditText
         android:id="@+id/et_search"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d30"
-        android:layout_margin="@dimen/d5"
+        android:layout_height="@dimen/basic_d30"
+        android:layout_margin="@dimen/basic_d5"
         android:adjustViewBounds="true"
         android:background="@drawable/bg_search"
         android:hint="@string/hint_search"
-        android:paddingEnd="@dimen/d15"
-        android:paddingStart="@dimen/d44"
+        android:paddingEnd="@dimen/basic_d15"
+        android:paddingStart="@dimen/basic_d44"
         android:singleLine="true"
-        android:textColor="@color/white1"
-        android:textColorHint="@color/gray4"
-        android:textSize="@dimen/s16" />
+        android:textColor="@color/basic_white1"
+        android:textColorHint="@color/basic_gray4"
+        android:textSize="@dimen/basic_s16" />
 
     <ImageView
-        android:layout_width="@dimen/d24"
-        android:layout_height="@dimen/d24"
+        android:layout_width="@dimen/basic_d24"
+        android:layout_height="@dimen/basic_d24"
         android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/d15"
+        android:layout_marginStart="@dimen/basic_d15"
         android:src="@drawable/ic_search"
         tools:ignore="ContentDescription" />
 </RelativeLayout>

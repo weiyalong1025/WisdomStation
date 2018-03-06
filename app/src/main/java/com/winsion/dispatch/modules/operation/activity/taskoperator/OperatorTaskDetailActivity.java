@@ -552,11 +552,11 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
 
         // 根据是否超时设置任务模块背景色
         if (isTimeOut) {
-            llBgColor.setBackgroundResource(R.color.yellow1);
-            tvLastTime.setTextColor(getResources().getColor(R.color.red2));
+            llBgColor.setBackgroundResource(R.color.basic_yellow1);
+            tvLastTime.setTextColor(getResources().getColor(R.color.basic_red2));
         } else {
-            llBgColor.setBackgroundResource(R.color.gray8);
-            tvLastTime.setTextColor(getResources().getColor(R.color.blue1));
+            llBgColor.setBackgroundResource(R.color.basic_gray8);
+            tvLastTime.setTextColor(getResources().getColor(R.color.basic_blue1));
         }
     }
 

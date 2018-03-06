@@ -262,9 +262,9 @@ public class CommonBiz {
                 // 确定按钮文字颜色
                 .setSubmitColor(0xFF46DBE2)
                 // 取消和确定文字大小
-                .setSubCalSize(ConvertUtils.getDimenSp(context, R.dimen.s18))
+                .setSubCalSize(ConvertUtils.getDimenSp(context, R.dimen.basic_s18))
                 // 滚轮文字大小
-                .setContentSize(ConvertUtils.getDimenSp(context, R.dimen.s20))
+                .setContentSize(ConvertUtils.getDimenSp(context, R.dimen.basic_s20))
                 // 选中的文字颜色
                 .setTextColorCenter(0xFF46DBE2)
                 // 是否只显示中间选中项的label文字，false则每项item全部都带有label
@@ -286,9 +286,9 @@ public class CommonBiz {
                 // 确定按钮文字颜色
                 .setSubmitColor(0xFF46DBE2)
                 // 取消和确定文字大小
-                .setSubCalSize(ConvertUtils.getDimenSp(context, R.dimen.s18))
+                .setSubCalSize(ConvertUtils.getDimenSp(context, R.dimen.basic_s18))
                 // 滚轮文字大小
-                .setContentTextSize(ConvertUtils.getDimenSp(context, R.dimen.s20))
+                .setContentTextSize(ConvertUtils.getDimenSp(context, R.dimen.basic_s20))
                 // 选中的文字颜色
                 .setTextColorCenter(0xFF46DBE2)
                 // 是否只显示中间选中项的label文字，false则每项item全部都带有label
@@ -302,7 +302,7 @@ public class CommonBiz {
         RelativeLayout tvTopBar = (RelativeLayout) pickerView.findViewById(R.id.rv_topbar);
         if (tvTopBar == null) return;
         ViewGroup.LayoutParams layoutParams = tvTopBar.getLayoutParams();
-        layoutParams.height = tvTopBar.getResources().getDimensionPixelSize(R.dimen.d45);
+        layoutParams.height = tvTopBar.getResources().getDimensionPixelSize(R.dimen.basic_d45);
         tvTopBar.setLayoutParams(layoutParams);
     }
 

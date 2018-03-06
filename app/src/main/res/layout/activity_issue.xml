@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray8"
+    android:background="@color/basic_gray8"
     android:orientation="vertical">
 
     <com.winsion.dispatch.view.TitleView
@@ -29,30 +29,30 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
-                android:layout_marginStart="@dimen/d15"
+                android:layout_height="@dimen/basic_d45"
+                android:layout_marginStart="@dimen/basic_d15"
                 android:gravity="center_vertical"
                 android:text="车"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
+                android:textColor="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/refer1"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_alignEnd="@id/refer3"
                 android:gravity="center_vertical"
                 android:text="站："
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
+                android:textColor="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="HardcodedText" />
 
             <ImageView
-                android:layout_width="@dimen/d45"
-                android:layout_height="@dimen/d45"
+                android:layout_width="@dimen/basic_d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_alignParentEnd="true"
-                android:padding="@dimen/d12"
+                android:padding="@dimen/basic_d12"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_arrow_right"
                 tools:ignore="ContentDescription" />
@@ -60,42 +60,42 @@
             <TextView
                 android:id="@+id/tv_station"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
-                android:layout_marginStart="@dimen/d10"
+                android:layout_height="@dimen/basic_d45"
+                android:layout_marginStart="@dimen/basic_d10"
                 android:layout_toEndOf="@id/refer1"
                 android:gravity="center_vertical"
                 android:hint="@string/hint_select_station"
-                android:paddingEnd="@dimen/d45"
-                android:textColor="@color/white1"
-                android:textColorHint="@color/gray5"
-                android:textSize="@dimen/s20"
+                android:paddingEnd="@dimen/basic_d45"
+                android:textColor="@color/basic_white1"
+                android:textColorHint="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="RtlSymmetry" />
 
             <View
                 android:id="@+id/refer2"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
+                android:layout_height="@dimen/basic_d1"
                 android:layout_below="@id/refer1"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                android:layout_marginStart="@dimen/basic_d10"
+                android:background="@color/basic_gray5" />
 
             <TextView
                 android:id="@+id/refer3"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_below="@id/refer2"
-                android:layout_marginStart="@dimen/d15"
+                android:layout_marginStart="@dimen/basic_d15"
                 android:gravity="center_vertical"
                 android:text="@string/name_start_time"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20" />
+                android:textColor="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20" />
 
             <ImageView
-                android:layout_width="@dimen/d45"
-                android:layout_height="@dimen/d45"
+                android:layout_width="@dimen/basic_d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/refer2"
-                android:padding="@dimen/d12"
+                android:padding="@dimen/basic_d12"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_arrow_right"
                 tools:ignore="ContentDescription" />
@@ -103,42 +103,42 @@
             <TextView
                 android:id="@+id/tv_start_time"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_below="@id/refer2"
-                android:layout_marginStart="@dimen/d10"
+                android:layout_marginStart="@dimen/basic_d10"
                 android:layout_toEndOf="@id/refer3"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/d45"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s20"
+                android:paddingEnd="@dimen/basic_d45"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="RtlSymmetry"
                 tools:text="2018-02-04 22:30:00" />
 
             <View
                 android:id="@+id/refer4"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
+                android:layout_height="@dimen/basic_d1"
                 android:layout_below="@id/tv_start_time"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                android:layout_marginStart="@dimen/basic_d10"
+                android:background="@color/basic_gray5" />
 
             <TextView
                 android:id="@+id/refer5"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_below="@id/refer4"
-                android:layout_marginStart="@dimen/d15"
+                android:layout_marginStart="@dimen/basic_d15"
                 android:gravity="center_vertical"
                 android:text="@string/name_end_time"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20" />
+                android:textColor="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20" />
 
             <ImageView
-                android:layout_width="@dimen/d45"
-                android:layout_height="@dimen/d45"
+                android:layout_width="@dimen/basic_d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/refer4"
-                android:padding="@dimen/d12"
+                android:padding="@dimen/basic_d12"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_arrow_right"
                 tools:ignore="ContentDescription" />
@@ -146,41 +146,41 @@
             <TextView
                 android:id="@+id/tv_end_time"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_below="@id/refer4"
-                android:layout_marginStart="@dimen/d10"
+                android:layout_marginStart="@dimen/basic_d10"
                 android:layout_toEndOf="@id/refer5"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/d45"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s20"
+                android:paddingEnd="@dimen/basic_d45"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="RtlSymmetry"
                 tools:text="2018-02-04 22:30:00" />
 
             <View
                 android:id="@+id/refer6"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
+                android:layout_height="@dimen/basic_d1"
                 android:layout_below="@id/tv_end_time"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                android:layout_marginStart="@dimen/basic_d10"
+                android:background="@color/basic_gray5" />
 
             <TextView
                 android:id="@+id/tv_performer_group_hint"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_below="@id/refer6"
-                android:layout_marginStart="@dimen/d15"
+                android:layout_marginStart="@dimen/basic_d15"
                 android:gravity="center_vertical"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
+                android:textColor="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20"
                 tools:text="@string/name_order_group" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_below="@id/refer6"
-                android:layout_marginStart="@dimen/d10"
+                android:layout_marginStart="@dimen/basic_d10"
                 android:layout_toEndOf="@id/tv_performer_group_hint"
                 android:layout_toStartOf="@id/iv_add_performer"
                 android:scrollbars="none">
@@ -190,18 +190,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:textColor="@color/blue1"
-                    android:textSize="@dimen/s20"
+                    android:textColor="@color/basic_blue1"
+                    android:textSize="@dimen/basic_s20"
                     tools:text="客运检票甲，客运检票已" />
             </HorizontalScrollView>
 
             <ImageView
                 android:id="@+id/iv_add_performer"
-                android:layout_width="@dimen/d45"
-                android:layout_height="@dimen/d45"
+                android:layout_width="@dimen/basic_d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/refer6"
-                android:padding="@dimen/d10"
+                android:padding="@dimen/basic_d10"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_add"
                 tools:ignore="ContentDescription" />
@@ -209,86 +209,86 @@
             <View
                 android:id="@+id/refer7"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
+                android:layout_height="@dimen/basic_d1"
                 android:layout_below="@id/iv_add_performer"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                android:layout_marginStart="@dimen/basic_d10"
+                android:background="@color/basic_gray5" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_below="@id/refer7"
-                android:layout_marginStart="@dimen/d15"
+                android:layout_marginStart="@dimen/basic_d15"
                 android:gravity="center_vertical"
                 android:text="标"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
+                android:textColor="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/refer8"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_alignEnd="@id/refer3"
                 android:layout_below="@id/refer7"
                 android:gravity="center_vertical"
                 android:text="题："
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
+                android:textColor="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/et_title"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_below="@id/refer7"
-                android:layout_marginLeft="@dimen/d10"
-                android:layout_marginRight="@dimen/d10"
+                android:layout_marginLeft="@dimen/basic_d10"
+                android:layout_marginRight="@dimen/basic_d10"
                 android:layout_toEndOf="@id/refer8"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:inputType="text"
                 android:labelFor="@+id/et_title"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s20"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s20"
                 tools:text="接车" />
 
             <View
                 android:id="@+id/refer9"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
+                android:layout_height="@dimen/basic_d1"
                 android:layout_below="@id/et_title"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                android:layout_marginStart="@dimen/basic_d10"
+                android:background="@color/basic_gray5" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_below="@id/refer9"
-                android:layout_marginStart="@dimen/d15"
+                android:layout_marginStart="@dimen/basic_d15"
                 android:gravity="center_vertical"
                 android:text="车"
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
+                android:textColor="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_alignEnd="@id/refer3"
                 android:layout_below="@id/refer9"
                 android:gravity="center_vertical"
                 android:text="次："
-                android:textColor="@color/gray5"
-                android:textSize="@dimen/s20"
+                android:textColor="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="HardcodedText" />
 
             <ImageView
-                android:layout_width="@dimen/d45"
-                android:layout_height="@dimen/d45"
+                android:layout_width="@dimen/basic_d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/refer9"
-                android:padding="@dimen/d12"
+                android:padding="@dimen/basic_d12"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_arrow_right"
                 tools:ignore="ContentDescription" />
@@ -296,49 +296,49 @@
             <TextView
                 android:id="@+id/tv_train_number"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
+                android:layout_height="@dimen/basic_d45"
                 android:layout_below="@id/refer9"
-                android:layout_marginStart="@dimen/d10"
+                android:layout_marginStart="@dimen/basic_d10"
                 android:layout_toEndOf="@id/refer3"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/d45"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s20"
+                android:paddingEnd="@dimen/basic_d45"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="RtlSymmetry"
                 tools:text="G506" />
 
             <View
                 android:id="@+id/refer10"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
+                android:layout_height="@dimen/basic_d1"
                 android:layout_below="@id/tv_train_number"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                android:layout_marginStart="@dimen/basic_d10"
+                android:background="@color/basic_gray5" />
 
             <EditText
                 android:id="@+id/et_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/refer10"
-                android:layout_marginStart="@dimen/d15"
+                android:layout_marginStart="@dimen/basic_d15"
                 android:background="@null"
                 android:hint="@string/name_command_content"
                 android:maxLength="150"
-                android:paddingBottom="@dimen/d10"
-                android:paddingEnd="@dimen/d10"
-                android:paddingTop="@dimen/d10"
-                android:textColor="@color/white1"
-                android:textColorHint="@color/gray5"
-                android:textSize="@dimen/s20"
+                android:paddingBottom="@dimen/basic_d10"
+                android:paddingEnd="@dimen/basic_d10"
+                android:paddingTop="@dimen/basic_d10"
+                android:textColor="@color/basic_white1"
+                android:textColorHint="@color/basic_gray5"
+                android:textSize="@dimen/basic_s20"
                 tools:ignore="RtlSymmetry" />
 
             <View
                 android:id="@+id/refer11"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
+                android:layout_height="@dimen/basic_d1"
                 android:layout_below="@id/et_content"
-                android:layout_marginStart="@dimen/d10"
-                android:background="@color/gray5" />
+                android:layout_marginStart="@dimen/basic_d10"
+                android:background="@color/basic_gray5" />
 
             <ListView
                 android:id="@+id/list_view"

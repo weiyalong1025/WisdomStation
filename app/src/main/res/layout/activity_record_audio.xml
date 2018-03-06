@@ -22,21 +22,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/d40"
+            android:layout_marginTop="@dimen/basic_d40"
             android:text="@string/recording"
-            android:textColor="@color/blue1"
-            android:textSize="@dimen/s18"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s18"
             android:visibility="gone" />
 
         <com.winsion.dispatch.view.WaveView
             android:id="@+id/wave_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d200"
+            android:layout_height="@dimen/basic_d200"
             android:layout_centerInParent="true"
             android:visibility="gone"
             app:maxVolume="100"
-            app:middleLine="@color/black1"
-            app:voiceLine="@color/blue1" />
+            app:middleLine="@color/basic_black1"
+            app:voiceLine="@color/basic_blue1" />
 
         <TextView
             android:id="@+id/tv_time"
@@ -44,18 +44,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/d138"
-            android:textColor="@color/white1"
+            android:layout_marginBottom="@dimen/basic_d138"
+            android:textColor="@color/basic_white1"
             android:textSize="21sp"
             tools:text="0s" />
 
         <ImageView
             android:id="@+id/btn_record"
-            android:layout_width="@dimen/d64"
-            android:layout_height="@dimen/d64"
+            android:layout_width="@dimen/basic_d64"
+            android:layout_height="@dimen/basic_d64"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/d20"
+            android:layout_marginBottom="@dimen/basic_d20"
             android:scaleType="centerCrop"
             android:src="@drawable/btn_record"
             tools:ignore="ContentDescription" />

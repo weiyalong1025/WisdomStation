@@ -15,8 +15,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d40"
-        android:background="@color/gray10"
+        android:layout_height="@dimen/basic_d40"
+        android:background="@color/basic_gray10"
         android:baselineAligned="false"
         android:gravity="center"
         android:orientation="horizontal">
@@ -32,16 +32,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_arrive_time"
-                android:textColor="@color/gray2"
-                android:textSize="@dimen/s16" />
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s16" />
 
             <TextView
                 android:id="@+id/tv_arrive_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/d10"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s16"
+                android:layout_marginStart="@dimen/basic_d10"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s16"
                 tools:text="--:--" />
         </LinearLayout>
 
@@ -56,16 +56,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_finish_time"
-                android:textColor="@color/gray2"
-                android:textSize="@dimen/s16" />
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s16" />
 
             <TextView
                 android:id="@+id/tv_finish_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/d10"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s16"
+                android:layout_marginStart="@dimen/basic_d10"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s16"
                 tools:text="--:--" />
         </LinearLayout>
     </LinearLayout>

@@ -8,50 +8,50 @@
     <TextView
         android:id="@+id/tv_monitor_group_hint"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/d45"
-        android:layout_marginStart="@dimen/d15"
+        android:layout_height="@dimen/basic_d45"
+        android:layout_marginStart="@dimen/basic_d15"
         android:gravity="center_vertical"
-        android:textColor="@color/gray5"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_gray5"
+        android:textSize="@dimen/basic_s20"
         tools:text="@string/name_issue_order_group" />
 
     <TextView
         android:id="@+id/tv_monitor_team"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d45"
-        android:layout_marginEnd="@dimen/d15"
-        android:layout_marginStart="@dimen/d10"
+        android:layout_height="@dimen/basic_d45"
+        android:layout_marginEnd="@dimen/basic_d15"
+        android:layout_marginStart="@dimen/basic_d10"
         android:layout_toEndOf="@id/tv_monitor_group_hint"
         android:gravity="center_vertical"
-        android:textColor="@color/white1"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_white1"
+        android:textSize="@dimen/basic_s20"
         tools:text="客运班组甲" />
 
     <View
         android:id="@+id/refer1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d1"
+        android:layout_height="@dimen/basic_d1"
         android:layout_below="@id/tv_monitor_team"
-        android:layout_marginStart="@dimen/d10"
-        android:background="@color/gray5" />
+        android:layout_marginStart="@dimen/basic_d10"
+        android:background="@color/basic_gray5" />
 
     <TextView
         android:id="@+id/tv_performer_group_hint"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_below="@+id/refer1"
-        android:layout_marginStart="@dimen/d15"
+        android:layout_marginStart="@dimen/basic_d15"
         android:gravity="center_vertical"
-        android:textColor="@color/gray5"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_gray5"
+        android:textSize="@dimen/basic_s20"
         tools:text="@string/name_order_group" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_below="@id/refer1"
-        android:layout_marginEnd="@dimen/d15"
-        android:layout_marginStart="@dimen/d10"
+        android:layout_marginEnd="@dimen/basic_d15"
+        android:layout_marginStart="@dimen/basic_d10"
         android:layout_toEndOf="@id/tv_performer_group_hint"
         android:scrollbars="none">
 
@@ -60,188 +60,188 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textColor="@color/blue1"
-            android:textSize="@dimen/s20"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s20"
             tools:text="客运检票甲，客运检票已1" />
     </HorizontalScrollView>
 
     <View
         android:id="@+id/refer2"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d1"
+        android:layout_height="@dimen/basic_d1"
         android:layout_below="@id/tv_performer_group_hint"
-        android:layout_marginStart="@dimen/d10"
-        android:background="@color/gray5" />
+        android:layout_marginStart="@dimen/basic_d10"
+        android:background="@color/basic_gray5" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_below="@+id/refer2"
-        android:layout_marginStart="@dimen/d15"
+        android:layout_marginStart="@dimen/basic_d15"
         android:gravity="center_vertical"
         android:text="标"
-        android:textColor="@color/gray5"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_gray5"
+        android:textSize="@dimen/basic_s20"
         tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/refer3"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_alignEnd="@id/tv_performer_group_hint"
         android:layout_below="@+id/refer2"
         android:gravity="center_vertical"
         android:text="题："
-        android:textColor="@color/gray5"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_gray5"
+        android:textSize="@dimen/basic_s20"
         tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/tv_title1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_below="@+id/refer2"
-        android:layout_marginEnd="@dimen/d15"
-        android:layout_marginStart="@dimen/d10"
+        android:layout_marginEnd="@dimen/basic_d15"
+        android:layout_marginStart="@dimen/basic_d10"
         android:layout_toEndOf="@+id/refer3"
         android:gravity="center_vertical"
-        android:textColor="@color/white1"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_white1"
+        android:textSize="@dimen/basic_s20"
         tools:text="命令标题" />
 
     <View
         android:id="@+id/refer4"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d1"
+        android:layout_height="@dimen/basic_d1"
         android:layout_below="@id/tv_title1"
-        android:layout_marginStart="@dimen/d10"
-        android:background="@color/gray5" />
+        android:layout_marginStart="@dimen/basic_d10"
+        android:background="@color/basic_gray5" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_below="@+id/refer4"
-        android:layout_marginStart="@dimen/d15"
+        android:layout_marginStart="@dimen/basic_d15"
         android:gravity="center_vertical"
         android:text="车"
-        android:textColor="@color/gray5"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_gray5"
+        android:textSize="@dimen/basic_s20"
         tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/refer5"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_alignEnd="@id/tv_performer_group_hint"
         android:layout_below="@+id/refer4"
         android:gravity="center_vertical"
         android:text="次："
-        android:textColor="@color/gray5"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_gray5"
+        android:textSize="@dimen/basic_s20"
         tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/tv_train_number"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_below="@+id/refer4"
-        android:layout_marginEnd="@dimen/d15"
-        android:layout_marginStart="@dimen/d10"
+        android:layout_marginEnd="@dimen/basic_d15"
+        android:layout_marginStart="@dimen/basic_d10"
         android:layout_toEndOf="@+id/refer5"
         android:gravity="center_vertical"
-        android:textColor="@color/white1"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_white1"
+        android:textSize="@dimen/basic_s20"
         tools:text="G506" />
 
     <View
         android:id="@+id/refer6"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d1"
+        android:layout_height="@dimen/basic_d1"
         android:layout_below="@id/tv_train_number"
-        android:layout_marginStart="@dimen/d10"
-        android:background="@color/gray5" />
+        android:layout_marginStart="@dimen/basic_d10"
+        android:background="@color/basic_gray5" />
 
     <TextView
         android:id="@+id/refer7"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_below="@+id/refer6"
-        android:layout_marginStart="@dimen/d15"
+        android:layout_marginStart="@dimen/basic_d15"
         android:gravity="center_vertical"
         android:text="@string/name_start_time"
-        android:textColor="@color/gray5"
-        android:textSize="@dimen/s20" />
+        android:textColor="@color/basic_gray5"
+        android:textSize="@dimen/basic_s20" />
 
     <TextView
         android:id="@+id/tv_start_time"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_below="@+id/refer6"
-        android:layout_marginEnd="@dimen/d15"
-        android:layout_marginStart="@dimen/d10"
+        android:layout_marginEnd="@dimen/basic_d15"
+        android:layout_marginStart="@dimen/basic_d10"
         android:layout_toEndOf="@+id/refer7"
         android:gravity="center_vertical"
-        android:textColor="@color/white1"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_white1"
+        android:textSize="@dimen/basic_s20"
         tools:text="2018-02-04 22:30:00" />
 
     <View
         android:id="@+id/refer8"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d1"
+        android:layout_height="@dimen/basic_d1"
         android:layout_below="@id/tv_start_time"
-        android:layout_marginStart="@dimen/d10"
-        android:background="@color/gray5" />
+        android:layout_marginStart="@dimen/basic_d10"
+        android:background="@color/basic_gray5" />
 
     <TextView
         android:id="@+id/refer9"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_below="@+id/refer8"
-        android:layout_marginStart="@dimen/d15"
+        android:layout_marginStart="@dimen/basic_d15"
         android:gravity="center_vertical"
         android:text="@string/name_end_time"
-        android:textColor="@color/gray5"
-        android:textSize="@dimen/s20" />
+        android:textColor="@color/basic_gray5"
+        android:textSize="@dimen/basic_s20" />
 
     <TextView
         android:id="@+id/tv_end_time"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d45"
+        android:layout_height="@dimen/basic_d45"
         android:layout_below="@+id/refer8"
-        android:layout_marginEnd="@dimen/d15"
-        android:layout_marginStart="@dimen/d10"
+        android:layout_marginEnd="@dimen/basic_d15"
+        android:layout_marginStart="@dimen/basic_d10"
         android:layout_toEndOf="@+id/refer9"
         android:gravity="center_vertical"
-        android:textColor="@color/white1"
-        android:textSize="@dimen/s20"
+        android:textColor="@color/basic_white1"
+        android:textSize="@dimen/basic_s20"
         tools:text="2018-02-04 22:30:00" />
 
     <View
         android:id="@+id/refer10"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d1"
+        android:layout_height="@dimen/basic_d1"
         android:layout_below="@id/tv_end_time"
-        android:layout_marginStart="@dimen/d10"
-        android:background="@color/gray5" />
+        android:layout_marginStart="@dimen/basic_d10"
+        android:background="@color/basic_gray5" />
 
     <EditText
         android:id="@+id/et_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/refer10"
-        android:layout_marginEnd="@dimen/d15"
-        android:layout_marginStart="@dimen/d15"
+        android:layout_marginEnd="@dimen/basic_d15"
+        android:layout_marginStart="@dimen/basic_d15"
         android:background="@null"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:gravity="top|start"
         android:labelFor="@id/et_content"
-        android:paddingBottom="@dimen/d10"
-        android:paddingTop="@dimen/d10"
-        android:textColor="@color/white1"
-        android:textColorHint="@color/gray5"
-        android:textSize="@dimen/s20"
+        android:paddingBottom="@dimen/basic_d10"
+        android:paddingTop="@dimen/basic_d10"
+        android:textColor="@color/basic_white1"
+        android:textColorHint="@color/basic_gray5"
+        android:textSize="@dimen/basic_s20"
         tools:hint="@string/name_command_content"
         tools:ignore="TextFields" />
 </RelativeLayout>

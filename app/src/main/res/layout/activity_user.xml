@@ -22,34 +22,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray8"
+        android:background="@color/basic_gray8"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/d15">
+        android:padding="@dimen/basic_d15">
 
         <com.winsion.dispatch.view.CircleImageView
             android:id="@+id/iv_head"
-            android:layout_width="@dimen/d60"
-            android:layout_height="@dimen/d60"
+            android:layout_width="@dimen/basic_d60"
+            android:layout_height="@dimen/basic_d60"
             android:src="@drawable/ic_head_single"
-            app:civ_border_color="@color/black6"
-            app:civ_border_width="@dimen/d0_5" />
+            app:civ_border_color="@color/basic_black6"
+            app:civ_border_width="@dimen/basic_d0_5" />
 
         <TextView
             android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/d15"
-            android:textColor="@color/blue1"
-            android:textSize="@dimen/s21"
+            android:layout_margin="@dimen/basic_d15"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s21"
             tools:text="汪文斌" />
 
         <TextView
             android:id="@+id/tv_role_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white1"
-            android:textSize="@dimen/s21"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s21"
             tools:text="(站长)" />
     </LinearLayout>
 
@@ -64,20 +64,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_common"
-        android:padding="@dimen/d15">
+        android:padding="@dimen/basic_d15">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="@string/btn_check_update"
-            android:textColor="@color/white1"
-            android:textSize="@dimen/s21"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s21"
             tools:ignore="RelativeOverlap" />
 
         <ImageView
-            android:layout_width="@dimen/d20"
-            android:layout_height="@dimen/d20"
+            android:layout_width="@dimen/basic_d20"
+            android:layout_height="@dimen/basic_d20"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_arrow_right"
@@ -96,10 +96,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/selector_common"
         android:gravity="center"
-        android:padding="@dimen/d15"
+        android:padding="@dimen/basic_d15"
         android:text="@string/btn_logout"
-        android:textColor="@color/yellow2"
-        android:textSize="@dimen/s21" />
+        android:textColor="@color/basic_yellow2"
+        android:textSize="@dimen/basic_s21" />
 
     <ImageView
         android:layout_width="match_parent"

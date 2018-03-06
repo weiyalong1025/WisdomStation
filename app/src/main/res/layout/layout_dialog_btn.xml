@@ -8,26 +8,26 @@
         android:id="@+id/btn_dialog_negative"
         style="?attr/buttonBarStyle"
         android:layout_width="0dp"
-        android:layout_height="@dimen/d48"
+        android:layout_height="@dimen/basic_d48"
         android:layout_weight="1"
         android:background="@drawable/selector_dialog_btn_left"
         android:text="@string/btn_cancel"
         android:textColor="@color/selector_dialog_button_text"
-        android:textSize="@dimen/s16" />
+        android:textSize="@dimen/basic_s16" />
 
     <View
-        android:layout_width="@dimen/d0_5"
+        android:layout_width="@dimen/basic_d0_5"
         android:layout_height="match_parent"
-        android:background="@color/gray1" />
+        android:background="@color/basic_gray1" />
 
     <Button
         android:id="@+id/btn_dialog_positive"
         style="?attr/buttonBarStyle"
         android:layout_width="0dp"
-        android:layout_height="@dimen/d48"
+        android:layout_height="@dimen/basic_d48"
         android:layout_weight="1"
         android:background="@drawable/selector_dialog_btn_right"
         android:text="@string/btn_confirm"
         android:textColor="@color/selector_dialog_button_text"
-        android:textSize="@dimen/s16" />
+        android:textSize="@dimen/basic_s16" />
 </LinearLayout>

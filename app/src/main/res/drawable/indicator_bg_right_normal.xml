@@ -3,22 +3,22 @@
     <!-- 连框颜色值 -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/blue1" />
+            <solid android:color="@color/basic_blue1" />
             <corners
-                android:bottomRightRadius="@dimen/d4"
-                android:topRightRadius="@dimen/d4" />
+                android:bottomRightRadius="@dimen/basic_d4"
+                android:topRightRadius="@dimen/basic_d4" />
         </shape>
     </item>
     <!-- 主体背景颜色值 -->
     <item
-        android:bottom="@dimen/d1"
-        android:right="@dimen/d1"
-        android:top="@dimen/d1">
+        android:bottom="@dimen/basic_d1"
+        android:right="@dimen/basic_d1"
+        android:top="@dimen/basic_d1">
         <shape android:shape="rectangle">
-            <solid android:color="@color/black3" />
+            <solid android:color="@color/basic_black3" />
             <corners
-                android:bottomRightRadius="@dimen/d4"
-                android:topRightRadius="@dimen/d4" />
+                android:bottomRightRadius="@dimen/basic_d4"
+                android:topRightRadius="@dimen/basic_d4" />
         </shape>
     </item>
 </layer-list>

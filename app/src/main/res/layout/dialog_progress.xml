@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="@dimen/d300"
+        android:layout_width="@dimen/basic_d300"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/bg_dialog_normal"
@@ -17,15 +17,15 @@
             android:id="@+id/tv_dialog_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d20"
-            android:textColor="@color/gray9"
-            android:textSize="@dimen/s18"
+            android:layout_marginTop="@dimen/basic_d20"
+            android:textColor="@color/basic_gray9"
+            android:textSize="@dimen/basic_s18"
             tools:text="对话框文字" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/d20"
+            android:layout_margin="@dimen/basic_d20"
             android:orientation="vertical">
 
             <ProgressBar
@@ -40,23 +40,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:text="@string/symbol_progress"
-                android:textColor="@color/gray9"
-                android:textSize="@dimen/s16" />
+                android:textColor="@color/basic_gray9"
+                android:textSize="@dimen/basic_s16" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d0_5"
-            android:background="@color/gray1" />
+            android:layout_height="@dimen/basic_d0_5"
+            android:background="@color/basic_gray1" />
 
         <Button
             android:id="@+id/btn_dialog_negative"
             style="?attr/buttonBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d48"
+            android:layout_height="@dimen/basic_d48"
             android:background="@drawable/selector_dialog_btn"
             android:text="@string/btn_cancel"
             android:textColor="@color/selector_dialog_button_text"
-            android:textSize="@dimen/s16" />
+            android:textSize="@dimen/basic_s16" />
     </LinearLayout>
 </FrameLayout>

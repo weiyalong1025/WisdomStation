@@ -28,12 +28,12 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/gray8"
+            android:background="@color/basic_gray8"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/d9"
-            android:paddingEnd="@dimen/d13"
-            android:paddingStart="@dimen/d13"
-            android:paddingTop="@dimen/d9">
+            android:paddingBottom="@dimen/basic_d9"
+            android:paddingEnd="@dimen/basic_d13"
+            android:paddingStart="@dimen/basic_d13"
+            android:paddingTop="@dimen/basic_d9">
 
             <android.support.v7.widget.GridLayout
                 android:layout_width="match_parent"
@@ -45,8 +45,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/name_device_name"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15"
                     app:layout_column="0"
                     app:layout_columnSpan="5" />
 
@@ -55,16 +55,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:textColor="@color/white1"
-                    android:textSize="@dimen/s16" />
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s16" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:text="@string/name_submit_time"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15"
                     app:layout_column="0"
                     app:layout_columnSpan="5" />
 
@@ -72,28 +72,28 @@
                     android:id="@+id/tv_commit_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:singleLine="true"
-                    android:textColor="@color/white1"
-                    android:textSize="@dimen/s16" />
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s16" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:text="地"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15"
                     app:layout_column="0"
                     tools:ignore="HardcodedText" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:text="点："
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15"
                     app:layout_column="3"
                     app:layout_columnSpan="2"
                     tools:ignore="HardcodedText" />
@@ -102,19 +102,19 @@
                     android:id="@+id/tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:singleLine="true"
-                    android:textColor="@color/white1"
-                    android:textSize="@dimen/s16"
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s16"
                     app:layout_columnSpan="1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:text="等"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15"
                     app:layout_column="0"
                     app:layout_columnSpan="1"
                     tools:ignore="HardcodedText" />
@@ -122,10 +122,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:text="级："
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15"
                     app:layout_column="3"
                     app:layout_columnSpan="2"
                     tools:ignore="HardcodedText" />
@@ -134,17 +134,17 @@
                     android:id="@+id/tv_grade"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
-                    android:textColor="@color/white1"
-                    android:textSize="@dimen/s16" />
+                    android:layout_marginTop="@dimen/basic_d8"
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s16" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:text="子"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15"
                     app:layout_column="0"
                     app:layout_columnSpan="1"
                     tools:ignore="HardcodedText" />
@@ -152,10 +152,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:text="类："
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15"
                     app:layout_column="3"
                     app:layout_columnSpan="2"
                     tools:ignore="HardcodedText" />
@@ -164,27 +164,27 @@
                     android:id="@+id/tv_subclass_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
-                    android:textColor="@color/white1"
-                    android:textSize="@dimen/s16" />
+                    android:layout_marginTop="@dimen/basic_d8"
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s16" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:text="描"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15"
                     app:layout_column="0"
                     tools:ignore="HardcodedText" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
+                    android:layout_marginTop="@dimen/basic_d8"
                     android:text="述："
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15"
                     app:layout_column="3"
                     app:layout_columnSpan="2"
                     tools:ignore="HardcodedText" />
@@ -193,15 +193,15 @@
                     android:id="@+id/tv_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d8"
-                    android:textColor="@color/white1"
-                    android:textSize="@dimen/s16" />
+                    android:layout_marginTop="@dimen/basic_d8"
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s16" />
             </android.support.v7.widget.GridLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/d8"
+                android:layout_marginTop="@dimen/basic_d8"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -209,8 +209,8 @@
                     android:id="@+id/tv_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/yellow2"
-                    android:textSize="@dimen/s20" />
+                    android:textColor="@color/basic_yellow2"
+                    android:textSize="@dimen/basic_s20" />
 
                 <View
                     android:layout_width="0dp"
@@ -219,20 +219,20 @@
 
                 <Button
                     android:id="@+id/btn_not_pass"
-                    android:layout_width="@dimen/d88"
-                    android:layout_height="@dimen/d38"
+                    android:layout_width="@dimen/basic_d88"
+                    android:layout_height="@dimen/basic_d38"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/btn_yellow"
                     android:text="@string/btn_not_pass"
-                    android:textSize="@dimen/s20" />
+                    android:textSize="@dimen/basic_s20" />
 
                 <Button
                     android:id="@+id/btn_pass"
-                    android:layout_width="@dimen/d88"
-                    android:layout_height="@dimen/d38"
+                    android:layout_width="@dimen/basic_d88"
+                    android:layout_height="@dimen/basic_d38"
                     android:background="@drawable/btn_yellow"
                     android:text="@string/btn_pass"
-                    android:textSize="@dimen/s20" />
+                    android:textSize="@dimen/basic_s20" />
             </LinearLayout>
         </LinearLayout>
 

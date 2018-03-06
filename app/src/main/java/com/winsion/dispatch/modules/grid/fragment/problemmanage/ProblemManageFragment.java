@@ -61,7 +61,7 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
         tvHint = findViewById(R.id.tv_hint);
         flContainer = findViewById(R.id.fl_container);
 
-        swipeRefresh.setColorSchemeResources(R.color.blue1);
+        swipeRefresh.setColorSchemeResources(R.color.basic_blue1);
     }
 
     private void initAdapter() {

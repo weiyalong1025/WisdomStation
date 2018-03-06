@@ -216,8 +216,8 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
                         break;
                 }
                 viewHolder.setVisible(R.id.iv_select, isSelect);
-                int colorWhite = getResources().getColor(R.color.white1);
-                int colorGray = getResources().getColor(R.color.gray2);
+                int colorWhite = getResources().getColor(R.color.basic_white1);
+                int colorGray = getResources().getColor(R.color.basic_gray2);
                 viewHolder.setTextColor(R.id.tv_text, isSelect ? colorWhite : colorGray);
                 if (position == 0) {
                     View view = viewHolder.getView(R.id.divider);
@@ -239,7 +239,7 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
         itemView.measure(0, 0);
         int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(getContext(), itemView.getMeasuredHeight());
         ListView listView = new WrapContentListView(getContext(), suggestMaxHeight);
-        listView.setBackgroundResource(R.color.gray7);
+        listView.setBackgroundResource(R.color.basic_gray7);
         listView.setAdapter(adapter);
         listView.setDivider(null);
 

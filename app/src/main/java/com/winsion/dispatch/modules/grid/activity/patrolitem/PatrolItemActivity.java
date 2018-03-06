@@ -127,7 +127,7 @@ public class PatrolItemActivity extends BaseActivity implements PatrolItemContra
                 startActivityForResult(intent, CODE_SUBMIT);
             }
         });
-        swipeRefresh.setColorSchemeResources(R.color.blue1);
+        swipeRefresh.setColorSchemeResources(R.color.basic_blue1);
         swipeRefresh.setOnRefreshListener(() -> mPresenter.getPatrolItemData(patrolPlanEntity.getId()));
         addOnClickListeners(R.id.tv_hint);
     }

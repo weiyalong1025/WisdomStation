@@ -85,7 +85,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         trainNumberIndex = findViewById(R.id.train_number_index);
         ivShade = findViewById(R.id.iv_shade);
 
-        swipeRefresh.setColorSchemeResources(R.color.blue1);
+        swipeRefresh.setColorSchemeResources(R.color.basic_blue1);
 
         // 初始化车站选项
         List<String> stationList = new ArrayList<>();

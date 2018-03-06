@@ -1,11 +1,7 @@
 package com.winsion.dispatch.main.activity;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v4.app.NotificationCompat;
 
 import com.alibaba.fastjson.JSON;
 import com.winsion.dispatch.R;

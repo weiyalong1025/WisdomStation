@@ -81,7 +81,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         tvHint = findViewById(R.id.tv_hint);
         flContainer = findViewById(R.id.fl_container);
 
-        swipeRefresh.setColorSchemeResources(R.color.blue1);
+        swipeRefresh.setColorSchemeResources(R.color.basic_blue1);
     }
 
     private void initAdapter() {

@@ -14,14 +14,14 @@
         <TextView
             android:id="@+id/tv_number"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/d35"
-            android:layout_marginTop="@dimen/d15"
+            android:layout_height="@dimen/basic_d35"
+            android:layout_marginTop="@dimen/basic_d15"
             android:background="@drawable/btn_white_large_corner"
             android:gravity="center"
-            android:paddingLeft="@dimen/d26"
-            android:paddingRight="@dimen/d26"
-            android:textColor="@color/black6"
-            android:textSize="@dimen/s24"
+            android:paddingLeft="@dimen/basic_d26"
+            android:paddingRight="@dimen/basic_d26"
+            android:textColor="@color/basic_black6"
+            android:textSize="@dimen/basic_s24"
             android:textStyle="bold"
             tools:text="D924" />
     </LinearLayout>
@@ -34,10 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/d14"
-            android:paddingLeft="@dimen/d15"
-            android:paddingRight="@dimen/d15"
-            android:paddingTop="@dimen/d13">
+            android:paddingBottom="@dimen/basic_d14"
+            android:paddingLeft="@dimen/basic_d15"
+            android:paddingRight="@dimen/basic_d15"
+            android:paddingTop="@dimen/basic_d13">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -49,33 +49,33 @@
                     android:id="@+id/tv_startStationName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21"
+                    android:textColor="@color/basic_blue1"
+                    android:textSize="@dimen/basic_s21"
                     tools:text="珠海" />
 
                 <TextView
                     android:id="@+id/tv_train_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/d12"
-                    android:layout_marginTop="@dimen/d12"
-                    android:textColor="@color/white1"
-                    android:textSize="@dimen/s16"
+                    android:layout_marginBottom="@dimen/basic_d12"
+                    android:layout_marginTop="@dimen/basic_d12"
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s16"
                     tools:text="正在检票" />
 
                 <TextView
                     android:id="@+id/tv_endStationName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21"
+                    android:textColor="@color/basic_blue1"
+                    android:textSize="@dimen/basic_s21"
                     tools:text="北京西" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="@dimen/d14"
-                    android:layout_marginTop="@dimen/d16" />
+                    android:layout_marginBottom="@dimen/basic_d14"
+                    android:layout_marginTop="@dimen/basic_d16" />
 
                 <LinearLayout
                     android:id="@+id/ll_track"
@@ -87,16 +87,16 @@
                         android:id="@+id/tv_track"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white1"
-                        android:textSize="@dimen/s21"
+                        android:textColor="@color/basic_white1"
+                        android:textSize="@dimen/basic_s21"
                         tools:text="3出站口" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/suffix_track"
-                        android:textColor="@color/white1"
-                        android:textSize="@dimen/s16"
+                        android:textColor="@color/basic_white1"
+                        android:textSize="@dimen/basic_s16"
                         android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>
@@ -113,20 +113,20 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="@dimen/d23"
-                    android:layout_height="@dimen/d23"
+                    android:layout_width="@dimen/basic_d23"
+                    android:layout_height="@dimen/basic_d23"
                     android:src="@drawable/ic_arrive"
                     tools:ignore="ContentDescription" />
 
                 <View
-                    android:layout_width="@dimen/d1"
+                    android:layout_width="@dimen/basic_d1"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:layout_width="@dimen/d23"
-                    android:layout_height="@dimen/d23"
-                    android:layout_marginBottom="@dimen/d33"
+                    android:layout_width="@dimen/basic_d23"
+                    android:layout_height="@dimen/basic_d23"
+                    android:layout_marginBottom="@dimen/basic_d33"
                     android:src="@drawable/ic_go"
                     tools:ignore="ContentDescription" />
 
@@ -140,16 +140,16 @@
                         android:id="@+id/tv_platform"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white1"
-                        android:textSize="@dimen/s21"
+                        android:textColor="@color/basic_white1"
+                        android:textSize="@dimen/basic_s21"
                         tools:text="3站台" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/suffix_platform"
-                        android:textColor="@color/white1"
-                        android:textSize="@dimen/s16"
+                        android:textColor="@color/basic_white1"
+                        android:textSize="@dimen/basic_s16"
                         android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>
@@ -169,32 +169,32 @@
                     android:id="@+id/tv_plan_arrive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white1"
-                    android:textSize="@dimen/s21"
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s21"
                     tools:text="03:20" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/d12"
-                    android:layout_marginTop="@dimen/d12"
+                    android:layout_marginBottom="@dimen/basic_d12"
+                    android:layout_marginTop="@dimen/basic_d12"
                     android:text="@string/name_plan"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s16" />
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s16" />
 
                 <TextView
                     android:id="@+id/tv_plan_depart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white1"
-                    android:textSize="@dimen/s21"
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s21"
                     tools:text="03:38" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="@dimen/d14"
-                    android:layout_marginTop="@dimen/d16" />
+                    android:layout_marginBottom="@dimen/basic_d14"
+                    android:layout_marginTop="@dimen/basic_d16" />
 
                 <LinearLayout
                     android:id="@+id/ll_wait_room"
@@ -206,16 +206,16 @@
                         android:id="@+id/tv_wait_room"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white1"
-                        android:textSize="@dimen/s21"
+                        android:textColor="@color/basic_white1"
+                        android:textSize="@dimen/basic_s21"
                         tools:text="候车区" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/suffix_waiting_room"
-                        android:textColor="@color/white1"
-                        android:textSize="@dimen/s16"
+                        android:textColor="@color/basic_white1"
+                        android:textSize="@dimen/basic_s16"
                         android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>
@@ -235,32 +235,32 @@
                     android:id="@+id/tv_real_arrive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21"
+                    android:textColor="@color/basic_blue1"
+                    android:textSize="@dimen/basic_s21"
                     tools:text="03:20" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/d12"
-                    android:layout_marginTop="@dimen/d12"
+                    android:layout_marginBottom="@dimen/basic_d12"
+                    android:layout_marginTop="@dimen/basic_d12"
                     android:text="@string/name_real"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s16" />
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s16" />
 
                 <TextView
                     android:id="@+id/tv_real_depart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21"
+                    android:textColor="@color/basic_blue1"
+                    android:textSize="@dimen/basic_s21"
                     tools:text="03:38" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="@dimen/d14"
-                    android:layout_marginTop="@dimen/d16" />
+                    android:layout_marginBottom="@dimen/basic_d14"
+                    android:layout_marginTop="@dimen/basic_d16" />
 
                 <LinearLayout
                     android:id="@+id/ll_check_port"
@@ -272,16 +272,16 @@
                         android:id="@+id/tv_check_port"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white1"
-                        android:textSize="@dimen/s21"
+                        android:textColor="@color/basic_white1"
+                        android:textSize="@dimen/basic_s21"
                         tools:text="B3,A3" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/suffix_check_port"
-                        android:textColor="@color/white1"
-                        android:textSize="@dimen/s16"
+                        android:textColor="@color/basic_white1"
+                        android:textSize="@dimen/basic_s16"
                         android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>
@@ -289,9 +289,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d1"
-            android:layout_marginTop="@dimen/d130"
-            android:background="@color/black1"
+            android:layout_height="@dimen/basic_d1"
+            android:layout_marginTop="@dimen/basic_d130"
+            android:background="@color/basic_black1"
             tools:ignore="ContentDescription" />
     </FrameLayout>
 </LinearLayout>

@@ -36,23 +36,23 @@ public class PatrolPlanAdapter extends CommonAdapter<PatrolPlanEntity> {
         }
 
         if (patrolPlanEntity.isArrive()) {
-            viewHolder.setTextColorRes(R.id.tv_location, R.color.blue1);
-            viewHolder.setTextColorRes(R.id.tv_plan_start_time, R.color.blue1);
-            viewHolder.setTextColorRes(R.id.tv_plan_end_time, R.color.yellow2);
-            viewHolder.setTextColorRes(R.id.tv_finish_count, R.color.white1);
-            viewHolder.setTextColorRes(R.id.tv_total_count, R.color.blue1);
-            viewHolder.setTextColorRes(R.id.tv_plan_start, R.color.gray2);
-            viewHolder.setTextColorRes(R.id.tv_plan_end, R.color.gray2);
-            viewHolder.setTextColorRes(R.id.tv_split_line, R.color.gray2);
+            viewHolder.setTextColorRes(R.id.tv_location, R.color.basic_blue1);
+            viewHolder.setTextColorRes(R.id.tv_plan_start_time, R.color.basic_blue1);
+            viewHolder.setTextColorRes(R.id.tv_plan_end_time, R.color.basic_yellow2);
+            viewHolder.setTextColorRes(R.id.tv_finish_count, R.color.basic_white1);
+            viewHolder.setTextColorRes(R.id.tv_total_count, R.color.basic_blue1);
+            viewHolder.setTextColorRes(R.id.tv_plan_start, R.color.basic_gray2);
+            viewHolder.setTextColorRes(R.id.tv_plan_end, R.color.basic_gray2);
+            viewHolder.setTextColorRes(R.id.tv_split_line, R.color.basic_gray2);
         } else {
-            viewHolder.setTextColorRes(R.id.tv_location, R.color.gray6);
-            viewHolder.setTextColorRes(R.id.tv_plan_start_time, R.color.gray6);
-            viewHolder.setTextColorRes(R.id.tv_plan_end_time, R.color.gray6);
-            viewHolder.setTextColorRes(R.id.tv_finish_count, R.color.gray6);
-            viewHolder.setTextColorRes(R.id.tv_total_count, R.color.gray6);
-            viewHolder.setTextColorRes(R.id.tv_plan_start, R.color.gray6);
-            viewHolder.setTextColorRes(R.id.tv_plan_end, R.color.gray6);
-            viewHolder.setTextColorRes(R.id.tv_split_line, R.color.gray6);
+            viewHolder.setTextColorRes(R.id.tv_location, R.color.basic_gray6);
+            viewHolder.setTextColorRes(R.id.tv_plan_start_time, R.color.basic_gray6);
+            viewHolder.setTextColorRes(R.id.tv_plan_end_time, R.color.basic_gray6);
+            viewHolder.setTextColorRes(R.id.tv_finish_count, R.color.basic_gray6);
+            viewHolder.setTextColorRes(R.id.tv_total_count, R.color.basic_gray6);
+            viewHolder.setTextColorRes(R.id.tv_plan_start, R.color.basic_gray6);
+            viewHolder.setTextColorRes(R.id.tv_plan_end, R.color.basic_gray6);
+            viewHolder.setTextColorRes(R.id.tv_split_line, R.color.basic_gray6);
         }
     }
 }

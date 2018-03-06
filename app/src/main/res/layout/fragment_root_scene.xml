@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:padding="@dimen/d10">
+            android:padding="@dimen/basic_d10">
 
             <LinearLayout
                 android:id="@+id/ll1"
@@ -32,8 +32,8 @@
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_grid"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
-                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_height="@dimen/basic_d120"
+                    android:layout_marginEnd="@dimen/basic_d5"
                     android:layout_weight="36"
                     app:moduleIcon="@drawable/ic_grid"
                     app:moduleName="@string/tab_grid" />
@@ -41,7 +41,7 @@
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_main_passenger"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
+                    android:layout_height="@dimen/basic_d120"
                     android:layout_weight="31"
                     app:moduleIcon="@drawable/ic_main_passenger"
                     app:moduleName="@string/title_key_passenger" />
@@ -53,14 +53,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll1"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/d5"
+                android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_area_broadcast"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
-                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_height="@dimen/basic_d120"
+                    android:layout_marginEnd="@dimen/basic_d5"
                     android:layout_weight="31"
                     app:moduleIcon="@drawable/ic_area_broadcast"
                     app:moduleName="@string/title_area_broadcast" />
@@ -68,7 +68,7 @@
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_broadcast"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
+                    android:layout_height="@dimen/basic_d120"
                     android:layout_weight="36"
                     app:moduleIcon="@drawable/ic_passenger_broadcast"
                     app:moduleName="@string/title_passenger_broadcast" />
@@ -80,14 +80,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll2"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/d5"
+                android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_transfer"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
-                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_height="@dimen/basic_d120"
+                    android:layout_marginEnd="@dimen/basic_d5"
                     android:layout_weight="36"
                     app:moduleIcon="@drawable/ic_transfer"
                     app:moduleName="@string/title_transfer" />
@@ -95,7 +95,7 @@
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_light"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
+                    android:layout_height="@dimen/basic_d120"
                     android:layout_weight="31"
                     app:moduleIcon="@drawable/ic_light"
                     app:moduleName="@string/title_light" />
@@ -107,14 +107,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll3"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/d5"
+                android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_elevator"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
-                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_height="@dimen/basic_d120"
+                    android:layout_marginEnd="@dimen/basic_d5"
                     android:layout_weight="31"
                     app:moduleIcon="@drawable/ic_elevator"
                     app:moduleName="@string/title_elevator" />
@@ -122,7 +122,7 @@
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_water"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
+                    android:layout_height="@dimen/basic_d120"
                     android:layout_weight="36"
                     app:moduleIcon="@drawable/ic_water"
                     app:moduleName="@string/title_water" />
@@ -134,14 +134,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll4"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/d5"
+                android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_video"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
-                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_height="@dimen/basic_d120"
+                    android:layout_marginEnd="@dimen/basic_d5"
                     android:layout_weight="36"
                     app:moduleIcon="@drawable/ic_video1"
                     app:moduleName="@string/title_video" />
@@ -149,7 +149,7 @@
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_door"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
+                    android:layout_height="@dimen/basic_d120"
                     android:layout_weight="31"
                     app:moduleIcon="@drawable/ic_door"
                     app:moduleName="@string/title_door" />
@@ -161,14 +161,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll5"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/d5"
+                android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_air_conditioner"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
-                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_height="@dimen/basic_d120"
+                    android:layout_marginEnd="@dimen/basic_d5"
                     android:layout_weight="31"
                     app:moduleIcon="@drawable/ic_air_conditioner"
                     app:moduleName="@string/title_air_conditioner" />
@@ -176,7 +176,7 @@
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_air_handing"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
+                    android:layout_height="@dimen/basic_d120"
                     android:layout_weight="36"
                     app:moduleIcon="@drawable/ic_air_handing"
                     app:moduleName="@string/title_air_handing" />
@@ -188,14 +188,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll6"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/d5"
+                android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_pump"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
-                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_height="@dimen/basic_d120"
+                    android:layout_marginEnd="@dimen/basic_d5"
                     android:layout_weight="36"
                     app:moduleIcon="@drawable/ic_pump"
                     app:moduleName="@string/title_pump" />
@@ -203,7 +203,7 @@
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_cooling_tower"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
+                    android:layout_height="@dimen/basic_d120"
                     android:layout_weight="31"
                     app:moduleIcon="@drawable/ic_cooling_tower"
                     app:moduleName="@string/title_cooling_tower" />
@@ -214,21 +214,21 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll7"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/d5"
+                android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
                 <com.winsion.dispatch.view.ModuleView
                     android:id="@+id/mv_lost"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
-                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_height="@dimen/basic_d120"
+                    android:layout_marginEnd="@dimen/basic_d5"
                     android:layout_weight="31"
                     app:moduleIcon="@drawable/ic_lost"
                     app:moduleName="@string/title_lost" />
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d120"
+                    android:layout_height="@dimen/basic_d120"
                     android:layout_weight="36" />
             </LinearLayout>
         </RelativeLayout>

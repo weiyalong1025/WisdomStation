@@ -217,12 +217,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         ListView listView = new WrapContentListView(mContext, suggestMaxHeight);
         listView.setAdapter(userListAdapter);
         listView.setOnItemClickListener(this);
-        listView.setDivider(new ColorDrawable(getResources().getColor(R.color.gray5)));
-        listView.setDividerHeight(getResources().getDimensionPixelSize(R.dimen.d1));
+        listView.setDivider(new ColorDrawable(getResources().getColor(R.color.basic_gray5)));
+        listView.setDividerHeight(getResources().getDimensionPixelSize(R.dimen.basic_d1));
 
         mUserListPopup = new PopupWindow(listView, rlUsername.getWidth(), -2, true);
         mUserListPopup.setContentView(listView);
-        mUserListPopup.setAnimationStyle(R.style.popupWindowAnimStyle);
+        mUserListPopup.setAnimationStyle(R.style.PopupWindowAnimStyle);
         mUserListPopup.setBackgroundDrawable(new BitmapDrawable());
         mUserListPopup.setOnDismissListener(this::arrowDown);
     }

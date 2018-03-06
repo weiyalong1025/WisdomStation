@@ -47,7 +47,7 @@ public class ContactsFragment extends BaseFragment {
         flContainer = findViewById(R.id.fl_container);
         lvList = findViewById(R.id.lv_list);
 
-        swipeRefresh.setColorSchemeResources(R.color.blue1);
+        swipeRefresh.setColorSchemeResources(R.color.basic_blue1);
 
         // 初始化车站选项
         List<String> stationList = new ArrayList<>();

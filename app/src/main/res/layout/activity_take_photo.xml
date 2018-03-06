@@ -24,20 +24,20 @@
 
         <ImageView
             android:id="@+id/iv_shutter"
-            android:layout_width="@dimen/d64"
-            android:layout_height="@dimen/d64"
+            android:layout_width="@dimen/basic_d64"
+            android:layout_height="@dimen/basic_d64"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/d20"
+            android:layout_marginBottom="@dimen/basic_d20"
             android:src="@drawable/btn_record"
             tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:id="@+id/ll_button"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d48"
+            android:layout_height="@dimen/basic_d48"
             android:layout_alignParentBottom="true"
-            android:background="@color/white2"
+            android:background="@color/basic_white2"
             android:orientation="horizontal"
             android:visibility="gone">
 
@@ -48,12 +48,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/btn_confirm"
-                android:textSize="@dimen/s18" />
+                android:textSize="@dimen/basic_s18" />
 
             <View
-                android:layout_width="@dimen/d1"
+                android:layout_width="@dimen/basic_d1"
                 android:layout_height="match_parent"
-                android:background="@color/black6" />
+                android:background="@color/basic_black6" />
 
             <Button
                 android:id="@+id/btn_cancel"
@@ -62,7 +62,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/btn_rephotograph"
-                android:textSize="@dimen/s18" />
+                android:textSize="@dimen/basic_s18" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

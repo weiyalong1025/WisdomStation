@@ -54,7 +54,7 @@ public class BadgeRadioButton extends AppCompatRadioButton {
 
             Paint numberPaint = new Paint();
             numberPaint.setColor(Color.WHITE);
-            numberPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.s9));
+            numberPaint.setTextSize(getResources().getDimensionPixelSize(R.dimen.basic_s9));
             numberPaint.setAntiAlias(true);
             numberPaint.setTextAlign(Paint.Align.CENTER);
             numberPaint.setTypeface(Typeface.DEFAULT_BOLD);
@@ -64,15 +64,15 @@ public class BadgeRadioButton extends AppCompatRadioButton {
             float numberHeight = fontMetrics.bottom - fontMetrics.top;
 
             numberWidth = numberWidth > numberHeight ? numberWidth : numberHeight;
-            int b = number.length() == 3 ? getResources().getDimensionPixelSize(R.dimen.d4) :
-                    number.length() == 2 ? getResources().getDimensionPixelSize(R.dimen.d2) : 0;
+            int b = number.length() == 3 ? getResources().getDimensionPixelSize(R.dimen.basic_d4) :
+                    number.length() == 2 ? getResources().getDimensionPixelSize(R.dimen.basic_d2) : 0;
 
             RectF roundRect = new RectF();
             roundRect.left = redDotX - numberWidth / 2 - b;
             roundRect.top = redDotY - numberHeight / 2;
             roundRect.right = redDotX + numberWidth / 2 + b;
             roundRect.bottom = redDotY + numberHeight / 2;
-            canvas.drawRoundRect(roundRect, getResources().getDimension(R.dimen.d8), getResources().getDimension(R.dimen.d8), paint);
+            canvas.drawRoundRect(roundRect, getResources().getDimension(R.dimen.basic_d8), getResources().getDimension(R.dimen.basic_d8), paint);
 
             float numberY = redDotY + (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
             canvas.drawText(number, redDotX, numberY, numberPaint);

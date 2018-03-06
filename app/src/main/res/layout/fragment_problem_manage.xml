@@ -6,13 +6,13 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d40"
-        android:background="@color/gray10"
+        android:layout_height="@dimen/basic_d40"
+        android:background="@color/basic_gray10"
         android:gravity="center_vertical"
-        android:padding="@dimen/d9"
+        android:padding="@dimen/basic_d9"
         android:text="@string/title_problem_list"
-        android:textColor="@color/white1"
-        android:textSize="@dimen/s16" />
+        android:textColor="@color/basic_white1"
+        android:textSize="@dimen/basic_s16" />
 
     <include layout="@layout/layout_status" />
 </LinearLayout>

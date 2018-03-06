@@ -11,10 +11,10 @@
         android:background="@drawable/bg_dialog_state"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/d20"
-        android:paddingEnd="@dimen/d40"
-        android:paddingStart="@dimen/d40"
-        android:paddingTop="@dimen/d20"
+        android:paddingBottom="@dimen/basic_d20"
+        android:paddingEnd="@dimen/basic_d40"
+        android:paddingStart="@dimen/basic_d40"
+        android:paddingTop="@dimen/basic_d20"
         tools:ignore="UselessParent">
 
         <com.winsion.dispatch.view.LoadingView
@@ -25,9 +25,9 @@
             android:id="@+id/tv_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d10"
-            android:textColor="@color/white1"
-            android:textSize="@dimen/s18"
+            android:layout_marginTop="@dimen/basic_d10"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s18"
             tools:text="登陆中" />
     </LinearLayout>
 </FrameLayout>

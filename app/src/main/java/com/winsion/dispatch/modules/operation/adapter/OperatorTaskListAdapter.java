@@ -193,11 +193,11 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
         }
 
         if (isTimeOut) {
-            viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.yellow1);
-            viewHolder.setTextColorRes(R.id.tv_last_time, R.color.red2);
+            viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.basic_yellow1);
+            viewHolder.setTextColorRes(R.id.tv_last_time, R.color.basic_red2);
         } else {
-            viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.gray8);
-            viewHolder.setTextColorRes(R.id.tv_last_time, R.color.blue1);
+            viewHolder.setBackgroundRes(R.id.ll_bg_color, R.color.basic_gray8);
+            viewHolder.setTextColorRes(R.id.tv_last_time, R.color.basic_blue1);
         }
 
         // 更改任务状态按钮点击事件

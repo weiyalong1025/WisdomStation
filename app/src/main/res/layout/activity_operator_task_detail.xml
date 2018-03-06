@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray8"
+    android:background="@color/basic_gray8"
     android:orientation="vertical">
 
     <com.winsion.dispatch.view.TitleView
@@ -61,13 +61,13 @@
             <TextView
                 android:id="@+id/tv_publisher_title"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d40"
-                android:background="@color/black1"
+                android:layout_height="@dimen/basic_d40"
+                android:background="@color/basic_black1"
                 android:gravity="center_vertical"
-                android:paddingStart="@dimen/d15"
+                android:paddingStart="@dimen/basic_d15"
                 android:text="@string/name_publisher_uploaded_record"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s16"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s16"
                 android:visibility="gone"
                 tools:ignore="RtlSymmetry" />
 
@@ -91,13 +91,13 @@
             <TextView
                 android:id="@+id/tv_performer_title"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d40"
-                android:background="@color/black1"
+                android:layout_height="@dimen/basic_d40"
+                android:background="@color/basic_black1"
                 android:gravity="center_vertical"
-                android:paddingStart="@dimen/d15"
+                android:paddingStart="@dimen/basic_d15"
                 android:text="@string/name_performer_uploaded_record"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s16"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s16"
                 android:visibility="gone"
                 tools:ignore="RtlSymmetry" />
 

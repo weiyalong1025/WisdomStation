@@ -16,12 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_common"
-        android:padding="@dimen/d15">
+        android:padding="@dimen/basic_d15">
 
         <ImageView
             android:id="@+id/iv_command"
-            android:layout_width="@dimen/d23"
-            android:layout_height="@dimen/d23"
+            android:layout_width="@dimen/basic_d23"
+            android:layout_height="@dimen/basic_d23"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_command"
             tools:ignore="ContentDescription" />
@@ -30,16 +30,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/d10"
+            android:layout_marginStart="@dimen/basic_d10"
             android:layout_toEndOf="@+id/iv_command"
             android:text="@string/btn_command"
-            android:textColor="@color/white1"
-            android:textSize="@dimen/s21"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s21"
             tools:ignore="RelativeOverlap" />
 
         <ImageView
-            android:layout_width="@dimen/d20"
-            android:layout_height="@dimen/d20"
+            android:layout_width="@dimen/basic_d20"
+            android:layout_height="@dimen/basic_d20"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_arrow_right"
@@ -58,12 +58,12 @@
         android:layout_height="wrap_content"
         android:background="@drawable/selector_common"
         android:orientation="horizontal"
-        android:padding="@dimen/d15">
+        android:padding="@dimen/basic_d15">
 
         <ImageView
             android:id="@+id/iv_cooperation"
-            android:layout_width="@dimen/d23"
-            android:layout_height="@dimen/d23"
+            android:layout_width="@dimen/basic_d23"
+            android:layout_height="@dimen/basic_d23"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_cooperation"
             tools:ignore="ContentDescription" />
@@ -72,16 +72,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/d10"
+            android:layout_marginStart="@dimen/basic_d10"
             android:layout_toEndOf="@+id/iv_cooperation"
             android:text="@string/btn_cooperation"
-            android:textColor="@color/white1"
-            android:textSize="@dimen/s21"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s21"
             tools:ignore="RelativeOverlap" />
 
         <ImageView
-            android:layout_width="@dimen/d20"
-            android:layout_height="@dimen/d20"
+            android:layout_width="@dimen/basic_d20"
+            android:layout_height="@dimen/basic_d20"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_arrow_right"

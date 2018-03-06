@@ -8,9 +8,9 @@
     <com.winsion.dispatch.view.AlphaTabsIndicator
         android:id="@+id/ati_indicator"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d54"
+        android:layout_height="@dimen/basic_d54"
         android:layout_alignParentBottom="true"
-        android:background="@color/gray7"
+        android:background="@color/basic_gray7"
         android:orientation="horizontal">
 
         <com.winsion.dispatch.view.AlphaTabView
@@ -57,12 +57,12 @@
 
     <com.winsion.dispatch.view.CircleImageView
         android:id="@+id/iv_head"
-        android:layout_width="@dimen/d48"
-        android:layout_height="@dimen/d48"
+        android:layout_width="@dimen/basic_d48"
+        android:layout_height="@dimen/basic_d48"
         android:layout_alignParentEnd="true"
         android:background="?android:attr/selectableItemBackground"
-        android:padding="@dimen/d9"
+        android:padding="@dimen/basic_d9"
         android:src="@drawable/ic_head"
-        app:civ_border_color="@color/black6"
-        app:civ_border_width="@dimen/d0_5" />
+        app:civ_border_color="@color/basic_black6"
+        app:civ_border_width="@dimen/basic_d0_5" />
 </RelativeLayout>

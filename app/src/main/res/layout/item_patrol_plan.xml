@@ -14,7 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray8"
+        android:background="@color/basic_gray8"
         android:orientation="horizontal">
 
         <ImageView
@@ -30,83 +30,83 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="@dimen/d10"
-            android:textColor="@color/blue1"
-            android:textSize="@dimen/s20"
+            android:padding="@dimen/basic_d10"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s20"
             tools:text="3候车室" />
 
         <View
-            android:layout_width="@dimen/d1"
-            android:layout_height="@dimen/d45"
+            android:layout_width="@dimen/basic_d1"
+            android:layout_height="@dimen/basic_d45"
             android:layout_gravity="center_vertical"
-            android:background="@color/black1" />
+            android:background="@color/basic_black1" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/d15"
-            android:layout_marginRight="@dimen/d15"
+            android:layout_marginLeft="@dimen/basic_d15"
+            android:layout_marginRight="@dimen/basic_d15"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/d10"
-            android:paddingTop="@dimen/d10">
+            android:paddingBottom="@dimen/basic_d10"
+            android:paddingTop="@dimen/basic_d10">
 
             <TextView
                 android:id="@+id/tv_plan_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_plan_start"
-                android:textColor="@color/gray2"
-                android:textSize="@dimen/s15" />
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s15" />
 
             <TextView
                 android:id="@+id/tv_plan_start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/d7"
-                android:textColor="@color/blue1"
-                android:textSize="@dimen/s15"
+                android:layout_marginTop="@dimen/basic_d7"
+                android:textColor="@color/basic_blue1"
+                android:textSize="@dimen/basic_s15"
                 tools:text="14:20" />
 
             <TextView
                 android:id="@+id/tv_plan_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/d10"
+                android:layout_marginTop="@dimen/basic_d10"
                 android:text="@string/name_plan_finish"
-                android:textColor="@color/gray2"
-                android:textSize="@dimen/s15" />
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s15" />
 
             <TextView
                 android:id="@+id/tv_plan_end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/d7"
-                android:textColor="@color/yellow2"
-                android:textSize="@dimen/s15"
+                android:layout_marginTop="@dimen/basic_d7"
+                android:textColor="@color/basic_yellow2"
+                android:textSize="@dimen/basic_s15"
                 tools:text="14:20" />
         </LinearLayout>
 
         <View
-            android:layout_width="@dimen/d1"
-            android:layout_height="@dimen/d45"
+            android:layout_width="@dimen/basic_d1"
+            android:layout_height="@dimen/basic_d45"
             android:layout_gravity="center_vertical"
-            android:background="@color/black1" />
+            android:background="@color/basic_black1" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/d17"
-            android:layout_marginRight="@dimen/d17">
+            android:layout_marginLeft="@dimen/basic_d17"
+            android:layout_marginRight="@dimen/basic_d17">
 
             <TextView
                 android:id="@+id/tv_finish_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue1"
-                android:textSize="@dimen/s20"
+                android:textColor="@color/basic_blue1"
+                android:textSize="@dimen/basic_s20"
                 tools:text="5" />
 
             <TextView
@@ -114,15 +114,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/symbol_separator"
-                android:textColor="@color/gray2"
-                android:textSize="@dimen/s20" />
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s20" />
 
             <TextView
                 android:id="@+id/tv_total_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue1"
-                android:textSize="@dimen/s20"
+                android:textColor="@color/basic_blue1"
+                android:textSize="@dimen/basic_s20"
                 tools:text="10" />
         </LinearLayout>
 

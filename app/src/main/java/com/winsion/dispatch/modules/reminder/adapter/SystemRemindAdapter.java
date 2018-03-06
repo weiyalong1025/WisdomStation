@@ -61,12 +61,12 @@ public class SystemRemindAdapter extends CommonAdapter<SystemRemindEntity> {
 
         if (systemRemindEntity.getReaded() == 1) {
             viewHolder.setVisible(R.id.iv_red_dot, false);
-            viewHolder.setTextColorRes(R.id.tv_remind_type, R.color.gray2);
-            viewHolder.setTextColorRes(R.id.tv_remind_content, R.color.gray2);
+            viewHolder.setTextColorRes(R.id.tv_remind_type, R.color.basic_gray2);
+            viewHolder.setTextColorRes(R.id.tv_remind_content, R.color.basic_gray2);
         } else {
             viewHolder.setVisible(R.id.iv_red_dot, true);
-            viewHolder.setTextColorRes(R.id.tv_remind_type, R.color.blue1);
-            viewHolder.setTextColorRes(R.id.tv_remind_content, R.color.white1);
+            viewHolder.setTextColorRes(R.id.tv_remind_type, R.color.basic_blue1);
+            viewHolder.setTextColorRes(R.id.tv_remind_content, R.color.basic_white1);
         }
 
         if (position == mDatas.size() - 1) {

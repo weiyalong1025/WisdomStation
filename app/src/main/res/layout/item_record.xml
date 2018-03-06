@@ -13,10 +13,10 @@
 
         <ImageView
             android:id="@+id/iv_file_type"
-            android:layout_width="@dimen/d28"
-            android:layout_height="@dimen/d22"
+            android:layout_width="@dimen/basic_d28"
+            android:layout_height="@dimen/basic_d22"
             android:layout_centerVertical="true"
-            android:layout_margin="@dimen/d20"
+            android:layout_margin="@dimen/basic_d20"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_picture" />
 
@@ -25,37 +25,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/d60"
+            android:layout_marginEnd="@dimen/basic_d60"
             android:layout_toEndOf="@+id/iv_file_type"
-            android:textColor="@color/white1"
-            android:textSize="@dimen/s18"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s18"
             tools:ignore="RelativeOverlap"
             tools:text="IMG_201706151231.jpg" />
 
         <ImageView
             android:id="@+id/iv_status"
-            android:layout_width="@dimen/d60"
-            android:layout_height="@dimen/d60"
+            android:layout_width="@dimen/basic_d60"
+            android:layout_height="@dimen/basic_d60"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/d20"
+            android:padding="@dimen/basic_d20"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_failed" />
 
         <com.winsion.dispatch.view.CircleProgressBar
             android:id="@+id/cpb_status"
-            android:layout_width="@dimen/d20"
-            android:layout_height="@dimen/d20"
+            android:layout_width="@dimen/basic_d20"
+            android:layout_height="@dimen/basic_d20"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_margin="@dimen/d20"
+            android:layout_margin="@dimen/basic_d20"
             android:visibility="gone"
             app:draw_progress_text="false"
-            app:line_width="@dimen/d3"
-            app:progress_background_color="@color/gray7"
-            app:progress_end_color="@color/white1"
-            app:progress_start_color="@color/white1"
-            app:progress_stroke_width="@dimen/d2"
+            app:line_width="@dimen/basic_d3"
+            app:progress_background_color="@color/basic_gray7"
+            app:progress_end_color="@color/basic_white1"
+            app:progress_start_color="@color/basic_white1"
+            app:progress_stroke_width="@dimen/basic_d2"
             app:style="line" />
     </RelativeLayout>
 
@@ -63,10 +63,10 @@
         android:id="@+id/tv_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray8"
-        android:padding="@dimen/d20"
-        android:textColor="@color/white1"
-        android:textSize="@dimen/s21"
+        android:background="@color/basic_gray8"
+        android:padding="@dimen/basic_d20"
+        android:textColor="@color/basic_white1"
+        android:textSize="@dimen/basic_s21"
         android:visibility="gone"
         tools:text="备注内容" />
 </FrameLayout>

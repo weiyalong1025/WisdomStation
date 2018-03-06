@@ -49,8 +49,8 @@ public class AlphaTabView extends View {
 
     public AlphaTabView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mTextSize = getResources().getDimensionPixelSize(R.dimen.s12);
-        mPadding = getResources().getDimensionPixelSize(R.dimen.d5);
+        mTextSize = getResources().getDimensionPixelSize(R.dimen.basic_s12);
+        mPadding = getResources().getDimensionPixelSize(R.dimen.basic_d5);
         //获取所有的自定义属性
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AlphaTabView);
         BitmapDrawable iconNormal = (BitmapDrawable) a.getDrawable(R.styleable.AlphaTabView_tabIconNormal);
@@ -205,7 +205,7 @@ public class AlphaTabView extends View {
             float y = height / 2f - fontMetrics.descent + (fontMetrics.descent - fontMetrics.ascent) / 2;
             canvasMessages.drawText(number, x, y, numberPaint);
             float left = getMeasuredWidth() / 10 * 6f;
-            canvas.drawBitmap(bitmap, left, getResources().getDimensionPixelSize(R.dimen.d5), null);
+            canvas.drawBitmap(bitmap, left, getResources().getDimensionPixelSize(R.dimen.basic_d5), null);
             bitmap.recycle();
         } else if (mBadgeNumber != 0) {
             if (isShowPoint) {
@@ -213,8 +213,8 @@ public class AlphaTabView extends View {
                 paint.setColor(mBadgeBackgroundColor);
                 paint.setAntiAlias(true);
                 float left = getMeasuredWidth() / 10 * 6f;
-                float top = getResources().getDimensionPixelSize(R.dimen.d5);
-                int pointSize = getResources().getDimensionPixelSize(R.dimen.d8);
+                float top = getResources().getDimensionPixelSize(R.dimen.basic_d5);
+                int pointSize = getResources().getDimensionPixelSize(R.dimen.basic_d8);
                 RectF messageRectF = new RectF(left, top, left + pointSize, top + pointSize);
                 canvas.drawOval(messageRectF, paint);
             }

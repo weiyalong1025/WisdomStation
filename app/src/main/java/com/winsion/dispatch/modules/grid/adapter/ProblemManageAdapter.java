@@ -83,26 +83,26 @@ public class ProblemManageAdapter extends CommonAdapter<TaskEntity> {
         // 设置底色
         switch (process) {
             case TaskState.NOT_STARTED:
-                viewHolder.setBackgroundRes(R.id.ll_bg, R.color.red3);
-                viewHolder.setTextColorRes(R.id.tv_state, R.color.red4);
+                viewHolder.setBackgroundRes(R.id.ll_bg, R.color.basic_red3);
+                viewHolder.setTextColorRes(R.id.tv_state, R.color.basic_red4);
                 viewHolder.setBackgroundRes(R.id.btn_pass, R.drawable.btn_gray);
                 viewHolder.setBackgroundRes(R.id.btn_not_pass, R.drawable.btn_gray);
                 break;
             case TaskState.RUN:
-                viewHolder.setBackgroundRes(R.id.ll_bg, R.color.green1);
-                viewHolder.setTextColorRes(R.id.tv_state, R.color.green2);
+                viewHolder.setBackgroundRes(R.id.ll_bg, R.color.basic_green1);
+                viewHolder.setTextColorRes(R.id.tv_state, R.color.basic_green2);
                 viewHolder.setBackgroundRes(R.id.btn_pass, R.drawable.btn_gray);
                 viewHolder.setBackgroundRes(R.id.btn_not_pass, R.drawable.btn_gray);
                 break;
             case TaskState.DONE:
-                viewHolder.setBackgroundRes(R.id.ll_bg, R.color.gray8);
-                viewHolder.setTextColorRes(R.id.tv_state, R.color.blue1);
+                viewHolder.setBackgroundRes(R.id.ll_bg, R.color.basic_gray8);
+                viewHolder.setTextColorRes(R.id.tv_state, R.color.basic_blue1);
                 viewHolder.setBackgroundRes(R.id.btn_pass, R.drawable.btn_yellow);
                 viewHolder.setBackgroundRes(R.id.btn_not_pass, R.drawable.btn_yellow);
                 break;
             case TaskState.GRID_NOT_PASS:
-                viewHolder.setBackgroundRes(R.id.ll_bg, R.color.yellow3);
-                viewHolder.setTextColorRes(R.id.tv_state, R.color.yellow4);
+                viewHolder.setBackgroundRes(R.id.ll_bg, R.color.basic_yellow3);
+                viewHolder.setTextColorRes(R.id.tv_state, R.color.basic_yellow4);
                 viewHolder.setBackgroundRes(R.id.btn_pass, R.drawable.btn_gray);
                 viewHolder.setBackgroundRes(R.id.btn_not_pass, R.drawable.btn_gray);
                 break;

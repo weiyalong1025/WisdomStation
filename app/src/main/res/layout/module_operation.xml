@@ -8,15 +8,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d90"
+        android:layout_height="@dimen/basic_d90"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/d5">
+        android:padding="@dimen/basic_d5">
 
         <ImageView
             android:id="@+id/iv_status"
             android:layout_width="0dp"
-            android:layout_height="@dimen/d45"
+            android:layout_height="@dimen/basic_d45"
             android:layout_weight="0.9"
             android:src="@drawable/ic_not_start"
             tools:ignore="ContentDescription" />
@@ -36,10 +36,10 @@
 
                 <ImageView
                     android:id="@+id/iv_type_icon"
-                    android:layout_width="@dimen/d23"
-                    android:layout_height="@dimen/d23"
+                    android:layout_width="@dimen/basic_d23"
+                    android:layout_height="@dimen/basic_d23"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/d3"
+                    android:layout_marginEnd="@dimen/basic_d3"
                     android:src="@drawable/ic_command"
                     android:visibility="gone"
                     tools:ignore="ContentDescription" />
@@ -51,8 +51,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/iv_type_icon"
                     android:text="@string/name_task_name"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s15" />
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -62,10 +62,10 @@
 
                 <ImageView
                     android:id="@+id/iv_job_icon"
-                    android:layout_width="@dimen/d20"
-                    android:layout_height="@dimen/d20"
-                    android:layout_marginEnd="@dimen/d3"
-                    android:layout_marginTop="@dimen/d3"
+                    android:layout_width="@dimen/basic_d20"
+                    android:layout_height="@dimen/basic_d20"
+                    android:layout_marginEnd="@dimen/basic_d3"
+                    android:layout_marginTop="@dimen/basic_d3"
                     android:src="@drawable/ic_normal"
                     android:visibility="gone"
                     tools:ignore="ContentDescription" />
@@ -76,8 +76,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/iv_job_icon"
-                    android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21"
+                    android:textColor="@color/basic_blue1"
+                    android:textSize="@dimen/basic_s21"
                     android:textStyle="bold"
                     tools:text="接站作业" />
             </RelativeLayout>
@@ -95,8 +95,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/name_execution_time"
-                android:textColor="@color/gray2"
-                android:textSize="@dimen/s15"
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s15"
                 tools:ignore="NestedWeights" />
 
             <TextView
@@ -106,8 +106,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:textColor="@color/blue1"
-                android:textSize="@dimen/s21"
+                android:textColor="@color/basic_blue1"
+                android:textSize="@dimen/basic_s21"
                 tools:text="120分" />
         </LinearLayout>
 
@@ -123,8 +123,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/name_location"
-                android:textColor="@color/gray2"
-                android:textSize="@dimen/s15"
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s15"
                 tools:ignore="NestedWeights" />
 
             <TextView
@@ -134,8 +134,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:textColor="@color/blue1"
-                android:textSize="@dimen/s21"
+                android:textColor="@color/basic_blue1"
+                android:textSize="@dimen/basic_s21"
                 tools:text="A2口" />
         </LinearLayout>
     </LinearLayout>
@@ -153,34 +153,34 @@
 
             <com.winsion.dispatch.view.DrawableCenterTextView
                 android:id="@+id/btn_note"
-                android:layout_width="@dimen/d100"
-                android:layout_height="@dimen/d40"
+                android:layout_width="@dimen/basic_d100"
+                android:layout_height="@dimen/basic_d40"
                 android:background="@drawable/btn_yellow_left"
-                android:drawablePadding="@dimen/d3"
+                android:drawablePadding="@dimen/basic_d3"
                 android:drawableStart="@drawable/ic_notes"
                 android:focusable="false"
                 android:gravity="center_vertical"
                 android:text="@string/title_btn_note"
-                android:textColor="@color/black6"
-                android:textSize="@dimen/s18" />
+                android:textColor="@color/basic_black6"
+                android:textSize="@dimen/basic_s18" />
 
             <View
                 android:layout_width="0dp"
-                android:layout_height="@dimen/d1"
+                android:layout_height="@dimen/basic_d1"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@color/black1"
+                android:background="@color/basic_black1"
                 tools:ignore="NestedWeights" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btn_status"
-            android:layout_width="@dimen/d110"
-            android:layout_height="@dimen/d40"
+            android:layout_width="@dimen/basic_d110"
+            android:layout_height="@dimen/basic_d40"
             android:background="@drawable/btn_bg_start"
             android:focusable="false"
             android:text="@string/btn_click_to_start"
-            android:textSize="@dimen/s18" />
+            android:textSize="@dimen/basic_s18" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -189,24 +189,24 @@
 
             <View
                 android:layout_width="0dp"
-                android:layout_height="@dimen/d1"
+                android:layout_height="@dimen/basic_d1"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@color/black1"
+                android:background="@color/basic_black1"
                 tools:ignore="NestedWeights" />
 
             <com.winsion.dispatch.view.DrawableCenterTextView
                 android:id="@+id/btn_broadcast"
-                android:layout_width="@dimen/d100"
-                android:layout_height="@dimen/d40"
+                android:layout_width="@dimen/basic_d100"
+                android:layout_height="@dimen/basic_d40"
                 android:background="@drawable/btn_yellow_right"
-                android:drawablePadding="@dimen/d3"
+                android:drawablePadding="@dimen/basic_d3"
                 android:drawableStart="@drawable/ic_broadcast"
                 android:focusable="false"
                 android:gravity="center_vertical"
                 android:text="@string/btn_broadcast"
-                android:textColor="@color/black6"
-                android:textSize="@dimen/s18" />
+                android:textColor="@color/basic_black6"
+                android:textSize="@dimen/basic_s18" />
         </LinearLayout>
     </LinearLayout>
 
@@ -214,7 +214,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/d15">
+        android:padding="@dimen/basic_d15">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -226,22 +226,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name_plan"
-                android:textColor="@color/gray2"
-                android:textSize="@dimen/s18" />
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s18" />
 
             <TextView
                 android:id="@+id/tv_plan_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/d5"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s18" />
+                android:layout_marginStart="@dimen/basic_d5"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s18" />
         </LinearLayout>
 
         <View
-            android:layout_width="@dimen/d1"
+            android:layout_width="@dimen/basic_d1"
             android:layout_height="match_parent"
-            android:background="@color/black1" />
+            android:background="@color/basic_black1" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -252,18 +252,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/d5"
+                android:layout_marginStart="@dimen/basic_d5"
                 android:text="@string/name_real"
-                android:textColor="@color/gray2"
-                android:textSize="@dimen/s18" />
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s18" />
 
             <TextView
                 android:id="@+id/tv_real_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/d5"
-                android:textColor="@color/white1"
-                android:textSize="@dimen/s18" />
+                android:layout_marginStart="@dimen/basic_d5"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s18" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

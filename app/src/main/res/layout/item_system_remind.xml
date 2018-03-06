@@ -26,20 +26,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/gray8"
+            android:background="@color/basic_gray8"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/d15">
+                android:layout_margin="@dimen/basic_d15">
 
                 <ImageView
                     android:id="@+id/iv_red_dot"
-                    android:layout_width="@dimen/d8"
-                    android:layout_height="@dimen/d8"
+                    android:layout_width="@dimen/basic_d8"
+                    android:layout_height="@dimen/basic_d8"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/d5"
+                    android:layout_marginEnd="@dimen/basic_d5"
                     android:gravity="center"
                     android:src="@drawable/bg_circle_red"
                     tools:ignore="ContentDescription" />
@@ -50,8 +50,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/iv_red_dot"
-                    android:textColor="@color/blue1"
-                    android:textSize="@dimen/s21"
+                    android:textColor="@color/basic_blue1"
+                    android:textSize="@dimen/basic_s21"
                     tools:text="[提醒分类]" />
 
                 <TextView
@@ -61,17 +61,17 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:gravity="center"
-                    android:textColor="@color/gray2"
-                    android:textSize="@dimen/s16"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s16"
                     tools:ignore="RelativeOverlap"
                     tools:text="[日期时间]" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/d1"
-                android:layout_marginStart="@dimen/d15"
-                android:background="@color/gray2" />
+                android:layout_height="@dimen/basic_d1"
+                android:layout_marginStart="@dimen/basic_d15"
+                android:background="@color/basic_gray2" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -81,29 +81,29 @@
                     android:id="@+id/tv_remind_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/d32"
-                    android:padding="@dimen/d15"
-                    android:textColor="@color/white1"
-                    android:textSize="@dimen/s21"
+                    android:layout_marginEnd="@dimen/basic_d32"
+                    android:padding="@dimen/basic_d15"
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s21"
                     tools:ignore="RelativeOverlap"
                     tools:text="[提醒内容]" />
 
                 <ImageView
                     android:id="@+id/iv_select"
-                    android:layout_width="@dimen/d54"
-                    android:layout_height="@dimen/d54"
+                    android:layout_width="@dimen/basic_d54"
+                    android:layout_height="@dimen/basic_d54"
                     android:layout_alignParentEnd="true"
-                    android:padding="@dimen/d15"
+                    android:padding="@dimen/basic_d15"
                     android:src="@drawable/ic_check_box_outline"
                     android:visibility="gone"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/iv_delete"
-                    android:layout_width="@dimen/d54"
-                    android:layout_height="@dimen/d54"
+                    android:layout_width="@dimen/basic_d54"
+                    android:layout_height="@dimen/basic_d54"
                     android:layout_alignParentEnd="true"
-                    android:padding="@dimen/d15"
+                    android:padding="@dimen/basic_d15"
                     android:src="@drawable/ic_delete1"
                     tools:ignore="ContentDescription" />
             </RelativeLayout>

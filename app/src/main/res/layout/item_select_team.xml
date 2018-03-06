@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/gray8"
+    android:background="@color/basic_gray8"
     android:orientation="vertical">
 
     <LinearLayout
@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/d15"
+        android:padding="@dimen/basic_d15"
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/iv_is_select"
-            android:layout_width="@dimen/d24"
-            android:layout_height="@dimen/d24"
+            android:layout_width="@dimen/basic_d24"
+            android:layout_height="@dimen/basic_d24"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_check_box_outline"
             tools:ignore="ContentDescription" />
@@ -26,16 +26,16 @@
             android:id="@+id/tv_performer_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/d5"
-            android:textColor="@color/white1"
-            android:textSize="@dimen/s21"
+            android:layout_marginStart="@dimen/basic_d5"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s21"
             tools:text="客运主任甲" />
     </LinearLayout>
 
     <View
         android:id="@+id/view_divider"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d1"
-        android:layout_marginStart="@dimen/d15"
-        android:background="@color/gray5" />
+        android:layout_height="@dimen/basic_d1"
+        android:layout_marginStart="@dimen/basic_d15"
+        android:background="@color/basic_gray5" />
 </LinearLayout>

@@ -8,7 +8,7 @@ import com.winsion.dispatch.common.listener.ClickListener;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
 import com.winsion.dispatch.modules.reminder.constants.ReadStatus;
 import com.winsion.dispatch.modules.reminder.entity.SystemRemindEntity;
-import com.winsion.dispatch.utils.ToastUtils;
+import com.winsion.component.basic.utils.ToastUtils;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 

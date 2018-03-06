@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseActivity;
+import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.dispatch.config.constants.SaveErrorCode;
 import com.winsion.dispatch.config.listener.SaveListener;
 import com.winsion.dispatch.view.TitleView;

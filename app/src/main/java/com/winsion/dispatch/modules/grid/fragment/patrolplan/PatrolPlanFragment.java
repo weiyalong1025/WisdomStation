@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.application.AppApplication;
-import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.modules.grid.activity.patrolitem.PatrolItemActivity;
 import com.winsion.dispatch.modules.grid.adapter.BluetoothPointAdapter;
@@ -28,7 +28,7 @@ import com.winsion.dispatch.modules.grid.adapter.PatrolPlanAdapter;
 import com.winsion.dispatch.modules.grid.entity.BPEntity;
 import com.winsion.dispatch.modules.grid.entity.PatrolPlanEntity;
 import com.winsion.dispatch.utils.IbeaconUtils;
-import com.winsion.dispatch.utils.ViewUtils;
+import com.winsion.component.basic.utils.ViewUtils;
 import com.winsion.dispatch.view.WrapContentListView;
 
 import org.greenrobot.eventbus.EventBus;

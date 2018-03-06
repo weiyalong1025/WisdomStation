@@ -2,9 +2,9 @@ package com.winsion.dispatch.splash;
 
 import android.os.Message;
 
-import com.winsion.dispatch.base.BaseActivity;
+import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.dispatch.login.activity.LoginActivity;
-import com.winsion.dispatch.utils.LogUtils;
+import com.winsion.component.basic.utils.LogUtils;
 
 public class SplashActivity extends BaseActivity {
     private static final String TAG = "SplashActivity";

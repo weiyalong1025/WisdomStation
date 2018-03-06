@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.grid.entity.BPEntity;
-import com.winsion.dispatch.utils.ConvertUtils;
-import com.winsion.dispatch.utils.constants.Formatter;
+import com.winsion.component.basic.utils.ConvertUtils;
+import com.winsion.component.basic.utils.constants.Formatter;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 

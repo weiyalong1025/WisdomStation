@@ -5,21 +5,22 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.model.HttpParams;
+import com.winsion.component.basic.data.NetDataSource;
+import com.winsion.component.basic.data.SPDataSource;
+import com.winsion.component.basic.data.constants.SPKey;
+import com.winsion.component.basic.data.constants.Urls;
+import com.winsion.component.basic.data.listener.ResponseListener;
+import com.winsion.component.basic.utils.JsonUtils;
+import com.winsion.component.basic.utils.LogUtils;
 import com.winsion.dispatch.application.AppApplication;
 import com.winsion.dispatch.common.biz.CommonBiz;
+import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.dispatch.data.DBDataSource;
-import com.winsion.dispatch.data.NetDataSource;
-import com.winsion.dispatch.data.SPDataSource;
-import com.winsion.dispatch.data.constants.SPKey;
-import com.winsion.dispatch.data.constants.Urls;
-import com.winsion.dispatch.data.listener.ResponseListener;
 import com.winsion.dispatch.login.constants.LoginErrorCode;
 import com.winsion.dispatch.login.entity.AuthEntity;
 import com.winsion.dispatch.login.entity.UserEntity;
 import com.winsion.dispatch.login.listener.LoginListener;
 import com.winsion.dispatch.mqtt.MQTTClient;
-import com.winsion.dispatch.utils.JsonUtils;
-import com.winsion.dispatch.utils.LogUtils;
 
 import java.util.List;
 
@@ -78,6 +79,10 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
 
         loginListener.onLogin();
 
+        CacheDataSource.setIp(ip);
+        CacheDataSource.setPort(port);
+        CacheDataSource.setBaseUrl(String.format("http://%s:%s/", ip, port));
+
         // 测试模式
         AppApplication.TEST_MODE = mUsername.equals("admin") && mPassword.equals("admin");
 
@@ -134,7 +139,7 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
 
     @Override
     public void connectSuccess() {
-        saveDataToLocal();
+        saveData();
         mLoginListener.loginSuccess();
     }
 
@@ -145,21 +150,23 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
     }
 
     /**
-     * 存储数据到本地
+     * 存储数据
      */
-    private void saveDataToLocal() {
+    private void saveData() {
         AuthEntity.UserDto user = mAuthEntity.getUser();
-        SPDataSource.put(mContext, SPKey.KEY_USER_ID, mAuthEntity.getUserId());
-        SPDataSource.put(mContext, SPKey.KEY_HTTP_KEY, mAuthEntity.getHttpKey());
-        SPDataSource.put(mContext, SPKey.KEY_TOKEN, mAuthEntity.getToken());
-        SPDataSource.put(mContext, SPKey.KEY_MQ_KEY, mAuthEntity.getMqKey());
-        SPDataSource.put(mContext, SPKey.KEY_TEAM_ID, mAuthEntity.getTeamId());
-        SPDataSource.put(mContext, SPKey.KEY_USERNAME, mUsername);
-        SPDataSource.put(mContext, SPKey.KEY_PASSWORD, mPassword);
-        SPDataSource.put(mContext, SPKey.KEY_SIP_USERNAME, user.getSiptelladdress());
-        SPDataSource.put(mContext, SPKey.KEY_SIP_PASSWORD, user.getSippassword());
-        SPDataSource.put(mContext, SPKey.KEY_REAL_NAME, user.getUsername());
-        SPDataSource.put(mContext, SPKey.KEY_USER_HEAD_ADDRESS, user.getPhoto());
+
+        CacheDataSource.setHttpKey(mAuthEntity.getHttpKey());
+        CacheDataSource.setToken(mAuthEntity.getToken());
+        CacheDataSource.setMqKey(mAuthEntity.getMqKey());
+        // TODO 记录配置的SSID   CacheDataSource.setSsid("");
+        CacheDataSource.setUserId(mAuthEntity.getUserId());
+        CacheDataSource.setTeamId(mAuthEntity.getTeamId());
+        CacheDataSource.setUsername(mUsername);
+        CacheDataSource.setPassword(mPassword);
+        CacheDataSource.setSipUsername(user.getSiptelladdress());
+        CacheDataSource.setSipPassword(user.getSippassword());
+        CacheDataSource.setRealName(user.getUsername());
+        CacheDataSource.setUserHeadAddress(user.getPhoto());
 
         UserEntity userBean = new UserEntity();
         userBean.setUserId(mAuthEntity.getUserId());
@@ -169,8 +176,8 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
         userBean.setPocUsername(user.getSiptelladdress());
         userBean.setPocPassword(user.getSippassword());
         userBean.setLastLoginTime(System.currentTimeMillis());
-        userBean.setLoginIp((String) SPDataSource.get(mContext, SPKey.KEY_IP, ""));
-        userBean.setLoginPort((String) SPDataSource.get(mContext, SPKey.KEY_PORT, ""));
+        userBean.setLoginIp(CacheDataSource.getIp());
+        userBean.setLoginPort(CacheDataSource.getPort());
         userBean.setIsAutoLogin(true);
         mDbDataSource.saveUserInfo(userBean);
     }

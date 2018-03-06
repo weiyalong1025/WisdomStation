@@ -4,11 +4,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseActivity;
+import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.dispatch.common.biz.CommonBiz;
-import com.winsion.dispatch.data.CacheDataSource;
-import com.winsion.dispatch.data.NetDataSource;
-import com.winsion.dispatch.utils.ImageLoader;
+import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.data.NetDataSource;
+import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.dispatch.view.CircleImageView;
 import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.TitleView;

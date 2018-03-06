@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.winsion.dispatch.PlaceHolderFragment;
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.dispatch.view.MyIndicator;
 import com.winsion.dispatch.view.NoScrollViewPager;
 

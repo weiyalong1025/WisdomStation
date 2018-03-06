@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.dispatch.view.SpinnerView;
 
 import java.util.ArrayList;

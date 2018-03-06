@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.dispatch.main.activity.MainActivity;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.reminder.adapter.SystemRemindAdapter;

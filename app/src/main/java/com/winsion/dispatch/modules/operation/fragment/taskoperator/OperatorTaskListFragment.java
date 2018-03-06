@@ -15,18 +15,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.common.listener.StateListener;
-import com.winsion.dispatch.data.constants.OpeType;
+import com.winsion.component.basic.data.constants.OpeType;
 import com.winsion.dispatch.modules.operation.activity.taskoperator.OperatorTaskDetailActivity;
 import com.winsion.dispatch.modules.operation.adapter.OperatorTaskListAdapter;
 import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;
 import com.winsion.dispatch.modules.operation.constants.TaskSpinnerState;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
-import com.winsion.dispatch.utils.ConvertUtils;
-import com.winsion.dispatch.utils.constants.Formatter;
+import com.winsion.component.basic.utils.ConvertUtils;
+import com.winsion.component.basic.utils.constants.Formatter;
 import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.SpinnerView;
 

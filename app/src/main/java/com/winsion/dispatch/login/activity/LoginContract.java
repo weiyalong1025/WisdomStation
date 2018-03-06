@@ -2,8 +2,8 @@ package com.winsion.dispatch.login.activity;
 
 import android.support.annotation.NonNull;
 
-import com.winsion.dispatch.base.BasePresenter;
-import com.winsion.dispatch.base.BaseView;
+import com.winsion.component.basic.base.BasePresenter;
+import com.winsion.component.basic.base.BaseView;
 import com.winsion.dispatch.login.entity.UserEntity;
 import com.winsion.dispatch.login.listener.LoginListener;
 

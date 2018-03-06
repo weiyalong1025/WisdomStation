@@ -13,8 +13,8 @@ import com.winsion.dispatch.R;
 import com.winsion.dispatch.media.constants.FileStatus;
 import com.winsion.dispatch.media.constants.FileType;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
-import com.winsion.dispatch.utils.FileUtils;
-import com.winsion.dispatch.utils.ToastUtils;
+import com.winsion.component.basic.utils.FileUtils;
+import com.winsion.component.basic.utils.ToastUtils;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 

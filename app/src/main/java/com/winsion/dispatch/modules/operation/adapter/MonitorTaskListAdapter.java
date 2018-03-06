@@ -10,9 +10,9 @@ import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
 import com.winsion.dispatch.modules.operation.entity.TaskEntity;
-import com.winsion.dispatch.utils.ConvertUtils;
-import com.winsion.dispatch.utils.ImageLoader;
-import com.winsion.dispatch.utils.constants.Formatter;
+import com.winsion.component.basic.utils.ConvertUtils;
+import com.winsion.component.basic.utils.ImageLoader;
+import com.winsion.component.basic.utils.constants.Formatter;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 

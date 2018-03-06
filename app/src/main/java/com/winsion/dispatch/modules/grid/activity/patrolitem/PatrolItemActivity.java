@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseActivity;
+import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.dispatch.modules.grid.activity.submitproblem.SubmitProblemActivity;
 import com.winsion.dispatch.modules.grid.adapter.PatrolItemAdapter;
 import com.winsion.dispatch.modules.grid.biz.SubmitBiz;
@@ -18,8 +18,8 @@ import com.winsion.dispatch.modules.grid.constants.DeviceState;
 import com.winsion.dispatch.modules.grid.constants.PatrolItemState;
 import com.winsion.dispatch.modules.grid.entity.PatrolItemEntity;
 import com.winsion.dispatch.modules.grid.entity.PatrolPlanEntity;
-import com.winsion.dispatch.utils.ConvertUtils;
-import com.winsion.dispatch.utils.constants.Formatter;
+import com.winsion.component.basic.utils.ConvertUtils;
+import com.winsion.component.basic.utils.constants.Formatter;
 import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.TitleView;
 

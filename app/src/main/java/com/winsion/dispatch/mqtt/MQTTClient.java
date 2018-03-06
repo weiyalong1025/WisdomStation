@@ -9,7 +9,7 @@ import android.net.NetworkInfo;
 
 import com.alibaba.fastjson.JSON;
 import com.winsion.dispatch.mqtt.entity.MQMessage;
-import com.winsion.dispatch.utils.LogUtils;
+import com.winsion.component.basic.utils.LogUtils;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;

@@ -16,7 +16,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.google.zxing.camera.CameraManager;
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseActivity;
+import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.dispatch.view.TitleView;
 import com.winsion.dispatch.view.ViewfinderView;
 

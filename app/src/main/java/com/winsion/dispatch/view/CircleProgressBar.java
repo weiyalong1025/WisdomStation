@@ -24,7 +24,7 @@ import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.utils.ConvertUtils;
+import com.winsion.component.basic.utils.ConvertUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

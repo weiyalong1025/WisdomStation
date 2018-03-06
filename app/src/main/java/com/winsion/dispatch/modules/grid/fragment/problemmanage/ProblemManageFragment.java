@@ -10,8 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseFragment;
-import com.winsion.dispatch.data.constants.OpeType;
+import com.winsion.component.basic.base.BaseFragment;
+import com.winsion.component.basic.data.constants.OpeType;
 import com.winsion.dispatch.modules.grid.adapter.ProblemManageAdapter;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.TaskEntity;

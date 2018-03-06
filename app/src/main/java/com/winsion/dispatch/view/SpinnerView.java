@@ -20,8 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.utils.ConvertUtils;
-import com.winsion.dispatch.utils.ViewUtils;
+import com.winsion.component.basic.utils.ConvertUtils;
+import com.winsion.component.basic.utils.ViewUtils;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 

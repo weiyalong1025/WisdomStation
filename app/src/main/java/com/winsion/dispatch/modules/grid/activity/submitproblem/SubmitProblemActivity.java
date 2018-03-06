@@ -12,10 +12,10 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseActivity;
+import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.dispatch.capture.activity.CaptureActivity;
 import com.winsion.dispatch.common.biz.CommonBiz;
-import com.winsion.dispatch.data.listener.UploadListener;
+import com.winsion.component.basic.data.listener.UploadListener;
 import com.winsion.dispatch.media.activity.TakePhotoActivity;
 import com.winsion.dispatch.media.adapter.RecordAdapter;
 import com.winsion.dispatch.media.constants.FileStatus;
@@ -26,8 +26,8 @@ import com.winsion.dispatch.modules.grid.constants.DeviceState;
 import com.winsion.dispatch.modules.grid.entity.PatrolItemEntity;
 import com.winsion.dispatch.modules.grid.entity.SubclassEntity;
 import com.winsion.dispatch.modules.operation.entity.FileEntity;
-import com.winsion.dispatch.utils.DirAndFileUtils;
-import com.winsion.dispatch.utils.ViewUtils;
+import com.winsion.component.basic.utils.DirAndFileUtils;
+import com.winsion.component.basic.utils.ViewUtils;
 import com.winsion.dispatch.view.CustomDialog;
 import com.winsion.dispatch.view.TitleView;
 

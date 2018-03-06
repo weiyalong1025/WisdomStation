@@ -1,9 +1,9 @@
 package com.winsion.dispatch.modules.operation.activity.taskoperator;
 
-import com.winsion.dispatch.base.BasePresenter;
-import com.winsion.dispatch.base.BaseView;
-import com.winsion.dispatch.data.listener.MyDownloadListener;
-import com.winsion.dispatch.data.listener.UploadListener;
+import com.winsion.component.basic.base.BasePresenter;
+import com.winsion.component.basic.base.BaseView;
+import com.winsion.component.basic.data.listener.MyDownloadListener;
+import com.winsion.component.basic.data.listener.UploadListener;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
 import com.winsion.dispatch.media.entity.ServerRecordEntity;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;

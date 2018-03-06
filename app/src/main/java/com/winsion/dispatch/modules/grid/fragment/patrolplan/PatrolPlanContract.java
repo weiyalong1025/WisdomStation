@@ -1,7 +1,7 @@
 package com.winsion.dispatch.modules.grid.fragment.patrolplan;
 
-import com.winsion.dispatch.base.BasePresenter;
-import com.winsion.dispatch.base.BaseView;
+import com.winsion.component.basic.base.BasePresenter;
+import com.winsion.component.basic.base.BaseView;
 import com.winsion.dispatch.modules.grid.entity.PatrolPlanEntity;
 
 import java.util.List;

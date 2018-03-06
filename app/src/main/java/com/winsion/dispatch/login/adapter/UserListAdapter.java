@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.common.listener.ClickListener;
 import com.winsion.dispatch.login.entity.UserEntity;
-import com.winsion.dispatch.utils.ImageLoader;
+import com.winsion.component.basic.utils.ImageLoader;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.View;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.dispatch.modules.grid.activity.GridActivity;
 
 /**

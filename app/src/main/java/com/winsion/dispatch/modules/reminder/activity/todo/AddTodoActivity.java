@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseActivity;
+import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.dispatch.common.biz.CommonBiz;
 import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
-import com.winsion.dispatch.utils.ConvertUtils;
-import com.winsion.dispatch.utils.constants.Formatter;
+import com.winsion.component.basic.utils.ConvertUtils;
+import com.winsion.component.basic.utils.constants.Formatter;
 import com.winsion.dispatch.view.TitleView;
 
 import java.util.Calendar;

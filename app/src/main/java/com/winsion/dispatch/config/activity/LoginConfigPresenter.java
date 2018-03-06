@@ -6,9 +6,8 @@ import android.text.TextUtils;
 import com.winsion.dispatch.config.constants.SaveErrorCode;
 import com.winsion.dispatch.config.constants.UrlRegular;
 import com.winsion.dispatch.config.listener.SaveListener;
-import com.winsion.dispatch.data.CacheDataSource;
-import com.winsion.dispatch.data.SPDataSource;
-import com.winsion.dispatch.data.constants.SPKey;
+import com.winsion.component.basic.data.SPDataSource;
+import com.winsion.component.basic.data.constants.SPKey;
 
 /**
  * Created by wyl on 2017/3/28.
@@ -41,7 +40,6 @@ class LoginConfigPresenter implements LoginConfigContract.Presenter {
         } else {
             SPDataSource.put(mContext, SPKey.KEY_IP, ip);
             SPDataSource.put(mContext, SPKey.KEY_PORT, port);
-            CacheDataSource.clearBaseUrl();
             saveListener.saveSuccess();
         }
     }

@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.dispatch.modules.operation.fragment.issue.IssueFragment;
 import com.winsion.dispatch.modules.operation.fragment.taskmonitor.MonitorTaskListFragment;
 import com.winsion.dispatch.modules.operation.fragment.taskoperator.OperatorTaskListFragment;

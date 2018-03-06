@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.winsion.dispatch.PlaceHolderFragment;
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseFragment;
+import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.dispatch.modules.reminder.fragment.systemremind.SystemRemindFragment;
 import com.winsion.dispatch.modules.reminder.fragment.todo.TodoListFragment;
 import com.winsion.dispatch.view.BadgeRadioButton;

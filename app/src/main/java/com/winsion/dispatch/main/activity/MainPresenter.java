@@ -6,13 +6,13 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.common.biz.CommonBiz;
-import com.winsion.dispatch.data.CacheDataSource;
-import com.winsion.dispatch.data.NetDataSource;
+import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.dispatch.mqtt.MQTTClient;
 import com.winsion.dispatch.mqtt.constants.MQType;
 import com.winsion.dispatch.mqtt.entity.MQMessage;
 import com.winsion.dispatch.mqtt.entity.TaskMessage;
-import com.winsion.dispatch.utils.ToastUtils;
+import com.winsion.component.basic.utils.ToastUtils;
 
 /**
  * Created by wyl on 2017/12/8

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.base.BaseActivity;
+import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.dispatch.modules.grid.fragment.patrolplan.PatrolPlanFragment;
 import com.winsion.dispatch.modules.grid.fragment.problemmanage.ProblemManageFragment;
 import com.winsion.dispatch.view.MyIndicator;

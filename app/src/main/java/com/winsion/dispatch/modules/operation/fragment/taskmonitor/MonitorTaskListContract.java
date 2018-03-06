@@ -1,7 +1,7 @@
 package com.winsion.dispatch.modules.operation.fragment.taskmonitor;
 
-import com.winsion.dispatch.base.BasePresenter;
-import com.winsion.dispatch.base.BaseView;
+import com.winsion.component.basic.base.BasePresenter;
+import com.winsion.component.basic.base.BaseView;
 import com.winsion.dispatch.modules.operation.entity.TaskEntity;
 
 import java.util.List;

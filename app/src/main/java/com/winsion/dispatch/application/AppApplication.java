@@ -37,7 +37,7 @@ public class AppApplication extends Application {
         initDB();
 
         // 初始化网络库
-        NetDataSource.init(this, getString(R.string.app_name));
+        NetDataSource.init(this, BuildConfig.DEBUG, getString(R.string.app_name));
 
         // 初始化LOG
         initLog();

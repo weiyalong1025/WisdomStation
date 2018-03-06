@@ -21,7 +21,6 @@ import com.lzy.okrx2.adapter.ObservableBody;
 import com.lzy.okserver.OkDownload;
 import com.lzy.okserver.download.DownloadListener;
 import com.lzy.okserver.download.DownloadTask;
-import com.winsion.component.basic.BuildConfig;
 import com.winsion.component.basic.data.constants.ParamKey;
 import com.winsion.component.basic.data.constants.Urls;
 import com.winsion.component.basic.data.converter.ObjectConverter;
@@ -67,12 +66,15 @@ public class NetDataSource {
 
     /**
      * 调用其他方法的前提
+     *
+     * @param application application
+     * @param logSwitch   LOG开关
+     * @param logTag      LOG标签
      */
-    public static void init(Application application,String logTag) {
+    public static void init(Application application, boolean logSwitch, String logTag) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-        // DEBUG模式下输出LOG
-        if (BuildConfig.DEBUG) {
+        if (logSwitch) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(logTag);
             // log打印级别，决定了log显示的详细程度
             loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);

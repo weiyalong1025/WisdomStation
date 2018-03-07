@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">智慧车站</string>
 
-    <string name="btn_complete">完成</string>
-    <string name="btn_confirm">确定</string>
-    <string name="btn_cancel">取消</string>
     <string name="btn_click_to_start">点击开始</string>
     <string name="btn_check_update">检查更新</string>
     <string name="btn_click_to_finish">点击完成</string>
@@ -26,8 +23,6 @@
     <string name="btn_submit">上报</string>
     <string name="btn_add_problem">添加问题</string>
     <string name="btn_device_repair">设备报修</string>
-    <string name="btn_update_now">立即更新</string>
-    <string name="btn_update_later">暂不更新</string>
     <string name="btn_broadcast">广播</string>
     <string name="btn_rephotograph">重拍</string>
 
@@ -36,16 +31,13 @@
     <string name="default_counter_150">0/150</string>
     <string name="default_counter_100">0/100</string>
 
-    <string name="dialog_on_login">登录中</string>
     <string name="dialog_on_search">查询中</string>
-    <string name="dialog_on_logout">注销中</string>
     <string name="dialog_on_issue">发布中</string>
     <string name="dialog_on_submit">上报中</string>
     <string name="dialog_sure_to_start">确定要开始吗？</string>
     <string name="dialog_sure_to_finish">确定要完成吗？</string>
     <string name="dialog_sure_to_delete">确定要删除吗？</string>
     <string name="dialog_after_exiting_data_will_be_cleared_are_you_sure">退出之后将清空所填数据，确定退出吗?</string>
-    <string name="dialog_downloading_installation_package">正在下载安装包…</string>
     <string name="dialog_add_problem_desc">添加问题描述</string>
     <string name="dialog_sure_exist_problem">确定存在问题吗？</string>
     <string name="dialog_sure_no_problem">确定没有问题吗？</string>
@@ -56,7 +48,6 @@
     <string name="hint_input_password">请输入密码</string>
     <string name="hint_ip_address">请输入IP地址</string>
     <string name="hint_input_port">请输入端口号</string>
-    <string name="hint_search">搜索</string>
     <string name="hint_select_station">请选择车站</string>
     <string name="hint_capture_qr_code">将二维码/条码放入框内，即可自动扫描</string>
     <string name="hint_no_data_click_retry">没有数据，点击重试</string>
@@ -125,7 +116,6 @@
 
     <string name="symbol_separator">/</string>
     <string name="symbol_hour_minute">"--:--"</string>
-    <string name="symbol_progress">0/100</string>
 
     <string name="tab_dispatch">到发</string>
     <string name="tab_operation">作业</string>
@@ -169,21 +159,12 @@
     <string name="title_alarm_detail">预警详情</string>
     <string name="title_grid_detail">网格详情</string>
     <string name="title_cooperation_detail">协作详情</string>
-    <string name="title_version_update">版本更新</string>
     <string name="title_patrol_item">巡视项目</string>
     <string name="title_qr_code">二维码/条码</string>
     <string name="title_input_device_id">请输入设备ID</string>
     <string name="title_key_passenger">重点旅客</string>
     <string name="title_lost">失误登记</string>
 
-    <string name="toast_complete_login_data">用户名密码不能为空</string>
-    <string name="toast_need_config_ip_port">请先配置IP地址和端口号</string>
-    <string name="toast_login_failed">登录失败</string>
-    <string name="toast_incorrect_username_pwd">用户名密码错误</string>
-    <string name="toast_complete_ip_port">地址端口号不能为空</string>
-    <string name="toast_format_error">格式错误</string>
-    <string name="toast_mq_connect_failed">MQ连接失败</string>
-    <string name="toast_check_sdcard">请检查SD卡状态</string>
     <string name="toast_change_state_failed">更改状态失败</string>
     <string name="toast_confirm_success">确认成功</string>
     <string name="toast_confirm_failed">确认失败</string>
@@ -202,14 +183,11 @@
     <string name="toast_upload_success">上传成功</string>
     <string name="toast_upload_failed">上传失败</string>
     <string name="toast_download_success">下载成功</string>
-    <string name="toast_download_failed">下载失败</string>
     <string name="toast_wait_for_files_upload_complete">请等待附件上传完成</string>
     <string name="toast_issue_success">发布成功</string>
     <string name="toast_issue_failed">发布失败</string>
     <string name="toast_local_file_clear_failed">本地文件清空失败</string>
     <string name="toast_local_file_clear_success">本地文件清空成功</string>
-    <string name="toast_current_version_is_the_latest">当前已是最新版本</string>
-    <string name="toast_check_update_failed">检查更新失败</string>
     <string name="toast_no_corresponding_program">没有对应的查看程序</string>
     <string name="toast_submit_failed">上报失败</string>
     <string name="toast_device_mismatch">设备不匹配</string>

@@ -2,7 +2,6 @@ package com.winsion.component.user.biz;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
 
 import com.lzy.okgo.model.HttpParams;
 import com.winsion.component.basic.data.CacheDataSource;
@@ -10,7 +9,6 @@ import com.winsion.component.basic.data.DBDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.Urls;
 import com.winsion.component.basic.listener.SuccessListener;
-import com.winsion.component.user.login.activity.LoginActivity;
 import com.winsion.component.user.mqtt.MQTTClient;
 
 /**

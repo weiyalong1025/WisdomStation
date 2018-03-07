@@ -365,6 +365,5 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.exit();
-        logI("我关掉啦！！！！！！！！");
     }
 }

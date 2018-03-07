@@ -1,7 +1,6 @@
 package com.winsion.dispatch.application;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.utils.CrashUtils;

@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.winsion.dispatch.application.AppApplication;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.FieldKey;
@@ -16,9 +15,9 @@ import com.winsion.component.basic.data.entity.OrderBy;
 import com.winsion.component.basic.data.entity.ResponseForQueryData;
 import com.winsion.component.basic.data.entity.WhereClause;
 import com.winsion.component.basic.data.listener.ResponseListener;
+import com.winsion.component.basic.utils.JsonUtils;
 import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
-import com.winsion.component.basic.utils.JsonUtils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

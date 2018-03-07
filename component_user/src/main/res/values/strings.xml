@@ -1,3 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
     <string name="user_app_name">登录组件</string>
+
+    <string name="toast_complete_ip_port">地址端口号不能为空</string>
+    <string name="toast_format_error">格式错误</string>
+    <string name="toast_complete_login_data">用户名密码不能为空</string>
+    <string name="toast_need_config_ip_port">请先配置IP地址和端口号</string>
+    <string name="toast_login_failed">登录失败</string>
+    <string name="toast_incorrect_username_pwd">用户名密码错误</string>
+    <string name="toast_mq_connect_failed">MQ连接失败</string>
+
+    <string name="dialog_on_login">登录中</string>
+    <string name="dialog_on_logout">注销中</string>
 </resources>

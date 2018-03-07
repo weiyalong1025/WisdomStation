@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_spinner"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/basic_d40"
+    android:background="@color/basic_gray10"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/ll_container_first"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/iv_text_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/basic_selector_spinner_text"
+            android:textSize="@dimen/basic_s16" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_first"
+            android:layout_width="@dimen/basic_d14"
+            android:layout_height="@dimen/basic_d14"
+            android:layout_marginStart="@dimen/basic_d6"
+            android:src="@drawable/basic_ic_arrow_down_little"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/div_first"
+        android:layout_width="@dimen/basic_d1"
+        android:layout_height="@dimen/basic_d15"
+        android:background="@color/basic_black1" />
+
+    <LinearLayout
+        android:id="@+id/ll_container_second"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/iv_text_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/basic_selector_spinner_text"
+            android:textSize="@dimen/basic_s16" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_second"
+            android:layout_width="@dimen/basic_d14"
+            android:layout_height="@dimen/basic_d14"
+            android:layout_marginStart="@dimen/basic_d6"
+            android:src="@drawable/basic_ic_arrow_down_little"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/div_second"
+        android:layout_width="@dimen/basic_d1"
+        android:layout_height="@dimen/basic_d15"
+        android:background="@color/basic_black1" />
+
+    <include
+        layout="@layout/basic_view_search"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+</LinearLayout>

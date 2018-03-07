@@ -44,7 +44,7 @@ public class OperatorTaskListPresenter extends ChangeStatusBiz implements Operat
 
     @Override
     public void getMyTaskData() {
-        if (AppApplication.TEST_MODE) {
+        if (CacheDataSource.getTestMode()) {
             mView.getMyTaskDataSuccess(JsonUtils.getTestEntities(mContext, JobEntity.class));
             return;
         }

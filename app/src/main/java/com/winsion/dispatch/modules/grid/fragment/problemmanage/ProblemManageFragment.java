@@ -2,6 +2,7 @@ package com.winsion.dispatch.modules.grid.fragment.problemmanage;
 
 import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -9,13 +10,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.data.constants.OpeType;
+import com.winsion.component.basic.view.CustomDialog;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.grid.adapter.ProblemManageAdapter;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.TaskEntity;
-import com.winsion.dispatch.view.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ProblemManageFragment extends BaseFragment implements ProblemManage
     @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return getLayoutInflater().inflate(R.layout.fragment_problem_manage, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.fragment_problem_manage, null);
     }
 
     @Override

@@ -97,8 +97,8 @@ public class ProblemManageAdapter extends CommonAdapter<TaskEntity> {
             case TaskState.DONE:
                 viewHolder.setBackgroundRes(R.id.ll_bg, R.color.basic_gray8);
                 viewHolder.setTextColorRes(R.id.tv_state, R.color.basic_blue1);
-                viewHolder.setBackgroundRes(R.id.btn_pass, R.drawable.btn_yellow);
-                viewHolder.setBackgroundRes(R.id.btn_not_pass, R.drawable.btn_yellow);
+                viewHolder.setBackgroundRes(R.id.btn_pass, R.drawable.basic_btn_yellow);
+                viewHolder.setBackgroundRes(R.id.btn_not_pass, R.drawable.basic_btn_yellow);
                 break;
             case TaskState.GRID_NOT_PASS:
                 viewHolder.setBackgroundRes(R.id.ll_bg, R.color.basic_yellow3);

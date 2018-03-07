@@ -23,9 +23,9 @@
 #-------------------------------------------定制化区域-----------------------------------------------
 #---------------------------------1.实体类---------------------------------
 -keep class com.winsion.component.basic.data.entity.** { *; }
--keep class com.winsion.dispatch.mqtt.entity.** { *; }
+-keep class com.winsion.component.login.mqtt.entity.** { *; }
 -keep class com.winsion.dispatch.login.entity.** { *; }
--keep class com.winsion.dispatch.common.entity.** { *; }
+-keep class com.winsion.component.basic.entity.** { *; }
 -keep class com.winsion.dispatch.modules.grid.entity.** { *; }
 -keep class com.winsion.dispatch.modules.reminder.entity.** { *; }
 -keep class com.winsion.dispatch.modules.operation.entity.** { *; }

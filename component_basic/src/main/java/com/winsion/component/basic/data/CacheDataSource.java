@@ -7,6 +7,7 @@ package com.winsion.component.basic.data;
  */
 
 public class CacheDataSource {
+    private static boolean loginState;  // 登录状态
     private static String ip;
     private static String port;
     private static String baseUrl;
@@ -22,6 +23,15 @@ public class CacheDataSource {
     private static String sipPassword;  // SIP登录密码
     private static String realName; // 用户昵称
     private static String userHeadAddress;  // 用户头像地址
+    private static boolean testMode;    // 测试模式开关
+
+    public static boolean getLoginState() {
+        return loginState;
+    }
+
+    public static void setLoginState(boolean loginState) {
+        CacheDataSource.loginState = loginState;
+    }
 
     public static String getIp() {
         return ip;
@@ -143,10 +153,19 @@ public class CacheDataSource {
         return userHeadAddress;
     }
 
+    public static boolean getTestMode() {
+        return testMode;
+    }
+
+    public static void setTestMode(boolean testMode) {
+        CacheDataSource.testMode = testMode;
+    }
+
     /**
      * 清除缓存
      */
     public static void clearCache() {
+        loginState = false;
         ip = null;
         port = null;
         baseUrl = null;
@@ -162,5 +181,6 @@ public class CacheDataSource {
         sipPassword = null;
         realName = null;
         userHeadAddress = null;
+        testMode = false;
     }
 }

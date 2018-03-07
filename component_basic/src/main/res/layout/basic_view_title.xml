@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_d48"
+        android:background="@color/basic_black3"
+        android:gravity="center"
+        android:textColor="@color/basic_blue1"
+        android:textSize="@dimen/basic_s20"
+        tools:text="标题" />
+
+    <ImageView
+        android:id="@+id/title_view_back"
+        android:layout_width="@dimen/basic_d48"
+        android:layout_height="@dimen/basic_d48"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/basic_ic_arrow_left"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/title_view_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/basic_d48"
+        android:layout_alignParentEnd="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingEnd="@dimen/basic_d10"
+        android:paddingStart="@dimen/basic_d10"
+        android:text="@string/btn_complete"
+        android:textColor="@color/basic_blue1"
+        android:textSize="@dimen/basic_s18"
+        tools:ignore="RelativeOverlap" />
+</RelativeLayout>

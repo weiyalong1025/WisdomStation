@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="@dimen/basic_d300"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/basic_bg_dialog_normal"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/tv_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/basic_d20"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:textColor="@color/basic_gray9"
+            android:textSize="@dimen/basic_s18"
+            tools:text="对话框标题" />
+
+        <com.winsion.component.basic.view.MaxHeightScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never">
+
+            <TextView
+                android:id="@+id/tv_dialog_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/basic_d20"
+                android:textColor="@color/basic_gray9"
+                android:textSize="@dimen/basic_s18"
+                tools:text="对话框文字" />
+        </com.winsion.component.basic.view.MaxHeightScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/basic_d0_5"
+            android:background="@color/basic_gray1" />
+
+        <include layout="@layout/basic_layout_dialog_btn" />
+    </LinearLayout>
+</FrameLayout>

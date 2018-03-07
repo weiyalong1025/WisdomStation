@@ -7,7 +7,7 @@
     android:background="@color/basic_gray8"
     android:orientation="vertical">
 
-    <com.winsion.dispatch.view.TitleView
+    <com.winsion.component.basic.view.TitleView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 android:id="@+id/div_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/div_horizontal"
+                android:background="@drawable/basic_div_horizontal"
                 tools:ignore="ContentDescription" />
 
             <include layout="@layout/module_operation" />
@@ -55,7 +55,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/div_horizontal"
+                android:background="@drawable/basic_div_horizontal"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:id="@+id/iv_record_div1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/div_horizontal"
+                android:src="@drawable/basic_div_horizontal"
                 android:visibility="gone"
                 tools:ignore="ContentDescription" />
 
@@ -113,7 +113,7 @@
                 android:id="@+id/iv_record_div2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/div_horizontal"
+                android:src="@drawable/basic_div_horizontal"
                 tools:ignore="ContentDescription" />
         </LinearLayout>
     </ScrollView>

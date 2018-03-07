@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.media.constants.FileStatus;
-import com.winsion.dispatch.media.constants.FileType;
+import com.winsion.component.basic.constants.FileType;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
 import com.winsion.component.basic.utils.FileUtils;
 import com.winsion.component.basic.utils.ToastUtils;

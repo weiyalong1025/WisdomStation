@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal"
+        android:background="@drawable/basic_div_horizontal"
         tools:ignore="ContentDescription" />
 
     <LinearLayout
@@ -137,6 +137,6 @@
         android:id="@+id/iv_bottom_split"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal"
+        android:background="@drawable/basic_div_horizontal"
         tools:ignore="ContentDescription" />
 </LinearLayout>

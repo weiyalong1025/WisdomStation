@@ -8,14 +8,14 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal"
+        android:background="@drawable/basic_div_horizontal"
         tools:ignore="ContentDescription" />
 
     <RelativeLayout
         android:id="@+id/ll_issue_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_common"
+        android:background="@drawable/basic_selector_common"
         android:padding="@dimen/basic_d15">
 
         <ImageView
@@ -42,21 +42,21 @@
             android:layout_height="@dimen/basic_d20"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right"
+            android:src="@drawable/basic_ic_arrow_right"
             tools:ignore="ContentDescription" />
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal"
+        android:background="@drawable/basic_div_horizontal"
         tools:ignore="ContentDescription" />
 
     <RelativeLayout
         android:id="@+id/ll_issue_cooperation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_common"
+        android:background="@drawable/basic_selector_common"
         android:orientation="horizontal"
         android:padding="@dimen/basic_d15">
 
@@ -84,13 +84,13 @@
             android:layout_height="@dimen/basic_d20"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right"
+            android:src="@drawable/basic_ic_arrow_right"
             tools:ignore="ContentDescription" />
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal"
+        android:background="@drawable/basic_div_horizontal"
         tools:ignore="ContentDescription" />
 </LinearLayout>

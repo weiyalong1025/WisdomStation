@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.winsion.dispatch.view.TitleView
+    <com.winsion.component.basic.view.TitleView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:textSize="@dimen/basic_s18"
             android:visibility="gone" />
 
-        <com.winsion.dispatch.view.WaveView
+        <com.winsion.component.basic.view.WaveView
             android:id="@+id/wave_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/basic_d200"

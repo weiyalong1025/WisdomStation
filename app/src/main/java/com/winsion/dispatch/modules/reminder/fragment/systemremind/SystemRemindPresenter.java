@@ -46,7 +46,7 @@ public class SystemRemindPresenter implements SystemRemindContract.Presenter {
 
     @Override
     public void getRemindData() {
-        if (AppApplication.TEST_MODE) {
+        if (CacheDataSource.getTestMode()) {
             mView.getRemindDataSuccess(JsonUtils.getTestEntities(mContext, SystemRemindEntity.class));
             return;
         }

@@ -6,14 +6,14 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.utils.FileUtils;
-import com.winsion.dispatch.view.TitleView;
+import com.winsion.component.basic.view.TitleView;
+import com.winsion.dispatch.R;
 
 import java.io.File;
 
-import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
+import static com.winsion.component.basic.constants.Intents.Media.MEDIA_FILE;
 
 /**
  * Created by admin on 2016/8/13.

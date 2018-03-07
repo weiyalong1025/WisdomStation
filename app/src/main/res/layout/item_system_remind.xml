@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal"
+        android:background="@drawable/basic_div_horizontal"
         tools:ignore="ContentDescription" />
 
     <LinearLayout
@@ -41,7 +41,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/basic_d5"
                     android:gravity="center"
-                    android:src="@drawable/bg_circle_red"
+                    android:src="@drawable/basic_bg_circle_red"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -121,6 +121,6 @@
         android:id="@+id/iv_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal"
+        android:background="@drawable/basic_div_horizontal"
         tools:ignore="ContentDescription" />
 </LinearLayout>

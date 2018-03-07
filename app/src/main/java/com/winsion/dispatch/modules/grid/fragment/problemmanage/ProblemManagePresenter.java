@@ -5,7 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.winsion.dispatch.application.AppApplication;
-import com.winsion.dispatch.common.biz.CommonBiz;
+import com.winsion.component.basic.biz.CommonBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.FieldKey;
@@ -47,7 +47,7 @@ public class ProblemManagePresenter implements ProblemManageContract.Presenter {
 
     @Override
     public void getProblemData() {
-        if (AppApplication.TEST_MODE) {
+        if (CacheDataSource.getTestMode()) {
             mView.getProblemDataSuccess(JsonUtils.getTestEntities(mContext, TaskEntity.class));
             return;
         }
@@ -96,7 +96,7 @@ public class ProblemManagePresenter implements ProblemManageContract.Presenter {
 
     @Override
     public void confirm(TaskEntity taskEntity, int opeType) {
-        if (AppApplication.TEST_MODE) {
+        if (CacheDataSource.getTestMode()) {
             mView.confirmSuccess(taskEntity.getTasksid(), opeType);
             return;
         }

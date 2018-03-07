@@ -29,7 +29,7 @@ ext {
     compileVersion = 26
     minVersion = 18
     targetVersion = 22
-    supportVersion = '26.1.0'
+    supportVersion = '27.1.0'
 }
 
 task clean(type: Delete) {

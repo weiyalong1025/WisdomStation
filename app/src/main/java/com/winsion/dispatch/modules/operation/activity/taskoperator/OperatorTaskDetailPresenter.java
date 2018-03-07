@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.winsion.dispatch.common.biz.CommonBiz;
+import com.winsion.component.basic.biz.CommonBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.FieldKey;
@@ -19,7 +19,7 @@ import com.winsion.component.basic.data.listener.MyDownloadListener;
 import com.winsion.component.basic.data.listener.ResponseListener;
 import com.winsion.component.basic.data.listener.UploadListener;
 import com.winsion.dispatch.media.constants.FileStatus;
-import com.winsion.dispatch.media.constants.FileType;
+import com.winsion.component.basic.constants.FileType;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
 import com.winsion.dispatch.media.entity.ServerRecordEntity;
 import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;

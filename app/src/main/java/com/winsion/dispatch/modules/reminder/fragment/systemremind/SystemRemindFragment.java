@@ -3,6 +3,7 @@ package com.winsion.dispatch.modules.reminder.fragment.systemremind;
 import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -14,15 +15,15 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseFragment;
+import com.winsion.component.basic.view.CustomDialog;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.main.activity.MainActivity;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.reminder.adapter.SystemRemindAdapter;
 import com.winsion.dispatch.modules.reminder.constants.HandleType;
 import com.winsion.dispatch.modules.reminder.constants.ReadStatus;
 import com.winsion.dispatch.modules.reminder.entity.SystemRemindEntity;
-import com.winsion.dispatch.view.CustomDialog;
 import com.zhy.adapter.abslistview.ViewHolder;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return getLayoutInflater().inflate(R.layout.layout_status, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.layout_status, null);
     }
 
     @Override
@@ -196,7 +197,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
      */
     @SuppressLint("InflateParams")
     private void initMultipleDeleteLayout() {
-        multipleDeleteLayout = getLayoutInflater().inflate(R.layout.layout_multiple_delete, null);
+        multipleDeleteLayout = LayoutInflater.from(mContext).inflate(R.layout.layout_multiple_delete, null);
         btnMultipleDeleteFooter = multipleDeleteLayout.findViewById(R.id.btn_multiple_delete_footer);
         btnSelectCount = multipleDeleteLayout.findViewById(R.id.btn_select_count);
         flMultipleDeleteHeader = multipleDeleteLayout.findViewById(R.id.fl_multiple_delete_header);

@@ -28,7 +28,7 @@
             android:layout_height="@dimen/basic_d11"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_select"
+            android:src="@drawable/basic_ic_select"
             tools:ignore="ContentDescription" />
     </RelativeLayout>
 

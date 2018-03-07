@@ -10,16 +10,16 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.Urls;
 import com.winsion.component.basic.data.constants.ViewName;
 import com.winsion.component.basic.data.entity.ResponseForQueryData;
 import com.winsion.component.basic.data.listener.ResponseListener;
+import com.winsion.component.basic.view.TitleView;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.operation.adapter.SelectTeamAdapter;
 import com.winsion.dispatch.modules.operation.entity.TeamEntity;
-import com.winsion.dispatch.view.TitleView;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

@@ -3,8 +3,8 @@ package com.winsion.dispatch.splash;
 import android.os.Message;
 
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.dispatch.login.activity.LoginActivity;
 import com.winsion.component.basic.utils.LogUtils;
+import com.winsion.component.user.login.activity.LoginActivity;
 
 public class SplashActivity extends BaseActivity {
     private static final String TAG = "SplashActivity";
@@ -23,6 +23,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void handlerMessage(Message msg) {
         super.handlerMessage(msg);
+
         startActivity(LoginActivity.class, true);
     }
 

@@ -12,7 +12,7 @@
         android:layout_height="@dimen/basic_d48"
         android:layout_marginEnd="@dimen/basic_d5"
         android:layout_weight="1"
-        android:background="@drawable/btn_yellow"
+        android:background="@drawable/basic_btn_yellow"
         android:text="@string/btn_take_photo"
         android:textSize="@dimen/basic_s18" />
 
@@ -24,7 +24,7 @@
         android:layout_marginLeft="@dimen/basic_d5"
         android:layout_marginRight="@dimen/basic_d5"
         android:layout_weight="1"
-        android:background="@drawable/btn_yellow"
+        android:background="@drawable/basic_btn_yellow"
         android:text="@string/btn_video"
         android:textSize="@dimen/basic_s18" />
 
@@ -35,7 +35,7 @@
         android:layout_height="@dimen/basic_d48"
         android:layout_marginStart="@dimen/basic_d5"
         android:layout_weight="1"
-        android:background="@drawable/btn_yellow"
+        android:background="@drawable/basic_btn_yellow"
         android:text="@string/btn_record"
         android:textSize="@dimen/basic_s18" />
 </LinearLayout>

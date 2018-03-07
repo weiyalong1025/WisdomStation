@@ -2,15 +2,16 @@ package com.winsion.dispatch.modules.contacts.activity.contacts;
 
 import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseFragment;
-import com.winsion.dispatch.view.SpinnerView;
+import com.winsion.component.basic.view.SpinnerView;
+import com.winsion.dispatch.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ContactsFragment extends BaseFragment {
     @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return getLayoutInflater().inflate(R.layout.fragment_contacts, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.fragment_contacts, null);
     }
 
     @Override

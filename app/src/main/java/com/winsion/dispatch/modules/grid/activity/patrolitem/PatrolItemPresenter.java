@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.dispatch.application.AppApplication;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.FieldKey;
@@ -46,7 +47,7 @@ public class PatrolItemPresenter extends SubmitBiz implements PatrolItemContract
      */
     @Override
     public void getPatrolItemData(String patrolId) {
-        if (AppApplication.TEST_MODE) {
+        if (CacheDataSource.getTestMode()) {
             List<PatrolItemEntity> patrolItemEntities = JsonUtils.getTestEntities(mContext, PatrolItemEntity.class);
             mView.getPatrolItemDataSuccess(patrolItemEntities);
             return;

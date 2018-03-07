@@ -2,6 +2,7 @@ package com.winsion.dispatch.modules.grid.activity.submitproblem;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.application.AppApplication;
 import com.winsion.component.basic.data.NetDataSource;
@@ -41,7 +42,7 @@ public class SubmitProblemPresenter extends SubmitBiz implements SubmitProblemCo
 
     @Override
     public void checkDeviceId(String deviceId) {
-        if (AppApplication.TEST_MODE) {
+        if (CacheDataSource.getTestMode()) {
             mView.checkDeviceIdSuccess("水龙头", "666", deviceId);
             return;
         }
@@ -84,7 +85,7 @@ public class SubmitProblemPresenter extends SubmitBiz implements SubmitProblemCo
 
     @Override
     public void getSubclass(String classificationId) {
-        if (AppApplication.TEST_MODE) {
+        if (CacheDataSource.getTestMode()) {
             List<SubclassEntity> subclassEntities = new ArrayList<>();
             SubclassEntity subclassEntity = new SubclassEntity();
             subclassEntity.setId("123");

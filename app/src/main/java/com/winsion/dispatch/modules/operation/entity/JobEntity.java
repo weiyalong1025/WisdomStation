@@ -1,6 +1,6 @@
 package com.winsion.dispatch.modules.operation.entity;
 
-import com.winsion.dispatch.common.biz.CommonBiz;
+import com.winsion.component.basic.biz.CommonBiz;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.constants.Formatter;
 

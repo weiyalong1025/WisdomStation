@@ -1,6 +1,5 @@
 ext.runAsApp = true
 apply from: 'https://raw.githubusercontent.com/luckybilly/CC/master/cc-settings.gradle'
-apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion rootProject.compileVersion
@@ -12,10 +11,7 @@ android {
         versionCode 1
         versionName "0.0.1"
     }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
+
     signingConfigs {
         release {
             keyAlias 'dispatchkey'
@@ -24,6 +20,7 @@ android {
             storePassword 'winsion123'
         }
     }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -38,6 +35,11 @@ android {
                 }
             }
         }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
@@ -58,17 +60,9 @@ configurations.all {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':component_basic')
-    // MQ
-    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
-    implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
-    // Adapter
-    implementation 'com.zhy:base-adapter:3.0.3'
-    implementation 'com.zhy:base-rvadapter:3.0.3'
+    implementation project(':component_user')
     // GridLayout兼容库
-    implementation 'com.android.support:gridlayout-v7:27.0.2'
+    implementation 'com.android.support:gridlayout-v7:27.1.0'
     // 事件传递
     implementation 'org.greenrobot:eventbus:3.1.1'
-    // 选择器
-    implementation 'com.contrarywind:Android-PickerView:3.2.5'
 }

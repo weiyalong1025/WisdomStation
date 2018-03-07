@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal"
+        android:background="@drawable/basic_div_horizontal"
         tools:ignore="ContentDescription" />
 
     <LinearLayout
@@ -222,7 +222,7 @@
                     android:layout_width="@dimen/basic_d88"
                     android:layout_height="@dimen/basic_d38"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/btn_yellow"
+                    android:background="@drawable/basic_btn_yellow"
                     android:text="@string/btn_not_pass"
                     android:textSize="@dimen/basic_s20" />
 
@@ -230,7 +230,7 @@
                     android:id="@+id/btn_pass"
                     android:layout_width="@dimen/basic_d88"
                     android:layout_height="@dimen/basic_d38"
-                    android:background="@drawable/btn_yellow"
+                    android:background="@drawable/basic_btn_yellow"
                     android:text="@string/btn_pass"
                     android:textSize="@dimen/basic_s20" />
             </LinearLayout>
@@ -247,6 +247,6 @@
         android:id="@+id/iv_bottom_split"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/div_horizontal"
+        android:background="@drawable/basic_div_horizontal"
         tools:ignore="ContentDescription" />
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -13,13 +14,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseFragment;
+import com.winsion.component.basic.view.SpinnerView;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.operation.adapter.MonitorTaskListAdapter;
 import com.winsion.dispatch.modules.operation.constants.TaskSpinnerState;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.TaskEntity;
-import com.winsion.dispatch.view.SpinnerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +59,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return getLayoutInflater().inflate(R.layout.fragment_task_list, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.fragment_task_list, null);
     }
 
     @Override

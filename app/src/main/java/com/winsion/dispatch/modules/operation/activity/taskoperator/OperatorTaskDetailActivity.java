@@ -15,21 +15,30 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.dispatch.common.biz.CommonBiz;
-import com.winsion.dispatch.common.listener.StateListener;
+import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.constants.FileType;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.constants.OpeType;
 import com.winsion.component.basic.data.listener.MyDownloadListener;
 import com.winsion.component.basic.data.listener.UploadListener;
+import com.winsion.component.basic.listener.StateListener;
+import com.winsion.component.basic.utils.ConvertUtils;
+import com.winsion.component.basic.utils.DirAndFileUtils;
+import com.winsion.component.basic.utils.FileUtils;
+import com.winsion.component.basic.utils.ImageLoader;
+import com.winsion.component.basic.utils.ViewUtils;
+import com.winsion.component.basic.utils.constants.Formatter;
+import com.winsion.component.basic.view.CustomDialog;
+import com.winsion.component.basic.view.DrawableCenterTextView;
+import com.winsion.component.basic.view.TitleView;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.media.activity.AddNoteActivity;
 import com.winsion.dispatch.media.activity.RecordAudioActivity;
 import com.winsion.dispatch.media.activity.RecordVideoActivity;
 import com.winsion.dispatch.media.activity.TakePhotoActivity;
 import com.winsion.dispatch.media.adapter.RecordAdapter;
 import com.winsion.dispatch.media.constants.FileStatus;
-import com.winsion.dispatch.media.constants.FileType;
 import com.winsion.dispatch.media.entity.LocalRecordEntity;
 import com.winsion.dispatch.media.entity.ServerRecordEntity;
 import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;
@@ -38,15 +47,6 @@ import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
 import com.winsion.dispatch.modules.operation.constants.TrainState;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
-import com.winsion.component.basic.utils.ConvertUtils;
-import com.winsion.component.basic.utils.DirAndFileUtils;
-import com.winsion.component.basic.utils.FileUtils;
-import com.winsion.component.basic.utils.ImageLoader;
-import com.winsion.component.basic.utils.ViewUtils;
-import com.winsion.component.basic.utils.constants.Formatter;
-import com.winsion.dispatch.view.CustomDialog;
-import com.winsion.dispatch.view.DrawableCenterTextView;
-import com.winsion.dispatch.view.TitleView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -61,7 +61,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
+import static com.winsion.component.basic.constants.Intents.Media.MEDIA_FILE;
 import static com.winsion.dispatch.modules.operation.constants.Intents.OperatorTaskDetail.JOB_ENTITY;
 
 /**

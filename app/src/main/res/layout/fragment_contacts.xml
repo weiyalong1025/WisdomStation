@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <!-- 选择框 -->
-    <com.winsion.dispatch.view.SpinnerView
+    <com.winsion.component.basic.view.SpinnerView
         android:id="@+id/sv_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

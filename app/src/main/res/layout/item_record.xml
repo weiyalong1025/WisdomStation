@@ -42,7 +42,7 @@
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_failed" />
 
-        <com.winsion.dispatch.view.CircleProgressBar
+        <com.winsion.component.basic.view.CircleProgressBar
             android:id="@+id/cpb_status"
             android:layout_width="@dimen/basic_d20"
             android:layout_height="@dimen/basic_d20"

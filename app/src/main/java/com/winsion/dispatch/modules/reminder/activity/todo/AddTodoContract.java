@@ -2,7 +2,7 @@ package com.winsion.dispatch.modules.reminder.activity.todo;
 
 import com.winsion.component.basic.base.BasePresenter;
 import com.winsion.component.basic.base.BaseView;
-import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
+import com.winsion.component.basic.entity.TodoEntity;
 
 /**
  * 作者：10295

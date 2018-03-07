@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.os.Build;
 
 import com.winsion.component.basic.data.CacheDataSource;
-import com.winsion.dispatch.data.DBDataSource;
-import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
+import com.winsion.component.basic.data.DBDataSource;
+import com.winsion.component.basic.entity.TodoEntity;
 import com.winsion.dispatch.modules.reminder.receiver.todo.TodoReceiver;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.constants.Formatter;
@@ -40,7 +40,7 @@ public class AddTodoPresenter implements AddTodoContract.Presenter {
 
     @Override
     public TodoEntity getTodoById(long todoId) {
-        return DBDataSource.getInstance().getTodoEntityById(todoId);
+        return DBDataSource.getInstance(mContext).getTodoEntityById(todoId);
     }
 
     @Override
@@ -52,14 +52,14 @@ public class AddTodoPresenter implements AddTodoContract.Presenter {
         todoEntity.setBelongUserId(CacheDataSource.getUserId());
         todoEntity.setFinished(false);
         todoEntity.setPlanDate(planDateMillis);
-        DBDataSource.getInstance().updateOrAddTodo(todoEntity);
+        DBDataSource.getInstance(mContext).updateOrAddTodo(todoEntity);
         setAlarm(todoEntity);
         mView.updateOrAddSuccess();
     }
 
     @Override
     public void updateTodo(String desc, String date, String time, long todoId) {
-        TodoEntity todoEntity = DBDataSource.getInstance().getTodoEntityById(todoId);
+        TodoEntity todoEntity = DBDataSource.getInstance(mContext).getTodoEntityById(todoId);
         // 取消之前的闹钟
         PendingIntent pendingIntent = getPendingIntent(todoEntity);
         alarmManager.cancel(pendingIntent);
@@ -69,7 +69,7 @@ public class AddTodoPresenter implements AddTodoContract.Presenter {
         long planDateMillis = ConvertUtils.parseDate(planDate, Formatter.DATE_FORMAT3);
         todoEntity.setContent(desc);
         todoEntity.setPlanDate(planDateMillis);
-        DBDataSource.getInstance().updateOrAddTodo(todoEntity);
+        DBDataSource.getInstance(mContext).updateOrAddTodo(todoEntity);
 
         // 设定新的闹钟
         setAlarm(todoEntity);

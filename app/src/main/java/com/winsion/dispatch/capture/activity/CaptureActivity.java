@@ -15,9 +15,9 @@ import android.view.View;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.google.zxing.camera.CameraManager;
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.dispatch.view.TitleView;
+import com.winsion.component.basic.view.TitleView;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.view.ViewfinderView;
 
 import java.io.IOException;

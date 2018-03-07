@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.StringRes;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.common.listener.ClickListener;
+import com.winsion.component.basic.listener.ClickListener;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
 import com.winsion.dispatch.modules.reminder.constants.ReadStatus;
 import com.winsion.dispatch.modules.reminder.entity.SystemRemindEntity;

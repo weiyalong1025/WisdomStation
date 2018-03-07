@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -14,21 +15,21 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseFragment;
-import com.winsion.dispatch.common.biz.CommonBiz;
-import com.winsion.dispatch.common.listener.StateListener;
+import com.winsion.component.basic.biz.CommonBiz;
 import com.winsion.component.basic.data.constants.OpeType;
+import com.winsion.component.basic.listener.StateListener;
+import com.winsion.component.basic.utils.ConvertUtils;
+import com.winsion.component.basic.utils.constants.Formatter;
+import com.winsion.component.basic.view.CustomDialog;
+import com.winsion.component.basic.view.SpinnerView;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.operation.activity.taskoperator.OperatorTaskDetailActivity;
 import com.winsion.dispatch.modules.operation.adapter.OperatorTaskListAdapter;
 import com.winsion.dispatch.modules.operation.biz.ChangeStatusBiz;
 import com.winsion.dispatch.modules.operation.constants.TaskSpinnerState;
 import com.winsion.dispatch.modules.operation.constants.TaskState;
 import com.winsion.dispatch.modules.operation.entity.JobEntity;
-import com.winsion.component.basic.utils.ConvertUtils;
-import com.winsion.component.basic.utils.constants.Formatter;
-import com.winsion.dispatch.view.CustomDialog;
-import com.winsion.dispatch.view.SpinnerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -73,7 +74,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return getLayoutInflater().inflate(R.layout.fragment_task_list, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.fragment_task_list, null);
     }
 
     @Override

@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.os.Build;
 
 import com.winsion.component.basic.data.CacheDataSource;
-import com.winsion.dispatch.data.DBDataSource;
-import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
+import com.winsion.component.basic.data.DBDataSource;
+import com.winsion.component.basic.entity.TodoEntity;
 import com.winsion.dispatch.modules.reminder.receiver.todo.TodoReceiver;
 
 import java.util.List;
@@ -45,13 +45,13 @@ public class TodoListPresenter implements TodoListContract.Presenter {
                     intent, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.cancel(pendingIntent);
         }
-        DBDataSource.getInstance().deleteOneTodo(todoEntity);
+        DBDataSource.getInstance(mContext).deleteOneTodo(todoEntity);
         mView.notifyLocalDataChange();
     }
 
     @Override
     public List<TodoEntity> queryTodo(boolean isFinish) {
-        return DBDataSource.getInstance().queryTodoByStatus(isFinish, CacheDataSource.getUserId());
+        return DBDataSource.getInstance(mContext).queryTodoByStatus(isFinish, CacheDataSource.getUserId());
     }
 
     /**

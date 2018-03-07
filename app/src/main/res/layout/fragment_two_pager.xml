@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.winsion.dispatch.view.MyIndicator
+    <com.winsion.component.basic.view.MyIndicator
         android:id="@+id/mi_container"
         style="@style/IndicatorStyle">
 
@@ -16,9 +16,9 @@
         <RadioButton
             style="@style/RadioButtonStyle"
             android:background="@drawable/selector_indicator_bg_right" />
-    </com.winsion.dispatch.view.MyIndicator>
+    </com.winsion.component.basic.view.MyIndicator>
 
-    <com.winsion.dispatch.view.NoScrollViewPager
+    <com.winsion.component.basic.view.NoScrollViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,7 +29,7 @@
         android:layout_width="@dimen/basic_d48"
         android:layout_height="@dimen/basic_d48"
         android:background="?android:attr/selectableItemBackground"
-        android:src="@drawable/ic_arrow_left"
+        android:src="@drawable/basic_ic_arrow_left"
         android:visibility="gone"
         tools:ignore="ContentDescription" />
 </RelativeLayout>

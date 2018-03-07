@@ -1,10 +1,11 @@
 package com.winsion.dispatch.modules.operation.fragment.issue;
 
 import android.annotation.SuppressLint;
+import android.view.LayoutInflater;
 import android.view.View;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseFragment;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.operation.activity.issue.IssueActivity;
 import com.winsion.dispatch.modules.operation.constants.TaskType;
 
@@ -17,7 +18,7 @@ public class IssueFragment extends BaseFragment {
     @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return getLayoutInflater().inflate(R.layout.fragment_issue, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.fragment_issue, null);
     }
 
     @Override

@@ -46,7 +46,7 @@ public class PatrolPlanPresenter implements PatrolPlanContract.Presenter {
 
     @Override
     public void getPatrolPlanData() {
-        if (AppApplication.TEST_MODE) {
+        if (CacheDataSource.getTestMode()) {
             List<PatrolPlanEntity> testEntity = JsonUtils.getTestEntities(mContext, PatrolPlanEntity.class);
             mView.getPatrolPlanDataSuccess(testEntity);
             return;

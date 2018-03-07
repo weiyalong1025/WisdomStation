@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.winsion.dispatch.view.TitleView
+    <com.winsion.component.basic.view.TitleView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showBackButton="false"
@@ -29,7 +29,7 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_grid"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -38,7 +38,7 @@
                     app:moduleIcon="@drawable/ic_grid"
                     app:moduleName="@string/tab_grid" />
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_main_passenger"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -56,7 +56,7 @@
                 android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_area_broadcast"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -65,7 +65,7 @@
                     app:moduleIcon="@drawable/ic_area_broadcast"
                     app:moduleName="@string/title_area_broadcast" />
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_broadcast"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -83,7 +83,7 @@
                 android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_transfer"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -92,7 +92,7 @@
                     app:moduleIcon="@drawable/ic_transfer"
                     app:moduleName="@string/title_transfer" />
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_light"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -110,7 +110,7 @@
                 android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_elevator"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -119,7 +119,7 @@
                     app:moduleIcon="@drawable/ic_elevator"
                     app:moduleName="@string/title_elevator" />
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_water"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -137,7 +137,7 @@
                 android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_video"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -146,7 +146,7 @@
                     app:moduleIcon="@drawable/ic_video1"
                     app:moduleName="@string/title_video" />
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_door"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -164,7 +164,7 @@
                 android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_air_conditioner"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -173,7 +173,7 @@
                     app:moduleIcon="@drawable/ic_air_conditioner"
                     app:moduleName="@string/title_air_conditioner" />
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_air_handing"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -191,7 +191,7 @@
                 android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_pump"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -200,7 +200,7 @@
                     app:moduleIcon="@drawable/ic_pump"
                     app:moduleName="@string/title_pump" />
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_cooling_tower"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"
@@ -217,7 +217,7 @@
                 android:layout_marginTop="@dimen/basic_d5"
                 android:orientation="horizontal">
 
-                <com.winsion.dispatch.view.ModuleView
+                <com.winsion.component.basic.view.ModuleView
                     android:id="@+id/mv_lost"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d120"

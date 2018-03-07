@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="UserPopupWindowAnimStyle">
+        <item name="android:windowEnterAnimation">@anim/user_popup_window_enter</item>
+        <item name="android:windowExitAnimation">@anim/user_popup_window_exit</item>
+    </style>
+</resources>

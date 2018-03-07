@@ -8,17 +8,17 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.component.basic.utils.ImageLoader;
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.utils.ImageLoader;
+import com.winsion.component.basic.view.AlphaTabView;
+import com.winsion.component.basic.view.AlphaTabsIndicator;
+import com.winsion.component.user.user.UserActivity;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.contacts.fragment.ContactsRootFragment;
 import com.winsion.dispatch.modules.daofa.fragment.DaofaRootFragment;
 import com.winsion.dispatch.modules.operation.fragment.OperationRootFragment;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.scene.fragment.SceneRootFragment;
-import com.winsion.dispatch.user.UserActivity;
-import com.winsion.dispatch.view.AlphaTabView;
-import com.winsion.dispatch.view.AlphaTabsIndicator;
 
 import java.util.ArrayList;
 
@@ -135,7 +135,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     }
 
     private void loadUserHead() {
-        ImageLoader.loadUrl(ivHead, CacheDataSource.getUserHeadAddress(), R.drawable.ic_head_single, R.drawable.ic_head_single);
+        ImageLoader.loadUrl(ivHead, CacheDataSource.getUserHeadAddress(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
     }
 
     @Override

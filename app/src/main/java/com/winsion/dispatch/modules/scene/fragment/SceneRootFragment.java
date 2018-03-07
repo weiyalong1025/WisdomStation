@@ -1,10 +1,11 @@
 package com.winsion.dispatch.modules.scene.fragment;
 
 import android.annotation.SuppressLint;
+import android.view.LayoutInflater;
 import android.view.View;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseFragment;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.grid.activity.GridActivity;
 
 /**
@@ -17,7 +18,7 @@ public class SceneRootFragment extends BaseFragment {
     @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return getLayoutInflater().inflate(R.layout.fragment_root_scene, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.fragment_root_scene, null);
     }
 
     @Override

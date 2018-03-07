@@ -50,7 +50,7 @@ public class SubmitBiz {
     public void submitWithoutDevice(PatrolItemEntity patrolItemEntity, String deviceState,
                                     List<FileEntity> fileEntities, String comment,
                                     SubmitListener submitListener) {
-        if (AppApplication.TEST_MODE) {
+        if (CacheDataSource.getTestMode()) {
             submitListener.submitSuccess(patrolItemEntity, deviceState);
             return;
         }
@@ -102,7 +102,7 @@ public class SubmitBiz {
     public void submitWithDevice(PatrolItemEntity patrolItemEntity, String problemTypeId,
                                  List<FileEntity> fileEntities, String comment,
                                  String deviceId, SubmitListener submitListener) {
-        if (AppApplication.TEST_MODE) {
+        if (CacheDataSource.getTestMode()) {
             submitListener.submitSuccess(patrolItemEntity, DeviceState.FAILURE);
             return;
         }

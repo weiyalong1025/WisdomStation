@@ -4,27 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.winsion.dispatch.view.MyIndicator
+    <com.winsion.component.basic.view.MyIndicator
         android:id="@+id/mi_container"
         style="@style/IndicatorStyle">
 
-        <com.winsion.dispatch.view.BadgeRadioButton
+        <com.winsion.component.basic.view.BadgeRadioButton
             android:id="@+id/brb0"
             style="@style/RadioButtonStyle"
             android:background="@drawable/selector_indicator_bg_left" />
 
-        <com.winsion.dispatch.view.BadgeRadioButton
+        <com.winsion.component.basic.view.BadgeRadioButton
             android:id="@+id/brb1"
             style="@style/RadioButtonStyle"
             android:background="@drawable/selector_indicator_bg_middle" />
 
-        <com.winsion.dispatch.view.BadgeRadioButton
+        <com.winsion.component.basic.view.BadgeRadioButton
             android:id="@+id/brb2"
             style="@style/RadioButtonStyle"
             android:background="@drawable/selector_indicator_bg_right" />
-    </com.winsion.dispatch.view.MyIndicator>
+    </com.winsion.component.basic.view.MyIndicator>
 
-    <com.winsion.dispatch.view.NoScrollViewPager
+    <com.winsion.component.basic.view.NoScrollViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -18,18 +18,18 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.winsion.dispatch.R;
-import com.winsion.dispatch.application.AppApplication;
 import com.winsion.component.basic.base.BaseFragment;
-import com.winsion.dispatch.common.biz.CommonBiz;
+import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.utils.ViewUtils;
+import com.winsion.component.basic.view.WrapContentListView;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.grid.activity.patrolitem.PatrolItemActivity;
 import com.winsion.dispatch.modules.grid.adapter.BluetoothPointAdapter;
 import com.winsion.dispatch.modules.grid.adapter.PatrolPlanAdapter;
 import com.winsion.dispatch.modules.grid.entity.BPEntity;
 import com.winsion.dispatch.modules.grid.entity.PatrolPlanEntity;
 import com.winsion.dispatch.utils.IbeaconUtils;
-import com.winsion.component.basic.utils.ViewUtils;
-import com.winsion.dispatch.view.WrapContentListView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -131,7 +131,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return getLayoutInflater().inflate(R.layout.fragment_patrol_plan, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.fragment_patrol_plan, null);
     }
 
     @Override
@@ -255,7 +255,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         PatrolPlanEntity patrolPlanEntity = listData.get(position);
-        if (patrolPlanEntity.isArrive() || AppApplication.TEST_MODE) {
+        if (patrolPlanEntity.isArrive() || CacheDataSource.getTestMode()) {
             Intent intent = new Intent(mContext, PatrolItemActivity.class);
             intent.putExtra(PATROL_TASK_ENTITY, patrolPlanEntity);
             startActivity(intent);

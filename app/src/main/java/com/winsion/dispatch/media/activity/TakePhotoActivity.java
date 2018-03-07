@@ -18,9 +18,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.dispatch.view.TitleView;
+import com.winsion.component.basic.view.TitleView;
+import com.winsion.dispatch.R;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -28,7 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import static com.winsion.dispatch.common.constants.Intents.Media.MEDIA_FILE;
+import static com.winsion.component.basic.constants.Intents.Media.MEDIA_FILE;
 
 /**
  * Created by wyl on 2016/8/27.

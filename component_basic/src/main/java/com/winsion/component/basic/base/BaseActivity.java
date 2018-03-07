@@ -155,10 +155,6 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
 
     /**
      * 判断两个字符串是否相等
-     *
-     * @param a
-     * @param b
-     * @return
      */
     public boolean equals(CharSequence a, CharSequence b) {
         return TextUtils.equals(a, b);

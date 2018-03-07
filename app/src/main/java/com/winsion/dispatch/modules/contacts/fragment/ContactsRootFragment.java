@@ -4,14 +4,15 @@ import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.LayoutInflater;
 import android.view.View;
 
+import com.winsion.component.basic.base.BaseFragment;
+import com.winsion.component.basic.view.MyIndicator;
+import com.winsion.component.basic.view.NoScrollViewPager;
 import com.winsion.dispatch.PlaceHolderFragment;
 import com.winsion.dispatch.R;
-import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.dispatch.modules.contacts.activity.contacts.ContactsFragment;
-import com.winsion.dispatch.view.MyIndicator;
-import com.winsion.dispatch.view.NoScrollViewPager;
 
 /**
  * Created by 10295 on 2017/12/10 0010.
@@ -28,7 +29,7 @@ public class ContactsRootFragment extends BaseFragment {
     @SuppressLint("InflateParams")
     @Override
     public View setContentView() {
-        return getLayoutInflater().inflate(R.layout.fragment_three_pager, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.fragment_three_pager, null);
     }
 
     @Override

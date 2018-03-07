@@ -3,8 +3,8 @@ package com.winsion.dispatch.modules.operation.biz;
 import android.content.Context;
 
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.common.biz.CommonBiz;
-import com.winsion.dispatch.common.listener.StateListener;
+import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.listener.StateListener;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.OpeCode;

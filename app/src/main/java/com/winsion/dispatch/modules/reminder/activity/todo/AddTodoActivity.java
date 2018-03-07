@@ -9,13 +9,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.dispatch.common.biz.CommonBiz;
-import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
+import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.entity.TodoEntity;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.constants.Formatter;
-import com.winsion.dispatch.view.TitleView;
+import com.winsion.component.basic.view.TitleView;
+import com.winsion.dispatch.R;
 
 import java.util.Calendar;
 import java.util.Date;

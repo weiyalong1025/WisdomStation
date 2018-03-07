@@ -151,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <com.winsion.dispatch.view.DrawableCenterTextView
+            <com.winsion.component.basic.view.DrawableCenterTextView
                 android:id="@+id/btn_note"
                 android:layout_width="@dimen/basic_d100"
                 android:layout_height="@dimen/basic_d40"
@@ -195,7 +195,7 @@
                 android:background="@color/basic_black1"
                 tools:ignore="NestedWeights" />
 
-            <com.winsion.dispatch.view.DrawableCenterTextView
+            <com.winsion.component.basic.view.DrawableCenterTextView
                 android:id="@+id/btn_broadcast"
                 android:layout_width="@dimen/basic_d100"
                 android:layout_height="@dimen/basic_d40"

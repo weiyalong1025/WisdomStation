@@ -4,15 +4,16 @@ import android.app.PendingIntent;
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
-import com.winsion.dispatch.R;
-import com.winsion.dispatch.common.biz.CommonBiz;
+import com.winsion.component.basic.biz.CommonBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
-import com.winsion.dispatch.mqtt.MQTTClient;
-import com.winsion.dispatch.mqtt.constants.MQType;
-import com.winsion.dispatch.mqtt.entity.MQMessage;
-import com.winsion.dispatch.mqtt.entity.TaskMessage;
 import com.winsion.component.basic.utils.ToastUtils;
+import com.winsion.component.user.biz.LogoutBiz;
+import com.winsion.component.user.mqtt.MQTTClient;
+import com.winsion.component.user.mqtt.constants.MQType;
+import com.winsion.component.user.mqtt.entity.MQMessage;
+import com.winsion.component.user.mqtt.entity.TaskMessage;
+import com.winsion.dispatch.R;
 
 /**
  * Created by wyl on 2017/12/8
@@ -42,7 +43,7 @@ public class MainPresenter implements MainContract.Presenter, MQTTClient.Observe
                 if (data.equals(CacheDataSource.getUserId())) {
                     // 用户在别的设备登录，强制下线
                     ToastUtils.showToast(mContext, R.string.toast_user_login_on_other_device);
-                    CommonBiz.logout(mContext, null);
+                    LogoutBiz.logout(mContext, null);
                 }
                 break;
             case MQType.TASK_STATE:
@@ -57,7 +58,7 @@ public class MainPresenter implements MainContract.Presenter, MQTTClient.Observe
     /**
      * 发送通知
      */
-    private void sendNotification(String title,String content,boolean tts,PendingIntent pendingIntent){
+    private void sendNotification(String title, String content, boolean tts, PendingIntent pendingIntent) {
         /*NotificationManager manager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(notificationId, builder.build());
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.ic_launcher);

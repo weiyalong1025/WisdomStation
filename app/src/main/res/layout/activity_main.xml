@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.winsion.dispatch.view.AlphaTabsIndicator
+    <com.winsion.component.basic.view.AlphaTabsIndicator
         android:id="@+id/ati_indicator"
         android:layout_width="match_parent"
         android:layout_height="@dimen/basic_d54"
@@ -13,49 +13,49 @@
         android:background="@color/basic_gray7"
         android:orientation="horizontal">
 
-        <com.winsion.dispatch.view.AlphaTabView
+        <com.winsion.component.basic.view.AlphaTabView
             android:id="@+id/atv_operation"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_operation"
             app:tabIconSelected="@drawable/ic_operation_selected"
             app:tabText="@string/tab_operation" />
 
-        <com.winsion.dispatch.view.AlphaTabView
+        <com.winsion.component.basic.view.AlphaTabView
             android:id="@+id/atv_dispatch"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_dispatch"
             app:tabIconSelected="@drawable/ic_dispatch_selected"
             app:tabText="@string/tab_dispatch" />
 
-        <com.winsion.dispatch.view.AlphaTabView
+        <com.winsion.component.basic.view.AlphaTabView
             android:id="@+id/atv_contacts"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_contacts"
             app:tabIconSelected="@drawable/ic_contacts_selected"
             app:tabText="@string/tab_contacts" />
 
-        <com.winsion.dispatch.view.AlphaTabView
+        <com.winsion.component.basic.view.AlphaTabView
             android:id="@+id/atv_scene"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_scene"
             app:tabIconSelected="@drawable/ic_scene_selected"
             app:tabText="@string/tab_scene" />
 
-        <com.winsion.dispatch.view.AlphaTabView
+        <com.winsion.component.basic.view.AlphaTabView
             android:id="@+id/atv_reminder"
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_reminder"
             app:tabIconSelected="@drawable/ic_reminder_selected"
             app:tabText="@string/tab_reminder" />
-    </com.winsion.dispatch.view.AlphaTabsIndicator>
+    </com.winsion.component.basic.view.AlphaTabsIndicator>
 
-    <com.winsion.dispatch.view.NoScrollViewPager
+    <com.winsion.component.basic.view.NoScrollViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/ati_indicator" />
 
-    <com.winsion.dispatch.view.CircleImageView
+    <com.winsion.component.basic.view.CircleImageView
         android:id="@+id/iv_head"
         android:layout_width="@dimen/basic_d48"
         android:layout_height="@dimen/basic_d48"

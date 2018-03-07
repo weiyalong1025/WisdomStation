@@ -7,12 +7,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseActivity;
+import com.winsion.component.basic.view.MyIndicator;
+import com.winsion.component.basic.view.NoScrollViewPager;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.grid.fragment.patrolplan.PatrolPlanFragment;
 import com.winsion.dispatch.modules.grid.fragment.problemmanage.ProblemManageFragment;
-import com.winsion.dispatch.view.MyIndicator;
-import com.winsion.dispatch.view.NoScrollViewPager;
 
 /**
  * Created by 10295 on 2017/12/10 0010.

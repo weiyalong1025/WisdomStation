@@ -2,21 +2,22 @@ package com.winsion.dispatch.modules.reminder.fragment.todo;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.base.BaseFragment;
+import com.winsion.component.basic.view.CustomDialog;
+import com.winsion.component.basic.view.SpinnerView;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.main.activity.MainActivity;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.reminder.activity.todo.AddTodoActivity;
 import com.winsion.dispatch.modules.reminder.adapter.TodoAdapter;
-import com.winsion.dispatch.modules.reminder.entity.TodoEntity;
-import com.winsion.dispatch.view.CustomDialog;
-import com.winsion.dispatch.view.SpinnerView;
+import com.winsion.component.basic.entity.TodoEntity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -59,7 +60,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
     @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return getLayoutInflater().inflate(R.layout.fragment_todo, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.fragment_todo, null);
     }
 
     @Override

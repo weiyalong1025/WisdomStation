@@ -1,5 +1,7 @@
 package com.winsion.component.basic.data;
 
+import android.os.Bundle;
+
 /**
  * Created by 10295 on 2017/12/5 0005.
  * 缓存数据，静态变量保存
@@ -182,5 +184,45 @@ public class CacheDataSource {
         realName = null;
         userHeadAddress = null;
         testMode = false;
+    }
+
+    public static void saveData(Bundle outState) {
+        outState.putBoolean("loginState", loginState);
+        outState.putString("ip", ip);
+        outState.putString("port", port);
+        outState.putString("baseUrl", baseUrl);
+        outState.putString("httpKey", httpKey);
+        outState.putString("token", token);
+        outState.putString("mqKey", mqKey);
+        outState.putString("ssid", ssid);
+        outState.putString("userId", userId);
+        outState.putString("teamId", teamId);
+        outState.putString("username", username);
+        outState.putString("password", password);
+        outState.putString("sipUsername", sipUsername);
+        outState.putString("sipPassword", sipPassword);
+        outState.putString("realName", realName);
+        outState.putString("userHeadAddress", userHeadAddress);
+        outState.putBoolean("testMode", testMode);
+    }
+
+    public static void restoreData(Bundle savedInstanceState) {
+        loginState = savedInstanceState.getBoolean("loginState");
+        ip = savedInstanceState.getString("ip");
+        port = savedInstanceState.getString("port");
+        baseUrl = savedInstanceState.getString("baseUrl");
+        httpKey = savedInstanceState.getString("httpKey");
+        token = savedInstanceState.getString("token");
+        mqKey = savedInstanceState.getString("mqKey");
+        ssid = savedInstanceState.getString("ssid");
+        userId = savedInstanceState.getString("userId");
+        teamId = savedInstanceState.getString("teamId");
+        username = savedInstanceState.getString("username");
+        password = savedInstanceState.getString("password");
+        sipUsername = savedInstanceState.getString("sipUsername");
+        sipPassword = savedInstanceState.getString("sipPassword");
+        realName = savedInstanceState.getString("realName");
+        userHeadAddress = savedInstanceState.getString("userHeadAddress");
+        testMode = savedInstanceState.getBoolean("testMode");
     }
 }

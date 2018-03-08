@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.utils.HandlerUtils;
 import com.winsion.component.basic.utils.LogUtils;
 import com.winsion.component.basic.utils.ToastUtils;
@@ -44,6 +45,9 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            CacheDataSource.restoreData(savedInstanceState);
+        }
         mContext = this;
         mHandler = new HandlerUtils.HandlerHolder(this);
         if (setContentView() != 0) {
@@ -74,8 +78,6 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
 
     /**
      * 显示LOG，TAG为当前类名
-     *
-     * @param msg
      */
     protected void logI(String msg) {
         LogUtils.i(getClass().getSimpleName(), msg);
@@ -83,8 +85,6 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
 
     /**
      * 显示LOG，TAG为当前类名
-     *
-     * @param msg
      */
     protected void logE(String msg) {
         LogUtils.e(getClass().getSimpleName(), msg);
@@ -200,6 +200,12 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
                 findViewById(id).setOnClickListener(this);
             }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        CacheDataSource.saveData(outState);
     }
 
     @Override

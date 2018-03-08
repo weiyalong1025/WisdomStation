@@ -2,6 +2,7 @@ package com.winsion.dispatch.application;
 
 import android.app.Application;
 
+import com.billy.cc.core.component.CC;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.utils.CrashUtils;
 import com.winsion.component.basic.utils.DirAndFileUtils;
@@ -29,6 +30,11 @@ public class AppApplication extends Application {
 
         // 初始化LOG
         initLog();
+
+        // 初始化CC
+        CC.enableVerboseLog(BuildConfig.DEBUG);
+        CC.enableDebug(BuildConfig.DEBUG);
+        CC.enableRemoteCC(BuildConfig.DEBUG);
     }
 
     private void initLog() {

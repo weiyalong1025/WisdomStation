@@ -7,12 +7,12 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.billy.cc.core.component.CC;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.view.AlphaTabView;
 import com.winsion.component.basic.view.AlphaTabsIndicator;
-import com.winsion.component.user.user.UserActivity;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.contacts.fragment.ContactsRootFragment;
 import com.winsion.dispatch.modules.daofa.fragment.DaofaRootFragment;
@@ -140,7 +140,13 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
 
     @Override
     public void onClick(View view) {
-        startActivity(UserActivity.class, false);
+        CC.obtainBuilder("ComponentUser").setActionName("toUserActivity").build().callAsync((cc, result) -> {
+            // 用户点击了注销，跳转至登录界面
+            CC.obtainBuilder("ComponentUser").setActionName("toLoginActivityClearTask").build().callAsync((cc1, result1) -> {
+                // 登录成功，跳转至MainActivity
+                startActivity(MainActivity.class);
+            });
+        });
     }
 
     /**
@@ -202,5 +208,6 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.exit();
+        logE("我关闭了啊啊啊啊啊啊啊啊啊啊啊！！！！！");
     }
 }

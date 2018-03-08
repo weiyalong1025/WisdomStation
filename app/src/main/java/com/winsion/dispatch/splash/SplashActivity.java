@@ -2,9 +2,10 @@ package com.winsion.dispatch.splash;
 
 import android.os.Message;
 
+import com.billy.cc.core.component.CC;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.utils.LogUtils;
-import com.winsion.component.user.login.activity.LoginActivity;
+import com.winsion.dispatch.main.activity.MainActivity;
 
 public class SplashActivity extends BaseActivity {
     private static final String TAG = "SplashActivity";
@@ -23,8 +24,9 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void handlerMessage(Message msg) {
         super.handlerMessage(msg);
-
-        startActivity(LoginActivity.class, true);
+        CC.obtainBuilder("ComponentUser").setActionName("toLoginActivity").build().callAsync((cc, result) ->
+                startActivity(MainActivity.class));
+        mHandler.postDelayed(this::finish, 500);
     }
 
     private void logScreenInfo() {

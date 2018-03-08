@@ -1,9 +1,11 @@
-package com.winsion.component.user.user;
+package com.winsion.component.user.user.activity;
 
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.billy.cc.core.component.CC;
+import com.billy.cc.core.component.CCResult;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.CommonBiz;
 import com.winsion.component.basic.data.CacheDataSource;
@@ -28,6 +30,7 @@ public class UserActivity extends BaseActivity {
     private TextView tvRoleName;
 
     private CustomDialog customDialog;
+    private String callId;
 
     @Override
     protected int setContentView() {
@@ -49,6 +52,10 @@ public class UserActivity extends BaseActivity {
     }
 
     private void initData() {
+        callId = getIntent().getStringExtra("callId");
+        if (isEmpty(callId)) {
+            tvTitle.showBackButton(false);
+        }
         tvUsername.setText(CacheDataSource.getRealName());
         ImageLoader.loadUrl(ivHead, CacheDataSource.getUserHeadAddress(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
     }
@@ -83,10 +90,15 @@ public class UserActivity extends BaseActivity {
     private void hideDialog() {
         if (customDialog != null) {
             customDialog.dismiss();
-            // 跳转登录界面
-            Intent intent = new Intent(mContext, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            if (!isEmpty(callId)) {
+                CC.sendCCResult(callId, CCResult.success());
+                finish();
+            } else {
+                // 跳转登录界面
+                Intent intent = new Intent(mContext, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
         }
     }
 

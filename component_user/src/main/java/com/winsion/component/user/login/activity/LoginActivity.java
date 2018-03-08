@@ -38,7 +38,7 @@ import com.winsion.component.user.config.activity.LoginConfigActivity;
 import com.winsion.component.user.login.adapter.UserListAdapter;
 import com.winsion.component.user.login.constants.LoginErrorCode;
 import com.winsion.component.user.login.listener.LoginListener;
-import com.winsion.component.user.user.UserActivity;
+import com.winsion.component.user.user.activity.UserActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,9 +76,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
     @Override
     protected void start() {
         initView();
+        initIntentData();
         initPresenter();
         initListener();
         initData();
+    }
+
+    private void initIntentData() {
+        callId = getIntent().getStringExtra("callId");
     }
 
     private void initView() {
@@ -108,7 +113,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
      * 获取所有保存过的用户信息
      */
     private void initData() {
-        callId = getIntent().getStringExtra("callId");
         mAllSavedUser.addAll(mPresenter.getAllSavedUser());
     }
 
@@ -303,8 +307,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         // 隐藏dialog
         hideDialog();
         if (!isEmpty(callId)) {
-            finish();
             CC.sendCCResult(callId, CCResult.success());
+            mHandler.postDelayed(this::finish, 500);
         } else {
             startActivity(UserActivity.class, true);
         }

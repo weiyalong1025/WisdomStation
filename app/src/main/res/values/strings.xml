@@ -2,11 +2,9 @@
     <string name="app_name">智慧车站</string>
 
     <string name="btn_click_to_start">点击开始</string>
-    <string name="btn_check_update">检查更新</string>
     <string name="btn_click_to_finish">点击完成</string>
     <string name="btn_wait_acceptance">待验收</string>
     <string name="btn_restart">重新开始</string>
-    <string name="btn_logout">注销</string>
     <string name="btn_command">命令</string>
     <string name="btn_cooperation">协作</string>
     <string name="btn_take_photo"><![CDATA[拍照>>]]></string>
@@ -44,19 +42,11 @@
     <string name="dialog_sure_to_pass">确定通过吗？</string>
     <string name="dialog_sure_to_not_pass">确定未通过吗？</string>
 
-    <string name="hint_input_account">请输入账号</string>
-    <string name="hint_input_password">请输入密码</string>
-    <string name="hint_ip_address">请输入IP地址</string>
-    <string name="hint_input_port">请输入端口号</string>
     <string name="hint_select_station">请选择车站</string>
     <string name="hint_capture_qr_code">将二维码/条码放入框内，即可自动扫描</string>
     <string name="hint_no_data_click_retry">没有数据，点击重试</string>
     <string name="hint_load_failed_click_retry">获取数据失败，点击重试</string>
 
-    <string name="name_account">账号</string>
-    <string name="name_password">密码</string>
-    <string name="name_ip_address">IP地址</string>
-    <string name="name_port">端口号</string>
     <string name="name_plan_time">计划时间</string>
     <string name="name_train_number">车次</string>
     <string name="name_task_name">任务名称</string>
@@ -136,8 +126,6 @@
     <string name="tab_patrol_plan">巡视计划</string>
     <string name="tab_problem_manager">问题管理</string>
 
-    <string name="title_btn_login">登录</string>
-    <string name="title_btn_login_config">登录配置</string>
     <string name="title_issue_command">发布命令</string>
     <string name="title_issue_cooperation">发布协作</string>
     <string name="title_problem_list">问题列表</string>

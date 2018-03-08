@@ -60,7 +60,7 @@ configurations.all {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':component_user')
+    implementation project(':component_basic')
     // GridLayout兼容库
     implementation 'com.android.support:gridlayout-v7:27.1.0'
     // 事件传递

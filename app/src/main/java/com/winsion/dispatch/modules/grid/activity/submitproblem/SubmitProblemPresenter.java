@@ -1,5 +1,7 @@
 package com.winsion.dispatch.modules.grid.activity.submitproblem;
 
+import android.content.Context;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.winsion.component.basic.data.CacheDataSource;
@@ -28,10 +30,12 @@ import java.util.List;
  */
 
 public class SubmitProblemPresenter extends SubmitBiz implements SubmitProblemContact.Presenter {
-    private SubmitProblemContact.View mView;
+    private final SubmitProblemContact.View mView;
+    private final Context mContext;
 
     SubmitProblemPresenter(SubmitProblemContact.View view) {
         this.mView = view;
+        this.mContext = view.getContext();
     }
 
     @Override

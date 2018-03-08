@@ -14,12 +14,12 @@ import com.winsion.component.basic.data.constants.SPKey;
 import com.winsion.component.basic.data.constants.Urls;
 import com.winsion.component.basic.data.listener.ResponseListener;
 import com.winsion.component.basic.entity.UserEntity;
+import com.winsion.component.basic.mqtt.MQTTClient;
 import com.winsion.component.basic.utils.JsonUtils;
 import com.winsion.component.basic.utils.LogUtils;
 import com.winsion.component.user.login.constants.LoginErrorCode;
 import com.winsion.component.user.login.entity.AuthEntity;
 import com.winsion.component.user.login.listener.LoginListener;
-import com.winsion.component.user.mqtt.MQTTClient;
 
 import java.util.List;
 
@@ -30,9 +30,9 @@ import java.util.List;
 class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListener {
     private static final String TAG = "LoginPresenter";
 
-    private LoginContract.View mView;
-    private Context mContext;
-    private DBDataSource mDbDataSource;
+    private final LoginContract.View mView;
+    private final Context mContext;
+    private final DBDataSource mDbDataSource;
     private LoginListener mLoginListener;
     private AuthEntity mAuthEntity;
     private String mUsername;
@@ -112,7 +112,6 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
                 // 开启MQ
                 new MQTTClient.Connector(mContext, ip)
                         .listener(LoginPresenter.this)
-                        .reconnect(false)
                         .connect();
                 LogUtils.i(TAG, "用户名:" + mUsername + ",密码:" + mPassword);
                 LogUtils.i(TAG, "IP地址:" + ip + ",端口号:" + port);
@@ -154,6 +153,7 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
     private void saveData() {
         AuthEntity.UserDto user = mAuthEntity.getUser();
 
+        CacheDataSource.setLoginState(true);
         CacheDataSource.setHttpKey(mAuthEntity.getHttpKey());
         CacheDataSource.setToken(mAuthEntity.getToken());
         CacheDataSource.setMqKey(mAuthEntity.getMqKey());

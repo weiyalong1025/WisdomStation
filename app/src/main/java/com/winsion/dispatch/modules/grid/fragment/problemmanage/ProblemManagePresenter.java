@@ -31,8 +31,8 @@ import java.util.List;
  * Created by wyl on 2017/6/29
  */
 public class ProblemManagePresenter implements ProblemManageContract.Presenter {
-    private ProblemManageContract.View mView;
-    private Context mContext;
+    private final ProblemManageContract.View mView;
+    private final Context mContext;
 
     ProblemManagePresenter(ProblemManageContract.View view) {
         this.mView = view;

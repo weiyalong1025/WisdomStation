@@ -22,8 +22,8 @@ public class DaofaRootFragment extends BaseFragment {
     private NoScrollViewPager vpContent;
     private MyIndicator mIndicator;
 
-    private Fragment[] mFragments = {new PlaceHolderFragment(), new PlaceHolderFragment()};
-    private int[] mTitles = {R.string.tab_up, R.string.tab_down};
+    private final Fragment[] mFragments = {new PlaceHolderFragment(), new PlaceHolderFragment()};
+    private final int[] mTitles = {R.string.tab_up, R.string.tab_down};
 
     @SuppressLint("InflateParams")
     @Override

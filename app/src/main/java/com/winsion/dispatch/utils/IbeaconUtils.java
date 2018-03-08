@@ -93,17 +93,17 @@ public class IbeaconUtils {
         byte[] proximityUuidBytes = new byte[16];
         System.arraycopy(scanData, startByte + 4, proximityUuidBytes, 0, 16);
         String hexString = bytesToHexString(proximityUuidBytes);
-        StringBuilder sb = new StringBuilder();
-        sb.append(hexString.substring(0, 8));
-        sb.append("-");
-        sb.append(hexString.substring(8, 12));
-        sb.append("-");
-        sb.append(hexString.substring(12, 16));
-        sb.append("-");
-        sb.append(hexString.substring(16, 20));
-        sb.append("-");
-        sb.append(hexString.substring(20, 32));
-        iBeacon.proximityUuid = sb.toString();
+        if (hexString != null) {
+            iBeacon.proximityUuid = hexString.substring(0, 8) +
+                    "-" +
+                    hexString.substring(8, 12) +
+                    "-" +
+                    hexString.substring(12, 16) +
+                    "-" +
+                    hexString.substring(16, 20) +
+                    "-" +
+                    hexString.substring(20, 32);
+        }
 
         if (device != null) {
             iBeacon.bluetoothAddress = device.getAddress();

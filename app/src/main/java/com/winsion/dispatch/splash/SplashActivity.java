@@ -24,9 +24,15 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void handlerMessage(Message msg) {
         super.handlerMessage(msg);
-        CC.obtainBuilder("ComponentUser").setActionName("toLoginActivity").build().callAsync((cc, result) ->
-                startActivity(MainActivity.class));
-        mHandler.postDelayed(this::finish, 500);
+        boolean hasComponentUser = CC.hasComponent("ComponentUser");
+        if (hasComponentUser) {
+            CC.obtainBuilder("ComponentUser").setActionName("toLoginActivity").build().callAsync((cc, result) ->
+                    startActivity(MainActivity.class));
+            mHandler.postDelayed(this::finish, 500);
+        } else {
+            // 如果没有用户组件直接进入主界面
+            startActivity(MainActivity.class, true);
+        }
     }
 
     private void logScreenInfo() {

@@ -124,10 +124,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private TextView tvEndTime;
     private EditText etContent;
 
-    public static final int CODE_NOTE = 0;  // 备注
-    public static final int CODE_TAKE_PHOTO = 1;    // 拍照
-    public static final int CODE_RECORD_VIDEO = 2;  // 录像
-    public static final int CODE_RECORD_AUDIO = 3;  // 录音
+    private static final int CODE_NOTE = 0;  // 备注
+    private static final int CODE_TAKE_PHOTO = 1;    // 拍照
+    private static final int CODE_RECORD_VIDEO = 2;  // 录像
+    private static final int CODE_RECORD_AUDIO = 3;  // 录音
 
     private OperatorTaskDetailContract.Presenter mPresenter;
 
@@ -553,10 +553,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         // 根据是否超时设置任务模块背景色
         if (isTimeOut) {
             llBgColor.setBackgroundResource(R.color.basic_yellow1);
-            tvLastTime.setTextColor(getResources().getColor(R.color.basic_red2));
+            tvLastTime.setTextColor(getMyColor(R.color.basic_red2));
         } else {
             llBgColor.setBackgroundResource(R.color.basic_gray8);
-            tvLastTime.setTextColor(getResources().getColor(R.color.basic_blue1));
+            tvLastTime.setTextColor(getMyColor(R.color.basic_blue1));
         }
     }
 

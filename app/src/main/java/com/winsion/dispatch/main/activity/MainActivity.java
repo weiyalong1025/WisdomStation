@@ -36,7 +36,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     private AlphaTabsIndicator atiIndicator;
     private ImageView ivHead;
 
-    private ArrayList<Fragment> mFragments = new ArrayList<>();
+    private final ArrayList<Fragment> mFragments = new ArrayList<>();
     private MainContract.Presenter mPresenter;
 
     @Override
@@ -46,12 +46,31 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
 
     @Override
     protected void start() {
-        initView();
-        initPresenter();
-        initData();
-        initAdapter();
-        initListener();
-        loadUserHead();
+        if (CacheDataSource.getLoginState()) {
+            initView();
+            initPresenter();
+            initData();
+            initAdapter();
+            initListener();
+            loadUserHead();
+        } else {
+            // 没有登录，去登录
+            toLogin();
+        }
+    }
+
+    private void toLogin() {
+        if (!CC.hasComponent("ComponentUser")) {
+            // 没有登录也没有用户组件
+            showToast("没有登录组件");
+        } else {
+            // 没有登录但有登录组件，先进行登录
+            // 跳转用户组件-登录界面
+            CC.obtainBuilder("ComponentUser").setActionName("toLoginActivityClearTask").build().callAsync((cc, result) -> {
+                // 登录成功，跳转至MainActivity
+                startActivity(MainActivity.class);
+            });
+        }
     }
 
     @Override
@@ -140,13 +159,12 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
 
     @Override
     public void onClick(View view) {
-        CC.obtainBuilder("ComponentUser").setActionName("toUserActivity").build().callAsync((cc, result) -> {
-            // 用户点击了注销，跳转至登录界面
-            CC.obtainBuilder("ComponentUser").setActionName("toLoginActivityClearTask").build().callAsync((cc1, result1) -> {
-                // 登录成功，跳转至MainActivity
-                startActivity(MainActivity.class);
-            });
-        });
+        // 跳转用户界面
+        CC.obtainBuilder("ComponentUser").setActionName("toUserActivity").build().callAsync((cc, result) ->
+                // 用户点击了注销，跳转至登录界面
+                CC.obtainBuilder("ComponentUser").setActionName("toLoginActivityClearTask").build().callAsync((cc1, result1) ->
+                        // 登录成功，跳转至MainActivity
+                        startActivity(MainActivity.class)));
     }
 
     /**
@@ -207,7 +225,9 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.exit();
+        if (mPresenter != null) {
+            mPresenter.exit();
+        }
         logE("我关闭了啊啊啊啊啊啊啊啊啊啊啊！！！！！");
     }
 }

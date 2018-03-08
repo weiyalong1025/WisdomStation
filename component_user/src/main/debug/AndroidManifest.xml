@@ -9,7 +9,7 @@
     <application
         android:name="debug.UserApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/basic_ic_launcher"
         android:label="@string/user_app_name"
         android:persistent="true"
         android:supportsRtl="true"

@@ -15,7 +15,7 @@ import okhttp3.ResponseBody;
  */
 
 public class ObjectConverter<T> implements Converter<T> {
-    private ResponseListener<T> mListener;
+    private final ResponseListener<T> mListener;
 
     public ObjectConverter(ResponseListener<T> listener) {
         this.mListener = listener;

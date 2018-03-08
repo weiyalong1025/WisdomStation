@@ -28,8 +28,8 @@ import java.util.List;
  */
 
 public class OperatorTaskListPresenter extends ChangeStatusBiz implements OperatorTaskListContract.Presenter {
-    private OperatorTaskListContract.View mView;
-    private Context mContext;
+    private final OperatorTaskListContract.View mView;
+    private final Context mContext;
 
     OperatorTaskListPresenter(OperatorTaskListContract.View view) {
         this.mView = view;

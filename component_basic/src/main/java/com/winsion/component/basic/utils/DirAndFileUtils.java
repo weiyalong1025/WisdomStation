@@ -2,7 +2,6 @@ package com.winsion.component.basic.utils;
 
 import android.os.Environment;
 
-import com.winsion.component.basic.utils.FileUtils;
 import com.winsion.component.basic.utils.constants.DirName;
 
 import java.io.File;

@@ -30,8 +30,8 @@ import java.util.List;
  */
 
 public class PatrolPlanPresenter implements PatrolPlanContract.Presenter {
-    private PatrolPlanContract.View mView;
-    private Context mContext;
+    private final PatrolPlanContract.View mView;
+    private final Context mContext;
 
     PatrolPlanPresenter(PatrolPlanContract.View view) {
         this.mView = view;

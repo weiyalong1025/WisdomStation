@@ -23,8 +23,8 @@ public class OperationRootFragment extends BaseFragment {
     private NoScrollViewPager vpContent;
     private MyIndicator mIndicator;
 
-    private Fragment[] mFragments = {new OperatorTaskListFragment(), new MonitorTaskListFragment(), new IssueFragment()};
-    private int[] mTitles = {R.string.tab_my_task, R.string.tab_task_monitor, R.string.tab_command_and_cooperation};
+    private final Fragment[] mFragments = {new OperatorTaskListFragment(), new MonitorTaskListFragment(), new IssueFragment()};
+    private final int[] mTitles = {R.string.tab_my_task, R.string.tab_task_monitor, R.string.tab_command_and_cooperation};
 
     @SuppressLint("InflateParams")
     @Override

@@ -296,7 +296,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     /**
      * 滚动到对应taskId条目的位置
      */
-    public void scrollToItem(TaskEntity taskEntity) {
+    private void scrollToItem(TaskEntity taskEntity) {
         int positionInList = listData.indexOf(taskEntity);
         if (positionInList != -1) lvList.setSelection(positionInList);
     }

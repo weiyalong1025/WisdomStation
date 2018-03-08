@@ -27,8 +27,8 @@ import java.util.List;
  */
 
 public class MonitorTaskListPresenter implements MonitorTaskListContract.Presenter {
-    private MonitorTaskListContract.View mView;
-    private Context mContext;
+    private final MonitorTaskListContract.View mView;
+    private final Context mContext;
 
     MonitorTaskListPresenter(MonitorTaskListContract.View view) {
         this.mView = view;

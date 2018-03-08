@@ -31,7 +31,7 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
 
     private View mContentView;
     protected Context mContext;
-    public HandlerUtils.HandlerHolder mHandler;
+    protected HandlerUtils.HandlerHolder mHandler;
 
     @Override
     public void handlerMessage(Message msg) {
@@ -68,11 +68,11 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      */
     protected abstract void init();
 
-    public void showToast(int resId) {
+    protected void showToast(int resId) {
         ToastUtils.showToast(mContext, resId);
     }
 
-    public void showToast(String msg) {
+    protected void showToast(String msg) {
         ToastUtils.showToast(mContext, msg);
     }
 
@@ -81,7 +81,7 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      *
      * @param msg
      */
-    public void logI(String msg) {
+    protected void logI(String msg) {
         LogUtils.i(getClass().getSimpleName(), msg);
     }
 
@@ -99,7 +99,7 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      *
      * @param cls
      */
-    public void startActivity(Class<? extends Activity> cls) {
+    protected void startActivity(Class<? extends Activity> cls) {
         Intent intent = new Intent(mContext, cls);
         startActivity(intent);
     }
@@ -109,7 +109,7 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      *
      * @param intent 要跳转的Activity
      */
-    public void startActivityForResult(Intent intent) {
+    protected void startActivityForResult(Intent intent) {
         startActivityForResult(intent, CODE_DEFAULT);
     }
 
@@ -118,16 +118,16 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      *
      * @param cls 要跳转的Activity
      */
-    public void startActivityForResult(Class<? extends Activity> cls) {
+    protected void startActivityForResult(Class<? extends Activity> cls) {
         startActivityForResult(cls, CODE_DEFAULT);
     }
 
-    public void startActivityForResult(Class<? extends Activity> cls, int requestCode) {
+    protected void startActivityForResult(Class<? extends Activity> cls, int requestCode) {
         Intent intent = new Intent(mContext, cls);
         startActivityForResult(intent, requestCode);
     }
 
-    public void showView(ViewGroup container, View v) {
+    protected void showView(ViewGroup container, View v) {
         v.setVisibility(View.VISIBLE);
         int childCount = container.getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -149,15 +149,15 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      * @param b
      * @return
      */
-    public boolean equals(CharSequence a, CharSequence b) {
+    protected boolean equals(CharSequence a, CharSequence b) {
         return TextUtils.equals(a, b);
     }
 
-    public boolean isEmpty(CharSequence str) {
+    protected boolean isEmpty(CharSequence str) {
         return TextUtils.isEmpty(str);
     }
 
-    public int getColor(@ColorRes int colorResId) {
+    protected int getMyColor(@ColorRes int colorResId) {
         return getResources().getColor(colorResId);
     }
 
@@ -165,11 +165,11 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
         return false;
     }
 
-    public <T extends View> T findViewById(@IdRes int id) {
+    protected <T extends View> T findViewById(@IdRes int id) {
         return mContentView.findViewById(id);
     }
 
-    public void addOnClickListeners(@IdRes int... ids) {
+    protected void addOnClickListeners(@IdRes int... ids) {
         if (ids != null) {
             for (@IdRes int id : ids) {
                 findViewById(id).setOnClickListener(this);

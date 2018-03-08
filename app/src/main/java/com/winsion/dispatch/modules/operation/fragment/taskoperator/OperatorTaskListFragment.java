@@ -368,7 +368,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     /**
      * 滚动到对应taskId条目的位置
      */
-    public void scrollToItem(JobEntity jobEntity) {
+    private void scrollToItem(JobEntity jobEntity) {
         int positionInList = listData.indexOf(jobEntity);
         if (positionInList != -1) lvList.setSelection(positionInList);
     }

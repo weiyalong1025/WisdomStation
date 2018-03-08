@@ -23,7 +23,7 @@ public class PlaceHolderFragment extends BaseFragment {
         textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         textView.setGravity(Gravity.CENTER);
         textView.setText("Placeholder Fragment");
-        textView.setTextColor(getColor(R.color.basic_red2));
+        textView.setTextColor(getMyColor(R.color.basic_red2));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.basic_s21));
         return textView;
     }

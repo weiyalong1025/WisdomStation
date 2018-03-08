@@ -1,4 +1,4 @@
-package com.winsion.component.user.mqtt.constants;
+package com.winsion.component.basic.mqtt.constants;
 
 /**
  * Created by wyl on 2017/6/29

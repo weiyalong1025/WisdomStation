@@ -23,8 +23,8 @@ public class ContactsRootFragment extends BaseFragment {
     private NoScrollViewPager vpContent;
     private MyIndicator mIndicator;
 
-    private Fragment[] mFragments = {new ContactsFragment(), new PlaceHolderFragment(), new PlaceHolderFragment()};
-    private int[] mTitles = {R.string.tab_contacts, R.string.tab_team_group, R.string.tab_contact_group};
+    private final Fragment[] mFragments = {new ContactsFragment(), new PlaceHolderFragment(), new PlaceHolderFragment()};
+    private final int[] mTitles = {R.string.tab_contacts, R.string.tab_team_group, R.string.tab_contact_group};
 
     @SuppressLint("InflateParams")
     @Override

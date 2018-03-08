@@ -1,4 +1,4 @@
-package com.winsion.component.user.mqtt;
+package com.winsion.component.basic.mqtt;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -10,8 +10,8 @@ import android.net.NetworkInfo;
 import android.support.annotation.RequiresPermission;
 
 import com.alibaba.fastjson.JSON;
+import com.winsion.component.basic.mqtt.entity.MQMessage;
 import com.winsion.component.basic.utils.LogUtils;
-import com.winsion.component.user.mqtt.entity.MQMessage;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -41,10 +41,10 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
     private static final String[] TOPIC_NAMES = new String[]{ALARM_TOPIC, ORDER_TOPIC, MONITOR_TOPIC, REPORT_TOPIC};
     private static final int[] QOS = new int[]{0, 0, 0, 0};
 
-    private static Vector<Observer> mObservers = new Vector<>();
+    private static final Vector<Observer> mObservers = new Vector<>();
     private static volatile MQTTClient mInstance;
-    private MqttAndroidClient mClient;
-    private WeakReference<Context> mContext;
+    private final MqttAndroidClient mClient;
+    private final WeakReference<Context> mContext;
     private boolean needReconnect;
     private ConnectListener mConnectListener;
     private Connector mConnector;
@@ -91,7 +91,6 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
         this.mConnector = connector;
         this.mContext = new WeakReference<>(connector.context.getApplicationContext());
         this.mServerUrl = connector.host;
-        this.needReconnect = connector.needReconnect;
         String CLIENT_ID = "yalong" + System.currentTimeMillis();
         mClient = new MqttAndroidClient(mContext.get(), "tcp://" + mServerUrl + ":" + MQ_PORT, CLIENT_ID, new MemoryPersistence());
         mClient.setCallback(new MqttCallback() {
@@ -132,7 +131,6 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
         private Context context;
         private ConnectListener connectListener;
         private String host;
-        private boolean needReconnect;
 
         public Connector(Context context, String host) {
             this.context = context;
@@ -141,11 +139,6 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
 
         public Connector listener(ConnectListener connectListener) {
             this.connectListener = connectListener;
-            return this;
-        }
-
-        public Connector reconnect(boolean needReconnect) {
-            this.needReconnect = needReconnect;
             return this;
         }
 
@@ -168,7 +161,7 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
     }
 
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    void connect() {
+    private void connect() {
         if (!isNetworkConnected()) {
             if (!needReconnect) {
                 if (mConnectListener != null) mConnectListener.connectFailed();
@@ -188,7 +181,7 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
     }
 
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    void reconnect() {
+    private void reconnect() {
         destroy();
         MQTTClient instance = getInstance(mConnector);
         instance.needReconnect = true;

@@ -1,11 +1,8 @@
 package com.winsion.component.user.user.activity;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.billy.cc.core.component.CC;
-import com.billy.cc.core.component.CCResult;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.CommonBiz;
 import com.winsion.component.basic.data.CacheDataSource;
@@ -14,9 +11,8 @@ import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.view.CircleImageView;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.TitleView;
+import com.winsion.component.user.ComponentUser;
 import com.winsion.component.user.R;
-import com.winsion.component.user.biz.LogoutBiz;
-import com.winsion.component.user.login.activity.LoginActivity;
 
 /**
  * Created by 10295 on 2017/12/19 0019
@@ -72,7 +68,11 @@ public class UserActivity extends BaseActivity {
             CommonBiz.checkVersionUpdate(mContext, this, true);
         } else if (id == R.id.btn_logout) {
             showDialog();
-            LogoutBiz.logout(mContext, this::hideDialog);
+            ComponentUser.logout(mContext, callId, () -> {
+                if (customDialog != null) {
+                    customDialog.dismiss();
+                }
+            });
         }
     }
 
@@ -85,21 +85,6 @@ public class UserActivity extends BaseActivity {
                     .create();
         }
         customDialog.show();
-    }
-
-    private void hideDialog() {
-        if (customDialog != null) {
-            customDialog.dismiss();
-            if (!isEmpty(callId)) {
-                CC.sendCCResult(callId, CCResult.success());
-                finish();
-            } else {
-                // 跳转登录界面
-                Intent intent = new Intent(mContext, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        }
     }
 
     @Override

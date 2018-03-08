@@ -26,8 +26,8 @@ import java.util.List;
  */
 
 public class PatrolItemPresenter extends SubmitBiz implements PatrolItemContract.Presenter {
-    private PatrolItemContract.View mView;
-    private Context mContext;
+    private final PatrolItemContract.View mView;
+    private final Context mContext;
 
     PatrolItemPresenter(PatrolItemContract.View view) {
         this.mView = view;

@@ -19,8 +19,8 @@ import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_
  * Created by wyl on 2017/6/2
  */
 public class TodoListPresenter implements TodoListContract.Presenter {
-    private TodoListContract.View mView;
-    private Context mContext;
+    private final TodoListContract.View mView;
+    private final Context mContext;
 
     private AlarmManager alarmManager;
 

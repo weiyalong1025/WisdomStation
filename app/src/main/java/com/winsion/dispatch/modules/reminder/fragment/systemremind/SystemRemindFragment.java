@@ -161,7 +161,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     /**
      * 显示多选删除布局
      */
-    public void showMultipleDeleteLayout() {
+    private void showMultipleDeleteLayout() {
         if (multipleDeleteLayout == null) {
             initMultipleDeleteLayout();
         }
@@ -241,7 +241,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     /**
      * 隐藏多选删除布局
      */
-    public void hideMultipleDeleteLayout() {
+    private void hideMultipleDeleteLayout() {
         isMultipleDeleteLayoutDisplaying = false;
         swipeRefresh.setEnabled(true);
 

@@ -67,15 +67,15 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     private ListView listView;
 
     // 选择班组
-    public static final int CODE_SELECT_TEAM = 0;
+    private static final int CODE_SELECT_TEAM = 0;
     // 选择车次
-    public static final int CODE_SELECT_TRAIN = 1;
+    private static final int CODE_SELECT_TRAIN = 1;
     // 拍照
-    public static final int CODE_TAKE_PHOTO = 2;
+    private static final int CODE_TAKE_PHOTO = 2;
     // 录像
-    public static final int CODE_RECORD_VIDEO = 3;
+    private static final int CODE_RECORD_VIDEO = 3;
     // 录音
-    public static final int CODE_RECORD_AUDIO = 4;
+    private static final int CODE_RECORD_AUDIO = 4;
 
     // 记录选中的车站，用于回显
     private int selectStationIndex;

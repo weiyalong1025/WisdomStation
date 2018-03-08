@@ -62,7 +62,7 @@ public class NetDataSource {
     private static final int CONNECT_TIMEOUT = 10;  // 连接超时时间
     private static final int RETRY_COUNT = 0;   // 请求重试次数
 
-    private static HashMap<Object, CompositeDisposable> requestMap = new HashMap<>();
+    private static final HashMap<Object, CompositeDisposable> requestMap = new HashMap<>();
 
     /**
      * 调用其他方法的前提

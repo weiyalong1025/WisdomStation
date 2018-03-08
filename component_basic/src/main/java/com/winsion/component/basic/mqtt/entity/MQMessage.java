@@ -1,4 +1,4 @@
-package com.winsion.component.user.mqtt.entity;
+package com.winsion.component.basic.mqtt.entity;
 
 /**
  * Created by w on 2017/7/19.

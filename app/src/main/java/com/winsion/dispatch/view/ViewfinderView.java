@@ -65,8 +65,8 @@ public final class ViewfinderView extends View {
     private final int labelTextColor;   // 扫描区域提示文本颜色
     private final float labelTextSize;
 
-    public static int scannerStart = 0;
-    public static int scannerEnd = 0;
+    private static int scannerStart = 0;
+    private static int scannerEnd = 0;
 
     private Collection<ResultPoint> possibleResultPoints;
     private Collection<ResultPoint> lastPossibleResultPoints;

@@ -45,8 +45,8 @@ public class OperatorTaskDetailPresenter extends ChangeStatusBiz implements Oper
     private static final String FIELD_MONITOR = "jobsid";   // 查询监控人上传附件用的字段
     private static final String FIELD_PERFORMER = "joboperatorsid"; // 查询执行人上传附件用的字段
 
-    private OperatorTaskDetailContract.View mView;
-    private Context mContext;
+    private final OperatorTaskDetailContract.View mView;
+    private final Context mContext;
 
     OperatorTaskDetailPresenter(OperatorTaskDetailContract.View view) {
         this.mView = view;

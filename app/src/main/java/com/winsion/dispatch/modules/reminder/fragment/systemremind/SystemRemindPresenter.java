@@ -30,8 +30,8 @@ import java.util.List;
  */
 
 public class SystemRemindPresenter implements SystemRemindContract.Presenter {
-    private SystemRemindContract.View mView;
-    private Context mContext;
+    private final SystemRemindContract.View mView;
+    private final Context mContext;
 
     SystemRemindPresenter(SystemRemindContract.View view) {
         this.mView = view;

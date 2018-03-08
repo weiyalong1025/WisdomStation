@@ -24,8 +24,8 @@ public class GridActivity extends BaseActivity {
     private MyIndicator mIndicator;
     private ImageView ivBack;
 
-    private Fragment[] mFragments = {new PatrolPlanFragment(), new ProblemManageFragment()};
-    private int[] mTitles = {R.string.tab_patrol_plan, R.string.tab_problem_manager};
+    private final Fragment[] mFragments = {new PatrolPlanFragment(), new ProblemManageFragment()};
+    private final int[] mTitles = {R.string.tab_patrol_plan, R.string.tab_problem_manager};
 
     @SuppressLint("InflateParams")
     @Override

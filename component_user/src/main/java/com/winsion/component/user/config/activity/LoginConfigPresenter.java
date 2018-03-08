@@ -16,8 +16,8 @@ import com.winsion.component.basic.data.constants.SPKey;
 
 class LoginConfigPresenter implements LoginConfigContract.Presenter {
 
-    private LoginConfigContract.View mView;
-    private Context mContext;
+    private final LoginConfigContract.View mView;
+    private final Context mContext;
 
     LoginConfigPresenter(LoginConfigContract.View view) {
         this.mView = view;

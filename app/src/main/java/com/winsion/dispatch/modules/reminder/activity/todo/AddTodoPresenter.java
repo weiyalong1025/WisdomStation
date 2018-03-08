@@ -22,8 +22,8 @@ import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_
  */
 
 public class AddTodoPresenter implements AddTodoContract.Presenter {
-    private AddTodoContract.View mView;
-    private Context mContext;
+    private final AddTodoContract.View mView;
+    private final Context mContext;
 
     private AlarmManager alarmManager;
 

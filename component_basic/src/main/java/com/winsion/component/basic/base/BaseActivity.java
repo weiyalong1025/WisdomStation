@@ -5,13 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -33,9 +33,8 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
      */
     private static final int CODE_DEFAULT = 0;
 
-    public Context mContext;
-    public LayoutInflater mInflater;
-    public HandlerUtils.HandlerHolder mHandler;
+    protected Context mContext;
+    protected HandlerUtils.HandlerHolder mHandler;
 
     @Override
     public void handlerMessage(Message msg) {
@@ -46,7 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
-        mInflater = LayoutInflater.from(mContext);
         mHandler = new HandlerUtils.HandlerHolder(this);
         if (setContentView() != 0) {
             setContentView(setContentView());
@@ -66,11 +64,11 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
      */
     protected abstract void start();
 
-    public void showToast(@StringRes int resId) {
+    protected void showToast(@StringRes int resId) {
         ToastUtils.showToast(mContext, resId);
     }
 
-    public void showToast(String msg) {
+    protected void showToast(String msg) {
         ToastUtils.showToast(mContext, msg);
     }
 
@@ -79,7 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
      *
      * @param msg
      */
-    public void logI(String msg) {
+    protected void logI(String msg) {
         LogUtils.i(getClass().getSimpleName(), msg);
     }
 
@@ -88,7 +86,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
      *
      * @param msg
      */
-    public void logE(String msg) {
+    protected void logE(String msg) {
         LogUtils.e(getClass().getSimpleName(), msg);
     }
 
@@ -107,7 +105,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
      * @param cls                  要打开的activity
      * @param closeCurrentActivity 是否需要关闭当前页面
      */
-    public void startActivity(Class<? extends Activity> cls, boolean closeCurrentActivity) {
+    protected void startActivity(Class<? extends Activity> cls, boolean closeCurrentActivity) {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
         if (closeCurrentActivity) {
@@ -133,12 +131,12 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
         startActivityForResult(cls, CODE_DEFAULT);
     }
 
-    public void startActivityForResult(Class<? extends Activity> cls, int requestCode) {
+    protected void startActivityForResult(Class<? extends Activity> cls, int requestCode) {
         Intent intent = new Intent(this, cls);
         startActivityForResult(intent, requestCode);
     }
 
-    public void showView(ViewGroup container, View v) {
+    protected void showView(ViewGroup container, View v) {
         v.setVisibility(View.VISIBLE);
         int childCount = container.getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -149,19 +147,23 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
         }
     }
 
-    public String getText(TextView textView) {
+    protected String getText(TextView textView) {
         return textView.getText().toString().trim();
     }
 
     /**
      * 判断两个字符串是否相等
      */
-    public boolean equals(CharSequence a, CharSequence b) {
+    protected boolean equals(CharSequence a, CharSequence b) {
         return TextUtils.equals(a, b);
     }
 
-    public boolean isEmpty(CharSequence str) {
+    protected boolean isEmpty(CharSequence str) {
         return TextUtils.isEmpty(str);
+    }
+
+    protected int getMyColor(@ColorRes int colorResId) {
+        return getResources().getColor(colorResId);
     }
 
     @Override
@@ -192,7 +194,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
         return super.onKeyDown(keyCode, event);
     }
 
-    public void addOnClickListeners(@IdRes int... ids) {
+    protected void addOnClickListeners(@IdRes int... ids) {
         if (ids != null) {
             for (@IdRes int id : ids) {
                 findViewById(id).setOnClickListener(this);

@@ -1,4 +1,4 @@
-ext.runAsApp = true
+//ext.runAsApp = true
 apply from: 'https://raw.githubusercontent.com/luckybilly/CC/master/cc-settings.gradle'
 
 android {
@@ -39,7 +39,4 @@ configurations.all {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':component_basic')
-    // MQ
-    compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
-    compile 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
 }

@@ -24,7 +24,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.billy.cc.core.component.CC;
-import com.billy.cc.core.component.CCResult;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.CommonBiz;
 import com.winsion.component.basic.entity.UserEntity;
@@ -46,7 +45,7 @@ import java.util.List;
 /**
  * Created by wyl on 2017/12/5
  */
-public class LoginActivity extends BaseActivity implements LoginContract.View, TextWatcher,
+public class LoginActivity extends BaseActivity implements LoginContract.View,
         LoginListener, AdapterView.OnItemClickListener {
     private EditText etUsername;
     private EditText etPassword;
@@ -101,11 +100,39 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         mPresenter.start();
     }
 
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        /**
+         * 监听用户名EditText，实时更新头像和密码
+         */
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String changedUsername = editable.toString();
+            UserEntity userEntity = mPresenter.getUserByUsername(changedUsername);
+            if (userEntity != null) {
+                ImageLoader.loadUrl(civHead, userEntity.getHeaderUrl(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
+                etPassword.setText(userEntity.getPassword());
+            } else {
+                ImageLoader.loadRes(civHead, R.drawable.basic_ic_head_single);
+                etPassword.setText("");
+            }
+        }
+    };
+
     /**
      * 初始化EditText监听器
      */
     private void initListener() {
-        etUsername.addTextChangedListener(this);
+        etUsername.addTextChangedListener(mTextWatcher);
         addOnClickListeners(R.id.iv_arrow, R.id.iv_visibility, R.id.btn_login, R.id.tv_login_config);
     }
 
@@ -259,32 +286,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         ivArrow.startAnimation(mDownAnim);
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    /**
-     * 监听用户名EditText，实时更新头像和密码
-     */
-    @Override
-    public void afterTextChanged(Editable editable) {
-        String changedUsername = editable.toString();
-        UserEntity userEntity = mPresenter.getUserByUsername(changedUsername);
-        if (userEntity != null) {
-            ImageLoader.loadUrl(civHead, userEntity.getHeaderUrl(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
-            etPassword.setText(userEntity.getPassword());
-        } else {
-            ImageLoader.loadRes(civHead, R.drawable.basic_ic_head_single);
-            etPassword.setText("");
-        }
-    }
-
     /**
      * 登录中，显示dialog
      */
@@ -307,7 +308,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, T
         // 隐藏dialog
         hideDialog();
         if (!isEmpty(callId)) {
-            CC.sendCCResult(callId, CCResult.success());
+            CC.obtainBuilder("ComponentApp")
+                    .setActionName("toMainActivity")
+                    .build()
+                    .callAsync();
             mHandler.postDelayed(this::finish, 500);
         } else {
             startActivity(UserActivity.class, true);

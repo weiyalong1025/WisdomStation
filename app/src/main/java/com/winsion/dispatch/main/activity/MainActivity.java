@@ -46,12 +46,25 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
 
     @Override
     protected void start() {
-        initView();
-        initPresenter();
-        initData();
-        initAdapter();
-        initListener();
-        loadUserHead();
+        if (!CC.hasComponent("ComponentUser")) {
+            // 没有登录也没有用户组件
+            showToast("没有登录组件");
+        } else if (!CacheDataSource.getLoginState()) {
+            // 没有登录但有登录组件，先进行登录
+            // 跳转用户组件-登录界面
+            showToast("请先登录");
+            CC.obtainBuilder("ComponentUser")
+                    .setActionName("toLoginActivityClearTask")
+                    .build()
+                    .callAsync();
+        } else {
+            initView();
+            initPresenter();
+            initData();
+            initAdapter();
+            initListener();
+            loadUserHead();
+        }
     }
 
     @Override
@@ -141,11 +154,10 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     @Override
     public void onClick(View view) {
         // 跳转用户界面
-        CC.obtainBuilder("ComponentUser").setActionName("toUserActivity").build().callAsync((cc, result) ->
-                // 用户点击了注销，跳转至登录界面
-                CC.obtainBuilder("ComponentUser").setActionName("toLoginActivityClearTask").build().callAsync((cc1, result1) ->
-                        // 登录成功，跳转至MainActivity
-                        startActivity(MainActivity.class)));
+        CC.obtainBuilder("ComponentUser")
+                .setActionName("toUserActivity")
+                .build()
+                .callAsync();
     }
 
     /**

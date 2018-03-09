@@ -11,11 +11,11 @@ import android.os.Vibrator;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.data.DBDataSource;
 import com.winsion.component.basic.entity.TodoEntity;
-import com.winsion.dispatch.modules.reminder.fragment.todo.TodoListFragment;
 import com.winsion.component.basic.view.CustomDialog;
+import com.winsion.dispatch.R;
+import com.winsion.dispatch.modules.reminder.fragment.todo.TodoListFragment;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -37,13 +37,15 @@ public class TodoReceiver extends BroadcastReceiver {
     private Vibrator vibrator;
     private CustomDialog customDialog;
     private Context mContext;
+    private DBDataSource mDBDataSource;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         this.mContext = context;
+        this.mDBDataSource = DBDataSource.getInstance(context.getApplicationContext());
         long id = intent.getLongExtra(TODO_ID, 0);
         if (id == 0) return;
-        todoEntity = DBDataSource.getInstance(mContext).getTodoEntityById(id);
+        todoEntity = mDBDataSource.getTodoEntityById(id);
         // 响铃
         playRing(context);
         // 震动
@@ -107,7 +109,7 @@ public class TodoReceiver extends BroadcastReceiver {
 
     private void operateState() {
         todoEntity.setFinished(isFinish);
-        DBDataSource.getInstance(mContext).updateOrAddTodo(todoEntity);
+        mDBDataSource.updateOrAddTodo(todoEntity);
         EventBus.getDefault().post(new TodoEntity());
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();

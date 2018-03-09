@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -68,7 +69,7 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      */
     protected abstract void init();
 
-    protected void showToast(int resId) {
+    protected void showToast(@StringRes int resId) {
         ToastUtils.showToast(mContext, resId);
     }
 
@@ -179,5 +180,11 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
 
     @Override
     public void onClick(View view) {
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

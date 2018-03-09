@@ -5,7 +5,6 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.billy.cc.core.component.CC;
-import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.CommonBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
@@ -44,13 +43,10 @@ public class MainPresenter implements MainContract.Presenter, MQTTClient.Observe
                 if (data.equals(CacheDataSource.getUserId())) {
                     // 用户在别的设备登录，强制下线
                     ToastUtils.showToast(mContext, R.string.toast_user_login_on_other_device);
-                    CC.obtainBuilder("ComponentUser").setActionName("logout").build().callAsync((cc, result) -> {
-                        // 跳转用户组件-登录界面
-                        CC.obtainBuilder("ComponentUser").setActionName("toLoginActivityClearTask").build().callAsync((cc1, result1) -> {
-                            // 登录成功，跳转至MainActivity
-                            ((BaseActivity) mView).startActivity(MainActivity.class);
-                        });
-                    });
+                    CC.obtainBuilder("ComponentUser")
+                            .setActionName("logout")
+                            .build()
+                            .callAsync();
                 }
                 break;
             case MQType.TASK_STATE:

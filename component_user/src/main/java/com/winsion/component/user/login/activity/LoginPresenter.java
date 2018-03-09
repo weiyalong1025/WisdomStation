@@ -41,7 +41,7 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
     LoginPresenter(LoginContract.View view) {
         this.mView = view;
         this.mContext = view.getContext();
-        this.mDbDataSource = DBDataSource.getInstance(mContext);
+        this.mDbDataSource = DBDataSource.getInstance(mContext.getApplicationContext());
     }
 
     @Override
@@ -110,7 +110,7 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
             public void onSuccess(AuthEntity authEntity) {
                 mAuthEntity = authEntity;
                 // 开启MQ
-                new MQTTClient.Connector(mContext, ip)
+                new MQTTClient.Connector(mContext.getApplicationContext(), ip)
                         .listener(LoginPresenter.this)
                         .connect();
                 LogUtils.i(TAG, "用户名:" + mUsername + ",密码:" + mPassword);

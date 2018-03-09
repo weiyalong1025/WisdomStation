@@ -21,12 +21,14 @@ import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_
 public class TodoListPresenter implements TodoListContract.Presenter {
     private final TodoListContract.View mView;
     private final Context mContext;
+    private final DBDataSource mDBDataSource;
 
     private AlarmManager alarmManager;
 
     TodoListPresenter(TodoListContract.View view) {
         this.mView = view;
         this.mContext = view.getContext();
+        this.mDBDataSource = DBDataSource.getInstance(mContext.getApplicationContext());
     }
 
     @Override
@@ -45,13 +47,13 @@ public class TodoListPresenter implements TodoListContract.Presenter {
                     intent, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.cancel(pendingIntent);
         }
-        DBDataSource.getInstance(mContext).deleteOneTodo(todoEntity);
+        mDBDataSource.deleteOneTodo(todoEntity);
         mView.notifyLocalDataChange();
     }
 
     @Override
     public List<TodoEntity> queryTodo(boolean isFinish) {
-        return DBDataSource.getInstance(mContext).queryTodoByStatus(isFinish, CacheDataSource.getUserId());
+        return mDBDataSource.queryTodoByStatus(isFinish, CacheDataSource.getUserId());
     }
 
     /**

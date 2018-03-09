@@ -2,7 +2,6 @@ package com.winsion.dispatch.modules.grid.fragment.patrolplan;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -48,7 +47,7 @@ import static com.winsion.dispatch.modules.grid.constants.Intents.PatrolItem.PAT
  * 巡检任务以及界面
  * TODO 蓝牙需要动态权限
  */
-public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContract.View, AdapterView.OnItemClickListener, BluetoothAdapter.LeScanCallback {
+public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContract.View, AdapterView.OnItemClickListener {
     private TextView tvDate;
     private ListView lvList;
     private SwipeRefreshLayout swipeRefresh;
@@ -83,13 +82,13 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
                             break;
                         case BluetoothAdapter.STATE_ON:
                             logI("onReceive---------STATE_ON");
-                            mBtAdapter.startLeScan(PatrolPlanFragment.this);
+                            mBtAdapter.startLeScan(leScanCallback);
                             break;
                         case BluetoothAdapter.STATE_TURNING_OFF:
                             logI("onReceive---------STATE_TURNING_OFF");
                             break;
                         case BluetoothAdapter.STATE_OFF:
-                            mBtAdapter.stopLeScan(PatrolPlanFragment.this);
+                            mBtAdapter.stopLeScan(leScanCallback);
                             logI("onReceive---------STATE_OFF");
                             break;
                     }
@@ -164,20 +163,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
         lvList.setAdapter(mLvAdapter);
     }
 
-    private void initBluetooth() {
-        mBtAdapter = BluetoothAdapter.getDefaultAdapter();
-        mHandler.sendEmptyMessage(0);
-        // 检测蓝牙是否可用
-        if (verifyBluetooth() && !mBtAdapter.startLeScan(this)) {
-            showToast("开启检测蓝牙失败，建议重新打开蓝牙");
-        }
-        // 注册监听蓝牙状态改变的广播
-        IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-        mContext.registerReceiver(mBtReceiver, filter);
-    }
-
-    @Override
-    public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
+    private BluetoothAdapter.LeScanCallback leScanCallback = (device, rssi, scanRecord) -> {
         IbeaconUtils.iBeacon ibeacon = IbeaconUtils.fromScanData(device, rssi, scanRecord);
         if (ibeacon != null) {
             String btAddress = ibeacon.bluetoothAddress;
@@ -190,6 +176,18 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
                 updateOrAddBluetoothPoint(BPEntity);
             }
         }
+    };
+
+    private void initBluetooth() {
+        mBtAdapter = BluetoothAdapter.getDefaultAdapter();
+        mHandler.sendEmptyMessage(0);
+        // 检测蓝牙是否可用
+        if (verifyBluetooth() && !mBtAdapter.startLeScan(leScanCallback)) {
+            showToast(R.string.toast_scan_bluetooth_failed);
+        }
+        // 注册监听蓝牙状态改变的广播
+        IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        mContext.registerReceiver(mBtReceiver, filter);
     }
 
     private void updateOrAddBluetoothPoint(BPEntity BPEntity) {
@@ -318,7 +316,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     public void onDestroy() {
         super.onDestroy();
         if (mBtAdapter != null) {
-            mBtAdapter.stopLeScan(PatrolPlanFragment.this);
+            mBtAdapter.stopLeScan(leScanCallback);
         }
         EventBus.getDefault().unregister(this);
         mHandler.removeCallbacksAndMessages(null);

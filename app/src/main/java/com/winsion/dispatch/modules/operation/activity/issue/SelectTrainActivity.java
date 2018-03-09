@@ -34,7 +34,7 @@ import java.util.List;
  * 发送命令/协作中选择车次
  */
 
-public class SelectTrainActivity extends BaseActivity implements TextWatcher {
+public class SelectTrainActivity extends BaseActivity {
     private TitleView tvTitle;
     private EditText etSearch;
     private ListView lvList;
@@ -46,6 +46,38 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
     private ArrayList<RunEntity> listData = new ArrayList<>();  // ListView显示的数据
     private ArrayList<RunEntity> allData = new ArrayList<>();   // 所有的车站数据
     private SelectTrainAdapter mLvAdapter;
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String s1 = s.toString().trim().toLowerCase();
+            if (TextUtils.isEmpty(s.toString())) {
+                listData.clear();
+                listData.addAll(allData);
+                mLvAdapter.notifyDataSetChanged();
+            } else {
+                listData.clear();
+                for (RunEntity runEntity : allData) {
+                    String number = runEntity.getTrainnumber();
+                    String trainNumber = number.toLowerCase();
+                    if (trainNumber.startsWith(s1)) {
+                        listData.add(runEntity);
+                    }
+                }
+                mLvAdapter.notifyDataSetChanged();
+            }
+        }
+    };
 
     @Override
     protected int setContentView() {
@@ -83,43 +115,13 @@ public class SelectTrainActivity extends BaseActivity implements TextWatcher {
                 showToast(R.string.toast_no_selected_item);
             }
         });
-        etSearch.addTextChangedListener(this);
+        etSearch.addTextChangedListener(mTextWatcher);
         addOnClickListeners(R.id.tv_hint);
     }
 
     private void initAdapter() {
         mLvAdapter = new SelectTrainAdapter(mContext, listData);
         lvList.setAdapter(mLvAdapter);
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        String s1 = s.toString().trim().toLowerCase();
-        if (TextUtils.isEmpty(s.toString())) {
-            listData.clear();
-            listData.addAll(allData);
-            mLvAdapter.notifyDataSetChanged();
-        } else {
-            listData.clear();
-            for (RunEntity runEntity : allData) {
-                String number = runEntity.getTrainnumber();
-                String trainNumber = number.toLowerCase();
-                if (trainNumber.startsWith(s1)) {
-                    listData.add(runEntity);
-                }
-            }
-            mLvAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
     }
 
     private void initData() {

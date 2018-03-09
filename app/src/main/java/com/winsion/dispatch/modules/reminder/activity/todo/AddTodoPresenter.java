@@ -9,9 +9,9 @@ import android.os.Build;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.DBDataSource;
 import com.winsion.component.basic.entity.TodoEntity;
-import com.winsion.dispatch.modules.reminder.receiver.todo.TodoReceiver;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.constants.Formatter;
+import com.winsion.dispatch.modules.reminder.receiver.todo.TodoReceiver;
 
 import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_ID;
 
@@ -24,12 +24,14 @@ import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_
 public class AddTodoPresenter implements AddTodoContract.Presenter {
     private final AddTodoContract.View mView;
     private final Context mContext;
+    private final DBDataSource mDBDataSource;
 
     private AlarmManager alarmManager;
 
     AddTodoPresenter(AddTodoContract.View view) {
         this.mView = view;
         this.mContext = view.getContext();
+        this.mDBDataSource = DBDataSource.getInstance(mContext.getApplicationContext());
     }
 
     @Override
@@ -40,7 +42,7 @@ public class AddTodoPresenter implements AddTodoContract.Presenter {
 
     @Override
     public TodoEntity getTodoById(long todoId) {
-        return DBDataSource.getInstance(mContext).getTodoEntityById(todoId);
+        return mDBDataSource.getTodoEntityById(todoId);
     }
 
     @Override
@@ -52,14 +54,14 @@ public class AddTodoPresenter implements AddTodoContract.Presenter {
         todoEntity.setBelongUserId(CacheDataSource.getUserId());
         todoEntity.setFinished(false);
         todoEntity.setPlanDate(planDateMillis);
-        DBDataSource.getInstance(mContext).updateOrAddTodo(todoEntity);
+        mDBDataSource.updateOrAddTodo(todoEntity);
         setAlarm(todoEntity);
         mView.updateOrAddSuccess();
     }
 
     @Override
     public void updateTodo(String desc, String date, String time, long todoId) {
-        TodoEntity todoEntity = DBDataSource.getInstance(mContext).getTodoEntityById(todoId);
+        TodoEntity todoEntity = mDBDataSource.getTodoEntityById(todoId);
         // 取消之前的闹钟
         PendingIntent pendingIntent = getPendingIntent(todoEntity);
         alarmManager.cancel(pendingIntent);
@@ -69,7 +71,7 @@ public class AddTodoPresenter implements AddTodoContract.Presenter {
         long planDateMillis = ConvertUtils.parseDate(planDate, Formatter.DATE_FORMAT3);
         todoEntity.setContent(desc);
         todoEntity.setPlanDate(planDateMillis);
-        DBDataSource.getInstance(mContext).updateOrAddTodo(todoEntity);
+        mDBDataSource.updateOrAddTodo(todoEntity);
 
         // 设定新的闹钟
         setAlarm(todoEntity);

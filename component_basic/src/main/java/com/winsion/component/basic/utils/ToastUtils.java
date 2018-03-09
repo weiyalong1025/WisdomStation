@@ -19,6 +19,7 @@ public class ToastUtils {
     }
 
     public static void showToast(Context context, String msg) {
+        context = context.getApplicationContext();
         if (toast == null) {
             toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
             toast.show();

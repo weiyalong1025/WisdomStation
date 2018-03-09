@@ -19,12 +19,29 @@ import static com.winsion.component.basic.constants.Intents.Media.MEDIA_FILE;
  * Created by admin on 2016/8/13.
  * 添加备注
  */
-public class AddNoteActivity extends BaseActivity implements TextWatcher {
+public class AddNoteActivity extends BaseActivity {
     private EditText etNoteContent;
     private TitleView tvTitle;
     private TextView tvCounter;
-
     private File file;
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String note = s.toString();
+            tvCounter.setText(String.format("%s/150", String.valueOf(note.length())));
+        }
+    };
 
     @Override
     protected int setContentView() {
@@ -53,23 +70,7 @@ public class AddNoteActivity extends BaseActivity implements TextWatcher {
             finish();
         });
 
-        etNoteContent.addTextChangedListener(this);
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        String note = s.toString();
-        tvCounter.setText(String.format("%s/150", String.valueOf(note.length())));
+        etNoteContent.addTextChangedListener(mTextWatcher);
     }
 
     private void initData() {

@@ -26,8 +26,10 @@ public class SplashActivity extends BaseActivity {
         super.handlerMessage(msg);
         boolean hasComponentUser = CC.hasComponent("ComponentUser");
         if (hasComponentUser) {
-            CC.obtainBuilder("ComponentUser").setActionName("toLoginActivity").build().callAsync((cc, result) ->
-                    startActivity(MainActivity.class));
+            CC.obtainBuilder("ComponentUser")
+                    .setActionName("toLoginActivity")
+                    .build()
+                    .callAsync();
             mHandler.postDelayed(this::finish, 500);
         } else {
             // 如果没有用户组件直接进入主界面

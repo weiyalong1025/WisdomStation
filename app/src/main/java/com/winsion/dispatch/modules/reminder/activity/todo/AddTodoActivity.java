@@ -28,7 +28,7 @@ import static com.winsion.dispatch.modules.reminder.constants.Intents.Todo.TODO_
  * 创建时间：2017/12/27 1:53
  */
 
-public class AddTodoActivity extends BaseActivity implements AddTodoContract.View, TextWatcher {
+public class AddTodoActivity extends BaseActivity implements AddTodoContract.View {
     private TextView tvDate;
     private TextView tvTime;
     private EditText etDesc;
@@ -39,6 +39,24 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
     private AddTodoContract.Presenter mPresenter;
     private boolean isUpdate;   // 是否是更新
     private long todoId;
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String note = s.toString();
+            tvCounter.setText(String.format("%s/100", String.valueOf(note.length())));
+        }
+    };
 
     @Override
     protected int setContentView() {
@@ -89,7 +107,7 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
 
     private void initListener() {
         tvTitle.setOnBackClickListener(v -> finish());
-        etDesc.addTextChangedListener(this);
+        etDesc.addTextChangedListener(mTextWatcher);
         addOnClickListeners(R.id.tv_date, R.id.tv_time, R.id.btn_save);
     }
 
@@ -178,21 +196,5 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
     public void updateOrAddSuccess() {
         setResult(RESULT_OK);
         finish();
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        String note = s.toString();
-        tvCounter.setText(String.format("%s/100", String.valueOf(note.length())));
     }
 }

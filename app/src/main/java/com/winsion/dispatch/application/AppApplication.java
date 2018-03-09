@@ -3,6 +3,7 @@ package com.winsion.dispatch.application;
 import android.app.Application;
 
 import com.billy.cc.core.component.CC;
+import com.squareup.leakcanary.LeakCanary;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.utils.CrashUtils;
 import com.winsion.component.basic.utils.DirAndFileUtils;
@@ -35,6 +36,9 @@ public class AppApplication extends Application {
         CC.enableVerboseLog(BuildConfig.DEBUG);
         CC.enableDebug(BuildConfig.DEBUG);
         CC.enableRemoteCC(BuildConfig.DEBUG);
+
+        // 初始化内存监测
+        LeakCanary.install(this);
     }
 
     private void initLog() {

@@ -211,4 +211,10 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
     @Override
     public void onClick(View view) {
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

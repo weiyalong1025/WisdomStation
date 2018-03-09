@@ -148,7 +148,7 @@ public class ConvertUtils {
         }
     }
 
-    private static int hex2Dec(char hexChar) {
+    public static int hex2Dec(char hexChar) {
         if (hexChar >= 48 && hexChar <= 57) {
             return hexChar - 48;
         } else if (hexChar >= 65 && hexChar <= 70) {

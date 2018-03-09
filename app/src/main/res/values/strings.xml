@@ -186,6 +186,7 @@
     <string name="toast_no_subclass">没有可选子类</string>
     <string name="toast_get_patrol_data_first">需要先获取巡视项目</string>
     <string name="toast_user_login_on_other_device">当前用户在其他终端登录</string>
+    <string name="toast_scan_bluetooth_failed">开启检测蓝牙失败，建议重新打开</string>
 
     <string name="value_nothing">无</string>
     <string name="value_grid_task">网格任务</string>

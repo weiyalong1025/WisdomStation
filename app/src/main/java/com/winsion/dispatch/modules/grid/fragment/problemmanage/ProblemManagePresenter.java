@@ -18,10 +18,10 @@ import com.winsion.component.basic.data.entity.ResponseForQueryData;
 import com.winsion.component.basic.data.entity.WhereClause;
 import com.winsion.component.basic.data.listener.ResponseListener;
 import com.winsion.component.basic.utils.JsonUtils;
-import com.winsion.dispatch.modules.operation.constants.TaskType;
-import com.winsion.dispatch.modules.operation.entity.JobEntity;
-import com.winsion.dispatch.modules.operation.entity.JobParameter;
-import com.winsion.dispatch.modules.operation.entity.TaskEntity;
+import com.winsion.component.task.constants.TaskType;
+import com.winsion.component.task.entity.JobEntity;
+import com.winsion.component.task.entity.JobParameter;
+import com.winsion.component.task.entity.TaskEntity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

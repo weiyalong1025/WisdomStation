@@ -22,14 +22,13 @@ import com.bigkoo.pickerview.view.BasePickerView;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okserver.download.DownloadTask;
 import com.winsion.component.basic.R;
-import com.winsion.component.basic.constants.FileType;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.Urls;
+import com.winsion.component.basic.data.entity.MyObjectBox;
 import com.winsion.component.basic.data.listener.MyDownloadListener;
 import com.winsion.component.basic.data.listener.ResponseListener;
-import com.winsion.component.basic.entity.MyObjectBox;
-import com.winsion.component.basic.entity.UpdateEntity;
+import com.winsion.component.basic.media.constants.FileType;
 import com.winsion.component.basic.utils.AppUtils;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.DirAndFileUtils;
@@ -101,7 +100,7 @@ public class CommonBiz {
     private static void showUpdateDialog(Context context, UpdateEntity updateEntity) {
         // 需要更新,弹出对话框
         new CustomDialog.NormalBuilder(context)
-                .setTitle(R.string.title_version_update)
+                .setTitle(R.string.dialog_version_update)
                 .setMessage(updateEntity.getVersionContent())
                 .setPositiveButtonText(R.string.btn_update_now)
                 .setPositiveButton((dialog, which) -> downloadNewVersion(context, updateEntity.getFilePath()))
@@ -363,5 +362,39 @@ public class CommonBiz {
     @IntDef({FileType.PICTURE, FileType.VIDEO, FileType.AUDIO, FileType.TEXT})
     @Retention(RetentionPolicy.SOURCE)
     @interface FileTypeLimit {
+    }
+
+    /**
+     * Created by 10295 on 2018/1/30
+     */
+
+    public static class UpdateEntity {
+        private int versionNumber;
+        private String filePath;
+        private String versionContent;
+
+        public int getVersionNumber() {
+            return versionNumber;
+        }
+
+        public void setVersionNumber(int versionNumber) {
+            this.versionNumber = versionNumber;
+        }
+
+        public String getFilePath() {
+            return filePath;
+        }
+
+        public void setFilePath(String filePath) {
+            this.filePath = filePath;
+        }
+
+        public String getVersionContent() {
+            return versionContent;
+        }
+
+        public void setVersionContent(String versionContent) {
+            this.versionContent = versionContent;
+        }
     }
 }

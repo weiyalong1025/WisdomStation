@@ -8,20 +8,21 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.winsion.component.basic.listener.OnTabChangedListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class AlphaTabsIndicator extends LinearLayout {
-
     private ViewPager mViewPager;
     private OnTabChangedListener mListener;
     private List<AlphaTabView> mTabViews;
     private boolean IS_INIT;
     private int mChildCounts;   // 子View的数量
     private int mCurrentItem = 0;   // 当前的条目索引
+
+    public interface OnTabChangedListener {
+        void onTabSelected(int tabNum);
+    }
 
     public AlphaTabsIndicator(Context context) {
         this(context, null);

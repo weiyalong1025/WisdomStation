@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.component.basic.view.MyIndicator
+        android:id="@+id/mi_container"
+        style="@style/BasicIndicatorStyle">
+
+        <RadioButton
+            style="@style/BasicRadioButtonStyle"
+            android:background="@drawable/basic_selector_indicator_bg_left" />
+
+        <RadioButton
+            style="@style/BasicRadioButtonStyle"
+            android:background="@drawable/basic_selector_indicator_bg_right" />
+    </com.winsion.component.basic.view.MyIndicator>
+
+    <com.winsion.component.basic.view.NoScrollViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mi_container" />
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/basic_d48"
+        android:layout_height="@dimen/basic_d48"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/basic_ic_arrow_left"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>

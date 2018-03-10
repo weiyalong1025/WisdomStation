@@ -12,5 +12,5 @@
         android:layout_height="wrap_content"
         app:showSecondOption="false" />
 
-    <include layout="@layout/layout_status" />
+    <include layout="@layout/basic_layout_status" />
 </LinearLayout>

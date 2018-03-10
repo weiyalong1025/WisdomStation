@@ -58,7 +58,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
     @SuppressLint("InflateParams")
     @Override
     protected View setContentView() {
-        return LayoutInflater.from(mContext).inflate(R.layout.layout_status, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.basic_layout_status, null);
     }
 
     @Override

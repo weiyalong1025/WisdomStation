@@ -8,7 +8,7 @@ import android.os.Build;
 
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.DBDataSource;
-import com.winsion.component.basic.entity.TodoEntity;
+import com.winsion.component.basic.data.entity.TodoEntity;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.constants.Formatter;
 import com.winsion.dispatch.modules.reminder.receiver.todo.TodoReceiver;

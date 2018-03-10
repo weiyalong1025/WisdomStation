@@ -10,7 +10,7 @@ import com.winsion.component.basic.data.constants.Urls;
 import com.winsion.component.basic.data.listener.ResponseListener;
 import com.winsion.dispatch.modules.grid.constants.DeviceState;
 import com.winsion.dispatch.modules.grid.entity.PatrolItemEntity;
-import com.winsion.dispatch.modules.operation.entity.FileEntity;
+import com.winsion.component.task.entity.FileEntity;
 
 import java.util.List;
 

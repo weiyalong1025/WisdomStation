@@ -17,7 +17,7 @@ import com.winsion.dispatch.main.activity.MainActivity;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.reminder.activity.todo.AddTodoActivity;
 import com.winsion.dispatch.modules.reminder.adapter.TodoAdapter;
-import com.winsion.component.basic.entity.TodoEntity;
+import com.winsion.component.basic.data.entity.TodoEntity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

@@ -11,10 +11,10 @@ import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.DBDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.Urls;
-import com.winsion.component.basic.listener.SuccessListener;
+import com.winsion.component.basic.listener.StateListener;
 import com.winsion.component.basic.mqtt.MQTTClient;
-import com.winsion.component.user.login.activity.LoginActivity;
-import com.winsion.component.user.user.activity.UserActivity;
+import com.winsion.component.user.activity.login.LoginActivity;
+import com.winsion.component.user.activity.user.UserActivity;
 
 /**
  * Created by 10295 on 2018/3/7.
@@ -59,7 +59,7 @@ public class ComponentUser implements IComponent {
     /**
      * 用户注销
      */
-    public static void logout(Context context, String callId, SuccessListener successListener) {
+    public static void logout(Context context, String callId, StateListener successListener) {
         MQTTClient.destroy();
         // 取消自动登录
         DBDataSource.getInstance(context.getApplicationContext()).cancelAutoLogin();

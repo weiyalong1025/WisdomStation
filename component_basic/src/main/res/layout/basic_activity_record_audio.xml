@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.component.basic.view.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showConfirmButton="false"
+        app:titleText="@string/title_record" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/basic_d40"
+            android:text="@string/recording"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s18"
+            android:visibility="gone" />
+
+        <com.winsion.component.basic.view.WaveView
+            android:id="@+id/wave_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/basic_d200"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:maxVolume="100"
+            app:middleLine="@color/basic_black1"
+            app:voiceLine="@color/basic_blue1" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/basic_d138"
+            android:textColor="@color/basic_white1"
+            android:textSize="21sp"
+            tools:text="0s" />
+
+        <ImageView
+            android:id="@+id/btn_record"
+            android:layout_width="@dimen/basic_d64"
+            android:layout_height="@dimen/basic_d64"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/basic_d20"
+            android:scaleType="centerCrop"
+            android:src="@drawable/basic_btn_record"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+</LinearLayout>

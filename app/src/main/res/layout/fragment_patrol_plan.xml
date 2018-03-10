@@ -32,5 +32,5 @@
             tools:ignore="ContentDescription" />
     </RelativeLayout>
 
-    <include layout="@layout/layout_status" />
+    <include layout="@layout/basic_layout_status" />
 </LinearLayout>

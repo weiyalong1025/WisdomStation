@@ -61,10 +61,9 @@ configurations.all {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':component_user')
+    implementation project(':component_task')
     // GridLayout兼容库
     implementation 'com.android.support:gridlayout-v7:27.1.0'
-    // 事件传递
-    implementation 'org.greenrobot:eventbus:3.1.1'
     // 内存监测
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'

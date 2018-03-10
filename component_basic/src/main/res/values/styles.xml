@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="basic_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BasicAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/basic_black1</item>
         <item name="colorPrimaryDark">@color/basic_black3</item>
-        <item name="android:windowAnimationStyle">@style/basic_ActivityAnimation</item>
+        <item name="android:windowAnimationStyle">@style/BasicActivityAnimation</item>
         <item name="android:windowBackground">@color/basic_black1</item>
         <item name="android:navigationBarColor" tools:ignore="NewApi">@android:color/transparent
         </item>
     </style>
 
-    <style name="basic_ActivityAnimation" parent="@android:style/Animation.Activity">
+    <style name="BasicActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/basic_slide_right_in</item>
         <item name="android:activityOpenExitAnimation">@anim/basic_slide_left_out</item>
         <item name="android:activityCloseEnterAnimation">@anim/basic_slide_left_in</item>
         <item name="android:activityCloseExitAnimation">@anim/basic_slide_right_out</item>
+    </style>
+
+    <!-- Indicator中的RadioButton -->
+    <style name="BasicRadioButtonStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">@dimen/basic_d84</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/selector_indicator_text</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">@dimen/basic_s14</item>
+    </style>
+
+    <style name="BasicIndicatorStyle">
+        <item name="android:layout_height">@dimen/basic_d48</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/basic_black3</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">@dimen/basic_d9</item>
     </style>
 </resources>

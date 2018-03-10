@@ -28,7 +28,7 @@ public class DaofaRootFragment extends BaseFragment {
     @SuppressLint("InflateParams")
     @Override
     public View setContentView() {
-        return LayoutInflater.from(mContext).inflate(R.layout.fragment_two_pager, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.basic_fragment_two_pager, null);
     }
 
     @Override

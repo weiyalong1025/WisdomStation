@@ -291,7 +291,7 @@
                 android:divider="@null"
                 android:scrollbars="none"
                 tools:ignore="NestedScrolling"
-                tools:listitem="@layout/item_record" />
+                tools:listitem="@layout/basic_item_record" />
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

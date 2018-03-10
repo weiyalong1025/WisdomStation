@@ -33,7 +33,7 @@ public class ReminderRootFragment extends BaseFragment {
     @SuppressLint("InflateParams")
     @Override
     public View setContentView() {
-        return LayoutInflater.from(mContext).inflate(R.layout.fragment_three_pager, null);
+        return LayoutInflater.from(mContext).inflate(R.layout.basic_fragment_three_pager, null);
     }
 
     @Override

@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="SplashTheme" parent="basic_AppTheme">
+    <style name="SplashTheme" parent="BasicAppTheme">
         <item name="android:windowBackground">@drawable/bg_splash</item>
         <item name="android:windowFullscreen">true</item>
     </style>
@@ -12,31 +12,5 @@
         <item name="android:layout_weight">1</item>
         <item name="textColorNormal">@color/basic_gray1</item>
         <item name="textColorSelected">@color/basic_white1</item>
-    </style>
-
-    <!-- Indicator中的RadioButton -->
-    <style name="RadioButtonStyle">
-        <item name="android:gravity">center</item>
-        <item name="android:layout_width">@dimen/basic_d84</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:textColor">@color/selector_indicator_text</item>
-        <item name="android:button">@null</item>
-        <item name="android:textSize">@dimen/basic_s14</item>
-    </style>
-
-    <style name="IndicatorStyle">
-        <item name="android:layout_height">@dimen/basic_d48</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/basic_black3</item>
-        <item name="android:gravity">center</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:padding">@dimen/basic_d9</item>
-    </style>
-
-    <!-- TextView跑马灯效果，需要对该TexView设置isSelect(true) -->
-    <style name="MarqueeTextView">
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:marqueeRepeatLimit">marquee_forever</item>
     </style>
 </resources>

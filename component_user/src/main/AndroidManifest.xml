@@ -7,15 +7,15 @@
 
     <application>
         <activity
-            android:name=".login.activity.LoginActivity"
+            android:name=".activity.login.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".config.activity.LoginConfigActivity"
+            android:name=".activity.config.LoginConfigActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.winsion.component.user.user.activity.UserActivity"
+            android:name="com.winsion.component.user.activity.user.UserActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
 

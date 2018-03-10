@@ -12,7 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.winsion.component.basic.data.DBDataSource;
-import com.winsion.component.basic.entity.TodoEntity;
+import com.winsion.component.basic.data.entity.TodoEntity;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.reminder.fragment.todo.TodoListFragment;

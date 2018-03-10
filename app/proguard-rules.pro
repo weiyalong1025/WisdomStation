@@ -28,7 +28,7 @@
 -keep class com.winsion.component.basic.entity.** { *; }
 -keep class com.winsion.dispatch.modules.grid.entity.** { *; }
 -keep class com.winsion.dispatch.modules.reminder.entity.** { *; }
--keep class com.winsion.dispatch.modules.operation.entity.** { *; }
+-keep class com.winsion.component.task.entity.** { *; }
 #-------------------------------------------------------------------------
 
 #---------------------------------2.第三方包-------------------------------

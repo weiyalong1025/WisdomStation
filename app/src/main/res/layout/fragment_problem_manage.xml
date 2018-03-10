@@ -14,5 +14,5 @@
         android:textColor="@color/basic_white1"
         android:textSize="@dimen/basic_s16" />
 
-    <include layout="@layout/layout_status" />
+    <include layout="@layout/basic_layout_status" />
 </LinearLayout>

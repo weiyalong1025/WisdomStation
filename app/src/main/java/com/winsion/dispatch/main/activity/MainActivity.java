@@ -16,7 +16,7 @@ import com.winsion.component.basic.view.AlphaTabsIndicator;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.contacts.fragment.ContactsRootFragment;
 import com.winsion.dispatch.modules.daofa.fragment.DaofaRootFragment;
-import com.winsion.dispatch.modules.operation.fragment.OperationRootFragment;
+import com.winsion.component.task.fragment.OperationRootFragment;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.scene.fragment.SceneRootFragment;
 

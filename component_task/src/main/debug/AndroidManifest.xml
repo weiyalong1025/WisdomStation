@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.winsion.component.task">
+
+    <application
+        android:name="debug.TaskApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/basic_ic_launcher"
+        android:label="@string/task_app_name"
+        android:persistent="true"
+        android:supportsRtl="true"
+        android:theme="@style/BasicAppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+    </application>
+</manifest>

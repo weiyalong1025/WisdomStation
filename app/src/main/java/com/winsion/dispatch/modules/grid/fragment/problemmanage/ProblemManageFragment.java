@@ -15,8 +15,8 @@ import com.winsion.component.basic.data.constants.OpeType;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.grid.adapter.ProblemManageAdapter;
-import com.winsion.dispatch.modules.operation.constants.TaskState;
-import com.winsion.dispatch.modules.operation.entity.TaskEntity;
+import com.winsion.component.task.constants.TaskState;
+import com.winsion.component.task.entity.TaskEntity;
 
 import java.util.ArrayList;
 import java.util.List;

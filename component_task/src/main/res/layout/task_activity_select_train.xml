@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.component.basic.view.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleText="@string/title_select_train" />
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 加载完成显示 -->
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/basic_gray8"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <include layout="@layout/basic_view_search" />
+
+            <ListView
+                android:id="@+id/lv_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                tools:listitem="@layout/task_item_select_train" />
+        </LinearLayout>
+
+        <!-- 加载中显示 -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/basic_d50"
+            android:layout_height="@dimen/basic_d50"
+            android:layout_gravity="center" />
+
+        <!-- 提示信息时显示(加载失败/数据为空...) -->
+        <TextView
+            android:id="@+id/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/basic_d10"
+            android:text="@string/hint_load_failed_click_retry"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s18"
+            android:visibility="gone" />
+    </FrameLayout>
+</LinearLayout>

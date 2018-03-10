@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 选择框 -->
+    <com.winsion.component.basic.view.SpinnerView
+        android:id="@+id/sv_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sv_spinner">
+
+        <include layout="@layout/basic_layout_status" />
+
+        <TextView
+            android:id="@+id/train_number_index"
+            android:layout_width="@dimen/basic_d130"
+            android:layout_height="@dimen/basic_d130"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/basic_d20"
+            android:background="@drawable/task_bg_circle_blue"
+            android:gravity="center"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s32"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_shade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sv_spinner"
+        android:background="@color/basic_black2"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>

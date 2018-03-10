@@ -30,7 +30,7 @@ public class GridActivity extends BaseActivity {
     @SuppressLint("InflateParams")
     @Override
     public int setContentView() {
-        return R.layout.fragment_two_pager;
+        return R.layout.basic_fragment_two_pager;
     }
 
     @Override

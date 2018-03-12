@@ -27,7 +27,7 @@ public class AppApplication extends Application {
         CrashUtils.getInstance().init(this);
 
         // 初始化网络库
-        NetDataSource.init(this, BuildConfig.DEBUG, getString(R.string.app_name));
+        NetDataSource.init(this, BuildConfig.DEBUG, getString(R.string.scanner_app_name));
 
         // 初始化LOG
         initLog();
@@ -48,7 +48,7 @@ public class AppApplication extends Application {
         } catch (IOException e) {
             logDir = getCacheDir().toString();
         }
-        String logTag = getString(R.string.app_name);
+        String logTag = getString(R.string.scanner_app_name);
         LogUtils.init(BuildConfig.DEBUG, true, logDir, LogUtils.FILTER_V, logTag);
     }
 }

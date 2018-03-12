@@ -23,7 +23,7 @@
             android:layout_width="@dimen/basic_d23"
             android:layout_height="@dimen/basic_d23"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_command"
+            android:src="@drawable/task_ic_command"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -65,7 +65,7 @@
             android:layout_width="@dimen/basic_d23"
             android:layout_height="@dimen/basic_d23"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_cooperation"
+            android:src="@drawable/task_ic_cooperation"
             tools:ignore="ContentDescription" />
 
         <TextView

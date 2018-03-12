@@ -203,7 +203,7 @@
                 android:layout_below="@id/refer6"
                 android:padding="@dimen/basic_d10"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_add"
+                android:src="@drawable/task_ic_add"
                 tools:ignore="ContentDescription" />
 
             <View
@@ -348,7 +348,7 @@
                 android:divider="@null"
                 android:scrollbars="none"
                 tools:ignore="NestedScrolling"
-                tools:listitem="@layout/basic_item_record" />
+                tools:listitem="@layout/media_item_record" />
         </RelativeLayout>
     </ScrollView>
 

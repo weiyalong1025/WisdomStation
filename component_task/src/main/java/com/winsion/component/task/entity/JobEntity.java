@@ -1,6 +1,6 @@
 package com.winsion.component.task.entity;
 
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.constants.Formatter;
 
@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by wyl on 2017/6/13
  */
-public class JobEntity implements Serializable, CommonBiz.HalfSearchCondition {
+public class JobEntity implements Serializable, BasicBiz.HalfSearchCondition {
     private String joboperatorsid;  // 作业操作ID
     private String jobsid;  // 作业ID
     private String teamsid; // 操作组编号

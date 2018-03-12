@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.billy.cc.core.component.CC;
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.mqtt.MQTTClient;
@@ -30,7 +30,7 @@ public class MainPresenter implements MainContract.Presenter, MQTTClient.Observe
     @Override
     public void start() {
         // 检查更新
-        CommonBiz.checkVersionUpdate(mContext, this, false);
+        BasicBiz.checkVersionUpdate(mContext, this, false);
         // 监听MQ消息
         MQTTClient.addObserver(this);
     }

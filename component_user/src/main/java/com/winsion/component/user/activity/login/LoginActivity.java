@@ -25,7 +25,7 @@ import android.widget.RelativeLayout;
 
 import com.billy.cc.core.component.CC;
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.entity.UserEntity;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.utils.ViewUtils;
@@ -211,7 +211,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,
                 if (isSoftShow) {
                     // 如果软键盘是弹出状态先隐藏软键盘
                     delayMillis = 100;
-                    CommonBiz.hideKeyboard(view);
+                    BasicBiz.hideKeyboard(view);
                 }
                 mHandler.postDelayed(() -> {
                     arrowUp();
@@ -291,7 +291,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,
     @Override
     public void onLogin() {
         // 隐藏软键盘
-        CommonBiz.hideKeyboard(etUsername);
+        BasicBiz.hideKeyboard(etUsername);
         // 登陆中，显示dialog
         if (customDialog == null) {
             customDialog = new CustomDialog.StateBuilder(mContext)

@@ -2,7 +2,7 @@ package com.winsion.component.task.biz;
 
 import android.content.Context;
 
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.OpeCode;
@@ -39,7 +39,7 @@ public class ChangeStatusBiz {
         JobParameter jobParameter = new JobParameter();
         jobParameter.setUsersId(CacheDataSource.getUserId());
         jobParameter.setJobsId(jobEntity.getJobsid());
-        jobParameter.setSsId(CommonBiz.getBSSID(context));
+        jobParameter.setSsId(BasicBiz.getBSSID(context));
         jobParameter.setTaskId(jobEntity.getTasksid());
         jobParameter.setOpormotId(jobEntity.getJoboperatorsid());
         jobParameter.setNote(note);

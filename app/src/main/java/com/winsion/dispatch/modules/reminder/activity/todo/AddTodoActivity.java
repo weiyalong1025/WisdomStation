@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.entity.TodoEntity;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.constants.Formatter;
@@ -142,7 +142,7 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
      */
     private void showDatePicker() {
         // 隐藏键盘
-        CommonBiz.hideKeyboard(etDesc);
+        BasicBiz.hideKeyboard(etDesc);
         String dateStr = getText(tvDate);
         Date currentDate = new Date(ConvertUtils.parseDate(dateStr, Formatter.DATE_FORMAT4));
         Calendar calendar = Calendar.getInstance();
@@ -151,13 +151,13 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
         TimePickerView.OnTimeSelectListener listener = (Date date, View v) ->
                 tvDate.setText(ConvertUtils.formatDate(date.getTime(), Formatter.DATE_FORMAT4));
 
-        TimePickerView datePickerView = CommonBiz.getMyTimePickerBuilder(mContext, listener)
+        TimePickerView datePickerView = BasicBiz.getMyTimePickerBuilder(mContext, listener)
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .setRange(calendar.get(Calendar.YEAR), calendar.get(Calendar.YEAR) + 1)
                 .setDate(calendar)
                 .build();
 
-        CommonBiz.selfAdaptionTopBar(datePickerView);
+        BasicBiz.selfAdaptionTopBar(datePickerView);
         datePickerView.show();
     }
 
@@ -165,7 +165,7 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
      * 显示时间选择器
      */
     private void showTimePicker() {
-        CommonBiz.hideKeyboard(etDesc);
+        BasicBiz.hideKeyboard(etDesc);
         String time = getText(tvTime);
         String[] split1 = time.split(":");
         Date currentDate = new Date();
@@ -177,13 +177,13 @@ public class AddTodoActivity extends BaseActivity implements AddTodoContract.Vie
         TimePickerView.OnTimeSelectListener listener = (Date date, View v) ->
                 tvTime.setText(ConvertUtils.formatDate(date.getTime(), Formatter.DATE_FORMAT7));
 
-        TimePickerView timePickerView = CommonBiz.getMyTimePickerBuilder(mContext, listener)
+        TimePickerView timePickerView = BasicBiz.getMyTimePickerBuilder(mContext, listener)
                 .setType(new boolean[]{false, false, false, true, true, false})
                 .setRange(calendar.get(Calendar.YEAR), calendar.get(Calendar.YEAR) + 1)
                 .setDate(calendar)
                 .build();
 
-        CommonBiz.selfAdaptionTopBar(timePickerView);
+        BasicBiz.selfAdaptionTopBar(timePickerView);
         timePickerView.show();
     }
 

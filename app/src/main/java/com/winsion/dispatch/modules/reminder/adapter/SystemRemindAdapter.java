@@ -3,12 +3,12 @@ package com.winsion.dispatch.modules.reminder.adapter;
 import android.content.Context;
 import android.support.annotation.StringRes;
 
-import com.winsion.dispatch.R;
 import com.winsion.component.basic.listener.ClickListener;
+import com.winsion.component.basic.utils.ToastUtils;
 import com.winsion.component.task.constants.TaskType;
+import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.reminder.constants.ReadStatus;
 import com.winsion.dispatch.modules.reminder.entity.SystemRemindEntity;
-import com.winsion.component.basic.utils.ToastUtils;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 
@@ -54,7 +54,7 @@ public class SystemRemindAdapter extends CommonAdapter<SystemRemindEntity> {
                 typeTextResId = R.string.title_plan_remind;
                 break;
         }
-        viewHolder.setText(R.id.tv_remind_type, mContext.getString(typeTextResId));
+        viewHolder.setText(R.id.tv_remind_type, getString(typeTextResId));
         viewHolder.setText(R.id.tv_remind_content, systemRemindEntity.getVoicecontent());
         String sendTime = systemRemindEntity.getSendtime();
         viewHolder.setText(R.id.tv_remind_date, sendTime.substring(0, sendTime.length() - 2));
@@ -79,9 +79,9 @@ public class SystemRemindAdapter extends CommonAdapter<SystemRemindEntity> {
             viewHolder.setVisible(R.id.iv_delete, false);
             viewHolder.setVisible(R.id.iv_select, true);
             if (selectData.contains(systemRemindEntity)) {
-                viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box);
+                viewHolder.setImageResource(R.id.iv_select, R.drawable.basic_ic_check_box);
             } else {
-                viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box_outline);
+                viewHolder.setImageResource(R.id.iv_select, R.drawable.basic_ic_check_box_outline);
             }
         } else {
             viewHolder.setVisible(R.id.iv_delete, true);
@@ -104,10 +104,10 @@ public class SystemRemindAdapter extends CommonAdapter<SystemRemindEntity> {
         } else {
             if (selectData.contains(systemRemindEntity)) {
                 selectData.remove(systemRemindEntity);
-                viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box_outline);
+                viewHolder.setImageResource(R.id.iv_select, R.drawable.basic_ic_check_box_outline);
             } else {
                 selectData.add(systemRemindEntity);
-                viewHolder.setImageResource(R.id.iv_select, R.drawable.ic_check_box);
+                viewHolder.setImageResource(R.id.iv_select, R.drawable.basic_ic_check_box);
             }
             if (onSelectChangeListener != null) {
                 onSelectChangeListener.onSelectChange(selectData.size());

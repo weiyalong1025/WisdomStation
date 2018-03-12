@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.model.HttpParams;
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.DBDataSource;
 import com.winsion.component.basic.data.NetDataSource;
@@ -91,7 +91,7 @@ class LoginPresenter implements LoginContract.Presenter, MQTTClient.ConnectListe
         }
 
         // 获取当前用户连接的WIFI信息用来定位
-        String bssid = CommonBiz.getBSSID(mContext);
+        String bssid = BasicBiz.getBSSID(mContext);
 
         HttpParams httpParams = new HttpParams();
         httpParams.put("account", username);

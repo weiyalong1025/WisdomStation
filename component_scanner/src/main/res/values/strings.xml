@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
+    <string name="scanner_app_name">二维码扫描组件</string>
+
+    <string name="title_qr_code">二维码/条码</string>
+
+    <string name="toast_capture_failed">扫描失败</string>
+
+    <string name="hint_capture_qr_code">将二维码/条码放入框内，即可自动扫描</string>
+</resources>

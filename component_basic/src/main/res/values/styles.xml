@@ -22,7 +22,7 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_width">@dimen/basic_d84</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textColor">@color/selector_indicator_text</item>
+        <item name="android:textColor">@color/basic_selector_indicator_text</item>
         <item name="android:button">@null</item>
         <item name="android:textSize">@dimen/basic_s14</item>
     </style>

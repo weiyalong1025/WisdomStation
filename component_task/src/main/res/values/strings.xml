@@ -21,6 +21,16 @@
     <string name="name_issue_cooperation_group">发起班组：</string>
     <string name="name_train_number">车次</string>
     <string name="name_plan_time">计划时间</string>
+    <string name="name_arrive_time">到位时间</string>
+    <string name="name_finish_time">完成时间</string>
+    <string name="name_device_name">设备名称：</string>
+    <string name="name_time_limit">解决时限：</string>
+    <string name="name_problem_desc">问题描述：</string>
+    <string name="name_submit_time">提交时间：</string>
+    <string name="name_bluetooth_address">蓝牙地址：</string>
+    <string name="name_last_time_receive_signal">最近收到信号时间：</string>
+    <string name="name_plan_start">计划开始</string>
+    <string name="name_plan_finish">计划结束</string>
 
     <string name="btn_issue">发布</string>
     <string name="btn_wait_pass">待验收</string>
@@ -33,6 +43,11 @@
     <string name="btn_video"><![CDATA[录像>>]]></string>
     <string name="btn_record"><![CDATA[录音>>]]></string>
     <string name="btn_broadcast">广播</string>
+    <string name="btn_device_repair">设备报修</string>
+    <string name="btn_submit">上报</string>
+    <string name="btn_add_problem">添加问题</string>
+    <string name="btn_pass">通过</string>
+    <string name="btn_not_pass">未通过</string>
 
     <string name="title_issue_command">发布命令</string>
     <string name="title_issue_cooperation">发布协作</string>
@@ -45,6 +60,9 @@
     <string name="title_alarm_detail">预警详情</string>
     <string name="title_grid_detail">网格详情</string>
     <string name="title_cooperation_detail">协作详情</string>
+    <string name="title_patrol_item">巡视项目</string>
+    <string name="title_input_device_id">请输入设备ID</string>
+    <string name="title_problem_list">问题列表</string>
 
     <string name="value_nothing">无</string>
     <string name="value_grid_task">网格任务</string>
@@ -81,27 +99,40 @@
     <string name="toast_finish_time_cannot_be_earlier_than_start_time">结束时间不能早于开始时间</string>
     <string name="toast_confirm_success">确认成功</string>
     <string name="toast_confirm_failed">确认失败</string>
+    <string name="toast_get_patrol_data_first">需要先获取巡视项目</string>
+    <string name="toast_submit_failed">上报失败</string>
+    <string name="toast_scan_bluetooth_failed">开启检测蓝牙失败，建议重新打开</string>
+    <string name="toast_bluetooth_not_support">该设备不支持蓝牙功能</string>
+    <string name="toast_open_bluetooth_failed">打开蓝牙失败，巡视功能暂不可用</string>
+    <string name="toast_add_device_first">请先添加设备</string>
+    <string name="toast_no_subclass">没有可选子类</string>
+    <string name="toast_get_subclass_failed">获取子类失败</string>
+    <string name="toast_device_mismatch">设备不匹配</string>
+    <string name="toast_check_device_failed">查询设备失败</string>
 
     <string name="dialog_sure_to_start">确定要开始吗？</string>
     <string name="dialog_sure_to_finish">确定要完成吗？</string>
     <string name="dialog_on_issue">发布中</string>
     <string name="dialog_after_exiting_data_will_be_cleared_are_you_sure">退出之后将清空所填数据，确定退出吗?</string>
-
-    <string name="spinner_all">全部</string>
-    <string name="spinner_not_started">未开始</string>
-    <string name="spinner_doing">进行中</string>
-    <string name="spinner_finished">已完成</string>
-    <string name="spinner_unfinished">未完成</string>
-    <string name="spinner_station_name">智慧车站</string>
+    <string name="dialog_sure_no_problem">确定没有问题吗？</string>
+    <string name="dialog_sure_exist_problem">确定存在问题吗？</string>
+    <string name="dialog_add_problem_desc">添加问题描述</string>
+    <string name="dialog_on_submit">上报中</string>
+    <string name="dialog_on_search">查询中</string>
+    <string name="dialog_sure_to_pass">确定通过吗？</string>
+    <string name="dialog_sure_to_not_pass">确定未通过吗？</string>
 
     <string name="tab_my_task">我的任务</string>
     <string name="tab_task_monitor">任务监控</string>
     <string name="tab_command_and_cooperation">命令与协作</string>
+    <string name="tab_patrol_plan">巡视计划</string>
+    <string name="tab_problem_manager">问题管理</string>
 
     <string name="hint_select_station">请选择车站</string>
 
     <string name="default_check_state">默认状态</string>
     <string name="default_counter_150">0/150</string>
+    <string name="default_patrol_date">----年--月--日巡检计划</string>
 
     <!-- 任务状态筛选 -->
     <string-array name="taskStatusArray">

@@ -19,7 +19,7 @@
             android:layout_width="@dimen/basic_d24"
             android:layout_height="@dimen/basic_d24"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_check_box_outline"
+            android:src="@drawable/basic_ic_check_box_outline"
             tools:ignore="ContentDescription" />
 
         <TextView

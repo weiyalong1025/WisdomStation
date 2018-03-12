@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.winsion.component.basic.base.BaseFragment;
+import com.winsion.component.task.activity.GridActivity;
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.modules.grid.activity.GridActivity;
 
 /**
  * Created by 10295 on 2017/12/10 0010.

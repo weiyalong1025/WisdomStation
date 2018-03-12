@@ -94,7 +94,7 @@
                     android:layout_height="@dimen/basic_d54"
                     android:layout_alignParentEnd="true"
                     android:padding="@dimen/basic_d15"
-                    android:src="@drawable/ic_check_box_outline"
+                    android:src="@drawable/basic_ic_check_box_outline"
                     android:visibility="gone"
                     tools:ignore="ContentDescription" />
 

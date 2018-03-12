@@ -11,26 +11,27 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.OpeCode;
 import com.winsion.component.basic.data.constants.Urls;
 import com.winsion.component.basic.data.listener.ResponseListener;
 import com.winsion.component.basic.data.listener.UploadListener;
-import com.winsion.component.basic.media.activity.RecordAudioActivity;
-import com.winsion.component.basic.media.activity.RecordVideoActivity;
-import com.winsion.component.basic.media.activity.TakePhotoActivity;
-import com.winsion.component.basic.media.adapter.RecordAdapter;
-import com.winsion.component.basic.media.constants.FileStatus;
-import com.winsion.component.basic.media.constants.FileType;
-import com.winsion.component.basic.media.entity.LocalRecordEntity;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.ViewUtils;
 import com.winsion.component.basic.utils.constants.Formatter;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.TitleView;
+import com.winsion.component.media.activity.RecordAudioActivity;
+import com.winsion.component.media.activity.RecordVideoActivity;
+import com.winsion.component.media.activity.TakePhotoActivity;
+import com.winsion.component.media.adapter.RecordAdapter;
+import com.winsion.component.media.biz.MediaBiz;
+import com.winsion.component.media.constants.FileStatus;
+import com.winsion.component.media.constants.FileType;
+import com.winsion.component.media.entity.LocalRecordEntity;
 import com.winsion.component.task.R;
 import com.winsion.component.task.constants.TaskType;
 import com.winsion.component.task.entity.FileEntity;
@@ -45,7 +46,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.winsion.component.basic.media.constants.Intents.Media.MEDIA_FILE;
+import static com.winsion.component.media.constants.Intents.Media.MEDIA_FILE;
 import static com.winsion.component.task.constants.Intents.Issue.ISSUE_TYPE;
 import static com.winsion.component.task.constants.Intents.Issue.SELECT_TEAM;
 import static com.winsion.component.task.constants.Intents.Issue.TO_TEAM_ENTITY;
@@ -225,7 +226,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         // 检查数据是否填写完整
         if (checkDataIsComplete()) {
             // 隐藏软键盘
-            CommonBiz.hideKeyboard(tvTitle);
+            BasicBiz.hideKeyboard(tvTitle);
             // 发布中，显示dialog
             showOnIssueDialog();
             // 发布
@@ -239,7 +240,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
             PublishParameter publishParameter = new PublishParameter();
             publishParameter.setRunsId(runsId);
-            publishParameter.setSsId(CommonBiz.getBSSID(this));
+            publishParameter.setSsId(BasicBiz.getBSSID(this));
             publishParameter.setUsersId(CacheDataSource.getUserId());
             publishParameter.setTaskName(getText(etTitle));
             publishParameter.setPlanEndTime(getText(tvEndTime));
@@ -322,7 +323,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             startActivityForResult(SelectTrainActivity.class, CODE_SELECT_TRAIN);
         } else if (id == R.id.btn_take_photo) {
             try {
-                photoFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
+                photoFile = MediaBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
                 intent = new Intent(mContext, TakePhotoActivity.class);
                 intent.putExtra(MEDIA_FILE, photoFile);
                 startActivityForResult(intent, CODE_TAKE_PHOTO);
@@ -331,7 +332,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             }
         } else if (id == R.id.btn_video) {
             try {
-                videoFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.VIDEO);
+                videoFile = MediaBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.VIDEO);
                 intent = new Intent(mContext, RecordVideoActivity.class);
                 intent.putExtra(MEDIA_FILE, videoFile);
                 startActivityForResult(intent, CODE_RECORD_VIDEO);
@@ -340,7 +341,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
             }
         } else if (id == R.id.btn_record) {
             try {
-                audioFile = CommonBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.AUDIO);
+                audioFile = MediaBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.AUDIO);
                 intent = new Intent(mContext, RecordAudioActivity.class);
                 intent.putExtra(MEDIA_FILE, audioFile);
                 startActivityForResult(intent, CODE_RECORD_AUDIO);
@@ -352,9 +353,9 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     private void showStationPickerView(View v) {
         // 隐藏软键盘
-        CommonBiz.hideKeyboard(v);
+        BasicBiz.hideKeyboard(v);
         // 创建选择器
-        OptionsPickerView.Builder pickerBuilder = CommonBiz.getMyOptionPickerBuilder(mContext,
+        OptionsPickerView.Builder pickerBuilder = BasicBiz.getMyOptionPickerBuilder(mContext,
                 (int options1, int options2, int options3, View v1) -> {
                     selectStationIndex = options1;
                     tvStation.setText(stationList.get(options1));
@@ -362,7 +363,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         OptionsPickerView<String> pickerView = new OptionsPickerView<>(pickerBuilder);
         pickerView.setPicker(stationList);
         pickerView.setSelectOptions(selectStationIndex);
-        CommonBiz.selfAdaptionTopBar(pickerView);
+        BasicBiz.selfAdaptionTopBar(pickerView);
         pickerView.show();
     }
 
@@ -374,7 +375,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
      */
     private void showTimePickerView(TextView textView, int type) {
         // 隐藏软键盘
-        CommonBiz.hideKeyboard(textView);
+        BasicBiz.hideKeyboard(textView);
 
         // 获取回显时间
         Date currentDate;
@@ -405,12 +406,12 @@ public class IssueActivity extends BaseActivity implements UploadListener {
         };
 
         // 创建选择器
-        TimePickerView timePickerView = CommonBiz.getMyTimePickerBuilder(mContext, onTimeSelectListener)
+        TimePickerView timePickerView = BasicBiz.getMyTimePickerBuilder(mContext, onTimeSelectListener)
                 .setType(new boolean[]{true, true, true, true, true, false})
                 .setRange(calendar.get(Calendar.YEAR), calendar.get(Calendar.YEAR) + 1)
                 .setDate(calendar)
                 .build();
-        CommonBiz.selfAdaptionTopBar(timePickerView);
+        BasicBiz.selfAdaptionTopBar(timePickerView);
         timePickerView.show();
     }
 

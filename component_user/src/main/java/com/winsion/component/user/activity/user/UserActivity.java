@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.listener.StateListener;
@@ -66,7 +66,7 @@ public class UserActivity extends BaseActivity {
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.rl_check_update) {
-            CommonBiz.checkVersionUpdate(mContext, this, true);
+            BasicBiz.checkVersionUpdate(mContext, this, true);
         } else if (id == R.id.btn_logout) {
             showDialog();
             ComponentUser.logout(mContext, callId, new StateListener() {

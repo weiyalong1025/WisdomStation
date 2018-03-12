@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.data.constants.FieldKey;
@@ -18,10 +18,10 @@ import com.winsion.component.basic.data.entity.WhereClause;
 import com.winsion.component.basic.data.listener.MyDownloadListener;
 import com.winsion.component.basic.data.listener.ResponseListener;
 import com.winsion.component.basic.data.listener.UploadListener;
-import com.winsion.component.basic.media.constants.FileStatus;
-import com.winsion.component.basic.media.constants.FileType;
-import com.winsion.component.basic.media.entity.LocalRecordEntity;
-import com.winsion.component.basic.media.entity.ServerRecordEntity;
+import com.winsion.component.media.constants.FileStatus;
+import com.winsion.component.media.constants.FileType;
+import com.winsion.component.media.entity.LocalRecordEntity;
+import com.winsion.component.media.entity.ServerRecordEntity;
 import com.winsion.component.task.biz.ChangeStatusBiz;
 import com.winsion.component.task.constants.TrainAreaType;
 import com.winsion.component.task.entity.FileEntity;
@@ -139,7 +139,7 @@ public class OperatorTaskDetailPresenter extends ChangeStatusBiz implements Oper
     @Override
     public void upload(JobEntity jobEntity, File file, UploadListener uploadListener) {
         JobParameter jobParameter = new JobParameter();
-        jobParameter.setSsId(CommonBiz.getBSSID(mContext));
+        jobParameter.setSsId(BasicBiz.getBSSID(mContext));
         jobParameter.setTaskId(jobEntity.getTasksid());
         jobParameter.setOpormotId(jobEntity.getJoboperatorsid());
         jobParameter.setOpType(OpeType.RUNNING);

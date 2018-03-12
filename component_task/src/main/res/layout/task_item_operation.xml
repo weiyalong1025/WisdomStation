@@ -42,7 +42,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/basic_d45"
                     android:layout_weight="0.9"
-                    android:src="@drawable/ic_not_start"
+                    android:src="@drawable/task_ic_not_start"
                     tools:ignore="ContentDescription" />
 
                 <LinearLayout
@@ -64,7 +64,7 @@
                             android:layout_height="@dimen/basic_d23"
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="@dimen/basic_d3"
-                            android:src="@drawable/ic_command"
+                            android:src="@drawable/task_ic_command"
                             android:visibility="gone"
                             tools:ignore="ContentDescription" />
 
@@ -92,7 +92,7 @@
                             android:layout_marginTop="@dimen/basic_d3"
                             android:visibility="gone"
                             tools:ignore="ContentDescription"
-                            tools:src="@drawable/ic_type_alarm" />
+                            tools:src="@drawable/task_ic_type_alarm" />
 
                         <TextView
                             android:id="@+id/tv_task_name"

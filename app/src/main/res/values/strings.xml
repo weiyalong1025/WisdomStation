@@ -1,56 +1,26 @@
 <resources>
     <string name="app_name">智慧车站</string>
 
-    <string name="btn_pass">通过</string>
-    <string name="btn_not_pass">未通过</string>
     <string name="btn_add">添加</string>
     <string name="btn_update">更新</string>
     <string name="btn_delete">删除</string>
     <string name="btn_select_all">全选</string>
     <string name="btn_select_none">全不选</string>
-    <string name="btn_submit">上报</string>
-    <string name="btn_add_problem">添加问题</string>
-    <string name="btn_device_repair">设备报修</string>
 
-    <string name="default_patrol_date">----年--月--日巡检计划</string>
     <string name="default_counter_100">0/100</string>
 
-    <string name="dialog_on_search">查询中</string>
-    <string name="dialog_on_submit">上报中</string>
     <string name="dialog_sure_to_delete">确定要删除吗？</string>
-    <string name="dialog_add_problem_desc">添加问题描述</string>
-    <string name="dialog_sure_exist_problem">确定存在问题吗？</string>
-    <string name="dialog_sure_no_problem">确定没有问题吗？</string>
-    <string name="dialog_sure_to_pass">确定通过吗？</string>
-    <string name="dialog_sure_to_not_pass">确定未通过吗？</string>
 
-    <string name="hint_capture_qr_code">将二维码/条码放入框内，即可自动扫描</string>
-
-    <string name="name_plan_start">计划开始</string>
-    <string name="name_plan_finish">计划结束</string>
-    <string name="name_bluetooth_address">蓝牙地址：</string>
-    <string name="name_last_time_receive_signal">最近收到信号时间：</string>
-    <string name="name_submit_time">提交时间：</string>
-    <string name="name_device_name">设备名称：</string>
     <string name="name_reminder_content">提醒内容：</string>
-    <string name="name_arrive_time">到位时间</string>
-    <string name="name_finish_time">完成时间</string>
-    <string name="name_time_limit">解决时限：</string>
-    <string name="name_problem_desc">问题描述：</string>
 
     <string name="prefix_sure_to_delete">确定要删除</string>
     <string name="prefix_items">项吗？</string>
     <string name="prefix_selected">已选</string>
 
-
-
     <string name="suffix_cooperation">个协作</string>
     <string name="suffix_year">年</string>
     <string name="suffix_month">月</string>
     <string name="suffix_item">项</string>
-
-    <string name="symbol_separator">/</string>
-    <string name="symbol_hour_minute">"--:--"</string>
 
     <string name="tab_dispatch">到发</string>
     <string name="tab_operation">作业</string>
@@ -65,39 +35,22 @@
     <string name="tab_user_message">用户消息</string>
     <string name="tab_todo">待办事项</string>
     <string name="tab_system_remind">系统提醒</string>
-    <string name="tab_patrol_plan">巡视计划</string>
-    <string name="tab_problem_manager">问题管理</string>
 
-    <string name="title_problem_list">问题列表</string>
     <string name="title_add_todo">添加待办事项</string>
     <string name="title_operation_remind">作业提醒</string>
     <string name="title_command_remind">命令提醒</string>
     <string name="title_cooperation_remind">协作提醒</string>
     <string name="title_grid_remind">网格提醒</string>
     <string name="title_plan_remind">预案提醒</string>
-    <string name="title_patrol_item">巡视项目</string>
-    <string name="title_qr_code">二维码/条码</string>
-    <string name="title_input_device_id">请输入设备ID</string>
     <string name="title_key_passenger">重点旅客</string>
     <string name="title_lost">失误登记</string>
 
-    <string name="toast_bluetooth_not_support">该设备不支持蓝牙功能</string>
-    <string name="toast_open_bluetooth_failed">打开蓝牙失败，巡视功能暂不可用</string>
     <string name="toast_only_read_remind_can_be_selected">只有已读提醒才能被选中</string>
     <string name="toast_only_read_remind_can_be_deleted">只有已读提醒才可以删除</string>
     <string name="toast_delete_success">删除成功</string>
     <string name="toast_delete_failed">删除失败</string>
     <string name="toast_set_read_failed">置为已读失败</string>
-    <string name="toast_submit_failed">上报失败</string>
-    <string name="toast_device_mismatch">设备不匹配</string>
-    <string name="toast_check_device_failed">查询设备失败</string>
-    <string name="toast_capture_failed">扫描失败</string>
-    <string name="toast_add_device_first">请先添加设备</string>
-    <string name="toast_get_subclass_failed">获取子类失败</string>
-    <string name="toast_no_subclass">没有可选子类</string>
-    <string name="toast_get_patrol_data_first">需要先获取巡视项目</string>
     <string name="toast_user_login_on_other_device">当前用户在其他终端登录</string>
-    <string name="toast_scan_bluetooth_failed">开启检测蓝牙失败，建议重新打开</string>
 
     <string name="title_update_toto">更新代办事项</string>
     <string name="title_passenger_broadcast">客运广播</string>

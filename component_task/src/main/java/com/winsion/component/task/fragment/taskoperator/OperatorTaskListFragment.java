@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.winsion.component.basic.base.BaseFragment;
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.constants.OpeType;
 import com.winsion.component.basic.listener.StateListener;
 import com.winsion.component.basic.utils.ConvertUtils;
@@ -378,7 +378,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     // 二级界面(OperatorTaskDetailActivity)更改了数据，同步该界面数据
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(JobEntity afterChangeEntity) {
-        int positionInList = CommonBiz.halfSearch(allData, afterChangeEntity);
+        int positionInList = BasicBiz.halfSearch(allData, afterChangeEntity);
         if (positionInList != -1) {
             JobEntity jobEntity = allData.get(positionInList);
             boolean isFinish = jobEntity.getWorkstatus() == TaskState.RUN;

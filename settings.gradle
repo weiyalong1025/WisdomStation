@@ -1,1 +1,1 @@
-include ':app', ':component_basic', ':component_user', ':component_task'
+include ':app', ':component_basic', ':component_user', ':component_task', ':component_scanner', ':component_media'

@@ -16,21 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.component.basic.biz.CommonBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.constants.OpeType;
 import com.winsion.component.basic.data.listener.MyDownloadListener;
 import com.winsion.component.basic.data.listener.UploadListener;
 import com.winsion.component.basic.listener.StateListener;
-import com.winsion.component.task.activity.addnote.AddNoteActivity;
-import com.winsion.component.basic.media.activity.RecordAudioActivity;
-import com.winsion.component.basic.media.activity.RecordVideoActivity;
-import com.winsion.component.basic.media.activity.TakePhotoActivity;
-import com.winsion.component.basic.media.adapter.RecordAdapter;
-import com.winsion.component.basic.media.constants.FileStatus;
-import com.winsion.component.basic.media.constants.FileType;
-import com.winsion.component.basic.media.entity.LocalRecordEntity;
-import com.winsion.component.basic.media.entity.ServerRecordEntity;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.FileUtils;
@@ -40,7 +30,17 @@ import com.winsion.component.basic.utils.constants.Formatter;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.DrawableCenterTextView;
 import com.winsion.component.basic.view.TitleView;
+import com.winsion.component.media.activity.RecordAudioActivity;
+import com.winsion.component.media.activity.RecordVideoActivity;
+import com.winsion.component.media.activity.TakePhotoActivity;
+import com.winsion.component.media.adapter.RecordAdapter;
+import com.winsion.component.media.biz.MediaBiz;
+import com.winsion.component.media.constants.FileStatus;
+import com.winsion.component.media.constants.FileType;
+import com.winsion.component.media.entity.LocalRecordEntity;
+import com.winsion.component.media.entity.ServerRecordEntity;
 import com.winsion.component.task.R;
+import com.winsion.component.task.activity.addnote.AddNoteActivity;
 import com.winsion.component.task.biz.ChangeStatusBiz;
 import com.winsion.component.task.constants.RunState;
 import com.winsion.component.task.constants.TaskState;
@@ -61,7 +61,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.winsion.component.basic.media.constants.Intents.Media.MEDIA_FILE;
+import static com.winsion.component.media.constants.Intents.Media.MEDIA_FILE;
 import static com.winsion.component.task.constants.Intents.OperatorTaskDetail.JOB_ENTITY;
 
 /**
@@ -426,28 +426,28 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             case TaskType.COMMAND:
                 tvTitle.setTitleText(R.string.title_command_detail);
                 taskTypeName.setText(R.string.name_command_name);
-                ivTypeIcon.setImageResource(R.drawable.ic_command);
+                ivTypeIcon.setImageResource(R.drawable.task_ic_command);
                 ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
             // 协作
             case TaskType.COOPERATE:
                 tvTitle.setTitleText(R.string.title_cooperation_detail);
                 taskTypeName.setText(R.string.name_cooperation_name);
-                ivTypeIcon.setImageResource(R.drawable.ic_cooperation);
+                ivTypeIcon.setImageResource(R.drawable.task_ic_cooperation);
                 ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
             // 网格
             case TaskType.GRID:
                 tvTitle.setTitleText(R.string.title_grid_detail);
                 taskTypeName.setText(R.string.value_grid_task);
-                ivTypeIcon.setImageResource(R.drawable.ic_type_grid);
+                ivTypeIcon.setImageResource(R.drawable.task_ic_type_grid);
                 ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
             // 预案
             case TaskType.PLAN:
                 tvTitle.setTitleText(R.string.title_alarm_detail);
                 taskTypeName.setText(R.string.value_alarm_task);
-                ivTypeIcon.setImageResource(R.drawable.ic_type_alarm);
+                ivTypeIcon.setImageResource(R.drawable.task_ic_type_alarm);
                 ivTypeIcon.setVisibility(View.VISIBLE);
                 break;
         }
@@ -490,9 +490,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 判断是否超时
                 isTimeOut = planStartTime < currentTime;
                 if (isTimeOut) {
-                    ivStatus.setImageResource(R.drawable.ic_timeout_unstart);
+                    ivStatus.setImageResource(R.drawable.task_ic_timeout_unstart);
                 } else {
-                    ivStatus.setImageResource(R.drawable.ic_not_start);
+                    ivStatus.setImageResource(R.drawable.task_ic_not_start);
                 }
                 break;
             case TaskState.RUN:
@@ -506,9 +506,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 判断是否超时
                 isTimeOut = planEndTime < currentTime;
                 if (isTimeOut) {
-                    ImageLoader.loadGif(ivStatus, R.drawable.gif_doing_timeout);
+                    ImageLoader.loadGif(ivStatus, R.drawable.task_gif_doing_timeout);
                 } else {
-                    ImageLoader.loadGif(ivStatus, R.drawable.gif_doing);
+                    ImageLoader.loadGif(ivStatus, R.drawable.task_gif_doing);
                 }
                 break;
             case TaskState.DONE:
@@ -522,13 +522,13 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 判断是否超时
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
-                    ivStatus.setImageResource(R.drawable.ic_timeout_done);
+                    ivStatus.setImageResource(R.drawable.task_ic_timeout_done);
                 } else {
-                    ivStatus.setImageResource(R.drawable.ic_done);
+                    ivStatus.setImageResource(R.drawable.task_ic_done);
                 }
                 // 如果是网格任务已完成状态则显示为待验收
                 if (taskType == TaskType.GRID) {
-                    ivStatus.setImageResource(R.drawable.ic_wait_pass);
+                    ivStatus.setImageResource(R.drawable.task_ic_wait_pass);
                     btnStatus.setText(R.string.btn_wait_pass);
                 }
                 break;
@@ -543,9 +543,9 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 // 判断是否超时
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
-                    ivStatus.setImageResource(R.drawable.ic_not_pass);
+                    ivStatus.setImageResource(R.drawable.task_ic_not_pass);
                 } else {
-                    ivStatus.setImageResource(R.drawable.ic_not_pass);
+                    ivStatus.setImageResource(R.drawable.task_ic_not_pass);
                 }
                 break;
         }
@@ -809,7 +809,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             showToast("暂未开放");
         } else if (id == R.id.btn_note) {
             try {
-                noteFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.TEXT);
+                noteFile = MediaBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.TEXT);
                 intent = new Intent(mContext, AddNoteActivity.class);
                 intent.putExtra(MEDIA_FILE, noteFile);
                 startActivityForResult(intent, CODE_NOTE);
@@ -818,7 +818,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             }
         } else if (id == R.id.btn_take_photo) {
             try {
-                photoFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.PICTURE);
+                photoFile = MediaBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.PICTURE);
                 intent = new Intent(mContext, TakePhotoActivity.class);
                 intent.putExtra(MEDIA_FILE, photoFile);
                 startActivityForResult(intent, CODE_TAKE_PHOTO);
@@ -827,7 +827,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             }
         } else if (id == R.id.btn_video) {
             try {
-                videoFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.VIDEO);
+                videoFile = MediaBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.VIDEO);
                 intent = new Intent(mContext, RecordVideoActivity.class);
                 intent.putExtra(MEDIA_FILE, videoFile);
                 startActivityForResult(intent, CODE_RECORD_VIDEO);
@@ -836,7 +836,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             }
         } else if (id == R.id.btn_record) {
             try {
-                audioFile = CommonBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.AUDIO);
+                audioFile = MediaBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.AUDIO);
                 intent = new Intent(mContext, RecordAudioActivity.class);
                 intent.putExtra(MEDIA_FILE, audioFile);
                 startActivityForResult(intent, CODE_RECORD_AUDIO);

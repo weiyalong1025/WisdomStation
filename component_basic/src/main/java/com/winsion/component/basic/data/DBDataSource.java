@@ -3,7 +3,7 @@ package com.winsion.component.basic.data;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.winsion.component.basic.biz.CommonBiz;
+import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.entity.TodoEntity;
 import com.winsion.component.basic.data.entity.TodoEntity_;
 import com.winsion.component.basic.data.entity.UserEntity;
@@ -24,8 +24,8 @@ public class DBDataSource {
     private final Box<TodoEntity> mTodoEntityBox;
 
     private DBDataSource(Context context) {
-        mUserEntityBox = CommonBiz.getBoxStore(context).boxFor(UserEntity.class);
-        mTodoEntityBox = CommonBiz.getBoxStore(context).boxFor(TodoEntity.class);
+        mUserEntityBox = BasicBiz.getBoxStore(context).boxFor(UserEntity.class);
+        mTodoEntityBox = BasicBiz.getBoxStore(context).boxFor(TodoEntity.class);
     }
 
     public static DBDataSource getInstance(Context context) {

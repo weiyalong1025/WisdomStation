@@ -71,28 +71,28 @@ public class MonitorTaskListAdapter extends CommonAdapter<TaskEntity> {
             // 命令
             case TaskType.COMMAND:
                 viewHolder.setText(R.id.task_type_name, getString(R.string.name_command_name));
-                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_command);
+                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.task_ic_command);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 viewHolder.setText(R.id.btn_status, jobSize + getString(R.string.suffix_command));
                 break;
             // 协作
             case TaskType.COOPERATE:
                 viewHolder.setText(R.id.task_type_name, getString(R.string.name_cooperation_name));
-                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_cooperation);
+                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.task_ic_cooperation);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 viewHolder.setText(R.id.btn_status, jobSize + getString(R.string.suffix_cooperation));
                 break;
             // 网格
             case TaskType.GRID:
                 viewHolder.setText(R.id.task_type_name, getString(R.string.value_grid_task));
-                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_type_grid);
+                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.task_ic_type_grid);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 viewHolder.setText(R.id.btn_status, jobSize + getString(R.string.suffix_operation));
                 break;
             // 预案
             case TaskType.PLAN:
                 viewHolder.setText(R.id.task_type_name, getString(R.string.value_alarm_task));
-                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.ic_type_alarm);
+                viewHolder.setImageResource(R.id.iv_type_icon, R.drawable.task_ic_type_alarm);
                 viewHolder.setVisible(R.id.iv_type_icon, true);
                 viewHolder.setText(R.id.btn_status, jobSize + getString(R.string.suffix_plan));
                 break;
@@ -128,9 +128,9 @@ public class MonitorTaskListAdapter extends CommonAdapter<TaskEntity> {
                 // 判断是否超时
                 isTimeOut = planStartTime < currentTime;
                 if (isTimeOut) {
-                    viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_timeout_unstart);
+                    viewHolder.setImageResource(R.id.iv_status, R.drawable.task_ic_timeout_unstart);
                 } else {
-                    viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_not_start);
+                    viewHolder.setImageResource(R.id.iv_status, R.drawable.task_ic_not_start);
                 }
                 break;
             case TaskState.RUN:
@@ -141,9 +141,9 @@ public class MonitorTaskListAdapter extends CommonAdapter<TaskEntity> {
                 isTimeOut = planEndTime < currentTime;
                 ImageView ivStatus = viewHolder.getView(R.id.iv_status);
                 if (isTimeOut) {
-                    ImageLoader.loadGif(ivStatus, R.drawable.gif_doing_timeout);
+                    ImageLoader.loadGif(ivStatus, R.drawable.task_gif_doing_timeout);
                 } else {
-                    ImageLoader.loadGif(ivStatus, R.drawable.gif_doing);
+                    ImageLoader.loadGif(ivStatus, R.drawable.task_gif_doing);
                 }
                 break;
             case TaskState.DONE:
@@ -154,13 +154,13 @@ public class MonitorTaskListAdapter extends CommonAdapter<TaskEntity> {
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
                     // 超时已完成
-                    viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_timeout_done);
+                    viewHolder.setImageResource(R.id.iv_status, R.drawable.task_ic_timeout_done);
                 } else {
-                    viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_done);
+                    viewHolder.setImageResource(R.id.iv_status, R.drawable.task_ic_done);
                 }
                 // 如果是网格任务已完成状态则显示为待验收
                 if (taskType == TaskType.GRID) {
-                    viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_wait_pass);
+                    viewHolder.setImageResource(R.id.iv_status, R.drawable.task_ic_wait_pass);
                     viewHolder.setText(R.id.btn_status, getString(R.string.btn_wait_pass));
                 }
                 break;
@@ -172,9 +172,9 @@ public class MonitorTaskListAdapter extends CommonAdapter<TaskEntity> {
                 isTimeOut = planEndTime < realEndTime;
                 if (isTimeOut) {
                     // 超时已完成，因没有超时未通过图标，这里使用一样的
-                    viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_not_pass);
+                    viewHolder.setImageResource(R.id.iv_status, R.drawable.task_ic_not_pass);
                 } else {
-                    viewHolder.setImageResource(R.id.iv_status, R.drawable.ic_not_pass);
+                    viewHolder.setImageResource(R.id.iv_status, R.drawable.task_ic_not_pass);
                 }
                 break;
         }

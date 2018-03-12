@@ -34,10 +34,10 @@ public class SelectTeamAdapter extends CommonAdapter<TeamEntity> {
         viewHolder.setOnClickListener(R.id.ll_list_item, (View v) -> {
             if (selectedList.contains(teamEntity)) {
                 selectedList.remove(teamEntity);
-                viewHolder.setImageResource(R.id.iv_is_select, R.drawable.ic_check_box_outline);
+                viewHolder.setImageResource(R.id.iv_is_select, R.drawable.basic_ic_check_box_outline);
             } else {
                 selectedList.add(teamEntity);
-                viewHolder.setImageResource(R.id.iv_is_select, R.drawable.ic_check_box);
+                viewHolder.setImageResource(R.id.iv_is_select, R.drawable.basic_ic_check_box);
             }
         });
 

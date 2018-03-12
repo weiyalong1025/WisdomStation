@@ -115,7 +115,7 @@
                 <ImageView
                     android:layout_width="@dimen/basic_d23"
                     android:layout_height="@dimen/basic_d23"
-                    android:src="@drawable/ic_arrive"
+                    android:src="@drawable/task_ic_arrive"
                     tools:ignore="ContentDescription" />
 
                 <View
@@ -127,7 +127,7 @@
                     android:layout_width="@dimen/basic_d23"
                     android:layout_height="@dimen/basic_d23"
                     android:layout_marginBottom="@dimen/basic_d33"
-                    android:src="@drawable/ic_go"
+                    android:src="@drawable/task_ic_go"
                     tools:ignore="ContentDescription" />
 
                 <LinearLayout

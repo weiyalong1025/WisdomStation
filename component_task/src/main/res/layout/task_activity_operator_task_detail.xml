@@ -39,7 +39,7 @@
                 android:divider="@null"
                 android:visibility="gone"
                 tools:ignore="NestedScrolling"
-                tools:listitem="@layout/basic_item_record" />
+                tools:listitem="@layout/media_item_record" />
 
             <ImageView
                 android:id="@+id/div_header"
@@ -78,7 +78,7 @@
                 android:scrollbars="none"
                 android:visibility="gone"
                 tools:ignore="NestedScrolling"
-                tools:listitem="@layout/basic_item_record" />
+                tools:listitem="@layout/media_item_record" />
 
             <ImageView
                 android:id="@+id/iv_record_div1"
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
                 tools:ignore="NestedScrolling"
-                tools:listitem="@layout/basic_item_record" />
+                tools:listitem="@layout/media_item_record" />
 
             <ImageView
                 android:id="@+id/iv_record_div2"

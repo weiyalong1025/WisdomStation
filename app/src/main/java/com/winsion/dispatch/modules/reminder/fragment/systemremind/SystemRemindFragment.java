@@ -150,13 +150,13 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         return false;
     }
 
-    @Override
+    /*@Override
     public void onPause() {
         super.onPause();
         if (isMultipleDeleteLayoutDisplaying) {
             hideMultipleDeleteLayout();
         }
-    }
+    }*/
 
     /**
      * 显示多选删除布局

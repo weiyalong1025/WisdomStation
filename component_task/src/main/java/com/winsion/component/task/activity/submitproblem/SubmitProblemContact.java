@@ -4,7 +4,7 @@ import android.support.annotation.StringRes;
 
 import com.winsion.component.basic.base.BasePresenter;
 import com.winsion.component.basic.base.BaseView;
-import com.winsion.component.basic.data.listener.UploadListener;
+import com.winsion.component.basic.listener.UploadListener;
 import com.winsion.component.task.entity.SubclassEntity;
 
 import java.io.File;

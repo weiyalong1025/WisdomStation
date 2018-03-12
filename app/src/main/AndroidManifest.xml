@@ -32,7 +32,7 @@
             android:value="2.1" />
         <!-- activity -->
         <activity
-            android:name="com.winsion.dispatch.splash.SplashActivity"
+            android:name="com.winsion.dispatch.activity.splash.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.winsion.dispatch.main.activity.MainActivity"
+            android:name="com.winsion.dispatch.activity.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"

@@ -13,11 +13,11 @@ import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.SpinnerView;
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.main.activity.MainActivity;
+import com.winsion.dispatch.activity.main.MainActivity;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.reminder.activity.todo.AddTodoActivity;
 import com.winsion.dispatch.modules.reminder.adapter.TodoAdapter;
-import com.winsion.component.basic.data.entity.TodoEntity;
+import com.winsion.component.basic.entity.TodoEntity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

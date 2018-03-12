@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
-import com.winsion.component.basic.data.entity.TodoEntity;
+import com.winsion.component.basic.entity.TodoEntity;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.constants.Formatter;
 import com.winsion.component.basic.view.TitleView;

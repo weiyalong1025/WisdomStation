@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.winsion.component.basic.base.BaseFragment;
-import com.winsion.component.basic.data.constants.OpeType;
+import com.winsion.component.basic.constants.OpeType;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.task.R;
 import com.winsion.component.task.adapter.ProblemManageAdapter;

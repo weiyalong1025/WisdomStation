@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
-import com.winsion.component.basic.data.listener.UploadListener;
+import com.winsion.component.basic.listener.UploadListener;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.ViewUtils;
 import com.winsion.component.basic.view.CustomDialog;

@@ -1,4 +1,4 @@
-package com.winsion.dispatch.main.activity;
+package com.winsion.dispatch.activity.main;
 
 import android.app.PendingIntent;
 import android.content.Context;

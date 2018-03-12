@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.main.activity.MainActivity;
+import com.winsion.dispatch.activity.main.MainActivity;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.reminder.adapter.SystemRemindAdapter;
 import com.winsion.dispatch.modules.reminder.constants.HandleType;

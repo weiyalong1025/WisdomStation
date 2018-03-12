@@ -1,4 +1,4 @@
-package com.winsion.component.basic.data.entity;
+package com.winsion.component.basic.entity;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;

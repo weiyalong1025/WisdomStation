@@ -1,9 +1,9 @@
-package com.winsion.component.basic.data.converter;
+package com.winsion.component.basic.converter;
 
 import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.convert.Converter;
-import com.winsion.component.basic.data.entity.KingkongResponse;
-import com.winsion.component.basic.data.listener.ResponseListener;
+import com.winsion.component.basic.entity.KingkongResponse;
+import com.winsion.component.basic.listener.ResponseListener;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

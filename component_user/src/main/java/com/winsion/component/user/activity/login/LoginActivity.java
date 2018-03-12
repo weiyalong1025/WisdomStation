@@ -26,7 +26,7 @@ import android.widget.RelativeLayout;
 import com.billy.cc.core.component.CC;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
-import com.winsion.component.basic.data.entity.UserEntity;
+import com.winsion.component.basic.entity.UserEntity;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.utils.ViewUtils;
 import com.winsion.component.basic.view.CircleImageView;

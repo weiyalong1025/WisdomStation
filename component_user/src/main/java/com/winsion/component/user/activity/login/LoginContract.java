@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.winsion.component.basic.base.BasePresenter;
 import com.winsion.component.basic.base.BaseView;
-import com.winsion.component.basic.data.entity.UserEntity;
+import com.winsion.component.basic.entity.UserEntity;
 
 import java.util.List;
 

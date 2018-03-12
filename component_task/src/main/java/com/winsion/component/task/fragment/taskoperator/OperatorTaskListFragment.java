@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.biz.BasicBiz;
-import com.winsion.component.basic.data.constants.OpeType;
+import com.winsion.component.basic.constants.OpeType;
 import com.winsion.component.basic.listener.StateListener;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.constants.Formatter;

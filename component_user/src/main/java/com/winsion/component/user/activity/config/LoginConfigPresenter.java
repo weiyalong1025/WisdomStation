@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.winsion.component.basic.data.SPDataSource;
-import com.winsion.component.basic.data.constants.SPKey;
+import com.winsion.component.basic.constants.SPKey;
 import com.winsion.component.user.constants.SaveErrorCode;
 import com.winsion.component.user.constants.UrlRegular;
 

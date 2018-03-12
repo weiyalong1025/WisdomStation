@@ -21,15 +21,15 @@ import com.lzy.okrx2.adapter.ObservableBody;
 import com.lzy.okserver.OkDownload;
 import com.lzy.okserver.download.DownloadListener;
 import com.lzy.okserver.download.DownloadTask;
-import com.winsion.component.basic.data.constants.ParamKey;
-import com.winsion.component.basic.data.constants.Urls;
-import com.winsion.component.basic.data.converter.ObjectConverter;
-import com.winsion.component.basic.data.entity.OrderBy;
-import com.winsion.component.basic.data.entity.QueryParameter;
-import com.winsion.component.basic.data.entity.WhereClause;
-import com.winsion.component.basic.data.listener.MyDownloadListener;
-import com.winsion.component.basic.data.listener.ResponseListener;
-import com.winsion.component.basic.data.listener.UploadListener;
+import com.winsion.component.basic.constants.ParamKey;
+import com.winsion.component.basic.constants.Urls;
+import com.winsion.component.basic.converter.ObjectConverter;
+import com.winsion.component.basic.entity.OrderBy;
+import com.winsion.component.basic.entity.QueryParameter;
+import com.winsion.component.basic.entity.WhereClause;
+import com.winsion.component.basic.listener.MyDownloadListener;
+import com.winsion.component.basic.listener.ResponseListener;
+import com.winsion.component.basic.listener.UploadListener;
 import com.winsion.component.basic.utils.HashUtils;
 import com.winsion.component.basic.utils.LogUtils;
 
@@ -150,7 +150,7 @@ public class NetDataSource {
     /**
      * 不需要opeCode就传0
      *
-     * @param opeCode {@link com.winsion.component.basic.data.constants.OpeCode}
+     * @param opeCode {@link com.winsion.component.basic.constants.OpeCode}
      */
     public static <T> void post(Object tag, String url, Object data, int opeCode, ResponseListener<T> listener) {
         long time = System.currentTimeMillis();

@@ -4,10 +4,10 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.winsion.component.basic.biz.BasicBiz;
-import com.winsion.component.basic.data.entity.TodoEntity;
-import com.winsion.component.basic.data.entity.TodoEntity_;
-import com.winsion.component.basic.data.entity.UserEntity;
-import com.winsion.component.basic.data.entity.UserEntity_;
+import com.winsion.component.basic.entity.TodoEntity;
+import com.winsion.component.basic.entity.TodoEntity_;
+import com.winsion.component.basic.entity.UserEntity;
+import com.winsion.component.basic.entity.UserEntity_;
 
 import java.util.List;
 

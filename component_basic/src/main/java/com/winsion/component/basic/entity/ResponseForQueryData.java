@@ -1,4 +1,4 @@
-package com.winsion.component.basic.data.entity;
+package com.winsion.component.basic.entity;
 
 /**
  * Created by wyl on 2017/6/10

@@ -1,4 +1,4 @@
-package com.winsion.component.basic.data.constants;
+package com.winsion.component.basic.constants;
 
 /**
  * Created by wyl on 2017/12/6

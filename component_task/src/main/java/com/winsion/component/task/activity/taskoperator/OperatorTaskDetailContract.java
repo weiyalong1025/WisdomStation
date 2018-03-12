@@ -2,8 +2,8 @@ package com.winsion.component.task.activity.taskoperator;
 
 import com.winsion.component.basic.base.BasePresenter;
 import com.winsion.component.basic.base.BaseView;
-import com.winsion.component.basic.data.listener.MyDownloadListener;
-import com.winsion.component.basic.data.listener.UploadListener;
+import com.winsion.component.basic.listener.MyDownloadListener;
+import com.winsion.component.basic.listener.UploadListener;
 import com.winsion.component.media.entity.LocalRecordEntity;
 import com.winsion.component.media.entity.ServerRecordEntity;
 import com.winsion.component.task.entity.JobEntity;

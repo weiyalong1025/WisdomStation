@@ -1,5 +1,6 @@
 package com.winsion.dispatch;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -25,7 +26,14 @@ public class ComponentApp implements IComponent {
         switch (actionName) {
             case "toMainActivity":
                 Intent intent = new Intent(context, MainActivity.class);
+                if (!(context instanceof Activity)) {
+                    //调用方没有设置context或app间组件跳转，context为application
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
                 context.startActivity(intent);
+                if (context instanceof Activity) {
+                    ((Activity) context).finish();
+                }
                 return true;
         }
         return false;

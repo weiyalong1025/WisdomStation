@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/basic_btn_yellow"
+        android:onClick="toCaptureActivity"
+        android:padding="@dimen/basic_d5"
+        android:text="跳转CaptureActivity"
+        android:textAllCaps="false"
+        android:textSize="@dimen/basic_s18"
+        tools:ignore="HardcodedText" />
+</FrameLayout>

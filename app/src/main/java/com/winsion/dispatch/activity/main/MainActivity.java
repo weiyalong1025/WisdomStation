@@ -13,10 +13,10 @@ import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.view.AlphaTabView;
 import com.winsion.component.basic.view.AlphaTabsIndicator;
+import com.winsion.component.task.fragment.OperationRootFragment;
 import com.winsion.dispatch.R;
 import com.winsion.dispatch.modules.contacts.fragment.ContactsRootFragment;
 import com.winsion.dispatch.modules.daofa.fragment.DaofaRootFragment;
-import com.winsion.component.task.fragment.OperationRootFragment;
 import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
 import com.winsion.dispatch.modules.scene.fragment.SceneRootFragment;
 
@@ -155,6 +155,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     public void onClick(View view) {
         // 跳转用户界面
         CC.obtainBuilder("ComponentUser")
+                .setContext(this)
                 .setActionName("toUserActivity")
                 .build()
                 .callAsync();

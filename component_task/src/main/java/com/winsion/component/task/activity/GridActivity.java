@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.view.MyIndicator;
@@ -22,7 +21,6 @@ import com.winsion.component.task.fragment.problemmanage.ProblemManageFragment;
 public class GridActivity extends BaseActivity {
     private NoScrollViewPager vpContent;
     private MyIndicator mIndicator;
-    private ImageView ivBack;
 
     private final Fragment[] mFragments = {new PatrolPlanFragment(), new ProblemManageFragment()};
     private final int[] mTitles = {R.string.tab_patrol_plan, R.string.tab_problem_manager};
@@ -42,9 +40,7 @@ public class GridActivity extends BaseActivity {
     private void initView() {
         vpContent = findViewById(R.id.vp_content);
         mIndicator = findViewById(R.id.mi_container);
-        ivBack = findViewById(R.id.iv_back);
-
-        ivBack.setVisibility(View.VISIBLE);
+        findViewById(R.id.iv_back).setVisibility(View.VISIBLE);
         addOnClickListeners(R.id.iv_back);
     }
 

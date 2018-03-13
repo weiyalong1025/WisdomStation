@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
-    <string name="scanner_app_name">二维码扫描组件</string>
+    <string name="scanner_app_name">扫描组件</string>
 
     <string name="title_qr_code">二维码/条码</string>
 

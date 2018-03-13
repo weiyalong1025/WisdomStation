@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application>
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
         <activity
             android:name=".activity.addnote.AddNoteActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -27,15 +31,19 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.winsion.component.task.activity.patrolitem.PatrolItemActivity"
+            android:name=".activity.patrolitem.PatrolItemActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.winsion.component.task.activity.submitproblem.SubmitProblemActivity"
+            android:name=".activity.submitproblem.SubmitProblemActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.winsion.component.task.activity.GridActivity"
+            android:name=".activity.GridActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.taskmonitor.MonitorTaskDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
     </application>

@@ -1,6 +1,7 @@
 package com.winsion.component.task.fragment.taskmonitor;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.view.SpinnerView;
 import com.winsion.component.task.R;
+import com.winsion.component.task.activity.taskmonitor.MonitorTaskDetailActivity;
 import com.winsion.component.task.adapter.MonitorTaskListAdapter;
 import com.winsion.component.task.constants.TaskSpinnerState;
 import com.winsion.component.task.constants.TaskState;
@@ -30,6 +32,8 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+
+import static com.winsion.component.task.constants.Intents.MontorTaskDetail.TASK_ENTITY;
 
 /**
  * Created by 10295 on 2017/12/25
@@ -138,7 +142,9 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Intent intent = new Intent(mContext, MonitorTaskDetailActivity.class);
+        intent.putExtra(TASK_ENTITY, listData.get(position));
+        startActivity(intent);
     }
 
     @Override

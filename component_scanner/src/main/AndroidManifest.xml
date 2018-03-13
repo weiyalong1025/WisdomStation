@@ -2,9 +2,16 @@
     package="com.winsion.component.scanner">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application>
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
         <activity
-            android:name="com.winsion.component.scanner.activity.CaptureActivity"
+            android:name=".activity.CaptureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
     </application>

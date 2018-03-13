@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
     /**
      * 默认的REQUEST_CODE
      */
-    private static final int CODE_DEFAULT = 0;
+    protected static final int DEFAULT_REQUEST_CODE = 0;
 
     private View mContentView;
     protected Context mContext;
@@ -111,7 +111,7 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      * @param intent 要跳转的Activity
      */
     protected void startActivityForResult(Intent intent) {
-        startActivityForResult(intent, CODE_DEFAULT);
+        startActivityForResult(intent, DEFAULT_REQUEST_CODE);
     }
 
     /**
@@ -120,7 +120,7 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      * @param cls 要跳转的Activity
      */
     protected void startActivityForResult(Class<? extends Activity> cls) {
-        startActivityForResult(cls, CODE_DEFAULT);
+        startActivityForResult(cls, DEFAULT_REQUEST_CODE);
     }
 
     protected void startActivityForResult(Class<? extends Activity> cls, int requestCode) {

@@ -32,7 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
     /**
      * 默认的REQUEST_CODE
      */
-    private static final int CODE_DEFAULT = 0;
+    protected static final int DEFAULT_REQUEST_CODE = 0;
 
     protected Context mContext;
     protected HandlerUtils.HandlerHolder mHandler;
@@ -119,7 +119,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
      * @param intent 要跳转的Activity
      */
     public void startActivityForResult(Intent intent) {
-        startActivityForResult(intent, CODE_DEFAULT);
+        startActivityForResult(intent, DEFAULT_REQUEST_CODE);
     }
 
     /**
@@ -128,7 +128,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
      * @param cls 要跳转的Activity
      */
     public void startActivityForResult(Class<? extends Activity> cls) {
-        startActivityForResult(cls, CODE_DEFAULT);
+        startActivityForResult(cls, DEFAULT_REQUEST_CODE);
     }
 
     protected void startActivityForResult(Class<? extends Activity> cls, int requestCode) {

@@ -1,5 +1,6 @@
 package com.winsion.component.user;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -7,10 +8,10 @@ import android.content.Intent;
 import com.billy.cc.core.component.CC;
 import com.billy.cc.core.component.IComponent;
 import com.lzy.okgo.model.HttpParams;
+import com.winsion.component.basic.constants.Urls;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.DBDataSource;
 import com.winsion.component.basic.data.NetDataSource;
-import com.winsion.component.basic.constants.Urls;
 import com.winsion.component.basic.listener.StateListener;
 import com.winsion.component.basic.mqtt.MQTTClient;
 import com.winsion.component.user.activity.login.LoginActivity;
@@ -36,7 +37,14 @@ public class ComponentUser implements IComponent {
             case "toLoginActivity":
                 intent = new Intent(context, LoginActivity.class);
                 intent.putExtra("callId", cc.getCallId());
+                if (!(context instanceof Activity)) {
+                    //调用方没有设置context或app间组件跳转，context为application
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
                 context.startActivity(intent);
+                if (context instanceof Activity) {
+                    ((Activity) context).finish();
+                }
                 return true;
             case "toLoginActivityClearTask":
                 intent = new Intent(context, LoginActivity.class);
@@ -47,6 +55,10 @@ public class ComponentUser implements IComponent {
             case "toUserActivity":
                 intent = new Intent(context, UserActivity.class);
                 intent.putExtra("callId", cc.getCallId());
+                if (!(context instanceof Activity)) {
+                    //调用方没有设置context或app间组件跳转，context为application
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
                 context.startActivity(intent);
                 return true;
             case "logout":

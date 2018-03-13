@@ -13,6 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/BasicAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
+        <activity
+            android:name="debug.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.addnote.AddNoteActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -34,15 +48,19 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.winsion.component.task.activity.patrolitem.PatrolItemActivity"
+            android:name=".activity.patrolitem.PatrolItemActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.winsion.component.task.activity.submitproblem.SubmitProblemActivity"
+            android:name=".activity.submitproblem.SubmitProblemActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.winsion.component.task.activity.GridActivity"
+            android:name=".activity.GridActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.taskmonitor.MonitorTaskDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
     </application>

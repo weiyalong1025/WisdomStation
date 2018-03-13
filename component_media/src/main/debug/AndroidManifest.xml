@@ -1,15 +1,34 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.winsion.component.media">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-    <application>
+    <application
+        android:name="debug.MediaApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/basic_ic_launcher"
+        android:label="@string/media_app_name"
+        android:persistent="true"
+        android:supportsRtl="true"
+        android:theme="@style/BasicAppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
 
+        <activity
+            android:name="debug.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.TakePhotoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

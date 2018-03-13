@@ -31,6 +31,7 @@
     <string name="name_last_time_receive_signal">最近收到信号时间：</string>
     <string name="name_plan_start">计划开始</string>
     <string name="name_plan_finish">计划结束</string>
+    <string name="name_note_content">备注内容：</string>
 
     <string name="btn_issue">发布</string>
     <string name="btn_wait_pass">待验收</string>

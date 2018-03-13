@@ -34,9 +34,9 @@ import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.WrapContentListView;
 import com.winsion.component.user.R;
 import com.winsion.component.user.activity.config.LoginConfigActivity;
+import com.winsion.component.user.activity.user.UserActivity;
 import com.winsion.component.user.adapter.UserListAdapter;
 import com.winsion.component.user.constants.LoginErrorCode;
-import com.winsion.component.user.activity.user.UserActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -308,10 +308,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,
         hideDialog();
         if (!isEmpty(callId)) {
             CC.obtainBuilder("ComponentApp")
+                    .setContext(this)
                     .setActionName("toMainActivity")
                     .build()
                     .callAsync();
-            mHandler.postDelayed(this::finish, 500);
         } else {
             startActivity(UserActivity.class, true);
         }

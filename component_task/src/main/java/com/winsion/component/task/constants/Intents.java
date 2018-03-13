@@ -25,6 +25,10 @@ public interface Intents {
         String JOB_ENTITY = "JOB_ENTITY";
     }
 
+    interface MontorTaskDetail {
+        String TASK_ENTITY = "TASK_ENTITY";
+    }
+
     interface SubmitProblem {
         /**
          * 巡检项对象

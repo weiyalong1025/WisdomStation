@@ -78,7 +78,6 @@
                     android:layout_marginTop="@dimen/basic_d16" />
 
                 <LinearLayout
-                    android:id="@+id/ll_track"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -131,7 +130,6 @@
                     tools:ignore="ContentDescription" />
 
                 <LinearLayout
-                    android:id="@+id/ll_platform"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -197,7 +195,6 @@
                     android:layout_marginTop="@dimen/basic_d16" />
 
                 <LinearLayout
-                    android:id="@+id/ll_wait_room"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -263,7 +260,6 @@
                     android:layout_marginTop="@dimen/basic_d16" />
 
                 <LinearLayout
-                    android:id="@+id/ll_check_port"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">

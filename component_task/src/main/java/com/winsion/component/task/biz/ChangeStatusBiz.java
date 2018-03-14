@@ -3,11 +3,11 @@ package com.winsion.component.task.biz;
 import android.content.Context;
 
 import com.winsion.component.basic.biz.BasicBiz;
-import com.winsion.component.basic.data.CacheDataSource;
-import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.constants.OpeCode;
 import com.winsion.component.basic.constants.OpeType;
 import com.winsion.component.basic.constants.Urls;
+import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.listener.ResponseListener;
 import com.winsion.component.basic.listener.StateListener;
 import com.winsion.component.basic.utils.DirAndFileUtils;
@@ -35,7 +35,7 @@ public class ChangeStatusBiz {
      */
     public void changeJobStatus(Context context, JobEntity jobEntity, int opType, StateListener listener) {
         // 获取备注
-        String note = getNote(context, jobEntity.getJoboperatorsid());
+        String note = getNote(jobEntity.getJoboperatorsid());
         JobParameter jobParameter = new JobParameter();
         jobParameter.setUsersId(CacheDataSource.getUserId());
         jobParameter.setJobsId(jobEntity.getJobsid());
@@ -93,10 +93,10 @@ public class ChangeStatusBiz {
     /**
      * 获取任务备注
      */
-    private String getNote(Context context, String id) {
+    private String getNote(String jobOperatorId) {
         String note = "";
         try {
-            File performerDir = DirAndFileUtils.getPerformerDir(CacheDataSource.getUserId(), id);
+            File performerDir = DirAndFileUtils.getPerformerDir(CacheDataSource.getUserId(), jobOperatorId);
             File[] files = performerDir.listFiles();
             for (File f : files) {
                 if (f.getName().endsWith(".txt")) {

@@ -207,7 +207,8 @@
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
                     android:textColor="@color/basic_white1"
-                    android:textSize="@dimen/basic_s20" />
+                    android:textSize="@dimen/basic_s20"
+                    tools:text="02-15 03:49" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -225,7 +226,8 @@
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
                     android:textColor="@color/basic_white1"
-                    android:textSize="@dimen/basic_s20" />
+                    android:textSize="@dimen/basic_s20"
+                    tools:text="02-15 04:49" />
             </LinearLayout>
         </LinearLayout>
 

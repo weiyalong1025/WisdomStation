@@ -4,6 +4,7 @@
     android:id="@+id/ll_bg_color"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/basic_gray8"
     android:orientation="vertical">
 
     <LinearLayout
@@ -50,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/iv_type_icon"
-                    android:text="@string/name_task_name"
+                    android:text="@string/name_operation_name"
                     android:textColor="@color/basic_gray2"
                     android:textSize="@dimen/basic_s15" />
             </RelativeLayout>
@@ -235,7 +236,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/basic_d5"
                 android:textColor="@color/basic_white1"
-                android:textSize="@dimen/basic_s18" />
+                android:textSize="@dimen/basic_s18"
+                tools:text="10:00 ~ 12:00" />
         </LinearLayout>
 
         <View
@@ -263,7 +265,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/basic_d5"
                 android:textColor="@color/basic_white1"
-                android:textSize="@dimen/basic_s18" />
+                android:textSize="@dimen/basic_s18"
+                tools:text="10:00 ~ 12:00" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

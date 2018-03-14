@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/basic_gray8"
+    android:background="@color/basic_black3"
     android:orientation="vertical">
 
     <com.winsion.component.basic.view.TitleView
@@ -24,6 +24,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/basic_gray8"
             android:focusable="true"
             android:focusableInTouchMode="true">
 
@@ -174,7 +175,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/basic_gray5"
                 android:textSize="@dimen/basic_s20"
-                tools:text="受令班组" />
+                tools:text="受令班组：" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -332,19 +333,11 @@
                 android:textSize="@dimen/basic_s20"
                 tools:ignore="RtlSymmetry" />
 
-            <View
-                android:id="@+id/refer11"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/basic_d1"
-                android:layout_below="@id/et_content"
-                android:layout_marginStart="@dimen/basic_d10"
-                android:background="@color/basic_gray5" />
-
             <ListView
                 android:id="@+id/list_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/refer11"
+                android:layout_below="@id/et_content"
                 android:divider="@null"
                 android:scrollbars="none"
                 tools:ignore="NestedScrolling"

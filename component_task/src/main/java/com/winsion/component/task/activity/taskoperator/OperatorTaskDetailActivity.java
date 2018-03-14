@@ -16,11 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.winsion.component.basic.base.BaseActivity;
-import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.constants.OpeType;
+import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.listener.MyDownloadListener;
-import com.winsion.component.basic.listener.UploadListener;
 import com.winsion.component.basic.listener.StateListener;
+import com.winsion.component.basic.listener.UploadListener;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.FileUtils;
@@ -66,7 +66,7 @@ import static com.winsion.component.task.constants.Intents.OperatorTaskDetail.JO
 
 /**
  * Created by 10295 on 2018/1/19.
- * 任务执行人任务详情Activity
+ * 任务执行人作业详情Activity
  * 协作/命令/任务/网格/预案
  */
 
@@ -77,17 +77,13 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private TextView tvTrainStatus;
     private TextView tvEndStationName;
     private TextView tvTrack;
-    private LinearLayout llTrack;
     private TextView tvPlatform;
-    private LinearLayout llPlatform;
     private TextView tvPlanArrive;
     private TextView tvPlanDepart;
     private TextView tvWaitRoom;
-    private LinearLayout llWaitRoom;
     private TextView tvRealArrive;
     private TextView tvRealDepart;
     private TextView tvCheckPort;
-    private LinearLayout llCheckPort;
     private LinearLayout llTrainModule;
     private ImageView divHeader;
     private ImageView ivStatus;
@@ -102,9 +98,6 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private DrawableCenterTextView btnBroadcast;
     private TextView tvPlanTime;
     private TextView tvRealTime;
-    private Button btnTakePhoto;
-    private Button btnVideo;
-    private Button btnRecord;
     private LinearLayout llBgColor;
     private TextView tvPublisherTitle;
     private ListView lvRecordPublisherGrid;
@@ -167,17 +160,13 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         tvTrainStatus = findViewById(R.id.tv_train_status);
         tvEndStationName = findViewById(R.id.tv_endStationName);
         tvTrack = findViewById(R.id.tv_track);
-        llTrack = findViewById(R.id.ll_track);
         tvPlatform = findViewById(R.id.tv_platform);
-        llPlatform = findViewById(R.id.ll_platform);
         tvPlanArrive = findViewById(R.id.tv_plan_arrive);
         tvPlanDepart = findViewById(R.id.tv_plan_depart);
         tvWaitRoom = findViewById(R.id.tv_wait_room);
-        llWaitRoom = findViewById(R.id.ll_wait_room);
         tvRealArrive = findViewById(R.id.tv_real_arrive);
         tvRealDepart = findViewById(R.id.tv_real_depart);
         tvCheckPort = findViewById(R.id.tv_check_port);
-        llCheckPort = findViewById(R.id.ll_check_port);
         llTrainModule = findViewById(R.id.ll_train_module);
         divHeader = findViewById(R.id.div_header);
         ivStatus = findViewById(R.id.iv_status);
@@ -192,9 +181,6 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         btnBroadcast = findViewById(R.id.btn_broadcast);
         tvPlanTime = findViewById(R.id.tv_plan_time);
         tvRealTime = findViewById(R.id.tv_real_time);
-        btnTakePhoto = findViewById(R.id.btn_take_photo);
-        btnVideo = findViewById(R.id.btn_video);
-        btnRecord = findViewById(R.id.btn_record);
         llBgColor = findViewById(R.id.ll_bg_color);
         tvPublisherTitle = findViewById(R.id.tv_publisher_title);
         lvRecordPublisherGrid = findViewById(R.id.lv_record_publisher_grid);
@@ -221,6 +207,13 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         mJobEntity = (JobEntity) getIntent().getSerializableExtra(JOB_ENTITY);
     }
 
+    private void initAdapter() {
+        initPerformerRecordAdapter();
+        int taskType = mJobEntity.getTaktype();
+        if (taskType == TaskType.COMMAND || taskType == TaskType.COOPERATE || taskType == TaskType.GRID)
+            initMonitorRecordAdapter();
+    }
+
     private void initData() {
         initViewModule();
 
@@ -238,7 +231,8 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 mJobEntity.getTaktype() == TaskType.COOPERATE ||
                 mJobEntity.getTaktype() == TaskType.GRID) {
             // 获取命令/协作/网格任务发布人本地保存的和已经上传到服务器的附件记录
-            localFile = mPresenter.getPublisherLocalFile(jobOperatorsId);
+            String jobsId = mJobEntity.getJobsid();
+            localFile = mPresenter.getPublisherLocalFile(jobsId);
             if (localFile.size() != 0) {
                 publisherRecordEntities.addAll(localFile);
                 publisherRecordAdapter.notifyDataSetChanged();
@@ -560,13 +554,6 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         }
     }
 
-    private void initAdapter() {
-        initPerformerRecordAdapter();
-        int taskType = mJobEntity.getTaktype();
-        if (taskType == TaskType.COMMAND || taskType == TaskType.COOPERATE || taskType == TaskType.GRID)
-            initMonitorRecordAdapter();
-    }
-
     /**
      * 初始化作业监控人附件列表Adapter
      */
@@ -577,8 +564,8 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         publisherRecordAdapter.setDownloadPerformer(localRecordEntity -> {
             try {
                 String userId = CacheDataSource.getUserId();
-                String jobOperatorsId = mJobEntity.getJoboperatorsid();
-                File publisherDir = DirAndFileUtils.getMonitorDir(userId, jobOperatorsId);
+                String jobsId = mJobEntity.getJobsid();
+                File publisherDir = DirAndFileUtils.getMonitorDir(userId, jobsId);
                 mPresenter.download(localRecordEntity.getServerUri(), publisherDir.getAbsolutePath(), this);
             } catch (IOException e) {
                 showToast(R.string.toast_check_sdcard);

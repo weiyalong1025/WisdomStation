@@ -32,15 +32,6 @@
                 layout="@layout/task_module_order"
                 android:visibility="gone" />
 
-            <ListView
-                android:id="@+id/lv_record_publisher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@null"
-                android:visibility="gone"
-                tools:ignore="NestedScrolling"
-                tools:listitem="@layout/media_item_record" />
-
             <ImageView
                 android:id="@+id/div_header"
                 android:layout_width="match_parent"

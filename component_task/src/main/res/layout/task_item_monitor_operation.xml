@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/div_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/basic_div_horizontal"
+        tools:ignore="ContentDescription" />
+
+    <include layout="@layout/task_module_operation" />
+
+    <include layout="@layout/task_module_record_buttons" />
+
+    <ImageView
+        android:id="@+id/div_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/basic_div_horizontal"
+        tools:ignore="ContentDescription" />
+</LinearLayout>

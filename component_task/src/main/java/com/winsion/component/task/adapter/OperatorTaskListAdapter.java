@@ -70,7 +70,7 @@ public class OperatorTaskListAdapter extends CommonAdapter<JobEntity> {
         switch (taskType) {
             // 任务
             case TaskType.TASK:
-                viewHolder.setText(R.id.task_type_name, getString(R.string.name_task_name));
+                viewHolder.setText(R.id.task_type_name, getString(R.string.name_operation_name));
                 viewHolder.setVisible(R.id.iv_type_icon, false);
                 break;
             // 命令

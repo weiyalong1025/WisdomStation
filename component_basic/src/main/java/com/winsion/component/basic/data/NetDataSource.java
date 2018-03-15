@@ -276,11 +276,12 @@ public class NetDataSource {
      * @param targetDir          文件目标存储目录
      * @param myDownloadListener 下载状态监听
      */
-    public static DownloadTask downloadFile(Object tag, String serverUri, String targetDir, MyDownloadListener myDownloadListener) {
+    public static DownloadTask downloadFile(String serverUri, String targetDir, MyDownloadListener myDownloadListener) {
         GetRequest<File> fileGetRequest = OkGo.get(serverUri);
+        // tag为serverUri，用来区分断点
         return OkDownload.request(serverUri, fileGetRequest)
                 .folder(targetDir)
-                .register(new DownloadListener(tag) {
+                .register(new DownloadListener(serverUri) {
                     @Override
                     public void onStart(Progress progress) {
 
@@ -305,6 +306,7 @@ public class NetDataSource {
                     @Override
                     public void onFinish(File file, Progress progress) {
                         myDownloadListener.downloadSuccess(file, serverUri);
+                        OkDownload.getInstance().removeTask(progress.tag);
                     }
 
                     @Override

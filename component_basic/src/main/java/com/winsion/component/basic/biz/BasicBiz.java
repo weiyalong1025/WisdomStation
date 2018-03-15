@@ -127,7 +127,7 @@ public class BasicBiz {
             customDialog.show();
 
             // 下载更新包
-            DownloadTask downloadTask = NetDataSource.downloadFile(downloadUrl, downloadUrl, targetDir,
+            DownloadTask downloadTask = NetDataSource.downloadFile(downloadUrl, targetDir,
                     new MyDownloadListener() {
                         @Override
                         public void downloadProgress(String serverUri, int progress) {
@@ -155,8 +155,8 @@ public class BasicBiz {
 
             // 取消下载
             progressBuilder.setNegativeButton((dialog, which) -> {
-                downloadTask.pause();
-                NetDataSource.unSubscribe(downloadUrl);
+                downloadTask.remove();
+                downloadTask.unRegister(downloadUrl);
                 dialog.dismiss();
             });
         } catch (IOException e) {

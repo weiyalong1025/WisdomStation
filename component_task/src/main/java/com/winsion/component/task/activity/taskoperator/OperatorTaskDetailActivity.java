@@ -68,9 +68,11 @@ import static com.winsion.component.task.constants.Intents.OperatorTaskDetail.JO
  * Created by 10295 on 2018/1/19.
  * 任务执行人作业详情Activity
  * 协作/命令/任务/网格/预案
+ * <p>
+ * TODO 重新进入该界面，显示附件的下载进度
  */
 
-public class OperatorTaskDetailActivity extends BaseActivity implements OperatorTaskDetailContract.View, UploadListener, MyDownloadListener {
+public class OperatorTaskDetailActivity extends BaseActivity implements OperatorTaskDetailContract.View {
     private TitleView tvTitle;
     private TextView tvNumber;
     private TextView tvStartStationName;
@@ -566,7 +568,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 String userId = CacheDataSource.getUserId();
                 String jobsId = mJobEntity.getJobsid();
                 File publisherDir = DirAndFileUtils.getMonitorDir(userId, jobsId);
-                mPresenter.download(localRecordEntity.getServerUri(), publisherDir.getAbsolutePath(), this);
+                mPresenter.download(localRecordEntity.getServerUri(), publisherDir.getAbsolutePath(), myDownloadListener);
             } catch (IOException e) {
                 showToast(R.string.toast_check_sdcard);
             }
@@ -584,14 +586,14 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         // 上传附件列表adapter
         performerRecordAdapter = new RecordAdapter(mContext, performerRecordEntities);
         // 设置上传文件具体操作
-        performerRecordAdapter.setUploadPerformer(localRecordEntity -> mPresenter.upload(mJobEntity, localRecordEntity.getFile(), this));
+        performerRecordAdapter.setUploadPerformer(localRecordEntity -> mPresenter.upload(mJobEntity, localRecordEntity.getFile(), uploadListener));
         // 设置下载文件具体操作
         performerRecordAdapter.setDownloadPerformer(localRecordEntity -> {
             try {
                 String userId = CacheDataSource.getUserId();
                 String jobOperatorsId = mJobEntity.getJoboperatorsid();
                 File performerDir = DirAndFileUtils.getPerformerDir(userId, jobOperatorsId);
-                mPresenter.download(localRecordEntity.getServerUri(), performerDir.getAbsolutePath(), this);
+                mPresenter.download(localRecordEntity.getServerUri(), performerDir.getAbsolutePath(), myDownloadListener);
             } catch (IOException e) {
                 showToast(R.string.toast_check_sdcard);
             }
@@ -599,103 +601,107 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         lvRecordPerformer.setAdapter(performerRecordAdapter);
     }
 
-    @Override
-    public void uploadProgress(File uploadFile, int progress) {
-        for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
-            if (localRecordEntity.getFile() == uploadFile) {
-                localRecordEntity.setFileStatus(FileStatus.UPLOADING);
-                localRecordEntity.setProgress(progress);
-                performerRecordAdapter.notifyDataSetChanged();
-                break;
+    private MyDownloadListener myDownloadListener = new MyDownloadListener() {
+        @Override
+        public void downloadProgress(String serverUri, int progress) {
+            for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
+                if (TextUtils.equals(localRecordEntity.getServerUri(), serverUri)) {
+                    localRecordEntity.setFileStatus(FileStatus.DOWNLOADING);
+                    localRecordEntity.setProgress(progress);
+                    performerRecordAdapter.notifyDataSetChanged();
+                    break;
+                }
+            }
+            for (LocalRecordEntity localRecordEntity : publisherRecordEntities) {
+                if (TextUtils.equals(localRecordEntity.getServerUri(), serverUri)) {
+                    localRecordEntity.setFileStatus(FileStatus.DOWNLOADING);
+                    localRecordEntity.setProgress(progress);
+                    publisherRecordAdapter.notifyDataSetChanged();
+                    break;
+                }
             }
         }
-    }
 
-    @Override
-    public void uploadSuccess(File uploadFile) {
-        for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
-            if (localRecordEntity.getFile() == uploadFile) {
-                localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
-                performerRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.toast_upload_success);
-                break;
+        @Override
+        public void downloadSuccess(File file, String serverUri) {
+            for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
+                if (TextUtils.equals(localRecordEntity.getServerUri(), serverUri)) {
+                    localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
+                    localRecordEntity.setFile(file);
+                    performerRecordAdapter.notifyDataSetChanged();
+                    showToast(R.string.toast_download_success);
+                    break;
+                }
+            }
+            for (LocalRecordEntity localRecordEntity : publisherRecordEntities) {
+                if (TextUtils.equals(localRecordEntity.getServerUri(), serverUri)) {
+                    localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
+                    localRecordEntity.setFile(file);
+                    publisherRecordAdapter.notifyDataSetChanged();
+                    showToast(R.string.toast_download_success);
+                    break;
+                }
             }
         }
-    }
 
-    @Override
-    public void uploadFailed(File uploadFile) {
-        for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
-            if (localRecordEntity.getFile() == uploadFile) {
-                localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
-                performerRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.toast_upload_failed);
-                break;
+        @Override
+        public void downloadFailed(String serverUri) {
+            for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
+                if (TextUtils.equals(localRecordEntity.getServerUri(), serverUri)) {
+                    localRecordEntity.setFileStatus(FileStatus.NO_DOWNLOAD);
+                    performerRecordAdapter.notifyDataSetChanged();
+                    showToast(R.string.toast_download_failed);
+                    break;
+                }
+            }
+            for (LocalRecordEntity localRecordEntity : publisherRecordEntities) {
+                if (TextUtils.equals(localRecordEntity.getServerUri(), serverUri)) {
+                    localRecordEntity.setFileStatus(FileStatus.NO_DOWNLOAD);
+                    publisherRecordAdapter.notifyDataSetChanged();
+                    showToast(R.string.toast_download_failed);
+                    break;
+                }
             }
         }
-    }
+    };
 
-    @Override
-    public void downloadProgress(String serverUri, int progress) {
-        for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
-            if (equals(localRecordEntity.getServerUri(), serverUri)) {
-                localRecordEntity.setFileStatus(FileStatus.DOWNLOADING);
-                localRecordEntity.setProgress(progress);
-                performerRecordAdapter.notifyDataSetChanged();
-                break;
+    private UploadListener uploadListener = new UploadListener() {
+        @Override
+        public void uploadProgress(File uploadFile, int progress) {
+            for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
+                if (localRecordEntity.getFile() == uploadFile) {
+                    localRecordEntity.setFileStatus(FileStatus.UPLOADING);
+                    localRecordEntity.setProgress(progress);
+                    performerRecordAdapter.notifyDataSetChanged();
+                    break;
+                }
             }
         }
-        for (LocalRecordEntity localRecordEntity : publisherRecordEntities) {
-            if (equals(localRecordEntity.getServerUri(), serverUri)) {
-                localRecordEntity.setFileStatus(FileStatus.DOWNLOADING);
-                localRecordEntity.setProgress(progress);
-                publisherRecordAdapter.notifyDataSetChanged();
-                break;
-            }
-        }
-    }
 
-    @Override
-    public void downloadSuccess(File file, String serverUri) {
-        for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
-            if (equals(localRecordEntity.getServerUri(), serverUri)) {
-                localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
-                localRecordEntity.setFile(file);
-                performerRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.toast_download_success);
-                break;
+        @Override
+        public void uploadSuccess(File uploadFile) {
+            for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
+                if (localRecordEntity.getFile() == uploadFile) {
+                    localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
+                    performerRecordAdapter.notifyDataSetChanged();
+                    showToast(R.string.toast_upload_success);
+                    break;
+                }
             }
         }
-        for (LocalRecordEntity localRecordEntity : publisherRecordEntities) {
-            if (equals(localRecordEntity.getServerUri(), serverUri)) {
-                localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
-                localRecordEntity.setFile(file);
-                publisherRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.toast_download_success);
-                break;
-            }
-        }
-    }
 
-    @Override
-    public void downloadFailed(String serverUri) {
-        for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
-            if (equals(localRecordEntity.getServerUri(), serverUri)) {
-                localRecordEntity.setFileStatus(FileStatus.NO_DOWNLOAD);
-                performerRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.toast_download_failed);
-                break;
+        @Override
+        public void uploadFailed(File uploadFile) {
+            for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
+                if (localRecordEntity.getFile() == uploadFile) {
+                    localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+                    performerRecordAdapter.notifyDataSetChanged();
+                    showToast(R.string.toast_upload_failed);
+                    break;
+                }
             }
         }
-        for (LocalRecordEntity localRecordEntity : publisherRecordEntities) {
-            if (equals(localRecordEntity.getServerUri(), serverUri)) {
-                localRecordEntity.setFileStatus(FileStatus.NO_DOWNLOAD);
-                publisherRecordAdapter.notifyDataSetChanged();
-                showToast(R.string.toast_download_failed);
-                break;
-            }
-        }
-    }
+    };
 
     /**
      * 获取执行人上传到服务器的附件记录成功
@@ -892,7 +898,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     performerRecordAdapter.notifyDataSetChanged();
                     ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
                     // 上传
-                    mPresenter.upload(mJobEntity, photoFile, this);
+                    mPresenter.upload(mJobEntity, photoFile, uploadListener);
                     break;
                 case CODE_RECORD_VIDEO:
                     // 录像成功
@@ -905,7 +911,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     performerRecordAdapter.notifyDataSetChanged();
                     ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
                     // 上传
-                    mPresenter.upload(mJobEntity, videoFile, this);
+                    mPresenter.upload(mJobEntity, videoFile, uploadListener);
                     break;
                 case CODE_RECORD_AUDIO:
                     // 录音成功
@@ -918,7 +924,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     performerRecordAdapter.notifyDataSetChanged();
                     ViewUtils.setListViewHeightBasedOnChildren(lvRecordPerformer);
                     // 上传
-                    mPresenter.upload(mJobEntity, audioFile, this);
+                    mPresenter.upload(mJobEntity, audioFile, uploadListener);
                     break;
                 case CODE_NOTE:
                     // 添加备注成功

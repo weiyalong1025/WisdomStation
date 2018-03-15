@@ -6,18 +6,20 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.winsion.component.basic.biz.BasicBiz;
-import com.winsion.component.basic.data.CacheDataSource;
-import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.constants.FieldKey;
 import com.winsion.component.basic.constants.JoinKey;
 import com.winsion.component.basic.constants.OpeType;
 import com.winsion.component.basic.constants.Urls;
 import com.winsion.component.basic.constants.ViewName;
+import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.entity.ResponseForQueryData;
 import com.winsion.component.basic.entity.WhereClause;
 import com.winsion.component.basic.listener.MyDownloadListener;
 import com.winsion.component.basic.listener.ResponseListener;
 import com.winsion.component.basic.listener.UploadListener;
+import com.winsion.component.basic.utils.DirAndFileUtils;
+import com.winsion.component.basic.utils.FileUtils;
 import com.winsion.component.media.constants.FileStatus;
 import com.winsion.component.media.constants.FileType;
 import com.winsion.component.media.entity.LocalRecordEntity;
@@ -27,8 +29,6 @@ import com.winsion.component.task.constants.TrainAreaType;
 import com.winsion.component.task.entity.FileEntity;
 import com.winsion.component.task.entity.JobEntity;
 import com.winsion.component.task.entity.JobParameter;
-import com.winsion.component.basic.utils.DirAndFileUtils;
-import com.winsion.component.basic.utils.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -133,7 +133,7 @@ public class OperatorTaskDetailPresenter extends ChangeStatusBiz implements Oper
 
     @Override
     public void download(String url, String targetPath, MyDownloadListener myDownloadListener) {
-        NetDataSource.downloadFile(this, url, targetPath, myDownloadListener).start();
+        NetDataSource.downloadFile(url, targetPath, myDownloadListener).start();
     }
 
     @Override

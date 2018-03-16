@@ -92,6 +92,7 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
     private TaskEntity mTaskEntity;
     private List<LocalRecordEntity> publisherRecordEntities = new ArrayList<>();    // 命令/协作发布人上传附件集合
     private RecordAdapter publisherRecordAdapter;   // 命令/协作发布人上传附件列表Adapter(用于命令/协作)
+    private MonitorOperationAdapter monitorOperationAdapter;    // 作业列表Adapter
 
     // 定时刷新器(刷新任务执行时间)
     private Disposable timer;
@@ -314,12 +315,12 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
 
         if (taskType == TaskType.COMMAND || taskType == TaskType.COOPERATE)
             initMonitorRecordAdapter(dataList.get(0).getJobsid());
-
-        updateLastTime();
     }
 
     private void initMonitorOperationAdapter(List<JobEntity> dataList) {
-        lvMonitorOperation.setAdapter(new MonitorOperationAdapter(mContext, dataList));
+        monitorOperationAdapter = new MonitorOperationAdapter(mContext, dataList);
+        lvMonitorOperation.setAdapter(monitorOperationAdapter);
+        updateLastTime();
     }
 
     /**
@@ -449,7 +450,7 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
             timer = Observable.interval(30, 30, TimeUnit.SECONDS)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe((Long aLong) -> publisherRecordAdapter.notifyDataSetChanged());
+                    .subscribe((Long aLong) -> monitorOperationAdapter.notifyDataSetChanged());
         }
     }
 

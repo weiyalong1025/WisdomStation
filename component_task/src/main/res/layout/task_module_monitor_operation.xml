@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/basic_gray8"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_d90"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/basic_d5">
+
+        <ImageView
+            android:id="@+id/iv_status"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/basic_d45"
+            android:layout_weight="0.9"
+            android:src="@drawable/task_ic_not_start"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:ignore="NestedWeights">
+
+                <ImageView
+                    android:id="@+id/iv_type_icon"
+                    android:layout_width="@dimen/basic_d23"
+                    android:layout_height="@dimen/basic_d23"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/basic_d3"
+                    android:src="@drawable/task_ic_command"
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/task_type_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/iv_type_icon"
+                    android:text="@string/name_operation_name"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s15" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_job_icon"
+                    android:layout_width="@dimen/basic_d20"
+                    android:layout_height="@dimen/basic_d20"
+                    android:layout_marginEnd="@dimen/basic_d3"
+                    android:layout_marginTop="@dimen/basic_d3"
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/task_ic_type_alarm" />
+
+                <TextView
+                    android:id="@+id/tv_task_name"
+                    style="@style/TaskMarqueeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/iv_job_icon"
+                    android:textColor="@color/basic_blue1"
+                    android:textSize="@dimen/basic_s21"
+                    android:textStyle="bold"
+                    tools:text="接站作业" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/name_execution_time"
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s15"
+                tools:ignore="NestedWeights" />
+
+            <TextView
+                android:id="@+id/tv_last_time"
+                style="@style/TaskMarqueeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/basic_blue1"
+                android:textSize="@dimen/basic_s21"
+                tools:text="120分" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/name_location"
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s15"
+                tools:ignore="NestedWeights" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                style="@style/TaskMarqueeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/basic_blue1"
+                android:textSize="@dimen/basic_s21"
+                tools:text="A2口" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.winsion.component.basic.view.DrawableCenterTextView
+                android:id="@+id/btn_video"
+                android:layout_width="@dimen/basic_d100"
+                android:layout_height="@dimen/basic_d40"
+                android:background="@drawable/task_btn_yellow_left"
+                android:drawablePadding="@dimen/basic_d3"
+                android:drawableStart="@drawable/task_ic_camera"
+                android:focusable="false"
+                android:gravity="center_vertical"
+                android:text="@string/btn_video1"
+                android:textColor="@color/basic_black6"
+                android:textSize="@dimen/basic_s18" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/basic_d1"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@color/basic_black1"
+                tools:ignore="NestedWeights" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_status"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/basic_d40"
+            android:background="@drawable/task_btn_bg_name"
+            android:focusable="false"
+            android:gravity="center"
+            android:minWidth="@dimen/basic_d110"
+            android:paddingEnd="@dimen/basic_d10"
+            android:paddingStart="@dimen/basic_d10"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s18"
+            tools:text="吸污组" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/basic_d1"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@color/basic_black1"
+                tools:ignore="NestedWeights" />
+
+            <com.winsion.component.basic.view.DrawableCenterTextView
+                android:id="@+id/btn_broadcast"
+                android:layout_width="@dimen/basic_d100"
+                android:layout_height="@dimen/basic_d40"
+                android:background="@drawable/task_btn_yellow_right"
+                android:drawablePadding="@dimen/basic_d3"
+                android:drawableStart="@drawable/task_ic_broadcast"
+                android:focusable="false"
+                android:gravity="center_vertical"
+                android:text="@string/btn_broadcast"
+                android:textColor="@color/basic_black6"
+                android:textSize="@dimen/basic_s18" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/basic_d15">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_plan"
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s18" />
+
+            <TextView
+                android:id="@+id/tv_plan_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/basic_d5"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s18"
+                tools:text="10:00 ~ 12:00" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/basic_d1"
+            android:layout_height="match_parent"
+            android:background="@color/basic_black1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/basic_d5"
+                android:text="@string/name_real"
+                android:textColor="@color/basic_gray2"
+                android:textSize="@dimen/basic_s18" />
+
+            <TextView
+                android:id="@+id/tv_real_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/basic_d5"
+                android:textColor="@color/basic_white1"
+                android:textSize="@dimen/basic_s18"
+                tools:text="10:00 ~ 12:00" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

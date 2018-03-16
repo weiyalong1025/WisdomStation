@@ -16,7 +16,7 @@ import com.winsion.component.basic.entity.ResponseForQueryData;
 import com.winsion.component.basic.entity.WhereClause;
 import com.winsion.component.basic.listener.ResponseListener;
 import com.winsion.component.basic.utils.JsonUtils;
-import com.winsion.component.task.biz.ChangeStatusBiz;
+import com.winsion.component.task.biz.TaskBiz;
 import com.winsion.component.task.entity.JobEntity;
 
 import java.lang.reflect.Type;
@@ -27,7 +27,7 @@ import java.util.List;
  * Created by 10295 on 2017/12/15 0015
  */
 
-public class OperatorTaskListPresenter extends ChangeStatusBiz implements OperatorTaskListContract.Presenter {
+public class OperatorTaskListPresenter extends TaskBiz implements OperatorTaskListContract.Presenter {
     private final OperatorTaskListContract.View mView;
     private final Context mContext;
 

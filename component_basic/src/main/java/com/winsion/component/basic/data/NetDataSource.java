@@ -300,6 +300,7 @@ public class NetDataSource {
                             OkDownload.getInstance().getTask(serverUri).restart();
                         } else {
                             myDownloadListener.downloadFailed(serverUri);
+                            OkDownload.getInstance().removeTask(progress.tag);
                         }
                     }
 

@@ -26,7 +26,7 @@ import com.winsion.component.basic.view.SpinnerView;
 import com.winsion.component.task.R;
 import com.winsion.component.task.activity.taskoperator.OperatorTaskDetailActivity;
 import com.winsion.component.task.adapter.OperatorTaskListAdapter;
-import com.winsion.component.task.biz.ChangeStatusBiz;
+import com.winsion.component.task.biz.TaskBiz;
 import com.winsion.component.task.constants.TaskSpinnerState;
 import com.winsion.component.task.constants.TaskState;
 import com.winsion.component.task.entity.JobEntity;
@@ -175,7 +175,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         jobEntity.setInOperation(true);
         mLvAdapter.notifyDataSetChanged();
         int opeType = isFinish ? OpeType.COMPLETE : OpeType.BEGIN;
-        ((ChangeStatusBiz) mPresenter).changeJobStatus(mContext, jobEntity, opeType, new StateListener() {
+        ((TaskBiz) mPresenter).changeJobStatus(mContext, jobEntity, opeType, new StateListener() {
             @Override
             public void onSuccess() {
                 jobEntity.setInOperation(false);

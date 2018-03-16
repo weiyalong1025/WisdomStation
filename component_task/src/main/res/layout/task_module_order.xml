@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textColor="@color/basic_blue1"
+            android:textColor="@color/basic_white1"
             android:textSize="@dimen/basic_s20"
             tools:text="客运检票甲，客运检票已1" />
     </HorizontalScrollView>
@@ -246,10 +246,10 @@
         tools:ignore="TextFields" />
 
     <ListView
-        android:layout_below="@+id/et_content"
         android:id="@+id/lv_record_publisher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/et_content"
         android:divider="@null"
         tools:ignore="NestedScrolling"
         tools:listitem="@layout/media_item_record" />

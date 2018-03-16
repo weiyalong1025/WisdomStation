@@ -12,33 +12,61 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showConfirmButton="false"
-        tools:titleText="作业详情" />
+        tools:titleText="任务详情" />
 
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/fl_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="ScrollViewCount">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <!-- 加载完成显示 -->
+        <ScrollView
+            android:id="@+id/sv_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:ignore="ScrollViewCount">
 
-            <include layout="@layout/task_module_train_info" />
-
-            <include
-                layout="@layout/task_module_order"
-                android:visibility="gone" />
-
-            <ListView
-                android:id="@+id/lv_monitor_operation"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                tools:ignore="NestedScrolling"
-                tools:listitem="@layout/task_item_monitor_operation" />
-        </LinearLayout>
-    </ScrollView>
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <include layout="@layout/task_module_train_info" />
+
+                <include
+                    layout="@layout/task_module_order"
+                    android:visibility="gone" />
+
+                <ListView
+                    android:id="@+id/lv_monitor_operation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    tools:ignore="NestedScrolling"
+                    tools:listitem="@layout/task_item_monitor_operation" />
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- 加载中显示 -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/basic_d50"
+            android:layout_height="@dimen/basic_d50"
+            android:layout_gravity="center" />
+
+        <!-- 提示信息时显示(加载失败/数据为空...) -->
+        <TextView
+            android:id="@+id/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/basic_d10"
+            android:text="@string/hint_load_failed_click_retry"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s18"
+            android:visibility="gone" />
+    </FrameLayout>
 </LinearLayout>

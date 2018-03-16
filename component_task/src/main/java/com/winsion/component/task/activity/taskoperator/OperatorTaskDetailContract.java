@@ -19,24 +19,16 @@ import java.util.List;
 
 class OperatorTaskDetailContract {
     interface View extends BaseView {
-        void onPublisherUploadedFileGetSuccess(List<ServerRecordEntity> serverRecordFileList);
+        void onPublisherUploadFileGetSuccess(List<ServerRecordEntity> serverRecordFileList);
 
-        void onPerformerUploadedFileGetSuccess(List<ServerRecordEntity> serverRecordFileList);
+        void onPerformerUploadFileGetSuccess(List<ServerRecordEntity> serverRecordFileList);
     }
 
     interface Presenter extends BasePresenter {
-        ArrayList<LocalRecordEntity> getPerformerLocalFile(String jobOperatorsId);
-
-        ArrayList<LocalRecordEntity> getPublisherLocalFile(String jobsId);
-
         void getPublisherUploadedFile(String jobsId);
 
         void getPerformerUploadedFile(String jobOperatorsId);
 
-        void download(String url, String targetPath, MyDownloadListener myDownloadListener);
-
-        void upload(JobEntity jobEntity, File file, UploadListener uploadListener);
-
-        String[] formatTrainData(String[] areaType, String[] name);
+        void uploadFile(JobEntity jobEntity, File file, UploadListener uploadListener);
     }
 }

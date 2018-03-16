@@ -44,9 +44,11 @@
             <include layout="@layout/task_module_record_buttons" />
 
             <ImageView
+                android:id="@+id/div_grid_split"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/basic_div_horizontal"
+                android:visibility="gone"
                 tools:ignore="ContentDescription" />
 
             <TextView

@@ -298,6 +298,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,
                     .setStateText(R.string.dialog_on_login)
                     .setIrrevocable()
                     .create();
+        } else if (customDialog.isShowing()) {
+            customDialog.dismiss();
         }
         customDialog.show();
     }

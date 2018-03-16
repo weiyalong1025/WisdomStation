@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/basic_black1"
+    android:orientation="horizontal"
+    android:padding="@dimen/basic_d10">
+
+    <com.winsion.component.basic.view.DrawableCenterTextView
+        android:id="@+id/btn_talkback"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/basic_d48"
+        android:layout_marginEnd="@dimen/basic_d5"
+        android:layout_weight="1"
+        android:background="@drawable/basic_btn_yellow"
+        android:drawablePadding="@dimen/basic_d3"
+        android:drawableStart="@drawable/task_ic_talkback"
+        android:gravity="center_vertical"
+        android:text="@string/btn_talkback"
+        android:textSize="@dimen/basic_s18" />
+
+    <com.winsion.component.basic.view.DrawableCenterTextView
+        android:id="@+id/btn_message"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/basic_d48"
+        android:layout_marginLeft="@dimen/basic_d5"
+        android:layout_marginRight="@dimen/basic_d5"
+        android:layout_weight="1"
+        android:background="@drawable/basic_btn_yellow"
+        android:drawablePadding="@dimen/basic_d3"
+        android:drawableStart="@drawable/task_ic_message"
+        android:gravity="center_vertical"
+        android:text="@string/btn_message"
+        android:textSize="@dimen/basic_s18" />
+
+    <com.winsion.component.basic.view.DrawableCenterTextView
+        android:id="@+id/btn_call"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/basic_d48"
+        android:layout_marginStart="@dimen/basic_d5"
+        android:layout_weight="1"
+        android:background="@drawable/basic_btn_yellow"
+        android:drawablePadding="@dimen/basic_d3"
+        android:drawableStart="@drawable/task_ic_call"
+        android:gravity="center_vertical"
+        android:text="@string/btn_call"
+        android:textSize="@dimen/basic_s18" />
+</LinearLayout>

@@ -43,12 +43,16 @@
     <string name="btn_take_photo"><![CDATA[拍照>>]]></string>
     <string name="btn_video"><![CDATA[录像>>]]></string>
     <string name="btn_record"><![CDATA[录音>>]]></string>
+    <string name="btn_video1">视频</string>
     <string name="btn_broadcast">广播</string>
     <string name="btn_device_repair">设备报修</string>
     <string name="btn_submit">上报</string>
     <string name="btn_add_problem">添加问题</string>
     <string name="btn_pass">通过</string>
     <string name="btn_not_pass">未通过</string>
+    <string name="btn_talkback">对讲</string>
+    <string name="btn_message">消息</string>
+    <string name="btn_call">呼叫</string>
 
     <string name="title_issue_command">发布命令</string>
     <string name="title_issue_cooperation">发布协作</string>

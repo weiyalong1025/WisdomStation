@@ -19,8 +19,8 @@ import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.constants.OpeType;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.listener.MyDownloadListener;
+import com.winsion.component.basic.listener.MyUploadListener;
 import com.winsion.component.basic.listener.StateListener;
-import com.winsion.component.basic.listener.UploadListener;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.FileUtils;
@@ -68,8 +68,6 @@ import static com.winsion.component.task.constants.Intents.OperatorTaskDetail.JO
  * Created by 10295 on 2018/1/19.
  * 任务执行人作业详情Activity
  * 协作/命令/任务/网格/预案
- * <p>
- * TODO 重新进入该界面，显示附件的下载进度
  */
 
 public class OperatorTaskDetailActivity extends BaseActivity implements OperatorTaskDetailContract.View {
@@ -87,7 +85,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private TextView tvRealDepart;
     private TextView tvCheckPort;
     private LinearLayout llTrainModule;
-    private ImageView divHeader;
+    private ImageView divTrainOperation;
     private ImageView ivStatus;
     private ImageView ivTypeIcon;
     private TextView taskTypeName;
@@ -101,12 +99,12 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private TextView tvPlanTime;
     private TextView tvRealTime;
     private LinearLayout llBgColor;
+    private ImageView divOperationPublisher;
     private TextView tvPublisherTitle;
     private ListView lvRecordPublisherGrid;
     private TextView tvPerformerTitle;
     private ListView lvRecordPerformer;
-    private ImageView ivRecordDiv1;
-    private ImageView ivRecordDiv2;
+    private ImageView divPublisherOperator;
     private RelativeLayout rlOrderModule;
     private ListView lvRecordPublisher;
     private TextView tvMonitorGroupHint;
@@ -118,7 +116,6 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private TextView tvStartTime;
     private TextView tvEndTime;
     private EditText etContent;
-    private ImageView divGridSplit;
 
     private static final int CODE_NOTE = 0;  // 备注
     private static final int CODE_TAKE_PHOTO = 1;    // 拍照
@@ -171,7 +168,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         tvRealDepart = findViewById(R.id.tv_real_depart);
         tvCheckPort = findViewById(R.id.tv_check_port);
         llTrainModule = findViewById(R.id.ll_train_module);
-        divHeader = findViewById(R.id.div_header);
+        divTrainOperation = findViewById(R.id.div_train_operation);
         ivStatus = findViewById(R.id.iv_status);
         ivTypeIcon = findViewById(R.id.iv_type_icon);
         taskTypeName = findViewById(R.id.task_type_name);
@@ -189,8 +186,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         lvRecordPublisherGrid = findViewById(R.id.lv_record_publisher_grid);
         tvPerformerTitle = findViewById(R.id.tv_performer_title);
         lvRecordPerformer = findViewById(R.id.lv_record_performer);
-        ivRecordDiv1 = findViewById(R.id.iv_record_div1);
-        ivRecordDiv2 = findViewById(R.id.iv_record_div2);
+        divPublisherOperator = findViewById(R.id.div_publisher_operator);
         rlOrderModule = findViewById(R.id.rl_order_module);
         lvRecordPublisher = findViewById(R.id.lv_record_publisher);
         tvMonitorGroupHint = findViewById(R.id.tv_monitor_group_hint);
@@ -203,7 +199,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         tvStartTime = findViewById(R.id.tv_start_time);
         tvEndTime = findViewById(R.id.tv_end_time);
         etContent = findViewById(R.id.et_content);
-        divGridSplit = findViewById(R.id.div_grid_split);
+        divOperationPublisher = findViewById(R.id.div_operation_publisher);
     }
 
     private void initPresenter() {
@@ -249,8 +245,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private void notifyPerformerRecordDataSetChanged(boolean needRecalculateHeight) {
         performerRecordAdapter.notifyDataSetChanged();
         if (performerRecordAdapter.getCount() != 0 && mJobEntity.getTaktype() == TaskType.GRID) {
+            divPublisherOperator.setVisibility(View.VISIBLE);
             tvPerformerTitle.setVisibility(View.VISIBLE);
         } else {
+            divPublisherOperator.setVisibility(View.GONE);
             tvPerformerTitle.setVisibility(View.GONE);
         }
 
@@ -269,10 +267,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
     private void notifyPublisherRecordDataSetChanged(boolean needRecalculateHeight) {
         publisherRecordAdapter.notifyDataSetChanged();
         if (publisherRecordAdapter.getCount() != 0 && mJobEntity.getTaktype() == TaskType.GRID) {
-            ivRecordDiv1.setVisibility(View.VISIBLE);
+            divOperationPublisher.setVisibility(View.VISIBLE);
             tvPublisherTitle.setVisibility(View.VISIBLE);
         } else {
-            ivRecordDiv1.setVisibility(View.GONE);
+            divOperationPublisher.setVisibility(View.GONE);
             tvPublisherTitle.setVisibility(View.GONE);
         }
 
@@ -291,37 +289,32 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         if (taskType == TaskType.GRID) {
             rlOrderModule.setVisibility(View.GONE);
             llTrainModule.setVisibility(View.GONE);
-            divHeader.setVisibility(View.GONE);
+            divTrainOperation.setVisibility(View.GONE);
             tvPerformerTitle.setVisibility(View.VISIBLE);
             tvPublisherTitle.setVisibility(View.VISIBLE);
-            ivRecordDiv1.setVisibility(View.VISIBLE);
-            ivRecordDiv2.setVisibility(View.VISIBLE);
-            divGridSplit.setVisibility(View.VISIBLE);
+            divPublisherOperator.setVisibility(View.VISIBLE);
         } else if (taskType == TaskType.PLAN) {
             rlOrderModule.setVisibility(View.GONE);
             llTrainModule.setVisibility(View.GONE);
-            divHeader.setVisibility(View.GONE);
+            divTrainOperation.setVisibility(View.GONE);
             tvPerformerTitle.setVisibility(View.GONE);
             tvPublisherTitle.setVisibility(View.GONE);
-            ivRecordDiv1.setVisibility(View.GONE);
-            ivRecordDiv2.setVisibility(View.GONE);
+            divPublisherOperator.setVisibility(View.GONE);
         } else if (taskType == TaskType.COOPERATE || taskType == TaskType.COMMAND) {
             rlOrderModule.setVisibility(View.VISIBLE);
             llTrainModule.setVisibility(View.GONE);
-            divHeader.setVisibility(View.VISIBLE);
+            divTrainOperation.setVisibility(View.VISIBLE);
             tvPerformerTitle.setVisibility(View.GONE);
             tvPublisherTitle.setVisibility(View.GONE);
-            ivRecordDiv1.setVisibility(View.GONE);
-            ivRecordDiv2.setVisibility(View.GONE);
+            divPublisherOperator.setVisibility(View.GONE);
             initOrderModuleView(taskType);
         } else {
             rlOrderModule.setVisibility(View.GONE);
             llTrainModule.setVisibility(View.VISIBLE);
-            divHeader.setVisibility(View.VISIBLE);
+            divTrainOperation.setVisibility(View.VISIBLE);
             tvPerformerTitle.setVisibility(View.GONE);
             tvPublisherTitle.setVisibility(View.GONE);
-            ivRecordDiv1.setVisibility(View.GONE);
-            ivRecordDiv2.setVisibility(View.GONE);
+            divPublisherOperator.setVisibility(View.GONE);
             initTrainModuleView();
         }
         initTaskModuleView();
@@ -381,10 +374,13 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 color = 0xFFE24D46;
                 break;
         }
+
         SpannableStringBuilder builder = new SpannableStringBuilder(trainNumber);
         ForegroundColorSpan statusColor = new ForegroundColorSpan(color);
-        builder.setSpan(statusColor, mJobEntity.getTrainnumber().length(), trainNumber.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(statusColor, mJobEntity.getTrainnumber().length(), trainNumber.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvNumber.setText(builder);
+
         int trainStatus = mJobEntity.getTrainstatus();
         switch (trainStatus) {
             case TrainState.IN_PROGRESS:
@@ -598,7 +594,8 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 String userId = CacheDataSource.getUserId();
                 String jobsId = mJobEntity.getJobsid();
                 File publisherDir = DirAndFileUtils.getMonitorDir(userId, jobsId);
-                ((TaskBiz) mPresenter).downloadFile(localRecordEntity.getServerUri(), publisherDir.getAbsolutePath(), myDownloadListener);
+                ((TaskBiz) mPresenter).downloadFile(localRecordEntity.getServerUri(),
+                        publisherDir.getAbsolutePath(), myDownloadListener);
             } catch (IOException e) {
                 showToast(R.string.toast_check_sdcard);
             }
@@ -616,14 +613,16 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         // 上传附件列表adapter
         performerRecordAdapter = new RecordAdapter(mContext, performerRecordEntities);
         // 设置上传文件具体操作
-        performerRecordAdapter.setUploadPerformer(localRecordEntity -> mPresenter.uploadFile(mJobEntity, localRecordEntity.getFile(), uploadListener));
+        performerRecordAdapter.setUploadPerformer(localRecordEntity ->
+                mPresenter.uploadFile(mJobEntity, localRecordEntity.getFile(), myUploadListener));
         // 设置下载文件具体操作
         performerRecordAdapter.setDownloadPerformer(localRecordEntity -> {
             try {
                 String userId = CacheDataSource.getUserId();
                 String jobOperatorsId = mJobEntity.getJoboperatorsid();
                 File performerDir = DirAndFileUtils.getPerformerDir(userId, jobOperatorsId);
-                ((TaskBiz) mPresenter).downloadFile(localRecordEntity.getServerUri(), performerDir.getAbsolutePath(), myDownloadListener);
+                ((TaskBiz) mPresenter).downloadFile(localRecordEntity.getServerUri(),
+                        performerDir.getAbsolutePath(), myDownloadListener);
             } catch (IOException e) {
                 showToast(R.string.toast_check_sdcard);
             }
@@ -695,7 +694,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         }
     };
 
-    private UploadListener uploadListener = new UploadListener() {
+    private MyUploadListener myUploadListener = new MyUploadListener() {
         @Override
         public void uploadProgress(File uploadFile, int progress) {
             for (LocalRecordEntity localRecordEntity : performerRecordEntities) {
@@ -761,6 +760,24 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             }
         }
         notifyPerformerRecordDataSetChanged(needRecalculateHeight);
+
+        // 自动上传没有上传成功的文件,自动下载没有下载成功的文件
+        for (LocalRecordEntity performerRecordEntity : performerRecordEntities) {
+            if (performerRecordEntity.getFileStatus() == FileStatus.NO_UPLOAD) {
+                mPresenter.uploadFile(mJobEntity, performerRecordEntity.getFile(), myUploadListener);
+            }
+            if (performerRecordEntity.getFileStatus() == FileStatus.NO_DOWNLOAD) {
+                try {
+                    String userId = CacheDataSource.getUserId();
+                    String jobOperatorsId = mJobEntity.getJoboperatorsid();
+                    File performerDir = DirAndFileUtils.getPerformerDir(userId, jobOperatorsId);
+                    ((TaskBiz) mPresenter).downloadFile(performerRecordEntity.getServerUri(),
+                            performerDir.getAbsolutePath(), myDownloadListener);
+                } catch (IOException e) {
+                    showToast(R.string.toast_check_sdcard);
+                }
+            }
+        }
     }
 
     /**
@@ -792,6 +809,21 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
         }
         if (serverRecordFileList.size() != 0)
             notifyPublisherRecordDataSetChanged(needRecalculateHeight);
+
+        // 自动下载没有下载成功的文件
+        for (LocalRecordEntity publisherRecordEntity : publisherRecordEntities) {
+            if (publisherRecordEntity.getFileStatus() == FileStatus.NO_DOWNLOAD) {
+                try {
+                    String userId = CacheDataSource.getUserId();
+                    String jobsId = mJobEntity.getJobsid();
+                    File publisherDir = DirAndFileUtils.getMonitorDir(userId, jobsId);
+                    ((TaskBiz) mPresenter).downloadFile(publisherRecordEntity.getServerUri(),
+                            publisherDir.getAbsolutePath(), myDownloadListener);
+                } catch (IOException e) {
+                    showToast(R.string.toast_check_sdcard);
+                }
+            }
+        }
     }
 
     /**
@@ -922,7 +954,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     performerRecordEntities.add(localRecordEntity);
                     notifyPerformerRecordDataSetChanged(true);
                     // 上传
-                    mPresenter.uploadFile(mJobEntity, photoFile, uploadListener);
+                    mPresenter.uploadFile(mJobEntity, photoFile, myUploadListener);
                     break;
                 case CODE_RECORD_VIDEO:
                     // 录像成功
@@ -934,7 +966,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     performerRecordEntities.add(localRecordEntity);
                     notifyPerformerRecordDataSetChanged(true);
                     // 上传
-                    mPresenter.uploadFile(mJobEntity, videoFile, uploadListener);
+                    mPresenter.uploadFile(mJobEntity, videoFile, myUploadListener);
                     break;
                 case CODE_RECORD_AUDIO:
                     // 录音成功
@@ -946,7 +978,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                     performerRecordEntities.add(localRecordEntity);
                     notifyPerformerRecordDataSetChanged(true);
                     // 上传
-                    mPresenter.uploadFile(mJobEntity, audioFile, uploadListener);
+                    mPresenter.uploadFile(mJobEntity, audioFile, myUploadListener);
                     break;
                 case CODE_NOTE:
                     // 添加备注成功

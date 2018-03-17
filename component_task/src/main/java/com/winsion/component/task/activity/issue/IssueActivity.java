@@ -10,14 +10,15 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
+import com.lzy.okserver.OkUpload;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
-import com.winsion.component.basic.data.CacheDataSource;
-import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.constants.OpeCode;
 import com.winsion.component.basic.constants.Urls;
+import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.data.NetDataSource;
+import com.winsion.component.basic.listener.MyUploadListener;
 import com.winsion.component.basic.listener.ResponseListener;
-import com.winsion.component.basic.listener.UploadListener;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.ViewUtils;
@@ -55,7 +56,7 @@ import static com.winsion.component.task.constants.Intents.Issue.TO_TEAM_ENTITY;
  * 发布命令/协作界面
  * Created by wyl on 2016/8/1.
  */
-public class IssueActivity extends BaseActivity implements UploadListener {
+public class IssueActivity extends BaseActivity implements MyUploadListener {
     private TitleView tvTitle;
     private TextView tvPerformerGroupHint;
     private EditText etContent;
@@ -214,8 +215,9 @@ public class IssueActivity extends BaseActivity implements UploadListener {
 
     private void initAdapter() {
         recordAdapter = new RecordAdapter(mContext, localRecordEntities);
-        recordAdapter.setUploadPerformer(localRecordEntity -> NetDataSource.uploadFileNoData(this,
-                localRecordEntity.getFile(), this));
+        recordAdapter.setUploadPerformer(localRecordEntity -> NetDataSource
+                .uploadFileNoData(this, localRecordEntity.getFile(), this)
+                .start());
         listView.setAdapter(recordAdapter);
     }
 
@@ -456,7 +458,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     recordAdapter.notifyDataSetChanged();
                     ViewUtils.setListViewHeightBasedOnChildren(listView);
                     // 上传
-                    NetDataSource.uploadFileNoData(this, photoFile, this);
+                    NetDataSource.uploadFileNoData(this, photoFile, this).start();
                     break;
                 case CODE_RECORD_VIDEO:
                     // 录像成功
@@ -469,7 +471,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     recordAdapter.notifyDataSetChanged();
                     ViewUtils.setListViewHeightBasedOnChildren(listView);
                     // 上传
-                    NetDataSource.uploadFileNoData(this, videoFile, this);
+                    NetDataSource.uploadFileNoData(this, videoFile, this).start();
                     break;
                 case CODE_RECORD_AUDIO:
                     // 录音成功
@@ -482,7 +484,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
                     recordAdapter.notifyDataSetChanged();
                     ViewUtils.setListViewHeightBasedOnChildren(listView);
                     // 上传
-                    NetDataSource.uploadFileNoData(this, audioFile, this);
+                    NetDataSource.uploadFileNoData(this, audioFile, this).start();
                     break;
             }
         }
@@ -566,5 +568,7 @@ public class IssueActivity extends BaseActivity implements UploadListener {
     protected void onDestroy() {
         super.onDestroy();
         NetDataSource.unSubscribe(this);
+        NetDataSource.unRegister(this);
+        OkUpload.getInstance().removeAll();
     }
 }

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
-import com.winsion.component.basic.listener.UploadListener;
+import com.winsion.component.basic.listener.MyUploadListener;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.ViewUtils;
 import com.winsion.component.basic.view.CustomDialog;
@@ -48,7 +48,7 @@ import static com.winsion.component.task.constants.Intents.SubmitProblem.SITE_NA
  * 上报问题界面
  */
 
-public class SubmitProblemActivity extends BaseActivity implements SubmitProblemContact.View, UploadListener, SubmitBiz.SubmitListener {
+public class SubmitProblemActivity extends BaseActivity implements SubmitProblemContact.View, MyUploadListener, SubmitBiz.SubmitListener {
     private TitleView tvTitle;
     private RelativeLayout rlDeviceInfo;
     private TextView tvSite;

@@ -56,7 +56,7 @@ public class BasicBiz {
             UpdateEntity updateEntity = new UpdateEntity();
             updateEntity.setFilePath("https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk");
             updateEntity.setVersionContent("新年快乐，大吉大利。");
-            showUpdateDialog(context, updateEntity);
+            showUpdateDialog(context, updateEntity, tag);
             return;
         }
         HttpParams httpParams = new HttpParams();
@@ -71,7 +71,7 @@ public class BasicBiz {
             public void onSuccess(UpdateEntity updateEntity) {
                 if (AppUtils.getPackageInfo(context).versionCode < updateEntity.getVersionNumber()) {
                     // 需要更新
-                    showUpdateDialog(context, updateEntity);
+                    showUpdateDialog(context, updateEntity, tag);
                 } else if (showHint) {
                     // 不需要更新
                     ToastUtils.showToast(context, R.string.toast_current_version_is_the_latest);
@@ -91,13 +91,13 @@ public class BasicBiz {
      * @param context      上下文
      * @param updateEntity 包含下载地址、更新信息
      */
-    private static void showUpdateDialog(Context context, UpdateEntity updateEntity) {
+    private static void showUpdateDialog(Context context, UpdateEntity updateEntity, Object tag) {
         // 需要更新,弹出对话框
         new CustomDialog.NormalBuilder(context)
                 .setTitle(R.string.dialog_version_update)
                 .setMessage(updateEntity.getVersionContent())
                 .setPositiveButtonText(R.string.btn_update_now)
-                .setPositiveButton((dialog, which) -> downloadNewVersion(context, updateEntity.getFilePath()))
+                .setPositiveButton((dialog, which) -> downloadNewVersion(context, updateEntity.getFilePath(), tag))
                 .setNegativeButtonText(R.string.btn_update_later)
                 .setIrrevocable()
                 .show();
@@ -109,7 +109,7 @@ public class BasicBiz {
      * @param context     上下文
      * @param downloadUrl 文件下载地址
      */
-    private static void downloadNewVersion(Context context, String downloadUrl) {
+    private static void downloadNewVersion(Context context, String downloadUrl, Object tag) {
         try {
             // 下载文件目标存储目录
             String targetDir = DirAndFileUtils.getUpdateDir().getAbsolutePath();
@@ -127,7 +127,7 @@ public class BasicBiz {
             customDialog.show();
 
             // 下载更新包
-            DownloadTask downloadTask = NetDataSource.downloadFile(downloadUrl, targetDir,
+            DownloadTask downloadTask = NetDataSource.downloadFile(tag, downloadUrl, targetDir,
                     new MyDownloadListener() {
                         @Override
                         public void downloadProgress(String serverUri, int progress) {

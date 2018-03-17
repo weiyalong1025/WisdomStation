@@ -89,5 +89,6 @@ public class MonitorTaskDetailPresenter extends TaskBiz implements MonitorTaskDe
     @Override
     public void exit() {
         NetDataSource.unSubscribe(this);
+        NetDataSource.unRegister(this);
     }
 }

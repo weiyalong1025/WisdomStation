@@ -7,7 +7,7 @@ import java.io.File;
  * 上传文件事件监听
  */
 
-public interface UploadListener {
+public interface MyUploadListener {
     void uploadProgress(File uploadFile, int progress);
 
     void uploadSuccess(File uploadFile);

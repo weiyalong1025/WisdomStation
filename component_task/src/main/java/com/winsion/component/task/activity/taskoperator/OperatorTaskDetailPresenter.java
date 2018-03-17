@@ -7,7 +7,7 @@ import com.winsion.component.basic.constants.OpeType;
 import com.winsion.component.basic.constants.ViewName;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
-import com.winsion.component.basic.listener.UploadListener;
+import com.winsion.component.basic.listener.MyUploadListener;
 import com.winsion.component.media.constants.FileType;
 import com.winsion.component.media.entity.ServerRecordEntity;
 import com.winsion.component.task.biz.TaskBiz;
@@ -68,7 +68,7 @@ public class OperatorTaskDetailPresenter extends TaskBiz implements OperatorTask
     }
 
     @Override
-    public void uploadFile(JobEntity jobEntity, File file, UploadListener uploadListener) {
+    public void uploadFile(JobEntity jobEntity, File file, MyUploadListener myUploadListener) {
         JobParameter jobParameter = new JobParameter();
         jobParameter.setSsId(BasicBiz.getBSSID(mContext));
         jobParameter.setTaskId(jobEntity.getTasksid());
@@ -84,7 +84,7 @@ public class OperatorTaskDetailPresenter extends TaskBiz implements OperatorTask
         fileList.add(fileEntity);
         jobParameter.setFileList(fileList);
 
-        NetDataSource.uploadFile(this, jobParameter, file, uploadListener);
+        NetDataSource.uploadFile(this, jobParameter, file, myUploadListener).start();
     }
 
     /**
@@ -107,5 +107,6 @@ public class OperatorTaskDetailPresenter extends TaskBiz implements OperatorTask
     @Override
     public void exit() {
         NetDataSource.unSubscribe(this);
+        NetDataSource.unRegister(this);
     }
 }

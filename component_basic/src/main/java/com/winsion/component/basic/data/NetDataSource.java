@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
-import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.convert.StringConvert;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.MemoryCookieStore;
 import com.lzy.okgo.exception.OkGoException;
@@ -15,12 +15,15 @@ import com.lzy.okgo.exception.StorageException;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Progress;
-import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.lzy.okgo.request.PostRequest;
 import com.lzy.okrx2.adapter.ObservableBody;
 import com.lzy.okserver.OkDownload;
+import com.lzy.okserver.OkUpload;
 import com.lzy.okserver.download.DownloadListener;
 import com.lzy.okserver.download.DownloadTask;
+import com.lzy.okserver.upload.UploadListener;
+import com.lzy.okserver.upload.UploadTask;
 import com.winsion.component.basic.constants.ParamKey;
 import com.winsion.component.basic.constants.Urls;
 import com.winsion.component.basic.converter.ObjectConverter;
@@ -28,12 +31,13 @@ import com.winsion.component.basic.entity.OrderBy;
 import com.winsion.component.basic.entity.QueryParameter;
 import com.winsion.component.basic.entity.WhereClause;
 import com.winsion.component.basic.listener.MyDownloadListener;
+import com.winsion.component.basic.listener.MyUploadListener;
 import com.winsion.component.basic.listener.ResponseListener;
-import com.winsion.component.basic.listener.UploadListener;
 import com.winsion.component.basic.utils.HashUtils;
 import com.winsion.component.basic.utils.LogUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -63,6 +67,7 @@ public class NetDataSource {
     private static final int RETRY_COUNT = 0;   // 请求重试次数
 
     private static final HashMap<Object, CompositeDisposable> requestMap = new HashMap<>();
+    private static final HashMap<Object, ArrayList<Runnable>> tasksMap = new HashMap<>();
 
     /**
      * 调用其他方法的前提
@@ -192,81 +197,144 @@ public class NetDataSource {
                 .subscribe(getObserver(tag, url, listener));
     }
 
-    public static void uploadFileNoData(Object tag, File file, UploadListener uploadListener) {
-        long time = System.currentTimeMillis();
-        String dataStr = file.getName();
-        String token = CacheDataSource.getToken();
-        String httpKey = CacheDataSource.getHttpKey();
-        String sha1Str = HashUtils.getSha1Str(dataStr + time + httpKey);
+    /**
+     * 不需要添加data参数的上传(eg发布命令时上传的文件不需要跟任务关联)
+     *
+     * @param tag              用来取消监听，页面销毁时一定要调用NetDataSource.unRegister()取消监听，否则会产生内存泄漏
+     * @param file             要上传的文件
+     * @param myUploadListener 上传状态回调
+     * @return 上传任务对象，开始任务需调用start()
+     */
+    @SuppressWarnings("unchecked")
+    public static UploadTask<String> uploadFileNoData(Object tag, File file, MyUploadListener myUploadListener) {
+        UploadListener<String> uploadListener = new UploadListener<String>(tag) {
+            @Override
+            public void onStart(Progress progress) {
 
-        HttpParams httpParams = new HttpParams();
-        httpParams.put(ParamKey.TIME, time);
-        httpParams.put(ParamKey.FILE, file);
-        httpParams.put(ParamKey.TOKEN, token);
-        httpParams.put(ParamKey.HASH, sha1Str);
-        OkGo.<String>post(CacheDataSource.getBaseUrl() + Urls.UPLOAD_SINGLE)
-                .tag(tag)
-                .params(httpParams)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        LogUtils.i("上传文件", file.getName() + "上传成功");
-                        uploadListener.uploadSuccess(file);
-                    }
+            }
 
-                    @Override
-                    public void uploadProgress(Progress progress) {
-                        LogUtils.i("上传文件", file.getName() + "上传进度：" + progress.fraction + "%");
-                        uploadListener.uploadProgress(file, (int) (progress.fraction * 100));
-                    }
+            @Override
+            public void onProgress(Progress progress) {
+                LogUtils.i("上传文件", file.getName() + "上传进度：" + progress.fraction + "%");
+                myUploadListener.uploadProgress(file, (int) (progress.fraction * 100));
+            }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        LogUtils.i("上传文件", file.getName() + "上传失败");
-                        uploadListener.uploadFailed(file);
-                    }
-                });
+            @Override
+            public void onError(Progress progress) {
+                LogUtils.i("上传文件", file.getName() + "上传失败");
+                myUploadListener.uploadFailed(file);
+                OkUpload.getInstance().removeTask(progress.tag);
+            }
+
+            @Override
+            public void onFinish(String s, Progress progress) {
+                LogUtils.i("上传文件", file.getName() + "上传成功");
+                myUploadListener.uploadSuccess(file);
+                OkUpload.getInstance().removeTask(progress.tag);
+            }
+
+            @Override
+            public void onRemove(Progress progress) {
+
+            }
+        };
+
+        UploadTask<String> uploadTask = (UploadTask<String>) OkUpload.getInstance().getTask(file.getName());
+
+        if (uploadTask == null) {
+            long time = System.currentTimeMillis();
+            String dataStr = file.getName();
+            String token = CacheDataSource.getToken();
+            String httpKey = CacheDataSource.getHttpKey();
+            String sha1Str = HashUtils.getSha1Str(dataStr + time + httpKey);
+
+            PostRequest<String> fileUploadRequest = OkGo.<String>post(CacheDataSource.getBaseUrl() + Urls.UPLOAD)
+                    .params(ParamKey.FILE, file)
+                    .params(ParamKey.TOKEN, token)
+                    .params(ParamKey.TIME, time)
+                    .params(ParamKey.HASH, sha1Str)
+                    .converter(new StringConvert());
+
+            uploadTask = OkUpload.request(file.getName(), fileUploadRequest)
+                    .register(uploadListener);
+        } else {
+            uploadTask.register(uploadListener);
+        }
+
+        register(tag, uploadTask);
+
+        return uploadTask;
     }
 
     /**
-     * 上传文件
+     * 添加data参数的上传(eg作业进行中上传的附件需要跟作业关联)
+     *
+     * @param tag              用来取消监听，页面销毁时一定要调用NetDataSource.unRegister()取消监听，否则会产生内存泄漏
+     * @param dateObject       需要关联的数据
+     * @param file             要上传的文件
+     * @param myUploadListener 上传状态回调
+     * @return 上传任务对象，开始任务需调用start()
      */
-    public static void uploadFile(Object tag, Object dateObject, File file, UploadListener uploadListener) {
-        String token = CacheDataSource.getToken();
-        long time = System.currentTimeMillis();
-        String dataStr = JSON.toJSONString(dateObject);
-        String httpKey = CacheDataSource.getHttpKey();
-        String sha1Str = HashUtils.getSha1Str(dataStr + time + httpKey);
+    @SuppressWarnings("unchecked")
+    public static UploadTask<?> uploadFile(Object tag, Object dateObject, File file, MyUploadListener myUploadListener) {
+        UploadListener<String> uploadListener = new UploadListener<String>(tag) {
+            @Override
+            public void onStart(Progress progress) {
 
-        HttpParams httpParams = new HttpParams();
-        httpParams.put(ParamKey.FILE, file);
-        httpParams.put(ParamKey.TOKEN, token);
-        httpParams.put(ParamKey.TIME, time);
-        httpParams.put(ParamKey.DATA, dataStr);
-        httpParams.put(ParamKey.HASH, sha1Str);
+            }
 
-        OkGo.<String>post(CacheDataSource.getBaseUrl() + Urls.UPLOAD)
-                .tag(tag)
-                .params(httpParams)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        LogUtils.i("上传文件", file.getName() + "上传成功");
-                        uploadListener.uploadSuccess(file);
-                    }
+            @Override
+            public void onProgress(Progress progress) {
+                LogUtils.i("上传文件", file.getName() + "上传进度：" + progress.fraction + "%");
+                myUploadListener.uploadProgress(file, (int) (progress.fraction * 100));
+            }
 
-                    @Override
-                    public void uploadProgress(Progress progress) {
-                        LogUtils.i("上传文件", file.getName() + "上传进度：" + progress.fraction + "%");
-                        uploadListener.uploadProgress(file, (int) (progress.fraction * 100));
-                    }
+            @Override
+            public void onError(Progress progress) {
+                LogUtils.i("上传文件", file.getName() + "上传失败");
+                myUploadListener.uploadFailed(file);
+                OkUpload.getInstance().removeTask(progress.tag);
+            }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        LogUtils.i("上传文件", file.getName() + "上传失败");
-                        uploadListener.uploadFailed(file);
-                    }
-                });
+            @Override
+            public void onFinish(String s, Progress progress) {
+                LogUtils.i("上传文件", file.getName() + "上传成功");
+                myUploadListener.uploadSuccess(file);
+                OkUpload.getInstance().removeTask(progress.tag);
+            }
+
+            @Override
+            public void onRemove(Progress progress) {
+
+            }
+        };
+
+        UploadTask<String> uploadTask = (UploadTask<String>) OkUpload.getInstance().getTask(file.getName());
+
+        if (uploadTask == null) {
+            String token = CacheDataSource.getToken();
+            long time = System.currentTimeMillis();
+            String dataStr = JSON.toJSONString(dateObject);
+            String httpKey = CacheDataSource.getHttpKey();
+            String sha1Str = HashUtils.getSha1Str(dataStr + time + httpKey);
+
+            PostRequest<String> fileUploadRequest = OkGo.<String>post(CacheDataSource.getBaseUrl() + Urls.UPLOAD)
+                    .params(ParamKey.FILE, file)
+                    .params(ParamKey.DATA, dataStr)
+                    .params(ParamKey.TOKEN, token)
+                    .params(ParamKey.TIME, time)
+                    .params(ParamKey.HASH, sha1Str)
+                    .converter(new StringConvert());
+
+            uploadTask = OkUpload.request(file.getName(), fileUploadRequest)
+                    .register(uploadListener);
+        } else {
+            uploadTask.register(uploadListener);
+        }
+
+        register(tag, uploadTask);
+
+        return uploadTask;
     }
 
     /**
@@ -276,52 +344,63 @@ public class NetDataSource {
      * @param targetDir          文件目标存储目录
      * @param myDownloadListener 下载状态监听
      */
-    public static DownloadTask downloadFile(String serverUri, String targetDir, MyDownloadListener myDownloadListener) {
-        GetRequest<File> fileGetRequest = OkGo.get(serverUri);
-        // tag为serverUri，用来区分断点
-        return OkDownload.request(serverUri, fileGetRequest)
-                .folder(targetDir)
-                .register(new DownloadListener(serverUri) {
-                    @Override
-                    public void onStart(Progress progress) {
+    public static DownloadTask downloadFile(Object tag, String serverUri, String targetDir, MyDownloadListener myDownloadListener) {
+        DownloadListener downloadListener = new DownloadListener(tag) {
+            @Override
+            public void onStart(Progress progress) {
 
-                    }
+            }
 
-                    @Override
-                    public void onProgress(Progress progress) {
-                        myDownloadListener.downloadProgress(serverUri, (int) (progress.fraction * 100));
-                    }
+            @Override
+            public void onProgress(Progress progress) {
+                myDownloadListener.downloadProgress(serverUri, (int) (progress.fraction * 100));
+            }
 
-                    @Override
-                    public void onError(Progress progress) {
-                        if (progress.exception instanceof OkGoException) {
-                            OkDownload.getInstance().getTask(serverUri).restart();
-                        } else if (progress.exception instanceof StorageException) {
-                            OkDownload.getInstance().getTask(serverUri).restart();
-                        } else {
-                            myDownloadListener.downloadFailed(serverUri);
-                            OkDownload.getInstance().removeTask(progress.tag);
-                        }
-                    }
+            @Override
+            public void onError(Progress progress) {
+                if (progress.exception instanceof OkGoException) {
+                    OkDownload.getInstance().getTask(serverUri).restart();
+                } else if (progress.exception instanceof StorageException) {
+                    OkDownload.getInstance().getTask(serverUri).restart();
+                } else {
+                    myDownloadListener.downloadFailed(serverUri);
+                    OkDownload.getInstance().removeTask(progress.tag);
+                }
+            }
 
-                    @Override
-                    public void onFinish(File file, Progress progress) {
-                        myDownloadListener.downloadSuccess(file, serverUri);
-                        OkDownload.getInstance().removeTask(progress.tag);
-                    }
+            @Override
+            public void onFinish(File file, Progress progress) {
+                myDownloadListener.downloadSuccess(file, serverUri);
+                OkDownload.getInstance().removeTask(progress.tag);
+            }
 
-                    @Override
-                    public void onRemove(Progress progress) {
+            @Override
+            public void onRemove(Progress progress) {
 
-                    }
-                });
+            }
+        };
+
+        DownloadTask downloadTask = OkDownload.getInstance().getTask(serverUri);
+
+        if (downloadTask == null) {
+            GetRequest<File> fileGetRequest = OkGo.get(serverUri);
+            downloadTask = OkDownload.request(serverUri, fileGetRequest)
+                    .folder(targetDir)
+                    .register(downloadListener);
+        } else {
+            downloadTask.register(downloadListener);
+        }
+
+        register(tag, downloadTask);
+
+        return downloadTask;
     }
 
     private static <T> Observer<T> getObserver(Object tag, String url, ResponseListener<T> listener) {
         return new Observer<T>() {
             @Override
             public void onSubscribe(Disposable d) {
-                addDisposable(tag, d);
+                subscribe(tag, d);
             }
 
             @Override
@@ -346,7 +425,7 @@ public class NetDataSource {
         };
     }
 
-    private static void addDisposable(Object tag, Disposable d) {
+    private static void subscribe(Object tag, Disposable d) {
         if (tag != null) {
             CompositeDisposable subscription;
             if ((subscription = requestMap.get(tag)) == null) {
@@ -361,6 +440,30 @@ public class NetDataSource {
         if (requestMap.containsKey(tag)) {
             requestMap.get(tag).dispose();
             requestMap.remove(tag);
+        }
+    }
+
+    private static void register(Object tag, Runnable task) {
+        ArrayList<Runnable> tasks = tasksMap.get(tag);
+        if (tasks == null) {
+            tasks = new ArrayList<>();
+            tasksMap.put(tag, tasks);
+        }
+        tasks.add(task);
+    }
+
+    public static void unRegister(Object tag) {
+        ArrayList<Runnable> tasks = tasksMap.get(tag);
+        if (tasks != null) {
+            for (Runnable task : tasks) {
+                if (task instanceof DownloadTask) {
+                    ((DownloadTask) task).listeners.remove(tag);
+                }
+                if (task instanceof UploadTask) {
+                    ((UploadTask) task).listeners.remove(tag);
+                }
+            }
+            tasksMap.remove(tag);
         }
     }
 

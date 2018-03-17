@@ -96,6 +96,7 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
 
     // 定时刷新器(刷新任务执行时间)
     private Disposable timer;
+    private String jobsId;
 
     @Override
     protected int setContentView() {
@@ -258,10 +259,13 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
                 color = 0xFFE24D46;
                 break;
         }
+
         SpannableStringBuilder builder = new SpannableStringBuilder(trainNumber);
         ForegroundColorSpan statusColor = new ForegroundColorSpan(color);
-        builder.setSpan(statusColor, jobEntity.getTrainnumber().length(), trainNumber.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(statusColor, jobEntity.getTrainnumber().length(), trainNumber.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvNumber.setText(builder);
+
         int trainStatus = jobEntity.getTrainstatus();
         switch (trainStatus) {
             case TrainState.IN_PROGRESS:
@@ -313,8 +317,10 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
 
         initMonitorOperationAdapter(dataList);
 
-        if (taskType == TaskType.COMMAND || taskType == TaskType.COOPERATE)
-            initMonitorRecordAdapter(dataList.get(0).getJobsid());
+        if (taskType == TaskType.COMMAND || taskType == TaskType.COOPERATE) {
+            jobsId = dataList.get(0).getJobsid();
+            initMonitorRecordAdapter(jobsId);
+        }
     }
 
     private void initMonitorOperationAdapter(List<JobEntity> dataList) {
@@ -334,7 +340,8 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
             try {
                 String userId = CacheDataSource.getUserId();
                 File publisherDir = DirAndFileUtils.getMonitorDir(userId, jobsId);
-                ((TaskBiz) mPresenter).downloadFile(localRecordEntity.getServerUri(), publisherDir.getAbsolutePath(), myDownloadListener);
+                ((TaskBiz) mPresenter).downloadFile(localRecordEntity.getServerUri(),
+                        publisherDir.getAbsolutePath(), myDownloadListener);
             } catch (IOException e) {
                 showToast(R.string.toast_check_sdcard);
             }
@@ -410,6 +417,20 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
         }
         if (serverRecordFileList.size() != 0)
             notifyPublisherRecordDataSetChanged(needRecalculateHeight);
+
+        // 自动下载没有下载成功的文件
+        for (LocalRecordEntity publisherRecordEntity : publisherRecordEntities) {
+            if (publisherRecordEntity.getFileStatus() == FileStatus.NO_DOWNLOAD) {
+                try {
+                    String userId = CacheDataSource.getUserId();
+                    File publisherDir = DirAndFileUtils.getMonitorDir(userId, jobsId);
+                    ((TaskBiz) mPresenter).downloadFile(publisherRecordEntity.getServerUri(),
+                            publisherDir.getAbsolutePath(), myDownloadListener);
+                } catch (IOException e) {
+                    showToast(R.string.toast_check_sdcard);
+                }
+            }
+        }
     }
 
     /**

@@ -106,6 +106,7 @@ public class MainPresenter implements MainContract.Presenter, MQTTClient.Observe
     @Override
     public void exit() {
         NetDataSource.unSubscribe(this);
+        NetDataSource.unRegister(this);
         MQTTClient.removeObserver(this);
     }
 }

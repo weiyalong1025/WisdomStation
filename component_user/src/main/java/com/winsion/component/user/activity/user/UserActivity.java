@@ -100,5 +100,6 @@ public class UserActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         NetDataSource.unSubscribe(this);
+        NetDataSource.unRegister(this);
     }
 }

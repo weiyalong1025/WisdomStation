@@ -4,16 +4,17 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.winsion.component.basic.data.CacheDataSource;
-import com.winsion.component.basic.data.NetDataSource;
+import com.lzy.okserver.OkUpload;
 import com.winsion.component.basic.constants.FieldKey;
 import com.winsion.component.basic.constants.JoinKey;
 import com.winsion.component.basic.constants.Urls;
 import com.winsion.component.basic.constants.ViewName;
+import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.entity.ResponseForQueryData;
 import com.winsion.component.basic.entity.WhereClause;
+import com.winsion.component.basic.listener.MyUploadListener;
 import com.winsion.component.basic.listener.ResponseListener;
-import com.winsion.component.basic.listener.UploadListener;
 import com.winsion.component.task.R;
 import com.winsion.component.task.biz.SubmitBiz;
 import com.winsion.component.task.entity.DeviceEntity;
@@ -130,12 +131,14 @@ public class SubmitProblemPresenter extends SubmitBiz implements SubmitProblemCo
     }
 
     @Override
-    public void uploadFile(File uploadFile, UploadListener uploadListener) {
-        NetDataSource.uploadFileNoData(this, uploadFile, uploadListener);
+    public void uploadFile(File uploadFile, MyUploadListener myUploadListener) {
+        NetDataSource.uploadFileNoData(this, uploadFile, myUploadListener).start();
     }
 
     @Override
     public void exit() {
         NetDataSource.unSubscribe(this);
+        NetDataSource.unRegister(this);
+        OkUpload.getInstance().removeAll();
     }
 }

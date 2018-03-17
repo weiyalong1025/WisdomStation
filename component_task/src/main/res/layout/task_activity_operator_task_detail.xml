@@ -33,7 +33,7 @@
                 android:visibility="gone" />
 
             <ImageView
-                android:id="@+id/div_header"
+                android:id="@+id/div_train_operation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/basic_div_horizontal"
@@ -44,7 +44,7 @@
             <include layout="@layout/task_module_record_buttons" />
 
             <ImageView
-                android:id="@+id/div_grid_split"
+                android:id="@+id/div_operation_publisher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/basic_div_horizontal"
@@ -74,7 +74,7 @@
                 tools:listitem="@layout/media_item_record" />
 
             <ImageView
-                android:id="@+id/iv_record_div1"
+                android:id="@+id/div_publisher_operator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/basic_div_horizontal"
@@ -101,13 +101,6 @@
                 android:scrollbars="none"
                 tools:ignore="NestedScrolling"
                 tools:listitem="@layout/media_item_record" />
-
-            <ImageView
-                android:id="@+id/iv_record_div2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/basic_div_horizontal"
-                tools:ignore="ContentDescription" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

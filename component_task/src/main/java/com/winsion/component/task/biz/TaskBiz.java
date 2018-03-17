@@ -173,7 +173,7 @@ public class TaskBiz {
     }
 
     public void downloadFile(String url, String targetPath, MyDownloadListener myDownloadListener) {
-        NetDataSource.downloadFile(url, targetPath, myDownloadListener).start();
+        NetDataSource.downloadFile(this, url, targetPath, myDownloadListener).start();
     }
 
     public ArrayList<LocalRecordEntity> getPerformerLocalFile(String jobOperatorsId) {

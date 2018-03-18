@@ -807,8 +807,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
                 localRecordEntity.setFileStatus(FileStatus.SYNCHRONIZED);
             }
         }
-        if (serverRecordFileList.size() != 0)
-            notifyPublisherRecordDataSetChanged(needRecalculateHeight);
+        notifyPublisherRecordDataSetChanged(needRecalculateHeight);
 
         // 自动下载没有下载成功的文件
         for (LocalRecordEntity publisherRecordEntity : publisherRecordEntities) {

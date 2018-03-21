@@ -56,11 +56,11 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.GridActivity"
+            android:name=".activity.taskmonitor.MonitorTaskDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.taskmonitor.MonitorTaskDetailActivity"
+            android:name=".activity.patrolplan.PatrolPlanActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
     </application>

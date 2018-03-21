@@ -58,7 +58,12 @@ public class MonitorTaskDetailPresenter extends TaskBiz implements MonitorTaskDe
 
                     @Override
                     public void onSuccess(ResponseForQueryData<List<JobEntity>> result) {
-                        mView.getTaskDetailInfoSuccess(result.getDataList());
+                        List<JobEntity> dataList = result.getDataList();
+                        if (dataList == null || dataList.size() == 0) {
+                            mView.getTaskDetailInfoFailed();
+                        } else {
+                            mView.getTaskDetailInfoSuccess(dataList);
+                        }
                     }
 
                     @Override

@@ -15,9 +15,18 @@ class MonitorTaskListContract {
         void getMonitorTaskDataSuccess(List<TaskEntity> data);
 
         void getMonitorTaskDataFailed();
+
+        void confirmFailed(String tasksId);
+
+        void confirmSuccess(String tasksId, int opeType);
     }
 
     interface Presenter extends BasePresenter {
         void getMonitorTaskData();
+
+        /**
+         * 问题状态变更(通过/未通过)
+         */
+        void confirm(TaskEntity taskEntity, int opeType);
     }
 }

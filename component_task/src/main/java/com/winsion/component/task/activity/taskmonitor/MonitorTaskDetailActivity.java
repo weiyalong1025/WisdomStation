@@ -6,6 +6,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -56,7 +57,7 @@ import static com.winsion.component.task.constants.Intents.MontorTaskDetail.TASK
  * 先用taskId查出JobEntity，用JobEntity的jobsId查询发布人上传的附件
  */
 
-public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTaskDetailContract.View {
+public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTaskDetailContract.View, AdapterView.OnItemClickListener {
     private TitleView tvTitle;
     private FrameLayout flContainer;
     private ScrollView svContent;
@@ -155,9 +156,7 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
         mPresenter.getTaskDetailInfo(mTaskEntity.getTasksid());
         // 根据任务类型设置界面标题
         int taskType = mTaskEntity.getTaktype();
-        if (taskType == TaskType.GRID) {
-            tvTitle.setTitleText(R.string.title_grid_detail);
-        } else if (taskType == TaskType.PLAN) {
+        if (taskType == TaskType.PLAN) {
             tvTitle.setTitleText(R.string.title_alarm_detail);
         } else if (taskType == TaskType.COOPERATE || taskType == TaskType.COMMAND) {
             tvTitle.setTitleText(taskType == TaskType.COOPERATE ? R.string.title_cooperation_detail : R.string.title_command_detail);
@@ -195,11 +194,7 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
      */
     private void initViewModule(JobEntity jobEntity) {
         int taskType = mTaskEntity.getTaktype();
-        if (taskType == TaskType.GRID) {
-            rlOrderModule.setVisibility(View.GONE);
-            llTrainModule.setVisibility(View.GONE);
-        } else if (taskType == TaskType.PLAN) {
-            tvTitle.setTitleText(R.string.title_alarm_detail);
+        if (taskType == TaskType.PLAN) {
             rlOrderModule.setVisibility(View.GONE);
             llTrainModule.setVisibility(View.GONE);
         } else if (taskType == TaskType.COOPERATE || taskType == TaskType.COMMAND) {
@@ -326,7 +321,13 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
     private void initMonitorOperationAdapter(List<JobEntity> dataList) {
         monitorOperationAdapter = new MonitorOperationAdapter(mContext, dataList);
         lvMonitorOperation.setAdapter(monitorOperationAdapter);
+        lvMonitorOperation.setOnItemClickListener(this);
         updateLastTime();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        showToast("123");
     }
 
     /**

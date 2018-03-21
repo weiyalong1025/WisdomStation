@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.winsion.component.basic.base.BaseFragment;
-import com.winsion.component.task.activity.GridActivity;
+import com.winsion.component.task.activity.patrolplan.PatrolPlanActivity;
 import com.winsion.dispatch.R;
 
 /**
@@ -33,7 +33,7 @@ public class SceneRootFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mv_grid:
-                startActivity(GridActivity.class);
+                startActivity(PatrolPlanActivity.class);
                 break;
             case R.id.mv_main_passenger:
                 showToast("重点旅客");

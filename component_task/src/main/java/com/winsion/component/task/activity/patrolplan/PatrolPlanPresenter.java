@@ -1,4 +1,4 @@
-package com.winsion.component.task.fragment.patrolplan;
+package com.winsion.component.task.activity.patrolplan;
 
 import android.content.Context;
 

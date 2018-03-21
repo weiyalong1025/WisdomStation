@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+    <View
+        android:id="@+id/refer_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_d0_5"
+        android:background="@color/basic_gray6" />
+
+    <View
+        android:id="@+id/refer_center_line"
+        android:layout_width="@dimen/basic_d0_5"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/btn_dialog_negative"
+        android:layout_below="@+id/refer_top_line"
+        android:layout_centerHorizontal="true"
+        android:background="@color/basic_gray6" />
+
     <Button
         android:id="@+id/btn_dialog_negative"
         style="?attr/buttonBarStyle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/basic_d48"
-        android:layout_weight="1"
+        android:layout_below="@+id/refer_top_line"
+        android:layout_toStartOf="@+id/refer_center_line"
         android:background="@drawable/basic_selector_dialog_btn_left"
         android:text="@string/btn_cancel"
         android:textColor="@color/basic_selector_dialog_button_text"
         android:textSize="@dimen/basic_s16" />
 
-    <View
-        android:layout_width="@dimen/basic_d0_5"
-        android:layout_height="match_parent"
-        android:background="@color/basic_gray1" />
-
     <Button
         android:id="@+id/btn_dialog_positive"
         style="?attr/buttonBarStyle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/basic_d48"
-        android:layout_weight="1"
+        android:layout_below="@+id/refer_top_line"
+        android:layout_toEndOf="@+id/refer_center_line"
         android:background="@drawable/basic_selector_dialog_btn_right"
         android:text="@string/btn_confirm"
         android:textColor="@color/basic_selector_dialog_button_text"
         android:textSize="@dimen/basic_s16" />
-</LinearLayout>
+</RelativeLayout>

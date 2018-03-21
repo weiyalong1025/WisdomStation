@@ -20,7 +20,7 @@
 
         <ImageView
             android:id="@+id/iv_command"
-            android:layout_width="@dimen/basic_d23"
+            android:layout_width="@dimen/basic_d28"
             android:layout_height="@dimen/basic_d23"
             android:layout_centerVertical="true"
             android:src="@drawable/task_ic_command"
@@ -62,7 +62,7 @@
 
         <ImageView
             android:id="@+id/iv_cooperation"
-            android:layout_width="@dimen/basic_d23"
+            android:layout_width="@dimen/basic_d28"
             android:layout_height="@dimen/basic_d23"
             android:layout_centerVertical="true"
             android:src="@drawable/task_ic_cooperation"

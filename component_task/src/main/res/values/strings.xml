@@ -68,6 +68,7 @@
     <string name="title_patrol_item">巡视项目</string>
     <string name="title_input_device_id">请输入设备ID</string>
     <string name="title_problem_list">问题列表</string>
+    <string name="title_patrol_plan">巡视计划</string>
 
     <string name="value_nothing">无</string>
     <string name="value_grid_task">网格任务</string>
@@ -106,7 +107,6 @@
     <string name="toast_confirm_failed">确认失败</string>
     <string name="toast_get_patrol_data_first">需要先获取巡视项目</string>
     <string name="toast_submit_failed">上报失败</string>
-    <string name="toast_scan_bluetooth_failed">开启检测蓝牙失败，建议重新打开</string>
     <string name="toast_bluetooth_not_support">该设备不支持蓝牙功能</string>
     <string name="toast_open_bluetooth_failed">打开蓝牙失败，巡视功能暂不可用</string>
     <string name="toast_add_device_first">请先添加设备</string>
@@ -130,7 +130,6 @@
     <string name="tab_my_task">我的任务</string>
     <string name="tab_task_monitor">任务监控</string>
     <string name="tab_command_and_cooperation">命令与协作</string>
-    <string name="tab_patrol_plan">巡视计划</string>
     <string name="tab_problem_manager">问题管理</string>
 
     <string name="hint_select_station">请选择车站</string>

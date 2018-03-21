@@ -60,11 +60,11 @@
 
                         <ImageView
                             android:id="@+id/iv_type_icon"
-                            android:layout_width="@dimen/basic_d23"
+                            android:layout_width="@dimen/basic_d28"
                             android:layout_height="@dimen/basic_d23"
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="@dimen/basic_d3"
-                            android:src="@drawable/task_ic_command"
+                            android:src="@drawable/task_ic_cooperation"
                             android:visibility="gone"
                             tools:ignore="ContentDescription" />
 

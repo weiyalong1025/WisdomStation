@@ -40,11 +40,6 @@
                 tools:text="对话框文字" />
         </com.winsion.component.basic.view.MaxHeightScrollView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/basic_d0_5"
-            android:background="@color/basic_gray1" />
-
         <include layout="@layout/basic_layout_dialog_btn" />
     </LinearLayout>
 </FrameLayout>

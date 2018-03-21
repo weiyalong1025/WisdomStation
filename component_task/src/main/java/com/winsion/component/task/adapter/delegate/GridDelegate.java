@@ -1,35 +1,45 @@
-package com.winsion.component.task.adapter;
-
-import android.content.Context;
+package com.winsion.component.task.adapter.delegate;
 
 import com.winsion.component.task.R;
 import com.winsion.component.task.constants.TaskState;
+import com.winsion.component.task.constants.TaskType;
 import com.winsion.component.task.entity.TaskEntity;
-import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
+import com.zhy.adapter.abslistview.base.ItemViewDelegate;
 
 import java.util.List;
 
 /**
- * Created by 10295 on 2017/12/26.
- * 问题管理Adapter
+ * Created by 10295 on 2018/3/21.
+ * 网格任务item
  */
 
-public class ProblemManageAdapter extends CommonAdapter<TaskEntity> {
+public class GridDelegate implements ItemViewDelegate<TaskEntity> {
+    private List<TaskEntity> mData;
+    private ConfirmButtonListener confirmButtonListener;
+
     public interface ConfirmButtonListener {
         void onPassButtonClick(TaskEntity taskEntity);
 
         void onNotPassButtonClick(TaskEntity taskEntity);
     }
 
-    private ConfirmButtonListener confirmButtonListener;
-
-    public ProblemManageAdapter(Context context, List<TaskEntity> data) {
-        super(context, R.layout.task_item_grid, data);
+    public GridDelegate(List<TaskEntity> data) {
+        this.mData = data;
     }
 
     @Override
-    protected void convert(ViewHolder viewHolder, TaskEntity taskEntity, int position) {
+    public int getItemViewLayoutId() {
+        return R.layout.task_item_grid;
+    }
+
+    @Override
+    public boolean isForViewType(TaskEntity item, int position) {
+        return item.getTaktype() == TaskType.GRID;
+    }
+
+    @Override
+    public void convert(ViewHolder viewHolder, TaskEntity taskEntity, int position) {
         String[] split = taskEntity.getTaskname().split(" ");
         String deviceName;
         String subclassName;
@@ -107,7 +117,7 @@ public class ProblemManageAdapter extends CommonAdapter<TaskEntity> {
                 viewHolder.setBackgroundRes(R.id.btn_not_pass, R.drawable.task_btn_gray);
                 break;
         }
-        if (position == mDatas.size() - 1) {
+        if (position == mData.size() - 1) {
             viewHolder.setVisible(R.id.iv_bottom_split, true);
         } else {
             viewHolder.setVisible(R.id.iv_bottom_split, false);

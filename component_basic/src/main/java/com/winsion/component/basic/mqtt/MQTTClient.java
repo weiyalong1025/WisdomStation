@@ -105,7 +105,7 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 // 接到消息
                 String msg = new String(message.getPayload());
-                LogUtils.i(TAG, "messageArrived:" + msg);
+                LogUtils.i(TAG, "topic:" + topic + "\n" + "msg:" + msg);
                 notifyObservers(JSON.parseObject(msg, MQMessage.class));
             }
 

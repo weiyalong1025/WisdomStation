@@ -1,1 +1,5 @@
-<manifest package="com.winsion.component.basic" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.winsion.component.basic">
+
+    <application android:theme="@style/BasicAppTheme" />
+</manifest>

@@ -1,4 +1,4 @@
-package com.winsion.component.task.fragment.patrolplan;
+package com.winsion.component.task.activity.patrolplan;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
@@ -17,10 +17,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.winsion.component.basic.base.BaseFragment;
+import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.utils.ViewUtils;
+import com.winsion.component.basic.view.TitleView;
 import com.winsion.component.basic.view.WrapContentListView;
 import com.winsion.component.task.R;
 import com.winsion.component.task.activity.patrolitem.PatrolItemActivity;
@@ -39,7 +40,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import static android.app.Activity.RESULT_CANCELED;
 import static com.winsion.component.task.constants.Intents.PatrolItem.PATROL_TASK_ENTITY;
 
 /**
@@ -47,7 +47,7 @@ import static com.winsion.component.task.constants.Intents.PatrolItem.PATROL_TAS
  * 巡检任务以及界面
  * TODO 蓝牙需要动态权限
  */
-public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContract.View, AdapterView.OnItemClickListener {
+public class PatrolPlanActivity extends BaseActivity implements PatrolPlanContract.View, AdapterView.OnItemClickListener {
     private TextView tvDate;
     private ListView lvList;
     private SwipeRefreshLayout swipeRefresh;
@@ -59,8 +59,8 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
 
     private PatrolPlanContract.Presenter mPresenter;
     private PatrolPlanAdapter mLvAdapter;
-    private BluetoothAdapter mBtAdapter;
-    private BluetoothPointAdapter bluetoothAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
+    private BluetoothPointAdapter mBluetoothPointAdapter;
     private long lastUpdateTime;
 
     private List<PatrolPlanEntity> listData = new ArrayList<>();
@@ -82,13 +82,13 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
                             break;
                         case BluetoothAdapter.STATE_ON:
                             logI("onReceive---------STATE_ON");
-                            mBtAdapter.startLeScan(leScanCallback);
+                            mBluetoothAdapter.startLeScan(leScanCallback);
                             break;
                         case BluetoothAdapter.STATE_TURNING_OFF:
                             logI("onReceive---------STATE_TURNING_OFF");
                             break;
                         case BluetoothAdapter.STATE_OFF:
-                            mBtAdapter.stopLeScan(leScanCallback);
+                            mBluetoothAdapter.stopLeScan(leScanCallback);
                             logI("onReceive---------STATE_OFF");
                             break;
                     }
@@ -127,14 +127,13 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
         mLvAdapter.notifyDataSetChanged();
     }
 
-    @SuppressLint("InflateParams")
     @Override
-    protected View setContentView() {
-        return LayoutInflater.from(mContext).inflate(R.layout.task_fragment_patrol_plan, null);
+    protected int setContentView() {
+        return R.layout.task_fragment_patrol_plan;
     }
 
     @Override
-    protected void init() {
+    protected void start() {
         initPresenter();
         initView();
         initAdapter();
@@ -148,6 +147,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     }
 
     private void initView() {
+        ((TitleView) findViewById(R.id.tv_title)).setOnBackClickListener(v -> finish());
         tvDate = findViewById(R.id.tv_date);
         lvList = findViewById(R.id.lv_list);
         swipeRefresh = findViewById(R.id.swipe_refresh);
@@ -179,15 +179,24 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     };
 
     private void initBluetooth() {
-        mBtAdapter = BluetoothAdapter.getDefaultAdapter();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mHandler.sendEmptyMessage(0);
-        // 检测蓝牙是否可用
-        if (verifyBluetooth() && !mBtAdapter.startLeScan(leScanCallback)) {
-            showToast(R.string.toast_scan_bluetooth_failed);
-        }
+
         // 注册监听蓝牙状态改变的广播
         IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-        mContext.registerReceiver(mBtReceiver, filter);
+        registerReceiver(mBtReceiver, filter);
+
+        // 检测蓝牙是否可用
+        if (mBluetoothAdapter == null) {
+            showToast(R.string.toast_bluetooth_not_support);
+        } else {
+            if (mBluetoothAdapter.isEnabled()) {
+                mBluetoothAdapter.startLeScan(leScanCallback);
+            } else {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            }
+        }
     }
 
     private void updateOrAddBluetoothPoint(BPEntity BPEntity) {
@@ -204,23 +213,10 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
             BPEntities.add(BPEntity);
         }
         Collections.sort(BPEntities, (o1, o2) -> (int) (o2.getLastTime() - o1.getLastTime()));
-        if (bluetoothAdapter != null) {
-            bluetoothAdapter.notifyDataSetChanged();
+        if (mBluetoothPointAdapter != null) {
+            mBluetoothPointAdapter.notifyDataSetChanged();
             lastUpdateTime = System.currentTimeMillis();
         }
-    }
-
-    private boolean verifyBluetooth() {
-        if (mBtAdapter == null) {
-            showToast(R.string.toast_bluetooth_not_support);
-            return false;
-        }
-        if (!mBtAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            return false;
-        }
-        return true;
     }
 
     @Override
@@ -273,8 +269,8 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
             inflate.measure(0, 0);
             int suggestMaxHeight = ViewUtils.getSuggestMaxHeight(mContext, inflate.getMeasuredHeight());
             ListView listView = new WrapContentListView(getContext(), suggestMaxHeight);
-            bluetoothAdapter = new BluetoothPointAdapter(mContext, BPEntities);
-            listView.setAdapter(bluetoothAdapter);
+            mBluetoothPointAdapter = new BluetoothPointAdapter(mContext, BPEntities);
+            listView.setAdapter(mBluetoothPointAdapter);
             new AlertDialog.Builder(mContext)
                     .setView(listView)
                     .setCancelable(true)
@@ -298,7 +294,7 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
             String createDate = listData.get(0).getCreatedate();
             String[] split = createDate.split("-");
             String data = split[0] + "年" + split[1] + "月" + split[2] + "日";
-            tvDate.setText(String.format("%s%s", data, getString(R.string.tab_patrol_plan)));
+            tvDate.setText(String.format("%s%s", data, getString(R.string.title_patrol_plan)));
             showView(flContainer, swipeRefresh);
         }
     }
@@ -311,14 +307,20 @@ public class PatrolPlanFragment extends BaseFragment implements PatrolPlanContra
     }
 
     @Override
+    public Context getContext() {
+        return mContext;
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mBtAdapter != null) {
-            mBtAdapter.stopLeScan(leScanCallback);
+        if (mBluetoothAdapter != null) {
+            mBluetoothAdapter.stopLeScan(leScanCallback);
+            mBluetoothAdapter.disable();
         }
         EventBus.getDefault().unregister(this);
         mHandler.removeCallbacksAndMessages(null);
-        mContext.unregisterReceiver(mBtReceiver);
+        unregisterReceiver(mBtReceiver);
         mPresenter.exit();
     }
 }

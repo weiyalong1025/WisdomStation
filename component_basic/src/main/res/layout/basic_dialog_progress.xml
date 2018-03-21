@@ -46,7 +46,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/basic_d0_5"
+            android:layout_height="@dimen/basic_d1"
             android:background="@color/basic_gray1" />
 
         <Button

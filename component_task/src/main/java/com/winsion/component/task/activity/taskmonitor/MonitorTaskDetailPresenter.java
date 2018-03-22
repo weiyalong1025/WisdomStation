@@ -87,7 +87,17 @@ public class MonitorTaskDetailPresenter extends TaskBiz implements MonitorTaskDe
     }
 
     @Override
+    public void onPublisherUploadFileGetFailed() {
+
+    }
+
+    @Override
     public void onPerformerUploadFileGetSuccess(List<ServerRecordEntity> dataList) {
+
+    }
+
+    @Override
+    public void onPerformerUploadFileGetFailed() {
 
     }
 

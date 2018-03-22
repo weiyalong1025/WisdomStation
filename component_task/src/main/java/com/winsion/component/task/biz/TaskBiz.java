@@ -260,7 +260,11 @@ public class TaskBiz {
 
                     @Override
                     public void onFailed(int errorCode, String errorInfo) {
-
+                        if (field.equals(FIELD_MONITOR)) {
+                            uploadFileGetListener.onPublisherUploadFileGetFailed();
+                        } else {
+                            uploadFileGetListener.onPerformerUploadFileGetFailed();
+                        }
                     }
                 });
     }
@@ -268,6 +272,10 @@ public class TaskBiz {
     public interface UploadFileGetListener {
         void onPublisherUploadFileGetSuccess(List<ServerRecordEntity> dataList);
 
+        void onPublisherUploadFileGetFailed();
+
         void onPerformerUploadFileGetSuccess(List<ServerRecordEntity> dataList);
+
+        void onPerformerUploadFileGetFailed();
     }
 }

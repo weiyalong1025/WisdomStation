@@ -1,6 +1,7 @@
 package com.winsion.component.task.activity.taskmonitor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -28,8 +29,10 @@ import com.winsion.component.media.constants.FileStatus;
 import com.winsion.component.media.entity.LocalRecordEntity;
 import com.winsion.component.media.entity.ServerRecordEntity;
 import com.winsion.component.task.R;
+import com.winsion.component.task.activity.scenerecord.SceneRecordActivity;
 import com.winsion.component.task.adapter.MonitorOperationAdapter;
 import com.winsion.component.task.biz.TaskBiz;
+import com.winsion.component.task.constants.Intents;
 import com.winsion.component.task.constants.RunState;
 import com.winsion.component.task.constants.TaskType;
 import com.winsion.component.task.constants.TrainState;
@@ -94,6 +97,7 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
     private List<LocalRecordEntity> publisherRecordEntities = new ArrayList<>();    // 命令/协作发布人上传附件集合
     private RecordAdapter publisherRecordAdapter;   // 命令/协作发布人上传附件列表Adapter(用于命令/协作)
     private MonitorOperationAdapter monitorOperationAdapter;    // 作业列表Adapter
+    private List<JobEntity> mJobEntities;    // 任务下的作业数据
 
     // 定时刷新器(刷新任务执行时间)
     private Disposable timer;
@@ -178,8 +182,9 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
 
     @Override
     public void getTaskDetailInfoSuccess(List<JobEntity> dataList) {
-        initViewModule(dataList.get(0));
-        initAdapter(dataList);
+        this.mJobEntities = dataList;
+        initViewModule();
+        initAdapter();
         showView(flContainer, svContent);
     }
 
@@ -192,7 +197,8 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
     /**
      * 根据任务类型显示不同的VIEW模块
      */
-    private void initViewModule(JobEntity jobEntity) {
+    private void initViewModule() {
+        JobEntity jobEntity = mJobEntities.get(0);
         int taskType = mTaskEntity.getTaktype();
         if (taskType == TaskType.PLAN) {
             rlOrderModule.setVisibility(View.GONE);
@@ -307,19 +313,19 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
         tvCheckPort.setText(strings[3]);
     }
 
-    private void initAdapter(List<JobEntity> dataList) {
+    private void initAdapter() {
         int taskType = mTaskEntity.getTaktype();
 
-        initMonitorOperationAdapter(dataList);
+        initMonitorOperationAdapter();
 
         if (taskType == TaskType.COMMAND || taskType == TaskType.COOPERATE) {
-            jobsId = dataList.get(0).getJobsid();
+            jobsId = mJobEntities.get(0).getJobsid();
             initMonitorRecordAdapter(jobsId);
         }
     }
 
-    private void initMonitorOperationAdapter(List<JobEntity> dataList) {
-        monitorOperationAdapter = new MonitorOperationAdapter(mContext, dataList);
+    private void initMonitorOperationAdapter() {
+        monitorOperationAdapter = new MonitorOperationAdapter(mContext, mJobEntities);
         lvMonitorOperation.setAdapter(monitorOperationAdapter);
         lvMonitorOperation.setOnItemClickListener(this);
         updateLastTime();
@@ -327,7 +333,11 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        showToast("123");
+        JobEntity jobEntity = mJobEntities.get(position);
+        String jobOperatorsId = jobEntity.getJoboperatorsid();
+        Intent intent = new Intent(mContext, SceneRecordActivity.class);
+        intent.putExtra(Intents.SceneRecord.JOB_OPERATORS_ID, jobOperatorsId);
+        startActivity(intent);
     }
 
     /**

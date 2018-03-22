@@ -63,8 +63,18 @@ public class OperatorTaskDetailPresenter extends TaskBiz implements OperatorTask
     }
 
     @Override
+    public void onPublisherUploadFileGetFailed() {
+
+    }
+
+    @Override
     public void onPerformerUploadFileGetSuccess(List<ServerRecordEntity> dataList) {
         mView.onPerformerUploadFileGetSuccess(dataList);
+    }
+
+    @Override
+    public void onPerformerUploadFileGetFailed() {
+
     }
 
     @Override

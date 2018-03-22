@@ -47,4 +47,8 @@ public interface Intents {
     interface PatrolItem {
         String PATROL_TASK_ENTITY = "PATROL_TASK_ENTITY";
     }
+
+    interface SceneRecord {
+        String JOB_OPERATORS_ID = "JOB_OPERATORS_ID";
+    }
 }

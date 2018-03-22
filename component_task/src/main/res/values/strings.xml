@@ -69,6 +69,7 @@
     <string name="title_input_device_id">请输入设备ID</string>
     <string name="title_problem_list">问题列表</string>
     <string name="title_patrol_plan">巡视计划</string>
+    <string name="title_scene_record">现场记录</string>
 
     <string name="value_nothing">无</string>
     <string name="value_grid_task">网格任务</string>

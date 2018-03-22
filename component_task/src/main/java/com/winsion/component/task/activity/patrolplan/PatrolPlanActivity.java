@@ -3,16 +3,11 @@ package com.winsion.component.task.activity.patrolplan;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.le.ScanCallback;
-import android.bluetooth.le.ScanRecord;
-import android.bluetooth.le.ScanResult;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Message;
-import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -41,6 +36,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -53,8 +49,7 @@ import static com.winsion.component.task.constants.Intents.PatrolItem.PATROL_TAS
  * 巡检任务以及界面
  * TODO 蓝牙需要动态权限
  */
-public class PatrolPlanActivity extends BaseActivity implements PatrolPlanContract.View,
-        AdapterView.OnItemClickListener {
+public class PatrolPlanActivity extends BaseActivity implements PatrolPlanContract.View, AdapterView.OnItemClickListener {
     private TextView tvDate;
     private ListView lvList;
     private SwipeRefreshLayout swipeRefresh;
@@ -73,6 +68,20 @@ public class PatrolPlanActivity extends BaseActivity implements PatrolPlanContra
     private List<PatrolPlanEntity> listData = new ArrayList<>();
     private HashMap<String, Long> btMap = new HashMap<>();
     private ArrayList<BPEntity> BPEntities = new ArrayList<>();
+    private MyScanCallback mScanCallback;
+
+    private static class MyScanCallback implements BluetoothAdapter.LeScanCallback {
+        private WeakReference<PatrolPlanActivity> mActivity;
+
+        MyScanCallback(PatrolPlanActivity activity) {
+            this.mActivity = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void onLeScan(BluetoothDevice device, int rssi, byte[] scanData) {
+            mActivity.get().scanResult(device, rssi, scanData);
+        }
+    }
 
     private BroadcastReceiver mBtReceiver = new BroadcastReceiver() {
         @Override
@@ -103,58 +112,6 @@ public class PatrolPlanActivity extends BaseActivity implements PatrolPlanContra
             }
         }
     };
-
-    private ScanCallback scanCallback = new ScanCallback() {
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-        @Override
-        public void onScanResult(int callbackType, ScanResult result) {
-            super.onScanResult(callbackType, result);
-            ScanRecord scanRecord = result.getScanRecord();
-            if (scanRecord != null) {
-                BluetoothDevice device = result.getDevice();
-                int rssi = result.getRssi();
-                byte[] scanData = scanRecord.getBytes();
-                scanResult(device, rssi, scanData);
-            }
-        }
-    };
-
-    private BluetoothAdapter.LeScanCallback leScanCallback = this::scanResult;
-
-    private void scanResult(BluetoothDevice device, int rssi, byte[] scanData) {
-        IbeaconUtils.iBeacon ibeacon = IbeaconUtils.fromScanData(device, rssi, scanData);
-        if (ibeacon != null) {
-            String btAddress = ibeacon.bluetoothAddress;
-            long lastTime = System.currentTimeMillis();
-            btMap.put(btAddress, lastTime);
-            BPEntity BPEntity = new BPEntity();
-            BPEntity.setBluetoothId(btAddress);
-            BPEntity.setLastTime(lastTime);
-            if ((System.currentTimeMillis() - lastUpdateTime) > 1000 * 5) {
-                updateOrAddBluetoothPoint(BPEntity);
-            }
-        }
-    }
-
-    private void updateOrAddBluetoothPoint(BPEntity BPEntity) {
-        boolean isUpdate = false;
-        for (BPEntity point : BPEntities) {
-            if (equals(point.getBluetoothId(), BPEntity.getBluetoothId())) {
-                BPEntities.remove(point);
-                BPEntities.add(BPEntity);
-                isUpdate = true;
-                break;
-            }
-        }
-        if (!isUpdate) {
-            BPEntities.add(BPEntity);
-        }
-        Collections.sort(BPEntities, (o1, o2) -> (int) (o2.getLastTime() - o1.getLastTime()));
-        if (mBluetoothPointAdapter != null) {
-            mBluetoothPointAdapter.notifyDataSetChanged();
-            lastUpdateTime = System.currentTimeMillis();
-        }
-    }
 
     @Override
     protected int setContentView() {
@@ -200,6 +157,8 @@ public class PatrolPlanActivity extends BaseActivity implements PatrolPlanContra
         IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         registerReceiver(mBtReceiver, filter);
 
+        mScanCallback = new MyScanCallback(this);
+
         // 开始扫描
         startScan();
     }
@@ -208,11 +167,7 @@ public class PatrolPlanActivity extends BaseActivity implements PatrolPlanContra
         if (mBluetoothAdapter == null) {
             showToast(R.string.toast_bluetooth_not_support);
         } else if (mBluetoothAdapter.isEnabled()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mBluetoothAdapter.getBluetoothLeScanner().startScan(scanCallback);
-            } else {
-                mBluetoothAdapter.startLeScan(leScanCallback);
-            }
+            mBluetoothAdapter.startLeScan(mScanCallback);
         } else {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
@@ -221,11 +176,42 @@ public class PatrolPlanActivity extends BaseActivity implements PatrolPlanContra
 
     private void stopScan() {
         if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mBluetoothAdapter.getBluetoothLeScanner().stopScan(scanCallback);
-            } else {
-                mBluetoothAdapter.stopLeScan(leScanCallback);
+            mBluetoothAdapter.stopLeScan(mScanCallback);
+        }
+    }
+
+    private void scanResult(BluetoothDevice device, int rssi, byte[] scanData) {
+        IbeaconUtils.iBeacon ibeacon = IbeaconUtils.fromScanData(device, rssi, scanData);
+        if (ibeacon != null) {
+            String btAddress = ibeacon.bluetoothAddress;
+            long lastTime = System.currentTimeMillis();
+            btMap.put(btAddress, lastTime);
+            BPEntity BPEntity = new BPEntity();
+            BPEntity.setBluetoothId(btAddress);
+            BPEntity.setLastTime(lastTime);
+            if ((System.currentTimeMillis() - lastUpdateTime) > 1000 * 5) {
+                updateOrAddBluetoothPoint(BPEntity);
             }
+        }
+    }
+
+    private void updateOrAddBluetoothPoint(BPEntity BPEntity) {
+        boolean isUpdate = false;
+        for (BPEntity point : BPEntities) {
+            if (equals(point.getBluetoothId(), BPEntity.getBluetoothId())) {
+                BPEntities.remove(point);
+                BPEntities.add(BPEntity);
+                isUpdate = true;
+                break;
+            }
+        }
+        if (!isUpdate) {
+            BPEntities.add(BPEntity);
+        }
+        Collections.sort(BPEntities, (o1, o2) -> (int) (o2.getLastTime() - o1.getLastTime()));
+        if (mBluetoothPointAdapter != null) {
+            mBluetoothPointAdapter.notifyDataSetChanged();
+            lastUpdateTime = System.currentTimeMillis();
         }
     }
 

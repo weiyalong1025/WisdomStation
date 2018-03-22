@@ -763,6 +763,10 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
 
         // 自动上传没有上传成功的文件,自动下载没有下载成功的文件
         for (LocalRecordEntity performerRecordEntity : performerRecordEntities) {
+            // 备注不上传
+            if (performerRecordEntity.getFileType() == FileType.TEXT) {
+                continue;
+            }
             if (performerRecordEntity.getFileStatus() == FileStatus.NO_UPLOAD) {
                 mPresenter.uploadFile(mJobEntity, performerRecordEntity.getFile(), myUploadListener);
             }

@@ -11,9 +11,10 @@ import static com.winsion.component.scanner.activity.CaptureActivity.INTENT_EXTR
 
 /**
  * Created by 10295 on 2018/3/13.
+ * 二维码扫描组件DEBUG版本MainActivity
  */
 
-public class MainActivity extends BaseActivity {
+public class ScannerMainActivity extends BaseActivity {
     @Override
     protected int setContentView() {
         return R.layout.scanner_activity_main;

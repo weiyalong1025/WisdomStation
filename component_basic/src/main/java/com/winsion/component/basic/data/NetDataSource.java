@@ -248,15 +248,14 @@ public class NetDataSource {
             String httpKey = CacheDataSource.getHttpKey();
             String sha1Str = HashUtils.getSha1Str(dataStr + time + httpKey);
 
-            PostRequest<String> fileUploadRequest = OkGo.<String>post(CacheDataSource.getBaseUrl() + Urls.UPLOAD)
+            PostRequest<String> fileUploadRequest = OkGo.<String>post(CacheDataSource.getBaseUrl() + Urls.UPLOAD_SINGLE)
                     .params(ParamKey.FILE, file)
                     .params(ParamKey.TOKEN, token)
                     .params(ParamKey.TIME, time)
                     .params(ParamKey.HASH, sha1Str)
                     .converter(new StringConvert());
 
-            uploadTask = OkUpload.request(file.getName(), fileUploadRequest)
-                    .register(uploadListener);
+            uploadTask = OkUpload.request(file.getName(), fileUploadRequest).register(uploadListener);
         } else {
             uploadTask.register(uploadListener);
         }
@@ -326,8 +325,7 @@ public class NetDataSource {
                     .params(ParamKey.HASH, sha1Str)
                     .converter(new StringConvert());
 
-            uploadTask = OkUpload.request(file.getName(), fileUploadRequest)
-                    .register(uploadListener);
+            uploadTask = OkUpload.request(file.getName(), fileUploadRequest).register(uploadListener);
         } else {
             uploadTask.register(uploadListener);
         }

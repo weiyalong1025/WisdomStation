@@ -1,45 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btn_take_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        android:background="@drawable/basic_btn_yellow"
+        android:padding="@dimen/basic_d5"
+        android:text="拍照"
+        android:textSize="@dimen/basic_s18"
+        tools:ignore="HardcodedText" />
 
-        <Button
-            android:id="@+id/btn_take_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/basic_btn_yellow"
-            android:padding="@dimen/basic_d5"
-            android:text="拍照"
-            android:textSize="@dimen/basic_s18"
-            tools:ignore="HardcodedText" />
+    <Button
+        android:id="@+id/btn_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/basic_d10"
+        android:layout_marginTop="@dimen/basic_d10"
+        android:background="@drawable/basic_btn_yellow"
+        android:padding="@dimen/basic_d5"
+        android:text="录像"
+        android:textSize="@dimen/basic_s18"
+        tools:ignore="HardcodedText" />
 
-        <Button
-            android:id="@+id/btn_video"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/basic_d10"
-            android:layout_marginTop="@dimen/basic_d10"
-            android:background="@drawable/basic_btn_yellow"
-            android:padding="@dimen/basic_d5"
-            android:text="录像"
-            android:textSize="@dimen/basic_s18"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/btn_record"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/basic_btn_yellow"
-            android:padding="@dimen/basic_d5"
-            android:text="录音"
-            android:textSize="@dimen/basic_s18"
-            tools:ignore="HardcodedText" />
-    </LinearLayout>
-</FrameLayout>
+    <Button
+        android:id="@+id/btn_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/basic_btn_yellow"
+        android:padding="@dimen/basic_d5"
+        android:text="录音"
+        android:textSize="@dimen/basic_s18"
+        tools:ignore="HardcodedText" />
+</LinearLayout>

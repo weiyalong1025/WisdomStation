@@ -42,8 +42,8 @@ public class AlphaTabsIndicator extends LinearLayout {
         init();
     }
 
-    public void setOnTabChangedListner(OnTabChangedListener listner) {
-        this.mListener = listner;
+    public void setOnTabChangedListener(OnTabChangedListener listener) {
+        this.mListener = listener;
         isInit();
     }
 
@@ -134,7 +134,7 @@ public class AlphaTabsIndicator extends LinearLayout {
 
         private int currentIndex;
 
-        public MyOnClickListener(int i) {
+        MyOnClickListener(int i) {
             this.currentIndex = i;
         }
 

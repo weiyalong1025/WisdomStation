@@ -19,9 +19,10 @@ import static com.winsion.component.media.constants.Intents.Media.MEDIA_FILE;
 
 /**
  * Created by 10295 on 2018/3/13.
+ * 多媒体录制组件DEBUG版本MainActivity
  */
 
-public class MainActivity extends BaseActivity {
+public class MediaMainActivity extends BaseActivity {
     private File mediaFile;
 
     @Override

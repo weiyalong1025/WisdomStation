@@ -20,7 +20,7 @@
             android:value="2.1" />
 
         <activity
-            android:name="debug.MainActivity"
+            android:name="debug.MediaMainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
             <intent-filter>

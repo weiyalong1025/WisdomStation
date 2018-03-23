@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
+    <string name="contact_app_name">联系人组件</string>
+
+    <string name="tab_contacts">联系人</string>
+    <string name="tab_team_group">班组</string>
+    <string name="tab_contact_group">联系人组</string>
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.component.basic.view.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showConfirmButton="false"
+        app:titleText="@string/title_add_todo" />
+
+    <RelativeLayout
+        android:id="@+id/refer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:background="@color/basic_gray8"
+        android:orientation="horizontal"
+        android:padding="@dimen/basic_d15">
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s21"
+            tools:text="2017-12-12" />
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="@dimen/basic_d20"
+            android:layout_height="@dimen/basic_d20"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/basic_ic_arrow_right"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/basic_d10"
+            android:layout_toStartOf="@id/iv_arrow"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s21"
+            tools:ignore="RelativeOverlap"
+            tools:text="22:00" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/refer2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_d1"
+        android:layout_below="@id/refer1"
+        android:background="@color/basic_gray2" />
+
+    <EditText
+        android:id="@+id/et_desc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_d200"
+        android:layout_below="@id/refer2"
+        android:background="@color/basic_gray8"
+        android:gravity="top|start"
+        android:hint="@string/name_remind_content"
+        android:maxLength="100"
+        android:maxLines="5"
+        android:padding="@dimen/basic_d15"
+        android:textColor="@color/basic_white1"
+        android:textColorHint="@color/basic_gray5"
+        android:textSize="@dimen/basic_s20" />
+
+    <TextView
+        android:id="@+id/tv_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/et_desc"
+        android:layout_alignEnd="@id/et_desc"
+        android:layout_margin="@dimen/basic_d10"
+        android:text="@string/default_counter_100"
+        android:textColor="@color/basic_gray1"
+        android:textSize="@dimen/basic_s16" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_d48"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/basic_d15"
+        android:background="@drawable/basic_btn_yellow"
+        android:text="@string/btn_add"
+        android:textSize="@dimen/basic_s21" />
+</RelativeLayout>

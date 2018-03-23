@@ -32,14 +32,14 @@ import java.util.List;
  * 现场记录-任务监控三级界面-执行人上传的附件列表
  */
 
-public class SceneRecordActivity extends BaseActivity implements SceneRecordContact.View {
+public class SceneRecordActivity extends BaseActivity implements SceneRecordContract.View {
     private FrameLayout flContainer;
     private SwipeRefreshLayout swipeRefresh;
     private ListView lvList;
     private ProgressBar pbLoading;
     private TextView tvHint;
 
-    private SceneRecordContact.Presenter mPresenter;
+    private SceneRecordContract.Presenter mPresenter;
     private List<LocalRecordEntity> recordEntities = new ArrayList<>();
     private RecordAdapter recordAdapter;
     private String jobOperatorsId;

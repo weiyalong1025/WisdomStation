@@ -42,11 +42,11 @@
             app:tabText="@string/tab_scene" />
 
         <com.winsion.component.basic.view.AlphaTabView
-            android:id="@+id/atv_reminder"
+            android:id="@+id/atv_remind"
             style="@style/BottomTabBarStyle"
-            app:tabIconNormal="@drawable/ic_reminder"
-            app:tabIconSelected="@drawable/ic_reminder_selected"
-            app:tabText="@string/tab_reminder" />
+            app:tabIconNormal="@drawable/ic_remind"
+            app:tabIconSelected="@drawable/ic_remind_selected"
+            app:tabText="@string/tab_remind" />
     </com.winsion.component.basic.view.AlphaTabsIndicator>
 
     <com.winsion.component.basic.view.NoScrollViewPager

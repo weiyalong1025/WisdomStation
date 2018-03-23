@@ -3,7 +3,7 @@ package com.winsion.component.task.adapter;
 import android.content.Context;
 
 import com.winsion.component.basic.utils.ConvertUtils;
-import com.winsion.component.basic.utils.constants.Formatter;
+import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.task.R;
 import com.winsion.component.task.entity.BPEntity;
 import com.zhy.adapter.abslistview.CommonAdapter;

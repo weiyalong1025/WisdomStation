@@ -19,7 +19,7 @@ import com.winsion.component.user.activity.user.UserActivity;
 
 /**
  * Created by 10295 on 2018/3/7.
- * User组件
+ * 用户组件功能实现
  */
 
 public class ComponentUser implements IComponent {
@@ -30,10 +30,9 @@ public class ComponentUser implements IComponent {
 
     @Override
     public boolean onCall(CC cc) {
-        String actionName = cc.getActionName();
         Context context = cc.getContext();
         Intent intent;
-        switch (actionName) {
+        switch (cc.getActionName()) {
             case "toLoginActivity":
                 intent = new Intent(context, LoginActivity.class);
                 intent.putExtra("callId", cc.getCallId());

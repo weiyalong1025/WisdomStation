@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_multiple_delete_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_d48"
+        android:background="@color/basic_black3"
+        android:clickable="true"
+        android:focusable="true">
+
+        <Button
+            android:id="@+id/btn_select_count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:gravity="center"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s18"
+            tools:text="已选0项" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/btn_cancel"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s16" />
+
+        <Button
+            android:id="@+id/btn_select_all"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:text="@string/btn_select_all"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s16" />
+    </FrameLayout>
+
+    <com.winsion.component.basic.view.DrawableCenterButton
+        android:id="@+id/btn_multiple_delete_footer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_d54"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/remind_selector_bg_button"
+        android:drawablePadding="@dimen/basic_d5"
+        android:drawableStart="@drawable/remind_ic_delete"
+        android:gravity="center"
+        android:text="@string/btn_delete"
+        android:textColor="@color/basic_red2"
+        android:textSize="@dimen/basic_s18" />
+</RelativeLayout>

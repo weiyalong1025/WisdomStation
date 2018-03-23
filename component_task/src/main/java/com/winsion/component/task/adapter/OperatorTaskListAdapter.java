@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.ImageLoader;
-import com.winsion.component.basic.utils.constants.Formatter;
+import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.task.R;
 import com.winsion.component.task.constants.TaskState;
 import com.winsion.component.task.constants.TaskType;

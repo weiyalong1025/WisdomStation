@@ -11,7 +11,7 @@ import android.support.annotation.DimenRes;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.winsion.component.basic.utils.constants.Formatter;
+import com.winsion.component.basic.constants.Formatter;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

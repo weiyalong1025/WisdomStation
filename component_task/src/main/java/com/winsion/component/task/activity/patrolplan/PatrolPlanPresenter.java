@@ -17,7 +17,7 @@ import com.winsion.component.basic.entity.WhereClause;
 import com.winsion.component.basic.listener.ResponseListener;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.JsonUtils;
-import com.winsion.component.basic.utils.constants.Formatter;
+import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.task.entity.PatrolPlanEntity;
 
 import java.lang.reflect.Type;

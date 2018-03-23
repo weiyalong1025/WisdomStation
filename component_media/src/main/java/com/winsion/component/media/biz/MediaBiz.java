@@ -2,7 +2,7 @@ package com.winsion.component.media.biz;
 
 import android.support.annotation.IntDef;
 
-import com.winsion.component.basic.utils.constants.Formatter;
+import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.media.constants.FileType;
 
 import java.io.File;

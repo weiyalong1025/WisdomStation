@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  * Created by 10295 on 2018/3/9.
- * 任务Application
+ * 任务组件DEBUG版本Application
  */
 
 public class TaskApplication extends Application {

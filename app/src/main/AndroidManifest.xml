@@ -48,13 +48,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.winsion.dispatch.modules.reminder.activity.todo.AddTodoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
-
-        <!-- receiver -->
-        <receiver android:name="com.winsion.dispatch.modules.reminder.receiver.todo.TodoReceiver" />
     </application>
 
 </manifest>

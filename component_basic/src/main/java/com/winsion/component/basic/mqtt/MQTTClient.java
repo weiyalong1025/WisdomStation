@@ -10,7 +10,7 @@ import android.net.NetworkInfo;
 import android.support.annotation.RequiresPermission;
 
 import com.alibaba.fastjson.JSON;
-import com.winsion.component.basic.mqtt.entity.MQMessage;
+import com.winsion.component.basic.entity.MQMessage;
 import com.winsion.component.basic.utils.LogUtils;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;

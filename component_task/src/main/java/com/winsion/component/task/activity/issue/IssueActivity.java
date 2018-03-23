@@ -22,7 +22,7 @@ import com.winsion.component.basic.listener.ResponseListener;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.ViewUtils;
-import com.winsion.component.basic.utils.constants.Formatter;
+import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.TitleView;
 import com.winsion.component.media.activity.RecordAudioActivity;

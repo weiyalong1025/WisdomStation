@@ -48,7 +48,7 @@ import static com.winsion.component.task.constants.Intents.SubmitProblem.SITE_NA
  * 上报问题界面
  */
 
-public class SubmitProblemActivity extends BaseActivity implements SubmitProblemContact.View, MyUploadListener, SubmitBiz.SubmitListener {
+public class SubmitProblemActivity extends BaseActivity implements SubmitProblemContract.View, MyUploadListener, SubmitBiz.SubmitListener {
     private TitleView tvTitle;
     private RelativeLayout rlDeviceInfo;
     private TextView tvSite;
@@ -62,7 +62,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     private static final int CODE_TAKE_PHOTO = 0;   // 拍照
     private static final int CODE_CAPTURE_QR = 1;   // 扫描二维码
 
-    private SubmitProblemContact.Presenter mPresenter;
+    private SubmitProblemContract.Presenter mPresenter;
     private PatrolItemEntity patrolItemEntity;
     private String siteName;
     private boolean deviceDependent;

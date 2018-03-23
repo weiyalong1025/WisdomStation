@@ -26,7 +26,7 @@ import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.FileUtils;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.utils.ViewUtils;
-import com.winsion.component.basic.utils.constants.Formatter;
+import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.DrawableCenterTextView;
 import com.winsion.component.basic.view.TitleView;

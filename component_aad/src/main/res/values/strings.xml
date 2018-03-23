@@ -1,0 +1,6 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
+    <string name="aad_app_name">到发组件</string>
+
+    <string name="tab_up">上行</string>
+    <string name="tab_down">下行</string>
+</resources>

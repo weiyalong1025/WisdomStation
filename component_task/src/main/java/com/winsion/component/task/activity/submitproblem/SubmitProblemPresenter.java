@@ -30,11 +30,11 @@ import java.util.List;
  * 上报问题Presenter
  */
 
-public class SubmitProblemPresenter extends SubmitBiz implements SubmitProblemContact.Presenter {
-    private final SubmitProblemContact.View mView;
+public class SubmitProblemPresenter extends SubmitBiz implements SubmitProblemContract.Presenter {
+    private final SubmitProblemContract.View mView;
     private final Context mContext;
 
-    SubmitProblemPresenter(SubmitProblemContact.View view) {
+    SubmitProblemPresenter(SubmitProblemContract.View view) {
         this.mView = view;
         this.mContext = view.getContext();
     }

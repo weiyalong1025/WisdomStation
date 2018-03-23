@@ -14,10 +14,10 @@ import static com.winsion.component.task.constants.SearchFileField.FIELD_PERFORM
  * 现场记录Presenter
  */
 
-public class SceneRecordPresenter extends TaskBiz implements SceneRecordContact.Presenter, TaskBiz.UploadFileGetListener {
-    private SceneRecordContact.View mView;
+public class SceneRecordPresenter extends TaskBiz implements SceneRecordContract.Presenter, TaskBiz.UploadFileGetListener {
+    private SceneRecordContract.View mView;
 
-    SceneRecordPresenter(SceneRecordContact.View view) {
+    SceneRecordPresenter(SceneRecordContract.View view) {
         this.mView = view;
     }
 

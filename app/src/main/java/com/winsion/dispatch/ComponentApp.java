@@ -10,7 +10,7 @@ import com.winsion.dispatch.activity.main.MainActivity;
 
 /**
  * Created by 10295 on 2018/3/9.
- * App组件
+ * APP组件功能实现
  */
 
 public class ComponentApp implements IComponent {
@@ -35,6 +35,13 @@ public class ComponentApp implements IComponent {
                     ((Activity) context).finish();
                 }
                 return true;
+            case "notifyUnreadSysRemindCountChanged":
+                Activity activity = cc.getParamItem("activity");
+                int unreadCount = cc.getParamItem("unreadCount");
+                if (activity != null && activity instanceof MainActivity) {
+                    ((MainActivity) activity).notifyUnreadSysRemindCountChanged(unreadCount);
+                }
+                break;
         }
         return false;
     }

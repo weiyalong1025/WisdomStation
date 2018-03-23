@@ -2,7 +2,7 @@ package com.winsion.component.basic.utils;
 
 import android.os.Environment;
 
-import com.winsion.component.basic.utils.constants.DirName;
+import com.winsion.component.basic.constants.DirName;
 
 import java.io.File;
 import java.io.IOException;

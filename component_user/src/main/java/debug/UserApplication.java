@@ -14,6 +14,7 @@ import java.io.IOException;
 
 /**
  * Created by 10295 on 2017/12/5 0005
+ * 用户组件DEBUG版本Application
  */
 
 public class UserApplication extends Application {

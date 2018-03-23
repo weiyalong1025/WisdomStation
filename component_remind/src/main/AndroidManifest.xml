@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.winsion.component.remind">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application android:theme="@style/BasicAppTheme">
+        <activity
+            android:name="com.winsion.component.remind.activity.todo.AddTodoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+
+        <!-- receiver -->
+        <receiver android:name="com.winsion.component.remind.receiver.todo.TodoReceiver" />
+    </application>
+</manifest>

@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
+    <string name="scene_app_name">现场组件</string>
+
+    <string name="title_scene">现场</string>
+    <string name="title_grid">网格</string>
+    <string name="title_passenger_broadcast">客运广播</string>
+    <string name="title_area_broadcast">小区广播</string>
+    <string name="title_transfer">交班</string>
+    <string name="title_light">照明</string>
+    <string name="title_elevator">电梯</string>
+    <string name="title_water">给水</string>
+    <string name="title_video">视频</string>
+    <string name="title_air_handing">空气处理机</string>
+    <string name="title_pump">水泵</string>
+    <string name="title_cooling_tower">冷却塔</string>
+    <string name="title_door">门禁</string>
+    <string name="title_air_conditioner">空调</string>
+    <string name="title_key_passenger">重点旅客</string>
+    <string name="title_lost">失误登记</string>
+</resources>

@@ -38,7 +38,7 @@ configurations.all {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':component_scanner')
     compile project(':component_user')
+    compile project(':component_scanner')
     compile project(':component_media')
 }

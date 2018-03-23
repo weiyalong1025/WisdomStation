@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.component.basic.view.SpinnerView
+        android:id="@+id/sv_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showFirstDiv="false"
+        app:showSearchView="false"
+        app:showSecondDiv="false"
+        app:showSecondOption="false" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_add"
+        android:layout_below="@id/sv_spinner">
+
+        <ListView
+            android:id="@+id/lv_reminds_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            tools:listitem="@layout/remind_item_todo" />
+
+        <TextView
+            android:id="@+id/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/basic_d10"
+            android:text="@string/hint_no_data_click_retry"
+            android:textColor="@color/basic_blue1"
+            android:textSize="@dimen/basic_s18"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_d48"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/basic_d15"
+        android:background="@drawable/basic_btn_yellow"
+        android:text="@string/btn_add"
+        android:textColor="@color/basic_black6"
+        android:textSize="@dimen/basic_s21" />
+
+    <ImageView
+        android:id="@+id/iv_shade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sv_spinner"
+        android:background="@color/basic_black2"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>

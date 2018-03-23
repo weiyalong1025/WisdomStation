@@ -8,17 +8,13 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.billy.cc.core.component.CC;
+import com.winsion.component.basic.PlaceHolderFragment;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.view.AlphaTabView;
 import com.winsion.component.basic.view.AlphaTabsIndicator;
-import com.winsion.component.task.fragment.OperationRootFragment;
 import com.winsion.dispatch.R;
-import com.winsion.dispatch.modules.contacts.fragment.ContactsRootFragment;
-import com.winsion.dispatch.modules.daofa.fragment.DaofaRootFragment;
-import com.winsion.dispatch.modules.reminder.ReminderRootFragment;
-import com.winsion.dispatch.modules.scene.fragment.SceneRootFragment;
 
 import java.util.ArrayList;
 
@@ -32,7 +28,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     private AlphaTabView atvDispatch;
     private AlphaTabView atvContacts;
     private AlphaTabView atvScene;
-    private AlphaTabView atvReminder;
+    private AlphaTabView atvRemind;
     private AlphaTabsIndicator atiIndicator;
     private ImageView ivHead;
 
@@ -78,7 +74,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
         atvDispatch = findViewById(R.id.atv_dispatch);
         atvContacts = findViewById(R.id.atv_contacts);
         atvScene = findViewById(R.id.atv_scene);
-        atvReminder = findViewById(R.id.atv_reminder);
+        atvRemind = findViewById(R.id.atv_remind);
         atiIndicator = findViewById(R.id.ati_indicator);
         ivHead = findViewById(R.id.iv_head);
     }
@@ -89,11 +85,31 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     }
 
     private void initData() {
-        mFragments.add(new OperationRootFragment());
-        mFragments.add(new DaofaRootFragment());
-        mFragments.add(new ContactsRootFragment());
-        mFragments.add(new SceneRootFragment());
-        mFragments.add(new ReminderRootFragment());
+        mFragments.add(getFragment("ComponentTask", "getOperationRootFragment"));
+        mFragments.add(getFragment("ComponentAAD", "getAADRootFragment"));
+        mFragments.add(getFragment("ComponentContact", "getContactRootFragment"));
+        mFragments.add(getFragment("ComponentScene", "getSceneRootFragment"));
+        mFragments.add(getFragment("ComponentRemind", "getRemindRootFragment"));
+    }
+
+    /**
+     * 根据组件名和动作名获取对应fragment，如果没有加载相应组件返回PlaceholderFragment
+     *
+     * @param componentName 组件名
+     * @param actionName    动作名
+     * @return 对应的fragment
+     */
+    private Fragment getFragment(String componentName, String actionName) {
+        Fragment fragment = CC
+                .obtainBuilder(componentName)
+                .setActionName(actionName)
+                .build()
+                .call()
+                .getDataItem("fragment");
+        if (fragment == null) {
+            fragment = new PlaceHolderFragment();
+        }
+        return fragment;
     }
 
     private void initAdapter() {
@@ -182,9 +198,9 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     public void notifyUnreadUserMessageCountChanged(int afterChangedCount) {
         unreadUserMessageCount = afterChangedCount;
         if (unreadUserMessageCount + unreadTodoCount + unreadSysRemindCount == 0) {
-            atvReminder.removeShow();
+            atvRemind.removeShow();
         } else {
-            atvReminder.showPoint();
+            atvRemind.showPoint();
         }
     }
 
@@ -196,9 +212,9 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     public void notifyUnreadTodoCountChanged(int afterChangedCount) {
         unreadTodoCount = afterChangedCount;
         if (unreadUserMessageCount + unreadTodoCount + unreadSysRemindCount == 0) {
-            atvReminder.removeShow();
+            atvRemind.removeShow();
         } else {
-            atvReminder.showPoint();
+            atvRemind.showPoint();
         }
     }
 
@@ -210,9 +226,9 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     public void notifyUnreadSysRemindCountChanged(int afterChangedCount) {
         unreadSysRemindCount = afterChangedCount;
         if (unreadUserMessageCount + unreadTodoCount + unreadSysRemindCount == 0) {
-            atvReminder.removeShow();
+            atvRemind.removeShow();
         } else {
-            atvReminder.showPoint();
+            atvRemind.showPoint();
         }
     }
 

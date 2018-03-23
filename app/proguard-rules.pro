@@ -23,11 +23,10 @@
 #-------------------------------------------定制化区域-----------------------------------------------
 #---------------------------------1.实体类---------------------------------
 -keep class com.winsion.component.basic.entity.** { *; }
--keep class com.winsion.component.login.mqtt.entity.** { *; }
 -keep class com.winsion.component.media.entity.** { *; }
+-keep class com.winsion.component.remind.entity.** { *; }
 -keep class com.winsion.component.task.entity.** { *; }
 -keep class com.winsion.component.user.entity.** { *; }
--keep class com.winsion.dispatch.modules.reminder.entity.** { *; }
 #-------------------------------------------------------------------------
 
 #---------------------------------2.第三方包-------------------------------

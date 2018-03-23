@@ -91,11 +91,9 @@
     <string name="suffix_waiting_room">候</string>
     <string name="suffix_check_port">口</string>
 
-    <string name="toast_no_selected_item">当前没有已选项</string>
     <string name="toast_change_state_failed">更改状态失败</string>
     <string name="toast_issue_success">发布成功</string>
     <string name="toast_issue_failed">发布失败</string>
-    <string name="toast_complete_info">请将信息填写完整</string>
     <string name="toast_wait_for_files_upload_complete">请等待附件上传完成</string>
     <string name="toast_upload_success">上传成功</string>
     <string name="toast_upload_failed">上传失败</string>

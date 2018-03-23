@@ -1,0 +1,26 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.winsion.component.contact">
+
+    <application
+        android:name="debug.ContactApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/basic_ic_launcher"
+        android:label="@string/contact_app_name"
+        android:persistent="true"
+        android:supportsRtl="true"
+        android:theme="@style/BasicAppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity
+            android:name="debug.ContactMainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

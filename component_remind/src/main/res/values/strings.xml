@@ -1,0 +1,47 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
+    <string name="remind_app_name">提醒组件</string>
+
+    <string name="tab_user_message">用户消息</string>
+    <string name="tab_todo">待办事项</string>
+    <string name="tab_system_remind">系统提醒</string>
+
+    <string name="title_add_todo">添加待办事项</string>
+    <string name="title_operation_remind">作业提醒</string>
+    <string name="title_command_remind">命令提醒</string>
+    <string name="title_cooperation_remind">协作提醒</string>
+    <string name="title_grid_remind">网格提醒</string>
+    <string name="title_plan_remind">预案提醒</string>
+    <string name="title_update_toto">更新代办事项</string>
+
+    <string name="toast_only_read_remind_can_be_selected">只有已读提醒才能被选中</string>
+    <string name="toast_only_read_remind_can_be_deleted">只有已读提醒才可以删除</string>
+    <string name="toast_delete_success">删除成功</string>
+    <string name="toast_delete_failed">删除失败</string>
+    <string name="toast_set_read_failed">置为已读失败</string>
+
+    <string name="name_remind_content">提醒内容：</string>
+
+    <string name="btn_add">添加</string>
+    <string name="btn_select_all">全选</string>
+    <string name="btn_select_none">全不选</string>
+    <string name="btn_delete">删除</string>
+    <string name="btn_update">更新</string>
+
+    <string name="suffix_year">年</string>
+    <string name="suffix_month">月</string>
+    <string name="suffix_item">项</string>
+
+    <string name="prefix_items">项吗？</string>
+    <string name="prefix_selected">已选</string>
+    <string name="prefix_sure_to_delete">确定要删除</string>
+
+    <string name="dialog_sure_to_delete">确定要删除吗？</string>
+    <string name="dialog_remind">提醒</string>
+
+    <!-- 代办事项状态筛选 -->
+    <string-array name="todoStatusArray">
+        <item>@string/spinner_all</item>
+        <item>@string/spinner_unfinished</item>
+        <item>@string/spinner_finished</item>
+    </string-array>
+</resources>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/basic_div_horizontal"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/basic_div_vertical"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/basic_gray8"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/basic_d15">
+
+                <ImageView
+                    android:id="@+id/iv_red_dot"
+                    android:layout_width="@dimen/basic_d8"
+                    android:layout_height="@dimen/basic_d8"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/basic_d5"
+                    android:gravity="center"
+                    android:src="@drawable/basic_bg_circle_red"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_remind_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/iv_red_dot"
+                    android:textColor="@color/basic_blue1"
+                    android:textSize="@dimen/basic_s21"
+                    tools:text="[提醒分类]" />
+
+                <TextView
+                    android:id="@+id/tv_remind_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:textColor="@color/basic_gray2"
+                    android:textSize="@dimen/basic_s16"
+                    tools:ignore="RelativeOverlap"
+                    tools:text="[日期时间]" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/basic_d1"
+                android:layout_marginStart="@dimen/basic_d15"
+                android:background="@color/basic_gray2" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_remind_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/basic_d32"
+                    android:padding="@dimen/basic_d15"
+                    android:textColor="@color/basic_white1"
+                    android:textSize="@dimen/basic_s21"
+                    tools:ignore="RelativeOverlap"
+                    tools:text="[提醒内容]" />
+
+                <ImageView
+                    android:id="@+id/iv_select"
+                    android:layout_width="@dimen/basic_d54"
+                    android:layout_height="@dimen/basic_d54"
+                    android:layout_alignParentEnd="true"
+                    android:padding="@dimen/basic_d15"
+                    android:src="@drawable/basic_ic_check_box_outline"
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/iv_delete"
+                    android:layout_width="@dimen/basic_d54"
+                    android:layout_height="@dimen/basic_d54"
+                    android:layout_alignParentEnd="true"
+                    android:padding="@dimen/basic_d15"
+                    android:src="@drawable/remind_ic_delete"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/basic_div_vertical"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/basic_div_horizontal"
+        tools:ignore="ContentDescription" />
+</LinearLayout>

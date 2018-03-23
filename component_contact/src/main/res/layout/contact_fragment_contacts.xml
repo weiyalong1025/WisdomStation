@@ -10,6 +10,7 @@
         android:id="@+id/sv_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:showSecondDiv="false"
         app:showSecondOption="false" />
 
     <include layout="@layout/basic_layout_status" />

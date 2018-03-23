@@ -25,6 +25,7 @@
     <ImageView
         android:layout_width="@dimen/basic_d24"
         android:layout_height="@dimen/basic_d24"
+        android:layout_alignStart="@id/et_search"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/basic_d15"
         android:src="@drawable/basic_ic_search"

@@ -1,16 +1,21 @@
 package com.winsion.component.aad.fragment;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 
 import com.winsion.component.aad.R;
-import com.winsion.component.basic.PlaceHolderFragment;
+import com.winsion.component.aad.fragment.aadlist.AADListFragment;
 import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.view.MyIndicator;
 import com.winsion.component.basic.view.NoScrollViewPager;
+
+import static com.winsion.component.aad.fragment.aadlist.AADListFragment.AAD_TYPE;
+import static com.winsion.component.aad.fragment.aadlist.AADListFragment.TYPE_DOWN;
+import static com.winsion.component.aad.fragment.aadlist.AADListFragment.TYPE_UP;
 
 /**
  * Created by 10295 on 2018/3/23.
@@ -21,7 +26,7 @@ public class AADRootFragment extends BaseFragment {
     private NoScrollViewPager vpContent;
     private MyIndicator mIndicator;
 
-    private final Fragment[] mFragments = {new PlaceHolderFragment(), new PlaceHolderFragment()};
+    private final Fragment[] mFragments = new Fragment[2];
     private final int[] mTitles = {R.string.tab_up, R.string.tab_down};
 
     @SuppressLint("InflateParams")
@@ -33,7 +38,24 @@ public class AADRootFragment extends BaseFragment {
     @Override
     protected void init() {
         initView();
+        initData();
         initAdapter();
+    }
+
+    private void initData() {
+        Bundle bundle;
+
+        AADListFragment aadUpListFragment = new AADListFragment();
+        bundle = new Bundle();
+        bundle.putInt(AAD_TYPE, TYPE_UP);
+        aadUpListFragment.setArguments(bundle);
+        mFragments[0] = aadUpListFragment;
+
+        AADListFragment aadDownListFragment = new AADListFragment();
+        bundle = new Bundle();
+        bundle.putInt(AAD_TYPE, TYPE_DOWN);
+        aadDownListFragment.setArguments(bundle);
+        mFragments[1] = aadDownListFragment;
     }
 
     private void initView() {

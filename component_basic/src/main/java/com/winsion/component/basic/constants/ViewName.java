@@ -136,7 +136,7 @@ public interface ViewName {
     /**
      * 到发
      */
-    String DAO_FA = "runtrainsInfo";
+    String AAD = "runtrainsInfo";
 
     /**
      * 获取站台列表

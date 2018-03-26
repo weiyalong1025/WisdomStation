@@ -70,7 +70,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     private List<JobEntity> underwayData = new ArrayList<>();   // 进行中
     private List<JobEntity> doneData = new ArrayList<>();   // 已完成
     private int statusPosition = TaskSpinnerState.STATE_ALL;    // 记录选了哪个状态进行筛选
-    private String lastText;    // 搜索框中上一次输入的文字
+    private String lastText = "";    // 搜索框中上一次输入的文字
     private Disposable timer;   // 定时刷新界面，更新执行时间
 
     @SuppressLint("InflateParams")
@@ -349,15 +349,15 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         listData.addAll(getSameStatusList(statusPosition));
         mLvAdapter.notifyDataSetChanged();
 
-        if (listData.size() == 0) {
-            tvHint.setText(R.string.hint_no_data_click_retry);
-            showView(flContainer, tvHint);
-        } else {
-            showView(flContainer, swipeRefresh);
-        }
-
         if (restoreSearchContent) {
             svSpinner.setSearchContent(lastText);
+        }else{
+            if (listData.size() == 0) {
+                tvHint.setText(R.string.hint_no_data_click_retry);
+                showView(flContainer, tvHint);
+            } else {
+                showView(flContainer, swipeRefresh);
+            }
         }
     }
 

@@ -8,14 +8,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 
 import com.winsion.component.aad.R;
+import com.winsion.component.aad.constants.AADType;
 import com.winsion.component.aad.fragment.aadlist.AADListFragment;
 import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.view.MyIndicator;
 import com.winsion.component.basic.view.NoScrollViewPager;
 
 import static com.winsion.component.aad.fragment.aadlist.AADListFragment.AAD_TYPE;
-import static com.winsion.component.aad.fragment.aadlist.AADListFragment.TYPE_DOWN;
-import static com.winsion.component.aad.fragment.aadlist.AADListFragment.TYPE_UP;
 
 /**
  * Created by 10295 on 2018/3/23.
@@ -47,13 +46,13 @@ public class AADRootFragment extends BaseFragment {
 
         AADListFragment aadUpListFragment = new AADListFragment();
         bundle = new Bundle();
-        bundle.putInt(AAD_TYPE, TYPE_UP);
+        bundle.putInt(AAD_TYPE, AADType.TYPE_UP);
         aadUpListFragment.setArguments(bundle);
         mFragments[0] = aadUpListFragment;
 
         AADListFragment aadDownListFragment = new AADListFragment();
         bundle = new Bundle();
-        bundle.putInt(AAD_TYPE, TYPE_DOWN);
+        bundle.putInt(AAD_TYPE, AADType.TYPE_DOWN);
         aadDownListFragment.setArguments(bundle);
         mFragments[1] = aadDownListFragment;
     }

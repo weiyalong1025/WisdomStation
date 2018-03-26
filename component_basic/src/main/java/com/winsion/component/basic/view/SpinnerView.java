@@ -116,8 +116,8 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
         } else {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) search.getLayoutParams();
             int d5 = getResources().getDimensionPixelSize(R.dimen.basic_d5);
-            int d15 = getResources().getDimensionPixelSize(R.dimen.basic_d15);
-            layoutParams.setMargins(d15, d5, d15, d5);
+            int d20 = getResources().getDimensionPixelSize(R.dimen.basic_d20);
+            layoutParams.setMargins(d20, d5, d20, d5);
             search.setLayoutParams(layoutParams);
             containerSecond.setVisibility(GONE);
         }

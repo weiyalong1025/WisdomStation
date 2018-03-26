@@ -3,4 +3,7 @@
 
     <string name="tab_up">上行</string>
     <string name="tab_down">下行</string>
+
+    <string name="value_plan">计划</string>
+    <string name="value_real">实际</string>
 </resources>

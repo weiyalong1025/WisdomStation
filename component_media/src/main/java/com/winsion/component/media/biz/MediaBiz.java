@@ -1,13 +1,9 @@
 package com.winsion.component.media.biz;
 
-import android.support.annotation.IntDef;
-
 import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.media.constants.FileType;
 
 import java.io.File;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.Date;
 
 /**
@@ -16,7 +12,7 @@ import java.util.Date;
  */
 
 public class MediaBiz {
-    public static File getMediaFile(File file, @FileTypeLimit int type) {
+    public static File getMediaFile(File file, @FileType int type) {
         if (file.exists() || file.mkdirs()) {
             String timeStamp = Formatter.DATE_FORMAT11.format(new Date());
             File mediaFile;
@@ -38,13 +34,5 @@ public class MediaBiz {
             return mediaFile;
         }
         return null;
-    }
-
-    /**
-     * 文件类型
-     */
-    @IntDef({FileType.PICTURE, FileType.VIDEO, FileType.AUDIO, FileType.TEXT})
-    @Retention(RetentionPolicy.SOURCE)
-    @interface FileTypeLimit {
     }
 }

@@ -31,4 +31,6 @@
 
     <string name="symbol_separator">/</string>
     <string name="symbol_hour_minute">"--:--"</string>
+
+    <string name="value_nothing">无</string>
 </resources>

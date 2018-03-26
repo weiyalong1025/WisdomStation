@@ -13,6 +13,10 @@ public interface Urls {
      */
     String BASE_QUERY = "kingkong/0.01/job/findByBaseCondition";
     /**
+     * 查询到发列表数据
+     */
+    String BASE_QUERY_AAD = "kingkong/0.01/device/findByBaseCondition";
+    /**
      * 用户上传文件
      */
     String UPLOAD = "kingkong/0.01/job/uploadJobOperatorFile";

@@ -6,25 +6,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:id="@+id/tv_number"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/basic_d35"
-            android:layout_marginTop="@dimen/basic_d15"
-            android:background="@drawable/task_btn_white_large_corner"
-            android:gravity="center"
-            android:paddingLeft="@dimen/basic_d26"
-            android:paddingRight="@dimen/basic_d26"
-            android:textColor="@color/basic_black6"
-            android:textSize="@dimen/basic_s24"
-            android:textStyle="bold"
-            tools:text="D924" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/basic_d35"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/basic_d15"
+        android:background="@drawable/basic_bg_round_rect_white"
+        android:gravity="center"
+        android:paddingLeft="@dimen/basic_d26"
+        android:paddingRight="@dimen/basic_d26"
+        android:textColor="@color/basic_black6"
+        android:textSize="@dimen/basic_s24"
+        android:textStyle="bold"
+        tools:text="D924" />
 
     <FrameLayout
         android:layout_width="match_parent"

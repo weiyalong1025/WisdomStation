@@ -178,7 +178,7 @@
             android:id="@+id/btn_status"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/basic_d40"
-            android:background="@drawable/task_btn_bg_name"
+            android:background="@drawable/basic_bg_round_rect_black"
             android:focusable="false"
             android:gravity="center"
             android:minWidth="@dimen/basic_d110"

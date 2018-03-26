@@ -7,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by wyl on 2017/6/13
+ * 任务类型
  */
 @IntDef({TaskType.COOPERATE, TaskType.COMMAND, TaskType.TASK, TaskType.GRID, TaskType.PLAN})
 @Retention(RetentionPolicy.SOURCE)

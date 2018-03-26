@@ -13,7 +13,7 @@
         android:layout_height="@dimen/basic_d30"
         android:layout_margin="@dimen/basic_d5"
         android:adjustViewBounds="true"
-        android:background="@drawable/basic_bg_search"
+        android:background="@drawable/basic_bg_round_rect_black"
         android:hint="@string/hint_search"
         android:paddingEnd="@dimen/basic_d15"
         android:paddingStart="@dimen/basic_d44"

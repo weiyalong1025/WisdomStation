@@ -49,5 +49,6 @@
     <!-- 绿色 -->
     <color name="basic_green1">#2B4B35</color>
     <color name="basic_green2">#2AC246</color>
+    <color name="basic_green3">#009688</color>
 
 </resources>

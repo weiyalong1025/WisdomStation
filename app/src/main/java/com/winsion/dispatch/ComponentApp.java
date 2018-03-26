@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.billy.cc.core.component.CC;
+import com.billy.cc.core.component.CCResult;
 import com.billy.cc.core.component.IComponent;
 import com.winsion.dispatch.activity.main.MainActivity;
 
@@ -34,13 +35,15 @@ public class ComponentApp implements IComponent {
                 if (context instanceof Activity) {
                     ((Activity) context).finish();
                 }
-                return true;
+                CC.sendCCResult(cc.getCallId(), CCResult.success());
+                break;
             case "notifyUnreadSysRemindCountChanged":
                 Activity activity = cc.getParamItem("activity");
                 int unreadCount = cc.getParamItem("unreadCount");
                 if (activity != null && activity instanceof MainActivity) {
                     ((MainActivity) activity).notifyUnreadSysRemindCountChanged(unreadCount);
                 }
+                CC.sendCCResult(cc.getCallId(), CCResult.success());
                 break;
         }
         return false;

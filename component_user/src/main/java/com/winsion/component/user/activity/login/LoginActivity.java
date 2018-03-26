@@ -313,7 +313,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,
                     .setContext(this)
                     .setActionName("toMainActivity")
                     .build()
-                    .callAsync();
+                    .call();
         } else {
             startActivity(UserActivity.class, true);
         }

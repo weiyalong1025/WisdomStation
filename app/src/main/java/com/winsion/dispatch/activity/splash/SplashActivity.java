@@ -30,7 +30,7 @@ public class SplashActivity extends BaseActivity {
                     .setContext(this)
                     .setActionName("toLoginActivity")
                     .build()
-                    .callAsync();
+                    .call();
         } else {
             // 如果没有用户组件直接进入主界面
             startActivity(MainActivity.class, true);

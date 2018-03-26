@@ -37,7 +37,7 @@ public class SceneRootFragment extends BaseFragment {
                     .setContext(mContext)
                     .setActionName("toPatrolPlanActivity")
                     .build()
-                    .callAsync();
+                    .call();
         } else if (id == R.id.mv_main_passenger) {
             showToast("重点旅客");
         } else if (id == R.id.mv_lost) {

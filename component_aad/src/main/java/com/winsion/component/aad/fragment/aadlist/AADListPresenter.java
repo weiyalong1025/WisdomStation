@@ -31,7 +31,7 @@ public class AADListPresenter implements AADListContract.Presenter {
 
     @Override
     public void getAADListData(int aadType) {
-        NetDataSource.post(getClass(), Urls.BASE_QUERY_AAD, null, null, ViewName.AAD,
+        NetDataSource.post(this, Urls.BASE_QUERY_AAD, null, null, ViewName.AAD,
                 1, new ResponseListener<ResponseForQueryData<List<AADEntity>>>() {
                     @Override
                     public ResponseForQueryData<List<AADEntity>> convert(String jsonStr) {

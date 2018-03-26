@@ -6,12 +6,12 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.billy.cc.core.component.CC;
 import com.winsion.component.basic.biz.BasicBiz;
+import com.winsion.component.basic.constants.MQType;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
-import com.winsion.component.basic.mqtt.MQTTClient;
-import com.winsion.component.basic.constants.MQType;
 import com.winsion.component.basic.entity.MQMessage;
 import com.winsion.component.basic.entity.TaskMessage;
+import com.winsion.component.basic.mqtt.MQTTClient;
 import com.winsion.component.basic.utils.ToastUtils;
 import com.winsion.dispatch.R;
 
@@ -46,7 +46,7 @@ public class MainPresenter implements MainContract.Presenter, MQTTClient.Observe
                     CC.obtainBuilder("ComponentUser")
                             .setActionName("logout")
                             .build()
-                            .callAsync();
+                            .call();
                 }
                 break;
             case MQType.TASK_STATE:

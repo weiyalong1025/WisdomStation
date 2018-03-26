@@ -37,6 +37,7 @@ public class ComponentTask implements IComponent {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
                 context.startActivity(intent);
+                CC.sendCCResult(cc.getCallId(), CCResult.success());
                 break;
         }
         return false;

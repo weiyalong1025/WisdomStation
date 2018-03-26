@@ -20,11 +20,11 @@ import com.billy.cc.core.component.CC;
 import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.remind.R;
-import com.winsion.component.remind.fragment.RemindRootFragment;
 import com.winsion.component.remind.adapter.SystemRemindAdapter;
 import com.winsion.component.remind.constants.HandleType;
 import com.winsion.component.remind.constants.ReadStatus;
 import com.winsion.component.remind.entity.SystemRemindEntity;
+import com.winsion.component.remind.fragment.RemindRootFragment;
 import com.zhy.adapter.abslistview.ViewHolder;
 
 import java.util.ArrayList;

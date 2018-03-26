@@ -58,7 +58,7 @@ public class SubmitProblemPresenter extends SubmitBiz implements SubmitProblemCo
         whereClause.setValueKey(deviceId);
         whereClauses.add(whereClause);
 
-        NetDataSource.post(getClass(), Urls.BASE_QUERY, whereClauses, null, ViewName.DEVICE_INFO,
+        NetDataSource.post(this, Urls.BASE_QUERY, whereClauses, null, ViewName.DEVICE_INFO,
                 1, new ResponseListener<ResponseForQueryData<List<DeviceEntity>>>() {
                     @Override
                     public ResponseForQueryData<List<DeviceEntity>> convert(String jsonStr) {
@@ -109,7 +109,7 @@ public class SubmitProblemPresenter extends SubmitBiz implements SubmitProblemCo
         whereClause.setFieldKey(FieldKey.EQUALS);
         whereClauses.add(whereClause);
 
-        NetDataSource.post(getClass(), Urls.BASE_QUERY, whereClauses, null, ViewName.SUBCLASS_INFO,
+        NetDataSource.post(this, Urls.BASE_QUERY, whereClauses, null, ViewName.SUBCLASS_INFO,
                 1, new ResponseListener<ResponseForQueryData<List<SubclassEntity>>>() {
                     @Override
                     public ResponseForQueryData<List<SubclassEntity>> convert(String jsonStr) {

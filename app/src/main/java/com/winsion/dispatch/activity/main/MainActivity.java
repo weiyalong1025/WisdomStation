@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
             CC.obtainBuilder("ComponentUser")
                     .setActionName("toLoginActivityClearTask")
                     .build()
-                    .callAsync();
+                    .call();
         } else {
             initView();
             initPresenter();
@@ -174,7 +174,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
                 .setContext(this)
                 .setActionName("toUserActivity")
                 .build()
-                .callAsync();
+                .call();
     }
 
     /**

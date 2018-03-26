@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.billy.cc.core.component.CC;
+import com.billy.cc.core.component.CCResult;
 import com.billy.cc.core.component.IComponent;
 import com.lzy.okgo.model.HttpParams;
 import com.winsion.component.basic.constants.Urls;
@@ -44,13 +45,15 @@ public class ComponentUser implements IComponent {
                 if (context instanceof Activity) {
                     ((Activity) context).finish();
                 }
-                return true;
+                CC.sendCCResult(cc.getCallId(), CCResult.success());
+                break;
             case "toLoginActivityClearTask":
                 intent = new Intent(context, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("callId", cc.getCallId());
                 context.startActivity(intent);
-                return true;
+                CC.sendCCResult(cc.getCallId(), CCResult.success());
+                break;
             case "toUserActivity":
                 intent = new Intent(context, UserActivity.class);
                 intent.putExtra("callId", cc.getCallId());
@@ -59,7 +62,8 @@ public class ComponentUser implements IComponent {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
                 context.startActivity(intent);
-                return true;
+                CC.sendCCResult(cc.getCallId(), CCResult.success());
+                break;
             case "logout":
                 logout(cc.getContext(), cc.getCallId(), null);
                 break;
@@ -84,13 +88,16 @@ public class ComponentUser implements IComponent {
         NetDataSource.post(null, Urls.USER_LOGOUT, httpParams, null);
         // 清除缓存信息
         CacheDataSource.clearCache();
-        if (successListener != null) {
-            successListener.onSuccess();
-        }
         // 跳转登录界面
         Intent intent = new Intent(context, LoginActivity.class);
         intent.putExtra("callId", callId);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
+
+        if (successListener != null) {
+            successListener.onSuccess();
+        } else {
+            CC.sendCCResult(callId, CCResult.success());
+        }
     }
 }

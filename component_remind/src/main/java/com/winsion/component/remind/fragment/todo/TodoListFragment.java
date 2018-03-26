@@ -16,9 +16,9 @@ import com.winsion.component.basic.entity.TodoEntity;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.SpinnerView;
 import com.winsion.component.remind.R;
-import com.winsion.component.remind.fragment.RemindRootFragment;
 import com.winsion.component.remind.activity.todo.AddTodoActivity;
 import com.winsion.component.remind.adapter.TodoAdapter;
+import com.winsion.component.remind.fragment.RemindRootFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

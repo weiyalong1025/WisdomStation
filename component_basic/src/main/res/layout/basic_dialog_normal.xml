@@ -5,9 +5,10 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="@dimen/basic_d300"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/basic_d22"
         android:background="@drawable/basic_bg_dialog_normal"
         android:gravity="center_horizontal"
         android:orientation="vertical"

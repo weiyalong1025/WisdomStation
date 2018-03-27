@@ -60,6 +60,7 @@ configurations.all {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':component_basic')
     implementation project(':component_user')
     implementation project(':component_task')
     implementation project(':component_remind')

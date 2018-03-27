@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.winsion.component.basic.base.BaseActivity;
+import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.basic.constants.OpeType;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.listener.MyDownloadListener;
@@ -26,7 +27,6 @@ import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.FileUtils;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.utils.ViewUtils;
-import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.DrawableCenterTextView;
 import com.winsion.component.basic.view.TitleView;
@@ -286,36 +286,42 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
      */
     private void initViewModule() {
         int taskType = mJobEntity.getTaktype();
-        if (taskType == TaskType.GRID) {
-            rlOrderModule.setVisibility(View.GONE);
-            llTrainModule.setVisibility(View.GONE);
-            divTrainOperation.setVisibility(View.GONE);
-            tvPerformerTitle.setVisibility(View.VISIBLE);
-            tvPublisherTitle.setVisibility(View.VISIBLE);
-            divPublisherOperator.setVisibility(View.VISIBLE);
-        } else if (taskType == TaskType.PLAN) {
-            rlOrderModule.setVisibility(View.GONE);
-            llTrainModule.setVisibility(View.GONE);
-            divTrainOperation.setVisibility(View.GONE);
-            tvPerformerTitle.setVisibility(View.GONE);
-            tvPublisherTitle.setVisibility(View.GONE);
-            divPublisherOperator.setVisibility(View.GONE);
-        } else if (taskType == TaskType.COOPERATE || taskType == TaskType.COMMAND) {
-            rlOrderModule.setVisibility(View.VISIBLE);
-            llTrainModule.setVisibility(View.GONE);
-            divTrainOperation.setVisibility(View.VISIBLE);
-            tvPerformerTitle.setVisibility(View.GONE);
-            tvPublisherTitle.setVisibility(View.GONE);
-            divPublisherOperator.setVisibility(View.GONE);
-            initOrderModuleView(taskType);
-        } else {
-            rlOrderModule.setVisibility(View.GONE);
-            llTrainModule.setVisibility(View.VISIBLE);
-            divTrainOperation.setVisibility(View.VISIBLE);
-            tvPerformerTitle.setVisibility(View.GONE);
-            tvPublisherTitle.setVisibility(View.GONE);
-            divPublisherOperator.setVisibility(View.GONE);
-            initTrainModuleView();
+        switch (taskType) {
+            case TaskType.GRID:
+                rlOrderModule.setVisibility(View.GONE);
+                llTrainModule.setVisibility(View.GONE);
+                divTrainOperation.setVisibility(View.GONE);
+                tvPerformerTitle.setVisibility(View.VISIBLE);
+                tvPublisherTitle.setVisibility(View.VISIBLE);
+                divPublisherOperator.setVisibility(View.VISIBLE);
+                break;
+            case TaskType.PLAN:
+                rlOrderModule.setVisibility(View.GONE);
+                llTrainModule.setVisibility(View.GONE);
+                divTrainOperation.setVisibility(View.GONE);
+                tvPerformerTitle.setVisibility(View.GONE);
+                tvPublisherTitle.setVisibility(View.GONE);
+                divPublisherOperator.setVisibility(View.GONE);
+                break;
+            case TaskType.COOPERATE:
+            case TaskType.COMMAND:
+                rlOrderModule.setVisibility(View.VISIBLE);
+                llTrainModule.setVisibility(View.GONE);
+                divTrainOperation.setVisibility(View.VISIBLE);
+                tvPerformerTitle.setVisibility(View.GONE);
+                tvPublisherTitle.setVisibility(View.GONE);
+                divPublisherOperator.setVisibility(View.GONE);
+                initOrderModuleView(taskType);
+                break;
+            default:
+                rlOrderModule.setVisibility(View.GONE);
+                llTrainModule.setVisibility(View.VISIBLE);
+                divTrainOperation.setVisibility(View.VISIBLE);
+                tvPerformerTitle.setVisibility(View.GONE);
+                tvPublisherTitle.setVisibility(View.GONE);
+                divPublisherOperator.setVisibility(View.GONE);
+                initTrainModuleView();
+                break;
         }
         initTaskModuleView();
     }

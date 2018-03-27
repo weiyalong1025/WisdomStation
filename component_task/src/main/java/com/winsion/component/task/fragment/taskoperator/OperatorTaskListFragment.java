@@ -17,10 +17,10 @@ import android.widget.TextView;
 
 import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.biz.BasicBiz;
+import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.basic.constants.OpeType;
 import com.winsion.component.basic.listener.StateListener;
 import com.winsion.component.basic.utils.ConvertUtils;
-import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.SpinnerView;
 import com.winsion.component.task.R;
@@ -141,10 +141,10 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         // 根据Spinner显示状态显隐透明背景
         svSpinner.setPopupDisplayChangeListener(status -> {
             switch (status) {
-                case SpinnerView.POPUP_SHOW:
+                case SpinnerView.PopupState.POPUP_SHOW:
                     ivShade.setVisibility(View.VISIBLE);
                     break;
-                case SpinnerView.POPUP_HIDE:
+                case SpinnerView.PopupState.POPUP_HIDE:
                     ivShade.setVisibility(View.GONE);
                     break;
             }
@@ -351,7 +351,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
         if (restoreSearchContent) {
             svSpinner.setSearchContent(lastText);
-        }else{
+        } else {
             if (listData.size() == 0) {
                 tvHint.setText(R.string.hint_no_data_click_retry);
                 showView(flContainer, tvHint);

@@ -133,10 +133,10 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         // 根据Spinner显示状态显隐透明背景
         svSpinner.setPopupDisplayChangeListener(status -> {
             switch (status) {
-                case SpinnerView.POPUP_SHOW:
+                case SpinnerView.PopupState.POPUP_SHOW:
                     ivShade.setVisibility(View.VISIBLE);
                     break;
-                case SpinnerView.POPUP_HIDE:
+                case SpinnerView.PopupState.POPUP_HIDE:
                     ivShade.setVisibility(View.GONE);
                     break;
             }

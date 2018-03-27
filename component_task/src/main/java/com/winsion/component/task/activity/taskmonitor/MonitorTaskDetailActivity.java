@@ -160,12 +160,17 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
         mPresenter.getTaskDetailInfo(mTaskEntity.getTasksid());
         // 根据任务类型设置界面标题
         int taskType = mTaskEntity.getTaktype();
-        if (taskType == TaskType.PLAN) {
-            tvTitle.setTitleText(R.string.title_alarm_detail);
-        } else if (taskType == TaskType.COOPERATE || taskType == TaskType.COMMAND) {
-            tvTitle.setTitleText(taskType == TaskType.COOPERATE ? R.string.title_cooperation_detail : R.string.title_command_detail);
-        } else {
-            tvTitle.setTitleText(R.string.title_task_detail);
+        switch (taskType) {
+            case TaskType.PLAN:
+                tvTitle.setTitleText(R.string.title_alarm_detail);
+                break;
+            case TaskType.COOPERATE:
+            case TaskType.COMMAND:
+                tvTitle.setTitleText(taskType == TaskType.COOPERATE ? R.string.title_cooperation_detail : R.string.title_command_detail);
+                break;
+            default:
+                tvTitle.setTitleText(R.string.title_task_detail);
+                break;
         }
     }
 
@@ -200,17 +205,22 @@ public class MonitorTaskDetailActivity extends BaseActivity implements MonitorTa
     private void initViewModule() {
         JobEntity jobEntity = mJobEntities.get(0);
         int taskType = mTaskEntity.getTaktype();
-        if (taskType == TaskType.PLAN) {
-            rlOrderModule.setVisibility(View.GONE);
-            llTrainModule.setVisibility(View.GONE);
-        } else if (taskType == TaskType.COOPERATE || taskType == TaskType.COMMAND) {
-            rlOrderModule.setVisibility(View.VISIBLE);
-            llTrainModule.setVisibility(View.GONE);
-            initOrderModuleView(jobEntity);
-        } else {
-            rlOrderModule.setVisibility(View.GONE);
-            llTrainModule.setVisibility(View.VISIBLE);
-            initTrainModuleView(jobEntity);
+        switch (taskType) {
+            case TaskType.PLAN:
+                rlOrderModule.setVisibility(View.GONE);
+                llTrainModule.setVisibility(View.GONE);
+                break;
+            case TaskType.COOPERATE:
+            case TaskType.COMMAND:
+                rlOrderModule.setVisibility(View.VISIBLE);
+                llTrainModule.setVisibility(View.GONE);
+                initOrderModuleView(jobEntity);
+                break;
+            default:
+                rlOrderModule.setVisibility(View.GONE);
+                llTrainModule.setVisibility(View.VISIBLE);
+                initTrainModuleView(jobEntity);
+                break;
         }
     }
 

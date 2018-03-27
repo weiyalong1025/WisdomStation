@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,8 @@ import com.winsion.component.basic.utils.ViewUtils;
 import com.zhy.adapter.abslistview.CommonAdapter;
 import com.zhy.adapter.abslistview.ViewHolder;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
 /**
@@ -42,13 +45,17 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
     private static final int FIRST_OPTION_TAG = 0;
     private static final int SECOND_OPTION_TAG = 1;
 
-    public static final int POPUP_SHOW = 0;
-    public static final int POPUP_HIDE = 1;
-
     private int firstOptionSelectPosition = 0;
     private int secondOptionSelectPosition = 0;
     private PopupWindow firstPopupWindow;
     private PopupWindow secondPopupWindow;
+
+    @IntDef({PopupState.POPUP_SHOW, PopupState.POPUP_HIDE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface PopupState {
+        int POPUP_SHOW = 0;
+        int POPUP_HIDE = 1;
+    }
 
     public interface OptionItemClickListener {
         void onItemClick(int position);
@@ -59,7 +66,12 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
     }
 
     public interface PopupDisplayChangeListener {
-        void popupDisplayChange(int status);
+        /**
+         * pop显隐状态回调
+         *
+         * @param status {@link SpinnerView.PopupState}
+         */
+        void popupDisplayChange(@PopupState int status);
     }
 
     private OptionItemClickListener firstOptionItemClickListener;
@@ -139,7 +151,7 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
                 firstPopupWindow.showAsDropDown(view);
                 arrowFirst.setImageResource(R.drawable.basic_ic_arrow_up_little);
                 if (popupDisplayChangeListener != null) {
-                    popupDisplayChangeListener.popupDisplayChange(POPUP_SHOW);
+                    popupDisplayChangeListener.popupDisplayChange(PopupState.POPUP_SHOW);
                 }
             }
         });
@@ -149,7 +161,7 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
                 secondPopupWindow.showAsDropDown(view);
                 arrowSecond.setImageResource(R.drawable.basic_ic_arrow_up_little);
                 if (popupDisplayChangeListener != null) {
-                    popupDisplayChangeListener.popupDisplayChange(POPUP_SHOW);
+                    popupDisplayChangeListener.popupDisplayChange(PopupState.POPUP_SHOW);
                 }
             }
         });
@@ -254,7 +266,7 @@ public class SpinnerView extends LinearLayout implements TextWatcher {
             arrowFirst.setImageResource(R.drawable.basic_ic_arrow_down_little);
             arrowSecond.setImageResource(R.drawable.basic_ic_arrow_down_little);
             if (popupDisplayChangeListener != null) {
-                popupDisplayChangeListener.popupDisplayChange(POPUP_HIDE);
+                popupDisplayChangeListener.popupDisplayChange(PopupState.POPUP_HIDE);
             }
         });
         listView.setOnItemClickListener((AdapterView<?> parent, View v, int position, long id) -> {

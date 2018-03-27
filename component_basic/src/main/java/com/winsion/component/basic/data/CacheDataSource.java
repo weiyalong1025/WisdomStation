@@ -19,6 +19,7 @@ public class CacheDataSource {
     private static String ssid; // 配置的SSID，人员定位用到，符合该SSID的再上报BSSID
     private static String userId;   // 用户ID
     private static String teamId;   // 班组ID
+    private static String teamName;     // 班组名
     private static String username; // 用户登录名
     private static String password; // 用户登录密码
     private static String sipUsername;  // SIP登录用户名
@@ -105,6 +106,14 @@ public class CacheDataSource {
 
     public static String getTeamId() {
         return teamId;
+    }
+
+    public static String getTeamName() {
+        return teamName;
+    }
+
+    public static void setTeamName(String teamName) {
+        CacheDataSource.teamName = teamName;
     }
 
     public static String getUsername() {

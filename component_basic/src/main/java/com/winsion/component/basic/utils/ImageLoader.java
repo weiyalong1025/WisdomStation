@@ -1,5 +1,7 @@
 package com.winsion.component.basic.utils;
 
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
@@ -85,5 +87,25 @@ public class ImageLoader {
                 .asGif()
                 .load(drawableRes)
                 .into(view);
+    }
+
+    /**
+     * 将ImageView置灰
+     */
+    public static void setGrey(ImageView imageView) {
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        imageView.setColorFilter(filter);
+    }
+
+    /**
+     * 将ImageView恢复正常
+     */
+    public static void setNormal(ImageView imageView) {
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(1);
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        imageView.setColorFilter(filter);
     }
 }

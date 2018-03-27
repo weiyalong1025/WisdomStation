@@ -180,15 +180,19 @@ public class AlphaTabView extends View {
             int width;
             int height = i;
             Bitmap bitmap;
-            if (number.length() == 1) {
-                width = i;
-                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            } else if (number.length() == 2) {
-                width = i + 5;
-                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            } else {
-                width = i + 8;
-                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            switch (number.length()) {
+                case 1:
+                    width = i;
+                    bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                    break;
+                case 2:
+                    width = i + 5;
+                    bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                    break;
+                default:
+                    width = i + 8;
+                    bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                    break;
             }
             Canvas canvasMessages = new Canvas(bitmap);
             RectF messageRectF = new RectF(0, 0, width, height);

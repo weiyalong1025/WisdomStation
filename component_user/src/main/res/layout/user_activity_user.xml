@@ -39,7 +39,10 @@
             android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/basic_d15"
+            android:layout_marginBottom="@dimen/basic_d15"
+            android:layout_marginEnd="@dimen/basic_d10"
+            android:layout_marginStart="@dimen/basic_d15"
+            android:layout_marginTop="@dimen/basic_d15"
             android:textColor="@color/basic_blue1"
             android:textSize="@dimen/basic_s21"
             tools:text="汪文斌" />

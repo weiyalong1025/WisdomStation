@@ -38,5 +38,5 @@ configurations.all {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':component_user')
+    api project(':component_user')
 }

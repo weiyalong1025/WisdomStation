@@ -38,28 +38,28 @@ configurations.all {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:27.1.0'
+    api 'com.android.support:appcompat-v7:27.1.0'
     // JSON
-    compile 'com.alibaba:fastjson:1.2.33'
+    api 'com.alibaba:fastjson:1.2.33'
     // 网络
     //noinspection GradleDependency
-    compile 'com.lzy.net:okgo:3.0.1'
-    compile 'com.lzy.net:okrx2:2.0.1'
-    compile 'com.lzy.net:okserver:2.0.1'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'com.lzy.net:okgo:3.0.1'
+    api 'com.lzy.net:okrx2:2.0.1'
+    api 'com.lzy.net:okserver:2.0.1'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
     // 图片加载
-    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    api 'com.github.bumptech.glide:glide:4.4.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
     // Adapter
-    compile 'com.zhy:base-adapter:3.0.3'
-    compile 'com.zhy:base-rvadapter:3.0.3'
+    api 'com.zhy:base-adapter:3.0.3'
+    api 'com.zhy:base-rvadapter:3.0.3'
     // 选择器
-    compile 'com.contrarywind:Android-PickerView:3.2.5'
+    api 'com.contrarywind:Android-PickerView:3.2.5'
     // MQ
-    compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
-    compile 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+    api 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+    api 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
     // 事件传递
-    compile 'org.greenrobot:eventbus:3.1.1'
+    api 'org.greenrobot:eventbus:3.1.1'
     // GridLayout兼容库
-    compile 'com.android.support:gridlayout-v7:27.1.0'
+    api 'com.android.support:gridlayout-v7:27.1.0'
 }

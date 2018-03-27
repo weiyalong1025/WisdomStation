@@ -12,6 +12,7 @@ public class AuthEntity {
     private String mqKey;
     private String roleId;
     private String teamId;
+    private String teamName;
     private String powerLine;
     private UserDto user;
     private String userId;
@@ -63,6 +64,14 @@ public class AuthEntity {
 
     public void setTeamId(String teamId) {
         this.teamId = teamId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public String getPowerLine() {

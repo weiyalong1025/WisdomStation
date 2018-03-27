@@ -4,4 +4,11 @@
     <string name="tab_contacts">联系人</string>
     <string name="tab_team_group">班组</string>
     <string name="tab_contact_group">联系人组</string>
+
+    <string name="btn_message">消息</string>
+    <string name="btn_call">呼叫</string>
+    <string name="btn_live">直播</string>
+    <string name="btn_talk_back">对讲</string>
+
+    <string name="value_draft">草稿</string>
 </resources>

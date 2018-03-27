@@ -15,21 +15,24 @@ public class MediaBiz {
     public static File getMediaFile(File file, @FileType int type) {
         if (file.exists() || file.mkdirs()) {
             String timeStamp = Formatter.DATE_FORMAT11.format(new Date());
-            File mediaFile;
-            if (type == FileType.PICTURE) {
-                mediaFile = new File(file.getPath() + File.separator
-                        + "IMG_" + timeStamp + ".jpg");
-            } else if (type == FileType.VIDEO) {
-                mediaFile = new File(file.getPath() + File.separator
-                        + "VID_" + timeStamp + ".mp4");
-            } else if (type == FileType.AUDIO) {
-                mediaFile = new File(file.getPath() + File.separator
-                        + "VOI_" + timeStamp + ".aac");
-            } else if (type == FileType.TEXT) {
-                mediaFile = new File(file.getPath() + File.separator
-                        + "TEXT_NOTE.txt");
-            } else {
-                return null;
+            File mediaFile = null;
+            switch (type) {
+                case FileType.PICTURE:
+                    mediaFile = new File(file.getPath() + File.separator
+                            + "IMG_" + timeStamp + ".jpg");
+                    break;
+                case FileType.VIDEO:
+                    mediaFile = new File(file.getPath() + File.separator
+                            + "VID_" + timeStamp + ".mp4");
+                    break;
+                case FileType.AUDIO:
+                    mediaFile = new File(file.getPath() + File.separator
+                            + "VOI_" + timeStamp + ".aac");
+                    break;
+                case FileType.TEXT:
+                    mediaFile = new File(file.getPath() + File.separator
+                            + "TEXT_NOTE.txt");
+                    break;
             }
             return mediaFile;
         }

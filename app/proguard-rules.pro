@@ -27,6 +27,8 @@
 -keep class com.winsion.component.remind.entity.** { *; }
 -keep class com.winsion.component.task.entity.** { *; }
 -keep class com.winsion.component.user.entity.** { *; }
+-keep class com.winsion.component.aad.entity.** { *; }
+-keep class com.winsion.component.contact.entity.** { *; }
 #-------------------------------------------------------------------------
 
 #---------------------------------2.第三方包-------------------------------

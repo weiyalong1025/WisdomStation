@@ -46,6 +46,9 @@ public class ContactRootFragment extends BaseFragment {
     private void initView() {
         vpContent = findViewById(R.id.vp_content);
         mIndicator = findViewById(R.id.mi_container);
+
+        // 预加载所有界面
+        vpContent.setOffscreenPageLimit(2);
     }
 
     private void initAdapter() {

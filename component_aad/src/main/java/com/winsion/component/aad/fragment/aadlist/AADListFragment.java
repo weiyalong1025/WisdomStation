@@ -40,7 +40,20 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
     private SwipeRefreshLayout swipeRefresh;
 
     public static final String AAD_TYPE = "AAD_TYPE";
+    /**
+     * 请求数据中
+     */
+    public static final int GETTING = 0;
+    /**
+     * 请求数据成功
+     */
+    public static final int GET_SUCCESS = 1;
+    /**
+     * 请求数据失败
+     */
+    public static final int GET_FAILED = 2;
 
+    private int getDataState = GETTING;   // 请求数据状态
     private int mType = AADType.TYPE_UP;    // 表示当前界面是上行还是下行
     private AADListContract.Presenter mPresenter;
     private String lastText = "";    // 搜索框中上一次输入的文字
@@ -56,10 +69,16 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
 
     @Override
     protected void init() {
+        initPresenter();
         initView();
+        initAdapter();
         initIntentData();
         initListener();
         initData();
+    }
+
+    private void initPresenter() {
+        mPresenter = new AADListPresenter(this);
     }
 
     private void initView() {
@@ -71,6 +90,18 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
         flContainer = findViewById(R.id.fl_container);
         lvList = findViewById(R.id.lv_list);
         trainNumberIndex = findViewById(R.id.train_number_index);
+
+        swipeRefresh.setColorSchemeResources(R.color.basic_blue1);
+
+        // 初始化车站选项
+        List<String> stationList = new ArrayList<>();
+        stationList.add(getString(R.string.spinner_station_name));
+        svSpinner.setFirstOptionData(stationList);
+    }
+
+    private void initAdapter() {
+        mAdapter = new AADListAdapter(mContext, mListData);
+        lvList.setAdapter(mAdapter);
     }
 
     private void initIntentData() {
@@ -81,14 +112,14 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
     }
 
     private void initListener() {
-        swipeRefresh.setOnRefreshListener(() -> mPresenter.getAADListData(mType));
+        swipeRefresh.setOnRefreshListener(this::initData);
         lvList.setOnItemClickListener(this);
         // lvList.setOnScrollListener(this);
         svSpinner.setAfterTextChangeListener(this);
 
         svSpinner.setFirstOptionItemClickListener((position) -> {
             showView(flContainer, progressBar);
-            mPresenter.getAADListData(mType);
+            initData();
         });
 
         // 根据Spinner显示状态显隐透明背景
@@ -107,21 +138,15 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
     }
 
     private void initData() {
-        // 初始化车站选项
-        List<String> stationList = new ArrayList<>();
-        stationList.add(getString(R.string.spinner_station_name));
-        svSpinner.setFirstOptionData(stationList);
-
-        mPresenter = new AADListPresenter(this);
-
-        mAdapter = new AADListAdapter(mContext, mListData);
-        lvList.setAdapter(mAdapter);
-
+        getDataState = GETTING;
         mPresenter.getAADListData(mType);
     }
 
     @Override
     public void afterTextChange(Editable s) {
+        if (getDataState != GET_SUCCESS) {
+            return;
+        }
         lastText = s.toString().trim();
         mListData.clear();
         if (TextUtils.isEmpty(lastText)) {
@@ -170,6 +195,7 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
 
     @Override
     public void getAADListDataSuccess(List<AADEntity> aadEntities) {
+        getDataState = GET_SUCCESS;
         swipeRefresh.setRefreshing(false);
         mAllData.clear();
         mAllData.addAll(aadEntities);
@@ -179,6 +205,7 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
 
     @Override
     public void getAADListDataFailed() {
+        getDataState = GET_FAILED;
         swipeRefresh.setRefreshing(false);
         tvHint.setText(getString(R.string.hint_load_failed_click_retry));
         showView(flContainer, tvHint);
@@ -187,7 +214,7 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
     @Override
     public void onClick(View v) {
         showView(flContainer, progressBar);
-        mPresenter.getAADListData(mType);
+        initData();
     }
 
     @Override

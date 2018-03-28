@@ -40,10 +40,7 @@ public class RemindRootFragment extends BaseFragment {
     @Override
     protected void init() {
         initView();
-        vpContent.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
-        mIndicator.setViewPager(vpContent);
-        // 预加载所有界面
-        vpContent.setOffscreenPageLimit(2);
+        initAdapter();
     }
 
     private void initView() {
@@ -52,6 +49,14 @@ public class RemindRootFragment extends BaseFragment {
         brb0 = findViewById(R.id.brb0);
         brb1 = findViewById(R.id.brb1);
         brb2 = findViewById(R.id.brb2);
+
+        // 预加载所有界面
+        vpContent.setOffscreenPageLimit(2);
+    }
+
+    private void initAdapter() {
+        vpContent.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
+        mIndicator.setViewPager(vpContent);
     }
 
     public BadgeRadioButton getBrbView(@IntRange(from = 0, to = 2) int index) {

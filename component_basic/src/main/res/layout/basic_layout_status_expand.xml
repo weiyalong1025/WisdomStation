@@ -12,7 +12,7 @@
         android:visibility="gone">
 
         <com.winsion.component.basic.view.expand.ActionSlideExpandableListView
-            android:id="@+id/lv_list"
+            android:id="@+id/ase_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null" />

@@ -55,6 +55,20 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     private TextView trainNumberIndex;
     private ImageView ivShade;
 
+    /**
+     * 请求数据中
+     */
+    public static final int GETTING = 0;
+    /**
+     * 请求数据成功
+     */
+    public static final int GET_SUCCESS = 1;
+    /**
+     * 请求数据失败
+     */
+    public static final int GET_FAILED = 2;
+
+    private int getDataState = GETTING;   // 请求数据状态
     private MonitorTaskListContract.Presenter mPresenter;
     private MonitorTaskListAdapter mLvAdapter;
     private List<TaskEntity> listData = new ArrayList<>();  // 当前显示数据
@@ -78,7 +92,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         initView();
         initAdapter();
         initListener();
-        mPresenter.getMonitorTaskData();
+        initData();
         startCountTimeByRxAndroid();
     }
 
@@ -114,7 +128,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     }
 
     private void initListener() {
-        swipeRefresh.setOnRefreshListener(() -> mPresenter.getMonitorTaskData());
+        swipeRefresh.setOnRefreshListener(this::initData);
         mLvAdapter.getGridDelegate().setConfirmButtonListener(this);
         lvList.setOnItemClickListener(this);
         lvList.setOnScrollListener(this);
@@ -122,7 +136,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
         svSpinner.setFirstOptionItemClickListener((position) -> {
             showView(flContainer, progressBar);
-            mPresenter.getMonitorTaskData();
+            initData();
         });
 
         svSpinner.setSecondOptionItemClickListener((position) -> {
@@ -144,6 +158,12 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
         addOnClickListeners(R.id.tv_hint);
     }
+
+    private void initData() {
+        getDataState = GETTING;
+        mPresenter.getMonitorTaskData();
+    }
+
 
     @Override
     public void onPassButtonClick(TaskEntity taskEntity) {
@@ -207,8 +227,10 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
     @Override
     public void afterTextChange(Editable s) {
+        if (getDataState != GET_SUCCESS) {
+            return;
+        }
         lastText = s.toString().trim();
-
         if (TextUtils.isEmpty(lastText)) {
             filterData(false);
         } else {
@@ -273,6 +295,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
     @Override
     public void getMonitorTaskDataSuccess(List<TaskEntity> data) {
+        getDataState = GET_SUCCESS;
         swipeRefresh.setRefreshing(false);
         allData.clear();
         allData.addAll(data);
@@ -300,6 +323,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
 
     @Override
     public void getMonitorTaskDataFailed() {
+        getDataState = GET_FAILED;
         swipeRefresh.setRefreshing(false);
         tvHint.setText(getString(R.string.hint_load_failed_click_retry));
         showView(flContainer, tvHint);
@@ -358,7 +382,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     @Override
     public void onClick(View v) {
         showView(flContainer, progressBar);
-        mPresenter.getMonitorTaskData();
+        initData();
     }
 
     /**

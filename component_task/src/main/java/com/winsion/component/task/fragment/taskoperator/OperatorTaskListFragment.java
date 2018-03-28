@@ -62,6 +62,20 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     private TextView trainNumberIndex;
     private ImageView ivShade;
 
+    /**
+     * 请求数据中
+     */
+    public static final int GETTING = 0;
+    /**
+     * 请求数据成功
+     */
+    public static final int GET_SUCCESS = 1;
+    /**
+     * 请求数据失败
+     */
+    public static final int GET_FAILED = 2;
+
+    private int getDataState = GETTING;   // 请求数据状态
     private OperatorTaskListContract.Presenter mPresenter;
     private OperatorTaskListAdapter mLvAdapter;
     private List<JobEntity> listData = new ArrayList<>();   // 当前显示数据
@@ -85,7 +99,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         initView();
         initAdapter();
         initListener();
-        mPresenter.getMyTaskData();
+        initData();
         startCountTimeByRxAndroid();
     }
 
@@ -122,7 +136,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
     private void initListener() {
         EventBus.getDefault().register(this);
-        swipeRefresh.setOnRefreshListener(() -> mPresenter.getMyTaskData());
+        swipeRefresh.setOnRefreshListener(this::initData);
         lvList.setOnItemClickListener(this);
         lvList.setOnScrollListener(this);
         svSpinner.setAfterTextChangeListener(this);
@@ -130,7 +144,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
         svSpinner.setFirstOptionItemClickListener((position) -> {
             showView(flContainer, progressBar);
-            mPresenter.getMyTaskData();
+            initData();
         });
 
         svSpinner.setSecondOptionItemClickListener((position) -> {
@@ -151,6 +165,11 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
         });
 
         addOnClickListeners(R.id.tv_hint);
+    }
+
+    private void initData() {
+        getDataState = GETTING;
+        mPresenter.getMyTaskData();
     }
 
     /**
@@ -241,8 +260,10 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
     @Override
     public void afterTextChange(Editable s) {
+        if (getDataState != GET_SUCCESS) {
+            return;
+        }
         lastText = s.toString().trim();
-
         if (TextUtils.isEmpty(lastText)) {
             filterData(false);
         } else {
@@ -307,6 +328,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
     @Override
     public void getMyTaskDataSuccess(List<JobEntity> data) {
+        getDataState = GET_SUCCESS;
         swipeRefresh.setRefreshing(false);
         allData.clear();
         allData.addAll(data);
@@ -334,6 +356,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
 
     @Override
     public void getMyTaskDataFailed() {
+        getDataState = GET_FAILED;
         swipeRefresh.setRefreshing(false);
         tvHint.setText(getString(R.string.hint_load_failed_click_retry));
         showView(flContainer, tvHint);
@@ -364,7 +387,7 @@ public class OperatorTaskListFragment extends BaseFragment implements OperatorTa
     @Override
     public void onClick(View v) {
         showView(flContainer, progressBar);
-        mPresenter.getMyTaskData();
+        initData();
     }
 
     /**

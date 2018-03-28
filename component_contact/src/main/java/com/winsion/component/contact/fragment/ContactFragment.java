@@ -44,6 +44,20 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
     private ImageView ivShade;
 
     public static final String CONTACT_TYPE = "CONTACT_TYPE";
+    /**
+     * 请求数据中
+     */
+    public static final int GETTING = 0;
+    /**
+     * 请求数据成功
+     */
+    public static final int GET_SUCCESS = 1;
+    /**
+     * 请求数据失败
+     */
+    public static final int GET_FAILED = 2;
+
+    private int getDataState = GETTING;   // 请求数据状态
 
     private ContactContract.Presenter mPresenter;
     private List<T> mListData = new ArrayList<>();    // 列表数据
@@ -71,7 +85,7 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
         progressBar = findViewById(R.id.progress_bar);
         tvHint = findViewById(R.id.tv_hint);
         flContainer = findViewById(R.id.fl_container);
-        lvList = findViewById(R.id.lv_list);
+        lvList = findViewById(R.id.ase_list);
         ivShade = findViewById(R.id.iv_shade);
 
         swipeRefresh.setColorSchemeResources(R.color.basic_blue1);
@@ -110,6 +124,7 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
     }
 
     private void initData() {
+        getDataState = GETTING;
         Bundle arguments = getArguments();
         int contactType;
         if (arguments != null) {
@@ -152,6 +167,9 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
 
     @Override
     public void afterTextChange(Editable s) {
+        if (getDataState != GET_SUCCESS) {
+            return;
+        }
         lastText = s.toString().trim();
         mListData.clear();
         if (TextUtils.isEmpty(lastText)) {
@@ -200,11 +218,8 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
 
     @Override
     public void getContactsDataSuccess(List<T> contactEntities) {
+        getDataState = GET_SUCCESS;
         swipeRefresh.setRefreshing(false);
-        /*if (contactEntities.size() == 0) {
-            tvHint.setText(R.string.hint_no_data_click_retry);
-            showView(flContainer, tvHint);
-        } else {*/
         mAllData.clear();
         mAllData.addAll(contactEntities);
 
@@ -213,6 +228,7 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
 
     @Override
     public void getContactsDataFailed() {
+        getDataState = GET_FAILED;
         swipeRefresh.setRefreshing(false);
         tvHint.setText(R.string.hint_load_failed_click_retry);
         showView(flContainer, tvHint);

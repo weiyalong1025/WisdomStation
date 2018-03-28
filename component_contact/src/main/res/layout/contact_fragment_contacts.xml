@@ -15,7 +15,7 @@
         app:showSecondOption="false" />
 
     <include
-        layout="@layout/basic_layout_status"
+        layout="@layout/basic_layout_status_expand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/sv_spinner" />

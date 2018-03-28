@@ -1,8 +1,8 @@
-package com.winsion.component.contact.fragment.contacts;
+package com.winsion.component.contact.fragment;
 
 import com.winsion.component.basic.base.BasePresenter;
 import com.winsion.component.basic.base.BaseView;
-import com.winsion.component.contact.entity.ContactEntity;
+import com.winsion.component.contact.constants.ContactType;
 
 import java.util.List;
 
@@ -11,14 +11,14 @@ import java.util.List;
  * 联系人Contract
  */
 
-class ContactsContract {
-    interface View extends BaseView {
-        void getContactsDataSuccess(List<ContactEntity> contactEntities);
+class ContactContract {
+    interface View<T> extends BaseView {
+        void getContactsDataSuccess(List<T> contactEntities);
 
         void getContactsDataFailed();
     }
 
     interface Presenter extends BasePresenter {
-        void getContactsData();
+        void getContactData(@ContactType int contactType);
     }
 }

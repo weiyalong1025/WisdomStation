@@ -174,10 +174,6 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
         mAllData.clear();
         mAllData.addAll(aadEntities);
 
-        mListData.clear();
-        mListData.addAll(aadEntities);
-        mAdapter.notifyDataSetChanged();
-
         svSpinner.setSearchContent(lastText);
     }
 

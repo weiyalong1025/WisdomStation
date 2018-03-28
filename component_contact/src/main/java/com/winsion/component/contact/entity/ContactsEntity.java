@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 联系人实体
  */
 
-public class ContactEntity implements Serializable {
+public class ContactsEntity implements Serializable {
     private String talkgroupid;
     private String postname;
     private String areaname;

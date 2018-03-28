@@ -12,6 +12,7 @@
         tools:ignore="ContentDescription" />
 
     <LinearLayout
+        android:id="@+id/expandable_toggle_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -23,7 +24,6 @@
             tools:ignore="ContentDescription" />
 
         <LinearLayout
-            android:id="@+id/expandable_toggle_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -178,7 +178,7 @@
 
     <LinearLayout
         android:id="@+id/expandable"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/contact_bg_contract"
         android:orientation="horizontal"
@@ -190,8 +190,7 @@
         <Button
             android:id="@+id/buttonA"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_marginEnd="@dimen/basic_d10"
+            android:layout_height="@dimen/basic_d48"
             android:layout_weight="1"
             android:background="@drawable/basic_btn_yellow"
             android:gravity="center"
@@ -203,7 +202,8 @@
         <Button
             android:id="@+id/buttonB"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="@dimen/basic_d48"
+            android:layout_marginStart="@dimen/basic_d10"
             android:layout_weight="1"
             android:background="@drawable/basic_btn_yellow"
             android:gravity="center"
@@ -215,7 +215,20 @@
         <Button
             android:id="@+id/buttonC"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="@dimen/basic_d48"
+            android:layout_marginStart="@dimen/basic_d10"
+            android:layout_weight="1"
+            android:background="@drawable/basic_btn_yellow"
+            android:gravity="center"
+            android:text="@string/btn_talk_back"
+            android:textColor="@color/basic_black6"
+            android:textSize="@dimen/basic_s21"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/buttonD"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/basic_d48"
             android:layout_marginStart="@dimen/basic_d10"
             android:layout_weight="1"
             android:background="@drawable/basic_btn_yellow"
@@ -226,14 +239,27 @@
             tools:ignore="ButtonStyle" />
 
         <Button
-            android:id="@+id/buttonD"
+            android:id="@+id/buttonE"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="@dimen/basic_d48"
             android:layout_marginStart="@dimen/basic_d10"
             android:layout_weight="1"
             android:background="@drawable/basic_btn_yellow"
             android:gravity="center"
-            android:text="@string/btn_talk_back"
+            android:text="@string/btn_command"
+            android:textColor="@color/basic_black6"
+            android:textSize="@dimen/basic_s21"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/buttonF"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/basic_d48"
+            android:layout_marginStart="@dimen/basic_d10"
+            android:layout_weight="1"
+            android:background="@drawable/basic_btn_yellow"
+            android:gravity="center"
+            android:text="@string/btn_cooperation"
             android:textColor="@color/basic_black6"
             android:textSize="@dimen/basic_s21"
             tools:ignore="ButtonStyle" />

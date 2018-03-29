@@ -152,7 +152,7 @@
             android:layout_height="@dimen/basic_d48"
             android:layout_marginLeft="@dimen/basic_d10"
             android:layout_marginRight="@dimen/basic_d10"
-            android:background="@drawable/user_btn_blue"
+            android:background="@drawable/basic_btn_blue"
             android:text="@string/title_btn_login"
             android:textSize="@dimen/basic_s18" />
 

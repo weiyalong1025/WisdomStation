@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.winsion.component.basic.view.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showConfirmButton="false"
+        tools:titleText="张三" />
+
+    <cn.jiguang.imui.messages.MessageList
+        android:id="@+id/msg_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:avatarHeight="@dimen/basic_d50"
+        app:avatarRadius="@dimen/basic_d25"
+        app:avatarWidth="@dimen/basic_d50"
+        app:bubbleMaxWidth="0.70"
+        app:dateTextSize="@dimen/basic_s14"
+        app:receiveBubblePaddingLeft="@dimen/basic_d20"
+        app:receiveBubblePaddingRight="@dimen/basic_d10"
+        app:receiveTextColor="@color/basic_gray8"
+        app:receiveTextSize="@dimen/basic_s18"
+        app:sendBubbleDrawable="@drawable/contact_bg_send_bubble"
+        app:sendBubblePaddingLeft="@dimen/basic_d10"
+        app:sendBubblePaddingRight="@dimen/basic_d20"
+        app:sendTextColor="@color/basic_gray8"
+        app:sendTextSize="@dimen/basic_s20" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/basic_white1"
+        android:padding="@dimen/basic_d5">
+
+        <RelativeLayout
+            android:id="@+id/chat_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/chat_changeToVoice"
+                android:layout_width="@dimen/basic_d35"
+                android:layout_height="@dimen/basic_d35"
+                android:layout_alignBottom="@id/chat_et"
+                android:layout_marginBottom="@dimen/basic_d5"
+                android:layout_marginStart="@dimen/basic_d5"
+                android:src="@drawable/contact_ic_voice"
+                tools:ignore="ContentDescription" />
+
+            <EditText
+                android:id="@+id/chat_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_toEndOf="@id/chat_changeToVoice"
+                android:layout_toStartOf="@id/iv_choosePic"
+                android:inputType="none"
+                android:maxHeight="@dimen/basic_d150"
+                android:textColor="@color/basic_gray8"
+                android:textSize="@dimen/basic_s20"
+                tools:ignore="LabelFor" />
+
+            <ImageView
+                android:id="@+id/iv_choosePic"
+                android:layout_width="@dimen/basic_d35"
+                android:layout_height="@dimen/basic_d35"
+                android:layout_alignBottom="@id/chat_et"
+                android:layout_marginBottom="@dimen/basic_d5"
+                android:layout_marginEnd="@dimen/basic_d5"
+                android:layout_toStartOf="@id/chat_send"
+                android:src="@drawable/contact_ic_pic"
+                tools:ignore="ContentDescription" />
+
+            <Button
+                android:id="@+id/chat_send"
+                android:layout_width="@dimen/basic_d54"
+                android:layout_height="@dimen/basic_d35"
+                android:layout_alignBottom="@id/chat_et"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="@dimen/basic_d5"
+                android:layout_marginEnd="@dimen/basic_d5"
+                android:background="@drawable/basic_btn_blue"
+                android:text="@string/btn_send"
+                android:textColor="@color/basic_black1"
+                android:textSize="@dimen/basic_s20"
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_record"
+                android:layout_width="@dimen/basic_d35"
+                android:layout_height="@dimen/basic_d35"
+                android:layout_alignBottom="@id/btn_record"
+                android:layout_marginBottom="@dimen/basic_d5"
+                android:layout_marginStart="@dimen/basic_d5"
+                android:src="@drawable/contact_ic_keyboard"
+                tools:ignore="ContentDescription" />
+
+            <Button
+                android:id="@+id/btn_record"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/basic_d43"
+                android:layout_margin="@dimen/basic_d5"
+                android:layout_toEndOf="@id/iv_record"
+                android:background="@drawable/contact_btn_record"
+                android:text="@string/btn_send"
+                android:textColor="@color/basic_black1"
+                android:textSize="@dimen/basic_s20"
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
+    </FrameLayout>
+</LinearLayout>

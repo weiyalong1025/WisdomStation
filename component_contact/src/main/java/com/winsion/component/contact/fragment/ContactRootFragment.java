@@ -16,8 +16,9 @@ import com.winsion.component.contact.constants.ContactType;
 import com.winsion.component.contact.entity.ContactsEntity;
 import com.winsion.component.contact.entity.ContactsGroupEntity;
 import com.winsion.component.contact.entity.TeamEntity;
+import com.winsion.component.contact.fragment.contact.ContactFragment;
 
-import static com.winsion.component.contact.fragment.ContactFragment.CONTACT_TYPE;
+import static com.winsion.component.contact.fragment.contact.ContactFragment.CONTACT_TYPE;
 
 /**
  * Created by 10295 on 2017/12/10 0010.

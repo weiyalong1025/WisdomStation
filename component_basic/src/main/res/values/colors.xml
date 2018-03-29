@@ -7,6 +7,8 @@
     <color name="basic_white3">#90FFFFFF</color>
     <color name="basic_white4">#26FFFFFF</color>
     <color name="basic_white5">#1AFFFFFF</color>
+    <color name="basic_white6">#F4F4F6</color>
+    <color name="basic_white7">#C6C7CA</color>
 
     <!-- 灰色 -->
     <color name="basic_gray1">#999999</color>

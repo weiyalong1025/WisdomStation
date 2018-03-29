@@ -1,11 +1,13 @@
 package com.winsion.component.contact.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.utils.ToastUtils;
 import com.winsion.component.contact.R;
+import com.winsion.component.contact.activity.chat.ChatActivity;
 import com.winsion.component.contact.constants.UserState;
 import com.winsion.component.contact.entity.ContactsEntity;
 import com.winsion.component.contact.entity.ContactsGroupEntity;
@@ -67,7 +69,9 @@ public class ContactListAdapter<T> extends CommonAdapter<T> {
         viewHolder.setVisible(R.id.buttonF, false);
         // 按钮点击事件
         viewHolder.setOnClickListener(R.id.buttonA, v -> {
-            ToastUtils.showToast(mContext, "消息");
+            Intent intent = new Intent(mContext, ChatActivity.class);
+            intent.putExtra("ContactsEntity", contactsEntity);
+            mContext.startActivity(intent);
         });
     }
 

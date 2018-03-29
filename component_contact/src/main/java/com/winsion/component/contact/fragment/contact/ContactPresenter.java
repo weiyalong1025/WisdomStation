@@ -1,4 +1,4 @@
-package com.winsion.component.contact.fragment;
+package com.winsion.component.contact.fragment.contact;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -34,12 +34,6 @@ public class ContactPresenter<T> implements ContactContract.Presenter {
 
     @Override
     public void getContactData(@ContactType int contactType) {
-        /*List<OrderBy> orderBy = new ArrayList<>();
-
-        OrderBy order = new OrderBy();
-        order.setField("loginstatus");
-        order.setMode(Mode.ASC);
-        orderBy.add(order);*/
         String viewName;
         Type type;
         switch (contactType) {

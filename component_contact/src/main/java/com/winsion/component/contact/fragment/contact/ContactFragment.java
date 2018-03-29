@@ -1,4 +1,4 @@
-package com.winsion.component.contact.fragment;
+package com.winsion.component.contact.fragment.contact;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

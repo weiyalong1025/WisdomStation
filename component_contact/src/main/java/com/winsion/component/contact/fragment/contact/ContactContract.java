@@ -1,4 +1,4 @@
-package com.winsion.component.contact.fragment;
+package com.winsion.component.contact.fragment.contact;
 
 import com.winsion.component.basic.base.BasePresenter;
 import com.winsion.component.basic.base.BaseView;

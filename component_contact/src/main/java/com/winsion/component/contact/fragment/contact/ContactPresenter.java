@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.winsion.component.basic.constants.Urls;
 import com.winsion.component.basic.constants.ViewName;
+import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.entity.ResponseForQueryData;
 import com.winsion.component.basic.listener.ResponseListener;
+import com.winsion.component.basic.utils.JsonUtils;
 import com.winsion.component.contact.constants.ContactType;
 import com.winsion.component.contact.entity.ContactsEntity;
 import com.winsion.component.contact.entity.ContactsGroupEntity;
@@ -38,6 +40,11 @@ public class ContactPresenter<T> implements ContactContract.Presenter {
         Type type;
         switch (contactType) {
             case ContactType.TYPE_CONTACTS:
+                if (CacheDataSource.getTestMode()) {
+                    List<ContactsEntity> testEntities = JsonUtils.getTestEntities(mView.getContext(), ContactsEntity.class);
+                    mView.getContactsDataSuccess((List<T>) testEntities);
+                    return;
+                }
                 viewName = ViewName.TEAM_USERS_INFO;
                 type = new TypeReference<ResponseForQueryData<List<ContactsEntity>>>() {
                 }.getType();

@@ -1,5 +1,6 @@
 <?dml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="basic_0d2">-1.78dp</dimen>
     <dimen name="basic_d0_5">0.44dp</dimen>
     <dimen name="basic_d1">0.89dp</dimen>
     <dimen name="basic_d2">1.78dp</dimen>

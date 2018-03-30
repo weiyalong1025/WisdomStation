@@ -113,4 +113,9 @@
         <attr name="showRedDot" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="TextImageButton">
+        <attr name="text" format="string" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+    </declare-styleable>
 </resources>

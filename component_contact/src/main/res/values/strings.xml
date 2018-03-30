@@ -13,6 +13,8 @@
     <string name="btn_command">命令</string>
     <string name="btn_cooperation">协作</string>
     <string name="btn_send">发送</string>
+    <string name="btn_press_to_talk">按住说话</string>
+    <string name="btn_release_to_finish">松开结束</string>
 
     <string name="value_draft">草稿</string>
 </resources>

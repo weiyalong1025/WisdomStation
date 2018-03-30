@@ -33,94 +33,67 @@
         app:sendTextColor="@color/basic_gray8"
         app:sendTextSize="@dimen/basic_s20" />
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/basic_white1"
-        android:padding="@dimen/basic_d5">
+        android:background="@color/basic_white6"
+        android:gravity="bottom"
+        android:padding="@dimen/basic_d12">
 
-        <RelativeLayout
-            android:id="@+id/chat_text"
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/cb_type"
+            android:layout_width="@dimen/basic_d35"
+            android:layout_height="@dimen/basic_d35"
+            android:layout_marginEnd="@dimen/basic_d10"
+            android:background="@drawable/contact_cb_type"
+            android:button="@null"
+            tools:ignore="ContentDescription" />
+
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:visibility="gone">
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/basic_d10"
+            android:layout_weight="1"
+            android:background="@drawable/contact_selector_edit_text"
+            android:inputType="none"
+            android:maxHeight="@dimen/basic_d130"
+            android:minHeight="@dimen/basic_d35"
+            android:paddingEnd="@dimen/basic_d7"
+            android:paddingStart="@dimen/basic_d7"
+            android:textColor="@color/basic_gray8"
+            android:textCursorDrawable="@drawable/contact_edit_text_cursor"
+            android:textSize="@dimen/basic_s20"
+            tools:ignore="LabelFor" />
 
-            <ImageView
-                android:id="@+id/chat_changeToVoice"
-                android:layout_width="@dimen/basic_d35"
-                android:layout_height="@dimen/basic_d35"
-                android:layout_alignBottom="@id/chat_et"
-                android:layout_marginBottom="@dimen/basic_d5"
-                android:layout_marginStart="@dimen/basic_d5"
-                android:src="@drawable/contact_ic_voice"
-                tools:ignore="ContentDescription" />
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="@dimen/basic_d35"
+            android:layout_height="@dimen/basic_d35"
+            android:layout_marginEnd="@dimen/basic_d10"
+            android:src="@drawable/contact_ic_pic"
+            tools:ignore="ContentDescription" />
 
-            <EditText
-                android:id="@+id/chat_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_toEndOf="@id/chat_changeToVoice"
-                android:layout_toStartOf="@id/iv_choosePic"
-                android:inputType="none"
-                android:maxHeight="@dimen/basic_d150"
-                android:textColor="@color/basic_gray8"
-                android:textSize="@dimen/basic_s20"
-                tools:ignore="LabelFor" />
+        <com.winsion.component.basic.view.TextImageButton
+            android:id="@+id/btn_send"
+            android:layout_width="@dimen/basic_d54"
+            android:layout_height="@dimen/basic_d35"
+            android:background="@drawable/basic_btn_blue"
+            app:text="@string/btn_send"
+            app:textColor="@color/basic_black1"
+            app:textSize="@dimen/basic_s18"
+            tools:ignore="ContentDescription" />
 
-            <ImageView
-                android:id="@+id/iv_choosePic"
-                android:layout_width="@dimen/basic_d35"
-                android:layout_height="@dimen/basic_d35"
-                android:layout_alignBottom="@id/chat_et"
-                android:layout_marginBottom="@dimen/basic_d5"
-                android:layout_marginEnd="@dimen/basic_d5"
-                android:layout_toStartOf="@id/chat_send"
-                android:src="@drawable/contact_ic_pic"
-                tools:ignore="ContentDescription" />
-
-            <Button
-                android:id="@+id/chat_send"
-                android:layout_width="@dimen/basic_d54"
-                android:layout_height="@dimen/basic_d35"
-                android:layout_alignBottom="@id/chat_et"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="@dimen/basic_d5"
-                android:layout_marginEnd="@dimen/basic_d5"
-                android:background="@drawable/basic_btn_blue"
-                android:text="@string/btn_send"
-                android:textColor="@color/basic_black1"
-                android:textSize="@dimen/basic_s20"
-                tools:ignore="ContentDescription" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_record"
+        <com.winsion.component.basic.view.TextImageButton
+            android:id="@+id/btn_record"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/iv_record"
-                android:layout_width="@dimen/basic_d35"
-                android:layout_height="@dimen/basic_d35"
-                android:layout_alignBottom="@id/btn_record"
-                android:layout_marginBottom="@dimen/basic_d5"
-                android:layout_marginStart="@dimen/basic_d5"
-                android:src="@drawable/contact_ic_keyboard"
-                tools:ignore="ContentDescription" />
-
-            <Button
-                android:id="@+id/btn_record"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/basic_d43"
-                android:layout_margin="@dimen/basic_d5"
-                android:layout_toEndOf="@id/iv_record"
-                android:background="@drawable/contact_btn_record"
-                android:text="@string/btn_send"
-                android:textColor="@color/basic_black1"
-                android:textSize="@dimen/basic_s20"
-                tools:ignore="ContentDescription" />
-        </RelativeLayout>
-    </FrameLayout>
+            android:layout_height="@dimen/basic_d35"
+            android:background="@drawable/contact_btn_record_normal"
+            android:visibility="gone"
+            app:text="@string/btn_press_to_talk"
+            app:textColor="@color/basic_gray4"
+            app:textSize="@dimen/basic_s20"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
 </LinearLayout>

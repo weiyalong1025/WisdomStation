@@ -55,7 +55,9 @@ public class ContactListAdapter<T> extends CommonAdapter<T> {
         // 设置位置信息
         viewHolder.setText(R.id.tv_position, contactsEntity.getAreaname());
         // 加载头像
-        ImageLoader.loadUrl(viewHolder.getView(R.id.iv_head), contactsEntity.getPhotourl());
+        ImageLoader.loadUrl(viewHolder.getView(R.id.iv_head), contactsEntity.getPhotourl(),
+                R.drawable.basic_ic_head_single,
+                R.drawable.basic_ic_head_single);
         // 设置在线状态
         if (TextUtils.equals(contactsEntity.getLoginstatus(), UserState.ON_LINE)) {
             viewHolder.setVisible(R.id.status_online, true);

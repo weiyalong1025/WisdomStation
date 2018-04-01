@@ -45,25 +45,21 @@
             android:layout_width="@dimen/basic_d35"
             android:layout_height="@dimen/basic_d35"
             android:layout_marginEnd="@dimen/basic_d10"
-            android:background="@drawable/contact_cb_type"
+            android:background="@drawable/contact_selector_cb_type"
             android:button="@null"
             tools:ignore="ContentDescription" />
 
         <EditText
             android:id="@+id/et_input"
+            style="@style/BasicEditTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/basic_d10"
             android:layout_weight="1"
-            android:background="@drawable/contact_selector_edit_text"
             android:inputType="none"
             android:maxHeight="@dimen/basic_d130"
-            android:minHeight="@dimen/basic_d35"
-            android:paddingEnd="@dimen/basic_d7"
-            android:paddingStart="@dimen/basic_d7"
             android:textColor="@color/basic_gray8"
-            android:textCursorDrawable="@drawable/contact_edit_text_cursor"
             android:textSize="@dimen/basic_s20"
             tools:ignore="LabelFor" />
 

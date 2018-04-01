@@ -24,6 +24,7 @@
             tools:text="对话框文字" />
 
         <EditText
+            style="@style/BasicEditTextStyle"
             android:id="@+id/et_dialog_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

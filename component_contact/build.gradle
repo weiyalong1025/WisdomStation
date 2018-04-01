@@ -41,5 +41,4 @@ dependencies {
     implementation project(':component_basic')
     implementation project(':component_user')
     implementation 'cn.jiguang.imui:messagelist:0.6.8'
-    implementation 'cn.jiguang.imui:chatinput:0.7.3'
 }

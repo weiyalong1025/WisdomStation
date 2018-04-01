@@ -35,4 +35,12 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:padding">@dimen/basic_d9</item>
     </style>
+
+    <style name="BasicEditTextStyle">
+        <item name="android:background">@drawable/basic_selector_edit_text</item>
+        <item name="android:textCursorDrawable">@drawable/basic_edit_text_cursor</item>
+        <item name="android:paddingStart">@dimen/basic_d7</item>
+        <item name="android:paddingEnd">@dimen/basic_d7</item>
+        <item name="android:minHeight">@dimen/basic_d35</item>
+    </style>
 </resources>

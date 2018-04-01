@@ -58,8 +58,6 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         ivPic = findViewById(R.id.iv_pic);
         btnSend = findViewById(R.id.btn_send);
         btnRecord = findViewById(R.id.btn_record);
-
-        BasicBiz.showKeyboard(etInput, false);
     }
 
     private void initPresenter() {

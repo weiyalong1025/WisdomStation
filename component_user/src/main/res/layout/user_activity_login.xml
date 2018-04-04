@@ -70,7 +70,7 @@
                     android:textColor="@color/basic_white1"
                     android:textColorHint="@color/basic_gray7"
                     android:textSize="@dimen/basic_s20"
-                    tools:ignore="RtlSymmetry" />
+                    tools:ignore="RtlSymmetry,TextFields" />
 
                 <ImageView
                     android:id="@+id/iv_arrow"

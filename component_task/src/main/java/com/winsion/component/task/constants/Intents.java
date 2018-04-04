@@ -51,4 +51,11 @@ public interface Intents {
     interface SceneRecord {
         String JOB_OPERATORS_ID = "JOB_OPERATORS_ID";
     }
+
+    interface Media {
+        /**
+         * 保存文件
+         */
+        String MEDIA_FILE = "MEDIA_FILE";
+    }
 }

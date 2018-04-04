@@ -13,7 +13,7 @@ import com.winsion.component.task.R;
 
 import java.io.File;
 
-import static com.winsion.component.media.constants.Intents.Media.MEDIA_FILE;
+import static com.winsion.component.task.constants.Intents.Media.MEDIA_FILE;
 
 /**
  * Created by admin on 2016/8/13.

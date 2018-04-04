@@ -58,6 +58,7 @@
     <dimen name="basic_d120">160dp</dimen>
     <dimen name="basic_d130">173.33dp</dimen>
     <dimen name="basic_d138">184dp</dimen>
+    <dimen name="basic_d144">192dp</dimen>
     <dimen name="basic_d150">200dp</dimen>
     <dimen name="basic_d200">266.67dp</dimen>
     <dimen name="basic_d208">277.33dp</dimen>

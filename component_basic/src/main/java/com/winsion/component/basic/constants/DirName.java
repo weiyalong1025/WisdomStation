@@ -38,4 +38,8 @@ public interface DirName {
      * 失物招领附件保存目录
      */
     String LOST = "Lost";
+    /**
+     * IM相关文件保存目录
+     */
+    String IM = "Lost";
 }

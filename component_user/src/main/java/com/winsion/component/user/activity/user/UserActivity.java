@@ -55,7 +55,7 @@ public class UserActivity extends BaseActivity {
         }
         tvUsername.setText(CacheDataSource.getRealName());
         tvRoleName.setText(String.format("(%s)", CacheDataSource.getTeamName()));
-        ImageLoader.loadUrl(ivHead, CacheDataSource.getUserHeadAddress(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
+        ImageLoader.loadAddress(ivHead, CacheDataSource.getUserHeadAddress(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
     }
 
     private void initListener() {

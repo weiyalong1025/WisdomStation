@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,9 +18,7 @@ import com.winsion.component.basic.view.expand.ActionSlideExpandableListView;
 import com.winsion.component.contact.R;
 import com.winsion.component.contact.adapter.ContactListAdapter;
 import com.winsion.component.contact.constants.ContactType;
-import com.winsion.component.contact.entity.ContactsEntity;
-import com.winsion.component.contact.entity.ContactsGroupEntity;
-import com.winsion.component.contact.entity.TeamEntity;
+import com.winsion.component.contact.entity.ContactEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +30,7 @@ import java.util.List;
  * 联系人Fragment
  */
 
-public class ContactFragment<T> extends BaseFragment implements ContactContract.View<T>,
+public class ContactFragment extends BaseFragment implements ContactContract.View,
         SpinnerView.AfterTextChangeListener {
     private SpinnerView svSpinner;
     private SwipeRefreshLayout swipeRefresh;
@@ -41,7 +38,7 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
     private TextView tvHint;
     private FrameLayout flContainer;
     private ActionSlideExpandableListView lvList;
-    private ImageView ivShade;
+    private View viewShade;
 
     public static final String CONTACT_TYPE = "CONTACT_TYPE";
     /**
@@ -60,8 +57,8 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
     private int getDataState = GETTING;   // 请求数据状态
 
     private ContactContract.Presenter mPresenter;
-    private List<T> mListData = new ArrayList<>();    // 列表数据
-    private List<T> mAllData = new ArrayList<>();   // 所有的数据
+    private ArrayList<ContactEntity> mListData = new ArrayList<>();    // 列表数据
+    private ArrayList<ContactEntity> mAllData = new ArrayList<>();   // 所有的数据
     private ContactListAdapter mLvAdapter;
     private String lastText = "";    // 搜索框中上一次输入的文字
 
@@ -86,7 +83,7 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
         tvHint = findViewById(R.id.tv_hint);
         flContainer = findViewById(R.id.fl_container);
         lvList = findViewById(R.id.ase_list);
-        ivShade = findViewById(R.id.iv_shade);
+        viewShade = findViewById(R.id.view_shade);
 
         swipeRefresh.setColorSchemeResources(R.color.basic_blue1);
 
@@ -101,10 +98,10 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
         svSpinner.setPopupDisplayChangeListener(status -> {
             switch (status) {
                 case SpinnerView.PopupState.POPUP_SHOW:
-                    ivShade.setVisibility(View.VISIBLE);
+                    viewShade.setVisibility(View.VISIBLE);
                     break;
                 case SpinnerView.PopupState.POPUP_HIDE:
-                    ivShade.setVisibility(View.GONE);
+                    viewShade.setVisibility(View.GONE);
                     break;
             }
         });
@@ -117,7 +114,7 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
     }
 
     private void initPresenter() {
-        mPresenter = new ContactPresenter<>(this);
+        mPresenter = new ContactPresenter(this);
 
         mLvAdapter = new ContactListAdapter<>(mContext, mListData);
         lvList.setAdapter(mLvAdapter);
@@ -135,29 +132,15 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
         mPresenter.getContactData(contactType);
     }
 
-    private Comparator<T> mComparator = (o1, o2) -> {
-        int result = 0;
-        if (o1 instanceof ContactsEntity) {
-            String loginStatus1 = ((ContactsEntity) o1).getLoginstatus();
-            String loginStatus2 = ((ContactsEntity) o2).getLoginstatus();
-            if (!TextUtils.equals(loginStatus1, loginStatus2)) {
-                result = Integer.valueOf(loginStatus1) - Integer.valueOf(loginStatus2);
-            } else {
-                String username1 = ((ContactsEntity) o1).getUsername();
-                String username2 = ((ContactsEntity) o2).getUsername();
-                String s1 = PinyinUtils.toPinYin(username1, "", PinyinUtils.Type.TYPE_LOWERCASE);
-                String s2 = PinyinUtils.toPinYin(username2, "", PinyinUtils.Type.TYPE_LOWERCASE);
-                result = s1.compareTo(s2);
-            }
-        } else if (o1 instanceof TeamEntity) {
-            String username1 = ((TeamEntity) o1).getTeamsName();
-            String username2 = ((TeamEntity) o2).getTeamsName();
-            String s1 = PinyinUtils.toPinYin(username1, "", PinyinUtils.Type.TYPE_LOWERCASE);
-            String s2 = PinyinUtils.toPinYin(username2, "", PinyinUtils.Type.TYPE_LOWERCASE);
-            result = s1.compareTo(s2);
-        } else if (o1 instanceof ContactsGroupEntity) {
-            String username1 = ((ContactsGroupEntity) o1).getGroupname();
-            String username2 = ((ContactsGroupEntity) o2).getGroupname();
+    private Comparator<ContactEntity> mComparator = (o1, o2) -> {
+        int result;
+        String username1 = o1.getConName();
+        String username2 = o2.getConName();
+        String loginStatus1 = o1.getConLoginState();
+        String loginStatus2 = o2.getConLoginState();
+        if (!TextUtils.equals(loginStatus1, loginStatus2)) {
+            result = Integer.valueOf(loginStatus1) - Integer.valueOf(loginStatus2);
+        } else {
             String s1 = PinyinUtils.toPinYin(username1, "", PinyinUtils.Type.TYPE_LOWERCASE);
             String s2 = PinyinUtils.toPinYin(username2, "", PinyinUtils.Type.TYPE_LOWERCASE);
             result = s1.compareTo(s2);
@@ -173,6 +156,7 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
         lastText = s.toString().trim();
         mListData.clear();
         if (TextUtils.isEmpty(lastText)) {
+            mAllData.addAll(mListData);
             mListData.addAll(mAllData);
             Collections.sort(mListData, mComparator);
             mLvAdapter.notifyDataSetChanged();
@@ -185,17 +169,10 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
             }
         } else {
             String filterStr = lastText.toLowerCase();
-            for (T t : mAllData) {
-                String str = null;
-                if (t instanceof ContactsEntity) {
-                    str = ((ContactsEntity) t).getUsername();
-                } else if (t instanceof TeamEntity) {
-                    str = ((TeamEntity) t).getTeamsName();
-                } else if (t instanceof ContactsGroupEntity) {
-                    str = ((ContactsGroupEntity) t).getGroupname();
-                }
+            for (ContactEntity contactEntity : mAllData) {
+                String str = contactEntity.getConName();
                 if (str != null && str.contains(filterStr)) {
-                    mListData.add(t);
+                    mListData.add(contactEntity);
                 }
             }
             Collections.sort(mListData, mComparator);
@@ -217,7 +194,7 @@ public class ContactFragment<T> extends BaseFragment implements ContactContract.
     }
 
     @Override
-    public void getContactsDataSuccess(List<T> contactEntities) {
+    public void getContactsDataSuccess(List<? extends ContactEntity> contactEntities) {
         getDataState = GET_SUCCESS;
         swipeRefresh.setRefreshing(false);
         mAllData.clear();

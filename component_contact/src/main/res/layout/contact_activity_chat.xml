@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <com.winsion.component.basic.view.TitleView
         android:id="@+id/tv_title"
@@ -16,8 +15,9 @@
     <cn.jiguang.imui.messages.MessageList
         android:id="@+id/msg_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_above="@id/refer"
+        android:layout_below="@id/tv_title"
         app:avatarHeight="@dimen/basic_d50"
         app:avatarRadius="@dimen/basic_d25"
         app:avatarWidth="@dimen/basic_d50"
@@ -34,10 +34,11 @@
         app:sendTextSize="@dimen/basic_s20" />
 
     <LinearLayout
+        android:id="@+id/refer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@color/basic_white6"
-        android:gravity="bottom"
         android:padding="@dimen/basic_d12">
 
         <CheckBox
@@ -76,7 +77,7 @@
             android:layout_width="@dimen/basic_d54"
             android:layout_height="@dimen/basic_d35"
             android:background="@drawable/basic_btn_blue"
-            app:text="@string/btn_send"
+            app:text="@string/contact_btn_send"
             app:textColor="@color/basic_black1"
             app:textSize="@dimen/basic_s18"
             tools:ignore="ContentDescription" />
@@ -87,9 +88,88 @@
             android:layout_height="@dimen/basic_d35"
             android:background="@drawable/contact_btn_record_normal"
             android:visibility="gone"
-            app:text="@string/btn_press_to_talk"
+            app:text="@string/contact_btn_press_to_talk"
             app:textColor="@color/basic_gray4"
             app:textSize="@dimen/basic_s20"
             tools:ignore="ContentDescription" />
     </LinearLayout>
-</LinearLayout>
+
+    <View
+        android:id="@+id/view_shader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/basic_black2"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/basic_d10"
+        android:paddingEnd="@dimen/basic_d20"
+        android:paddingStart="@dimen/basic_d20"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_take_photo"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/basic_d50"
+            android:background="@drawable/contact_bg_take_photo"
+            android:text="@string/contact_btn_take_photo"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s20" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/basic_d0_5"
+            android:background="@color/basic_gray1" />
+
+        <Button
+            android:id="@+id/btn_record_video"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/basic_d50"
+            android:background="@drawable/contact_bg_record_video"
+            android:text="@string/contact_btn_record_video"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s20" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/basic_d0_5"
+            android:background="@color/basic_gray1" />
+
+        <Button
+            android:id="@+id/btn_select_pic"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/basic_d50"
+            android:background="@drawable/contact_bg_select_pic"
+            android:text="@string/contact_btn_select_pic"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s20" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/basic_d50"
+            android:layout_marginTop="@dimen/basic_d10"
+            android:background="@drawable/contact_bg_cancel"
+            android:text="@string/btn_cancel"
+            android:textColor="@color/basic_white7"
+            android:textSize="@dimen/basic_s20" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_record_view"
+        android:layout_width="@dimen/basic_d144"
+        android:layout_height="@dimen/basic_d144"
+        android:layout_centerInParent="true"
+        android:src="@drawable/contact_bg_recorder"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>

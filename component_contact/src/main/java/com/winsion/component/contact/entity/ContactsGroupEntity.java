@@ -1,11 +1,14 @@
 package com.winsion.component.contact.entity;
 
+import com.winsion.component.contact.constants.ContactType;
+import com.winsion.component.contact.constants.UserState;
+
 /**
  * Created by w on 2017/7/25.
  * 联系人组实体
  */
 
-public class ContactsGroupEntity {
+public class ContactsGroupEntity extends ContactEntity {
 
 //    \"talkgroupid\":\"G000000000000054\"," +
 //            "\"ugid\":\"859E4B1B-38A7-4AEA-9D04-A7075B029B9B\"," +
@@ -37,5 +40,30 @@ public class ContactsGroupEntity {
 
     public void setGroupname(String groupname) {
         this.groupname = groupname;
+    }
+
+    @Override
+    public int getContactType() {
+        return ContactType.TYPE_CONTACTS_GROUP;
+    }
+
+    @Override
+    public String getConName() {
+        return groupname;
+    }
+
+    @Override
+    public String getConId() {
+        return talkgroupid;
+    }
+
+    @Override
+    public String getConPhotoUrl() {
+        return "";
+    }
+
+    @Override
+    public String getConLoginState() {
+        return UserState.OFF_LINE;
     }
 }

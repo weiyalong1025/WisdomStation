@@ -1,5 +1,7 @@
 package com.winsion.component.contact.entity;
 
+import com.winsion.component.contact.constants.ContactType;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +9,7 @@ import java.io.Serializable;
  * 联系人实体
  */
 
-public class ContactsEntity implements Serializable {
+public class ContactsEntity extends ContactEntity implements Serializable {
     private String talkgroupid;
     private String postname;
     private String areaname;
@@ -133,5 +135,30 @@ public class ContactsEntity implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public int getContactType() {
+        return ContactType.TYPE_CONTACTS;
+    }
+
+    @Override
+    public String getConName() {
+        return username;
+    }
+
+    @Override
+    public String getConId() {
+        return usersid;
+    }
+
+    @Override
+    public String getConPhotoUrl() {
+        return photourl;
+    }
+
+    @Override
+    public String getConLoginState() {
+        return loginstatus;
     }
 }

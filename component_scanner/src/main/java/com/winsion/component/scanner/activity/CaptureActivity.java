@@ -1,6 +1,5 @@
 package com.winsion.component.scanner.activity;
 
-import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
@@ -12,6 +11,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import com.billy.cc.core.component.CC;
+import com.billy.cc.core.component.CCResult;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.google.zxing.camera.CameraManager;
@@ -123,10 +124,9 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
         if (TextUtils.isEmpty(resultString)) {
             showToast(R.string.toast_capture_failed);
         } else {
-            logI("capture result:" + resultString);
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra(INTENT_EXTRA_KEY_QR_SCAN, resultString);
-            setResult(RESULT_OK, resultIntent);
+            CCResult success = CCResult.success();
+            success.addData("QR_CODE", resultString);
+            CC.sendCCResult(getIntent().getStringExtra("callId"), success);
         }
         finish();
     }

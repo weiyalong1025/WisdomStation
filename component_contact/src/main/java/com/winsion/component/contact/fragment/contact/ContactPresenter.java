@@ -10,6 +10,7 @@ import com.winsion.component.basic.entity.ResponseForQueryData;
 import com.winsion.component.basic.listener.ResponseListener;
 import com.winsion.component.basic.utils.JsonUtils;
 import com.winsion.component.contact.constants.ContactType;
+import com.winsion.component.contact.entity.ContactEntity;
 import com.winsion.component.contact.entity.ContactsEntity;
 import com.winsion.component.contact.entity.ContactsGroupEntity;
 import com.winsion.component.contact.entity.TeamEntity;
@@ -22,10 +23,10 @@ import java.util.List;
  * 联系人Presenter
  */
 
-public class ContactPresenter<T> implements ContactContract.Presenter {
-    private ContactContract.View<T> mView;
+public class ContactPresenter implements ContactContract.Presenter {
+    private ContactContract.View mView;
 
-    ContactPresenter(ContactContract.View<T> view) {
+    ContactPresenter(ContactContract.View view) {
         this.mView = view;
     }
 
@@ -42,7 +43,7 @@ public class ContactPresenter<T> implements ContactContract.Presenter {
             case ContactType.TYPE_CONTACTS:
                 if (CacheDataSource.getTestMode()) {
                     List<ContactsEntity> testEntities = JsonUtils.getTestEntities(mView.getContext(), ContactsEntity.class);
-                    mView.getContactsDataSuccess((List<T>) testEntities);
+                    mView.getContactsDataSuccess(testEntities);
                     return;
                 }
                 viewName = ViewName.TEAM_USERS_INFO;
@@ -67,14 +68,14 @@ public class ContactPresenter<T> implements ContactContract.Presenter {
         }
 
         NetDataSource.post(this, Urls.BASE_QUERY, null, null, viewName,
-                1, new ResponseListener<ResponseForQueryData<List<T>>>() {
+                1, new ResponseListener<ResponseForQueryData<List<? extends ContactEntity>>>() {
                     @Override
-                    public ResponseForQueryData<List<T>> convert(String jsonStr) {
+                    public ResponseForQueryData<List<? extends ContactEntity>> convert(String jsonStr) {
                         return JSON.parseObject(jsonStr, type);
                     }
 
                     @Override
-                    public void onSuccess(ResponseForQueryData<List<T>> result) {
+                    public void onSuccess(ResponseForQueryData<List<? extends ContactEntity>> result) {
                         mView.getContactsDataSuccess(result.getDataList());
                     }
 

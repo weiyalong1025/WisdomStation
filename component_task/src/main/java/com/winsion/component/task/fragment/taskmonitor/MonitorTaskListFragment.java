@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -53,7 +52,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
     private FrameLayout flContainer;
     private ListView lvList;
     private TextView trainNumberIndex;
-    private ImageView ivShade;
+    private View viewShade;
 
     /**
      * 请求数据中
@@ -108,7 +107,7 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         flContainer = findViewById(R.id.fl_container);
         lvList = findViewById(R.id.lv_list);
         trainNumberIndex = findViewById(R.id.train_number_index);
-        ivShade = findViewById(R.id.iv_shade);
+        viewShade = findViewById(R.id.view_shade);
 
         swipeRefresh.setColorSchemeResources(R.color.basic_blue1);
 
@@ -148,10 +147,10 @@ public class MonitorTaskListFragment extends BaseFragment implements MonitorTask
         svSpinner.setPopupDisplayChangeListener(status -> {
             switch (status) {
                 case SpinnerView.PopupState.POPUP_SHOW:
-                    ivShade.setVisibility(View.VISIBLE);
+                    viewShade.setVisibility(View.VISIBLE);
                     break;
                 case SpinnerView.PopupState.POPUP_HIDE:
-                    ivShade.setVisibility(View.GONE);
+                    viewShade.setVisibility(View.GONE);
                     break;
             }
         });

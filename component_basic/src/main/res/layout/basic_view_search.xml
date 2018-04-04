@@ -20,7 +20,8 @@
         android:singleLine="true"
         android:textColor="@color/basic_white1"
         android:textColorHint="@color/basic_gray4"
-        android:textSize="@dimen/basic_s16" />
+        android:textSize="@dimen/basic_s16"
+        tools:ignore="TextFields" />
 
     <ImageView
         android:layout_width="@dimen/basic_d24"

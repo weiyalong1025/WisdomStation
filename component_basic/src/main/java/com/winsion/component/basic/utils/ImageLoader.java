@@ -14,54 +14,36 @@ import com.bumptech.glide.request.RequestOptions;
 public class ImageLoader {
 
     /**
-     * 加载网络图片
+     * 加载图片
      *
-     * @param view 要设置图片的ImageView
-     * @param url  图片地址
+     * @param view    要设置图片的ImageView
+     * @param address 图片地址(url/path)
      */
-    public static void loadUrl(ImageView view, String url) {
+    public static void loadAddress(ImageView view, String address) {
         if (view == null || view.getContext() == null) {
             return;
         }
         Glide.with(view.getContext())
                 .asBitmap()
-                .load(url)
+                .load(address)
                 .into(view);
     }
 
     /**
-     * 加载网络图片
-     *
-     * @param view  要设置图片的ImageView
-     * @param url   图片地址
-     * @param error 加载失败显示图
-     */
-    public static void loadUrl(ImageView view, String url, @DrawableRes int error) {
-        if (view == null || view.getContext() == null) {
-            return;
-        }
-        Glide.with(view.getContext())
-                .asBitmap()
-                .load(url)
-                .apply(new RequestOptions().error(error))
-                .into(view);
-    }
-
-    /**
-     * 加载网络图片
+     * 加载图片
      *
      * @param view        要设置图片的ImageView
-     * @param url         图片地址
+     * @param address     图片地址(url/path)
      * @param placeHolder 占位图
      * @param error       加载失败显示图
      */
-    public static void loadUrl(ImageView view, String url, @DrawableRes int placeHolder, @DrawableRes int error) {
+    public static void loadAddress(ImageView view, String address, @DrawableRes int placeHolder, @DrawableRes int error) {
         if (view == null || view.getContext() == null) {
             return;
         }
         Glide.with(view.getContext())
                 .asBitmap()
-                .load(url)
+                .load(address)
                 .apply(new RequestOptions().placeholder(placeHolder).error(error))
                 .into(view);
     }

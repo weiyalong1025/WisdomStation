@@ -243,7 +243,7 @@
         android:textColorHint="@color/basic_gray5"
         android:textSize="@dimen/basic_s20"
         tools:hint="@string/name_command_content"
-        tools:ignore="TextFields" />
+        tools:ignore="LabelFor,TextFields" />
 
     <ListView
         android:id="@+id/lv_record_publisher"
@@ -252,5 +252,5 @@
         android:layout_below="@+id/et_content"
         android:divider="@null"
         tools:ignore="NestedScrolling"
-        tools:listitem="@layout/media_item_record" />
+        tools:listitem="@layout/basic_item_record" />
 </RelativeLayout>

@@ -10,7 +10,7 @@ import com.winsion.component.basic.data.NetDataSource;
 import com.winsion.component.basic.entity.ResponseForQueryData;
 import com.winsion.component.basic.entity.WhereClause;
 import com.winsion.component.basic.listener.ResponseListener;
-import com.winsion.component.media.entity.ServerRecordEntity;
+import com.winsion.component.basic.entity.ServerRecordEntity;
 import com.winsion.component.task.biz.TaskBiz;
 import com.winsion.component.task.entity.JobEntity;
 

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.billy.cc.core.component.CC;
 import com.winsion.component.basic.PlaceHolderFragment;
 import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.view.BadgeRadioButton;
@@ -28,7 +29,7 @@ public class RemindRootFragment extends BaseFragment {
     private BadgeRadioButton brb1;
     private BadgeRadioButton brb2;
 
-    private final Fragment[] mFragments = {new PlaceHolderFragment(), new TodoListFragment(), new SystemRemindFragment()};
+    private final Fragment[] mFragments = new Fragment[3];
     private final int[] mTitles = {R.string.tab_user_message, R.string.tab_todo, R.string.tab_system_remind};
 
     @SuppressLint("InflateParams")
@@ -39,8 +40,23 @@ public class RemindRootFragment extends BaseFragment {
 
     @Override
     protected void init() {
+        initData();
         initView();
         initAdapter();
+    }
+
+    private void initData() {
+        Fragment messageListFragment = CC.obtainBuilder("ComponentContact")
+                .setActionName("getMessageListFragment")
+                .build()
+                .call()
+                .getDataItem("fragment");
+        if (messageListFragment == null) {
+            messageListFragment = new PlaceHolderFragment();
+        }
+        mFragments[0] = messageListFragment;
+        mFragments[1] = new TodoListFragment();
+        mFragments[2] = new SystemRemindFragment();
     }
 
     private void initView() {

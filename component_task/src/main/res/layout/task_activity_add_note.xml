@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,7 +26,8 @@
         android:paddingTop="@dimen/basic_d10"
         android:textColor="@color/basic_white1"
         android:textColorHint="@color/basic_gray2"
-        android:textSize="@dimen/basic_s20" />
+        android:textSize="@dimen/basic_s20"
+        tools:ignore="TextFields" />
 
     <TextView
         android:id="@+id/tv_counter"

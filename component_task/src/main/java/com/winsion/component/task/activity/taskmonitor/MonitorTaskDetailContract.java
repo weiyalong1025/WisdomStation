@@ -2,7 +2,7 @@ package com.winsion.component.task.activity.taskmonitor;
 
 import com.winsion.component.basic.base.BasePresenter;
 import com.winsion.component.basic.base.BaseView;
-import com.winsion.component.media.entity.ServerRecordEntity;
+import com.winsion.component.basic.entity.ServerRecordEntity;
 import com.winsion.component.task.entity.JobEntity;
 
 import java.util.List;

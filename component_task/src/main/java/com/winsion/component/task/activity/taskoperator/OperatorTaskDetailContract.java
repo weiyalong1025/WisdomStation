@@ -2,8 +2,8 @@ package com.winsion.component.task.activity.taskoperator;
 
 import com.winsion.component.basic.base.BasePresenter;
 import com.winsion.component.basic.base.BaseView;
+import com.winsion.component.basic.entity.ServerRecordEntity;
 import com.winsion.component.basic.listener.MyUploadListener;
-import com.winsion.component.media.entity.ServerRecordEntity;
 import com.winsion.component.task.entity.JobEntity;
 
 import java.io.File;

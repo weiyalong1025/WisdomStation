@@ -55,7 +55,7 @@ public class ContactListAdapter<T> extends CommonAdapter<T> {
         // 设置位置信息
         viewHolder.setText(R.id.tv_position, contactsEntity.getAreaname());
         // 加载头像
-        ImageLoader.loadUrl(viewHolder.getView(R.id.iv_head), contactsEntity.getPhotourl(),
+        ImageLoader.loadAddress(viewHolder.getView(R.id.iv_head), contactsEntity.getPhotourl(),
                 R.drawable.basic_ic_head_single,
                 R.drawable.basic_ic_head_single);
         // 设置在线状态
@@ -72,7 +72,7 @@ public class ContactListAdapter<T> extends CommonAdapter<T> {
         // 按钮点击事件
         viewHolder.setOnClickListener(R.id.buttonA, v -> {
             Intent intent = new Intent(mContext, ChatActivity.class);
-            intent.putExtra("ContactsEntity", contactsEntity);
+            intent.putExtra("ContactEntity", contactsEntity);
             mContext.startActivity(intent);
         });
     }

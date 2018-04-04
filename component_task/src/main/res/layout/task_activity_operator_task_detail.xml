@@ -71,7 +71,7 @@
                 android:scrollbars="none"
                 android:visibility="gone"
                 tools:ignore="NestedScrolling"
-                tools:listitem="@layout/media_item_record" />
+                tools:listitem="@layout/basic_item_record" />
 
             <ImageView
                 android:id="@+id/div_publisher_operator"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
                 tools:ignore="NestedScrolling"
-                tools:listitem="@layout/media_item_record" />
+                tools:listitem="@layout/basic_item_record" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

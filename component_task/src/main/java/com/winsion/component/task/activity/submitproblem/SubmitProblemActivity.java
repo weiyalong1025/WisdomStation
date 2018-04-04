@@ -11,20 +11,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.billy.cc.core.component.CC;
+import com.winsion.component.basic.activity.TakePhotoActivity;
+import com.winsion.component.basic.adapter.RecordAdapter;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
+import com.winsion.component.basic.constants.FileStatus;
+import com.winsion.component.basic.constants.FileType;
+import com.winsion.component.basic.entity.LocalRecordEntity;
 import com.winsion.component.basic.listener.MyUploadListener;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.ViewUtils;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.TitleView;
-import com.winsion.component.media.activity.TakePhotoActivity;
-import com.winsion.component.media.adapter.RecordAdapter;
-import com.winsion.component.media.biz.MediaBiz;
-import com.winsion.component.media.constants.FileStatus;
-import com.winsion.component.media.constants.FileType;
-import com.winsion.component.media.entity.LocalRecordEntity;
-import com.winsion.component.scanner.activity.CaptureActivity;
 import com.winsion.component.task.R;
 import com.winsion.component.task.biz.SubmitBiz;
 import com.winsion.component.task.constants.DeviceState;
@@ -37,8 +36,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.winsion.component.media.constants.Intents.Media.MEDIA_FILE;
-import static com.winsion.component.scanner.activity.CaptureActivity.INTENT_EXTRA_KEY_QR_SCAN;
+import static com.winsion.component.basic.constants.Intents.Media.MEDIA_FILE;
 import static com.winsion.component.task.constants.Intents.SubmitProblem.DEVICE_DEPENDENT;
 import static com.winsion.component.task.constants.Intents.SubmitProblem.PATROL_ITEM_ENTITY;
 import static com.winsion.component.task.constants.Intents.SubmitProblem.SITE_NAME;
@@ -60,7 +58,6 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     private ListView lvRecordList;
 
     private static final int CODE_TAKE_PHOTO = 0;   // 拍照
-    private static final int CODE_CAPTURE_QR = 1;   // 扫描二维码
 
     private SubmitProblemContract.Presenter mPresenter;
     private PatrolItemEntity patrolItemEntity;
@@ -221,7 +218,15 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
                     .show();
         } else if (id == R.id.iv_scan) {
             // 跳转扫描二维码界面
-            startActivityForResult(CaptureActivity.class, CODE_CAPTURE_QR);
+            CC.obtainBuilder("ComponentScanner")
+                    .setActionName("toCaptureActivity")
+                    .build()
+                    .callAsyncCallbackOnMainThread((cc, result) -> {
+                        if (result.isSuccess()) {
+                            String qrCode = result.getDataItem("QR_CODE");
+                            checkDeviceId(qrCode);
+                        }
+                    });
         } else if (id == R.id.tv_subclass) {
             // 选择子类(应先添加设备)
             if (isEmpty(mClassificationId)) {
@@ -237,7 +242,7 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
         } else if (id == R.id.iv_take_photo) {
             // 跳转拍照界面
             try {
-                photoFile = MediaBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
+                photoFile = BasicBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
                 Intent intent = new Intent(mContext, TakePhotoActivity.class);
                 intent.putExtra(MEDIA_FILE, photoFile);
                 startActivityForResult(intent, CODE_TAKE_PHOTO);
@@ -332,26 +337,18 @@ public class SubmitProblemActivity extends BaseActivity implements SubmitProblem
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case CODE_TAKE_PHOTO:
-                    // 拍照成功
-                    LocalRecordEntity localRecordEntity = new LocalRecordEntity();
-                    localRecordEntity.setFileType(FileType.PICTURE);
-                    localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
-                    localRecordEntity.setFile(photoFile);
-                    localRecordEntity.setFileName(photoFile.getName());
-                    localRecordEntities.add(localRecordEntity);
-                    recordAdapter.notifyDataSetChanged();
-                    ViewUtils.setListViewHeightBasedOnChildren(lvRecordList);
-                    // 上传
-                    mPresenter.uploadFile(photoFile, this);
-                    break;
-                case CODE_CAPTURE_QR:
-                    String result = data.getStringExtra(INTENT_EXTRA_KEY_QR_SCAN);
-                    checkDeviceId(result);
-                    break;
-            }
+        if (resultCode == RESULT_OK && requestCode == CODE_TAKE_PHOTO) {
+            // 拍照成功
+            LocalRecordEntity localRecordEntity = new LocalRecordEntity();
+            localRecordEntity.setFileType(FileType.PICTURE);
+            localRecordEntity.setFileStatus(FileStatus.NO_UPLOAD);
+            localRecordEntity.setFile(photoFile);
+            localRecordEntity.setFileName(photoFile.getName());
+            localRecordEntities.add(localRecordEntity);
+            recordAdapter.notifyDataSetChanged();
+            ViewUtils.setListViewHeightBasedOnChildren(lvRecordList);
+            // 上传
+            mPresenter.uploadFile(photoFile, this);
         }
     }
 

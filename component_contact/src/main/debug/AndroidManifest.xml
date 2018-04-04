@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.winsion.component.contact">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name="debug.ContactApplication"
         android:allowBackup="true"

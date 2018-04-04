@@ -2,7 +2,7 @@ package com.winsion.component.task.activity.scenerecord;
 
 import com.winsion.component.basic.constants.ViewName;
 import com.winsion.component.basic.data.NetDataSource;
-import com.winsion.component.media.entity.ServerRecordEntity;
+import com.winsion.component.basic.entity.ServerRecordEntity;
 import com.winsion.component.task.biz.TaskBiz;
 
 import java.util.List;

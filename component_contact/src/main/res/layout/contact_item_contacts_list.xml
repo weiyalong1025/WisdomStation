@@ -118,7 +118,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/basic_d5"
-                            android:text="@string/value_draft"
+                            android:text="@string/contact_value_draft"
                             android:textColor="@color/basic_red1"
                             android:textSize="@dimen/basic_s16" />
 
@@ -194,7 +194,7 @@
             android:layout_weight="1"
             android:background="@drawable/basic_btn_yellow"
             android:gravity="center"
-            android:text="@string/btn_message"
+            android:text="@string/contact_btn_message"
             android:textColor="@color/basic_black6"
             android:textSize="@dimen/basic_s21"
             tools:ignore="ButtonStyle" />
@@ -207,7 +207,7 @@
             android:layout_weight="1"
             android:background="@drawable/basic_btn_yellow"
             android:gravity="center"
-            android:text="@string/btn_call"
+            android:text="@string/contact_btn_call"
             android:textColor="@color/basic_black6"
             android:textSize="@dimen/basic_s21"
             tools:ignore="ButtonStyle" />
@@ -220,7 +220,7 @@
             android:layout_weight="1"
             android:background="@drawable/basic_btn_yellow"
             android:gravity="center"
-            android:text="@string/btn_talk_back"
+            android:text="@string/contact_btn_talk_back"
             android:textColor="@color/basic_black6"
             android:textSize="@dimen/basic_s21"
             tools:ignore="ButtonStyle" />
@@ -233,7 +233,7 @@
             android:layout_weight="1"
             android:background="@drawable/basic_btn_yellow"
             android:gravity="center"
-            android:text="@string/btn_live"
+            android:text="@string/contact_btn_live"
             android:textColor="@color/basic_black6"
             android:textSize="@dimen/basic_s21"
             tools:ignore="ButtonStyle" />
@@ -246,7 +246,7 @@
             android:layout_weight="1"
             android:background="@drawable/basic_btn_yellow"
             android:gravity="center"
-            android:text="@string/btn_command"
+            android:text="@string/contact_btn_command"
             android:textColor="@color/basic_black6"
             android:textSize="@dimen/basic_s21"
             tools:ignore="ButtonStyle" />
@@ -259,7 +259,7 @@
             android:layout_weight="1"
             android:background="@drawable/basic_btn_yellow"
             android:gravity="center"
-            android:text="@string/btn_cooperation"
+            android:text="@string/contact_btn_cooperation"
             android:textColor="@color/basic_black6"
             android:textSize="@dimen/basic_s21"
             tools:ignore="ButtonStyle" />

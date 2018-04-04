@@ -67,6 +67,7 @@ dependencies {
     implementation project(':component_scene')
     implementation project(':component_aad')
     implementation project(':component_contact')
+    implementation project(':component_scanner')
     // 内存监测
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'

@@ -3,13 +3,13 @@ package com.winsion.component.task.activity.taskoperator;
 import android.content.Context;
 
 import com.winsion.component.basic.biz.BasicBiz;
+import com.winsion.component.basic.constants.FileType;
 import com.winsion.component.basic.constants.OpeType;
 import com.winsion.component.basic.constants.ViewName;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
+import com.winsion.component.basic.entity.ServerRecordEntity;
 import com.winsion.component.basic.listener.MyUploadListener;
-import com.winsion.component.media.constants.FileType;
-import com.winsion.component.media.entity.ServerRecordEntity;
 import com.winsion.component.task.biz.TaskBiz;
 import com.winsion.component.task.entity.FileEntity;
 import com.winsion.component.task.entity.JobEntity;

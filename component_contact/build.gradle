@@ -39,6 +39,5 @@ configurations.all {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':component_basic')
-    implementation project(':component_user')
     implementation 'cn.jiguang.imui:messagelist:0.6.8'
 }

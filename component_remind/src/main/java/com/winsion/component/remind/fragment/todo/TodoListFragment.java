@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,7 +36,7 @@ import static com.winsion.component.remind.constants.Intents.Todo.TODO_ID;
 public class TodoListFragment extends BaseFragment implements TodoListContract.View, AdapterView.OnItemClickListener {
     private SpinnerView svSpinner;
     private ListView lvRemindsList;
-    private ImageView ivShade;
+    private View viewShade;
     private TextView tvHint;
 
     /**
@@ -83,7 +82,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
     private void initView() {
         svSpinner = findViewById(R.id.sv_spinner);
         lvRemindsList = findViewById(R.id.lv_reminds_list);
-        ivShade = findViewById(R.id.iv_shade);
+        viewShade = findViewById(R.id.view_shade);
         tvHint = findViewById(R.id.tv_hint);
     }
 
@@ -99,10 +98,10 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
         svSpinner.setPopupDisplayChangeListener(status -> {
             switch (status) {
                 case SpinnerView.PopupState.POPUP_SHOW:
-                    ivShade.setVisibility(View.VISIBLE);
+                    viewShade.setVisibility(View.VISIBLE);
                     break;
                 case SpinnerView.PopupState.POPUP_HIDE:
-                    ivShade.setVisibility(View.GONE);
+                    viewShade.setVisibility(View.GONE);
                     break;
             }
         });

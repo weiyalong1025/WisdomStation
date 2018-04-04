@@ -51,12 +51,11 @@
         android:textColor="@color/basic_black6"
         android:textSize="@dimen/basic_s21" />
 
-    <ImageView
-        android:id="@+id/iv_shade"
+    <View
+        android:id="@+id/view_shade"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/sv_spinner"
         android:background="@color/basic_black2"
-        android:visibility="gone"
-        tools:ignore="ContentDescription" />
+        android:visibility="gone" />
 </RelativeLayout>

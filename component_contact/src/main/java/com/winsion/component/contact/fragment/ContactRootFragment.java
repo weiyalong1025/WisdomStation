@@ -13,9 +13,6 @@ import com.winsion.component.basic.view.MyIndicator;
 import com.winsion.component.basic.view.NoScrollViewPager;
 import com.winsion.component.contact.R;
 import com.winsion.component.contact.constants.ContactType;
-import com.winsion.component.contact.entity.ContactsEntity;
-import com.winsion.component.contact.entity.ContactsGroupEntity;
-import com.winsion.component.contact.entity.TeamEntity;
 import com.winsion.component.contact.fragment.contact.ContactFragment;
 
 import static com.winsion.component.contact.fragment.contact.ContactFragment.CONTACT_TYPE;
@@ -30,7 +27,7 @@ public class ContactRootFragment extends BaseFragment {
     private MyIndicator mIndicator;
 
     private final Fragment[] mFragments = new Fragment[3];
-    private final int[] mTitles = {R.string.tab_contacts, R.string.tab_team_group, R.string.tab_contact_group};
+    private final int[] mTitles = {R.string.contact_tab_contacts, R.string.contact_tab_team_group, R.string.contact_tab_contact_group};
 
     @SuppressLint("InflateParams")
     @Override
@@ -55,19 +52,19 @@ public class ContactRootFragment extends BaseFragment {
     private void initAdapter() {
         Bundle bundle;
 
-        ContactFragment contactFragment = new ContactFragment<ContactsEntity>();
+        ContactFragment contactFragment = new ContactFragment();
         bundle = new Bundle();
         bundle.putInt(CONTACT_TYPE, ContactType.TYPE_CONTACTS);
         contactFragment.setArguments(bundle);
         mFragments[0] = contactFragment;
 
-        ContactFragment teamFragment = new ContactFragment<TeamEntity>();
+        ContactFragment teamFragment = new ContactFragment();
         bundle = new Bundle();
         bundle.putInt(CONTACT_TYPE, ContactType.TYPE_TEAM);
         teamFragment.setArguments(bundle);
         mFragments[1] = teamFragment;
 
-        ContactFragment contactsGroupFragment = new ContactFragment<ContactsGroupEntity>();
+        ContactFragment contactsGroupFragment = new ContactFragment();
         bundle = new Bundle();
         bundle.putInt(CONTACT_TYPE, ContactType.TYPE_CONTACTS_GROUP);
         contactsGroupFragment.setArguments(bundle);

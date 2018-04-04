@@ -5,12 +5,15 @@
     <string name="toast_check_sdcard">请检查SD卡状态</string>
     <string name="toast_complete_info">请将信息填写完整</string>
     <string name="toast_no_selected_item">当前没有已选项</string>
+    <string name="toast_no_corresponding_program">没有对应的查看程序</string>
+    <string name="toast_video_not_support">该设备不支持录像功能</string>
 
     <string name="btn_update_now">立即更新</string>
     <string name="btn_update_later">暂不更新</string>
     <string name="btn_confirm">确定</string>
     <string name="btn_cancel">取消</string>
     <string name="btn_complete">完成</string>
+    <string name="btn_rephotograph">重拍</string>
 
     <string name="dialog_downloading_installation_package">正在下载安装包…</string>
     <string name="dialog_version_update">版本更新</string>
@@ -32,5 +35,11 @@
     <string name="symbol_separator">/</string>
     <string name="symbol_hour_minute">"--:--"</string>
 
+    <string name="title_take_photo">拍照</string>
+    <string name="title_record_video">录像</string>
+    <string name="title_record">录音</string>
+
     <string name="value_nothing">无</string>
+    <string name="name_note_content">备注内容：</string>
+    <string name="recording">录音中…</string>
 </resources>

@@ -11,28 +11,27 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.lzy.okserver.OkUpload;
+import com.winsion.component.basic.activity.RecordAudioActivity;
+import com.winsion.component.basic.activity.RecordVideoActivity;
+import com.winsion.component.basic.activity.TakePhotoActivity;
+import com.winsion.component.basic.adapter.RecordAdapter;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
+import com.winsion.component.basic.constants.FileStatus;
+import com.winsion.component.basic.constants.FileType;
+import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.basic.constants.OpeCode;
 import com.winsion.component.basic.constants.Urls;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
+import com.winsion.component.basic.entity.LocalRecordEntity;
 import com.winsion.component.basic.listener.MyUploadListener;
 import com.winsion.component.basic.listener.ResponseListener;
 import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.ViewUtils;
-import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.TitleView;
-import com.winsion.component.media.activity.RecordAudioActivity;
-import com.winsion.component.media.activity.RecordVideoActivity;
-import com.winsion.component.media.activity.TakePhotoActivity;
-import com.winsion.component.media.adapter.RecordAdapter;
-import com.winsion.component.media.biz.MediaBiz;
-import com.winsion.component.media.constants.FileStatus;
-import com.winsion.component.media.constants.FileType;
-import com.winsion.component.media.entity.LocalRecordEntity;
 import com.winsion.component.task.R;
 import com.winsion.component.task.constants.TaskType;
 import com.winsion.component.task.entity.FileEntity;
@@ -47,10 +46,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.winsion.component.media.constants.Intents.Media.MEDIA_FILE;
 import static com.winsion.component.task.constants.Intents.Issue.ISSUE_TYPE;
 import static com.winsion.component.task.constants.Intents.Issue.SELECT_TEAM;
 import static com.winsion.component.task.constants.Intents.Issue.TO_TEAM_ENTITY;
+import static com.winsion.component.task.constants.Intents.Media.MEDIA_FILE;
 
 /**
  * 发布命令/协作界面
@@ -228,7 +227,7 @@ public class IssueActivity extends BaseActivity implements MyUploadListener {
         // 检查数据是否填写完整
         if (checkDataIsComplete()) {
             // 隐藏软键盘
-            BasicBiz.hideKeyboard(tvTitle);
+            BasicBiz.hideKeyboard(etTitle);
             // 发布中，显示dialog
             showOnIssueDialog();
             // 发布
@@ -325,7 +324,7 @@ public class IssueActivity extends BaseActivity implements MyUploadListener {
             startActivityForResult(SelectTrainActivity.class, CODE_SELECT_TRAIN);
         } else if (id == R.id.btn_take_photo) {
             try {
-                photoFile = MediaBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
+                photoFile = BasicBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.PICTURE);
                 intent = new Intent(mContext, TakePhotoActivity.class);
                 intent.putExtra(MEDIA_FILE, photoFile);
                 startActivityForResult(intent, CODE_TAKE_PHOTO);
@@ -334,7 +333,7 @@ public class IssueActivity extends BaseActivity implements MyUploadListener {
             }
         } else if (id == R.id.btn_video) {
             try {
-                videoFile = MediaBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.VIDEO);
+                videoFile = BasicBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.VIDEO);
                 intent = new Intent(mContext, RecordVideoActivity.class);
                 intent.putExtra(MEDIA_FILE, videoFile);
                 startActivityForResult(intent, CODE_RECORD_VIDEO);
@@ -343,7 +342,7 @@ public class IssueActivity extends BaseActivity implements MyUploadListener {
             }
         } else if (id == R.id.btn_record) {
             try {
-                audioFile = MediaBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.AUDIO);
+                audioFile = BasicBiz.getMediaFile(DirAndFileUtils.getIssueDir(), FileType.AUDIO);
                 intent = new Intent(mContext, RecordAudioActivity.class);
                 intent.putExtra(MEDIA_FILE, audioFile);
                 startActivityForResult(intent, CODE_RECORD_AUDIO);

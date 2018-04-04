@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,7 +35,7 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
     private FrameLayout flContainer;
     private ListView lvList;
     private TextView trainNumberIndex;
-    private ImageView ivShade;
+    private View viewShade;
     private SwipeRefreshLayout swipeRefresh;
 
     public static final String AAD_TYPE = "AAD_TYPE";
@@ -83,7 +82,7 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
 
     private void initView() {
         svSpinner = findViewById(R.id.sv_spinner);
-        ivShade = findViewById(R.id.iv_shade);
+        viewShade = findViewById(R.id.view_shade);
         swipeRefresh = findViewById(R.id.swipe_refresh);
         progressBar = findViewById(R.id.progress_bar);
         tvHint = findViewById(R.id.tv_hint);
@@ -126,10 +125,10 @@ public class AADListFragment extends BaseFragment implements SpinnerView.AfterTe
         svSpinner.setPopupDisplayChangeListener(status -> {
             switch (status) {
                 case SpinnerView.PopupState.POPUP_SHOW:
-                    ivShade.setVisibility(View.VISIBLE);
+                    viewShade.setVisibility(View.VISIBLE);
                     break;
                 case SpinnerView.PopupState.POPUP_HIDE:
-                    ivShade.setVisibility(View.GONE);
+                    viewShade.setVisibility(View.GONE);
                     break;
             }
         });

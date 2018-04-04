@@ -15,10 +15,19 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.winsion.component.basic.activity.RecordAudioActivity;
+import com.winsion.component.basic.activity.RecordVideoActivity;
+import com.winsion.component.basic.activity.TakePhotoActivity;
+import com.winsion.component.basic.adapter.RecordAdapter;
 import com.winsion.component.basic.base.BaseActivity;
+import com.winsion.component.basic.biz.BasicBiz;
+import com.winsion.component.basic.constants.FileStatus;
+import com.winsion.component.basic.constants.FileType;
 import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.basic.constants.OpeType;
 import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.entity.LocalRecordEntity;
+import com.winsion.component.basic.entity.ServerRecordEntity;
 import com.winsion.component.basic.listener.MyDownloadListener;
 import com.winsion.component.basic.listener.MyUploadListener;
 import com.winsion.component.basic.listener.StateListener;
@@ -30,15 +39,6 @@ import com.winsion.component.basic.utils.ViewUtils;
 import com.winsion.component.basic.view.CustomDialog;
 import com.winsion.component.basic.view.DrawableCenterTextView;
 import com.winsion.component.basic.view.TitleView;
-import com.winsion.component.media.activity.RecordAudioActivity;
-import com.winsion.component.media.activity.RecordVideoActivity;
-import com.winsion.component.media.activity.TakePhotoActivity;
-import com.winsion.component.media.adapter.RecordAdapter;
-import com.winsion.component.media.biz.MediaBiz;
-import com.winsion.component.media.constants.FileStatus;
-import com.winsion.component.media.constants.FileType;
-import com.winsion.component.media.entity.LocalRecordEntity;
-import com.winsion.component.media.entity.ServerRecordEntity;
 import com.winsion.component.task.R;
 import com.winsion.component.task.activity.addnote.AddNoteActivity;
 import com.winsion.component.task.biz.TaskBiz;
@@ -61,7 +61,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.winsion.component.media.constants.Intents.Media.MEDIA_FILE;
+import static com.winsion.component.task.constants.Intents.Media.MEDIA_FILE;
 import static com.winsion.component.task.constants.Intents.OperatorTaskDetail.JOB_ENTITY;
 
 /**
@@ -868,7 +868,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             showToast("暂未开放");
         } else if (id == R.id.btn_note) {
             try {
-                noteFile = MediaBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.TEXT);
+                noteFile = BasicBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.TEXT);
                 intent = new Intent(mContext, AddNoteActivity.class);
                 intent.putExtra(MEDIA_FILE, noteFile);
                 startActivityForResult(intent, CODE_NOTE);
@@ -877,7 +877,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             }
         } else if (id == R.id.btn_take_photo) {
             try {
-                photoFile = MediaBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.PICTURE);
+                photoFile = BasicBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.PICTURE);
                 intent = new Intent(mContext, TakePhotoActivity.class);
                 intent.putExtra(MEDIA_FILE, photoFile);
                 startActivityForResult(intent, CODE_TAKE_PHOTO);
@@ -886,7 +886,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             }
         } else if (id == R.id.btn_video) {
             try {
-                videoFile = MediaBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.VIDEO);
+                videoFile = BasicBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.VIDEO);
                 intent = new Intent(mContext, RecordVideoActivity.class);
                 intent.putExtra(MEDIA_FILE, videoFile);
                 startActivityForResult(intent, CODE_RECORD_VIDEO);
@@ -895,7 +895,7 @@ public class OperatorTaskDetailActivity extends BaseActivity implements Operator
             }
         } else if (id == R.id.btn_record) {
             try {
-                audioFile = MediaBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.AUDIO);
+                audioFile = BasicBiz.getMediaFile(DirAndFileUtils.getPerformerDir(userId, jobOperatorsId), FileType.AUDIO);
                 intent = new Intent(mContext, RecordAudioActivity.class);
                 intent.putExtra(MEDIA_FILE, audioFile);
                 startActivityForResult(intent, CODE_RECORD_AUDIO);

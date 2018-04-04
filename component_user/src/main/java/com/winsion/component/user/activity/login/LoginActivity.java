@@ -118,7 +118,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,
             String changedUsername = editable.toString();
             UserEntity userEntity = mPresenter.getUserByUsername(changedUsername);
             if (userEntity != null) {
-                ImageLoader.loadUrl(civHead, userEntity.getHeaderUrl(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
+                ImageLoader.loadAddress(civHead, userEntity.getHeaderUrl(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
                 etPassword.setText(userEntity.getPassword());
             } else {
                 ImageLoader.loadRes(civHead, R.drawable.basic_ic_head_single);
@@ -158,7 +158,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,
         etUsername.setText(username);
         etUsername.setSelection(username.length());
         etPassword.setText(password);
-        ImageLoader.loadUrl(civHead, userEntity.getHeaderUrl(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
+        ImageLoader.loadAddress(civHead, userEntity.getHeaderUrl(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
 
         // 是否需要自动登录
         if (userEntity.getIsAutoLogin()) {
@@ -307,13 +307,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,
     @Override
     public void loginSuccess() {
         // 隐藏dialog
-        hideDialog();
         if (!isEmpty(callId)) {
             CC.obtainBuilder("ComponentApp")
                     .setContext(this)
                     .setActionName("toMainActivity")
+                    .setTimeout(3000)
                     .build()
-                    .call();
+                    .callAsyncCallbackOnMainThread((cc, result) -> hideDialog());
         } else {
             startActivity(UserActivity.class, true);
         }
@@ -363,7 +363,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View,
         // 关掉下拉框
         mUserListPopup.dismiss();
         // 设置新选用户的信息
-        ImageLoader.loadUrl(civHead, userEntity.getHeaderUrl(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
+        ImageLoader.loadAddress(civHead, userEntity.getHeaderUrl(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
         etUsername.setText(username);
         etPassword.setText(password);
         etUsername.setSelection(username.length());

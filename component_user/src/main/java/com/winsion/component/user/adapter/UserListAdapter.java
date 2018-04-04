@@ -28,7 +28,7 @@ public class UserListAdapter extends CommonAdapter<UserEntity> {
     protected void convert(ViewHolder viewHolder, UserEntity item, int position) {
         // 设置头像
         ImageView imageView = viewHolder.getView(R.id.civ_head);
-        ImageLoader.loadUrl(imageView, item.getHeaderUrl(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
+        ImageLoader.loadAddress(imageView, item.getHeaderUrl(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
 
         // 设置用户名
         String username = item.getUsername();

@@ -39,5 +39,4 @@ configurations.all {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':component_basic')
-    implementation project(':component_user')
 }

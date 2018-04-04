@@ -1,10 +1,13 @@
 package com.winsion.component.contact.entity;
 
+import com.winsion.component.contact.constants.ContactType;
+import com.winsion.component.contact.constants.UserState;
+
 /**
  * Created by w on 2017/7/18.
  */
 
-public class TeamEntity {
+public class TeamEntity extends ContactEntity {
 
 //            {\"talkgroupid\":\"G000000000000067\"," +
 //            "\"userCount\":\"4\"," +
@@ -66,5 +69,30 @@ public class TeamEntity {
 
     public void setTeamsName(String teamsName) {
         this.teamsName = teamsName;
+    }
+
+    @Override
+    public int getContactType() {
+        return ContactType.TYPE_TEAM;
+    }
+
+    @Override
+    public String getConName() {
+        return teamsName;
+    }
+
+    @Override
+    public String getConId() {
+        return teamid;
+    }
+
+    @Override
+    public String getConPhotoUrl() {
+        return "";
+    }
+
+    @Override
+    public String getConLoginState() {
+        return UserState.OFF_LINE;
     }
 }

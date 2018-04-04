@@ -164,7 +164,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     }
 
     private void loadUserHead() {
-        ImageLoader.loadUrl(ivHead, CacheDataSource.getUserHeadAddress(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
+        ImageLoader.loadAddress(ivHead, CacheDataSource.getUserHeadAddress(), R.drawable.basic_ic_head_single, R.drawable.basic_ic_head_single);
     }
 
     @Override

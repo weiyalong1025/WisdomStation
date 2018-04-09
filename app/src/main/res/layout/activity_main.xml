@@ -32,7 +32,7 @@
             style="@style/BottomTabBarStyle"
             app:tabIconNormal="@drawable/ic_contacts"
             app:tabIconSelected="@drawable/ic_contacts_selected"
-            app:tabText="@string/contact_tab_contacts" />
+            app:tabText="@string/tab_contacts" />
 
         <com.winsion.component.basic.view.AlphaTabView
             android:id="@+id/atv_scene"

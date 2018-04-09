@@ -1,24 +1,21 @@
 package com.winsion.component.contact.activity.chat;
 
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.Vibrator;
 
 import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.constants.FileType;
+import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.utils.ToastUtils;
 import com.winsion.component.contact.R;
-import com.winsion.component.contact.entity.ContactEntity;
-import com.winsion.component.contact.entity.MyMessage;
-import com.winsion.component.contact.entity.MyUser;
+import com.winsion.component.contact.constants.MessageStatus;
+import com.winsion.component.contact.constants.MessageType;
+import com.winsion.component.contact.entity.UserMessage;
 
 import java.io.File;
 import java.io.IOException;
-
-import cn.jiguang.imui.commons.models.IMessage;
 
 public class ChatPresenter implements ChatContract.Presenter {
     private ChatContract.View mView;
@@ -39,29 +36,26 @@ public class ChatPresenter implements ChatContract.Presenter {
 
     @Override
     public void sendText(String msg) {
-        MyMessage myMessage = new MyMessage();
-        myMessage.setText(msg);
-        ContactEntity contactEntity = mView.getContactEntity();
-        myMessage.setUser(new MyUser(contactEntity.getConId(), contactEntity.getConName(), contactEntity.getConPhotoUrl()));
-        myMessage.setType(IMessage.MessageType.SEND_TEXT.ordinal());
-        myMessage.setMessageStatus(IMessage.MessageStatus.SEND_SUCCEED);
-        mView.sendMessageSuccess(myMessage);
+        UserMessage userMessage = new UserMessage();
+        userMessage.setSenderId(CacheDataSource.getUserId());
+        userMessage.setType(MessageType.WORD);
+        userMessage.setStatus(MessageStatus.SEND_SUCCESS);
+        userMessage.setContent(msg);
+        mView.sendMessageSuccess(userMessage);
     }
 
     @Override
     public void sendImage(File file) {
-        MyMessage myMessage = new MyMessage();
-        myMessage.setType(IMessage.MessageType.SEND_IMAGE.ordinal());
-        sendFile(file, myMessage);
+        UserMessage userMessage = new UserMessage();
+        userMessage.setType(MessageType.PICTURE);
+        sendFile(file, userMessage);
     }
 
     @Override
     public void sendVideo(File file) {
-        MyMessage myMessage = new MyMessage();
-        myMessage.setType(IMessage.MessageType.SEND_VIDEO.ordinal());
-        int duration = MediaPlayer.create(mContext, Uri.fromFile(file)).getDuration() / 1000;
-        myMessage.setDuration(duration);
-        sendFile(file, myMessage);
+        UserMessage userMessage = new UserMessage();
+        userMessage.setType(MessageType.VIDEO);
+        sendFile(file, userMessage);
     }
 
     @Override
@@ -97,23 +91,24 @@ public class ChatPresenter implements ChatContract.Presenter {
         mRecorder.release();
         mRecorder = null;
         // 将录音发送出去并发送给服务器
-        if (System.currentTimeMillis() - startTime > 2000) {
-            MyMessage myMessage = new MyMessage();
-            myMessage.setType(IMessage.MessageType.SEND_VOICE.ordinal());
-            int duration = MediaPlayer.create(mContext, Uri.fromFile(voiceFile)).getDuration() / 1000;
-            myMessage.setDuration(duration);
-            sendFile(voiceFile, myMessage);
+        if (System.currentTimeMillis() - startTime > 1000) {
+            UserMessage userMessage = new UserMessage();
+            userMessage.setType(MessageType.VOICE);
+            sendFile(voiceFile, userMessage);
         } else {
             ToastUtils.showToast(mContext, "录音时间太短");
         }
     }
 
-    private void sendFile(File file, MyMessage myMessage) {
-        myMessage.setMediaFilePath(file.getAbsolutePath());
-        ContactEntity contactEntity = mView.getContactEntity();
-        myMessage.setUser(new MyUser(contactEntity.getConId(), contactEntity.getConName(), contactEntity.getConPhotoUrl()));
-        myMessage.setMessageStatus(IMessage.MessageStatus.SEND_SUCCEED);
-        mView.sendMessageSuccess(myMessage);
+    private void sendFile(File file, UserMessage userMessage) {
+        userMessage.setSenderId(CacheDataSource.getUserId());
+        userMessage.setStatus(MessageStatus.SEND_SUCCESS);
+        userMessage.setDescription(file.getAbsolutePath());
+        mView.sendMessageSuccess(userMessage);
+    }
+
+    public static void resendMessage(UserMessage myMessage) {
+
     }
 
     @Override

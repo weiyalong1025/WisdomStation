@@ -76,7 +76,8 @@ public class ContactPresenter implements ContactContract.Presenter {
 
                     @Override
                     public void onSuccess(ResponseForQueryData<List<? extends ContactEntity>> result) {
-                        mView.getContactsDataSuccess(result.getDataList());
+                        List<? extends ContactEntity> dataList = result.getDataList();
+                        mView.getContactsDataSuccess(dataList);
                     }
 
                     @Override

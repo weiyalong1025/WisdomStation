@@ -1,26 +1,37 @@
 package com.winsion.component.task.fragment.taskmonitor;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.constants.FieldKey;
 import com.winsion.component.basic.constants.JoinKey;
+import com.winsion.component.basic.constants.MQType;
 import com.winsion.component.basic.constants.Mode;
 import com.winsion.component.basic.constants.OpeCode;
 import com.winsion.component.basic.constants.Urls;
 import com.winsion.component.basic.constants.ViewName;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.NetDataSource;
+import com.winsion.component.basic.entity.MQMessage;
 import com.winsion.component.basic.entity.OrderBy;
 import com.winsion.component.basic.entity.ResponseForQueryData;
 import com.winsion.component.basic.entity.WhereClause;
 import com.winsion.component.basic.listener.ResponseListener;
+import com.winsion.component.basic.mqtt.MQTTClient;
 import com.winsion.component.basic.utils.JsonUtils;
+import com.winsion.component.basic.utils.NotifyUtils;
+import com.winsion.component.basic.utils.TTSUtils;
+import com.winsion.component.task.R;
+import com.winsion.component.task.activity.taskmonitor.MonitorTaskDetailActivity;
 import com.winsion.component.task.entity.JobEntity;
 import com.winsion.component.task.entity.JobParameter;
 import com.winsion.component.task.entity.TaskEntity;
+import com.winsion.component.task.entity.message.TaskMessage;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -30,7 +41,7 @@ import java.util.List;
  * Created by 10295 on 2017/12/25
  */
 
-public class MonitorTaskListPresenter implements MonitorTaskListContract.Presenter {
+public class MonitorTaskListPresenter implements MonitorTaskListContract.Presenter, MQTTClient.Observer {
     private final MonitorTaskListContract.View mView;
     private final Context mContext;
 
@@ -41,7 +52,31 @@ public class MonitorTaskListPresenter implements MonitorTaskListContract.Present
 
     @Override
     public void start() {
+        // 监听MQ消息
+        MQTTClient.addObserver(this);
+    }
 
+    @Override
+    public void onMessageArrive(MQMessage msg) {
+        if (msg.getMessageType() == MQType.TASK_STATE) {
+            String data = msg.getData();
+            TaskMessage taskMessage = JSON.parseObject(data, TaskMessage.class);
+            if (TextUtils.equals(taskMessage.getMonitorteamid(), CacheDataSource.getTeamId())) {
+                // 任务状态发生改变，该条任务的监控组ID为当前登录用户的组ID，全刷数据
+                getMonitorTaskData();
+                // TTS
+                TTSUtils.getInstance(mContext.getApplicationContext()).synth(mContext, msg.getDesc());
+                // 发送通知
+                sendNotification(msg.getDesc());
+            }
+        }
+    }
+
+    private void sendNotification(String desc) {
+        Intent intent = new Intent(mContext, MonitorTaskDetailActivity.class);
+        PendingIntent activity = PendingIntent.getActivity(mContext, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        new NotifyUtils(mContext, 1).notifyNormalMoreLine(activity, R.mipmap.basic_ic_launcher,
+                desc, 123, "任务状态改变通知", desc, true, true, true);
     }
 
     @Override
@@ -157,5 +192,6 @@ public class MonitorTaskListPresenter implements MonitorTaskListContract.Present
     @Override
     public void exit() {
         NetDataSource.unSubscribe(this);
+        MQTTClient.removeObserver(this);
     }
 }

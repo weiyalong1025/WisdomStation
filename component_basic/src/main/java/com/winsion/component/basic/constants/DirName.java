@@ -41,5 +41,5 @@ public interface DirName {
     /**
      * IM相关文件保存目录
      */
-    String IM = "Lost";
+    String IM = "IM";
 }

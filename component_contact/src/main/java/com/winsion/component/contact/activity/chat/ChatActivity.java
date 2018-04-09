@@ -1,10 +1,8 @@
 package com.winsion.component.contact.activity.chat;
 
 import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.winsion.component.basic.activity.RecordVideoActivity;
 import com.winsion.component.basic.activity.TakePhotoActivity;
@@ -22,27 +21,31 @@ import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.constants.FileType;
 import com.winsion.component.basic.utils.DirAndFileUtils;
-import com.winsion.component.basic.utils.ToastUtils;
 import com.winsion.component.basic.view.TextImageButton;
 import com.winsion.component.basic.view.TitleView;
 import com.winsion.component.contact.R;
+import com.winsion.component.contact.adapter.ReceivePicItem;
+import com.winsion.component.contact.adapter.ReceiveVideoItem;
+import com.winsion.component.contact.adapter.ReceiveVoiceItem;
+import com.winsion.component.contact.adapter.ReceiveWordItem;
+import com.winsion.component.contact.adapter.SendPicItem;
+import com.winsion.component.contact.adapter.SendVideoItem;
+import com.winsion.component.contact.adapter.SendVoiceItem;
+import com.winsion.component.contact.adapter.SendWordItem;
 import com.winsion.component.contact.entity.ContactEntity;
-import com.winsion.component.contact.entity.MyMessage;
-import com.winsion.component.contact.entity.MyUser;
+import com.winsion.component.contact.entity.UserMessage;
+import com.zhy.adapter.abslistview.MultiItemTypeAdapter;
 
 import java.io.File;
 import java.io.IOException;
-
-import cn.jiguang.imui.commons.ImageLoader;
-import cn.jiguang.imui.commons.models.IMessage;
-import cn.jiguang.imui.messages.MessageList;
-import cn.jiguang.imui.messages.MsgListAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.winsion.component.basic.constants.Intents.Media.MEDIA_FILE;
 
 public class ChatActivity extends BaseActivity implements ChatContract.View {
     private TitleView tvTitle;
-    private MessageList msgList;
+    private ListView msgList;
     private CheckBox cbType;
     private ImageView ivChangeType;
     private EditText etInput;
@@ -60,8 +63,8 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
     private ChatContract.Presenter mPresenter;
     private ContactEntity contactEntity;
-    private MsgListAdapter<MyMessage> adapter;
-    private MyUser myUser;
+    private MultiItemTypeAdapter<UserMessage> adapter;
+    private List<UserMessage> mListData = new ArrayList<>();
     private boolean isSelectPicViewShowing = false;
     private TranslateAnimation showAnimation;
     private TranslateAnimation hideAnimation;
@@ -103,39 +106,19 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     private void initIntentData() {
         contactEntity = (ContactEntity) getIntent().getSerializableExtra("ContactEntity");
         tvTitle.setTitleText(contactEntity.getConName());
-        myUser = new MyUser(contactEntity.getConId(), contactEntity.getConName(), contactEntity.getConPhotoUrl());
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void initAdapter() {
-        adapter = new MsgListAdapter<>(contactEntity.getConId(), new ImageLoader() {
-            @Override
-            public void loadAvatarImage(ImageView avatarImageView, String string) {
-                avatarImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                com.winsion.component.basic.utils.ImageLoader.loadAddress(avatarImageView, string,
-                        R.drawable.basic_ic_head_single,
-                        R.drawable.basic_ic_head_single);
-            }
-
-            @Override
-            public void loadImage(ImageView imageView, String string) {
-                com.winsion.component.basic.utils.ImageLoader.loadAddress(imageView, string);
-            }
-        });
-        adapter.setOnMsgClickListener(message -> {
-            int fileType = message.getType();
-            String type = fileType == IMessage.MessageType.SEND_IMAGE.ordinal() || fileType == IMessage.MessageType.RECEIVE_IMAGE.ordinal() ? "image/*"
-                    : fileType == IMessage.MessageType.SEND_VIDEO.ordinal() || fileType == IMessage.MessageType.RECEIVE_VIDEO.ordinal() ? "video/*" : "";
-            if (type.equals("")) return;
-            try {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                Uri uri = Uri.fromFile(new File(message.getMediaFilePath()));
-                intent.setDataAndType(uri, type);
-                mContext.startActivity(intent);
-            } catch (ActivityNotFoundException e) {
-                ToastUtils.showToast(mContext, com.winsion.component.basic.R.string.toast_no_corresponding_program);
-            }
-        });
+        adapter = new MultiItemTypeAdapter<>(mContext, mListData);
+        adapter.addItemViewDelegate(new SendWordItem());
+        adapter.addItemViewDelegate(new ReceiveWordItem());
+        adapter.addItemViewDelegate(new SendPicItem());
+        adapter.addItemViewDelegate(new ReceivePicItem());
+        adapter.addItemViewDelegate(new SendVoiceItem());
+        adapter.addItemViewDelegate(new ReceiveVoiceItem());
+        adapter.addItemViewDelegate(new SendVideoItem());
+        adapter.addItemViewDelegate(new ReceiveVideoItem());
         msgList.setAdapter(adapter);
     }
 
@@ -162,19 +145,17 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     btnRecord.setBackgroundResource(R.drawable.contact_btn_record_press);
-                    btnRecord.setText(R.string.contact_btn_release_to_finish);
+                    btnRecord.setText(R.string.btn_release_to_finish);
                     mPresenter.startRecord();
                     break;
                 case MotionEvent.ACTION_UP:
                     btnRecord.setBackgroundResource(R.drawable.contact_btn_record_normal);
-                    btnRecord.setText(R.string.contact_btn_press_to_talk);
+                    btnRecord.setText(R.string.btn_press_to_talk);
                     mPresenter.stopRecord();
                     break;
             }
             return true;
         });
-        msgList.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) ->
-                msgList.scrollToPosition(0));
         msgList.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 BasicBiz.hideKeyboard(etInput);
@@ -297,7 +278,6 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         llPic.startAnimation(hideAnimation);
         llPic.setVisibility(View.GONE);
         viewShader.setVisibility(View.GONE);
-
     }
 
     @Override
@@ -315,8 +295,9 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     }
 
     @Override
-    public void sendMessageSuccess(MyMessage myMessage) {
-        adapter.addToStart(myMessage, true);
+    public void sendMessageSuccess(UserMessage userMessage) {
+        mListData.add(userMessage);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

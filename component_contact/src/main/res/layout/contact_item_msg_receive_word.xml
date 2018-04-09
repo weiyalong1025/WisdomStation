@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/basic_d10"
+    android:paddingTop="@dimen/basic_d10">
+
+    <com.winsion.component.basic.view.CircleImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/basic_d50"
+        android:layout_height="@dimen/basic_d50"
+        android:layout_marginStart="@dimen/basic_d10"
+        android:background="@drawable/basic_ic_head_single"
+        app:civ_border_color="@color/basic_black6"
+        app:civ_border_width="@dimen/basic_d0_5" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/basic_d5"
+            android:layout_marginStart="@dimen/basic_d10"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s16"
+            tools:text="张三" />
+
+        <TextView
+            android:id="@+id/chat_from_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/basic_d5"
+            android:background="@drawable/contact_bg_receive"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:minHeight="@dimen/basic_d50"
+            android:paddingStart="@dimen/basic_d15"
+            android:textColor="@color/basic_gray8"
+            android:textSize="@dimen/basic_s20"
+            tools:ignore="RtlSymmetry"
+            tools:text="在吗？" />
+    </LinearLayout>
+</LinearLayout>

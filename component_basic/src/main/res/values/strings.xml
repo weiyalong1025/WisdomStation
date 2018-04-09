@@ -7,6 +7,7 @@
     <string name="toast_no_selected_item">当前没有已选项</string>
     <string name="toast_no_corresponding_program">没有对应的查看程序</string>
     <string name="toast_video_not_support">该设备不支持录像功能</string>
+    <string name="toast_first_use_tts">首次使用TTS，请连接internet网络</string>
 
     <string name="btn_update_now">立即更新</string>
     <string name="btn_update_later">暂不更新</string>

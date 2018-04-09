@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/basic_d10"
+    android:paddingTop="@dimen/basic_d10">
+
+    <com.winsion.component.basic.view.CircleImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/basic_d50"
+        android:layout_height="@dimen/basic_d50"
+        android:layout_marginStart="@dimen/basic_d10"
+        android:background="@drawable/basic_ic_head_single"
+        app:civ_border_color="@color/basic_black6"
+        app:civ_border_width="@dimen/basic_d0_5" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/basic_d5"
+            android:layout_marginStart="@dimen/basic_d10"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s16"
+            tools:text="张三" />
+
+        <com.winsion.component.contact.view.ChatImageView
+            android:id="@+id/iv_content"
+            android:layout_width="@dimen/basic_d150"
+            android:layout_height="@dimen/basic_d150"
+            android:layout_marginStart="@dimen/basic_d5"
+            android:src="@color/basic_white1"
+            app:chat_image_mask="@drawable/contact_bg_receive" />
+    </LinearLayout>
+</LinearLayout>

@@ -3,13 +3,13 @@ package com.winsion.component.contact.activity.chat;
 import com.winsion.component.basic.base.BasePresenter;
 import com.winsion.component.basic.base.BaseView;
 import com.winsion.component.contact.entity.ContactEntity;
-import com.winsion.component.contact.entity.MyMessage;
+import com.winsion.component.contact.entity.UserMessage;
 
 import java.io.File;
 
 class ChatContract {
     interface View extends BaseView {
-        void sendMessageSuccess(MyMessage myMessage);
+        void sendMessageSuccess(UserMessage userMessage);
 
         void showRecordView();
 

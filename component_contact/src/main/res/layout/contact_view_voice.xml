@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ll_length_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/contact_bg_receive"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_voice_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/basic_d5"
+                android:src="@drawable/contact_voice_left"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_duration_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/basic_d10"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s16"
+            tools:text="20'" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_duration_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/basic_d10"
+            android:textColor="@color/basic_white1"
+            android:textSize="@dimen/basic_s16"
+            tools:text="20'" />
+
+        <LinearLayout
+            android:id="@+id/ll_length_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/contact_bg_send"
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_voice_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/contact_voice_right"
+                tools:ignore="ContentDescription"
+                tools:text="20'" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

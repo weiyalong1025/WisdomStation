@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- 只单行显示的TextView，文字显示不下会在末尾追加... -->
     <style name="ContactSingleLineTextView">
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>
+
+    // 语音消息控件
+    <declare-styleable name="VoiceView" tools:ignore="ResourceName">
+        <attr name="side" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="leftBg" format="reference" />
+        <attr name="rightBg" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ChatImageView" tools:ignore="ResourceName">
+        <attr name="chat_image_mask" format="reference" />
+    </declare-styleable>
 </resources>

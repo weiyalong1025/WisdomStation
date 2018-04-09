@@ -1,23 +1,22 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
     <string name="contact_app_name">联系人组件</string>
 
-    <string name="contact_tab_contacts">联系人</string>
-    <string name="contact_tab_team_group">班组</string>
-    <string name="contact_tab_contact_group">联系人组</string>
+    <string name="tab_contacts">联系人</string>
+    <string name="tab_team_group">班组</string>
+    <string name="tab_contact_group">联系人组</string>
 
+    <string name="btn_message">消息</string>
+    <string name="btn_call">呼叫</string>
+    <string name="btn_live">直播</string>
+    <string name="btn_talk_back">对讲</string>
+    <string name="btn_command">命令</string>
+    <string name="btn_cooperation">协作</string>
+    <string name="btn_send">发送</string>
+    <string name="btn_press_to_talk">按住说话</string>
+    <string name="btn_release_to_finish">松开结束</string>
+    <string name="btn_contact_take_photo">拍照</string>
+    <string name="btn_contact_video">视频</string>
+    <string name="btn_select_pic">选择图片</string>
 
-    <string name="contact_btn_message">消息</string>
-    <string name="contact_btn_call">呼叫</string>
-    <string name="contact_btn_live">直播</string>
-    <string name="contact_btn_talk_back">对讲</string>
-    <string name="contact_btn_command">命令</string>
-    <string name="contact_btn_cooperation">协作</string>
-    <string name="contact_btn_send">发送</string>
-    <string name="contact_btn_press_to_talk">按住说话</string>
-    <string name="contact_btn_release_to_finish">松开结束</string>
-    <string name="contact_btn_take_photo">拍照</string>
-    <string name="contact_btn_record_video">视频</string>
-    <string name="contact_btn_select_pic">选择图片</string>
-
-    <string name="contact_value_draft">草稿</string>
+    <string name="value_draft">草稿</string>
 </resources>

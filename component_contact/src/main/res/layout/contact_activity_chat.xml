@@ -12,26 +12,15 @@
         app:showConfirmButton="false"
         tools:titleText="张三" />
 
-    <cn.jiguang.imui.messages.MessageList
+    <ListView
         android:id="@+id/msg_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/refer"
         android:layout_below="@id/tv_title"
-        app:avatarHeight="@dimen/basic_d50"
-        app:avatarRadius="@dimen/basic_d25"
-        app:avatarWidth="@dimen/basic_d50"
-        app:bubbleMaxWidth="0.70"
-        app:dateTextSize="@dimen/basic_s14"
-        app:receiveBubblePaddingLeft="@dimen/basic_d20"
-        app:receiveBubblePaddingRight="@dimen/basic_d10"
-        app:receiveTextColor="@color/basic_gray8"
-        app:receiveTextSize="@dimen/basic_s18"
-        app:sendBubbleDrawable="@drawable/contact_bg_send_bubble"
-        app:sendBubblePaddingLeft="@dimen/basic_d10"
-        app:sendBubblePaddingRight="@dimen/basic_d20"
-        app:sendTextColor="@color/basic_gray8"
-        app:sendTextSize="@dimen/basic_s20" />
+        android:divider="@null"
+        android:transcriptMode="alwaysScroll"
+        tools:listitem="@layout/contact_item_msg_receive_word" />
 
     <LinearLayout
         android:id="@+id/refer"
@@ -77,7 +66,7 @@
             android:layout_width="@dimen/basic_d54"
             android:layout_height="@dimen/basic_d35"
             android:background="@drawable/basic_btn_blue"
-            app:text="@string/contact_btn_send"
+            app:text="@string/btn_send"
             app:textColor="@color/basic_black1"
             app:textSize="@dimen/basic_s18"
             tools:ignore="ContentDescription" />
@@ -88,7 +77,7 @@
             android:layout_height="@dimen/basic_d35"
             android:background="@drawable/contact_btn_record_normal"
             android:visibility="gone"
-            app:text="@string/contact_btn_press_to_talk"
+            app:text="@string/btn_press_to_talk"
             app:textColor="@color/basic_gray4"
             app:textSize="@dimen/basic_s20"
             tools:ignore="ContentDescription" />
@@ -118,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/basic_d50"
             android:background="@drawable/contact_bg_take_photo"
-            android:text="@string/contact_btn_take_photo"
+            android:text="@string/btn_contact_take_photo"
             android:textColor="@color/basic_white1"
             android:textSize="@dimen/basic_s20" />
 
@@ -133,7 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/basic_d50"
             android:background="@drawable/contact_bg_record_video"
-            android:text="@string/contact_btn_record_video"
+            android:text="@string/btn_contact_video"
             android:textColor="@color/basic_white1"
             android:textSize="@dimen/basic_s20" />
 
@@ -148,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/basic_d50"
             android:background="@drawable/contact_bg_select_pic"
-            android:text="@string/contact_btn_select_pic"
+            android:text="@string/btn_select_pic"
             android:textColor="@color/basic_white1"
             android:textSize="@dimen/basic_s20" />
 

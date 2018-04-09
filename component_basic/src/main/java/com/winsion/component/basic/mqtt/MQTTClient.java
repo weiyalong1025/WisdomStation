@@ -102,7 +102,7 @@ public class MQTTClient extends BroadcastReceiver implements IMqttActionListener
             }
 
             @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
+            public void messageArrived(String topic, MqttMessage message) {
                 // 接到消息
                 String msg = new String(message.getPayload());
                 LogUtils.i(TAG, "topic:" + topic + "\n" + "msg:" + msg);

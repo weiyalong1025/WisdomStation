@@ -27,7 +27,7 @@ public class ContactRootFragment extends BaseFragment {
     private MyIndicator mIndicator;
 
     private final Fragment[] mFragments = new Fragment[3];
-    private final int[] mTitles = {R.string.contact_tab_contacts, R.string.contact_tab_team_group, R.string.contact_tab_contact_group};
+    private final int[] mTitles = {R.string.tab_contacts, R.string.tab_team_group, R.string.tab_contact_group};
 
     @SuppressLint("InflateParams")
     @Override

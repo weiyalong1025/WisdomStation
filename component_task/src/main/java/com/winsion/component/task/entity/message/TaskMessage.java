@@ -1,10 +1,8 @@
-package com.winsion.component.basic.entity;
+package com.winsion.component.task.entity.message;
 
 /**
- * Created by 10295 on 2018/3/5.
- * 任务状态消息
+ * Created by wyl on 2017/8/25
  */
-
 public class TaskMessage {
     private String taskid;
     private String monitorteamid;

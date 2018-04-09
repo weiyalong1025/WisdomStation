@@ -10,6 +10,10 @@ android {
         targetSdkVersion rootProject.targetVersion
         versionCode 1
         versionName "0.0.1"
+
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
     }
 
     signingConfigs {
@@ -23,8 +27,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             zipAlignEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

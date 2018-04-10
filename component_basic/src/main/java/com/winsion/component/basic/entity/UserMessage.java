@@ -1,9 +1,14 @@
-package com.winsion.component.contact.entity;
+package com.winsion.component.basic.entity;
+
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
 
 /**
  * Created by wyl on 2017/5/26
  */
+@Entity
 public class UserMessage {
+    @Id
     private Long id;
     // 时间，消息类型，发送者(id,mmpId,name)，接收者，组，消息内容(图片和语音消息为文件ID+后缀)，描述为文件存储父目录(不带文件名)
     // 时间戳
@@ -27,13 +32,13 @@ public class UserMessage {
     private String belongUserId;
     // 消息状态(成功1,进行中2,失败3)
     private int status;
-    // 是否是组消息
-    private boolean isGroup;
+    // 联系人/班组/联系人组
+    private int contactType;
 
     public UserMessage(Long id, long time, int type, String senderId,
                        String senderMmpId, String senderName, String receiverId,
                        String receiverMmpId, String receiverName, String content,
-                       String description, String belongUserId, int status, boolean isGroup) {
+                       String description, String belongUserId, int status, int contactType) {
         this.id = id;
         this.time = time;
         this.type = type;
@@ -47,7 +52,7 @@ public class UserMessage {
         this.description = description;
         this.belongUserId = belongUserId;
         this.status = status;
-        this.isGroup = isGroup;
+        this.contactType = contactType;
     }
 
     public UserMessage() {
@@ -157,11 +162,11 @@ public class UserMessage {
         this.status = status;
     }
 
-    public boolean getIsGroup() {
-        return this.isGroup;
+    public int getContactType() {
+        return this.contactType;
     }
 
-    public void setIsGroup(boolean isGroup) {
-        this.isGroup = isGroup;
+    public void setContactType(int contactType) {
+        this.contactType = contactType;
     }
 }

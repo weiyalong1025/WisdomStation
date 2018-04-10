@@ -13,6 +13,7 @@
         android:id="@+id/fl_message_status"
         android:layout_width="@dimen/basic_d30"
         android:layout_height="@dimen/basic_d30"
+        android:layout_gravity="center_vertical"
         android:layout_marginEnd="@dimen/basic_d10">
 
         <ImageView

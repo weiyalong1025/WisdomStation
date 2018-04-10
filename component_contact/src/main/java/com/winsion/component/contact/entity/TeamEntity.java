@@ -8,14 +8,6 @@ import com.winsion.component.contact.constants.UserState;
  */
 
 public class TeamEntity extends ContactEntity {
-
-//            {\"talkgroupid\":\"G000000000000067\"," +
-//            "\"userCount\":\"4\"," +
-//            "\"teamid\":\"3A9530A7-A144-44E7-9E2D-5D9E78ECDCCF\"," +
-//            "\"postid\":\"D83B9257-D2B9-4555-8C63-0597BFC3B04E\"," +
-//            "\"delflag\":\"false\"," +
-//            "\"teamsName\":\"3候客运丁班\"}
-
     private String talkgroupid;
     private int userCount;
     private String teamid;
@@ -72,7 +64,7 @@ public class TeamEntity extends ContactEntity {
     }
 
     @Override
-    public int getContactType() {
+    public int getConType() {
         return ContactType.TYPE_TEAM;
     }
 
@@ -89,6 +81,11 @@ public class TeamEntity extends ContactEntity {
     @Override
     public String getConPhotoUrl() {
         return "";
+    }
+
+    @Override
+    public String getConMmpId() {
+        return talkgroupid;
     }
 
     @Override

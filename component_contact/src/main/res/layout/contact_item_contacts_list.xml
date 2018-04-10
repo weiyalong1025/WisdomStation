@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
@@ -57,7 +57,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/basic_d64"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -123,6 +123,7 @@
                             android:textSize="@dimen/basic_s16" />
 
                         <TextView
+                            android:id="@+id/tv_draft"
                             style="@style/ContactSingleLineTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -143,6 +144,7 @@
                         android:layout_toStartOf="@+id/iv_position_icon"
                         android:textColor="@color/basic_gray2"
                         android:textSize="@dimen/basic_s16"
+                        android:visibility="gone"
                         tools:ignore="RelativeOverlap"
                         tools:text="李四：你在哪？" />
 

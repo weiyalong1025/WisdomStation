@@ -20,6 +20,7 @@ import com.winsion.component.basic.activity.TakePhotoActivity;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.constants.FileType;
+import com.winsion.component.basic.entity.UserMessage;
 import com.winsion.component.basic.utils.DirAndFileUtils;
 import com.winsion.component.basic.view.TextImageButton;
 import com.winsion.component.basic.view.TitleView;
@@ -33,7 +34,6 @@ import com.winsion.component.contact.adapter.SendVideoItem;
 import com.winsion.component.contact.adapter.SendVoiceItem;
 import com.winsion.component.contact.adapter.SendWordItem;
 import com.winsion.component.contact.entity.ContactEntity;
-import com.winsion.component.contact.entity.UserMessage;
 import com.zhy.adapter.abslistview.MultiItemTypeAdapter;
 
 import java.io.File;
@@ -47,7 +47,6 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     private TitleView tvTitle;
     private ListView msgList;
     private CheckBox cbType;
-    private ImageView ivChangeType;
     private EditText etInput;
     private ImageView ivPic;
     private TextImageButton btnSend;
@@ -79,10 +78,11 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     @Override
     protected void start() {
         initView();
-        initPresenter();
         initIntentData();
+        initPresenter();
         initAdapter();
         initListener();
+        initMessageData();
     }
 
     private void initView() {
@@ -101,6 +101,18 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
     private void initPresenter() {
         mPresenter = new ChatPresenter(this);
+        mPresenter.start();
+    }
+
+    @Override
+    public void showDraft(String draft) {
+        etInput.setText(draft);
+        etInput.setSelection(draft.length());
+    }
+
+    @Override
+    public String getInputText() {
+        return getText(etInput);
     }
 
     private void initIntentData() {
@@ -165,6 +177,13 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         });
         addOnClickListeners(R.id.iv_pic, R.id.btn_send, R.id.btn_cancel, R.id.btn_take_photo,
                 R.id.btn_record_video, R.id.btn_select_pic);
+    }
+
+    private void initMessageData() {
+        mListData.clear();
+        mListData.addAll(mPresenter.loadMessage());
+        adapter.notifyDataSetChanged();
+        msgList.setSelection(mListData.size() - 1);
     }
 
     @Override
@@ -301,11 +320,6 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     }
 
     @Override
-    public ContactEntity getContactEntity() {
-        return contactEntity;
-    }
-
-    @Override
     public void showRecordView() {
         ivRecordView.setVisibility(View.VISIBLE);
     }
@@ -313,5 +327,22 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     @Override
     public void hideRecordView() {
         ivRecordView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public ContactEntity getContactEntity() {
+        return contactEntity;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mPresenter.updateDraft();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.exit();
     }
 }

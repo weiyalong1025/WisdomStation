@@ -5,19 +5,18 @@ import android.net.Uri;
 import android.view.View;
 
 import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.entity.UserMessage;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.contact.R;
 import com.winsion.component.contact.activity.chat.ChatPresenter;
 import com.winsion.component.contact.constants.MessageStatus;
-import com.winsion.component.contact.entity.UserMessage;
 import com.winsion.component.contact.view.ChatImageView;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.adapter.abslistview.base.ItemViewDelegate;
 
 import java.io.File;
 
-import static com.winsion.component.contact.constants.MessageType.PICTURE;
-import static com.winsion.component.contact.constants.MessageType.PICTURE_GROUP;
+import static com.winsion.component.basic.constants.MessageType.PICTURE;
 
 /**
  * Created by wyl on 2017/5/25
@@ -32,7 +31,7 @@ public class SendPicItem implements ItemViewDelegate<UserMessage> {
     public boolean isForViewType(UserMessage message, int position) {
         int type = message.getType();
         String userId = CacheDataSource.getUserId();
-        return (type == PICTURE || type == PICTURE_GROUP) && message.getSenderId().equals(userId);
+        return type == PICTURE && message.getSenderId().equals(userId);
     }
 
     @Override

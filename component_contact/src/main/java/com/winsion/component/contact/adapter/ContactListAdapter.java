@@ -4,11 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.billy.cc.core.component.CC;
+import com.winsion.component.basic.constants.MessageType;
+import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.data.DBDataSource;
+import com.winsion.component.basic.entity.UserMessage;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.utils.ToastUtils;
 import com.winsion.component.contact.R;
 import com.winsion.component.contact.activity.chat.ChatActivity;
+import com.winsion.component.contact.constants.ContactType;
 import com.winsion.component.contact.constants.UserState;
+import com.winsion.component.contact.entity.ContactEntity;
 import com.winsion.component.contact.entity.ContactsEntity;
 import com.winsion.component.contact.entity.ContactsGroupEntity;
 import com.winsion.component.contact.entity.TeamEntity;
@@ -22,14 +29,16 @@ import java.util.List;
  * 联系人列表Adapter
  */
 
-public class ContactListAdapter<T> extends CommonAdapter<T> {
+public class ContactListAdapter extends CommonAdapter<ContactEntity> {
+    private final DBDataSource dbDataSource;
 
-    public ContactListAdapter(Context context, List<T> data) {
+    public ContactListAdapter(Context context, List<ContactEntity> data) {
         super(context, R.layout.contact_item_contacts_list, data);
+        dbDataSource = DBDataSource.getInstance(context);
     }
 
     @Override
-    protected void convert(ViewHolder viewHolder, T item, int position) {
+    protected void convert(ViewHolder viewHolder, ContactEntity item, int position) {
         if (position == mDatas.size() - 1) {
             viewHolder.setVisible(R.id.div_bottom, true);
         } else {
@@ -42,6 +51,67 @@ public class ContactListAdapter<T> extends CommonAdapter<T> {
         } else if (item instanceof ContactsGroupEntity) {
             convertContactsGroup(viewHolder, (ContactsGroupEntity) item);
         }
+
+        UserMessage draft = dbDataSource.getDraft(item.getConType() != ContactType.TYPE_CONTACTS,
+                CacheDataSource.getUserId(), item.getConId());
+
+        if (draft != null) {
+            viewHolder.setVisible(R.id.ll_draft, true);
+            viewHolder.setVisible(R.id.tv_history_text, false);
+            viewHolder.setText(R.id.tv_draft, draft.getContent());
+        } else {
+            // 显示最后一条聊天记录
+            List<UserMessage> messages = dbDataSource.getSingMessage(CacheDataSource.getUserId(), item.getConId());
+            if (messages.size() != 0) {
+                UserMessage userMessage = messages.get(messages.size() - 1);
+                viewHolder.setVisible(R.id.ll_draft, false);
+                viewHolder.setVisible(R.id.tv_history_text, true);
+                int contactType = userMessage.getContactType();
+                boolean isGroup = contactType != ContactType.TYPE_CONTACTS;
+                String senderName = userMessage.getSenderName();
+                switch (userMessage.getType()) {
+                    case MessageType.WORD:
+                        String content = userMessage.getContent();
+                        viewHolder.setText(R.id.tv_history_text, isGroup ? senderName + "：" + content : content);
+                        break;
+                    case MessageType.PICTURE:
+                        viewHolder.setText(R.id.tv_history_text, isGroup ? senderName + "：[图片]" : "[图片]");
+                        break;
+                    case MessageType.VIDEO:
+                        viewHolder.setText(R.id.tv_history_text, isGroup ? senderName + "：[视频]" : "[视频]");
+                        break;
+                    case MessageType.VOICE:
+                        viewHolder.setText(R.id.tv_history_text, isGroup ? senderName + "：[语音]" : "[语音]");
+                        break;
+                }
+            } else {
+                viewHolder.setVisible(R.id.ll_draft, false);
+                viewHolder.setVisible(R.id.tv_history_text, false);
+            }
+        }
+
+        // 按钮点击事件
+        viewHolder.setOnClickListener(R.id.buttonA, v -> {
+            Intent intent = new Intent(mContext, ChatActivity.class);
+            intent.putExtra("ContactEntity", item);
+            mContext.startActivity(intent);
+        });
+        // 按钮点击事件
+        viewHolder.setOnClickListener(R.id.buttonE, v -> CC.obtainBuilder("ComponentTask")
+                .setActionName("toIssueActivity")
+                .addParam("ISSUE_TYPE", 1)
+                .addParam("toTeamsName", item.getConId())
+                .addParam("toTeamsId", item.getConName())
+                .build()
+                .call());
+        // 按钮点击事件
+        viewHolder.setOnClickListener(R.id.buttonF, v -> CC.obtainBuilder("ComponentTask")
+                .setActionName("toIssueActivity")
+                .addParam("ISSUE_TYPE", 0)
+                .addParam("toTeamsName", item.getConId())
+                .addParam("toTeamsId", item.getConName())
+                .build()
+                .call());
     }
 
     private void convertContact(ViewHolder viewHolder, ContactsEntity contactsEntity) {
@@ -69,12 +139,6 @@ public class ContactListAdapter<T> extends CommonAdapter<T> {
         // 隐藏对应按钮
         viewHolder.setVisible(R.id.buttonE, false);
         viewHolder.setVisible(R.id.buttonF, false);
-        // 按钮点击事件
-        viewHolder.setOnClickListener(R.id.buttonA, v -> {
-            Intent intent = new Intent(mContext, ChatActivity.class);
-            intent.putExtra("ContactEntity", contactsEntity);
-            mContext.startActivity(intent);
-        });
     }
 
     private void convertTeam(ViewHolder viewHolder, TeamEntity teamEntity) {
@@ -90,10 +154,6 @@ public class ContactListAdapter<T> extends CommonAdapter<T> {
         viewHolder.setVisible(R.id.status_online, false);
         // 隐藏对应按钮
         viewHolder.setVisible(R.id.buttonD, false);
-        // 按钮点击事件
-        viewHolder.setOnClickListener(R.id.buttonE, v -> {
-            ToastUtils.showToast(mContext, "命令");
-        });
     }
 
     private void convertContactsGroup(ViewHolder viewHolder, ContactsGroupEntity contactsGroupEntity) {

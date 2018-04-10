@@ -138,7 +138,7 @@ public class ContactsEntity extends ContactEntity implements Serializable {
     }
 
     @Override
-    public int getContactType() {
+    public int getConType() {
         return ContactType.TYPE_CONTACTS;
     }
 
@@ -155,6 +155,11 @@ public class ContactsEntity extends ContactEntity implements Serializable {
     @Override
     public String getConPhotoUrl() {
         return photourl;
+    }
+
+    @Override
+    public String getConMmpId() {
+        return siptelladdress;
     }
 
     @Override

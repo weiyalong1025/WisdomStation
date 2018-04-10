@@ -1,6 +1,5 @@
 package com.winsion.component.task.activity.issue;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
@@ -48,7 +47,6 @@ import java.util.List;
 
 import static com.winsion.component.task.constants.Intents.Issue.ISSUE_TYPE;
 import static com.winsion.component.task.constants.Intents.Issue.SELECT_TEAM;
-import static com.winsion.component.task.constants.Intents.Issue.TO_TEAM_ENTITY;
 import static com.winsion.component.task.constants.Intents.Media.MEDIA_FILE;
 
 /**
@@ -101,30 +99,6 @@ public class IssueActivity extends BaseActivity implements MyUploadListener {
     // 发布中显示dialog
     private CustomDialog customDialog;
 
-    /**
-     * @param context   上下文
-     * @param issueType 发布类型(命令<COMMAND>/协作<COOPERATE>)
-     *                  {@link TaskType}
-     */
-    public static void startIssueActivity(Context context, @TaskType int issueType) {
-        startIssueActivity(context, issueType, null);
-    }
-
-    /**
-     * @param context    上下文
-     * @param issueType  发布类型(命令<COMMAND>/协作<COOPERATE>)
-     *                   {@link TaskType}
-     * @param teamEntity 发布给班组的班组对象，可以为空
-     */
-    public static void startIssueActivity(Context context, @TaskType int issueType, TeamEntity teamEntity) {
-        Intent intent = new Intent(context, IssueActivity.class);
-        intent.putExtra(ISSUE_TYPE, issueType);
-        if (teamEntity != null) {
-            intent.putExtra(TO_TEAM_ENTITY, teamEntity);
-        }
-        context.startActivity(intent);
-    }
-
     @Override
     protected int setContentView() {
         return R.layout.task_activity_issue;
@@ -171,11 +145,8 @@ public class IssueActivity extends BaseActivity implements MyUploadListener {
                 tvTitle.setTitleText(R.string.title_issue_cooperation);
                 break;
         }
-        TeamEntity toTeamEntity = (TeamEntity) intent.getSerializableExtra(TO_TEAM_ENTITY);
-        if (toTeamEntity != null) {
-            teamIds = toTeamEntity.getTeamid();
-            teamNames = toTeamEntity.getTeamsName();
-        }
+        teamIds = intent.getStringExtra("toTeamsName");
+        teamNames = intent.getStringExtra("toTeamsId");
     }
 
     // 选择车站数据
@@ -200,7 +171,7 @@ public class IssueActivity extends BaseActivity implements MyUploadListener {
         // 进入界面默任回写后一天的时间
         tvEndTime.setText(ConvertUtils.formatDate(System.currentTimeMillis() + 1000 * 60 * 60 * 24, Formatter.DATE_FORMAT1));
         // 回显跳转过来时传递的班组
-        if (isEmpty(teamNames)) {
+        if (!isEmpty(teamNames)) {
             tvTeamList.setText(teamNames);
         }
     }

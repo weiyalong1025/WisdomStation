@@ -1,6 +1,7 @@
 package com.winsion.component.task.fragment.issue;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -8,6 +9,8 @@ import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.task.R;
 import com.winsion.component.task.activity.issue.IssueActivity;
 import com.winsion.component.task.constants.TaskType;
+
+import static com.winsion.component.task.constants.Intents.Issue.ISSUE_TYPE;
 
 /**
  * Created by admin on 2016/8/11.
@@ -28,10 +31,12 @@ public class IssueFragment extends BaseFragment {
 
     public void onClick(View view) {
         int id = view.getId();
+        Intent intent = new Intent(mContext, IssueActivity.class);
         if (id == R.id.ll_issue_order) {
-            IssueActivity.startIssueActivity(mContext, TaskType.COMMAND);
+            intent.putExtra(ISSUE_TYPE, TaskType.COMMAND);
         } else if (id == R.id.ll_issue_cooperation) {
-            IssueActivity.startIssueActivity(mContext, TaskType.COOPERATE);
+            intent.putExtra(ISSUE_TYPE, TaskType.COOPERATE);
         }
+        startActivity(intent);
     }
 }

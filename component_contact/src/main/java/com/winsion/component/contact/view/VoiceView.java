@@ -196,7 +196,7 @@ public class VoiceView extends RelativeLayout {
                     super.run();
                     int duration = mVoicePlayer.getDuration(path);
                     post(() -> {
-                        String durationStr = duration + "s";
+                        String durationStr = duration + "\"";
                         if (mWhichSide == LEFT) {
                             tvDurationLeft.setText(durationStr);
                         } else if (mWhichSide == RIGHT) {

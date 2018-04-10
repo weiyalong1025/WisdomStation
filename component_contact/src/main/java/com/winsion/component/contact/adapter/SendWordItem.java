@@ -3,16 +3,15 @@ package com.winsion.component.contact.adapter;
 import android.widget.TextView;
 
 import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.entity.UserMessage;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.contact.R;
 import com.winsion.component.contact.activity.chat.ChatPresenter;
 import com.winsion.component.contact.constants.MessageStatus;
-import com.winsion.component.contact.entity.UserMessage;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.adapter.abslistview.base.ItemViewDelegate;
 
-import static com.winsion.component.contact.constants.MessageType.WORD;
-import static com.winsion.component.contact.constants.MessageType.WORD_GROUP;
+import static com.winsion.component.basic.constants.MessageType.WORD;
 
 /**
  * Created by wyl on 2017/5/24
@@ -27,7 +26,7 @@ public class SendWordItem implements ItemViewDelegate<UserMessage> {
     public boolean isForViewType(UserMessage message, int position) {
         int type = message.getType();
         String userId = CacheDataSource.getUserId();
-        return (type == WORD || type == WORD_GROUP) && message.getSenderId().equals(userId);
+        return type == WORD && message.getSenderId().equals(userId);
     }
 
     @Override

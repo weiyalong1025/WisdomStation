@@ -3,13 +3,13 @@ package com.winsion.component.contact.adapter;
 import android.widget.TextView;
 
 import com.winsion.component.basic.data.CacheDataSource;
+import com.winsion.component.basic.entity.UserMessage;
 import com.winsion.component.contact.R;
-import com.winsion.component.contact.entity.UserMessage;
+import com.winsion.component.contact.constants.ContactType;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.adapter.abslistview.base.ItemViewDelegate;
 
-import static com.winsion.component.contact.constants.MessageType.WORD;
-import static com.winsion.component.contact.constants.MessageType.WORD_GROUP;
+import static com.winsion.component.basic.constants.MessageType.WORD;
 
 /**
  * Created by wyl on 2017/5/24
@@ -24,7 +24,7 @@ public class ReceiveWordItem implements ItemViewDelegate<UserMessage> {
     public boolean isForViewType(UserMessage message, int position) {
         int type = message.getType();
         String userId = CacheDataSource.getUserId();
-        return (type == WORD || type == WORD_GROUP) && !message.getSenderId().equals(userId);
+        return type == WORD && !message.getSenderId().equals(userId);
     }
 
     @Override
@@ -37,8 +37,12 @@ public class ReceiveWordItem implements ItemViewDelegate<UserMessage> {
         holder.setText(R.id.chat_from_content, message.getContent());
         TextView tvContent = holder.getView(R.id.chat_from_content);
         tvContent.setMaxWidth(holder.getConvertView().getContext().getResources().getDisplayMetrics().widthPixels / 3 * 2);
-        if (message.getIsGroup()) {
+
+        if (message.getContactType() != ContactType.TYPE_CONTACTS) {
             holder.setText(R.id.tv_name, message.getSenderName());
+            holder.setVisible(R.id.tv_name, true);
+        } else {
+            holder.setVisible(R.id.tv_name, false);
         }
     }
 }

@@ -116,8 +116,14 @@ public class ContactFragment extends BaseFragment implements ContactContract.Vie
     private void initPresenter() {
         mPresenter = new ContactPresenter(this);
 
-        mLvAdapter = new ContactListAdapter<>(mContext, mListData);
+        mLvAdapter = new ContactListAdapter(mContext, mListData);
         lvList.setAdapter(mLvAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mLvAdapter.notifyDataSetChanged();
     }
 
     private void initData() {

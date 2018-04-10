@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.winsion.component.basic.data.CacheDataSource;
-import com.winsion.component.basic.utils.ImageLoader;
+import com.winsion.component.basic.entity.UserMessage;
 import com.winsion.component.contact.R;
-import com.winsion.component.contact.entity.UserMessage;
+import com.winsion.component.contact.constants.ContactType;
 import com.winsion.component.contact.view.ChatImageView;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.adapter.abslistview.base.ItemViewDelegate;
@@ -24,8 +24,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.winsion.component.contact.constants.MessageType.VIDEO;
-import static com.winsion.component.contact.constants.MessageType.VIDEO_GROUP;
+import static com.winsion.component.basic.constants.MessageType.VIDEO;
 
 /**
  * Created by wyl on 2017/5/25
@@ -40,7 +39,7 @@ public class ReceiveVideoItem implements ItemViewDelegate<UserMessage> {
     public boolean isForViewType(UserMessage message, int position) {
         int type = message.getType();
         String userId = CacheDataSource.getUserId();
-        return (type == VIDEO || type == VIDEO_GROUP) && !message.getSenderId().equals(userId);
+        return type == VIDEO && !message.getSenderId().equals(userId);
     }
 
     @SuppressLint("CheckResult")
@@ -72,5 +71,12 @@ public class ReceiveVideoItem implements ItemViewDelegate<UserMessage> {
                         holder.getConvertView().getContext().startActivity(intent);
                     });
                 });
+
+        if (message.getContactType() != ContactType.TYPE_CONTACTS) {
+            holder.setText(R.id.tv_name, message.getSenderName());
+            holder.setVisible(R.id.tv_name, true);
+        } else {
+            holder.setVisible(R.id.tv_name, false);
+        }
     }
 }

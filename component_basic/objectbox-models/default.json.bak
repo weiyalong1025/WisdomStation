@@ -82,9 +82,73 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:1814583488089335700",
+      "lastPropertyId": "14:378279137757932741",
+      "name": "UserMessage",
+      "properties": [
+        {
+          "id": "1:199258216334627295",
+          "name": "id"
+        },
+        {
+          "id": "2:462659396783548493",
+          "name": "time"
+        },
+        {
+          "id": "3:7847389094083243463",
+          "name": "type"
+        },
+        {
+          "id": "4:742001988491058791",
+          "name": "senderId"
+        },
+        {
+          "id": "5:8658223017696603543",
+          "name": "senderMmpId"
+        },
+        {
+          "id": "6:7437003699979651340",
+          "name": "senderName"
+        },
+        {
+          "id": "7:5663051535102348860",
+          "name": "receiverId"
+        },
+        {
+          "id": "8:2571425076822170439",
+          "name": "receiverMmpId"
+        },
+        {
+          "id": "9:3840285874449899749",
+          "name": "receiverName"
+        },
+        {
+          "id": "10:9157156117100548923",
+          "name": "content"
+        },
+        {
+          "id": "11:8922086655229738873",
+          "name": "description"
+        },
+        {
+          "id": "12:345726833186434",
+          "name": "belongUserId"
+        },
+        {
+          "id": "13:5590810898161136053",
+          "name": "status"
+        },
+        {
+          "id": "14:378279137757932741",
+          "name": "isGroup"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:5087777874517788127",
+  "lastEntityId": "4:1814583488089335700",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

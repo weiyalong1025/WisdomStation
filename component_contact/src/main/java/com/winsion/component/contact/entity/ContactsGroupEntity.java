@@ -43,7 +43,7 @@ public class ContactsGroupEntity extends ContactEntity {
     }
 
     @Override
-    public int getContactType() {
+    public int getConType() {
         return ContactType.TYPE_CONTACTS_GROUP;
     }
 
@@ -54,12 +54,17 @@ public class ContactsGroupEntity extends ContactEntity {
 
     @Override
     public String getConId() {
-        return talkgroupid;
+        return ugid;
     }
 
     @Override
     public String getConPhotoUrl() {
         return "";
+    }
+
+    @Override
+    public String getConMmpId() {
+        return talkgroupid;
     }
 
     @Override

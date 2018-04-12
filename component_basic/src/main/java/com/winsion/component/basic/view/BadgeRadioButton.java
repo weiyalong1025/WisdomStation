@@ -58,28 +58,33 @@ public class BadgeRadioButton extends AppCompatRadioButton {
             numberPaint.setAntiAlias(true);
             numberPaint.setTextAlign(Paint.Align.CENTER);
             numberPaint.setTypeface(Typeface.DEFAULT_BOLD);
-            numberPaint.getTextBounds(number, 0, number.length() - 1, textRect);
-            Paint.FontMetrics fontMetrics = numberPaint.getFontMetrics();
+            numberPaint.getTextBounds(number, 0, number.length(), textRect);
             float numberWidth = numberPaint.measureText(number);
-            float numberHeight = fontMetrics.bottom - fontMetrics.top;
+            float numberHeight = textRect.bottom - textRect.top;
 
             numberWidth = numberWidth > numberHeight ? numberWidth : numberHeight;
-            int b = number.length() == 3 ? getResources().getDimensionPixelSize(R.dimen.basic_d4) :
-                    number.length() == 2 ? getResources().getDimensionPixelSize(R.dimen.basic_d2) : 0;
+            int b = getResources().getDimensionPixelSize(R.dimen.basic_d3);
 
             RectF roundRect = new RectF();
             roundRect.left = redDotX - numberWidth / 2 - b;
-            roundRect.top = redDotY - numberHeight / 2;
+            roundRect.top = redDotY - numberHeight / 2 - b;
             roundRect.right = redDotX + numberWidth / 2 + b;
-            roundRect.bottom = redDotY + numberHeight / 2;
-            canvas.drawRoundRect(roundRect, getResources().getDimension(R.dimen.basic_d8), getResources().getDimension(R.dimen.basic_d8), paint);
+            roundRect.bottom = redDotY + numberHeight / 2 + b;
+            canvas.drawRoundRect(roundRect, getResources().getDimension(R.dimen.basic_d6), getResources().getDimension(R.dimen.basic_d6), paint);
 
+            Paint.FontMetrics fontMetrics = numberPaint.getFontMetrics();
             float numberY = redDotY + (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
             canvas.drawText(number, redDotX, numberY, numberPaint);
         }
     }
 
-    public void showNumber(int badgeNum) {
+    /**
+     * 99以上显示99+
+     * 0以下(包括0)不显示
+     *
+     * @param badgeNum
+     */
+    public void setNumber(int badgeNum) {
         if (badgeNum > 99) {
             number = "99+";
             showBadge = true;

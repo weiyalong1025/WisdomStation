@@ -25,6 +25,7 @@
     <string name="hint_search">搜索</string>
     <string name="hint_load_failed_click_retry">获取数据失败，点击重试</string>
     <string name="hint_no_data_click_retry">没有数据，点击重试</string>
+    <string name="hint_no_data">没有数据</string>
 
     <string name="spinner_all">全部</string>
     <string name="spinner_not_started">未开始</string>

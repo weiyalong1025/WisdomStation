@@ -12,10 +12,6 @@ class ChatContract {
     interface View extends BaseView {
         void sendMessageSuccess(UserMessage userMessage);
 
-        void showRecordView();
-
-        void hideRecordView();
-
         ContactEntity getContactEntity();
 
         void showDraft(String draft);
@@ -24,18 +20,14 @@ class ChatContract {
     }
 
     interface Presenter extends BasePresenter {
-        void sendText(String msg);
+        void sendTextMessage(String msg);
 
-        void sendImage(File file);
+        void sendFileMessage(File file, int messageType);
 
-        void sendVideo(File file);
+        void startRecord(File voiceFile);
 
-        void startRecord();
-
-        void stopRecord();
+        boolean stopRecord(File voiceFile);
 
         List<UserMessage> loadMessage();
-
-        void updateDraft();
     }
 }

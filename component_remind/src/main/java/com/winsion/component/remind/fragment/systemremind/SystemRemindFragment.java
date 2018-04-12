@@ -337,7 +337,7 @@ public class SystemRemindFragment extends BaseFragment implements SystemRemindCo
         }
         RemindRootFragment parentFragment = (RemindRootFragment) getParentFragment();
         if (parentFragment != null) {
-            parentFragment.getBrbView(2).showNumber(unreadCount);
+            parentFragment.showBadge(2, unreadCount);
         }
         FragmentActivity activity = getActivity();
         CC.obtainBuilder("ComponentApp")

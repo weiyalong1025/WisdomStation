@@ -119,7 +119,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
                 .setPositiveButton((dialog, which) -> mPresenter.deleteTodo(todoEntity))
                 .show());
         lvRemindsList.setOnItemClickListener(this);
-        addOnClickListeners(R.id.btn_add, R.id.tv_hint);
+        addOnClickListeners(R.id.btn_add);
     }
 
     /**
@@ -161,7 +161,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
             }
             RemindRootFragment parentFragment = (RemindRootFragment) getParentFragment();
             if (parentFragment != null) {
-                parentFragment.getBrbView(1).showNumber(unreadCount);
+                parentFragment.showBadge(1, unreadCount);
             }
             FragmentActivity activity = getActivity();
             CC.obtainBuilder("ComponentApp")
@@ -191,12 +191,7 @@ public class TodoListFragment extends BaseFragment implements TodoListContract.V
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.btn_add) {
-            startActivityForResult(AddTodoActivity.class);
-        } else if (id == R.id.tv_hint) {
-            initData(false);
-        }
+        startActivityForResult(AddTodoActivity.class);
     }
 
     /**

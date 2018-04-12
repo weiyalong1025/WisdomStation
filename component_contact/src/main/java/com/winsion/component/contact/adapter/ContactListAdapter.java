@@ -5,15 +5,16 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import com.billy.cc.core.component.CC;
-import com.winsion.component.basic.constants.MessageType;
+import com.winsion.component.basic.constants.ContactType;
+import com.winsion.component.basic.constants.Formatter;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.data.DBDataSource;
 import com.winsion.component.basic.entity.UserMessage;
+import com.winsion.component.basic.utils.ConvertUtils;
 import com.winsion.component.basic.utils.ImageLoader;
 import com.winsion.component.basic.utils.ToastUtils;
 import com.winsion.component.contact.R;
 import com.winsion.component.contact.activity.chat.ChatActivity;
-import com.winsion.component.contact.constants.ContactType;
 import com.winsion.component.contact.constants.UserState;
 import com.winsion.component.contact.entity.ContactEntity;
 import com.winsion.component.contact.entity.ContactsEntity;
@@ -59,6 +60,7 @@ public class ContactListAdapter extends CommonAdapter<ContactEntity> {
             viewHolder.setVisible(R.id.ll_draft, true);
             viewHolder.setVisible(R.id.tv_history_text, false);
             viewHolder.setText(R.id.tv_draft, draft.getContent());
+            viewHolder.setVisible(R.id.tv_time, false);
         } else {
             // 显示最后一条聊天记录
             List<UserMessage> messages = dbDataSource.getSingMessage(CacheDataSource.getUserId(), item.getConId());
@@ -69,24 +71,14 @@ public class ContactListAdapter extends CommonAdapter<ContactEntity> {
                 int contactType = userMessage.getContactType();
                 boolean isGroup = contactType != ContactType.TYPE_CONTACTS;
                 String senderName = userMessage.getSenderName();
-                switch (userMessage.getType()) {
-                    case MessageType.WORD:
-                        String content = userMessage.getContent();
-                        viewHolder.setText(R.id.tv_history_text, isGroup ? senderName + "：" + content : content);
-                        break;
-                    case MessageType.PICTURE:
-                        viewHolder.setText(R.id.tv_history_text, isGroup ? senderName + "：[图片]" : "[图片]");
-                        break;
-                    case MessageType.VIDEO:
-                        viewHolder.setText(R.id.tv_history_text, isGroup ? senderName + "：[视频]" : "[视频]");
-                        break;
-                    case MessageType.VOICE:
-                        viewHolder.setText(R.id.tv_history_text, isGroup ? senderName + "：[语音]" : "[语音]");
-                        break;
-                }
+                String content = userMessage.getContent();
+                viewHolder.setText(R.id.tv_history_text, isGroup ? senderName + "：" + content : content);
+                viewHolder.setVisible(R.id.tv_time, true);
+                viewHolder.setText(R.id.tv_time, ConvertUtils.formatDate(userMessage.getTime(), Formatter.DATE_FORMAT7));
             } else {
                 viewHolder.setVisible(R.id.ll_draft, false);
                 viewHolder.setVisible(R.id.tv_history_text, false);
+                viewHolder.setVisible(R.id.tv_time, false);
             }
         }
 

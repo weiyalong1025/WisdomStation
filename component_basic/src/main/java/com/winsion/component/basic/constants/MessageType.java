@@ -5,19 +5,19 @@ package com.winsion.component.basic.constants;
  */
 public interface MessageType {
     /**
-     * 单人文字消息
+     * 文字消息
      */
     int WORD = 1;
     /**
-     * 单人图片消息
+     * 图片消息
      */
     int PICTURE = 2;
     /**
-     * 单人语音消息
+     * 语音消息
      */
     int VOICE = 3;
     /**
-     * 单人视频消息
+     * 视频消息
      */
     int VIDEO = 4;
     /**

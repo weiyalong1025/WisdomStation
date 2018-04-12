@@ -20,8 +20,10 @@ import com.winsion.component.basic.activity.TakePhotoActivity;
 import com.winsion.component.basic.base.BaseActivity;
 import com.winsion.component.basic.biz.BasicBiz;
 import com.winsion.component.basic.constants.FileType;
+import com.winsion.component.basic.constants.MessageType;
 import com.winsion.component.basic.entity.UserMessage;
 import com.winsion.component.basic.utils.DirAndFileUtils;
+import com.winsion.component.basic.utils.ToastUtils;
 import com.winsion.component.basic.view.TextImageButton;
 import com.winsion.component.basic.view.TitleView;
 import com.winsion.component.contact.R;
@@ -61,14 +63,15 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     private static final int CODE_SELECT_PIC = 2;
 
     private ChatContract.Presenter mPresenter;
-    private ContactEntity contactEntity;
-    private MultiItemTypeAdapter<UserMessage> adapter;
-    private List<UserMessage> mListData = new ArrayList<>();
-    private boolean isSelectPicViewShowing = false;
-    private TranslateAnimation showAnimation;
-    private TranslateAnimation hideAnimation;
-    private File photoFile;
-    private File videoFile;
+    private ContactEntity contactEntity;    // 联系人/班组/联系人组
+    private MultiItemTypeAdapter<UserMessage> adapter;  // 消息列表adapter
+    private List<UserMessage> mListData = new ArrayList<>();    // 消息列表数据
+    private boolean isSelectPicViewShowing = false; // 选择文件布局是否正在显示
+    private TranslateAnimation showAnimation;   // 显示选择文件布局动画
+    private TranslateAnimation hideAnimation;   // 隐藏选择文件布局动画
+    private File photoFile; // 图片文件
+    private File videoFile; // 视频文件
+    private File voiceFile; // 录音文件
 
     @Override
     protected int setContentView() {
@@ -99,25 +102,14 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         ivRecordView = findViewById(R.id.iv_record_view);
     }
 
-    private void initPresenter() {
-        mPresenter = new ChatPresenter(this);
-        mPresenter.start();
-    }
-
-    @Override
-    public void showDraft(String draft) {
-        etInput.setText(draft);
-        etInput.setSelection(draft.length());
-    }
-
-    @Override
-    public String getInputText() {
-        return getText(etInput);
-    }
-
     private void initIntentData() {
         contactEntity = (ContactEntity) getIntent().getSerializableExtra("ContactEntity");
         tvTitle.setTitleText(contactEntity.getConName());
+    }
+
+    private void initPresenter() {
+        mPresenter = new ChatPresenter(this);
+        mPresenter.start();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -133,6 +125,8 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         adapter.addItemViewDelegate(new ReceiveVideoItem());
         msgList.setAdapter(adapter);
     }
+
+    private long startTime;
 
     @SuppressLint("ClickableViewAccessibility")
     private void initListener() {
@@ -156,14 +150,28 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         btnRecord.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    btnRecord.setBackgroundResource(R.drawable.contact_btn_record_press);
-                    btnRecord.setText(R.string.btn_release_to_finish);
-                    mPresenter.startRecord();
+                    try {
+                        startTime = System.currentTimeMillis();
+                        btnRecord.setBackgroundResource(R.drawable.contact_btn_record_press);
+                        btnRecord.setText(R.string.btn_release_to_finish);
+                        ivRecordView.setVisibility(View.VISIBLE);
+                        voiceFile = BasicBiz.getMediaFile(DirAndFileUtils.getIMDir(), FileType.AUDIO);
+                        mPresenter.startRecord(voiceFile);
+                    } catch (IOException e) {
+                        ToastUtils.showToast(mContext, R.string.toast_check_sdcard);
+                    }
                     break;
                 case MotionEvent.ACTION_UP:
                     btnRecord.setBackgroundResource(R.drawable.contact_btn_record_normal);
                     btnRecord.setText(R.string.btn_press_to_talk);
-                    mPresenter.stopRecord();
+                    ivRecordView.setVisibility(View.GONE);
+                    if (voiceFile != null) {
+                        if (mPresenter.stopRecord(voiceFile) && System.currentTimeMillis() - startTime > 1000) {
+                            mPresenter.sendFileMessage(voiceFile, MessageType.VOICE);
+                        } else {
+                            showToast(R.string.toast_time_too_short);
+                        }
+                    }
                     break;
             }
             return true;
@@ -186,6 +194,27 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         msgList.setSelection(mListData.size() - 1);
     }
 
+    /**
+     * 回显草稿记录
+     *
+     * @param draft 草稿文字
+     */
+    @Override
+    public void showDraft(String draft) {
+        etInput.setText(draft);
+        etInput.setSelection(draft.length());
+    }
+
+    /**
+     * 获取输入框中当前的文字，用户退出界面时保存草稿
+     *
+     * @return 数据框中当前的文字
+     */
+    @Override
+    public String getInputText() {
+        return getText(etInput);
+    }
+
     @Override
     public void onClick(View view) {
         super.onClick(view);
@@ -195,7 +224,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         } else if (id == R.id.btn_send) {
             String text = getText(etInput);
             if (!isEmpty(text)) {
-                mPresenter.sendText(text);
+                mPresenter.sendTextMessage(text);
                 etInput.setText("");
             }
         } else if (id == R.id.btn_cancel) {
@@ -238,21 +267,24 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case CODE_TAKE_PHOTO:
-                    mPresenter.sendImage(photoFile);
+                    mPresenter.sendFileMessage(photoFile, MessageType.PICTURE);
                     break;
                 case CODE_RECORD_VIDEO:
-                    mPresenter.sendVideo(videoFile);
+                    mPresenter.sendFileMessage(videoFile, MessageType.VIDEO);
                     break;
                 case CODE_SELECT_PIC:
                     String realFilePath = BasicBiz.getRealFilePath(mContext, data.getData());
                     if (realFilePath != null) {
-                        mPresenter.sendImage(new File(realFilePath));
+                        mPresenter.sendFileMessage(new File(realFilePath), MessageType.PICTURE);
                     }
                     break;
             }
         }
     }
 
+    /**
+     * 显示选择文件布局
+     */
     private void showSelectPicView() {
         isSelectPicViewShowing = true;
         // 隐藏键盘
@@ -268,6 +300,11 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         llPic.startAnimation(showAnimation);
     }
 
+    /**
+     * 隐藏选择文件布局
+     *
+     * @param onAnimationEnd 动画结束后要做的事情
+     */
     private void hideSelectPicView(Runnable onAnimationEnd) {
         isSelectPicViewShowing = false;
         if (hideAnimation == null) {
@@ -299,6 +336,9 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         viewShader.setVisibility(View.GONE);
     }
 
+    /**
+     * 用户按下BACK键时如果选择文件布局正在显示，则先隐藏该布局
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && isSelectPicViewShowing) {
@@ -320,24 +360,8 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     }
 
     @Override
-    public void showRecordView() {
-        ivRecordView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideRecordView() {
-        ivRecordView.setVisibility(View.GONE);
-    }
-
-    @Override
     public ContactEntity getContactEntity() {
         return contactEntity;
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mPresenter.updateDraft();
     }
 
     @Override

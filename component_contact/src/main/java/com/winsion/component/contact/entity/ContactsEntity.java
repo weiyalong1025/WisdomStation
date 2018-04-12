@@ -1,6 +1,6 @@
 package com.winsion.component.contact.entity;
 
-import com.winsion.component.contact.constants.ContactType;
+import com.winsion.component.basic.constants.ContactType;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 联系人实体
  */
 
-public class ContactsEntity extends ContactEntity implements Serializable {
+public class ContactsEntity extends ContactEntity {
     private String talkgroupid;
     private String postname;
     private String areaname;

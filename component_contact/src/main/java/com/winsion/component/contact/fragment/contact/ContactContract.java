@@ -2,7 +2,7 @@ package com.winsion.component.contact.fragment.contact;
 
 import com.winsion.component.basic.base.BasePresenter;
 import com.winsion.component.basic.base.BaseView;
-import com.winsion.component.contact.constants.ContactType;
+import com.winsion.component.basic.constants.ContactType;
 import com.winsion.component.contact.entity.ContactEntity;
 
 import java.util.List;
@@ -17,6 +17,8 @@ class ContactContract {
         void getContactsDataSuccess(List<? extends ContactEntity> contactEntities);
 
         void getContactsDataFailed();
+
+        void notifyDataChange();
     }
 
     interface Presenter extends BasePresenter {

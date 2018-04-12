@@ -75,8 +75,10 @@ public class RemindRootFragment extends BaseFragment {
         mIndicator.setViewPager(vpContent);
     }
 
-    public BadgeRadioButton getBrbView(@IntRange(from = 0, to = 2) int index) {
-        return index == 0 ? brb0 : index == 1 ? brb1 : index == 2 ? brb2 : null;
+    public void showBadge(@IntRange(from = 0, to = 2) int index, int badgeNum) {
+        BadgeRadioButton badgeRadioButton = index == 0 ? brb0 : index == 1 ? brb1 : index == 2 ? brb2 : null;
+        assert badgeRadioButton != null;
+        badgeRadioButton.setNumber(badgeNum);
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

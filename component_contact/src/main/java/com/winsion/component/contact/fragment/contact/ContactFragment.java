@@ -12,12 +12,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.winsion.component.basic.base.BaseFragment;
+import com.winsion.component.basic.constants.ContactType;
 import com.winsion.component.basic.utils.PinyinUtils;
 import com.winsion.component.basic.view.SpinnerView;
 import com.winsion.component.basic.view.expand.ActionSlideExpandableListView;
 import com.winsion.component.contact.R;
 import com.winsion.component.contact.adapter.ContactListAdapter;
-import com.winsion.component.contact.constants.ContactType;
 import com.winsion.component.contact.entity.ContactEntity;
 
 import java.util.ArrayList;
@@ -115,15 +115,10 @@ public class ContactFragment extends BaseFragment implements ContactContract.Vie
 
     private void initPresenter() {
         mPresenter = new ContactPresenter(this);
+        mPresenter.start();
 
         mLvAdapter = new ContactListAdapter(mContext, mListData);
         lvList.setAdapter(mLvAdapter);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mLvAdapter.notifyDataSetChanged();
     }
 
     private void initData() {
@@ -215,6 +210,11 @@ public class ContactFragment extends BaseFragment implements ContactContract.Vie
         swipeRefresh.setRefreshing(false);
         tvHint.setText(R.string.hint_load_failed_click_retry);
         showView(flContainer, tvHint);
+    }
+
+    @Override
+    public void notifyDataChange() {
+        mLvAdapter.notifyDataSetChanged();
     }
 
     @Override

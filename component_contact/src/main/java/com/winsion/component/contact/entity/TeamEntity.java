@@ -1,6 +1,6 @@
 package com.winsion.component.contact.entity;
 
-import com.winsion.component.contact.constants.ContactType;
+import com.winsion.component.basic.constants.ContactType;
 import com.winsion.component.contact.constants.UserState;
 
 /**

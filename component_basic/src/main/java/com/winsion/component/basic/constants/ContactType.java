@@ -1,4 +1,4 @@
-package com.winsion.component.contact.constants;
+package com.winsion.component.basic.constants;
 
 import android.support.annotation.IntDef;
 

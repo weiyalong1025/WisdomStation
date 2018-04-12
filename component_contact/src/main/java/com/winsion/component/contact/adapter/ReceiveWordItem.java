@@ -5,7 +5,7 @@ import android.widget.TextView;
 import com.winsion.component.basic.data.CacheDataSource;
 import com.winsion.component.basic.entity.UserMessage;
 import com.winsion.component.contact.R;
-import com.winsion.component.contact.constants.ContactType;
+import com.winsion.component.basic.constants.ContactType;
 import com.zhy.adapter.abslistview.ViewHolder;
 import com.zhy.adapter.abslistview.base.ItemViewDelegate;
 

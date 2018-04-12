@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="@dimen/basic_d10"
-            android:text="@string/hint_no_data_click_retry"
+            android:text="@string/hint_no_data"
             android:textColor="@color/basic_blue1"
             android:textSize="@dimen/basic_s18"
             android:visibility="gone" />

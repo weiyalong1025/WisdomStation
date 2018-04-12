@@ -12,7 +12,7 @@ import com.winsion.component.basic.base.BaseFragment;
 import com.winsion.component.basic.view.MyIndicator;
 import com.winsion.component.basic.view.NoScrollViewPager;
 import com.winsion.component.contact.R;
-import com.winsion.component.contact.constants.ContactType;
+import com.winsion.component.basic.constants.ContactType;
 import com.winsion.component.contact.fragment.contact.ContactFragment;
 
 import static com.winsion.component.contact.fragment.contact.ContactFragment.CONTACT_TYPE;
